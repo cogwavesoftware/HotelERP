@@ -1,0 +1,161 @@
+<div id="pcoded" class="pcoded"
+     [attr.nav-type]="navType"
+     [attr.pcoded-device-type]="pcodedDeviceType"
+     [attr.fream-type]="freamType"
+     [attr.layout-type]="layoutType"
+     (window:resize)="onResize($event)"
+     
+>
+  <!-- <div class="pcoded-overlay-box"></div> -->
+  <div class="pcoded-container navbar-wrapper">
+    <nav class="navbar header-navbar pcoded-header" [attr.header-theme]="headerTheme">
+      <div class="navbar-wrapper">
+        <div class="navbar-logo">
+          <a [routerLink]="['/dashboard/default/']" class="ripple light">
+            <img src="assets/images/logo.png" alt="Cogwave Software">
+          </a>
+          <a href="javascript:" class="mobile-options ripple light" (click)="toggleHeaderNavRight()">
+            <i class="icon-more"></i>
+          </a>
+        </div>
+        <div class="navbar-container container-fluid">
+          <ul class="nav-left">
+            <li class="ripple light">
+              <div class="sidebar_toggle"><a href="javascript:"><i class="icon-menu"></i></a></div>
+            </li>
+          
+          </ul>
+          <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
+            <li (clickOutside)="notificationOutsideClick('live')" class="header-notification ripple light" [ngClass]="liveNotificationClass" (click)="toggleLiveNotification()">
+              <a href="javascript:">
+                <i class="icon-bell"></i>
+                <span class="badge bg-c-red"></span>
+              </a>
+              <ul [@notificationBottom]="liveNotification" class="show-notification">
+                <li>
+                  <h6>Notifications</h6>
+                  <label class="label label-danger">New</label>
+                </li>
+                <li class="ripple">
+                  <div class="media">
+                    <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                    <div class="media-body">
+                      <h5 class="notification-user">John Doe</h5>
+                      <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                      <span class="notification-time">30 minutes ago</span>
+                    </div>
+                  </div>
+                </li>
+               
+              </ul>
+            </li>          
+                  
+                  
+                    <li class="ripple">
+                        <a style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif " routerLink="/productlist">Product Price List</a>
+                    </li>
+                    <li class="ripple">
+                      <a style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif " routerLink="/productlist">Service & Help</a>
+                  </li>
+                  <li class="ripple">
+                    <a style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif " href="www.cogwave.in" target="_blank">About Cogwave</a>
+                
+                </li>
+    
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  
+ 
+<div class="container">
+<div class="row">
+ <div class="col-sm-6">
+
+    <div class="card">
+          
+        <div class="row card-block">
+
+            <div class="col-md-12 col-lg-4">
+                <h5 class="sub-title">Cogwave Product List</h5>
+                <ul class="basic-list list-icons-img">
+                    <li>
+                      <img src="assets/images/avatar-1.jpg"
+                           class="img-fluid p-absolute d-block text-center"
+                           alt="">
+                      <h6>Front Office</h6>
+                      <p>Laborum nihil aliquam nulla praesentium illo libero
+                        nihil at odio maxime.</p>
+                    </li>
+                    <li>
+                      <h6>Point of Sale</h6>
+                      <img src="assets/images/avatar-2.jpg"
+                           class="img-fluid p-absolute d-block text-center"
+                           alt="">
+                      <p>Laborum nihil aliquam nulla praesentium illo libero
+                        nihil at odio maxime.</p>
+                    </li>
+                    <li>
+                      <h6>House Keeping</h6>
+                      <img src="assets/images/avatar-3.jpg"
+                           class="img-fluid p-absolute d-block text-center"
+                           alt="">
+                      <p>Laborum nihil aliquam nulla praesentium illo libero
+                        nihil at odio maxime.</p>
+                    </li>
+                  
+                      <li>
+                          <h6>Maintance</h6>
+                          <img src="assets/images/avatar-3.jpg"
+                               class="img-fluid p-absolute d-block text-center"
+                               alt="">
+                          <p>Laborum nihil aliquam nulla praesentium illo libero
+                            nihil at odio maxime.</p>
+                        </li>
+
+                  </ul>
+              </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+ 
+ <div class="col-sm-6">
+    <div class="col s8 offset-s2">
+      <div class="card grey lighten-2">
+        <div class="card-tabs">
+          <ul class="tabs tabs-fixed-width tabs-transparent">
+            <li class="tab">
+              <a routerLink='/commonpage/logins' routerLinkActive='active'>User Login</a>
+            </li>
+            <li class="tab">
+              <a  routerLink='/commonpage/signups' routerLinkActive='active'>Cogwave Login</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-content white">
+          <div class="row">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div> 
+
+  </div>  
+  
+ </div>
+</div>
+
+
+<app-card [title]="'Bootstrap tab'" [headerContent]="'Lorem ipsum dolor sit amet, consectetur adipisicing elit'">
+
+  </app-card>
+

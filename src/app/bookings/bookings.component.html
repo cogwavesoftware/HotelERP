@@ -1,0 +1,119 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">bookings Register</h4>
+                        <p class="card-category"> List of bookings</p>
+
+                        <div class="row">
+                            <div class="col-md-6 input-group">
+                                <label>Date From:</label> &nbsp; &nbsp;
+                                <input class="form-control" placeholder="dd-mm-yyyy" name="ngbDatepicker"
+                                    #ngbDatepicker="ngModel" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append bg-default" (click)="d.toggle()">
+                                    <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 input-group">
+                                <label>To Date:</label> &nbsp; &nbsp;
+                                <input class="form-control" placeholder="dd-mm-yyyy" name="ngbDatepicker2"
+                                    #ngbDatepicker2="ngModel" [(ngModel)]="toDate" ngbDatepicker #d2="ngbDatepicker">
+                                <div class="input-group-append bg-default" (click)="d2.toggle()">
+                                    <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4 input-group">
+                                <label>Booking Type</label> &nbsp; &nbsp;
+                                <select name="BookingTypeID" [(ngModel)]="service.formData.BookingTypeId"
+                                    class="form-control">
+                                    <option value="0">-Select-</option>
+                                    <option *ngFor="let item of bookingtypeList" value="{{item.BookingTypeId}}">
+                                        {{item.Name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 input-group">
+                                <label>Status</label> &nbsp; &nbsp;
+                                <select name="StatusID" [(ngModel)]="service.formData.StatusId" class="form-control">
+                                    <option value="0">-Select-</option>
+                                    <option *ngFor="let item of statusList" value="{{item.StatusId}}">
+                                        {{item.Name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 input-group">
+                                <label>Last Modified By (User)</label> &nbsp; &nbsp;
+                                <select name="UserID" [(ngModel)]="service.formData.ModifiedBy" class="form-control">
+                                    <option value="0">-Select-</option>
+                                    <option *ngFor="let item of userList" value="{{item.UserId}}">
+                                        {{item.Name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 input-group">
+                                <label>No. of Bookings: </label> &nbsp; &nbsp;
+                                <input matInput placeholder="Count" name="NoofBookings"
+                                    [(ngModel)]="service.formData.NoOfbookings" />
+                            </div>
+                        </div>
+
+                        <button id="btnSearch" mat-raised-button class="btn btn-outline-dark pull-right"
+                            (click)="onbtnSearchclick()"><i class="fa fa-database"></i> Search </button>
+
+
+                        <button id="btnCreate" mat-raised-button class="btn btn-outline-success pull-right"
+                            routerLink="/booking" (click)="btnCreate()"><i class="fa fa-database"></i> Create
+                            Booking </button>
+
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>SR#</th>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Rooms</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of bookingList">
+                                            <th (click)="openForEdit(item.bkM_Id)">{{item.bkM_No}}</th>
+                                            <td (click)="openForEdit(item.bkM_Id)">
+                                                {{item.bkM_BookingDateTime  | date:'dd/MM/yyyy'}}</td>
+                                            <td (click)="openForEdit(item.bkM_Id)">{{item.gstM_Name}}</td>
+                                            <td (click)="openForEdit(item.bkM_Id)">{{item.bkM_BookingRoomsCount}}</td>
+                                            <td (click)="openForEdit(item.bkM_Id)">{{item.fBookingStatus}}</td>
+                                            <td>
+                                                <a class="btn text-danger" (click)="onbookingDelete(item.bkM_Id)"><i
+                                                        class="fa fa-trash"></i>Cancel</a>
+                                                <a class="btn text-danger" (click)="onbookingDelete(item.bkM_Id)"><i
+                                                        class="fa fa-success"></i>RAC</a>
+                                                <a class="btn text-danger" (click)="onbookingDelete(item.bkM_Id)"><i
+                                                        class="fa fa-plus-square"></i>Confirm</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

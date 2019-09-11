@@ -1,0 +1,174 @@
+<div class="main-content">
+
+  <form #form="ngForm" autocomplete="off" *ngIf="service.bookingData" (submit)="onSubmit(form)">
+    <input type="hidden" name="bookingID" #bookingID="ngModel" [(ngModel)]="service.bookingData.bkM_ID" />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">booking Entry</h4>
+              <p class="card-category">Enter booking details</p>
+            </div>
+            <div class="card-body">
+
+
+              <div class="row">
+                <div class="col-md-4 input-group">
+                  <label>Guest</label> &nbsp; &nbsp;
+                  <select name="GuestID" [(ngModel)]="service.bookingData.bkM_gstMId" class="form-control">
+                    <option value="0">-Select-</option>
+                    <option *ngFor="let item of guestList" value="{{item.GuestId}}">
+                      {{item.Name}}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col-md-4 input-group">
+                  <label>Status</label> &nbsp; &nbsp;
+                  <select name="StatusID" [(ngModel)]="service.bookingData.bkM_BookingStatus" class="form-control">
+                    <option value="0">-Select-</option>
+                    <option *ngFor="let item of statusList" value="{{item.StatusId}}">
+                      {{item.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-4 input-group">
+                  <label>Booking Type</label> &nbsp; &nbsp;
+                  <select name="BookingTypeID" [(ngModel)]="service.bookingData.bkM_Type" class="form-control">
+                    <option value="0">-Select-</option>
+                    <option *ngFor="let item of bookingtypeList" value="{{item.BookingTypeId}}">
+                      {{item.Name}}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col-md-4 input-group">
+                  <label>Channel</label> &nbsp; &nbsp;
+                  <select name="ChannelID" [(ngModel)]="service.bookingData.bkM_chMId" class="form-control">
+                    <option value="0">-Select-</option>
+                    <option *ngFor="let item of channelList" value="{{item.ChannelId}}">
+                      {{item.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6 input-group">
+                  <label>Check In:</label> &nbsp; &nbsp;
+                  <input class="form-control" placeholder="dd-mm-yyyy" name="ngbDatepicker" #ngbDatepicker="ngModel"
+                    [(ngModel)]="mReservationFrom" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append bg-default" (click)="d.toggle()">
+                    <span class="icofont icofont-ui-calendar input-group-text"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6 input-group">
+                  <label>Check Out:</label> &nbsp; &nbsp;
+                  <input class="form-control" placeholder="dd-mm-yyyy" name="ngbDatepicker2" #ngbDatepicker2="ngModel"
+                    [(ngModel)]="mReservationTo" ngbDatepicker #d2="ngbDatepicker">
+                  <div class="input-group-append bg-default" (click)="d2.toggle()">
+                    <span class="icofont icofont-ui-calendar input-group-text"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="Agent" name="Agent" #Agent="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_Agent">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="PMSCMS" name="PMSCMS" #PMSCMS="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_PMSCMS" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="example-full-width">
+                    <textarea matInput rows="4" placeholder="comments" name="comments" #comments="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_Comments"> </textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="Rooms Count" name="BookingRoomsCount" #ReferenceName="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_BookingRoomsCount">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="ReferenceName" name="ReferenceName" #ReferenceName="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_ReferenceName" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="Purpose" name="Purpose" #Purpose="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_Purpose">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="ChannelManagerBookingNo" name="ChannelManagerBookingNo"
+                      #ChannelManagerBookingNo="ngModel" [(ngModel)]="service.bookingData.bkM_ChannelManagerBookingNo">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="Adult" name="Adult" #Purpose="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_Adult">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="example-full-width">
+                    <input matInput placeholder="Kids" name="Kids" #Kids="ngModel"
+                      [(ngModel)]="service.bookingData.bkM_Child">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="clearfix"></div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <a class="btn btn-outline-dark ml-1 pull-right" routerLink="/bookings"><i class="fa fa-table"></i> View
+          bookings</a>
+        <button mat-raised-button type="submit" class="btn btn-dark pull-right"><i class="fa fa-database"></i>
+          Submit</button>
+        <!--<button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>-->
+      </div>
+    </div>
+
+  </form>
+</div>
