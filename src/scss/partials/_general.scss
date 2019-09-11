@@ -5750,3 +5750,18 @@ select.form-control:not([size]):not([multiple]){
 .tabledit-input:disabled{
     display: none;
 }
+// common styles for cogwave
+.commonstyles{
+    border:2px solid red;
+        
+    .aqua-gradient{
+        // background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+        padding: 10px;
+        font-size: 100%;
+        color: #fff;        
+    }
+}
+
+.sub-title{
+    border:1px solid red;
+}

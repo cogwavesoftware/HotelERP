@@ -6,7 +6,7 @@ import { AuthComponent } from './layout/auth/auth.component';
 // import { bookingsComponent } from './bookings/bookings.component';
 // import { bookingComponent } from './bookings/booking/booking.component';
 import { AuthGuard } from './_guards';
-debugger;
+ 
 const routes: Routes = [
 
   // {
