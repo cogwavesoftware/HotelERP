@@ -10,20 +10,12 @@ const routes: Routes = [
     path:'',
     component: CommonpageComponent,
     data:{
-      title:'commonpage',
-      status:false
+      title:'commonpage'
+      // status:false
 
-    },
-    children:[
-      {
-        path:'logins',
-        loadChildren:'./logins/logins.module#LoginsModule'
-      },
-      {
-        path:'signups',
-        loadChildren:'./signups/signups.module#SignupsModule'
-      }
-    ]
+    }
+    
+   
 
   }
 ];

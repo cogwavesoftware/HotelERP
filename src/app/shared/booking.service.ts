@@ -30,7 +30,7 @@ export class bookingService {formData: BookingRegister_Read_spParams;bookingData
   }
 
   bookingtypeList() {
-    return this.http.get(environment.apiURL + '/booking/GetBookingTypeList').toPromise();
+    return this.http.get(environment.apiURL + '/booking/GetBookingTypeList').toPromise(); 
   }
 
   bookingtypeLists() {

@@ -5750,18 +5750,38 @@ select.form-control:not([size]):not([multiple]){
 .tabledit-input:disabled{
     display: none;
 }
-// common styles for cogwave
-.commonstyles{
-    border:2px solid red;
-        
+//cogwve styles
+.commonstyles{   
+    border-radius: 5px;
+    box-shadow: 0 1px 20px 0 rgba(7, 53, 77, 0.08);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     .aqua-gradient{
-        // background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
-        padding: 10px;
-        font-size: 100%;
+        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;          
         color: #fff;        
     }
+    .peach-gradient {
+        background: linear-gradient(40deg,#ffd86f,#fc6262)!important;
+    }
+    .purple-gradient {
+        background: linear-gradient(40deg,#ff6ec4,#7873f5)!important;
+    }
+    .blackred-gradiant {
+        background: linear-gradient(40deg, #000000, #ff0f0f) !important;             
+        h5{
+            color: #fff!important;  
+        } 
+    }
+    
 }
-
-.sub-title{
-    border:1px solid red;
+ .pcoded-header {
+    background: #000!important;
+    color:#fff!important;
+ }
+.homethreebox .card-block img{ 
+    border-radius: 50%;
+    border: 1px solid #448aff;
+    padding: 4px;
 }

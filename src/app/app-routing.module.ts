@@ -49,13 +49,12 @@ const routes: Routes = [
         loadChildren: './theme/auth/login/login.module#LoginModule'
       },
       {
-           path:'commonpage/logins',
-           loadChildren:'./commonpage/logins/logins.module#LoginsModule'
+        path:'logins',
+        loadChildren:'./logins/logins.module#LoginsModule'
       },
-      
       {
-        path:'commonpage/signups',
-        loadChildren:'./commonpage/signups/signups.module#SignupsModule'
+        path:'signups',
+        loadChildren:'./signups/signups.module#SignupsModule'
       },
       // {
       //   path: 'auth',

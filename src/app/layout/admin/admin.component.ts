@@ -26,7 +26,7 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
     ]),
     trigger('slideInOut', [
       state('in', style({
-        width: '280px',
+        width: '280px', 
         // transform: 'translate3d(0, 0, 0)'
       })),
       state('out', style({

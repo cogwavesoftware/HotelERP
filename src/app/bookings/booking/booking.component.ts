@@ -56,6 +56,11 @@ export class bookingComponent implements OnInit {
   }
 
 
+  getdata()
+  {
+    console.log("frad");
+  }
+
   resetForm(form?: NgForm) {
     //alert('test1');
     if (form = null)

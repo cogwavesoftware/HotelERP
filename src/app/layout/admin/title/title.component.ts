@@ -9,7 +9,7 @@ import {isUndefined} from 'util';
 })
 export class TitleComponent {
   constructor(private router: Router, private route: ActivatedRoute, private titleService: Title) {
-    debugger;
+   
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {

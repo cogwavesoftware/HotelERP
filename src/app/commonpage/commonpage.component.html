@@ -49,16 +49,28 @@
                
               </ul>
             </li>          
-                  
-                  
+            <li class="ripple">
+              <a routerLink="/logins">User Login</a>
+          </li>
+          <li class="ripple">
+            <a routerLink="/commonpage/signups">Cogwave login</a>
+        </li>
+        
+      <li class="ripple">
+        <a routerLink="/logins">Announcement</a>
+    </li>
+    <li class="ripple">
+      <a routerLink="/logins">Successful Clients</a>
+  </li>
+ 
                     <li class="ripple">
-                        <a style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif " routerLink="/productlist">Product Price List</a>
+                        <a   routerLink="/productlist">Product Price List</a>
                     </li>
                     <li class="ripple">
-                      <a style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif " routerLink="/productlist">Service & Help</a>
+                      <a   routerLink="/productlist">Service & Help</a>
                   </li>
                   <li class="ripple">
-                    <a style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif " href="www.cogwave.in" target="_blank">About Cogwave</a>
+                    <a   href="www.cogwave.in" target="_blank">About Cogwave</a>
                 
                 </li>
     
@@ -69,105 +81,102 @@
     </nav>
   </div>
 
-  
  
-<div class="container commonstyles">
-<div class="row">
- <div class="col-sm-6">
-
-    <div class="card">
-      <h5 class="sub-title aqua-gradient">Cogwave Product List</h5>
-        <div class="">
-
-            <div class="col-md-12 col-lg-12">
-                <ul>
-                  <li>
-                    <div class="offerBox">
-                      <div class="offerTitle">
-                          <h3><strong>This content descbribe about Front Office</strong></h3>
-                      </div>
-                      <div class="offerImg">
-                          <img src="src\assets\images\cogwaveimages\front_desk.png">
-                      </div>
-                      <div class="offerContent">
-                          <p>Get financial assistance for professional or technical education in India and abroad.</p>
-                          <a href="https://application.axisbank.co.in/webforms/onlineform/education-loan/web/educationloan.aspx?cta=logout-first-banner-educationloan" class="applyNowBtn" target="_blank">Apply Now </a>
-                          <span class="termNote">*T&amp;C apply</span>
-                      </div>
-                  </div>
-                  </li>
-                </ul>
-                <!-- <ul class="basic-list list-icons-img">
-                    <li>
-                      <img src="assets/images/avatar-1.jpg"
-                           class="img-fluid p-absolute d-block text-center"
-                           alt="">
-                      <h6>Front Office</h6>
-                      <p>Laborum nihil aliquam nulla praesentium illo libero
-                        nihil at odio maxime.</p>
-                    </li>
-                    <li>
-                      <h6>Point of Sale</h6>
-                      <img src="assets/images/avatar-2.jpg"
-                           class="img-fluid p-absolute d-block text-center"
-                           alt="">
-                      <p>Laborum nihil aliquam nulla praesentium illo libero
-                        nihil at odio maxime.</p>
-                    </li>
-                    <li>
-                      <h6>House Keeping</h6>
-                      <img src="assets/images/avatar-3.jpg"
-                           class="img-fluid p-absolute d-block text-center"
-                           alt="">
-                      <p>Laborum nihil aliquam nulla praesentium illo libero
-                        nihil at odio maxime.</p>
-                    </li>
-                  
-                      <li>
-                          <h6>Maintance</h6>
-                          <img src="assets/images/avatar-3.jpg"
-                               class="img-fluid p-absolute d-block text-center"
-                               alt="">
-                          <p>Laborum nihil aliquam nulla praesentium illo libero
-                            nihil at odio maxime.</p>
-                        </li>
-
-                  </ul> -->
-              </div>
-
-          </div>
-
-        </div>
-
+ 
+<div class="container-fluid commonstyles">
+    <div class="card-block " style="padding-top: 10px">
+        <ngb-carousel>
+          <ng-template ngbSlide>
+            <img src="assets/images/slider/b2.jpg" alt="Random first slide">
+            <div class="carousel-caption">
+              <h3>First slide label</h3>
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <img src="assets/images/slider/b1.jpg" alt="Random second slide">
+            <div class="carousel-caption">
+              <h3>Second slide label</h3>
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <img src="assets/images/slider/b3.jpg" alt="Random third slide">
+            <div class="carousel-caption">
+              <h3>Third slide label</h3>
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <img src="assets/images/slider/b4.png" alt="Random third slide">
+            <div class="carousel-caption">
+              <h3>Fourth slide label</h3>
+            </div>
+          </ng-template>
+        </ngb-carousel>
       </div>
-
- 
- <div class="col-sm-6">
-    <div class="col s8 offset-s2">
-      <div class="card grey lighten-2">
-        <div class="card-tabs">
-          <ul class="tabs tabs-fixed-width tabs-transparent">
-            <li class="tab">
-              <a routerLink='/commonpage/logins' routerLinkActive='active'>User Login</a>
-            </li>
-            <li class="tab">
-              <a  routerLink='/commonpage/signups' routerLinkActive='active'>Cogwave Login</a>
-            </li>
-          </ul>
+  <div class="row users-card homethreebox" style="padding-top: 10px; margin-bottom: 0px">
+    <div class="col-lg-4">
+      <div class="card user-card">
+        <div class="card-header aqua-gradient">
+          <h5 class="">About us</h5>
         </div>
-        <div class="card-content white">
-          <div class="row">
-            <router-outlet></router-outlet>
+        <div class="card-block">
+          <img class="img-fluid img-radius mx-auto d-block" src="assets/images/slider/boximg1.jpg" alt="img-inverse">
+          <div class="top-cap-text">
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp.</p>
           </div>
         </div>
       </div>
     </div>
-    
+    <div class="col-lg-4">
+      <div class="card user-card">
+        <div class="card-header peach-gradient">
+          <h5>Relative Links</h5>
+        </div>
+        <div class="card-block">
+          <img class="img-fluid img-radius mx-auto d-block" src="assets/images/slider/boximg2.jpg" alt="img-inverse">
+          <div class="top-cap-text">
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card user-card">
+        <div class="card-header purple-gradient">
+          <h5>Latest News</h5>
+        </div>
+        <div class="card-block">
+          <img class="img-fluid img-radius mx-auto d-block" src="assets/images/slider/boximg3.jpg" alt="img-inverse">
+          <div class="top-cap-text">
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div> 
-
-  </div>  
+  <div class="row users-card" >
+    <div class="col-lg-12">
+      <div class="card user-card">
+        <div class="card-header blackred-gradiant">
+          <h5 class="">Announcements </h5>
+        </div>
+        <div class="card-block">          
+          <div class="top-cap-text">
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp or incidi dunt ut labore et.Lorem ipsum dolor sit amet, consecte.</p>
+            <p>Lorem ipsum dolor sit amet, consectet ur adipisicing elit, sed do eiusmod temp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   
+  
+  </div> 
  </div>
+</div>
+<div class="footer">
+  <p class="text-center m-b-0">Copyright &copy; 2017 MEGA ABLE ADMIN , All rights reserved.</p>
 </div>
 
 
