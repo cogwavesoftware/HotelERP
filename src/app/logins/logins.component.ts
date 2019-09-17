@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-
-
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -23,6 +20,9 @@ export class LoginsComponent implements OnInit {
     returnUrl: string;
     error = '';
     isShow=false;
+    
+   
+  public config: any;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -40,7 +40,15 @@ export class LoginsComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
       // alert(this.returnUrl)
     }
-
+    openMyModal(event) {
+        document.querySelector('#' + event).classList.add('md-show');
+      }    
+      closeMyModal(event) {
+        ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+      }
+    
+       
+    
     // convenience getter for easy access to form fields
     get f() 
     { 

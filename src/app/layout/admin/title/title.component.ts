@@ -26,8 +26,7 @@ export class TitleComponent {
           });
         } 
         while (currentRoute);
-        debugger;
-        if (title !== undefined ) {
+              if (title !== undefined ) {
           this.titleService.setTitle(title + ' | Mega Able Angular 7+');
         }
       });
