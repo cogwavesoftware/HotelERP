@@ -79,7 +79,7 @@
       <h3>USERNAME WITH OTP</h3>
       <div class="app-modal-body">
           <div class="form-group form-primary">
-            <label class="float-label">Mobile No</label>
+            <label class="float-label">Enter mobile no</label>
             <input type="text" name="mobile" class="form-control" required="">
             <span class="form-bar"></span>
             
@@ -87,12 +87,16 @@
            
           <div class="form-group form-primary" >
             <label class="float-label">OTP</label>
-            <input type="password" name="password" class="form-control" required="">
+            <div id="divOuter">
+              <div id="divInner">
+                <input id="partitioned" type="text" maxlength="4" autocomplete="off" [disabled]='isDisabled' />
+              </div>
+            </div>
             <span class="form-bar"></span>               
           </div>
-          <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+          <button (click)="toggle()" class="btn btn-primary md-close" >{{displayText}}</button>
         </div>
-      <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+      <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn">X</button>
     </app-modal-animation>
 
 

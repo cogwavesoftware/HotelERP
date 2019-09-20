@@ -20,7 +20,8 @@ body =  document.getElementsByTagName('body')[0];
     returnUrl: string;
     error = '';
     isShow=false;
-    
+    isDisabled = true;
+    displayText ="Get OTP";
    
   public config: any;
     constructor(
@@ -49,7 +50,7 @@ body =  document.getElementsByTagName('body')[0];
         document.querySelector('#' + event).classList.add('md-show');
       }    
       closeMyModal(event) {
-        ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+        ((event.target.parentElement).parentElement).classList.remove('md-show');
       }
     
            
@@ -66,8 +67,9 @@ body =  document.getElementsByTagName('body')[0];
     console.log('Super done');
     }
 
-    loginwithotp(){
-        
+    toggle(){
+        this.displayText="Login";
+        this.isDisabled = false;
     }
     onSubmit()
      {
