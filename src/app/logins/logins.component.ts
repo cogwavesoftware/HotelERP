@@ -26,17 +26,12 @@ export class LoginsComponent implements OnInit {
     loginMaster:loginMaster;
     error = '';
     isShow=false;
-<<<<<<< HEAD
-    isDisabled = true;
-    displayText ="Get OTP";
-   
-  public config: any;
-=======
     public roles =[];
     isLoginError:boolean;
     isOTPEntered:boolean;
     OTP:number;
->>>>>>> ca3c5d1aa1a62f09e6b976f1d088b548ba2ace79
+    displayText="Get OTP";
+    isDisabled ="true";
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -60,19 +55,6 @@ export class LoginsComponent implements OnInit {
     openMyModal(event)
      {
         document.querySelector('#' + event).classList.add('md-show');
-<<<<<<< HEAD
-      }    
-      closeMyModal(event) {
-        ((event.target.parentElement).parentElement).classList.remove('md-show');
-      }
-    
-           
-    // convenience getter for easy access to form fields
-    get f() 
-    { 
-        return this.loginForm.controls;
-    }
-=======
       }  
       
       
@@ -80,8 +62,7 @@ export class LoginsComponent implements OnInit {
        { 
        
         console.log(mobile);
-        ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
->>>>>>> ca3c5d1aa1a62f09e6b976f1d088b548ba2ace79
+        ((event.target.parentElement).parentElement).classList.remove('md-show');
 
         this.loading = true;
         this.authenticationService.gologin(mobile, "cogwaveotp")
@@ -110,17 +91,7 @@ export class LoginsComponent implements OnInit {
               this.loading = false;
           });   
 
-<<<<<<< HEAD
-    toggle(){
-        this.displayText="Login";
-        this.isDisabled = false;
-    }
-    onSubmit()
-     {
-        this.submitted = true;
-=======
        }
->>>>>>> ca3c5d1aa1a62f09e6b976f1d088b548ba2ace79
 
 
        CheckOTP(Userotp:number)
@@ -175,7 +146,10 @@ export class LoginsComponent implements OnInit {
                     this.loading = false;
                 });
     }
-    
+    toggle(){
+      this.displayText="Login";
+      this.isDisabled ="false";
+    }
 }
 
 
