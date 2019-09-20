@@ -7,7 +7,10 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class bookingService {formData: BookingRegister_Read_spParams;bookingData: tblBookingMaster;
+export class bookingService {
+  formData: BookingRegister_Read_spParams;
+  bookingData: tblBookingMaster;
+ 
   constructor(private http: HttpClient)
    {
     this.formData = new BookingRegister_Read_spParams();

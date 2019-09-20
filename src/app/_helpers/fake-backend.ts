@@ -36,10 +36,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // get users
-            if (request.url.endsWith('/users') && request.method === 'GET') {
+            if (request.url.endsWith('/users') && request.method === 'GET') 
+            {
                     // check for fake auth token in header and return users if valid, this security 
                     // is implemented server side in a real application
-                    if (request.headers.get('Authorization') === `Basic ${window.btoa('cogwave:cogwave')}`) {
+                    if (request.headers.get('Authorization') === `Basic ${window.btoa('cogwave:cogwave')}`)
+                     {
                     return of(new HttpResponse({ status: 200, body: [testUser] }));
                 } else {
                     // return 401 not authorised if token is null or invalid
