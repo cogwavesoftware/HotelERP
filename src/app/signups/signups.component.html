@@ -19,30 +19,27 @@
                 </div>
   
                 <div class="form-group form-primary">
-                  <input type="text" #email ngModel name="email" class="form-control"  required="">
-                  <span class="form-bar"></span>
-                  <label class="float-label">Enter Your UserName</label>
+                  <label class="float-label">Enter OTP</label>
+                  <div id="divOuter">
+                      <div id="divInner">
+                  <input type="text" id="otppassword" #otppassword ngModel name="otppassword" class="form-control" [disabled]="isDisabled" required="" autocomplete="off">
+                  </div></div>
+                  <span class="form-bar"></span>                  
                 </div>
   
-                <div class="form-group form-primary">
-                  <input type="password"  #password ngModel name="password" class="form-control"  required="">
-                  <span class="form-bar"></span>
-                  <label class="float-label">Password</label>
-  
-                  <!-- <div class="messages text-danger tooltip-error" placement="top" ngbTooltip="Username can't be blank" *ngIf="loginForm.controls.password.errors?.required"><i class="text-danger icofont icofont-close-circled"></i></div> -->
-                </div>
+       
   
                 <div class="row m-t-25 text-left">
                   <div class="col-12">
                     
                     <div class="forgot-phone text-right f-right">
-                      <a [routerLink]="['/auth/forgot']" class="text-right f-w-600"> Forgot Password?</a>
+                      <a [routerLink]="['/auth/forgot']" class="text-right f-w-600"> Forgot Password?</a> 
                     </div>
                   </div>
                 </div>
                 <div class="row m-t-30">
                   <div class="col-md-12">
-                    <button type="submit" [disabled]="!loginForms.valid"  class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">Sign in</button>
+                    <button type="submit" (click)="toggle()"   class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">{{DisplayText}}</button>
                   </div>
   
                   

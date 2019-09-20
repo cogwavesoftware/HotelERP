@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators ,FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -23,11 +23,14 @@ export class SignupsComponent implements OnInit {
   loginMaster:loginMaster;
   error:string;
   body = document.getElementsByTagName('body')[0];
+  DisplayText =" Get OTP";
+  isDisabled = "true";  
 
-
+  
 
   constructor(  private formBuilder: FormBuilder,private route: ActivatedRoute,
     private router: Router, private authenticationService: AuthenticationService) { }
+ 
  
 
   ngOnInit() {  
@@ -68,6 +71,16 @@ export class SignupsComponent implements OnInit {
                     this.error = error;
                     this.loading = false;
                 });
+    }
+
+
+    @ViewChild("otppassword",{static: false}) nameField: ElementRef;
+
+    toggle() : void{      
+      this.DisplayText = "Login";
+      this.isDisabled = "false";
+      this.nameField.nativeElement.focus();
+       
     }
 
 }
