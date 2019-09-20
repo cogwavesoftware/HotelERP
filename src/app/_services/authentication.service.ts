@@ -48,6 +48,19 @@ export class AuthenticationService {
       .catch(this.errorHandler); 
     }
 
+    GetloginuserDetailsbyMobileno(mobileno): Observable<loginMaster>
+    {
+       
+      return this.http.get<loginMaster>(environment.apiURL + '/api/common/company/Getlogin?mobileno=' + mobileno) 
+      .catch(this.errorHandler); 
+    }
+
+     GenerateonetimeOTP(mobileno) :   Observable<number>
+     {
+      return this.http.get<number>(environment.apiURL + '/api/common/company/GetOTP?mobileno=' + mobileno) 
+      .catch(this.errorHandler);
+     }
+    
     errorHandler(error: HttpErrorResponse)
     {
      return Observable.throw(error.message || "server ERROR");

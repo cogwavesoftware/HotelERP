@@ -10,6 +10,7 @@ import {ToastrService} from 'ngx-toastr'
 
 import { loginMaster } from './../_models/loginMaster';
 import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-logins',
   templateUrl: './logins.component.html',
@@ -20,12 +21,15 @@ export class LoginsComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
     submitted = false;
+    mobile:string;
     returnUrl: string;
     loginMaster:loginMaster;
     error = '';
     isShow=false;
     public roles =[];
     isLoginError:boolean;
+    isOTPEntered:boolean;
+    OTP:number;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -46,12 +50,71 @@ export class LoginsComponent implements OnInit {
     ngOnDestroy(){
       this.body.classList.remove("loginsignupbg");
     }
-    openMyModal(event) {
+    openMyModal(event)
+     {
         document.querySelector('#' + event).classList.add('md-show');
-      }    
-      closeMyModal(event) {
+      }  
+      
+      
+      closeMyModal(event,mobile)
+       { 
+       
+        console.log(mobile);
         ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
-      }
+
+        this.loading = true;
+        this.authenticationService.gologin(mobile, "cogwaveotp")
+        .subscribe(data =>                 
+          {
+
+           if(!data)
+           {      
+             this.mobile=mobile;    
+            this.authenticationService.GenerateonetimeOTP(mobile).subscribe(data => {
+                this.OTP=data;
+            })
+            // this.authenticationService.GetloginuserDetailsbyMobileno(mobile)
+            // .subscribe(data=>{
+            //   this.loginMaster=data;
+            //  console.log(data.UserId)   
+            //  localStorage.setItem('id',data.UserId.toString());
+            //  localStorage.setItem('BranchCode',data.BranchCode.toString());
+            // })             
+           //  this.router.navigate(['/dashboard/default']);
+           }            
+          },
+          error => {
+             console.log("error");
+              this.error = error;
+              this.loading = false;
+          });   
+
+       }
+
+
+       CheckOTP(Userotp:number)
+       {
+         if(Userotp==this.OTP)
+           {
+             
+            this.authenticationService.GetloginuserDetailsbyMobileno(this.mobile)
+            .subscribe(data=>{
+              this.loginMaster=data;
+             console.log(data.UserId)   
+             localStorage.setItem('id',data.UserId.toString());
+             localStorage.setItem('BranchCode',data.BranchCode.toString());
+            })        
+            this.router.navigate(['/dashboard/default']);
+           }
+           error => {
+            console.log("error");
+             this.error = error;
+             this.loading = false;
+         }; 
+       }
+
+     
+
     OnSubmit(username: string ,password:string)
      {  
      
@@ -70,6 +133,7 @@ export class LoginsComponent implements OnInit {
                      this.loginMaster=data;
                     console.log(data.UserId)
                   localStorage.setItem('id',data.UserId.toString());
+                  localStorage.setItem('BranchCode',data.BranchCode.toString());
                    })
                    
                     this.router.navigate(['/dashboard/default']);
