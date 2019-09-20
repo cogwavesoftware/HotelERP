@@ -44,20 +44,21 @@ export class AuthenticationService {
     GetloginuserDetails(username): Observable<loginMaster>
     {
        
-      return this.http.get<loginMaster>(environment.apiURL + '/api/common/company/Getlogin?username=' + username) 
+      return this.http.get<loginMaster>(environment.apiURL + '/api/common/HMSAccount/Getlogin?username=' + username) 
       .catch(this.errorHandler); 
     }
 
     GetloginuserDetailsbyMobileno(mobileno): Observable<loginMaster>
     {
        
-      return this.http.get<loginMaster>(environment.apiURL + '/api/common/company/Getlogin?mobileno=' + mobileno) 
+      return this.http.get<loginMaster>(environment.apiURL + '/api/common/HMSAccount/Getlogin?mobileno=' + mobileno) 
       .catch(this.errorHandler); 
     }
 
-     GenerateonetimeOTP(mobileno) :   Observable<number>
+     GenerateonetimeOTP(mobileno)   
      {
-      return this.http.get<number>(environment.apiURL + '/api/common/company/GetOTP?mobileno=' + mobileno) 
+      
+      return this.http.get(environment.apiURL + '/api/common/HMSAccount/GetOTP?mobileno=' + mobileno) 
       .catch(this.errorHandler);
      }
     

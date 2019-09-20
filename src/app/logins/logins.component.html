@@ -98,11 +98,11 @@
           <label class="float-label">OTP</label>
           <div id="divOuter">
             <div id="divInner">
-          <input type="password" id="otppassword" #otppassword ngModel name="password" class="form-control" [disabled]="isDisabled" required="">
+          <input type="password" id="otppassword" #otppassword ngModel name="otppassword" class="form-control" [disabled]="isDisabled" required="">
           </div></div>
           <span class="form-bar"></span>               
         </div>
-        <button (click)="toggle()" class="btn btn-primary md-close">{{displayText}}</button>
+        <button (click)="toggle(mobile.value,otppassword.value)" class="btn btn-primary md-close">{{displayText}}</button>
       </div>
     <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn">X</button>
   </app-modal-animation>

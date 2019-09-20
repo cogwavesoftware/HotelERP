@@ -61,35 +61,9 @@ export class LoginsComponent implements OnInit {
       closeMyModal(event,mobile)
        { 
        
-        console.log(mobile);
+        
         ((event.target.parentElement).parentElement).classList.remove('md-show');
 
-        this.loading = true;
-        this.authenticationService.gologin(mobile, "cogwaveotp")
-        .subscribe(data =>                 
-          {
-
-           if(!data)
-           {      
-             this.mobile=mobile;    
-            this.authenticationService.GenerateonetimeOTP(mobile).subscribe(data => {
-                this.OTP=data;
-            })
-            // this.authenticationService.GetloginuserDetailsbyMobileno(mobile)
-            // .subscribe(data=>{
-            //   this.loginMaster=data;
-            //  console.log(data.UserId)   
-            //  localStorage.setItem('id',data.UserId.toString());
-            //  localStorage.setItem('BranchCode',data.BranchCode.toString());
-            // })             
-           //  this.router.navigate(['/dashboard/default']);
-           }            
-          },
-          error => {
-             console.log("error");
-              this.error = error;
-              this.loading = false;
-          });   
 
        }
 
@@ -146,9 +120,42 @@ export class LoginsComponent implements OnInit {
                     this.loading = false;
                 });
     }
-    toggle(){
-      this.displayText="Login";
-      this.isDisabled ="false";
+
+
+    toggle(mobile,otp)
+    {
+      if(this.displayText=="Get OTP")
+      {
+        
+        this.displayText="Login";
+        this.isDisabled ="false";
+        this.loading = true;
+        this.authenticationService.gologin(mobile, "cogwaveotp")
+        .subscribe(data =>                 
+          {
+            console.log(data.access_token)
+           if(data.access_token !=null)
+           {      
+             this.mobile=mobile;    
+            this.authenticationService.GenerateonetimeOTP(mobile).subscribe(data => {
+                this.OTP= Number(data);
+               
+                console.log( this.OTP)
+            })
+   
+           }            
+          },
+          error => {
+             console.log("error");
+              this.error = error;
+              this.loading = false;
+          });
+      }
+      else
+      {
+        this.CheckOTP(otp);
+      }
+       
     }
 }
 

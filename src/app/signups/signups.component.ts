@@ -59,8 +59,7 @@ export class SignupsComponent implements OnInit {
                     console.log(data.UserId)
                   localStorage.setItem('id',data.UserId.toString());
                   localStorage.setItem('BranchCode',data.BranchCode.toString());
-                   })
-                   
+                   })                   
                     this.router.navigate(['/dashboard/default']);
                 },
                 error => {
