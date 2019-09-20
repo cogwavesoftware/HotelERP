@@ -1,76 +1,105 @@
 <!-- <form [formGroup]="loginForm"> -->
 
-<section class="login-block">
-  <!-- Container-fluid starts -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <!-- Authentication card start -->
-        
-        <form #loginForms="ngForm" class="form-group" (ngSubmit)="OnSubmit(email.value,password.value)">
-        
-          <div class="auth-box card">
-            <div class="card-block">
-              <div class="row m-b-20">
-                <div class="col-md-12">
-                  <h3 class="text-center">User Login</h3>
-                </div>
-              </div>
-
-              <div class="form-group form-primary">
-                <input type="text" #email ngModel name="email" class="form-control"  required="">
-                <span class="form-bar"></span>
-                <label class="float-label">Enter Your UserName</label>
-              </div>
-
-              <div class="form-group form-primary">
-                <input type="password"  #password ngModel name="password" class="form-control"  required="">
-                <span class="form-bar"></span>
-                <label class="float-label">Password</label>
-
-                <!-- <div class="messages text-danger tooltip-error" placement="top" ngbTooltip="Username can't be blank" *ngIf="loginForm.controls.password.errors?.required"><i class="text-danger icofont icofont-close-circled"></i></div> -->
-              </div>
-
-              <div class="row m-t-25 text-left">
-                <div class="col-12">
-                  <div class="checkbox-fade fade-in-primary d-">
-                    <label>
-                      <input type="checkbox" value="">
-                      <span class="cr"><i class="cr-icon fa fa-check txt-primary"></i></span>
-                      <span class="text-inverse">Remember me</span>
-                    </label>
-                  </div>
-                  <div class="forgot-phone text-right f-right">
-                    <a [routerLink]="['/auth/forgot']" class="text-right f-w-600"> Forgot Password?</a>
+  <section class="login-block">
+    <!-- Container-fluid starts -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Authentication card start -->
+          
+          <form #loginForms="ngForm" class="form-group" (ngSubmit)="OnSubmit(email.value,password.value)">
+          
+            <div class="auth-box card">
+              <div class="card-block">
+                <div class="row m-b-20">
+                  <div class="col-md-12">
+                    <h3 class="text-center">User Login</h3>
                   </div>
                 </div>
-              </div>
-              <div class="row m-t-30">
-                <div class="col-md-12">
-                  <button type="submit" [disabled]="!loginForms.valid"  class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">Sign in</button>
+  
+                <div class="form-group form-primary">
+                  <input type="text" #email ngModel name="email" class="form-control"  required="">
+                  <span class="form-bar"></span>
+                  <label class="float-label">Enter Your UserName</label>
+                </div>
+  
+                <div class="form-group form-primary">
+                  <input type="password"  #password ngModel name="password" class="form-control"  required="">
+                  <span class="form-bar"></span>
+                  <label class="float-label">Password</label>
+  
+                  <!-- <div class="messages text-danger tooltip-error" placement="top" ngbTooltip="Username can't be blank" *ngIf="loginForm.controls.password.errors?.required"><i class="text-danger icofont icofont-close-circled"></i></div> -->
+                </div>
+  
+                <div class="row m-t-25 text-left">
+                  <div class="col-12">
+                    <div class="checkbox-fade fade-in-primary d-">
+                      <label>
+                        <input type="checkbox" value="">
+                        <span class="cr"><i class="cr-icon fa fa-check txt-primary"></i></span>
+                        <span class="text-inverse">Remember me</span>
+                      </label>
+                    </div>
+                    <div class="forgot-phone text-right f-right">
+                      <a [routerLink]="['/auth/forgot']" class="text-right f-w-600"> Forgot Password?</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-t-30">
+                  <div class="col-md-12">
+                    <button type="submit" [disabled]="!loginForms.valid"  class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">Sign in</button>
+                  </div>
+  
+                  
                 </div>
 
-                
-              </div>
-              <hr/>
-              <div class="row">
-                <div class="col-md-10">
-                  <p class="text-inverse text-left m-b-0">Thank you.</p>
-                  <p class="text-inverse text-left"><a [routerLink]="['/dashboard/default']"><b>Back to website</b></a></p>
+                <div class="row m-t-10">
+                  <div class="col-md-12">
+                      <button type="button" class="btn btn-primary btn-outline-primary md-trigger ripple light" (click)="openMyModal('effect-8')">Login with OTP</button>
+                  </div>
                 </div>
-                <div class="col-md-2">
-                  <img src="assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+                <hr/>
+                <div class="row">
+                  <div class="col-md-10">
+                    <p class="text-inverse text-left m-b-0">Thank you.</p>
+                    <p class="text-inverse text-left"><a [routerLink]="['/dashboard/default']"><b>Back to website</b></a></p>
+                  </div>
+                  <div class="col-md-2">
+                    <img src="assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
-        <!-- end of form -->
+          </form>
+          <!-- end of form -->
+        </div>
+        <!-- end of col-sm-12 -->
       </div>
-      <!-- end of col-sm-12 -->
+  
+      <!-- end of row -->
     </div>
+    <!-- end of container-fluid -->
+  </section>
 
-    <!-- end of row -->
-  </div>
-  <!-- end of container-fluid -->
-</section>
+
+
+   <!-- model starting here -->
+   <app-modal-animation [modalID]="'effect-8'" [modalClass]="'md-effect-8'">
+    <h3>USERNAME WITH OTP</h3>
+    <div class="app-modal-body">
+        <div class="form-group form-primary">
+          <label class="float-label">Mobile No</label>
+          <input type="text" name="mobile" class="form-control" required="">
+          <span class="form-bar"></span>
+          
+        </div>
+         
+        <div class="form-group form-primary" >
+          <label class="float-label">OTP</label>
+          <input type="password" name="password" class="form-control" required="">
+          <span class="form-bar"></span>               
+        </div>
+        <button (click)="closeMyModal($event)" class="btn btn-primary md-close">Close Me!!</button>
+      </div>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+  </app-modal-animation>
