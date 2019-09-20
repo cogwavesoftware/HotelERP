@@ -83,6 +83,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: AdminComponent,canActivate: [AuthGuard] ,
+    
     children: [ 
       {
         path: 'dashboard',
@@ -93,6 +94,10 @@ const routes: Routes = [
          path: 'dashboard',
          loadChildren: './theme/dashboard/dashboard.module#DashboardModule'
        },
+       {
+        path: 'default',
+        loadChildren: './theme/dashboard/default/default.module#DefaultModule'
+      },
       // {
       //   path: 'navigation',
       //   loadChildren: './theme/navigation/navigation.module#NavigationModule'

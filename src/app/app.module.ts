@@ -69,11 +69,11 @@ import { fakeBackendProvider } from './_helpers';
   //entryComponents: [CommonpageComponent],
   providers: [
     MenuItems, bookingService,
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+   // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
-fakeBackendProvider
+    //fakeBackendProvider
   
   ],
 
