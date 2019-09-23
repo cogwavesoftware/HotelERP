@@ -11,6 +11,7 @@ import {ToastrService} from 'ngx-toastr'
 import { loginMaster } from './../_models/loginMaster';
 import { HttpErrorResponse } from '@angular/common/http';
 
+import { SuperAdmin } from './../_models/SuperAdmin';
 @Component({
   selector: 'app-signups',
   templateUrl: './signups.component.html',
@@ -20,12 +21,13 @@ export class SignupsComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted:boolean;
-  loginMaster:loginMaster;
+  superadmin:SuperAdmin;
   error:string;
+  mobileno:string;
   body = document.getElementsByTagName('body')[0];
-  DisplayText =" Get OTP";
+  DisplayText ="Get OTP";
   isDisabled = "true";  
-
+  OTP:number;
   
 
   constructor(  private formBuilder: FormBuilder,private route: ActivatedRoute,
@@ -33,37 +35,38 @@ export class SignupsComponent implements OnInit {
  
  
 
-  ngOnInit() {  
+  ngOnInit() 
+  {  
     this.body.classList.add("loginsignupbg");    
   }
 
 
-  ngOnDestroy(){
+  ngOnDestroy()
+  {
     this.body.classList.remove("loginsignupbg");
   }
 
 
   OnSubmit(username: string ,password:string)
      {  
-     
+       alert ("submit")
         this.submitted = true;
-        // stop here if form is invalid
-        // if (this.loginForm.invalid) 
-        // {
-        //     return;
-        // }
         this.loading = true;
-        this.authenticationService.gologin(username, password)   
+        this.authenticationService.gosuperadminlogin(username, password)   
             .subscribe(data =>                 
                 {
-                   this.authenticationService.GetloginuserDetails(username)
+                   this.authenticationService.GetsuperAdminloginDetails()
                    .subscribe(data=>{
-                     this.loginMaster=data;
-                    console.log(data.UserId)
-                  localStorage.setItem('id',data.UserId.toString());
-                  localStorage.setItem('BranchCode',data.BranchCode.toString());
+                     this.superadmin=data;
+                    console.log(data.Id)
+                    this.mobileno=data.MobileNo
+                    localStorage.setItem('id',data.Id.toString());
+                    this.authenticationService.OneTimpOTPForSuperAdmin(this.mobileno).subscribe(res => {
+                      this.OTP=Number(res);  
+                    })
+                  
                    })                   
-                    this.router.navigate(['/dashboard/default']);
+                    //this.router.navigate(['/dashboard']);
                 },
                 error => {
                    console.log("error");
@@ -74,12 +77,36 @@ export class SignupsComponent implements OnInit {
 
 
     @ViewChild("otppassword",{static: false}) nameField: ElementRef;
+ 
+    toggle(otp) : void
+    {   
+     
+      if ( this.DisplayText =="Get OTP")
+      {
+        this.OnSubmit("SuperAdmin","SuperAdmin")  
+        this.DisplayText = "Login";
+        this.isDisabled = "false";
+        this.nameField.nativeElement.focus();
+      } 
+      else
+      {
+       this.CheckOTP(otp);
+      }
+ 
+    }
 
-    toggle() : void{      
-      this.DisplayText = "Login";
-      this.isDisabled = "false";
-      this.nameField.nativeElement.focus();
-       
+    
+    CheckOTP(Userotp:number)
+    {
+      if(Userotp==this.OTP)
+        {               
+         this.router.navigate(['/dashboard']);
+        }
+        error => {
+         console.log("error");
+          this.error = error;
+          this.loading = false;
+      }; 
     }
 
 }

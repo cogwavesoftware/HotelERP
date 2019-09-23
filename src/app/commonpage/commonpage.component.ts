@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../_services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -72,7 +73,7 @@ export class CommonpageComponent implements OnInit {
   public navRight: string;
   public windowWidth: number;
 
-  constructor() {
+  constructor(private _authservice:AuthenticationService) {
     this.navType = 'st2';
     this.themeLayout = 'vertical';
     this.verticalPlacement = 'left';
@@ -101,6 +102,7 @@ export class CommonpageComponent implements OnInit {
   }
 
   ngOnInit() {
+  this._authservice.logout();
   }
 
   onResize(event) {

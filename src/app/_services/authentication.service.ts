@@ -5,11 +5,12 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpErrorResponse } from '@angula
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user'
-import { loginMaster, } from '../_models/loginMaster';
+import { loginMaster } from '../_models/loginMaster';
 import { Observable } from "rxjs/observable";
 import 'rxjs/add/operator/catch';
 import { Alert } from 'selenium-webdriver';
 import { stringify } from '@angular/compiler/src/util';
+import { SuperAdmin } from '../_models/SuperAdmin';
 
 
 @Injectable({ providedIn: 'root' })
@@ -41,9 +42,32 @@ export class AuthenticationService {
             return user;
         })); 
     }
+
+    gosuperadminlogin(username, password) 
+    {       
+         let urlSearchParams = new URLSearchParams();
+         urlSearchParams.append('UserName', username);
+         urlSearchParams.append('Password', password);
+         urlSearchParams.append('grant_type', 'password');
+        let body = urlSearchParams.toString()
+        return this.http.post<any>(environment.apiURL + '/postoken',  body,{ headers:environment.BASE_CONTENTTYPE_HEADER }) 
+        .pipe(map(user => {
+            // login successful if there's a user in the response
+            if (user) 
+            {      
+              alert("user")           
+                // store user details and basic auth credentials in local storage 
+                // to keep user logged in between page refreshes
+                user.authdata = window.btoa(username + ':' + password);
+               //localStorage.setItem('logincredential', JSON.stringify(user.authdata));
+                localStorage.setItem('currentUser', JSON.stringify(user));              
+            }      
+            return user;
+        })); 
+    }
+
     GetloginuserDetails(username): Observable<loginMaster>
-    {
-       
+    {   
       return this.http.get<loginMaster>(environment.apiURL + '/api/common/HMSAccount/Getlogin?username=' + username) 
       .catch(this.errorHandler); 
     }
@@ -62,41 +86,47 @@ export class AuthenticationService {
       .catch(this.errorHandler);
      }
     
+     OneTimpOTPForSuperAdmin(mobileno)   
+     {
+      
+      return this.http.get(environment.apiURL + '/api/common/HMSAccount/GetOTP?mobileno=' + mobileno) 
+      .catch(this.errorHandler);
+     }
+
     errorHandler(error: HttpErrorResponse)
     {
      return Observable.throw(error.message || "server ERROR");
     }
     
-    getbranchDetails()
-    {
-        console.log('getbranchservicecall')  
-        return this.http.get(environment.apiURL+'/api/common/company/Getcompany', {headers: environment.BASE_ACCEPT_HEADER})
-    }
+    // getbranchDetails()
+    // {
+    //     console.log('getbranchservicecall')  
+    //     return this.http.get(environment.apiURL+'/api/common/company/Getcompany', {headers: environment.BASE_ACCEPT_HEADER})
+    // }
  
-    getUserDetailss(username, password)
-    {
-      return this.http.get<any>(environment.apiURL + '/api/common/Account/GetuserDetails?username=' + username + '&password=' + password) 
-      .pipe(map(user => {  
-        if (user) 
-        {
-          console.log(user);
-        }      
-        return user;
-    }));
-    }
+    // getUserDetailss(username, password)
+    // {
+    //   return this.http.get<any>(environment.apiURL + '/api/common/Account/GetuserDetails?username=' + username + '&password=' + password) 
+    //   .pipe(map(user => {  
+    //     if (user) 
+    //     {
+    //       console.log(user);
+    //     }      
+    //     return user;
+    // }));
+    // }
 
-
-
- 
-
-
-    
-    
+    GetsuperAdminloginDetails(): Observable<SuperAdmin>
+    {    
+      return this.http.get<SuperAdmin>(environment.apiURL + '/api/common/HMSAccount/GetSuperAdminlogin') 
+      .catch(this.errorHandler); 
+    } 
     logout() 
     {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        
+        localStorage.removeItem('currentUser');   
+        localStorage.removeItem('id');   
+        localStorage.removeItem('BranchCode');   
     }
 }
 
