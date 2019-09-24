@@ -37,9 +37,12 @@ export class LoginsComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,private toastser:ToastrService
-        ) {}
+        ) {
+          console.log("constr")
+        }
 
     ngOnInit() { 
+      console.log("ngonit")
         // reset login status
         this.authenticationService.logout();
         // get return url from route parameters or default to '/'
@@ -78,7 +81,9 @@ export class LoginsComponent implements OnInit {
               this.loginMaster=data;
              console.log(data.UserId)   
              localStorage.setItem('id',data.UserId.toString());
+             localStorage.setItem('IsRole',data.IsRole.toString());
              localStorage.setItem('BranchCode',data.BranchCode.toString());
+             
             })        
             this.router.navigate(['/dashboard/default']);
            }
@@ -106,12 +111,14 @@ export class LoginsComponent implements OnInit {
                 {
                    this.authenticationService.GetloginuserDetails(username)
                    .subscribe(data=>{
-                     this.loginMaster=data;
-                    console.log(data.UserId)
-                  localStorage.setItem('id',data.UserId.toString());
+                     this.loginMaster=data;                    
+                  localStorage.setItem('id',data.UserId.toString());  
+                  localStorage.setItem('IsRole',data.IsRole.toString());
                   localStorage.setItem('BranchCode',data.BranchCode.toString());
                    })
-                   
+                   console.log("Before")
+                   console.log(data.IsRole)
+                   console.log("after")
                     this.router.navigate(['/dashboard/default']);
                 },
                 error => {

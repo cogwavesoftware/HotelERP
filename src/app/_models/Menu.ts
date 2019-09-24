@@ -30,7 +30,7 @@ export interface BadgeItem {
     children?: ChildrenItems[];
   }
   
-  export interface Menu {
+  export interface Menus {
     label: string;
     main: MainMenuItems[];
   }

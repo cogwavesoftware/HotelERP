@@ -313,7 +313,7 @@
                 </a>
               </div>
 
-              <div *ngFor="let asideItems of menuItems.getAll()" class="d-color">
+              <div *ngFor="let asideItems of finalMenu" class="d-color">
                 <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme">{{asideItems.label}}</div>
                 <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
                   [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder"

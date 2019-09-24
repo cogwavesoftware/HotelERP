@@ -1,7 +1,12 @@
+
+import { AuthenticationService } from './../../_services/authentication.service';
+
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
-import {MenuItems} from '../../shared/menu-items/menu-items';
-
+import {MenuItems, Menu} from '../../shared/menu-items/menu-items';
+import { Menus } from 'src/app/_models/Menu';
+import { stringify } from 'querystring';
+import { Observable } from "rxjs/observable";
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -81,6 +86,9 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
   ]
 })
 export class AdminComponent implements OnInit, OnDestroy {
+
+  menuItems1: Menu[];
+  finalMenu = new Array<Menu>();
   public animateSidebar: string;
   public navType: string;
   public themeLayout: string;
@@ -164,7 +172,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public menuItems: MenuItems) {
+  constructor(public menuItems: MenuItems, public _authservice:AuthenticationService) {
     this.animateSidebar = '';
     this.navType = 'st2';
     this.themeLayout = 'vertical';
@@ -240,10 +248,44 @@ export class AdminComponent implements OnInit, OnDestroy {
     // sidebar img
     /*this.setLayoutType('img');*/
 
+
+    let IsRole = localStorage.getItem('IsRole');
+    if (IsRole=="SuperAdmin")
+    {
+       this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"Create Panel","short_label":"Co","main_state":"Create Panel","target":false,"name":"Create Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"Company Creation","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"Branch Creation","target":false,"name":"Branch Creation","type":"link","children":[]}]}]}];
+    }
+    else
+    {    
+    this.menuItems.getmenu().subscribe((res:any[])=>
+    {
+      //var Menulistdd=JSON.stringify(res);
+      //console.log("francis")
+      this.finalMenu=res
+      //console.log(this.finalMenu)    
+    }); 
+  } 
+
   }
 
   ngOnInit() {
+   
+   
     this.setBackgroundPattern('theme1');
+  //   let IsRole = localStorage.getItem('IsRole');
+  //   if (IsRole=="SuperAdmin")
+  //   {
+  //      this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"Create Panel","short_label":"Co","main_state":"Create Panel","target":false,"name":"Create Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"Company Creation","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"Branch Creation","target":false,"name":"Branch Creation","type":"link","children":[]}]}]}];
+  //   }
+  //   else
+  //   {    
+  //   this.menuItems.getmenu().subscribe((res:any[])=>
+  //   {
+  //     //var Menulistdd=JSON.stringify(res);
+  //     //console.log("francis")
+  //     this.finalMenu=res
+  //     //console.log(this.finalMenu)    
+  //   }); 
+  // } 
   }
 
   onResize(event) {

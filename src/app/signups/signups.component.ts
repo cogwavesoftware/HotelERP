@@ -33,23 +33,17 @@ export class SignupsComponent implements OnInit {
   constructor(  private formBuilder: FormBuilder,private route: ActivatedRoute,
     private router: Router, private authenticationService: AuthenticationService) { }
  
- 
-
   ngOnInit() 
   {  
     this.body.classList.add("loginsignupbg");    
   }
-
-
   ngOnDestroy()
   {
     this.body.classList.remove("loginsignupbg");
   }
-
-
   OnSubmit(username: string ,password:string)
      {  
-       alert ("submit")
+      
         this.submitted = true;
         this.loading = true;
         this.authenticationService.gosuperadminlogin(username, password)   
@@ -61,6 +55,7 @@ export class SignupsComponent implements OnInit {
                     console.log(data.Id)
                     this.mobileno=data.MobileNo
                     localStorage.setItem('id',data.Id.toString());
+                    localStorage.setItem('IsRole','SuperAdmin');
                     this.authenticationService.OneTimpOTPForSuperAdmin(this.mobileno).subscribe(res => {
                       this.OTP=Number(res);  
                     })
