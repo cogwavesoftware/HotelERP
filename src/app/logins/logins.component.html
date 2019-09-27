@@ -1,108 +1,123 @@
 <!-- <form [formGroup]="loginForm"> -->
 
-  <section class="login-block">
-    <!-- Container-fluid starts -->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <!-- Authentication card start -->
+ 
+        <div class="cogloginouter">
+                <header class="header">
+              <div class="container d-none d-sm-none d-md-block">
+                  <div class="row">
+                      <div class="col-md-7"> 
+                           <div class="logo">
+                              <img src="assets/images/cogwaveimages/CogLog.png" class="circle responsive-img valign" />
+                              <h2 class="logo__item logo__item_descr company-title" style="font-family:Calibri">
+                                  Cogwave Software Technologies
+                              </h2>
+                          </div>
+                      </div>
+                      <div class="col-md-5">
+                              <div class="contacts header__item">
+                                      <div class="contacts__phone">Call us: +91-80-41710121</div>
+                                      <div class="contacts__email">Email: murali@cognitiontechnologies.com</div>
+                                      <div class="contacts__email  ">
+                                          Service No: +91-73381 88171,71,73,74,78,79
+                                      </div>
+                                  </div>
+                      </div>
+                
+                  <!-- <div class="enter header__item">
           
-          <form #loginForms="ngForm" class="form-group" (ngSubmit)="OnSubmit(email.value,password.value)">
-          
-            <div class="auth-box card">
-              <div class="card-block">
-                <div class="row m-b-20">
-                  <div class="col-md-12">
-                    <h3 class="text-center">User Login</h3>
-                  </div>
-                </div>
-  
-                <div class="form-group form-primary">
-                  <input type="text" #email ngModel name="email" class="form-control"  required="">
-                  <span class="form-bar"></span>
-                  <label class="float-label">Enter Your UserName</label>
-                </div>
-  
-                <div class="form-group form-primary">
-                  <input type="password"  #password ngModel name="password" class="form-control"  required="">
-                  <span class="form-bar"></span>
-                  <label class="float-label">Password</label>
-  
-                  <!-- <div class="messages text-danger tooltip-error" placement="top" ngbTooltip="Username can't be blank" *ngIf="loginForm.controls.password.errors?.required"><i class="text-danger icofont icofont-close-circled"></i></div> -->
-                </div>
-  
-                <div class="row m-t-25 text-left">
-                  <div class="col-12">
-                    <div class="checkbox-fade fade-in-primary d-">
-                      <label>
-                        <input type="checkbox" value="">
-                        <span class="cr"><i class="cr-icon fa fa-check txt-primary"></i></span>
-                        <span class="text-inverse">Remember me</span>
-                      </label>
-                    </div>
-                    <div class="forgot-phone text-right f-right">
-                      <a [routerLink]="['/auth/forgot']" class="text-right f-w-600"> Forgot Password?</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="row m-t-30">
-                  <div class="col-md-12">
-                    <button type="submit" [disabled]="!loginForms.valid"  class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">Sign in</button>
-                  </div>
-  
-                  
-                </div>
-
-                <div class="row m-t-10">
-                  <div class="col-md-12">
-                      <button type="button" class="btn btn-primary btn-outline-primary md-trigger ripple light" (click)="openMyModal('effect-8')">Login with OTP</button>
-                  </div>
-                </div>
-                <hr/>
-                <div class="row">
-                  <div class="col-md-10">
-                    <p class="text-inverse text-left m-b-0">Thank you.</p>
-                    <p class="text-inverse text-left"><a [routerLink]="['/dashboard/default']"><b>Back to website</b></a></p>
-                  </div>
-                  <div class="col-md-2">
-                    <img src="assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
-                  </div>
-                </div>
+                  </div> -->
+             
               </div>
-            </div>
-          </form>
-          <!-- end of form -->
-        </div>
-        <!-- end of col-sm-12 -->
-      </div>
-  
-      <!-- end of row -->
-    </div>
-    <!-- end of container-fluid -->
-  </section>
-
-
-
-   <!-- model starting here -->
-   <app-modal-animation [modalID]="'effect-8'" [modalClass]="'md-effect-8'">
-    <h3>USERNAME WITH OTP</h3>
-    <div class="app-modal-body">
-        <div class="form-group form-primary">
-          <label class="float-label">Mobile No</label>
-          <input type="text" #mobile ngModel maxlength="10" name="mobile"  class="form-control" required="">
-          <span class="form-bar"></span>
+              </div>
+          </header>
+          <div class="clearfix"></div>
+          <section class="bg1">
+              <div class="container">
+                  <div class="row">
+                            
+                          <div class="col-md-9">
+                              <h1 class="h1-tag" style="font-family:Calibri ">Hotel Management Software </h1>
+                          </div>
+                          <div class="col-lg-3 col-sm-12 login-form form">
+                              <div class="">
+                                  <div class="form__header">
+                                      <div class="form__title">
+                                          Login Details
+                                      </div>
+                                  </div>
+                                   
+                                  <form #loginForms="ngForm" class="form-group" (ngSubmit)="OnSubmit(email.value,password.value)">
+                                      <div class="row loginform">
+                                          <div class="col-md-12">
+                                             
+                                              <div>
+                                                  <label for="UserName" style="font-family:Calibri "><i class="fa fa-user f-14 text-c-white"></i> UserName</label>
+                                                  <input type="text" #email ngModel name="email" class="form-control"  required="">
+                                         
           
-        </div>
+                                              </div>
+                                              <div>
+                                                  <label for="Password" style="font-family:Calibri"><i class="fa fa-key f-14 text-c-white"></i> Password</label>
+                                                  <input type="password"  #password ngModel name="password" class="form-control"  required="">
+                                                 
+                                              </div>
+                                              <br />
+                                              <div class="form-group">
+                                                    <input id="Submit" type="submit" [disabled]="!loginForms.valid" value="Sign in" class="btn-primary" style="font-family:Calibri" />
+                                                    
+                                                  <input id="Submit1" type="reset" value="Cancel" class="btn-warning " style="font-family:Calibri" />
+                                                  <br />
+                                                  <a class="float-left" style="font-family:Calibri;cursor: pointer; ">Forgot password</a>
+                                                  <a class="float-right" style="font-family:Calibri; cursor: pointer;" (click)="openMyModal('effect-8')">Login with OTP</a>
+                                                  
+                                              </div>
+                                              <div class="bottom text-center btm-pad-req" style="font-family:Calibri">
+                                                 <a [routerLink]="['/dashboard/default']" class="" style="font-family:Calibri; color:#fff; display: inline-block">  <i class="fa fa-home f-14 text-c-red"></i> Back to Home</a>
+                                                
+                                              </div>
+          
+                                          </div>
+          
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+                     
+                      
+          
+          
+                  </div>
+              </div>
+               
+          </section>
+          <footer>
+                <marquee class="marq" direction = "right" loop="" >                      
+                        <div class="geek2">&copy; Cogwave Software Private Limited... </div> 
+                    </marquee> 
+          </footer>
+          </div>
          
-        <div class="form-group form-primary" >
-          <label class="float-label">OTP</label>
-          <div id="divOuter">
-            <div id="divInner">
-          <input type="password" id="otppassword" #otppassword ngModel name="otppassword" class="form-control" [disabled]="isDisabled" required="">
-          </div></div>
-          <span class="form-bar"></span>               
-        </div>
-        <button (click)="toggle(mobile.value,otppassword.value)" class="btn btn-primary md-close">{{displayText}}</button>
-      </div>
-    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn">X</button>
-  </app-modal-animation>
+             <!-- model starting here -->
+             <app-modal-animation [modalID]="'effect-8'" [modalClass]="'md-effect-8'">
+              <h3 class="purple-gradient">USERNAME WITH OTP</h3>
+              <div class="app-modal-body">
+                  <div class="form-group form-primary">
+                    <label class="float-label">Mobile No</label>
+                    <input type="text" #mobile ngModel maxlength="10" name="mobile"  class="form-control" required="">
+                    <span class="form-bar"></span>
+                    
+                  </div>
+                   
+                  <div class="form-group form-primary" >
+                    <label class="float-label">OTP</label>
+                    <div id="divOuter">
+                      <div id="divInner">
+                    <input type="password" id="otppassword" #otppassword ngModel name="otppassword" class="form-control" [disabled]="isDisabled" required="">
+                    </div></div>
+                    <span class="form-bar"></span>               
+                  </div>
+                  <button (click)="toggle(mobile.value,otppassword.value)" class="btn btn-primary md-close">{{displayText}}</button>
+                </div>
+              <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn">X</button>
+            </app-modal-animation>
+          

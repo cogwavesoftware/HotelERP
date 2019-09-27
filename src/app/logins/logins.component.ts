@@ -17,7 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./logins.component.scss']
 })
 export class LoginsComponent implements OnInit {
-  body =  document.getElementsByTagName('body')[0];
+  // body =  document.getElementsByTagName('body')[0];
     loginForm: FormGroup;
     loading = false;
     submitted = false;
@@ -49,14 +49,15 @@ export class LoginsComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
       // alert(this.returnUrl)
 
-      this.body.classList.add("loginsignupbg");
+      // this.body.classList.add("loginsignupbg");
     }
 
     ngOnDestroy(){
-      this.body.classList.remove("loginsignupbg");
+      // this.body.classList.remove("loginsignupbg");
     }
     openMyModal(event)
      {
+       
         document.querySelector('#' + event).classList.add('md-show');
       }  
       

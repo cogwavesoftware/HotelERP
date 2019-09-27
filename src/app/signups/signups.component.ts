@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef,ViewChild  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators ,FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -17,30 +17,32 @@ import { SuperAdmin } from './../_models/SuperAdmin';
   templateUrl: './signups.component.html',
   styleUrls: ['./signups.component.scss']
 })
-export class SignupsComponent implements OnInit {
+export class SignupsComponent implements OnInit   {
+   
+
   loginForm: FormGroup;
   loading = false;
   submitted:boolean;
   superadmin:SuperAdmin;
   error:string;
-  mobileno:string;
-  body = document.getElementsByTagName('body')[0];
+  mobileno:string;  
   DisplayText ="Get OTP";
   isDisabled = "true";  
   OTP:number;
   
 
   constructor(  private formBuilder: FormBuilder,private route: ActivatedRoute,
-    private router: Router, private authenticationService: AuthenticationService) { }
+    private router: Router, private authenticationService: AuthenticationService,private el: ElementRef) { }
  
   ngOnInit() 
   {  
-    this.body.classList.add("loginsignupbg");    
+   
   }
   ngOnDestroy()
   {
-    this.body.classList.remove("loginsignupbg");
+   
   }
+  
   OnSubmit(username: string ,password:string)
      {  
       
@@ -71,17 +73,19 @@ export class SignupsComponent implements OnInit {
     }
 
 
-    @ViewChild("otppassword",{static: false}) nameField: ElementRef;
+    ///@ViewChild("otppassword",{static: true}) otppassword: ElementRef;
+    @ViewChild('otppassword',{static: true}) otppassword: ElementRef;
  
     toggle(otp) : void
-    {   
-     
+    {        
       if ( this.DisplayText =="Get OTP")
       {
         this.OnSubmit("SuperAdmin","SuperAdmin")  
         this.DisplayText = "Login";
         this.isDisabled = "false";
-        this.nameField.nativeElement.focus();
+        setTimeout(()=>{ // this will make the execution after the above boolean has changed
+          this.otppassword.nativeElement.focus();
+        },0);  
       } 
       else
       {
