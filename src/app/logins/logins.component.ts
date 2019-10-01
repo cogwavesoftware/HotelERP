@@ -1,20 +1,20 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators ,FormControl} from '@angular/forms';
-
 import { AuthenticationService,UserService } from '../_services';
-
 import {CustomValidators} from 'ng2-validation';
-import {ToastrService} from 'ngx-toastr'
-
 import { loginMaster } from './../_models/loginMaster';
 import { HttpErrorResponse } from '@angular/common/http';
+import {ToastData, ToastOptions, ToastyService} from 'ng2-toasty';
+
 
 @Component({
   selector: 'app-logins',
   templateUrl: './logins.component.html',
-  styleUrls: ['./logins.component.scss']
+  styleUrls: ['./logins.component.scss'],
+  encapsulation: ViewEncapsulation.None
+  
 })
 export class LoginsComponent implements OnInit {
   // body =  document.getElementsByTagName('body')[0];
@@ -32,17 +32,26 @@ export class LoginsComponent implements OnInit {
     OTP:number;
     displayText="Get OTP";
     isDisabled ="true";
+    isrole:string;
+    isId:string;
+    position = 'top-left';
+    Message:string;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService,private toastser:ToastrService
-        ) {
-          console.log("constr")
+        private authenticationService: AuthenticationService,private toastyService: ToastyService
+        ) 
+        {
+         
+           
         }
+ //{title:'', msg:'Turning standard Material alerts into awesome notifications', timeout: 5000, theme:'material', position:'bottom-right', type:'default'})">Default</button>
+  
 
     ngOnInit() { 
-      console.log("ngonit")
+        
+   
         // reset login status
         this.authenticationService.logout();
         // get return url from route parameters or default to '/'
@@ -55,6 +64,8 @@ export class LoginsComponent implements OnInit {
     ngOnDestroy(){
       // this.body.classList.remove("loginsignupbg");
     }
+
+
     openMyModal(event)
      {
        
@@ -63,12 +74,8 @@ export class LoginsComponent implements OnInit {
       
       
       closeMyModal(event,mobile)
-       { 
-       
-        
+       {              
         ((event.target.parentElement).parentElement).classList.remove('md-show');
-
-
        }
 
 
@@ -84,19 +91,107 @@ export class LoginsComponent implements OnInit {
              localStorage.setItem('id',data.UserId.toString());
              localStorage.setItem('IsRole',data.IsRole.toString());
              localStorage.setItem('BranchCode',data.BranchCode.toString());
-             
+             this.addToast('Cogwave Software','Login Sucessfully','success')
+            // this.router.navigate(['/dashboard/default']);
             })        
-            this.router.navigate(['/dashboard/default']);
+            
            }
            error => {
             console.log("error");
-             this.error = error;
+            this.error = error;
+            this.addToast("Cogwave Software 😃",this.error + '👊','error')
              this.loading = false;
          }; 
        }
 
+    //    error => {
+    //     this.error = true;
+    //     this.errorText=error.message;
+    //  }; 
+
+
+       addToast(title,Message,theme)
+       {     
+         debugger;
+         this.toastyService.clearAll();           
+        const toastOptions: ToastOptions = {
+          title:title,
+          msg: Message,
+          showClose:false,
+          timeout: 5000,
+          theme: theme,          
+          onAdd: (toast: ToastData) => {   
+            //console.log('Toast ' + toast.id + ' has been added!');       
+           // this.router.navigate(['/dashboard/default']);
+          },
+          onRemove: (toast: ToastData) => {
+            /* removed */
+            //console.log(ToastData);
+           // console.log('Toast ' + toast.id + ' has been removed!');
+          }
+        };
+      
+        switch (theme) 
+        {
+           
+          case 'default':
+          this.toastyService.default(toastOptions);
+           break;
+          case 'info':
+          this.toastyService.info(toastOptions); 
+          break;
+          case 'success':
+          this.toastyService.success(toastOptions);
+           break;
+          case 'wait': 
+          this.toastyService.wait(toastOptions); 
+          break;
+          case 'error': 
+          this.toastyService.error(toastOptions);
+          break;
+          case 'warning': this.toastyService.warning(toastOptions);
+           break;     
+        }
+
+      }
      
 
+
+
+      //  addToast(options)
+      //  {
+      //   if (options.closeOther) 
+      //   {
+      //     this.toastyService.clearAll();          
+      //   }
+      //   this.position = options.position ? options.position : this.position;
+      //   const toastOptions: ToastOptions = {
+      //     title: options.title,
+      //     msg: options.msg,
+      //     showClose: options.showClose,
+      //     timeout: options.timeout,
+      //     theme: options.theme,
+      //     onAdd: (toast: ToastData) => {          
+      //       /* added */
+      //     },
+      //     onRemove: (toast: ToastData) => {
+      //       /* removed */
+      //     }
+      //   };
+      
+
+      //   switch (options.type) {
+      //     case 'default': this.toastyService.default(toastOptions); break;
+      //     case 'info': this.toastyService.info(toastOptions); break;
+      //     case 'success': this.toastyService.success(toastOptions); break;
+      //     case 'wait': this.toastyService.wait(toastOptions); break;
+      //     case 'error': this.toastyService.error(toastOptions); break;
+      //     case 'warning': this.toastyService.warning(toastOptions); break;
+      //   }
+
+      // }
+     
+    
     OnSubmit(username: string ,password:string)
      {  
      
@@ -112,23 +207,36 @@ export class LoginsComponent implements OnInit {
                 {
                    this.authenticationService.GetloginuserDetails(username)
                    .subscribe(data=>{
-                     this.loginMaster=data;                    
+                     this.loginMaster=data; 
+                     debugger;      
+                  //this.authenticationService.setUserName(data.UserName)             
                   localStorage.setItem('id',data.UserId.toString());  
                   localStorage.setItem('IsRole',data.IsRole.toString());
                   localStorage.setItem('BranchCode',data.BranchCode.toString());
+                  sessionStorage.setItem('UserName',data.UserName)
+                  //this.isrole=localStorage.getItem('IsRole');
+                  //this.isId=localStorage.getItem('id');
+                 // console.log(this.isrole)
+                  //console.log(this.isId)
+                  //var dd=this.authenticationService.getUserName();
+                 // alert(dd);
+                 this.addToast('Cogwave Software','Login Sucessfully','success')
+                   this.router.navigate(['/dashboard/default']);
                    })
-                   console.log("Before")
-                   console.log(data.IsRole)
-                   console.log("after")
-                    this.router.navigate(['/dashboard/default']);
                 },
                 error => {
-                   console.log("error");
-                    this.error = error;
+                  let currenterror = JSON.stringify(error.error.error_description);
+                   console.log(currenterror);
+                    
+                    console.log(this.error );
+                    this.addToast("Cogwave Software",currenterror,'error')
                     this.loading = false;
                 });
     }
-
+        //      setTimeout(()=>{    
+              //       //this.messageSuccess = false;
+              //  }, 3000);
+                  
 
     toggle(mobile,otp)
     {

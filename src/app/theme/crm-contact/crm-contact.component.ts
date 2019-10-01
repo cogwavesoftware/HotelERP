@@ -40,17 +40,14 @@ export class CrmContactComponent implements OnInit {
   public userDate: string;
 
   @Input('modalDefault') modalDefault: any;
-
   constructor(public httpClient: HttpClient) { }
-
   ngOnInit() {
     this.data = this.httpClient.get<CrmContact>(`assets/data/crm-contact.json`);
   }
-
-  openMyModal(event) {
+  openMyModal(event) 
+  {
     document.querySelector('#' + event).classList.add('md-show');
   }
-
   openMyModalData(event) {
     this.data.subscribe(response => {
         this.userName = response[event]['name'];

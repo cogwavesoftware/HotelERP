@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user'
 import { loginMaster } from '../_models/loginMaster';
@@ -11,6 +11,7 @@ import { Alert } from 'selenium-webdriver';
 import { stringify } from '@angular/compiler/src/util';
 import { SuperAdmin } from '../_models/SuperAdmin';
 import { Menus } from 'src/app/_models/Menu';
+import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService { 
@@ -18,6 +19,7 @@ export class AuthenticationService {
    userc:User;
    credentials:string;
    bas:string;
+   private _username: string;
  constructor(private http: HttpClient) { }
 
     gologin(username, password) 
@@ -68,7 +70,16 @@ export class AuthenticationService {
       }
      
     }
+     
+    setUserName(username) {
+      console.log('setUserName' + username);
+      this._username = username;
+    }
 
+    getUserName() {
+      console.log('getUserName' + this._username);
+      return this._username;
+    }
     gosuperadminlogin(username, password) 
     {       
          let urlSearchParams = new URLSearchParams();
@@ -123,7 +134,24 @@ export class AuthenticationService {
     {
      return Observable.throw(error.message || "server ERROR");
     }
+
+    getData(): Observable<any>
+    {
+      return this.http.get<any>(environment.apiURL).pipe(catchError(this.handleerror));
+    }
     
+    handleerror(err)
+    {
+      if(err instanceof HttpErrorResponse)
+      {
+          //server seide
+      }
+      else
+      {
+          //Clientside
+      }
+      return throwError(err);
+    }
     // getbranchDetails()
     // {
     //     console.log('getbranchservicecall')  

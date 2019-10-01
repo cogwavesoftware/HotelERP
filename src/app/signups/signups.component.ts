@@ -99,7 +99,7 @@ export class SignupsComponent implements OnInit   {
     {
       if(Userotp==this.OTP)
         {               
-         this.router.navigate(['/dashboard']);
+         this.router.navigate(['/SuperAdmin']);
         }
         error => {
          console.log("error");

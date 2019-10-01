@@ -15,7 +15,7 @@
             <i class="icon-menu"></i>
           </a>
           <a [routerLink]="['/dashboard/default/']" class="ripple light">
-            <!-- <img class="img-fluid" src="assets/images/logo.png" alt="Mega Able" /> -->
+            <img class="img-fluid" src="assets/images/logo.png" alt="Mega Able" /> 
           </a>
           <a href="javascript:" class="mobile-options ripple light" (click)="toggleHeaderNavRight()">
             <i class="icon-more"></i>
@@ -42,6 +42,7 @@
                 <i class="icon-fullscreen"></i>
               </a>
             </li>
+           
           </ul>
           <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
             <li (clickOutside)="notificationOutsideClick('live')" class="header-notification ripple light"
@@ -60,7 +61,7 @@
                     <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg"
                       alt="Generic placeholder image">
                     <div class="media-body">
-                      <h5 class="notification-user">Admin</h5>
+                      <h5 class="notification-user">{{ UserName }}</h5>
                       <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                       <span class="notification-time">30 minutes ago</span>
                     </div>
@@ -101,7 +102,7 @@
               (click)="toggleProfileNotification()">
               <a href="javascript:">
                 <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
-                <span>Admin</span>
+                <span>{{UserName}}</span>
                 <i class="icon-angle-down"></i>
               </a>
               <ul [@notificationBottom]="profileNotification" class="show-notification profile-notification"
@@ -280,9 +281,9 @@
             <div class="pcoded-inner-navbar main-menu" appAccordion>
               <div class="">
                 <div class="main-menu-header">
-                  <!-- <img class="img-menu-user img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image"> -->
+                   <img class="img-menu-user img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image"> 
                   <div class="user-details">
-                    <span id="more-details" (click)="toggleOpenedSidebar()"> Admin
+                    <span id="more-details" (click)="toggleOpenedSidebar()"> {{UserName}}
                       <i class="fa fa-caret-down m-l-10"></i>
                     </span>
                   </div>
@@ -307,11 +308,11 @@
                   </div>
                 </form>
               </div>
-              <div class="pcoded-navigation-label">
+              <!-- <div class="pcoded-navigation-label">
                 <a [routerLinkActive]="['active']" class="ripple" href="bookings">
                   <span class="pcoded-mtext">TheBookings</span>
                 </a>
-              </div>
+              </div> -->
 
               <div *ngFor="let asideItems of finalMenu" class="d-color">
                 <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme">{{asideItems.label}}</div>

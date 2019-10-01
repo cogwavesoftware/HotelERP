@@ -98,6 +98,10 @@ const routes: Routes = [
         path: 'default',
         loadChildren: './theme/dashboard/default/default.module#DefaultModule'
       },
+      {
+        path: 'company',
+        loadChildren: './super-admin/company/company.module#CompanyModule'
+      },
       // {
       //   path: 'navigation',
       //   loadChildren: './theme/navigation/navigation.module#NavigationModule'
@@ -185,6 +189,35 @@ const routes: Routes = [
       // }
     ]
   },
+
+
+
+  {
+    path: 'SuperAdmin',
+    component: AdminComponent,
+    
+    children: [ 
+      {
+        path: 'SuperAdmin',
+        redirectTo: 'SuperAdmin/company',
+        pathMatch: 'full'
+      },
+       
+      {
+        path: 'company',
+        loadChildren: './super-admin/company/company.module#CompanyModule'
+      },
+      {
+        path: 'branch',
+        loadChildren: './super-admin/branch/branch.module#BranchModule'
+      },
+      
+     
+    ]
+  },
+
+
+
 
 ];
 

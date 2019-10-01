@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
+// import {TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-commonpage',
@@ -74,6 +75,12 @@ export class CommonpageComponent implements OnInit {
   public windowWidth: number;
 
   constructor(private _authservice:AuthenticationService) {
+
+   // translate.addLangs(['en','fr','ta','zh']);
+    //translate.setDefaultLang('fr');
+    // const browserLang=translate.getBrowserLang();
+    // translate.use(browserLang.match(/en|fr/) ? browserLang :'en')
+
     this.navType = 'st2';
     this.themeLayout = 'vertical';
     this.verticalPlacement = 'left';
@@ -118,7 +125,8 @@ export class CommonpageComponent implements OnInit {
     }
   }
 
-  toggleHeaderNavRight() {
+  toggleHeaderNavRight() 
+  {
     this.navRight = this.navRight === 'nav-on' ? 'nav-off' : 'nav-on';
   }
 

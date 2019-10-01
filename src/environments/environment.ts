@@ -27,9 +27,9 @@ export const environment = {
   apiURL : 'http://localhost:37425',
   BASE_ACCEPT_HEADER: acceptHeaders,
   BASE_CONTENTTYPE_HEADER: contentTypeHeaders,
+  
  
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

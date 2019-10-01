@@ -7,6 +7,7 @@ import {MenuItems, Menu} from '../../shared/menu-items/menu-items';
 import { Menus } from 'src/app/_models/Menu';
 import { stringify } from 'querystring';
 import { Observable } from "rxjs/observable";
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -133,7 +134,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   public menuTitleTheme: string;
   public dropDownIcon: string;
   public subItemIcon: string;
-
+  public UserName:string;
   public configOpenRightBar: string;
   public displayBoxLayout: string;
   public isVerticalLayoutChecked: boolean;
@@ -230,6 +231,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
 
+    //this.UserName=_authservice.getUserName();
+    
+    this.UserName=sessionStorage.getItem('UserName');
+    console.log('admin session' + this.UserName);
     // dark theme
     /*this.setLayoutType('dark');*/
 
@@ -250,9 +255,10 @@ export class AdminComponent implements OnInit, OnDestroy {
 
 
     let IsRole = localStorage.getItem('IsRole');
+
     if (IsRole=="SuperAdmin")
     {
-       this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"Create Panel","short_label":"Co","main_state":"Create Panel","target":false,"name":"Create Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"Company Creation","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"Branch Creation","target":false,"name":"Branch Creation","type":"link","children":[]}]}]}];
+       this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"SuperAdmin","short_label":"Co","main_state":"SuperAdmin","target":false,"name":"Control Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"company","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"branch","target":false,"name":"Branch Creation","type":"link","children":[]}]}]}];
     }
     else
     {    

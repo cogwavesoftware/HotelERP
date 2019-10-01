@@ -1,0 +1,29 @@
+{
+	"login": {
+		"title": "Formulaire De Connexion",
+		"username.label": "Nom d'utilisateur",
+		"username.placeholder": "Nom D'Utilisateur Ici",
+		"password.label": "Mot de passe",
+		"password.placeholder": "Entrez Le Mot De Passe",
+		"button.name": "Signin",
+		"forgotpassword.link": "Mot De Passe Oublié ?",
+		"register.link": "Créer Un Nouveau Compte",
+		"button.en": "Anglaise",
+		"button.ta": "Tamil",
+		"button.fr": "Française",
+		"button.zh": "Chinoise"
+	},
+
+	
+	"Commonpage": {
+		
+		"Userlogin.menu": "Utilisateur en ligne",
+		"Cogwavelogin.menu": "Connexion Cogwave",
+		"Announcement.menu": "Annonce",
+		"SuccessfulClients.menu": "Clients réussis",
+		"ProductPriceList.menu": "Liste de prix du produit",
+		"Service&Help.menu": "Service & Aide",
+		"AboutCogwave.menu": "À propos de Cogwave"
+	
+	}
+}

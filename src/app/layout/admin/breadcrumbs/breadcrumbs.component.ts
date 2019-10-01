@@ -11,7 +11,7 @@ export class BreadcrumbsComponent {
   breadcrumbs: Array<Object>;
   constructor(private router: Router, private route: ActivatedRoute) {
 
-    debugger;
+    
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {

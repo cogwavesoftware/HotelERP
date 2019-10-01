@@ -1,0 +1,28 @@
+{
+	"login": {
+		"title": "Login Form",
+		"username.label": "Username",
+		"username.placeholder": "Username Here",
+		"password.label": "Password",
+		"password.placeholder": "Enter Password",
+		"button.name": "Signin",
+		"forgotpassword.link": "Forgot Password ?",
+		"register.link": "Create New Account",
+		"button.en": "English",
+		"button.ta": "Tamil",
+		"button.fr": "French",
+		"button.zh": "Chinese"
+	},
+
+
+	"Commonpage": {
+		"Userlogin.menu": "User Login",
+		"Cogwavelogin.menu": "Cogwave login",
+		"Announcement.menu": "Announcement",
+		"SuccessfulClients.menu": "Successful Clients",
+		"ProductPriceList.menu": "Product Price List",
+		"Service&Help.menu": "Service & Help",
+		"AboutCogwave.menu": "About Cogwave"
+	
+	}
+}

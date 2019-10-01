@@ -1,0 +1,27 @@
+{
+	"login": {
+		"title": "登录的形式",
+		"username.label": "用户名",
+		"username.placeholder": "用户名在这里",
+		"password.label": "密码",
+		"password.placeholder": "输入密码",
+		"button.name": "签到",
+		"forgotpassword.link": "忘了密码?",
+		"register.link": "创建新帐户",
+		"button.en": "英语",
+		"button.ta": "泰米尔人",
+		"button.fr": "法国",
+		"button.zh": "中文"
+	},
+	
+	"Commonpage": {
+		"Userlogin.menu": "用户登录",
+		"Cogwavelogin.menu": "Cogwave登录",
+		"Announcement.menu": "公告",
+		"SuccessfulClients.menu": "成功的客户",
+		"ProductPriceList.menu": "产品价格表",
+		"Service&Help.menu": "服务与帮助",
+		"AboutCogwave.menu": "关于Cogwave"
+	
+	}
+}

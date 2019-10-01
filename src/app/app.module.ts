@@ -14,33 +14,30 @@ import { MenuItems } from './shared/menu-items/menu-items';
 import { BreadcrumbsComponent } from './layout/admin/breadcrumbs/breadcrumbs.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
-import { bookingsComponent } from './bookings/bookings.component';
-import { bookingService } from './shared/booking.service';
-import { bookingComponent } from './bookings/booking/booking.component';
+import { HttpClientModule,HTTP_INTERCEPTORS,HttpClient } from '@angular/common/http';
 
 import { NgMarqueeModule } from "ng-marquee";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatRippleModule,
-  MatFormFieldModule,
-  MatTooltipModule,
-  MatSelectModule
-} from '@angular/material';
+
 
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 
 
 import { fakeBackendProvider } from './_helpers';
+
+// import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http);
+// }
+
 @NgModule({
   declarations: [   
     AppComponent, 
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent,
+    
     //bookingsComponent,
     //bookingComponent, 
     //CommonpageComponent,
@@ -52,23 +49,19 @@ import { fakeBackendProvider } from './_helpers';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
     HttpClientModule,
-    MatButtonModule,
-    MatRippleModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    ToastrModule.forRoot(),
-    NgMarqueeModule,
-    
-    
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: HttpLoaderFactory,
+    //     deps: [HttpClient]
+    //   }
+    // })
+   
   ],
   //entryComponents: [CommonpageComponent],
   providers: [
-    MenuItems, bookingService,
+    MenuItems,
    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

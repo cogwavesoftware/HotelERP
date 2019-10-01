@@ -8,8 +8,8 @@ const routes: Routes = [
     component: AnalyticsComponent,
     data: {
       title: 'Analytics',
-    icon: 'icon-home',
-    caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+       icon: 'icon-home',
+      caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
       status: true
     }
   }
