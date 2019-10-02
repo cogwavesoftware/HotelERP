@@ -1,7 +1,21 @@
+<div class="outerdiv">
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+        <div class="row">
+            <div class="col-md-11">
+                <h5 class="ng-tns-c6-1">Company Creation</h5>         
+                <span class="ng-tns-c6-1 ng-star-inserted">Creating company details</span>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-1"> 
+                  <button type="button" class="btn btn-sm btn-success text-white" (click)="openMyModal()"  > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                  </button>
+               
+              </div>
+        </div>
+      </div>
 
-<div class="card">
-   <div class="card-header animation-model">
-    <div class="formouter rotate" *ngIf="isShown">
+   
+      <div class="formdesign" *ngIf="isShown">
+    <div class="formouter rotate" >
         <form #form="ngForm" autocomplete="off"  class="md-float-material form-material contact-form"  (submit)="onSubmit(form)">
       <!-- <form  #loginForms="ngForm" class="md-float-material form-material contact-form" action="javascript:"> -->
           <input type="hidden" ngModel value="{{Id}}" #Idd [(ngModel)]="Id" name="Id" class="form-control" autocomplete="off">
@@ -74,43 +88,44 @@
          </div>       
       </form>
     </div> 
+  </div>
 
-    <button type="button" class="btn btn-sm btn-success text-white" (click)="openMyModal()"  > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
-    </button>
-  </div>  
-
-
-  <div class="card-body">
+  <div class="productlist">
+      <div class="shadow p-3 mb-5 bg-white rounded" >
+   
     <div class="table-content crm-table">
       <div class="project-table">
         <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
-              <div>
-                <label class="label-control">Show
-                  <select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
-                    <option [ngValue]="10">10</option>
-                    <option [ngValue]="25">25</option>
-                    <option [ngValue]="50">50</option>
-                    <option [ngValue]="100">100</option>
-                  </select>
-                  entries
-                </label>
-              </div>
-            </div>
+ 
+
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Data List</div>
+                  </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                  <div style="text-align: right;">
+                    <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                      <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                    </label>
+                  </div>
+                </div>  
+
+
+
+<!--                 
             <div class="col-xs-12 col-sm-12 col-md-6">
               <div style="text-align: right;">
                 <label>Search:
                   <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
                 </label>
               </div>
-            </div>
+            </div> -->
           </div>
-           <div class="panel-heading">Company Data List</div>
+           
           <div class="table-responsive">
             <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
               <thead>
-              <tr>
+              <tr class="blueorange-gradient">
                 <!-- <th>
                   <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
                 </th> -->
@@ -184,46 +199,13 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+   
+      </div></div>
 
 
 <!-- Add Contact Start Model -->
-
-
-
-
-
-
-<!-- <app-modal-animation [modalID]="'effect-11'" [modalClass]="'md-effect-11'">
-
-    <div class="app-modal-header">
-       
-        <h3>body Data</h3>
-       
-      </div>
-
-      <div class="input-group">
-          <span class="input-group-prepend" id="basic-addon3"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
-          <input type="text" #Id ngModel value="{{Id}}" maxlength="10" name="Id"   class="form-control" required=""> 
-
-          <input type="text" ngModel value="{{Id}}" #Id name="Ids"   class="form-control" required="" autocomplete="off">
-        </div>
-
-        <div class="input-group">
-            <span class="input-group-prepend" id="basic-addon3"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
-            <input type="text" #ClientName ngModel  value="{{ClientName}}" name="ClientName"   class="form-control" required="">
-          </div>
-       
-    <div class="app-modal-footer">
-      <button type="button" class="btn btn-default waves-effect" (click)="modalDefault1.hide()">Close</button> 
-    </div>
-</app-modal-animation> -->
-
-
-
-
-
+</div>
+<!-- End outer div -->
 
 
 <app-modal-basic #modalDefault>

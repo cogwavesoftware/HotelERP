@@ -129,7 +129,7 @@ export class BranchComponent implements OnInit {
   Showhide()
   {
 
-    if (this.btitle=="Add Item")
+    if (this.btitle=="ADD")
     {
       this.form.reset();
       this.Show=true;
@@ -141,7 +141,7 @@ export class BranchComponent implements OnInit {
 
 
       this.Show=false;
-      this.btitle="Add Item"
+      this.btitle="ADD"
       this.form.reset();
       
     }
@@ -190,7 +190,7 @@ export class BranchComponent implements OnInit {
      
     
     this.form.reset();
-    this.btitle="Add Item"
+    this.btitle="ADD"
     this.Show=false;
     this.data = this._branchservice.getBranchdata()
 
@@ -247,17 +247,17 @@ export class BranchComponent implements OnInit {
      
   private Chekbo(branch:string) 
   {
-    (this._branchservice.GetCogwaveproduct()).subscribe(dat=>{
-   // this._branchservice.getPorductByBranchcode(branch).subscribe(dat=>{
+    //(this._branchservice.GetCogwaveproduct()).subscribe(dat=>{
+    this._branchservice.getPorductByBranchcode(branch).subscribe(dat=>{
       this.ordersData=dat;
-      
-      this.ordersData.forEach((o, i) =>
-      {
-        const element = this._branchservice.getPorductByBranchcode(branch).find(x => x.value === i);
-       const control = new FormControl(i);  // if first item set to true, else false
+      console.log(dat);
+    //   this.ordersData.forEach((o, i) =>
+    //   {
+    //     const element = this._branchservice.getPorductByBranchcode(branch).find(x => x.value === i);
+    //    const control = new FormControl(i);  // if first item set to true, else false
         
-       (this.form.controls.orders as FormArray).push(control);
-     });
+    //    (this.form.controls.orders as FormArray).push(control);
+    //  });
 
     })
 

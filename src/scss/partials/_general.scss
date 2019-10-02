@@ -5790,3 +5790,102 @@ select.form-control:not([size]):not([multiple]){
     height: 100%;
     background-size: 100% 100%;
 }
+
+.outerdiv{    
+    border: double 2px #ffd86f;
+    outline: solid 1px #ccc;
+    .peach-gradient {
+        background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
+    }
+    
+    .rgba-gradient {
+        background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+        background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+        background: linear-gradient(to 45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+        color:#fff;
+        padding:5px;
+    }
+    .voilet-gradient {
+        background: #1e5799; /* Old browsers */
+        background: -moz-linear-gradient(left, #1e5799 0%, #986ecc 86%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #1e5799 0%,#986ecc 86%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #1e5799 0%,#986ecc 86%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#986ecc',GradientType=1 ); /* IE6-9 */
+    }
+    .blueorange-gradient {
+        background: rgb(174,11,183); /* Old browsers */
+        background: -moz-linear-gradient(-45deg, rgba(174,11,183,1) 1%, rgba(117,113,249,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, rgba(174,11,183,1) 1%,rgba(117,113,249,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, rgba(174,11,183,1) 1%,rgba(117,113,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ae0bb7', endColorstr='#7571f9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+ 
+    .panel-heading{
+        background: #2D5772;        
+        color:#fff;        
+        color: #fff;
+        font-weight: bold;       
+        padding: 5px 9px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 21px;
+        text-transform: uppercase;
+    }
+    .table tr th{
+        padding:5px;
+        color:#fff;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .table tr td{
+        padding: 6px;
+    }
+    .searchlbl{
+        margin-bottom: 0px;
+        input.form-control{
+            height:calc(1.2em + 0.65rem + 2px);
+            border-radius:5px;
+        }
+         
+    }
+    .orangered{
+        color:orangered;
+    }
+    .card-header .btn{
+        padding: 5px;
+
+    }
+    .card .card-header{
+        padding:4px 0px 4px 20px;
+    }
+    .card-header{
+        color:#fff;
+        background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
+        h5{
+            color:#fff;
+        }
+       
+    }
+    .formdesign,
+    .productlist{
+        padding:10px;
+    }
+     .formdesign .form-group.listproducts label{         
+       padding:10px;
+       width: 100%;
+    }
+    .form-group input.form-control{
+        border-radius: 0px;
+        height: 1.50rem;
+        border: 1px solid hsl(218, 22%, 90%);
+        font-size: 100%;
+        padding: 0px 0px 0px 10px;
+    }
+    .form-group label{
+        margin-bottom:0.1rem;
+    }
+    .form-group select.form-control:not([size]):not([multiple]){
+        height: auto;
+    }
+   
+}
+
