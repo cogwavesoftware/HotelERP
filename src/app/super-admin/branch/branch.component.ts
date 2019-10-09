@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import {ToastData, ToastOptions, ToastyService} from 'ng2-toasty'
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn,Validators  } from '@angular/forms';
 import { BranchService } from '../../_services/branch.service';
 import { CompanyService } from '../../_services/company.service';
 import { Branchmodel,  } from 'src/app/_models/Branchmodel';
@@ -32,12 +32,15 @@ import { Identifiers } from '@angular/compiler';
 export class BranchComponent implements OnInit {
 
   
-  
-   btitle="Add Item";
   public rowsOnPage = 10;
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
+  
+   btitle="Add Item";
+  
+  
+  
 
 
   
@@ -62,8 +65,8 @@ export class BranchComponent implements OnInit {
  Branchfor:Branchmodel;
  //ordersData :[];
  companylist:companymodel[]; 
- submitted: boolean;
- data:Observable<Branchmodel>;
+ submitted = false;
+ public data:Observable<Branchmodel>;
  form: FormGroup;
  mode:string;
  ordersData:productlist[];
@@ -78,9 +81,9 @@ export class BranchComponent implements OnInit {
      this.mode="add";
      this.form = this.formBuilder.group({
        'HotelId': formBuilder.control({ value: '', disabled: true }),
-       'PurchaseId': formBuilder.control({ value: '', disabled: false }),
-       'BranchName': formBuilder.control({ value: '', disabled: false }),
-       'BranchCode': formBuilder.control({ value: '', disabled: false }),
+       'PurchaseId': formBuilder.control({ value: '', disabled: false},Validators.required),
+       'BranchName': formBuilder.control({ value: '', disabled: false},Validators.required),
+       'BranchCode': formBuilder.control({ value: '', disabled: false },Validators.required),
         'HotelMobile': formBuilder.control({ value: '', disabled: false }),
         'HotelEmailId': formBuilder.control({ value: '', disabled: false }),
         'HotelPassword': formBuilder.control({ value: '', disabled: false }),
@@ -107,24 +110,24 @@ export class BranchComponent implements OnInit {
     (this._branchservice.GetCogwaveproduct()).subscribe(orders=>{
       this.ordersData=orders;
     
-      this.addCheckboxes();
+      //this.addCheckboxes();
     })
 
    }
 
 
-   private addCheckboxes() 
-   {
-    this.ordersData.forEach((o, i) =>
-     { 
-      const control = new FormControl(i); // if first item set to true, else false
-      {
+  //  private addCheckboxes() 
+  //  {
+  //   this.ordersData.forEach((o, i) =>
+  //    { 
+  //     const control = new FormControl(i); // if first item set to true, else false
+  //     {
        
-        (this.form.controls.orders as FormArray).push(control);
-      }
+  //       (this.form.controls.orders as FormArray).push(control);
+  //     }
       
-    });
-    }   
+  //   });
+  //   }   
  
   Showhide()
   {
@@ -151,6 +154,13 @@ export class BranchComponent implements OnInit {
 
   Submit() 
   {
+    this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.form.invalid) {
+            return;
+        }
+    console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));     
     //console.log(this.form);
     //console.log(this.form.value); 
     this.Branchfor=this.form.value;
@@ -187,6 +197,10 @@ export class BranchComponent implements OnInit {
 
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      BranchName: ['',Validators.required],
+      BranchCode: ['',Validators.required]
+    })
      
     
     this.form.reset();
@@ -218,8 +232,8 @@ export class BranchComponent implements OnInit {
       this.form = this.formBuilder.group({
         'HotelId': this.formBuilder.control({ value: this.Branchfor.HotelId, disabled: false }),
         'PurchaseId': this.formBuilder.control({ value: this.Branchfor.PurchaseId, disabled: false }),
-        'BranchName': this.formBuilder.control({ value: this.Branchfor.BranchName, disabled: false }),
-        'BranchCode': this.formBuilder.control({ value: this.Branchfor.BranchCode, disabled: false }),
+        'BranchName': this.formBuilder.control({ value: this.Branchfor.BranchName, disabled: false},Validators.required ),
+        'BranchCode': this.formBuilder.control({ value: this.Branchfor.BranchCode, disabled: false },Validators.required),
         'HotelMobile': this.formBuilder.control({ value: this.Branchfor.HotelMobile, disabled: false }),
         'HotelEmailId': this.formBuilder.control({ value: this.Branchfor.HotelEmailId, disabled: false }),
         'HotelPassword':this. formBuilder.control({ value: this.Branchfor.HotelPassword, disabled: false }),

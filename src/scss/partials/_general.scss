@@ -5797,7 +5797,10 @@ select.form-control:not([size]):not([multiple]){
     .peach-gradient {
         background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
     }
-    
+    .aqua-gradient{
+        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;          
+           
+    }
     .rgba-gradient {
         background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
         background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
@@ -5865,9 +5868,13 @@ select.form-control:not([size]):not([multiple]){
         }
        
     }
+ 
     .formdesign,
     .productlist{
         padding:10px;
+    }
+    .formdesign .form-group{
+        margin-bottom:.25em;
     }
      .formdesign .form-group.listproducts label{         
        padding:10px;
@@ -5879,6 +5886,15 @@ select.form-control:not([size]):not([multiple]){
         border: 1px solid hsl(218, 22%, 90%);
         font-size: 100%;
         padding: 0px 0px 0px 10px;
+    }
+    .form-group textarea.form-control{
+        border:1px solid #ccc;
+    }
+    .form-group .input-group {
+        flex-wrap:nowrap; 
+    }
+    .form-group .input-group .bg-default{
+        height: 24px;
     }
     .form-group label{
         margin-bottom:0.1rem;
