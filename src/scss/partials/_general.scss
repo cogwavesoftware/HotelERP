@@ -5790,7 +5790,25 @@ select.form-control:not([size]):not([multiple]){
     height: 100%;
     background-size: 100% 100%;
 }
-
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('/assets/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('/assets/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('/assets/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('/assets/fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
 .outerdiv{     
     border: double 2px #ffd86f;
     outline: solid 1px #ccc;
@@ -5872,10 +5890,12 @@ select.form-control:not([size]):not([multiple]){
     .formdesign,
     .productlist{
         padding:10px;
-        font-size: 90%;
+        font-size: 90%;     
+        font-family: Poppins-Regular, sans-serif;  
     }
     .formdesign .form-group{
-        margin-bottom:1em;         
+        margin-bottom:1em;
+                
     }
      .formdesign .form-group.listproducts label{         
        padding:10px;
