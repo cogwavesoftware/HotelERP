@@ -23,6 +23,7 @@ export class BranchService {
 
   getBranchdata()
   {  
+   //return this.http.get(`assets/data/branch.json`);
     return this.http.get<any>(environment.apiURL + '/api/common/HMSBranch/Getbranch');  
   }
   

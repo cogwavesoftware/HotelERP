@@ -5791,7 +5791,7 @@ select.form-control:not([size]):not([multiple]){
     background-size: 100% 100%;
 }
 
-.outerdiv{    
+.outerdiv{     
     border: double 2px #ffd86f;
     outline: solid 1px #ccc;
     .peach-gradient {
@@ -5872,9 +5872,10 @@ select.form-control:not([size]):not([multiple]){
     .formdesign,
     .productlist{
         padding:10px;
+        font-size: 90%;
     }
     .formdesign .form-group{
-        margin-bottom:.25em;
+        margin-bottom:1em;         
     }
      .formdesign .form-group.listproducts label{         
        padding:10px;
