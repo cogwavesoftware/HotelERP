@@ -5790,14 +5790,35 @@ select.form-control:not([size]):not([multiple]){
     height: 100%;
     background-size: 100% 100%;
 }
-
-.outerdiv{    
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('/assets/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('/assets/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('/assets/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('/assets/fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+.outerdiv{     
     border: double 2px #ffd86f;
     outline: solid 1px #ccc;
     .peach-gradient {
         background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
     }
-    
+    .aqua-gradient{
+        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;          
+           
+    }
     .rgba-gradient {
         background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
         background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
@@ -5865,9 +5886,16 @@ select.form-control:not([size]):not([multiple]){
         }
        
     }
+ 
     .formdesign,
     .productlist{
         padding:10px;
+        font-size: 90%;     
+        font-family: Poppins-Regular, sans-serif;  
+    }
+    .formdesign .form-group{
+        margin-bottom:1em;
+                
     }
      .formdesign .form-group.listproducts label{         
        padding:10px;
@@ -5879,6 +5907,15 @@ select.form-control:not([size]):not([multiple]){
         border: 1px solid hsl(218, 22%, 90%);
         font-size: 100%;
         padding: 0px 0px 0px 10px;
+    }
+    .form-group textarea.form-control{
+        border:1px solid #ccc;
+    }
+    .form-group .input-group {
+        flex-wrap:nowrap; 
+    }
+    .form-group .input-group .bg-default{
+        height: 24px;
     }
     .form-group label{
         margin-bottom:0.1rem;
