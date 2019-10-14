@@ -6,7 +6,7 @@ import { productlist } from './../../_models/Branchmodel';
 import {Component, Input, OnInit,ViewEncapsulation} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import {ToastData, ToastOptions, ToastyService} from 'ng2-toasty'
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
@@ -100,15 +100,13 @@ export class BranchComponent implements OnInit {
         'TrDate': formBuilder.control({ value: '', disabled: false }),
         'IsActive': formBuilder.control({ value: '', disabled: false }),
         'LicenceType': formBuilder.control({ value: '', disabled: false }),
-        orders: new FormArray([],minSelectedCheckboxes(1))
+        orders: new FormArray([])
      });
   
-
-    (this._branchservice.GetCogwaveproduct()).subscribe(orders=>{
-      this.ordersData=orders;
-    
-      this.addCheckboxes();
-    })
+    // (this._branchservice.GetCogwaveproduct()).subscribe(orders=>{
+    //   this.ordersData=orders;
+    //   this.addCheckboxes();
+    // })
 
    }
 
@@ -118,8 +116,7 @@ export class BranchComponent implements OnInit {
     this.ordersData.forEach((o, i) =>
      { 
       const control = new FormControl(i); // if first item set to true, else false
-      {
-       
+      {   
         (this.form.controls.orders as FormArray).push(control);
       }
       
@@ -133,41 +130,34 @@ export class BranchComponent implements OnInit {
     {
       this.form.reset();
       this.Show=true;
-      this.btitle="Hide"
+      this.btitle="Hide"  
       
+      this._branchservice.GetCogwaveproduct().subscribe(orders=>{
+        this.ordersData=orders;
+        this.addCheckboxes();
+      })
+
+    
     }
     else
     {
-
-
       this.Show=false;
       this.btitle="ADD"
       this.form.reset();
       
     }
-  
   }
 
 
   Submit() 
   {
     //console.log(this.form);
-    //console.log(this.form.value); 
+    console.log(this.form.value); 
     this.Branchfor=this.form.value;
     const selectedOrderIds = this.form.value.orders.map((v, i) => v ? this.ordersData[i].Id : null).filter(v => v !== null);
       
 
-
-       this.slectted=selectedOrderIds;
-
-       this.slectted.forEach((o, i) =>
-       { 
-        
-        
-       });
-
-
-
+     this.slectted=selectedOrderIds;
          console.log(this.Branchfor); 
          this._branchservice.SaveBranchData(this.Branchfor).subscribe(data=>{ 
            if (data)
@@ -193,13 +183,11 @@ export class BranchComponent implements OnInit {
     this.btitle="ADD"
     this.Show=false;
     this.data = this._branchservice.getBranchdata()
-
+     console.log(this.data)
 
      this._companyservice.getcompanydata().subscribe(res => {   
        this.companylist = res ;
      });
-
-
   }
 
 
@@ -212,7 +200,7 @@ export class BranchComponent implements OnInit {
     this.Branchfor=Editform;
     //this.addCheckboxes();
     //alert(this.Branchfor.BranchCode);
-    this.Chekbo(this.Branchfor.BranchCode);
+    //this.Chekbo(this.Branchfor.BranchCode);
    
      this.onTypeChange(this.Branchfor.HotelId);
       this.form = this.formBuilder.group({

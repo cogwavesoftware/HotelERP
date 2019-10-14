@@ -15,16 +15,20 @@ import { BreadcrumbsComponent } from './layout/admin/breadcrumbs/breadcrumbs.com
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { HttpClientModule,HTTP_INTERCEPTORS,HttpClient } from '@angular/common/http';
-
 import { NgMarqueeModule } from "ng-marquee";
-
-
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
-
-
 import { fakeBackendProvider } from './_helpers';
+// import { MasterComponent } from './master/master.component';
+// import { FloorcreationComponent } from './master/floorcreation/floorcreation.component';
+// import { RoomtypecreationComponent } from './master/roomtypecreation/roomtypecreation.component';
+// import { RoomorganizerComponent } from './master/roomorganizer/roomorganizer.component';
+// import { GuestcreationComponent } from './master/guestcreation/guestcreation.component';
+// import { CompanycreationComponent } from './master/companycreation/companycreation.component';
+// import { PlancreationComponent } from './master/plancreation/plancreation.component';
+// import { CreditcardComponent } from './master/creditcard/creditcard.component';
+// import { BanknameComponent } from './master/bankname/bankname.component';
 
-// import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+// // import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // export function HttpLoaderFactory(http: HttpClient) {
@@ -37,6 +41,15 @@ import { fakeBackendProvider } from './_helpers';
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent,
+    // MasterComponent,
+    // FloorcreationComponent,
+    // RoomtypecreationComponent,
+    // RoomorganizerComponent,
+    // GuestcreationComponent,
+    // CompanycreationComponent,
+    // PlancreationComponent,
+    // CreditcardComponent,
+    // BanknameComponent,
     
     //bookingsComponent,
     //bookingComponent, 

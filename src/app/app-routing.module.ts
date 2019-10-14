@@ -218,6 +218,30 @@ const routes: Routes = [
 
 
 
+  {
+    path: 'Master',
+    component: AdminComponent,
+    
+    children: [ 
+      {
+        path: 'Master',
+        redirectTo: 'Master/floor',
+        pathMatch: 'full'
+      },
+       
+      {
+        path: 'floor',
+        loadChildren: './master/floorcreation/floorcreation.module#FloorcreationModule'
+      },
+      // {
+      //   path: 'branch',
+      //   loadChildren: './super-admin/branch/branch.module#BranchModule'
+      // },
+      
+     
+    ]
+  },
+
 
 ];
 
