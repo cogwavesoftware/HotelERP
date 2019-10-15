@@ -1,6 +1,4 @@
 
-
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,9 +20,19 @@ const routes: Routes = [
         path: 'bank',
         loadChildren: './bankname/bankname.module#BanknameModule'
       },
+      // {
+      //   path: 'branch',
+      //   loadChildren: './branch/branch.module#BranchModule'
+      // },
+
       {
-        path: 'branch',
-        loadChildren: './branch/branch.module#BranchModule'
+        path: 'RoomType',
+        loadChildren: './roomtypecreation/roomtypecreation.module#RoomtypecreationModule'
+      },
+
+      {
+        path: 'RoomNo',
+        loadChildren: './roomorganizer/roomorganizer.module#RoomorganizerModule'
       }
 
      

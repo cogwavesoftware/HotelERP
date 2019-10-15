@@ -196,7 +196,8 @@ export class BranchComponent implements OnInit {
 
 
 
-  ngOnInit() {
+  ngOnInit()
+   {
     this.form = this.formBuilder.group({
       BranchName: ['',Validators.required],
       BranchCode: ['',Validators.required],      
@@ -219,9 +220,6 @@ export class BranchComponent implements OnInit {
       TrDate:['',Validators.required],
       LicenceType:['', Validators.required]
 
-
-    
-   
     })
      
     
