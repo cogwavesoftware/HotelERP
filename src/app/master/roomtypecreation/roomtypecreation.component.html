@@ -16,7 +16,7 @@
 
 
 
-    <div class="formdesign aqua-gradient">
+    <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
             <!-- <input type="hidden" name="FloorCode" class="form-control" [(ngModel)]="model.FloorCode" #FloorCode="ngModel" value="{{FloorCode}}"  > -->
@@ -31,7 +31,7 @@
                                   <div class="row">
                                         <div class="col-md-6">
     
-                                            <label class="required" >RoomCode</label>
+                                            <label class="required">RoomCode*</label>
                                               <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}"  required autocomplete="off">
                                               <div *ngIf="RoomCode.touched && RoomCode.invalid" class="invalid-feedback">
                                                   <div *ngIf="RoomCode.errors.required">RoomCode is invalid</div>
@@ -39,7 +39,7 @@
                                         </div> 
   
                                         <div class="col-md-6">
-                                            <label>Room Name</label>
+                                            <label>Room Name*</label>
                                             <input type="text" name="RoomName" class="form-control" [(ngModel)]="model.RoomName" #RoomName="ngModel" value="{{RoomName}}"  [ngClass]="{'is-invalid': RoomName.touched && RoomName.invalid}"  required autocomplete="off">
                                             <div *ngIf="RoomName.touched && RoomName.invalid" class="invalid-feedback">
                                               <div *ngIf="RoomName.errors.required">Room Name is invalid</div>
@@ -50,7 +50,7 @@
                                     <div class="row">
                                        
                                             <div class="col-md-6">
-                                                <label>Total Room</label>
+                                                <label>Total Room*</label>
                                                 <input type="number" name="TotalRooms" class="form-control" [(ngModel)]="model.TotalRooms" #TotalRooms="ngModel" value="{{TotalRooms}}"  [ngClass]="{'is-invalid': TotalRooms.touched && TotalRooms.invalid}"  required   autocomplete="off">
                                                 <div *ngIf="TotalRooms.touched && TotalRooms.invalid" class="invalid-feedback">
                                                   <div *ngIf="TotalRooms.errors.required">Total Room Cant'be Empty</div>
@@ -59,7 +59,7 @@
                                         
 
                                             <div class="col-md-6">
-                                                <label>Channel Code</label>
+                                                <label>Channel Code*</label>
                                                 <input type="text" name="ChannelRoomCode" class="form-control" [(ngModel)]="model.ChannelRoomCode" #ChannelRoomCode="ngModel" value="{{ChannelRoomCode}}"  [ngClass]="{'is-invalid': ChannelRoomCode.touched && ChannelRoomCode.invalid}"  required autocomplete="off">
                                                 <div *ngIf="ChannelRoomCode.touched && ChannelRoomCode.invalid" class="invalid-feedback">
                                                   <div *ngIf="ChannelRoomCode.errors.required">MaxRoom is invalid</div>
@@ -71,7 +71,7 @@
                                     <div class="row">
                                        
                                         <div class="col-md-3">
-                                            <label>Default Pax</label>
+                                            <label>Default Pax*</label>
                                             <input type="number" name="Defaultpax" class="form-control" [(ngModel)]="model.Defaultpax" #Defaultpax="ngModel" value="{{Defaultpax}}"  [ngClass]="{'is-invalid': Defaultpax.touched && Defaultpax.invalid}"  required autocomplete="off">
                                             <div *ngIf="Defaultpax.touched && Defaultpax.invalid" class="invalid-feedback">
                                               <div *ngIf="Defaultpax.errors.required">Defaultpax can't be Blank</div>
@@ -81,7 +81,7 @@
   
                                    
                                         <div class="col-md-3">
-                                            <label>Default Rate</label>
+                                            <label>Default Rate*</label>
                                             <input type="number" name="Defaultrate" class="form-control" [(ngModel)]="model.Defaultrate" #Defaultrate="ngModel" value="{{Defaultrate}}"  [ngClass]="{'is-invalid': Defaultrate.touched && Defaultrate.invalid}"  required autocomplete="off">
                                             <div *ngIf="Defaultrate.touched && Defaultrate.invalid" class="invalid-feedback">
                                               <div *ngIf="Defaultrate.errors.required">MaxRoom is invalid</div>
@@ -91,7 +91,7 @@
   
                                       
                                         <div class="col-md-3">
-                                            <label>Single Pax Rate</label>
+                                            <label>Single Pax Rate*</label>
                                             <input type="number" name="SingleRate" class="form-control" [(ngModel)]="model.SingleRate" #SingleRate="ngModel" value="{{SingleRate}}"  [ngClass]="{'is-invalid': SingleRate.touched && SingleRate.invalid}"  required autocomplete="off">
                                             <div *ngIf="SingleRate.touched && SingleRate.invalid" class="invalid-feedback">
                                               <div *ngIf="SingleRate.errors.required">Total Room is invalid</div>
@@ -101,7 +101,7 @@
   
                                    
                                         <div class="col-md-3">
-                                            <label>Double Pax Rate</label>
+                                            <label>Double Pax Rate*</label>
                                             <input type="number" name="DoubleRate" class="form-control" [(ngModel)]="model.DoubleRate" #DoubleRate="ngModel" value="{{DoubleRate}}"  [ngClass]="{'is-invalid': DoubleRate.touched && DoubleRate.invalid}"  required autocomplete="off">
                                             <div *ngIf="DoubleRate.touched && DoubleRate.invalid" class="invalid-feedback">
                                               <div *ngIf="DoubleRate.errors.required">DoubleRate is invalid</div>
@@ -111,7 +111,7 @@
   
                                       <div class="row">
                                           <div class="col-md-3">
-                                              <label>Triple Pax Rate</label>
+                                              <label>Triple Pax Rate*</label>
                                               <input type="number" name="TribleRate" class="form-control" [(ngModel)]="model.TribleRate" #TribleRate="ngModel" value="{{TribleRate}}"  [ngClass]="{'is-invalid': TribleRate.touched && TribleRate.invalid}"  required autocomplete="off">
                                               <div *ngIf="TribleRate.touched && TribleRate.invalid" class="invalid-feedback">
                                                 <div *ngIf="TribleRate.errors.required">TribleRate is invalid</div>
@@ -119,7 +119,7 @@
                                           </div>
   
                                           <div class="col-md-3">
-                                              <label>QuadRate Pax Rate</label>
+                                              <label>QuadRate Pax Rate*</label>
                                               <input type="number" name="QuadRate" class="form-control" [(ngModel)]="model.QuadRate" #QuadRate="ngModel" value="{{QuadRate}}"  [ngClass]="{'is-invalid': QuadRate.touched && QuadRate.invalid}"  required autocomplete="off">
                                               <div *ngIf="QuadRate.touched && QuadRate.invalid" class="invalid-feedback">
                                                 <div *ngIf="QuadRate.errors.required">QuadRate is invalid</div>
@@ -128,7 +128,7 @@
   
   
                                           <div class="col-md-3">
-                                              <label>Fivth Pax Rate</label>
+                                              <label>Fivth Pax Rate*</label>
                                               <input type="number" name="Fivth" class="form-control" [(ngModel)]="model.Fivth" #Fivth="ngModel" value="{{Fivth}}"  [ngClass]="{'is-invalid': Fivth.touched && Fivth.invalid}"  required autocomplete="off">
                                               <div *ngIf="Fivth.touched && Fivth.invalid" class="invalid-feedback">
                                                 <div *ngIf="Fivth.errors.required">Fivth is invalid</div>
@@ -136,7 +136,7 @@
                                           </div>
   
                                           <div class="col-md-3">
-                                              <label>Sixth Pax Rate</label>
+                                              <label>Sixth Pax Rate*</label>
                                               <input type="number" name="Sixth" class="form-control" [(ngModel)]="model.Sixth" #Sixth="ngModel" value="{{Sixth}}"  [ngClass]="{'is-invalid': Sixth.touched && Sixth.invalid}"  required autocomplete="off">
                                               <div *ngIf="Sixth.touched && Sixth.invalid" class="invalid-feedback">
                                                 <div *ngIf="Sixth.errors.required">Sixth is invalid</div>
@@ -146,24 +146,24 @@
                                       <div class="row">
                                           <div class="col-md-3">
                                               <label>Seventh Pax Rate</label>
-                                              <input type="number" name="Seventh" class="form-control" [(ngModel)]="model.Seventh" #Seventh="ngModel" value="{{Seventh}}"  [ngClass]="{'is-invalid': Seventh.touched && Seventh.invalid}"  required autocomplete="off">
-                                              <div *ngIf="Seventh.touched && Seventh.invalid" class="invalid-feedback">
+                                              <input type="number" name="Seventh" class="form-control" [(ngModel)]="model.Seventh" #Seventh="ngModel" value="{{Seventh}}"  autocomplete="off">
+                                              <!-- <div *ngIf="Seventh.touched && Seventh.invalid" class="invalid-feedback">
                                                 <div *ngIf="Seventh.errors.required">Seventh is invalid</div>
-                                              </div>
+                                              </div> -->
                                           </div>
                                           <div class="col-md-3">
                                               <label>Eight Pax Rate</label>
-                                              <input type="number" name="Eighth" class="form-control" [(ngModel)]="model.Eighth" #Eighth="ngModel" value="{{Eighth}}"  [ngClass]="{'is-invalid': Eighth.touched && Eighth.invalid}"  required autocomplete="off">
-                                              <div *ngIf="Eighth.touched && Eighth.invalid" class="invalid-feedback">
+                                              <input type="number" name="Eighth" class="form-control" [(ngModel)]="model.Eighth" #Eighth="ngModel" value="{{Eighth}}"   autocomplete="off">
+                                              <!-- <div *ngIf="Eighth.touched && Eighth.invalid" class="invalid-feedback">
                                                 <div *ngIf="Eighth.errors.required">Eighth is invalid</div>
-                                              </div>
+                                              </div> -->
                                           </div>
                                           <div class="col-md-3">
                                               <label>Nine Pax Rate</label>
-                                              <input type="number" name="Nineth" class="form-control" [(ngModel)]="model.Nineth" #Nineth="ngModel" value="{{Nineth}}"  [ngClass]="{'is-invalid': Nineth.touched && Nineth.invalid}"  required autocomplete="off">
-                                              <div *ngIf="Nineth.touched && Nineth.invalid" class="invalid-feedback">
+                                              <input type="number" name="Nineth" class="form-control" [(ngModel)]="model.Nineth" #Nineth="ngModel" value="{{Nineth}}"  autocomplete="off">
+                                              <!-- <div *ngIf="Nineth.touched && Nineth.invalid" class="invalid-feedback">
                                                 <div *ngIf="Nineth.errors.required">Nineth is invalid</div>
-                                              </div>
+                                              </div> -->
                                           </div>
   
                                           <div class="col-md-3">
@@ -177,7 +177,7 @@
 
                                       <div class="row">
                                           <div class="col-md-6">
-                                              <label>Extra Adult</label>
+                                              <label>Extra Adult*</label>
                                               <input type="number" name="ExtraAdult" class="form-control" [(ngModel)]="model.ExtraAdult" #ExtraAdult="ngModel" value="{{ExtraAdult}}"  [ngClass]="{'is-invalid': ExtraAdult.touched && ExtraAdult.invalid}"  required autocomplete="off">
                                               <div *ngIf="ExtraAdult.touched && ExtraAdult.invalid" class="invalid-feedback">
                                                 <div *ngIf="ExtraAdult.errors.required">ExtraAdult is invalid</div>
@@ -185,7 +185,7 @@
                                           </div>
   
                                           <div class="col-md-6">
-                                              <label>Child Rate</label>
+                                              <label>Child Rate*</label>
                                               <input type="number" name="ExtraChild" class="form-control" [(ngModel)]="model.ExtraChild" #ExtraChild="ngModel" value="{{ExtraChild}}"  [ngClass]="{'is-invalid': ExtraChild.touched && ExtraChild.invalid}"  required autocomplete="off">
                                               <div *ngIf="ExtraChild.touched && ExtraChild.invalid" class="invalid-feedback">
                                                 <div *ngIf="ExtraChild.errors.required">ExtraChild is invalid</div>
@@ -195,7 +195,7 @@
 
                                       <div class="row">
                                           <div class="col-md-6">
-                                              <label>Select RoomType</label>
+                                              <label>Select RoomType*</label>
                                                   <select class="custom-select" (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)" #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched" name="topic" [(ngModel)]="model.topic">
                                                     <option value="default">Please Select</option>
                                                     <option *ngFor="let topic of Roomtyeps">{{ topic }}</option>
@@ -204,7 +204,7 @@
                                           </div>
                                      
                                           <div class="col-md-6">
-                                              <label>Select Catagery</label>
+                                              <label>Select Catagery*</label>
                                                   <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
                                                     <option value="default">Please Select</option>
                                                     <option *ngFor="let catagery of catagerys">{{ catagery }}</option>
@@ -215,7 +215,7 @@
                                       <div class="row">
                                           <div class="col-12 col-sm-3'">
                                                   <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
-                                                  <label class="form-control-label" for="IsActive" style="padding-right: 10px;">IsActive  </label>
+                                                  <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
                                                   <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                           </div>
                                       </div>
@@ -237,6 +237,109 @@
           </form>
        </div> 
      </div>
+
+
+<!-- -----------table start Here------------ -->
+
+
+
+     <div class="productlist">
+        <div class="shadow p-3 mb-5 bg-white rounded" >
+      <div class="table-content crm-table">
+        <div class="project-table">
+          <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+            <div class="row">
+   
+  
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Data List</div>
+                    </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div style="text-align: right;">
+                      <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                        <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                      </label>
+                    </div>
+                  </div>  
+
+            </div>
+             
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                <thead>
+                <tr class="blueorange-gradient">
+                  <!-- <th>
+                    <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+                  </th> -->
+                  <th>
+                    <mfDefaultSorter  by="FloorCode">FloorCode</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="FloorName">FloorName</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="BranchCode">BranchCode</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="MaxRoom">MaxRoom</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="Alloted">Alloted</mfDefaultSorter>
+                  </th>
+
+                    <th>
+                        <mfDefaultSorter  by="IsActive">IsActive</mfDefaultSorter>
+                    </th>
+                  <th>
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;">
+                  <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
+                  <td>{{item.FloorCode}}</td>
+                  <td>{{item.FloorName}}</td>
+                  <td>{{item.BranchCode}}</td>
+                  <td>{{item.MaxRoom}}</td>
+                  <td>{{item.Alloted}}</td>
+                  <td>{{item.IsActive}}</td>
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-10',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                      
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <!-- <th>Profile</th> -->
+                  <th>FloorCode</th>
+                  <th>FloorName</th>
+                  <th>BranchCode</th>
+                  <th>MaxRoom</th>
+                  <th>Alloted</th>                
+                  <th>IsActive</th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                  <td colspan="10">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+</div>
+</div>
+    <!-- -----------table End Here------------ -->
 
 
 

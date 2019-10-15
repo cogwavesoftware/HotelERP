@@ -78,13 +78,11 @@ export class FloorcreationComponent implements OnInit {
     }   
   }
 
-  Closeform()
-  {
+  Closeform(){
       this.isShown = false;
       this.btitle="Add Item"  
-      this.resetForm();  
-  }
-
+      this.resetForm(); }
+      
   resetForm(form?: NgForm)
   {
 
