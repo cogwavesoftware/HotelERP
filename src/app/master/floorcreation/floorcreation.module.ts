@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { FloorcreationComponent } from './floorcreation.component';
 
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FloorcreationComponent } from './floorcreation.component';
     DataTableModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class FloorcreationModule { }
 

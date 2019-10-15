@@ -6,7 +6,7 @@ import { productlist } from './../../_models/Branchmodel';
 import {Component, Input, OnInit,ViewEncapsulation} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import {ToastData, ToastOptions, ToastyService} from 'ng2-toasty'
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn,Validators  } from '@angular/forms';
@@ -36,19 +36,10 @@ export class BranchComponent implements OnInit {
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
-  
    btitle="Add Item";
-  
-  
-  
 
-
-  
   isValid:boolean;
-
-
   public isShown:boolean = false;
-
   @Input('modalDefault') modalDefault: any;
    
   title: string;
@@ -58,9 +49,7 @@ export class BranchComponent implements OnInit {
   theme = 'bootstrap';
   type = 'default';
   closeOther = false;
-
  checkboxx:ClientProduct[];
-
  branch : Branchmodel[];
  Branchfor:Branchmodel;
  //ordersData :[];
@@ -75,17 +64,18 @@ export class BranchComponent implements OnInit {
  companyname:any;
   constructor(public _branchservice:BranchService,public router:Router,public formBuilder: FormBuilder,private route: ActivatedRoute,private _companyservice:CompanyService)
    { 
-     
-   
-    
-     this.mode="add";
-     this.form = this.formBuilder.group({
-       'HotelId': formBuilder.control({ value: '', disabled: true }),
+
+    console.log(Date.now())
+    alert('d')
+    // [Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        this.mode="add";
+        this.form = this.formBuilder.group({
+       'HotelId': formBuilder.control({ value: '', disabled: true },Validators.required),
        'PurchaseId': formBuilder.control({ value: '', disabled: false},Validators.required),
        'BranchName': formBuilder.control({ value: '', disabled: false},Validators.required),
        'BranchCode': formBuilder.control({ value: '', disabled: false },Validators.required),
-        'HotelMobile': formBuilder.control({ value: '', disabled: false }),
-        'HotelEmailId': formBuilder.control({ value: '', disabled: false }),
+        'HotelMobile': formBuilder.control({ value: '', disabled: false },Validators.required),
+        'HotelEmailId': formBuilder.control({ value: '', disabled: false },Validators.required),  
         'HotelPassword': formBuilder.control({ value: '', disabled: false }),
         'City': formBuilder.control({ value: '', disabled: false }),
         'State': formBuilder.control({ value: '', disabled: false }),
@@ -99,96 +89,48 @@ export class BranchComponent implements OnInit {
         'TaxNo': formBuilder.control({ value: '', disabled: false }),
         'LicenceNo': formBuilder.control({ value: '', disabled: false }),
         'PanNo': formBuilder.control({ value: '', disabled: false }),
-
         'TrDate': formBuilder.control({ value: '', disabled: false }),
         'IsActive': formBuilder.control({ value: '', disabled: false }),
         'LicenceType': formBuilder.control({ value: '', disabled: false }),
-        orders: new FormArray([])
+        //orders: new FormArray([],minSelectedCheckboxes(1))
      });
   
-<<<<<<< HEAD
-    // (this._branchservice.GetCogwaveproduct()).subscribe(orders=>{
-    //   this.ordersData=orders;
-    //   this.addCheckboxes();
-    // })
-=======
 
     (this._branchservice.GetCogwaveproduct()).subscribe(orders=>{
       this.ordersData=orders;
-    
-      //this.addCheckboxes();
     })
->>>>>>> 2880c0109767be7a27dd9e26faa63dd67d50ea78
 
    }
 
 
-<<<<<<< HEAD
-   private addCheckboxes() 
-   {
-    this.ordersData.forEach((o, i) =>
-     { 
-      const control = new FormControl(i); // if first item set to true, else false
-      {   
-        (this.form.controls.orders as FormArray).push(control);
-      }
-=======
-  //  private addCheckboxes() 
-  //  {
-  //   this.ordersData.forEach((o, i) =>
-  //    { 
-  //     const control = new FormControl(i); // if first item set to true, else false
-  //     {
-       
-  //       (this.form.controls.orders as FormArray).push(control);
-  //     }
->>>>>>> 2880c0109767be7a27dd9e26faa63dd67d50ea78
-      
-  //   });
-  //   }   
  
   Showhide()
   {
-
     if (this.btitle=="ADD")
     {
       this.form.reset();
       this.Show=true;
       this.btitle="Hide"  
-      
-      this._branchservice.GetCogwaveproduct().subscribe(orders=>{
-        this.ordersData=orders;
-        this.addCheckboxes();
-      })
-
-    
     }
     else
     {
       this.Show=false;
       this.btitle="ADD"
       this.form.reset();
-      
     }
   }
 
 
   Submit() 
   {
-    this.submitted = true;
-
+        this.submitted = true;
         // stop here if form is invalid
-        if (this.form.invalid) {
+        if (this.form.invalid) 
+        {
             return;
         }
-    console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));     
-    //console.log(this.form);
-    console.log(this.form.value); 
-    this.Branchfor=this.form.value;
-    const selectedOrderIds = this.form.value.orders.map((v, i) => v ? this.ordersData[i].Id : null).filter(v => v !== null);
-      
-
-     this.slectted=selectedOrderIds;
+        console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));     
+        this.Branchfor=this.form.value;
          console.log(this.Branchfor); 
          this._branchservice.SaveBranchData(this.Branchfor).subscribe(data=>{ 
            if (data)
@@ -198,9 +140,6 @@ export class BranchComponent implements OnInit {
            this.isShown = false;
            this.ngOnInit();    
          }) 
-       
-     
-    //console.log(selectedOrderIds);
   }
 
  
@@ -208,21 +147,23 @@ export class BranchComponent implements OnInit {
 
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      BranchName: ['',Validators.required],
-      BranchCode: ['',Validators.required]
-    })
-     
-    
+    // this.form = this.formBuilder.group({
+    //   BranchName: ['',Validators.required],
+    //   BranchCode: ['',Validators.required],
+    //   HotelEmailId: ['',Validators.required ]
+    // })
+
     this.form.reset();
     this.btitle="ADD"
     this.Show=false;
     this.data = this._branchservice.getBranchdata()
-     console.log(this.data)
+
 
      this._companyservice.getcompanydata().subscribe(res => {   
        this.companylist = res ;
      });
+
+
   }
 
 
@@ -236,15 +177,16 @@ export class BranchComponent implements OnInit {
     //this.addCheckboxes();
     //alert(this.Branchfor.BranchCode);
     //this.Chekbo(this.Branchfor.BranchCode);
-   
+  
      this.onTypeChange(this.Branchfor.HotelId);
+
       this.form = this.formBuilder.group({
         'HotelId': this.formBuilder.control({ value: this.Branchfor.HotelId, disabled: false }),
         'PurchaseId': this.formBuilder.control({ value: this.Branchfor.PurchaseId, disabled: false }),
         'BranchName': this.formBuilder.control({ value: this.Branchfor.BranchName, disabled: false},Validators.required ),
         'BranchCode': this.formBuilder.control({ value: this.Branchfor.BranchCode, disabled: false },Validators.required),
         'HotelMobile': this.formBuilder.control({ value: this.Branchfor.HotelMobile, disabled: false }),
-        'HotelEmailId': this.formBuilder.control({ value: this.Branchfor.HotelEmailId, disabled: false }),
+        'HotelEmailId': this.formBuilder.control({ value: this.Branchfor.HotelEmailId, disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
         'HotelPassword':this. formBuilder.control({ value: this.Branchfor.HotelPassword, disabled: false }),
         'City': this.formBuilder.control({ value: this.Branchfor.City, disabled: false }),
         'State': this.formBuilder.control({ value: this.Branchfor.State, disabled: false }),
