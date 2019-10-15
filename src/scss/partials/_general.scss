@@ -5923,6 +5923,15 @@ select.form-control:not([size]):not([multiple]){
     .form-group select.form-control:not([size]):not([multiple]){
         height: auto;
     }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
+     .branchform .form-group .form-control-label::after { 
+        content:"*";
+        color:red;
+     }
    
 }
 

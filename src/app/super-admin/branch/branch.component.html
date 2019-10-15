@@ -19,11 +19,11 @@
   
 <!-- <app-card  [title]="'Branch Creation'" [headerContent]="'Creating branch details for company'" [cardOptionBlock]="true"> -->
     
-  <div class="formdesign" *ngIf="Show">
+  <div class="formdesign branchform" *ngIf="Show">
       <div class="col-xs-12 col-sm-12 col-md-6" style="padding-left: 0px;">
           <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Add Branch</div>
           </div>
-      <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow p-3 mb-5 bg-white rounded">
+      <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow p-3 mb-5 bg-white rounded" autocomplete="off" >
          <input type="hidden" class="form-control tooltip-form" id="HotelIdp" formControlName="HotelId" name="HotelId"> 
          
           <div class='row'>
@@ -34,10 +34,11 @@
                   <div class="row">                   
                         <div class='col-12 col-sm-12'>
                             <div class="form-group">
-                                <label class="form-control-label" for="firstname">Select Box</label>
-                                <select name="select" class="form-control" formControlName="PurchaseId">
+                                <label class="form-control-label" for="firstname">Select Company</label>
+                                <select name="select" class="form-control" formControlName="PurchaseId" formControlName="PurchaseId" [ngClass] = "{'is-invalid' : submitted && form.controls.PurchaseId.errors || form.controls.PurchaseId.touched || form.controls.PurchaseId.dirty}"  >
                                   <option [value]="company.Id" *ngFor="let company of companylist">{{company.ClientName}}</option>
-                              </select>                             
+                              </select>      
+                              <div class="invalid-feedback" *ngIf="form.controls.PurchaseId.errors?.required" >Company Name is required</div>                       
                             </div>
                         </div>                   
                   </div>
@@ -46,113 +47,159 @@
                         <div class='col-12 col-sm-6'>
                             <div class="form-group">
                                 <label class="form-control-label" for="lastname">Branch Name</label>
-                                <input type="text" class="form-control tooltip-form" id="BranchNamep" formControlName="BranchName" name="BranchName" autocomplete="off"    [ngClass]="{'is-invalid': submitted && form.controls.BranchName.errors}" />                                
+                                <input type="text" class="form-control tooltip-form" id="BranchNamep" formControlName="BranchName" name="BranchName" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.BranchName.errors || form.controls.BranchName.touched || form.controls.BranchName.dirty}" />                                
                                 <div class="invalid-feedback" *ngIf="form.controls.BranchName.errors?.required" >Branch Name is required</div>
                             </div>
                         </div>
                       <div class='col-12 col-sm-6'>
                           <div class="form-group">
                               <label class="form-control-label" for="Branchcode">Branch Code</label>
-                              <input type="text" class="form-control tooltip-form" id="BranchCodep" formControlName="BranchCode" name="BranchCode" autocomplete="off" [ngClass]="{'is-invalid': submitted && form.controls.BranchCode.errors}"  />
-                              <div class="messages text-danger invalid-feedback" *ngIf="form.controls.BranchCode.errors?.required">BranchCode is required</div>
+                              <input type="text" class="form-control tooltip-form" id="BranchCodep" formControlName="BranchCode" name="BranchCode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.BranchCode.errors || form.controls.BranchCode.touched || form.controls.BranchCode.dirty}"   />
+                              <div class="invalid-feedback" *ngIf="form.controls.BranchCode.errors?.required">BranchCode is required</div>
                           </div>
                       </div>
                      
                   </div>
                   <div class="row">
-                      <div class='col-12 col-sm-6'>
+                      <div class='col-12 col-sm-4'>
                           <div class="form-group">
                               <label class="form-control-label" for="Mobile">Mobile</label>
-                              <input type="text" class="form-control tooltip-form" id="HotelMobilep" formControlName="HotelMobile" name="HotelMobile" autocomplete="off" >
-                          </div>
+                              <input pattern='^[7-9][0-9]{9}$' type="text" class="form-control tooltip-form" id="HotelMobilep" minlength="10" maxlength="10" formControlName="HotelMobile" name="HotelMobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.BranchName.errors || form.controls.BranchName.touched || form.controls.BranchName.dirty}" />
+                              <div class=" messages text-danger invalid-feedback"  *ngIf="form.controls.HotelMobile.errors?.minlength && (form.controls.HotelMobile.dirty || form.controls.HotelMobile.touched)">
+                                  Mobile no must be 10 digits.
+                                </div>
+                               <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.HotelMobile.errors?.required">Mobile can't be blank</div>
+                                <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.HotelMobile.hasError('pattern') && (form.controls.HotelMobile.dirty || form.controls.HotelMobile.touched)">
+                                    Please Enter Numaric Value
+                                  </div>
+                                  </div>
                       </div>
-                    <div class='col-12 col-sm-6'>
+                    <div class='col-12 col-sm-4'>
                         <div class="form-group">
                             <label class="form-control-label" for="HotelEmailId">Hotel EmailId</label>
-                            <input type="text" class="form-control tooltip-form" id="HotelEmailIdp" formControlName="HotelEmailId" name="HotelEmailId" autocomplete="off" >                   
+                            <input type="text"   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" class="form-control tooltip-form" id="HotelEmailIdp" formControlName="HotelEmailId"  [ngClass] = "{'is-invalid' : submitted && form.controls.HotelEmailId.errors || form.controls.HotelEmailId.touched || form.controls.HotelEmailId.dirty}" />                   
+                            <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.HotelEmailId.hasError('pattern') && form.controls.HotelEmailId.touched">
+                                Please enter valid Email
+                              </div>
+                            <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.HotelEmailId.errors?.required">
+                              Email can't be blank
+                            </div>
+
                         </div>
                     </div>
+                    <div class='col-12 col-sm-4'>
+                        <div class="form-group">
+                            <label class="form-control-label" for="HotelPassword">Hotel Email Password</label>
+                            <input type="password" class="form-control tooltip-form" id="HotelPasswordp" formControlName="HotelPassword" name="HotelPassword" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.HotelPassword.errors || form.controls.HotelPassword.touched || form.controls.HotelPassword.dirty}" />
+                              <div class="invalid-feedback"  *ngIf="form.controls.HotelPassword.errors?.required">Hotel Password can't be blank</div>  
+                        </div>
+                    </div>
+
                    
                 </div>
                 <div class="row">
                     <div class='col-12 col-sm-12'>
                         <div class="form-group">
-                            <label class="form-control-label" for="HotelPassword">Hotel Password</label>
-                            <input type="text" class="form-control tooltip-form" id="HotelPasswordp" formControlName="HotelPassword" name="HotelPassword" autocomplete="off" >
+                            <label class="form-control-label" for="HotelAddress">Hotel Address</label>
+                            <input type="text" class="form-control tooltip-form" id="HotelAddressp" formControlName="HotelAddress" name="HotelAddress" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.HotelAddress.errors || form.controls.HotelAddress.touched || form.controls.HotelAddress.dirty}" />
+                            <div class="invalid-feedback"  *ngIf="form.controls.HotelAddress.errors?.required">HotelAddress can't be blank</div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                  <div class='col-12 col-sm-6'>
+                  <div class='col-12 col-sm-3'>
                       <div class="form-group">
                           <label class="form-control-label" for="City">City</label>
-                          <input type="text" class="form-control tooltip-form" id="Cityp" formControlName="City" name="City" autocomplete="off" >               
+                          <input type="text" class="form-control tooltip-form" id="Cityp" formControlName="City" name="City" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.City.errors || form.controls.City.touched || form.controls.City.dirty}" >               
+                          <div class="invalid-feedback"  *ngIf="form.controls.City.errors?.required">City can't be blank</div>
                       </div>
                   </div>
-                  <div class='col-12 col-sm-6'>
+                  <div class='col-12 col-sm-3'>
                       <div class="form-group">
                           <label class="form-control-label" for="State">State</label>
-                          <input type="text" class="form-control tooltip-form" id="Statep" formControlName="State" name="State" autocomplete="off" >
+                          <input type="text" class="form-control tooltip-form" id="Statep" formControlName="State" name="State" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.State.errors || form.controls.State.touched || form.controls.State.dirty}" />
+                          <div class="invalid-feedback"  *ngIf="form.controls.State.errors?.required">State can't be blank</div>
+                      </div>
+                  </div>
+                  <div class='col-12 col-sm-3'>
+                      <div class="form-group">
+                          <label class="form-control-label" for="Nation">Nation</label>
+                          <input type="text" class="form-control tooltip-form" id="Nationp" formControlName="Nation" name="Nation" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.Nation.errors || form.controls.Nation.touched || form.controls.Nation.dirty}" />         
+                          <div class="invalid-feedback"  *ngIf="form.controls.Nation.errors?.required">Nation can't be blank</div>
+                      </div>
+                  </div>
+                  <div class='col-12 col-sm-3'>
+                      <div class="form-group">
+                          <label class="form-control-label" for="StateCode">State Code</label>
+                          <input type="text" class="form-control tooltip-form" id="StateCodep" formControlName="StateCode" name="StateCode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.StateCode.errors || form.controls.StateCode.touched || form.controls.StateCode.dirty}" />
+                          <div class="invalid-feedback"  *ngIf="form.controls.StateCode.errors?.required">StateCode can't be blank</div>
                       </div>
                   </div>
               </div>
-              <div class="row">
-                <div class='col-12 col-sm-6'>
-                    <div class="form-group">
-                        <label class="form-control-label" for="Nation">Nation</label>
-                        <input type="text" class="form-control tooltip-form" id="Nationp" formControlName="Nation" name="Nation" autocomplete="off">         
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6'>
-                    <div class="form-group">
-                        <label class="form-control-label" for="StateCode">State Code</label>
-                        <input type="text" class="form-control tooltip-form" id="StateCodep" formControlName="StateCode" name="StateCode" autocomplete="off" >
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class='col-12 col-sm-12'>
-                    <div class="form-group">
-                        <label class="form-control-label" for="HotelAddress">Hotel Address</label>
-                        <input type="text" class="form-control tooltip-form" id="HotelAddressp" formControlName="HotelAddress" name="HotelAddress" autocomplete="off" >
-                    </div>
-                </div>
-            </div>
+    
+
  
           <div class="row">
-            <div class='col-12 col-sm-6'>
+            <div class='col-12 col-sm-4'>
                 <div class="form-group">
                     <label class="form-control-label" for="ManagerEmail">Manager Email</label>
-                    <input type="text" class="form-control tooltip-form" id="ManagerEmailp" formControlName="ManagerEmail" name="ManagerEmail" autocomplete="off" >
+                    <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"  class="form-control tooltip-form" id="ManagerEmailp" formControlName="ManagerEmail" name="ManagerEmail" autocomplete="off"  [ngClass] = "{'is-invalid' : submitted && form.controls.ManagerEmail.errors || form.controls.ManagerEmail.touched || form.controls.ManagerEmail.dirty}" />
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.ManagerEmail.hasError('pattern') && form.controls.ManagerEmail.touched">
+                        Please enter valid Email
+                      </div>
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.ManagerEmail.errors?.required">
+                      Email can't be blank
+                    </div>
                 </div>
             </div>
-            <div class='col-12 col-sm-6'>
+            <div class='col-12 col-sm-4'>
                 <div class="form-group">
                     <label class="form-control-label" for="ManagerMobileNo">Manager MobileNo</label>
-                    <input type="text" class="form-control tooltip-form" id="ManagerMobileNop" formControlName="ManagerMobileNo" name="ManagerMobileNo" autocomplete="off" >
+                    <input type="text" pattern='^[7-9][0-9]{9}$' class="form-control tooltip-form" minlength="10" maxlength="10" id="ManagerMobileNop" formControlName="ManagerMobileNo" name="ManagerMobileNo" autocomplete="off"  [ngClass] = "{'is-invalid' : submitted && form.controls.ManagerMobileNo.errors || form.controls.ManagerMobileNo.touched || form.controls.ManagerMobileNo.dirty}" />
+                    <div class=" messages text-danger invalid-feedback"  *ngIf="form.controls.ManagerMobileNo.errors?.minlength && (form.controls.ManagerMobileNo.dirty || form.controls.ManagerMobileNo.touched)">
+                        Mobile no must be 10 digits.
+                      </div>
+                     <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.ManagerMobileNo.errors?.required">Mobile can't be blank</div>
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.ManagerMobileNo.hasError('pattern') && (form.controls.ManagerMobileNo.dirty || form.controls.ManagerMobileNo.touched)">
+                          Please Enter Numaric Value
+                        </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class='col-12 col-sm-12'>
+            <div class='col-12 col-sm-4'>
                 <div class="form-group">
                     <label class="form-control-label" for="PoliceEmail">Police Email</label>
-                    <input type="text" class="form-control tooltip-form" id="PoliceEmailp" formControlName="PoliceEmail" name="PoliceEmail" autocomplete="off">
+                    <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"  class="form-control tooltip-form" id="PoliceEmailp" formControlName="PoliceEmail" name="PoliceEmail" autocomplete="off"  [ngClass] = "{'is-invalid' : submitted && form.controls.PoliceEmail.errors || form.controls.PoliceEmail.touched || form.controls.PoliceEmail.dirty}" />
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.PoliceEmail.hasError('pattern') && form.controls.PoliceEmail.touched">
+                        Please enter valid Email
+                      </div>
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.PoliceEmail.errors?.required">
+                      Email can't be blank
+                    </div>
                 </div>
             </div>
         </div>
+        
         <div class="row">
    
           <div class='col-12 col-sm-6'>
               <div class="form-group">
-                  <label class="form-control-label" for="GSTNO">GSTNO</label>
-                  <input type="text" class="form-control tooltip-form" id="GSTNOp" formControlName="GSTNO" name="GSTNO" autocomplete="off">
+                  <label class="form-control-label" for="GSTNO">GSTNO ((E.g. 12ayipk1020p2z5)</label>
+                  <input type="text" pattern="/^([0-9]{2}[a-zA-Z]{4}([a-zA-Z]{1}|[0-9]{1})[0-9]{4}[a-zA-Z]{1}([a-zA-Z]|[0-9]){3}){0,15}$/" class="form-control tooltip-form" minlength="15" maxlength="15"  id="GSTNOp" formControlName="GSTNO" name="GSTNO" autocomplete="off"  [ngClass] = "{'is-invalid' : submitted && form.controls.GSTNO.errors || form.controls.GSTNO.touched || form.controls.GSTNO.dirty}" /> 
+                  <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.GSTNO.hasError('pattern') && form.controls.GSTNO.touched">
+                      Please enter valid GST NO 
+                    </div>
+                  <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.GSTNO.errors?.required">
+                    GSTNO can't be blank
+                  </div>
               </div>
           </div>
           <div class='col-12 col-sm-6'>
               <div class="form-group">
                   <label class="form-control-label" for="TaxNo">TaxNo</label>
-                  <input type="text" class="form-control tooltip-form" id="TaxNop" formControlName="TaxNo" name="TaxNo"  autocomplete="off">
+                  <input type="text" class="form-control tooltip-form" id="TaxNop" formControlName="TaxNo" name="TaxNo"  autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.TaxNo.errors || form.controls.TaxNo.touched || form.controls.TaxNo.dirty}" />
+                  <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.TaxNo.errors?.required">
+                      TAXNO can't be blank
+                    </div>
               </div>
           </div>
       </div>
@@ -161,13 +208,22 @@
         <div class='col-12 col-sm-6'>
             <div class="form-group">
                 <label class="form-control-label" for="LicenceNo">Licence No</label>
-                <input type="text" class="form-control tooltip-form" id="LicenceNop" formControlName="LicenceNo" name="LicenceNo" autocomplete="off">
+                <input type="text" class="form-control tooltip-form" id="LicenceNop" formControlName="LicenceNo" name="LicenceNo" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.LicenceNo.errors || form.controls.LicenceNo.touched || form.controls.GLicenceNoSTNO.dirty}" />
+                <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.LicenceNo.errors?.required">
+                    LicenceNo can't be blank
+                </div>
             </div>
         </div>
         <div class='col-12 col-sm-6'>
             <div class="form-group">
-                <label class="form-control-label" for="PanNo">Pan No</label>
-                <input type="text" class="form-control tooltip-form" id="PanNop" formControlName="PanNo" name="PanNo"   >
+                <label class="form-control-label" for="PanNo">Pan No (E.g. AAAAA9999A)</label>
+                <input type="text" pattern="/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/" class="form-control tooltip-form" id="PanNop" maxlength="10" formControlName="PanNo" name="PanNo" [ngClass] = "{'is-invalid' : submitted && form.controls.PanNo.errors || form.controls.PanNo.touched || form.controls.PanNo.dirty}" />
+                <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.PanNo.errors?.required">
+                    PanNo can't be blank
+                </div>
+                <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.PanNo.hasError('pattern') && form.controls.PanNo.touched">
+                  Please enter valid PAN NO 
+                </div>
             </div>
         </div>
     </div>
@@ -177,9 +233,13 @@
           <div class="form-group">
               <label class="form-control-label" for="TrDate">TrDate</label>
               <div class="input-group">                   
-                <input class="form-control" formControlName="TrDate" placeholder="Date" name="TrDate" [(ngModel)]="modelPopup" ngbDatepicker #d="ngbDatepicker">
+                <input class="form-control" formControlName="TrDate" placeholder="Date" name="TrDate" [(ngModel)]="modelPopup" ngbDatepicker #d="ngbDatepicker"  [ngClass] = "{'is-invalid' : submitted && form.controls.TrDate.errors || form.controls.TrDate.touched || form.controls.TrDate.dirty}" />
+            
                 <div class="input-group-append bg-default" (click)="d.toggle()" >
                   <span class="icofont icofont-ui-calendar input-group-text"></span>
+                </div>
+                <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.TrDate.errors?.required">
+                    TrDate can't be blank
                 </div>
               </div>
             </div>  
@@ -193,7 +253,10 @@
       <div class='col-12 col-sm-6'>
           <div class="form-group">
               <label class="form-control-label" for="LicenceType">Licence Type</label>
-              <input type="text" class="form-control tooltip-form" id="LicenceTypep" formControlName="LicenceType" name="LicenceType" autocomplete="off">
+              <input type="text" class="form-control tooltip-form" id="LicenceTypep" formControlName="LicenceType" name="LicenceType" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.LicenceType.errors || form.controls.LicenceType.touched || form.controls.LicenceType.dirty}" />
+              <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.LicenceType.errors?.required">
+                  LicenceType can't be blank
+              </div>
           </div>
       </div>
 

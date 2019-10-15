@@ -84,25 +84,25 @@ export class BranchComponent implements OnInit {
        'PurchaseId': formBuilder.control({ value: '', disabled: false},Validators.required),
        'BranchName': formBuilder.control({ value: '', disabled: false},Validators.required),
        'BranchCode': formBuilder.control({ value: '', disabled: false },Validators.required),
-        'HotelMobile': formBuilder.control({ value: '', disabled: false }),
-        'HotelEmailId': formBuilder.control({ value: '', disabled: false }),
-        'HotelPassword': formBuilder.control({ value: '', disabled: false }),
-        'City': formBuilder.control({ value: '', disabled: false }),
-        'State': formBuilder.control({ value: '', disabled: false }),
-        'Nation': formBuilder.control({ value: '', disabled: false }),
-        'StateCode': formBuilder.control({ value: '', disabled: false }),
+        'HotelMobile': formBuilder.control({ value: '', disabled: false },[Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('^[7-9][0-9]{9}$')]),
+        'HotelEmailId': formBuilder.control({ value: '', disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),         
+        'HotelPassword': formBuilder.control({ value: '', disabled: false },Validators.required),
+        'City': formBuilder.control({ value: '', disabled: false },Validators.required),
+        'State': formBuilder.control({ value: '', disabled: false }, Validators.required),
+        'Nation': formBuilder.control({ value: '', disabled: false }, Validators.required),
+        'StateCode': formBuilder.control({ value: '', disabled: false }, Validators.required),
         'HotelAddress': formBuilder.control({ value: '', disabled: false }),
-        'ManagerMobileNo': formBuilder.control({ value: '', disabled: false }),
-        'ManagerEmail': formBuilder.control({ value: '', disabled: false }),
-        'PoliceEmail': formBuilder.control({ value: '', disabled: false }),
-        'GSTNO': formBuilder.control({ value: '', disabled: false }),
-        'TaxNo': formBuilder.control({ value: '', disabled: false }),
-        'LicenceNo': formBuilder.control({ value: '', disabled: false }),
-        'PanNo': formBuilder.control({ value: '', disabled: false }),
+        'ManagerMobileNo': formBuilder.control({ value: '', disabled: false },[Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('^[7-9][0-9]{9}$')]),
+        'ManagerEmail': formBuilder.control({ value: '', disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        'PoliceEmail': formBuilder.control({ value: '', disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        'GSTNO': formBuilder.control({ value: '', disabled: false },[Validators.required, Validators.pattern('/^([0-9]{2}[a-zA-Z]{4}([a-zA-Z]{1}|[0-9]{1})[0-9]{4}[a-zA-Z]{1}([a-zA-Z]|[0-9]){3}){0,15}$/')]),
+        'TaxNo': formBuilder.control({ value: '', disabled: false },[Validators.required]),
+        'LicenceNo': formBuilder.control({ value: '', disabled: false },[Validators.required]),
+        'PanNo': formBuilder.control({ value: '', disabled: false },[Validators.required]),
 
-        'TrDate': formBuilder.control({ value: '', disabled: false }),
+        'TrDate': formBuilder.control({ value: '', disabled: false },[Validators.required]),
         'IsActive': formBuilder.control({ value: '', disabled: false }),
-        'LicenceType': formBuilder.control({ value: '', disabled: false }),
+        'LicenceType': formBuilder.control({ value: '', disabled: false },[Validators.required]),
         orders: new FormArray([],minSelectedCheckboxes(1))
      });
   
@@ -199,7 +199,29 @@ export class BranchComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       BranchName: ['',Validators.required],
-      BranchCode: ['',Validators.required]
+      BranchCode: ['',Validators.required],      
+      HotelMobile: ['',Validators.required],
+      HotelEmailId: ['',Validators.required],
+      HotelPassword:['',Validators.required],
+      HotelAddress: ['', Validators.required],      
+      PurchaseId:['',Validators.required],
+      City:['', Validators.required],
+      State:['',Validators.required],
+      Nation:['',Validators.required],
+      StateCode:['',Validators.required],
+      ManagerEmail:['',Validators.required],
+      ManagerMobileNo:['',Validators.required],
+      PoliceEmail:['',Validators.required],
+      GSTNO:['',Validators.required],
+      TaxNo:['',Validators.required],
+      LicenceNo:['',Validators.required],
+      PanNo:['',Validators.required],
+      TrDate:['',Validators.required],
+      LicenceType:['', Validators.required]
+
+
+    
+   
     })
      
     
@@ -231,27 +253,27 @@ export class BranchComponent implements OnInit {
      this.onTypeChange(this.Branchfor.HotelId);
       this.form = this.formBuilder.group({
         'HotelId': this.formBuilder.control({ value: this.Branchfor.HotelId, disabled: false }),
-        'PurchaseId': this.formBuilder.control({ value: this.Branchfor.PurchaseId, disabled: false }),
+        'PurchaseId': this.formBuilder.control({ value: this.Branchfor.PurchaseId, disabled: false },Validators.required),
         'BranchName': this.formBuilder.control({ value: this.Branchfor.BranchName, disabled: false},Validators.required ),
         'BranchCode': this.formBuilder.control({ value: this.Branchfor.BranchCode, disabled: false },Validators.required),
-        'HotelMobile': this.formBuilder.control({ value: this.Branchfor.HotelMobile, disabled: false }),
-        'HotelEmailId': this.formBuilder.control({ value: this.Branchfor.HotelEmailId, disabled: false }),
-        'HotelPassword':this. formBuilder.control({ value: this.Branchfor.HotelPassword, disabled: false }),
-        'City': this.formBuilder.control({ value: this.Branchfor.City, disabled: false }),
-        'State': this.formBuilder.control({ value: this.Branchfor.State, disabled: false }),
-        'Nation': this.formBuilder.control({ value: this.Branchfor.Nation, disabled: false }),
-        'StateCode': this.formBuilder.control({ value: this.Branchfor.StateCode, disabled: false }),
+        'HotelMobile': this.formBuilder.control({ value: this.Branchfor.HotelMobile, disabled: false },[Validators.required, Validators.minLength(10),Validators.pattern('^[7-9][0-9]{9}$')]),
+        'HotelEmailId': this.formBuilder.control({ value: this.Branchfor.HotelEmailId, disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        'HotelPassword':this. formBuilder.control({ value: this.Branchfor.HotelPassword, disabled: false },Validators.required),
+        'City': this.formBuilder.control({ value: this.Branchfor.City, disabled: false }, Validators.required),
+        'State': this.formBuilder.control({ value: this.Branchfor.State, disabled: false }, Validators.required),
+        'Nation': this.formBuilder.control({ value: this.Branchfor.Nation, disabled: false }, Validators.required),
+        'StateCode': this.formBuilder.control({ value: this.Branchfor.StateCode, disabled: false }, Validators.required),
         'HotelAddress': this.formBuilder.control({ value: this.Branchfor.HotelAddress, disabled: false }),
-        'ManagerMobileNo': this.formBuilder.control({ value: this.Branchfor.ManagerMobileNo, disabled: false }),
-        'ManagerEmail': this.formBuilder.control({ value: this.Branchfor.ManagerEmail, disabled: false }),
-        'PoliceEmail': this.formBuilder.control({ value: this.Branchfor.PoliceEmail, disabled: false }),
-        'GSTNO': this.formBuilder.control({ value: this.Branchfor.GSTNO, disabled: false }),
-        'TaxNo': this.formBuilder.control({ value: this.Branchfor.TaxNo, disabled: false }),
-        'LicenceNo': this.formBuilder.control({ value: this.Branchfor.LicenceNo, disabled: false }),
-        'PanNo': this.formBuilder.control({ value: this.Branchfor.PanNo, disabled: false }),
-        'TrDate': this.formBuilder.control({ value: this.Branchfor.TrDate, disabled: false }),
+        'ManagerMobileNo': this.formBuilder.control({ value: this.Branchfor.ManagerMobileNo, disabled: false },[Validators.required, Validators.minLength(10),Validators.pattern('^[7-9][0-9]{9}$')]),
+        'ManagerEmail': this.formBuilder.control({ value: this.Branchfor.ManagerEmail, disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        'PoliceEmail': this.formBuilder.control({ value: this.Branchfor.PoliceEmail, disabled: false },[Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        'GSTNO': this.formBuilder.control({ value: this.Branchfor.GSTNO, disabled: false },[Validators.required, Validators.pattern('/^([0-9]{2}[a-zA-Z]{4}([a-zA-Z]{1}|[0-9]{1})[0-9]{4}[a-zA-Z]{1}([a-zA-Z]|[0-9]){3}){0,15}$/')]),
+        'TaxNo': this.formBuilder.control({ value: this.Branchfor.TaxNo, disabled: false },[Validators.required]),
+        'LicenceNo': this.formBuilder.control({ value: this.Branchfor.LicenceNo, disabled: false },[Validators.required]),
+        'PanNo': this.formBuilder.control({ value: this.Branchfor.PanNo, disabled: false },[Validators.required,Validators.pattern('/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/')]),
+        'TrDate': this.formBuilder.control({ value: this.Branchfor.TrDate, disabled: false },[Validators.required]),
         'IsActive': this.formBuilder.control({ value: this.Branchfor.IsActive, disabled: false }),
-        'LicenceType': this.formBuilder.control({ value: this.Branchfor.LicenceType, disabled: false }),
+        'LicenceType': this.formBuilder.control({ value: this.Branchfor.LicenceType, disabled: false },[Validators.required]),
         orders: new FormArray([])
 
       });
