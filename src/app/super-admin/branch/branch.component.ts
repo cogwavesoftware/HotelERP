@@ -36,19 +36,10 @@ export class BranchComponent implements OnInit {
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
-  
    btitle="Add Item";
-  
-  
-  
 
-
-  
   isValid:boolean;
-
-
   public isShown:boolean = false;
-
   @Input('modalDefault') modalDefault: any;
    
   title: string;
@@ -58,9 +49,7 @@ export class BranchComponent implements OnInit {
   theme = 'bootstrap';
   type = 'default';
   closeOther = false;
-
  checkboxx:ClientProduct[];
-
  branch : Branchmodel[];
  Branchfor:Branchmodel;
  //ordersData :[];
@@ -75,12 +64,13 @@ export class BranchComponent implements OnInit {
  companyname:any;
   constructor(public _branchservice:BranchService,public router:Router,public formBuilder: FormBuilder,private route: ActivatedRoute,private _companyservice:CompanyService)
    { 
-     
-   
-    
-     this.mode="add";
-     this.form = this.formBuilder.group({
-       'HotelId': formBuilder.control({ value: '', disabled: true }),
+
+    console.log(Date.now())
+    alert('d')
+    // [Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
+        this.mode="add";
+        this.form = this.formBuilder.group({
+       'HotelId': formBuilder.control({ value: '', disabled: true },Validators.required),
        'PurchaseId': formBuilder.control({ value: '', disabled: false},Validators.required),
        'BranchName': formBuilder.control({ value: '', disabled: false},Validators.required),
        'BranchCode': formBuilder.control({ value: '', disabled: false },Validators.required),
@@ -109,75 +99,39 @@ export class BranchComponent implements OnInit {
 
     (this._branchservice.GetCogwaveproduct()).subscribe(orders=>{
       this.ordersData=orders;
-    
-      //this.addCheckboxes();
     })
 
    }
 
 
-  //  private addCheckboxes() 
-  //  {
-  //   this.ordersData.forEach((o, i) =>
-  //    { 
-  //     const control = new FormControl(i); // if first item set to true, else false
-  //     {
-       
-  //       (this.form.controls.orders as FormArray).push(control);
-  //     }
-      
-  //   });
-  //   }   
  
   Showhide()
   {
-
     if (this.btitle=="ADD")
     {
       this.form.reset();
       this.Show=true;
-      this.btitle="Hide"
-      
+      this.btitle="Hide"  
     }
     else
     {
-
-
       this.Show=false;
       this.btitle="ADD"
       this.form.reset();
-      
     }
-  
   }
 
 
   Submit() 
   {
-    this.submitted = true;
-
+        this.submitted = true;
         // stop here if form is invalid
-        if (this.form.invalid) {
+        if (this.form.invalid) 
+        {
             return;
         }
-    console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));     
-    //console.log(this.form);
-    //console.log(this.form.value); 
-    this.Branchfor=this.form.value;
-    const selectedOrderIds = this.form.value.orders.map((v, i) => v ? this.ordersData[i].Id : null).filter(v => v !== null);
-      
-
-
-       this.slectted=selectedOrderIds;
-
-       this.slectted.forEach((o, i) =>
-       { 
-        
-        
-       });
-
-
-
+        console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));     
+        this.Branchfor=this.form.value;
          console.log(this.Branchfor); 
          this._branchservice.SaveBranchData(this.Branchfor).subscribe(data=>{ 
            if (data)
@@ -187,9 +141,6 @@ export class BranchComponent implements OnInit {
            this.isShown = false;
            this.ngOnInit();    
          }) 
-       
-     
-    //console.log(selectedOrderIds);
   }
 
  
@@ -248,9 +199,10 @@ export class BranchComponent implements OnInit {
     this.Branchfor=Editform;
     //this.addCheckboxes();
     //alert(this.Branchfor.BranchCode);
-    this.Chekbo(this.Branchfor.BranchCode);
-   
+    //this.Chekbo(this.Branchfor.BranchCode);
+  
      this.onTypeChange(this.Branchfor.HotelId);
+
       this.form = this.formBuilder.group({
         'HotelId': this.formBuilder.control({ value: this.Branchfor.HotelId, disabled: false }),
         'PurchaseId': this.formBuilder.control({ value: this.Branchfor.PurchaseId, disabled: false },Validators.required),

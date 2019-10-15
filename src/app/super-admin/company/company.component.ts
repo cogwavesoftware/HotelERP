@@ -50,22 +50,15 @@ export class CompanyComponent implements OnInit {
   public sortBy = '';
   public sortOrder = 'desc';
 
-
-
   public Id: number;
   public ClientName: string;
   public ClientAddress: string;
   public MobileNo: string;
   public EmailId: string;
   public Trdate: string;
-  
   isValid:boolean;
-
-
   public isShown:boolean = false;
-
-  @Input('modalDefault') modalDefault: any;
-   
+  @Input('modalDefault') modalDefault: any;  
   title: string;
   msg: string;
   returnUrl:string;
