@@ -233,6 +233,20 @@ const routes: Routes = [
         path: 'floor',
         loadChildren: './master/floorcreation/floorcreation.module#FloorcreationModule'
       },
+
+      {
+        path: 'RoomType',
+        loadChildren: './master/roomtypecreation/roomtypecreation.module#RoomtypecreationModule'
+      },
+
+      {
+        path: 'RoomNo',
+        loadChildren: './master/roomorganizer/roomorganizer.module#RoomorganizerModule'
+      },
+      {
+        path: 'bank',
+        loadChildren: './master/bankname/bankname.module#BanknameModule'
+      },
       // {
       //   path: 'branch',
       //   loadChildren: './super-admin/branch/branch.module#BranchModule'

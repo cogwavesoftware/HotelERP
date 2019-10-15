@@ -65,9 +65,6 @@ export class BranchComponent implements OnInit {
   constructor(public _branchservice:BranchService,public router:Router,public formBuilder: FormBuilder,private route: ActivatedRoute,private _companyservice:CompanyService)
    { 
 
-    console.log(Date.now())
-    alert('d')
-    // [Validators.required, Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')]),
         this.mode="add";
         this.form = this.formBuilder.group({
        'HotelId': formBuilder.control({ value: '', disabled: true },Validators.required),
@@ -147,7 +144,8 @@ export class BranchComponent implements OnInit {
 
 
 
-  ngOnInit() {
+  ngOnInit()
+   {
     this.form = this.formBuilder.group({
       BranchName: ['',Validators.required],
       BranchCode: ['',Validators.required],      
@@ -170,9 +168,6 @@ export class BranchComponent implements OnInit {
       TrDate:['',Validators.required],
       LicenceType:['', Validators.required]
 
-
-    
-   
     })
      
     
