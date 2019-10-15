@@ -24,52 +24,39 @@
                        <div class="card-block">
                          <div class="frmdata" >              
                             <div class="containar">
+
                                 <div class="row">
-                                  <div class="col-md-12">
-                                    
-                                    <div class="row">
-
-                                        <!-- <div class="col-md-6">
-
-                                            <label>Floor Code</label>
-                                              <input type="text" name="FloorCode" class="form-control" [(ngModel)]="model.FloorCode" #FloorCode="ngModel" value="{{FloorCode}}"  [ngClass]="{'is-invalid': f.submitted && FloorCode.invalid}"  required autocomplete="off">
-                                              <div *ngIf="f.submitted && FloorCode.invalid" class="invalid-feedback">
-                                                  <div *ngIf="FloorCode.errors.required">FloorCode is invalid</div>
-                                              </div>
-                                        </div> -->
-
-
-                                        <div class="col-md-6">
-                                                <label>Floor Name</label>
-                                                <input type="text" name="FloorName" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid': f.submitted && FloorName.invalid}"  required autocomplete="off">
-                                                <div *ngIf="f.submitted && FloorName.invalid" class="invalid-feedback">
-                                                  <div *ngIf="FloorName.errors.required">FloorName is invalid</div>
-                                                </div>
+                                    <div class='col-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Floor Name">Floor Name</label>
+                                            <input type="text" name="FloorName" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid': f.submitted && FloorName.invalid}"  required autocomplete="off">
+                                            <div *ngIf="f.submitted && FloorName.invalid" class="invalid-feedback">
+                                              <div *ngIf="FloorName.errors.required">FloorName is invalid</div>
+                                            </div>
                                         </div>
-                
                                     </div>
-
-                                <div class="row">
-
-                                        <div class="col-md-6">
-                                                <label>Maximum Room</label>
-                                                <input type="number" name="MaxRoom" class="form-control" [(ngModel)]="model.MaxRoom" #MaxRoom="ngModel" value="{{MaxRoom}}"  [ngClass]="{'is-invalid': f.submitted && MaxRoom.invalid}"  required autocomplete="off">
-                                                <div *ngIf="f.submitted && MaxRoom.invalid" class="invalid-feedback">
-                                                  <div *ngIf="MaxRoom.errors.required">MaxRoom is invalid</div>
-                                                </div>
-                                        </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-3'">
-                                            <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': f.submitted && IsActive.invalid }" required>
-                                            <label class="form-control-label" for="IsActive" style="padding-right: 10px;">IsActive  </label>
-                                            <div *ngIf="f.submitted && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                  <div class='col-12 col-sm-6'>
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="Maximum Room">Maximum Room</label>
+                                          <input type="number" name="MaxRoom" class="form-control" [(ngModel)]="model.MaxRoom" #MaxRoom="ngModel" value="{{MaxRoom}}"  [ngClass]="{'is-invalid': f.submitted && MaxRoom.invalid}"  required autocomplete="off">
+                                          <div *ngIf="f.submitted && MaxRoom.invalid" class="invalid-feedback">
+                                            <div *ngIf="MaxRoom.errors.required">MaxRoom is invalid</div>
+                                          </div>
+                                      </div>
+                                  </div>                   
+                            </div>
+                            <div class="row">
+                                <div class='col-12 col-sm-6'>
+                                    <div class="form-group">
+                                        
+                                        <input type="checkbox" name="IsActive" id="IsActive" class="" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': f.submitted && IsActive.invalid }" required>
+                                        <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
+                                        <div *ngIf="f.submitted && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                     </div>
                                 </div>
+                                     
                         </div>
-            
-                        </div>
+  
                 </div>
                          </div>
             
