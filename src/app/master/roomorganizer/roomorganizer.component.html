@@ -1,1 +1,106 @@
-<p>roomorganizer works!</p>
+<div class="outerdiv">
+
+        <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+          <div class="row">
+              <div class="col-md-11">
+                  <h5 class="ng-tns-c6-1">Room Organaizer Creation</h5>         
+                  <span class="ng-tns-c6-1 ng-star-inserted">Creating Room Organaizer details for Branch </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-1"> 
+                    <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                  </button>
+                </div>
+          </div>
+        </div>
+    
+    
+    
+        <div class="formdesign aqua-gradient" *ngIf="isShown">
+            <div class="formouter rotate" >
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+                <!-- <input type="hidden" name="FloorCode" class="form-control" [(ngModel)]="model.FloorCode" #FloorCode="ngModel" value="{{FloorCode}}"  > -->
+                
+                 <div class="auth-box card">
+                       <div class="card-block">
+                         <div class="frmdata" >              
+                            <div class="containar">
+                                <div class="row">
+                                    <div class="col-md-12">                                             
+                                      <div class="row">
+                                            <div class="col-md-6">        
+                                                <label class="required">Room No*</label>
+                                                  <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
+                                                      <div *ngIf="RoomNo.errors.required">RoomNo is invalid</div>
+                                                  </div>
+                                            </div> 
+                                            <div class="col-md-6">
+                                              <label> Room Code*</label>
+                                                  <select class="custom-select" (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)" #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched" name="topic" [(ngModel)]="model.topic">
+                                                    <option value="default">Please Select</option>
+                                                    <option *ngFor="let topic of Roomcodes">{{ topic }}</option>
+                                                  </select>
+                                                  <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please select room code</small>                
+                                          </div>
+                                         </div>
+                                         <div class="row">
+                                          <div class="col-md-12">        
+                                            <label class="required">Room Details*</label>
+                                            <textarea name="roomdesc" class="form-control" [(ngModel)]="model.roomdesc" #roomdesc="ngModel"  [ngClass]="{'is-invalid': roomdesc.touched && roomdesc.invalid}"  required autocomplete="off"></textarea>
+                                              <div *ngIf="roomdesc.touched && roomdesc.invalid" class="invalid-feedback">
+                                                  <div *ngIf="roomdesc.errors.required">Please fill Room Description</div>
+                                              </div>
+                                        </div> 
+                                         </div>
+
+                                         <div class="row">
+                                          <div class="col-md-6">        
+                                              <label class="required">Priority</label>
+                                                <input type="text" name="priority" class="form-control" [(ngModel)]="priority" [disabled]="true" />                
+                                          </div> 
+                                          <div class="col-md-6">
+                                            <label>Select Catagery*</label>
+                                                <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
+                                                  <option value="default">Please Select</option>
+                                                  <option *ngFor="let catagery of catagerys">{{ catagery }}</option>
+                                                </select>
+                                                <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>                
+                                        </div> 
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-12 col-sm-3'">
+                                            <label class="form-control-label" for="IsActive"  style="padding-right: 25px;">IsActive*  </label>
+                                                <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>                                                
+                                                <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                        </div>
+                                    </div>
+                                  </div>
+                   
+                              
+                                </div>
+                              </div>
+                         </div>
+                         <div class="row m-t-30">
+                            <div class="col-md-12 text-center" >
+                              <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                  </div>       
+              </form>
+           </div> 
+         </div>
+    
+    
+    <!-- -----------table start Here------------ -->
+    
+    
+    
+  
+        <!-- -----------table End Here------------ -->
+    
+    
+    
+    
+    </div>
