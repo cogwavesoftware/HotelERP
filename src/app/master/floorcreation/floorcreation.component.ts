@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 export class FloorcreationComponent implements OnInit {
  
 
-  public data: Observable<Floormodel>;
+  public data: Observable<any>;
   
   public rowsOnPage = 10;
   public filterQuery = '';

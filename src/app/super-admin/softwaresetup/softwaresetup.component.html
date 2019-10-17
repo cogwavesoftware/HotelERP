@@ -1,0 +1,359 @@
+<div class="outerdiv">
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+        <div class="row">
+            <div class="col-md-11">
+                <h5 class="ng-tns-c6-1"> Software ToolSetup</h5>         
+                <span class="ng-tns-c6-1 ng-star-inserted">Software ToolSetup Details</span>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-1"> 
+                  <button type="button" class="btn btn-sm btn-success text-white" (click)="openMyModal()"  > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                  </button>
+               
+              </div>
+        </div>
+      </div>
+
+
+      <div class="formdesign aqua-gradient">
+        <div class="formouter rotate" >
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">          
+              <div class="auth-box card">
+               <div class="card-block">
+            
+                 <div class="frmdata" >          
+                   
+                    <div class="containar">
+                        <div class="row">
+                          <div class="col-md-12">
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                         <label>Enable SMS</label>
+                                        </div>
+                                        <!-- <div class='col-md-4'>
+                                                <div class="border-checkbox-group border-checkbox-group-success">
+                                                        <input class="border-checkbox" name="enablesms" id="enablesms"  [(ngModel)]="model.enablesms" #enablesms="ngModel" type="checkbox">
+                                                        <label class="border-checkbox-label" for="enablesms">Yes</label>
+                                                      </div>
+                                        </div> -->
+                                         <div class="col-md-3">
+                                                <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsHms" id="IsHms" [(ngModel)]="model.IsHms" #IsHms="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>
+                                              
+                                      </div> 
+
+                                      <div class='col-md-3'>
+                                            <label>Power Automation</label>
+                                      </div>
+                                            <div class="col-md-3">
+                                                   <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="power" id="power" [(ngModel)]="model.power" #power="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                           </div> 
+
+                                </div>
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>House KeepingTab</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsHktab" id="IsHktab" [(ngModel)]="model.IsHktab" #IsHktab="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Database AutoBackup</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="Databackup" id="Databackup" [(ngModel)]="model.Databackup" #Databackup="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div> 
+                                                   
+                                </div>
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Pos</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsPos" id="IsPos" [(ngModel)]="model.IsPos" #IsPos="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Tele service</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="teleservice" id="teleservice" [(ngModel)]="model.teleservice" #teleservice="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div> 
+                                                   
+                                </div>
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Group Checkin</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="groupcheckin" id="groupcheckin" [(ngModel)]="model.groupcheckin" #groupcheckin="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Group Checkin</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="groupckout" id="groupckout" [(ngModel)]="model.groupckout" #groupckout="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div> 
+                                                   
+                                </div>
+
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Split Checkout</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="splitcheckout" id="splitcheckout" [(ngModel)]="model.splitcheckout" #splitcheckout="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Pre Settlement</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="presettlement" id="presettlement" [(ngModel)]="model.presettlement" #presettlement="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div> 
+                                                   
+                                </div>
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Continous Discount</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="iscontinousdiscount" id="iscontinousdiscount" [(ngModel)]="model.iscontinousdiscount" #iscontinousdiscount="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Email Sent</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsEmail" id="IsEmail" [(ngModel)]="model.IsEmail" #IsEmail="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div>            
+                                </div>
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Discount Coupon</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="Discountcoupon" id="Discountcoupon" [(ngModel)]="model.Discountcoupon" #Discountcoupon="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>BulkProvider</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsBulkprovider" id="IsBulkprovider" [(ngModel)]="model.IsBulkprovider" #IsBulkprovider="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div>            
+                                </div>
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Mobile App</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="mobileApp" id="mobileApp" [(ngModel)]="model.mobileApp" #mobileApp="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>IsDoorLocking</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsDoorlocking" id="IsDoorlocking" [(ngModel)]="model.IsDoorlocking" #IsDoorlocking="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div>            
+                                </div>
+
+                                
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>IsCheckoutBill Continous Series</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsCheckoutBillcontinous" id="IsCheckoutBillcontinous" [(ngModel)]="model.IsCheckoutBillcontinous" #IsCheckoutBillcontinous="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Advance Receipt Same Serious</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsAdvanceReceiptserious" id="IsAdvanceReceiptserious" [(ngModel)]="model.IsAdvanceReceiptserious" #IsAdvanceReceiptserious="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div>            
+                                </div>
+
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Post Bill Same Series</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="Ispostbillsameserious" id="Ispostbillsameserious" [(ngModel)]="model.Ispostbillsameserious" #Ispostbillsameserious="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Payment Gateway</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsPaymentgateway" id="IsPaymentgateway" [(ngModel)]="model.IsPaymentgateway" #IsPaymentgateway="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div>            
+                                </div>
+
+
+                                <div class="row">
+                                        <div class='col-md-3'>
+                                                <label>Checkin 24 hr</label>
+                                          </div>
+                                                <div class="col-md-3">
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsCheckin24" id="IsCheckin24" [(ngModel)]="model.IsCheckin24" #IsCheckin24="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                               </div> 
+                                               
+                                               <div class='col-md-3'>
+                                                    <label>Bluetooth printer</label>
+                                              </div>
+                                                    <div class="col-md-3">
+                                                           <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="Isbluetooth" id="Isbluetooth" [(ngModel)]="model.Isbluetooth" #Isbluetooth="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   </div>            
+                                </div>
+
+
+
+                                <div class="row">
+                                        <div class="col-md-3">
+                                                <label>Roomservice HelpNo</label>
+                                                <input type="number" name="IsroomserviceNo" class="form-control" [(ngModel)]="model.IsroomserviceNo" #IsroomserviceNo="ngModel" value="{{IsroomserviceNo}}"  autocomplete="off">
+                                                 <div *ngIf="IsroomserviceNo.touched && IsroomserviceNo.invalid" class="invalid-feedback">
+                                                  <div *ngIf="IsroomserviceNo.errors.required">Seventh is invalid</div>
+                                                </div> 
+                                            </div>   
+                                            
+                                            <div class="col-md-3">
+                                                <label>Housekeeping HelpNo</label>
+                                                <input type="number" name="IsHousekeepingNo" class="form-control" [(ngModel)]="model.IsHousekeepingNo" #IsHousekeepingNo="ngModel" value="{{IsHousekeepingNo}}"  autocomplete="off">
+                                                 <div *ngIf="IsHousekeepingNo.touched && IsHousekeepingNo.invalid" class="invalid-feedback">
+                                                  <div *ngIf="IsHousekeepingNo.errors.required">Seventh is invalid</div>
+                                                </div> 
+                                            </div>  
+
+                                            <div class="col-md-3">
+                                                <label>Reservetion HelpNo</label>
+                                                <input type="number" name="IsReservetionNo" class="form-control" [(ngModel)]="model.IsReservetionNo" #IsReservetionNo="ngModel" value="{{IsReservetionNo}}"  autocomplete="off">
+                                                 <div *ngIf="IsReservetionNo.touched && IsReservetionNo.invalid" class="invalid-feedback">
+                                                  <div *ngIf="IsReservetionNo.errors.required">IsReservetionNo is invalid</div>
+                                                </div> 
+                                            </div>  
+
+                                            <div class="col-md-3">
+                                                <label>FrontDesk HelpNo</label>
+                                                <input type="number" name="FrontDesk" class="form-control" [(ngModel)]="model.FrontDesk" #FrontDesk="ngModel" value="{{FrontDesk}}"  autocomplete="off">
+                                                 <div *ngIf="FrontDesk.touched && FrontDesk.invalid" class="invalid-feedback">
+                                                  <div *ngIf="FrontDesk.errors.required">FrontDesk is invalid</div>
+                                                </div> 
+                                            </div>  
+                                </div>
+
+
+
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Smtp Host</label>
+                                                <input type="text" name="smtphost" class="form-control" [(ngModel)]="model.smtphost" #smtphost="ngModel" value="{{smtphost}}"  autocomplete="off">
+                                                 <div *ngIf="smtphost.touched && smtphost.invalid" class="invalid-feedback">
+                                                  <div *ngIf="smtphost.errors.required">Seventh is invalid</div>
+                                                </div> 
+                                            </div>   
+                                            
+                                            <div class="col-md-6">
+                                                <label>Smtp Port</label>
+                                                <input type="text" name="smtpport" class="form-control" [(ngModel)]="model.smtpport" #smtpport="ngModel" value="{{smtpport}}"  autocomplete="off">
+                                                 <div *ngIf="smtpport.touched && smtpport.invalid" class="invalid-feedback">
+                                                  <div *ngIf="smtpport.errors.required">Seventh is invalid</div>
+                                                </div> 
+                                            </div>  
+
+                                </div>
+                                
+                           </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+                <div class="col-md-12 text-center" >
+                        <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                        <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                      </div>
+            </div>
+
+        </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+
+<div class="formdesign aqua-gradient">
+      
+        <div class="formouter rotate" >
+         <form name="form" (ngSubmit)="f1.form.valid && onSubmit()" #f1="ngForm">          
+              <div class="auth-box card">
+               <div class="card-block">
+                    <h6>Set Bill Format</h6>
+                 <div class="frmdata" >          
+                   
+                    <div class="containar">
+                      
+                        <div class="row">
+                          <div class="col-md-12">
+                                <div class="row">
+
+
+                                        <div class="col-md-6">
+                                                <label>Select Format*</label>
+                                                    <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model1.catagery">
+                                                      <option value="default">Please Select</option>
+                                                      <option *ngFor="let catagery of catagerys">{{ catagery.Name }}</option>
+                                                    </select>
+                                                    <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>                
+                                            </div> 
+
+                                        <div class="col-md-6" *ngIf="noPrefiixdiv">
+                                            <label>Conform Prefix or Contnius*</label>
+                                                <select class="custom-select" (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)" #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched" name="topic" [(ngModel)]="model1.topic">
+                                                  <option value="default">Please Select</option>
+                                                  <option *ngFor="let topic of Roomtyeps">{{ topic }}</option>
+                                                </select>
+                                                <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please choose a topic</small>                
+                                        </div>
+                                   
+                                       
+                                    </div>
+                                   
+
+                                    <div class="row" >
+                                            <div class="col-md-6" *ngIf="IsCheckoutContinue">
+                                                    <label>Please Enter Prefix</label>
+                                                    <input type="text" name="prefix" class="form-control" [(ngModel)]="model1.prefix" #prefix="ngModel" value="{{prefix}}"  minlength="{{minlenth}}" maxlength="{{minlenth}}" [ngClass]="{'is-invalid': prefix.touched && prefix.invalid}"  required autocomplete="off">
+                                                    <div *ngIf="prefix.touched && prefix.invalid" class="invalid-feedback">
+                                                      <div *ngIf="prefix.errors.required">prefix is invalid</div>
+                                                    </div>
+                                            </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="col-md-12 text-center" >
+                        <button type="submit" [disabled]="f1.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                        <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                      </div>
+            </div>
+         </form>                    
+        </div>
+    </div>
+    </div>

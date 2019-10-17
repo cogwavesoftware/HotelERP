@@ -40,13 +40,29 @@ export class BranchService {
 
 
    SaveBranchData(Branchmodel:any)
-   {
-     
+   {    
      return this.http.post(environment.apiURL + '/api/common/HMSBranch/Savebranch',Branchmodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })
      .pipe(map(res=>
       {
         return res;
       }));
    }
+
+
+   
+  GetAllBillHeader()
+  {  
+   
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetBillHeader');  
+  }
   
+  SaveSoftwaretoolSetup(tool:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Posttool',tool,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+     .pipe(map(res=>
+      {
+        return res;
+      }));
+  }
+
 }

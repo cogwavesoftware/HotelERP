@@ -18,6 +18,11 @@ const routes: Routes = [
       {
         path: 'branch',
         loadChildren: './branch/branch.module#BranchModule'
+      },
+
+      {
+        path: 'tool',
+        loadChildren: './softwaresetup/softwaresetup.module#SoftwaresetupModule'
       }
       // {
       //   path: 'crm-dashboard',

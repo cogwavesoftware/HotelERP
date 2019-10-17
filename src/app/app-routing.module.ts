@@ -211,7 +211,10 @@ const routes: Routes = [
         path: 'branch',
         loadChildren: './super-admin/branch/branch.module#BranchModule'
       },
-      
+      {
+        path: 'tool',
+        loadChildren: './super-admin/softwaresetup/softwaresetup.module#SoftwaresetupModule'
+      },
      
     ]
   },

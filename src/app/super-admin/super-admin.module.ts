@@ -6,7 +6,7 @@ import { CompanyComponent } from './company/company.component';
 import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ ],
   imports: [
     CommonModule,SuperAdminRoutingModule
   ]

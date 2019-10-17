@@ -213,11 +213,13 @@
                                           </div> 
                                       </div>
                                       <div class="row">
-                                          <div class="col-12 col-sm-3'">
+                                          <div class="col-12 col-sm-3 ">
                                                   <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
                                                   <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
                                                   <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                           </div>
+
+                                          
                                       </div>
   
                               </div>
@@ -252,7 +254,7 @@
    
   
                 <div class="col-xs-12 col-sm-12 col-md-6">
-                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Data List</div>
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Room Type Data List</div>
                     </div>
                   <div class="col-xs-12 col-sm-12 col-md-6">
                     <div style="text-align: right;">
@@ -273,19 +275,19 @@
                     <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
                   </th> -->
                   <th>
-                    <mfDefaultSorter  by="FloorCode">FloorCode</mfDefaultSorter>
+                    <mfDefaultSorter  by="RoomCode">RoomCode</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter  by="FloorName">FloorName</mfDefaultSorter>
+                    <mfDefaultSorter  by="RoomName">RoomName</mfDefaultSorter>
                   </th>
                   <th>
                     <mfDefaultSorter  by="BranchCode">BranchCode</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="MaxRoom">MaxRoom</mfDefaultSorter>
+                    <mfDefaultSorter by="SingleRate">SingleRate</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter  by="Alloted">Alloted</mfDefaultSorter>
+                    <mfDefaultSorter  by="DoubleRate">DoubleRate</mfDefaultSorter>
                   </th>
 
                     <th>
@@ -301,14 +303,14 @@
                 <tbody>
                 <tr *ngFor="let item of mf.data; let i = index;">
                   <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
-                  <td>{{item.FloorCode}}</td>
-                  <td>{{item.FloorName}}</td>
+                  <td>{{item.RoomCode}}</td>
+                  <td>{{item.RoomName}}</td>
                   <td>{{item.BranchCode}}</td>
-                  <td>{{item.MaxRoom}}</td>
-                  <td>{{item.Alloted}}</td>
+                  <td>{{item.SingleRate}}</td>
+                  <td>{{item.DoubleRate}}</td>
                   <td>{{item.IsActive}}</td>
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-10',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                       
                   </td>
@@ -317,11 +319,11 @@
                 <tfoot>
                 <tr>
                   <!-- <th>Profile</th> -->
-                  <th>FloorCode</th>
-                  <th>FloorName</th>
+                  <th>RoomCode</th>
+                  <th>RoomName</th>
                   <th>BranchCode</th>
-                  <th>MaxRoom</th>
-                  <th>Alloted</th>                
+                  <th>SingleRate</th>
+                  <th>DoubleRate</th>                
                   <th>IsActive</th>
                   <th>Action</th>
                 </tr>
@@ -345,3 +347,44 @@
 
 
 </div>
+
+
+
+<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+    <h3 class="f-15">View  Floor Details</h3>
+    
+      <div class="app-modal-body text-center"> 
+          <table class="table table-striped text-left m-t-10">
+              <tr>
+                <td>RoomCode :</td>
+                <td>{{ model.RoomCode }}</td>
+              </tr>
+              <tr>
+                <td>SingleRate :</td>
+                <td>{{ model.SingleRate }}</td>
+              </tr>
+              <tr>
+                <td>DoubleRate :</td>
+                <td>{{ model.DoubleRate }}</td>
+              </tr>
+              <tr>
+                <td>TribleRate :</td>
+                <td>{{ model.TribleRate }}</td>
+              </tr>
+              <tr>
+                <td>QuadRate :</td>
+                <td>{{ model.QuadRate }}</td>
+              </tr>
+              <tr>
+                <td>Fifth Rate. :</td>
+                <td>{{ model.Fivth }}</td>
+              </tr>
+              <tr>
+                <td>BranchCode :</td>
+                <td>{{ model.BranchCode }}</td>
+              </tr>
+             </table>      
+             <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+        </div>
+         
+      </app-modal-animation>
