@@ -74,7 +74,7 @@ export class CompanyComponent implements OnInit {
   ngOnInit() {
      
     this.btitle="Add Item";
-    this.model.Trdate = this.datePipe.transform(new Date(),"dd-MM-yyyy");
+    this.model.Trdate = this.datePipe.transform(this.model.Trdate,"dd-MM-yyyy");
     console.log( this.model.Trdate); //output - 14-02-2019
    
     this.btitle="Add Item"

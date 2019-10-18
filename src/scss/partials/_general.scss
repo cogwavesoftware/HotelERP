@@ -5751,6 +5751,9 @@ select.form-control:not([size]):not([multiple]){
     display: none;
 }
 //cogwve styles
+outerdiv{
+
+}
 .commonstyles{   
     border-radius: 5px;
     box-shadow: 0 1px 20px 0 rgba(7, 53, 77, 0.08);
@@ -5809,7 +5812,8 @@ select.form-control:not([size]):not([multiple]){
     font-family: Poppins-SemiBold;
     src: url('/assets/fonts/poppins/Poppins-SemiBold.ttf'); 
   }
-.outerdiv{     
+.outerdiv{    
+     
     border: double 2px #ffd86f;
     outline: solid 1px #ccc;
     .peach-gradient {
@@ -5877,6 +5881,7 @@ select.form-control:not([size]):not([multiple]){
     }
     .card .card-header{
         padding:4px 0px 4px 20px;
+        font-family: Poppins-Regular!important;
     }
     .card-header{
         color:#fff;
