@@ -16,9 +16,10 @@
    
       <div class="formdesign aqua-gradient" *ngIf="isShown">
     <div class="formouter rotate" >
-        <form #form="ngForm" autocomplete="off"  class="md-float-material form-material contact-form"  (submit)="onSubmit(form)">
+        <!-- <form #form="ngForm" autocomplete="off"  class="md-float-material form-material contact-form"  (submit)="onSubmit(form)"> -->
       <!-- <form  #loginForms="ngForm" class="md-float-material form-material contact-form" action="javascript:"> -->
-          <input type="hidden" ngModel value="{{Id}}" #Idd [(ngModel)]="Id" name="Id" class="form-control" autocomplete="off">
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">    
+          <input type="hidden" ngModel value="{{Id}}" #Id [(ngModel)]="model.Id" name="Id" class="form-control" autocomplete="off">
           <div class="auth-box card">
            <div class="card-block">
         
@@ -28,49 +29,89 @@
                     <div class="row">
                       <div class="col-md-12">
                           <div class="row">
-                              <div class='col-md-6'>
+                              <!-- <div class='col-md-6'>
                                   <div class="form-group">
                                       <label class="form-control-label" for="Branchcode">Name</label>
                                       <input type="text"  ngModel value="{{ClientName}}" #ClientName1 [(ngModel)]="ClientName" name="ClientName"  class="form-control" required="required" autocomplete="off">                                                            
                                   </div>
-                              </div>
-                              <div class='col-md-6'>
+                              </div> -->
+
+                              <div class="col-md-6">
+    
+                                  <label>Company Name*</label>
+                                    <input type="text" name="ClientName" class="form-control" [(ngModel)]="model.ClientName" #ClientName="ngModel" value="{{ClientName}}"  [ngClass]="{'is-invalid': ClientName.touched && ClientName.invalid}"  required autocomplete="off">
+                                    <div *ngIf="ClientName.touched && ClientName.invalid" class="invalid-feedback">
+                                        <div *ngIf="ClientName.errors.required">ClientName is Required </div>
+                                    </div>
+                              </div> 
+
+                              <!-- <div class='col-md-6'>
                                   <div class="form-group">
                                       <label class="form-control-label" for="Branchcode">MobileNo</label>
                                       <input type="text"  ngModel value="{{MobileNo}}" #MobileNo1 [(ngModel)]="MobileNo" name="MobileNo" maxlength="10"  class="form-control" required="required">                                                              
                                   </div>
-                              </div>
+                              </div> -->
+
+
+                              <div class="col-md-6">
+                                  <label>MobileNo*</label>
+                                    <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required pattern="^\d{10}$" autocomplete="off">
+                                    <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
+                                        <div *ngIf="MobileNo.errors.required">MobileNo is Required </div>
+                                        <div *ngIf="MobileNo.errors.pattern">Invalid MobileNo</div>
+                                    </div>
+                              </div> 
                           </div>
 
+                         
                           <div class="mb-3">
-                              <div class="form-group">
-                                  <label class="form-control-label" for="Email">Address</label>
-                                  <!-- <input type="textarea"  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress"  class="form-control" required="" autocomplete="off">     -->
-                                  <textarea  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress" class="form-control" required="required">
-
-                                  </textarea>                                       
-                              </div>
+    
+                              <label>Address*</label>
+                                <textarea name="ClientAddress" class="form-control" [(ngModel)]="model.ClientAddress" #ClientAddress="ngModel" value="{{ClientAddress}}"  [ngClass]="{'is-invalid': ClientAddress.touched && ClientAddress.invalid}"  required  autocomplete="off"></textarea>   
+                                <div *ngIf="ClientAddress.touched && ClientAddress.invalid" class="invalid-feedback">
+                                    <div *ngIf="ClientAddress.errors.required">Address is Required </div>
+                                </div>
                           </div>
+                          
+
+
+                        
+                          <!-- <div class="form-group">
+                              <label class="form-control-label" for="Email">Address</label>
+                              <!-- <input type="textarea"  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress"  class="form-control" required="" autocomplete="off">     -->
+                              <!-- <textarea  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress" class="form-control" required="required">
+
+                              </textarea>                                       
+                          </div> -->
+                       
+
+
+                          
                           <div class="row">
-                              <div class='col-md-6'>
-                                  <div class="form-group">
-                                      <label class="form-control-label" for="Email">Email</label>
-                                      <input type="text"  ngModel value="{{EmailId}}" #EmailId1s [(ngModel)]="EmailId" name="EmailId"  class="form-control" required="">                                                      
-                                  </div>
-                              </div>
-                              <div class='col-md-6'>
+                              
+
+                          <div class="col-md-6">
+                              <label>Email*</label>
+                                <input type="text" name="EmailId" class="form-control" [(ngModel)]="model.EmailId" #EmailId="ngModel" value="{{EmailId}}"  [ngClass]="{'is-invalid': EmailId.touched && EmailId.invalid}"  required pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$" autocomplete="off">
+                                <div *ngIf="EmailId.touched && EmailId.invalid" class="invalid-feedback">
+                                    <div *ngIf="EmailId.errors.required">Email is Required </div>
+                                    <div *ngIf="EmailId.errors.pattern">Invalid Email</div>
+                                </div>
+                          </div> 
+
+                              <!-- <div class='col-md-6'>
                                   <div class="form-group">
                                       <label class="form-control-label" for="Branchcode">Transaction Date</label>
                                       <div class="form-group">
                                           <div class="input-group">
-                                            <input class="form-control" placeholder="Date" name="dp" [(ngModel)]="modelPopup" ngbDatepicker #d="ngbDatepicker">
+                                            <input class="form-control" placeholder="Date" name="Trdate" [(ngModel)]="model.Trdate" value="{{Trdate}}" ngbDatepicker #d="ngbDatepicker">
                                             <div class="input-group-append bg-default" (click)="d.toggle()" >
                                               <span class="icofont icofont-ui-calendar input-group-text"></span>
                                             </div>
                                           </div>
                                         </div>                                                         
                                   </div>
-                              </div>
+                              </div> -->
                           </div>
                       </div>
                       
@@ -82,11 +123,17 @@
        
              </div>
              <div class="row m-t-30">
+                <div class="col-md-12 text-center" >
+                  <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                  <button type="button" (click)="closepopup()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                </div>
+              </div>
+             <!-- <div class="row m-t-30">
                <div class="col-md-12 text-center" >
                  <button type="submit" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
                  <button type="button" (click)="closepopup()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
                </div>
-             </div>
+             </div> -->
             </div>
          </div>       
       </form>
@@ -175,9 +222,13 @@
                 <!-- <td>{{item.phone_no}}</td> -->
                 <td>{{item.Trdate}}</td>
                 <td class="action-icon">
-                    <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalDataview(i);modalDefault.show();"><i class="fa fa-book"></i></a>
+                    <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalDataview('effect-13',item)"><i class="fa fa-book"></i></a>
                     <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                   <!-- <a href="javascript:;" class="crm-action-delete text-danger"><i class="fa fa-trash"></i></a> -->
+
+                  <!-- <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                      -->
                 </td>
               </tr>
               </tbody>
@@ -255,6 +306,40 @@
     <!-- <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button> -->
   </div>
 </app-modal-basic>
+
+
+
+<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+  <h3 class="f-15">View  Floor Details</h3>
+  
+    <div class="app-modal-body text-center"> 
+      <table class="table table-striped text-left m-t-20">
+        <tr>
+           <td>Id :</td>
+          <td>{{ model.Id }}</td>
+        </tr>
+        <tr>
+          <td>Name :</td>
+          <td>{{ model.ClientName }}</td>
+        </tr>
+        <tr>
+          <td>Address :</td>
+          <td>{{ model.ClientAddress }}</td>
+        </tr>
+        <tr>
+          <td>MobileNo :</td>
+          <td>{{ model.MobileNo }}</td>
+        </tr>
+        <tr>
+          <td>EmailId :</td>
+          <td>{{ model.EmailId }}</td>
+        </tr>
+           
+      </table>
+           <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+      </div>
+       
+    </app-modal-animation>
 
 
 

@@ -31,10 +31,12 @@ export class CompanyService {
      
   }
   
-   SaveCompanyData(company:any)
+   SaveCompanyData(companymodel:any)
    {
+
      
-     return this.http.post(environment.apiURL + '/api/common/HMSCompany/Savecompany',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+    console.log(companymodel)
+     return this.http.post(environment.apiURL + '/api/common/HMSCompany/Savecompany',companymodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })
      .pipe(map(res=>
       {
         return res;

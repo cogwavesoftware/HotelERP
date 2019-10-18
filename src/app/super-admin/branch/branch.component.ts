@@ -155,26 +155,24 @@ export class BranchComponent implements OnInit {
   Submit() 
   {
     this.submitted = true;
-
+    console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));    
         // stop here if form is invalid
-        if (this.form.invalid) {
-            return;
+        if (this.form.invalid) 
+        {
+            //return;
         }
-    console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value));     
+   
     //console.log(this.form);
     //console.log(this.form.value); 
     this.Branchfor=this.form.value;
-    const selectedOrderIds = this.form.value.orders.map((v, i) => v ? this.ordersData[i].Id : null).filter(v => v !== null);
-      
+    // const selectedOrderIds = this.form.value.orders.map((v, i) => v ? this.ordersData[i].Id : null).filter(v => v !== null);
+    //    this.slectted=selectedOrderIds;
 
-
-       this.slectted=selectedOrderIds;
-
-       this.slectted.forEach((o, i) =>
-       { 
+    //    this.slectted.forEach((o, i) =>
+    //    { 
         
         
-       });
+    //    });
 
 
 
@@ -198,29 +196,29 @@ export class BranchComponent implements OnInit {
 
   ngOnInit()
    {
-    this.form = this.formBuilder.group({
-      BranchName: ['',Validators.required],
-      BranchCode: ['',Validators.required],      
-      HotelMobile: ['',Validators.required],
-      HotelEmailId: ['',Validators.required],
-      HotelPassword:['',Validators.required],
-      HotelAddress: ['', Validators.required],      
-      PurchaseId:['',Validators.required],
-      City:['', Validators.required],
-      State:['',Validators.required],
-      Nation:['',Validators.required],
-      StateCode:['',Validators.required],
-      ManagerEmail:['',Validators.required],
-      ManagerMobileNo:['',Validators.required],
-      PoliceEmail:['',Validators.required],
-      GSTNO:['',Validators.required],
-      TaxNo:['',Validators.required],
-      LicenceNo:['',Validators.required],
-      PanNo:['',Validators.required],
-      TrDate:['',Validators.required],
-      LicenceType:['', Validators.required]
+    // this.form = this.formBuilder.group({
+    //   BranchName: ['',Validators.required],
+    //   BranchCode: ['',Validators.required],      
+    //   HotelMobile: ['',Validators.required],
+    //   HotelEmailId: ['',Validators.required],
+    //   HotelPassword:['',Validators.required],
+    //   HotelAddress: ['', Validators.required],      
+    //   PurchaseId:['',Validators.required],
+    //   City:['', Validators.required],
+    //   State:['',Validators.required],
+    //   Nation:['',Validators.required],
+    //   StateCode:['',Validators.required],
+    //   ManagerEmail:['',Validators.required],
+    //   ManagerMobileNo:['',Validators.required],
+    //   PoliceEmail:['',Validators.required],
+    //   GSTNO:['',Validators.required],
+    //   TaxNo:['',Validators.required],
+    //   LicenceNo:['',Validators.required],
+    //   PanNo:['',Validators.required],
+    //   TrDate:['',Validators.required],
+    //   LicenceType:['', Validators.required]
 
-    })
+    // })
      
     
     this.form.reset();

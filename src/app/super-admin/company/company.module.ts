@@ -8,6 +8,8 @@ import { CompanyComponent } from './company.component';
 import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {DatePipe} from '@angular/common';
+
 
 @NgModule({
   declarations: [CompanyComponent],
@@ -18,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     DataTableModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class CompanyModule { }
