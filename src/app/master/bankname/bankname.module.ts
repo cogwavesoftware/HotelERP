@@ -12,7 +12,7 @@ import { BanknameRoutingModule  }  from './bankname-routing.module';
 @NgModule({
   declarations: [BanknameComponent],
   imports: [
-    CommonModule,BanknameRoutingModule,SharedModule
+    CommonModule,BanknameRoutingModule,SharedModule,FormsModule, DataTableModule,
   ]
 })
 export class BanknameModule { }

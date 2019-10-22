@@ -182,7 +182,12 @@ export class AuthenticationService {
         localStorage.removeItem('id');   
         localStorage.removeItem('BranchCode');   
        localStorage.removeItem('IsRole');
+      
+       
     }
+
+
+ 
 }
 
 

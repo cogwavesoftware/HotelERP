@@ -1,9 +1,19 @@
-import { AuthenticationService } from './../_services/authentication.service';
-import { Component, OnInit } from '@angular/core';
 
+import { Component, OnInit,NgZone } from '@angular/core';
+import { AuthenticationService } from './../_services/authentication.service';
 
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 // import {TranslateService } from '@ngx-translate/core';
+
+
+declare global {
+  interface Window {
+    RTCPeerConnection: RTCPeerConnection;
+    mozRTCPeerConnection: RTCPeerConnection;
+    webkitRTCPeerConnection: RTCPeerConnection;
+  }
+}
+
 
 @Component({
   selector: 'app-commonpage',
@@ -73,8 +83,11 @@ export class CommonpageComponent implements OnInit {
 
   public navRight: string;
   public windowWidth: number;
+  localIp = sessionStorage.getItem('LOCAL_IP');
 
-  constructor(private _authservice:AuthenticationService) {
+  private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
+
+  constructor(private _authservice:AuthenticationService,private zone: NgZone) {
 
    // translate.addLangs(['en','fr','ta','zh']);
     //translate.setDefaultLang('fr');
@@ -110,8 +123,37 @@ export class CommonpageComponent implements OnInit {
 
   ngOnInit() {
   this._authservice.logout();
+  this.determineLocalIp();
+
   }
 
+  private determineLocalIp() {
+    window.RTCPeerConnection = this.getRTCPeerConnection();
+
+    const pc = new RTCPeerConnection({ iceServers: [] });
+    pc.createDataChannel('');
+    pc.createOffer().then(pc.setLocalDescription.bind(pc));
+
+    pc.onicecandidate = (ice) => {
+      this.zone.run(() => {
+        if (!ice || !ice.candidate || !ice.candidate.candidate) {
+          return;
+        }
+
+        this.localIp = this.ipRegex.exec(ice.candidate.candidate)[1];
+        localStorage.removeItem('LOCAL_IP');
+        localStorage.setItem('LOCAL_IP', this.localIp)
+        pc.onicecandidate = () => {};
+        pc.close();
+      });
+    };
+  }
+  private getRTCPeerConnection() {
+    return window.RTCPeerConnection ||
+      window.mozRTCPeerConnection ||
+      window.webkitRTCPeerConnection;
+  }
+  
   onResize(event) {
     this.windowWidth = event.target.innerWidth;
     this.setHeaderAttributes(this.windowWidth);

@@ -312,8 +312,8 @@ export class BranchComponent implements OnInit {
     this.ordersData.forEach((o,i)=>{   
     let ProductId=this.ordersData[i].Id
     console.log(ProductId)              
-  const control = new FormControl(this.ordersData[i].IsActive==true); // if first item set to true, else false 
-  (this.form.controls.orders as FormArray).push(control);  
+    const control = new FormControl(this.ordersData[i].IsActive==true); // if first item set to true, else false 
+   (this.form.controls.orders as FormArray).push(control);  
  
   
 })

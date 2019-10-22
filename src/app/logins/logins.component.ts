@@ -50,8 +50,7 @@ export class LoginsComponent implements OnInit {
   
 
     ngOnInit() { 
-        
-   
+      
         // reset login status
         this.authenticationService.logout();
         // get return url from route parameters or default to '/'
