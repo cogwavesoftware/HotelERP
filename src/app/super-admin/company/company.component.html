@@ -92,26 +92,26 @@
 
                           <div class="col-md-6">
                               <label>Email*</label>
-                                <input type="text" name="EmailId" class="form-control" [(ngModel)]="model.EmailId" #EmailId="ngModel" value="{{EmailId}}"  [ngClass]="{'is-invalid': EmailId.touched && EmailId.invalid}"  required pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$" autocomplete="off">
-                                <div *ngIf="EmailId.touched && EmailId.invalid" class="invalid-feedback">
+                                <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" name="EmailId" class="form-control" [(ngModel)]="model.EmailId" #EmailId="ngModel" value="{{EmailId}}"  [ngClass]="{'is-invalid': EmailId.touched && EmailId.invalid}"  required    />
+                                 <div *ngIf="EmailId.touched && EmailId.invalid" class="invalid-feedback">
                                     <div *ngIf="EmailId.errors.required">Email is Required </div>
                                     <div *ngIf="EmailId.errors.pattern">Invalid Email</div>
                                 </div>
                           </div> 
 
-                              <!-- <div class='col-md-6'>
+                            <div class='col-md-6'>
                                   <div class="form-group">
                                       <label class="form-control-label" for="Branchcode">Transaction Date</label>
                                       <div class="form-group">
                                           <div class="input-group">
-                                            <input class="form-control" placeholder="Date" name="Trdate" [(ngModel)]="model.Trdate" value="{{Trdate}}" ngbDatepicker #d="ngbDatepicker">
+                                            <input class="form-control" placeholder="Date" name="Trdate" [(ngModel)]="model.Trdate" value="{{model.Trdate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
                                             <div class="input-group-append bg-default" (click)="d.toggle()" >
                                               <span class="icofont icofont-ui-calendar input-group-text"></span>
                                             </div>
                                           </div>
                                         </div>                                                         
                                   </div>
-                              </div> -->
+                              </div> 
                           </div>
                       </div>
                       
@@ -233,7 +233,7 @@
               </tr>
               </tbody>
               <tfoot>
-              <tr>
+              <tr class="blueorange-gradient">
                 <!-- <th>Profile</th> -->
                 <th>Id</th>
                 <th>Name</th>

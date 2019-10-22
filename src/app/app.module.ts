@@ -18,6 +18,9 @@ import { HttpClientModule,HTTP_INTERCEPTORS,HttpClient } from '@angular/common/h
 import { NgMarqueeModule } from "ng-marquee";
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
+ import * as moment from 'moment';
+import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+
 // import { MasterComponent } from './master/master.component';
 // import { FloorcreationComponent } from './master/floorcreation/floorcreation.component';
 // import { RoomtypecreationComponent } from './master/roomtypecreation/roomtypecreation.component';
@@ -74,7 +77,12 @@ import { fakeBackendProvider } from './_helpers';
   ],
   //entryComponents: [CommonpageComponent],
   providers: [
-    MenuItems,
+    
+      MenuItems,
+      {
+        provide: NgbDateAdapter,
+        useClass: NgbDateNativeAdapter
+      }
    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
