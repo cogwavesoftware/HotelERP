@@ -26,6 +26,23 @@
            <div class="container">
             <div class='row'>
            <div class="col-sm-12">
+  
+      <div class="row">
+  
+          <div class='col-md-6'>
+              
+              <label class="col-sm-3 form-control-label" for="PurchaseId">Select Company</label>
+                  <select class="custom-select"  name="PurchaseId" formControlName="PurchaseId"  id="PurchaseIdp">
+                    
+                    <option [ngValue]="catagery.Id" *ngFor="let catagery of companylist">{{ catagery.ClientName }}</option>
+                  </select>
+                  <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>                
+          </div>
+        </div>
+  
+  
+  
+      
              <div class="row">
                 <div class='col-12 col-sm-6'>
                     <div class="form-group row">
@@ -38,6 +55,8 @@
                        
                     </div>
                 </div>
+  
+  
               <div class='col-12 col-sm-6'>
                   <div class="form-group row">
                       <label class="col-sm-3 form-control-label" for="Branchcode">Branch Code</label>
@@ -290,7 +309,7 @@
   <!-- Row starting -->
   <div class="row">
    
-    <div class='col-12 col-sm-6'>
+    <!-- <div class='col-12 col-sm-6'>
         <div class="form-group row">
             <label class="col-sm-3 form-control-label" for="LicenceType">Licence Type</label>
             <div class="col-sm-9">
@@ -300,7 +319,22 @@
                 </div>
             </div>                    
         </div>
-    </div>    
+    </div>   -->
+  
+  
+     <div class='col-12 col-sm-6'>
+        <div class="form-group row">
+            <label class="col-sm-3 form-control-label" for="LicenceType">Licence Type</label>
+            <select class="select"  name="LicenceType" formControlName="LicenceType"  id="LicenceTypep">
+                <option value="default">Please Select</option>
+                <option value="S">S</option>
+                <option value="M">M</option>    
+              </select>
+        </div>
+    </div>
+    
+  
+  
     <div class='col-12 col-sm-6'>
         <div class="form-group row">
             <label class="col-sm-3 form-control-label" for="IsActive">IsActive</label>
@@ -311,6 +345,67 @@
         </div>
     </div>
   </div>
+  
+  
+  <div class="row">
+  
+      <div class='col-12 col-sm-6'>
+          <div class="form-group row">
+              <label class="col-sm-3 form-control-label" for="InstallationBy">Installed Person</label>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control tooltip-form" id="InstallationByp"  formControlName="InstallationBy" name="InstallationBy" [ngClass] = "{'is-invalid' : submitted && form.controls.InstallationBy.errors || form.controls.InstallationBy.touched || form.controls.InstallationBy.dirty}" />
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.InstallationBy.errors?.required">
+                        Installed can't be blank
+                    </div>
+                    <div class="messages text-danger invalid-feedback" >
+                        Installed enter Valid Person
+                    </div>
+              </div>                    
+          </div>
+      </div>    
+      <div class='col-12 col-sm-6'>
+          <div class="form-group row">
+              <label class="col-sm-3 form-control-label" for="InstallationMobileNo">Installed Mobile</label>
+              <div class="col-sm-9">
+                  <input type="text" class="form-control tooltip-form" id="InstallationMobileNop"  formControlName="InstallationMobileNo" name="InstallationMobileNo" [ngClass] = "{'is-invalid' : submitted && form.controls.InstallationMobileNo.errors || form.controls.InstallationMobileNo.touched || form.controls.InstallationMobileNo.dirty}" />
+                    <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.InstallationBy.errors?.required">
+                        Installed can't be blank
+                    </div>
+                    <div class="messages text-danger invalid-feedback" >
+                        Installed enter Valid Person
+                    </div>
+              </div>                    
+          </div>
+      </div>
+    </div>
+  
+  
+    
+  <div class="row">
+    <!-- <div class="form-group">
+                <label for="options">Options :</label>
+                <li *ngFor="let item of ordersData;let i = index">
+                  <input type="checkbox" [id]="'ordersData-'+i" value="{{item.ProductName}}" [checked]="item.IsActive">
+                   <label [for]="'ordersData-'+i">{{item.ProductName}}</label> 
+                </li>
+            </div> -->
+      
+    
+    
+      <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
+        <input type="checkbox" [formControlName]="i">
+        {{ordersData[i].ProductName}}
+      </label>
+    
+      
+    </div>
+  
+  
+  
+  
+  
+  
+  
   <!-- Row ending --> 
           </div>
           <div class="col-sm-12">
@@ -489,3 +584,4 @@
      
      
      
+  

@@ -44,8 +44,10 @@ export interface Branchmodel
      IsActive : boolean;
      
      LicenceType : string;
-     
-   productlist:productlist[]
+     InstallationBy : string;
+     InstallationMobileNo : string;
+     ProductArray:string
+  // productlist:productlist[]
   }
 
 

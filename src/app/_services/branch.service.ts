@@ -26,15 +26,19 @@ export class BranchService {
    //return this.http.get(`assets/data/branch.json`);
     return this.http.get<any>(environment.apiURL + '/api/common/HMSBranch/Getbranch');  
   }
-  
- getPorductByBranchcode(Branchcode) :Observable<any>
+  //+ '&password=' + password
+ getPorductByBranchcode(Branchcode,Id)
  {
-  return this.http.get<any>(environment.apiURL + '/api/common/HMSBranch/Getbranch?Branchcode=' + Branchcode);  
+  return this.http.get(environment.apiURL + '/api/common/HMSBranch/Getbranch?Branchcode=' + Branchcode + '&Id=' +Id);  
  }
 
   GetCogwaveproduct() : Observable<any>
   {  
     return this.http.get<any>(environment.apiURL + '/api/common/HMSBranch/Getcogwaveproduct');  
+  }
+  Getproduct(Branchcode) : Observable<any>
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/common/HMSBranch/Getproduct?Branchcode=' + Branchcode);  
   }
 
 
