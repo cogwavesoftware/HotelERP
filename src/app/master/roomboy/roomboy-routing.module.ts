@@ -1,19 +1,20 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import { PlancreationComponent } from './plancreation.component';
+import { RoomboyComponent } from './roomboy.component';
+
+import { Routes,RouterModule } from '@angular/router';
 
 const routes:Routes = [{
   path:'',
-  component:PlancreationComponent,
+  component:RoomboyComponent,
   data:{
-    title:'Credit Card',
+    title:'Stward Master',
     icon:'icon-home',
     caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
     status: true
   }
   }];
-
 @NgModule({
   declarations: [],
   imports: [
@@ -21,4 +22,4 @@ const routes:Routes = [{
   ],
   exports:[RouterModule]
 })
-export class PlancreationRoutingModule { }
+export class RoomboyRoutingModule { }

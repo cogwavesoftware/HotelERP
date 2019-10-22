@@ -20,10 +20,10 @@ const routes: Routes = [
         path: 'bank',
         loadChildren: './bankname/bankname.module#BanknameModule'
       },
-      // {
-      //   path: 'branch',
-      //   loadChildren: './branch/branch.module#BranchModule'
-      // },
+      {
+         path: 'creditcard',
+         loadChildren: './creditcard/creditcard.module#CreditcardModule'
+       },
 
       {
         path: 'RoomType',
@@ -33,10 +33,65 @@ const routes: Routes = [
       {
         path: 'RoomNo',
         loadChildren: './roomorganizer/roomorganizer.module#RoomorganizerModule'
-      }
+      },
 
+      {
+        path: 'reference',
+        loadChildren: './booking-reference/booking-reference.module#BookingReferenceModule'
+      },
+      {
+        path: 'companycreate',
+        loadChildren: './companycreation/companycreation.module#CompanycreationModule'
+      },
+
+      {
+        path: 'financial',
+        loadChildren: './financial/financial.module#FinancialModule'
+      },
+
+      {
+        path: 'gridtest',
+        loadChildren: './gridtest/gridtest.module#GridtestModule'
+      },
+
+      {
+        path: 'guest',
+        loadChildren: './guestcreation/guestcreation.module#GuestcreationModule'
+      },
+
+      {
+        path: 'item',
+        loadChildren: './itemmaster/itemmaster.module#ItemmasterModule'
+      },
       
-      
+      {
+        path: 'ledger',
+        loadChildren: './ledgercreation/ledgercreation.module#LedgercreationModule'
+      },
+
+      {
+        path: 'othertax',
+        loadChildren: './other-tax/other-tax.module#OtherTaxModule'
+      },
+
+      {
+        path: 'plan',
+        loadChildren: './plancreation/plancreation.module#PlancreationModule'
+      },
+
+      {
+        path: 'revenu',
+        loadChildren: './revenu/revenu.module#RevenuModule'
+      },
+
+      {
+        path: 'roomboy',
+        loadChildren: './roomboy/roomboy.module#RoomboyModule'
+      },
+      {
+        path: 'visit',
+        loadChildren: './visitpurpose/visitpurpose.module#VisitpurposeModule'
+      }
      
     ]
   }

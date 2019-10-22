@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import { PlancreationComponent } from './plancreation.component';
+
+
+import { Routes,RouterModule } from '@angular/router';
+import { OtherTaxComponent } from './other-tax.component';
 
 const routes:Routes = [{
   path:'',
-  component:PlancreationComponent,
+  component:OtherTaxComponent,
   data:{
-    title:'Credit Card',
+    title:'Create Other Tax',
     icon:'icon-home',
     caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
     status: true
   }
   }];
+
 
 @NgModule({
   declarations: [],
@@ -21,4 +24,4 @@ const routes:Routes = [{
   ],
   exports:[RouterModule]
 })
-export class PlancreationRoutingModule { }
+export class OtherTaxRoutingModule { }

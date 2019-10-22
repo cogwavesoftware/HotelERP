@@ -1,13 +1,14 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import { PlancreationComponent } from './plancreation.component';
+import { FinancialComponent } from './financial.component';
+import { Routes,RouterModule } from '@angular/router';
 
 const routes:Routes = [{
   path:'',
-  component:PlancreationComponent,
+  component:FinancialComponent,
   data:{
-    title:'Credit Card',
+    title:'Financial Master',
     icon:'icon-home',
     caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
     status: true
@@ -21,4 +22,4 @@ const routes:Routes = [{
   ],
   exports:[RouterModule]
 })
-export class PlancreationRoutingModule { }
+export class FinancialRoutingModule { }

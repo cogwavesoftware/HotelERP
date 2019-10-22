@@ -250,10 +250,70 @@ const routes: Routes = [
         path: 'bank',
         loadChildren: './master/bankname/bankname.module#BanknameModule'
       },
-      // {
-      //   path: 'branch',
-      //   loadChildren: './super-admin/branch/branch.module#BranchModule'
-      // },
+       {
+        path: 'credicard',
+         loadChildren: './master/creditcard/creditcard.module#CreditcardModule'
+       },
+
+
+
+       {
+        path: 'reference',
+        loadChildren: './master/booking-reference/booking-reference.module#BookingReferenceModule'
+      },
+      {
+        path: 'companycreate',
+        loadChildren: './master/companycreation/companycreation.module#CompanycreationModule'
+      },
+
+      {
+        path: 'financial',
+        loadChildren: './master/financial/financial.module#FinancialModule'
+      },
+
+      {
+        path: 'gridtest',
+        loadChildren: './master/gridtest/gridtest.module#GridtestModule'
+      },
+
+      {
+        path: 'guest',
+        loadChildren: './master/guestcreation/guestcreation.module#GuestcreationModule'
+      },
+
+      {
+        path: 'item',
+        loadChildren: './master/itemmaster/itemmaster.module#ItemmasterModule'
+      },
+      
+      {
+        path: 'ledger',
+        loadChildren: './master/ledgercreation/ledgercreation.module#LedgercreationModule'
+      },
+
+      {
+        path: 'othertax',
+        loadChildren: './master/other-tax/other-tax.module#OtherTaxModule'
+      },
+
+      {
+        path: 'plan',
+        loadChildren: './master/plancreation/plancreation.module#PlancreationModule'
+      },
+
+      {
+        path: 'revenu',
+        loadChildren: './master/revenu/revenu.module#RevenuModule'
+      },
+
+      {
+        path: 'roomboy',
+        loadChildren: './master/roomboy/roomboy.module#RoomboyModule'
+      },
+      {
+        path: 'visit',
+        loadChildren: './master/visitpurpose/visitpurpose.module#VisitpurposeModule'
+      }
       
      
     ]
