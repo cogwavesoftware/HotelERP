@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { RoomtypeService } from 'src/app/_services/roomtype.service';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-roomtypecreation',
   templateUrl: './roomtypecreation.component.html',
@@ -20,7 +21,7 @@ export class RoomtypecreationComponent implements OnInit {
   catagerys=['Room','Hall'];
   catageryhasError=true; 
   btitle:string="Add";
-  
+  public DOB: string;
   isValid:boolean;
 
   dtat:string;
@@ -33,7 +34,7 @@ export class RoomtypecreationComponent implements OnInit {
   closeOther = false;
   isroomt:string;
   isroomc:string;
-  constructor(private _roomtypeservice:RoomtypeService) { }
+  constructor(private _roomtypeservice:RoomtypeService,private datePipe:DatePipe) { }
    
   ngOnInit() {
     this.model.topic="default";
