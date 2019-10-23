@@ -78,7 +78,7 @@ export class RoomboyComponent implements OnInit {
       Nation:null,
       Mobile:null,
       Email:null,
-          
+      IsActive:null,  
       BranchCode:localStorage.getItem('BranchCode'),
       IpAdd:localStorage.getItem('LOCAL_IP'),
       CreatedBy:localStorage.getItem('id'),
@@ -114,7 +114,13 @@ export class RoomboyComponent implements OnInit {
   {
     this.model = {  
       Id:data.Id,
-      Name:data.Name,      
+      DoB:data.DoB,   
+      StwardName: data.StwardName,
+      Address:data.Address,
+      Nation:data.Nation,
+      Mobile:data.Mobile,
+      Email:data.Email,
+      IsActive:data.IsActive 
     };
     document.querySelector('#' + event).classList.add('md-show');
   }
