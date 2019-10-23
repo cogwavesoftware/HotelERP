@@ -25,6 +25,7 @@ contentTypeHeaders.append('Accept', 'q=0.8;application/json;q=0.9');
 export const environment = {
   production: false,
   apiURL : 'http://localhost:37425',
+  //apiURL : 'http://192.168.0.106:777',
   BASE_ACCEPT_HEADER: acceptHeaders,
   BASE_CONTENTTYPE_HEADER: contentTypeHeaders,
   

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
+
 // import { OtherTaxComponent } from './other-tax/other-tax.component';
 // import { VisitpurposeComponent } from './visitpurpose/visitpurpose.component';
 // import { VisitpurposeRoutingComponent } from './visitpurpose/visitpurpose-routing.component';

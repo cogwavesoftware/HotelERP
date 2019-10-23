@@ -147,9 +147,12 @@ export class CompanyComponent implements OnInit {
         this.model.ClientAddress = response[event]['ClientAddress'];
         this.model.MobileNo = response[event]['MobileNo'];
         this.model.EmailId = response[event]['EmailId'];
-        this.model.Trdate = response[event]['Trdate'];
+       // this.model.Trdate = response[event]['Trdate'];
+        this.model.Trdate = this.datePipe.transform(response[event]['Trdate'],"MM-dd-yyyy");
         
+        console.log(this.model.Trdate)
     });
+
   }
 
 
@@ -186,6 +189,7 @@ export class CompanyComponent implements OnInit {
   onSubmit()
     {
         console.log(this.model)
+        
         this.model.Id=null;
         if(this.validateForm())
         {

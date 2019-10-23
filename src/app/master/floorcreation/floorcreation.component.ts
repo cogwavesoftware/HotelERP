@@ -2,7 +2,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Floormodel } from './../../_models/floormodel';
- import {  Observable } from "rxjs";
+import {  Observable } from "rxjs";
  
 import { FloormasterService } from './../../_services/floormaster.service';
 import { DatePipe } from '@angular/common';

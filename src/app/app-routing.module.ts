@@ -255,8 +255,6 @@ const routes: Routes = [
          loadChildren: './master/creditcard/creditcard.module#CreditcardModule'
        },
 
-
-
        {
         path: 'reference',
         loadChildren: './master/booking-reference/booking-reference.module#BookingReferenceModule'
@@ -313,7 +311,16 @@ const routes: Routes = [
       {
         path: 'visit',
         loadChildren: './master/visitpurpose/visitpurpose.module#VisitpurposeModule'
-      }
+      },
+      {
+        path: 'walet',
+         loadChildren: './master/walet/walet.module#WaletModule'
+       }
+
+      // {
+      //   path: 'walet',
+      //   loadChildren: './master/walet/walet.module#WaletModule'
+      // }
       
      
     ]

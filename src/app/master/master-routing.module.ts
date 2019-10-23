@@ -91,8 +91,14 @@ const routes: Routes = [
       {
         path: 'visit',
         loadChildren: './visitpurpose/visitpurpose.module#VisitpurposeModule'
-      }
+      },
      
+     
+
+      {
+        path: 'walet',
+         loadChildren: './walet/walet.module#WaletModule'
+       }
     ]
   }
 ];

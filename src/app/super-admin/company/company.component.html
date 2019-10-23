@@ -220,7 +220,9 @@
                   <span *ngIf="item.age <= 25"><i class="fa fa-star-o" aria-hidden="true"></i></span>
                 </td> -->
                 <!-- <td>{{item.phone_no}}</td> -->
-                <td>{{item.Trdate}}</td>
+                <td>{{item.Trdate  | date: 'dd/MM/yyyy'}}</td>
+
+                 
                 <td class="action-icon">
                     <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalDataview('effect-13',item)"><i class="fa fa-book"></i></a>
                     <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>

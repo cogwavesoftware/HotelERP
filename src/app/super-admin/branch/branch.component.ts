@@ -1,6 +1,4 @@
 
-import { state } from '@angular/animations';
-import { Alert } from 'selenium-webdriver';
 import { productlist } from './../../_models/Branchmodel';
 
 import {Component, Input, OnInit,ViewEncapsulation} from '@angular/core';

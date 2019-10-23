@@ -7,6 +7,8 @@ import { NgForm } from "@angular/forms";
   styleUrls: ['./other-tax.component.scss']
 })
 export class OtherTaxComponent implements OnInit {
+
+
   public data: Observable<any>;
   public rowsOnPage = 10;
   public filterQuery = '';
@@ -30,6 +32,7 @@ export class OtherTaxComponent implements OnInit {
   isroomt:string;
   isroomc:string;
   @ViewChild('f',{static:false}) form: any;
+  
   constructor() { }
 
   ngOnInit() 

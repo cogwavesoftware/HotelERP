@@ -23,5 +23,11 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetBankdetails');
      
   }
+
+  getreferencedetail()
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Getreference');
+     
+  }
   
 }

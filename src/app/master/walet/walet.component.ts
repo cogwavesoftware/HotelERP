@@ -6,21 +6,24 @@ import { MasterformService } from './../../_services/masterform.service';
 import { IpserviceService } from 'src/app/_services/ipservice.service';
 
 @Component({
-  selector: 'app-booking-reference',
-  templateUrl: './booking-reference.component.html',
-  styleUrls: ['./booking-reference.component.scss']
+  selector: 'app-walet',
+  templateUrl: './walet.component.html',
+  styleUrls: ['./walet.component.scss']
 })
 
-export class BookingReferenceComponent implements OnInit {
+export class WaletComponent implements OnInit {
+
   public data: Observable<any>;
   public rowsOnPage = 10;
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
   public isShown:boolean = false;
-  model: any = {};
+  model: any = {};   
   btitle:string="Add";
+  
   isValid:boolean;
+ 
 
   dtat:string;
   title: string;
@@ -32,9 +35,11 @@ export class BookingReferenceComponent implements OnInit {
   closeOther = false;
   isroomt:string;
   isroomc:string;
+  @ViewChild('f',{static:false}) form: any;
+
+ 
   ipAddress:string;
  
-  @ViewChild('f',{static:false}) form: any;
   
   constructor(private _masterformservice:MasterformService,private _ipservice:IpserviceService) { }
    
@@ -44,12 +49,10 @@ export class BookingReferenceComponent implements OnInit {
   this.btitle="Add Item"
   this.data = this._masterformservice.getreferencedetail()
   console.log(this.data)
-  this.model.BranchCode=localStorage.getItem('BranchCode');
+  
   this.model.IpAdd=localStorage.getItem('LOCAL_IP');
   this.model.CreatedBy=localStorage.getItem('id');
-   console.log(this.model.BranchCode)
-   console.log(this.model.IpAdd)
-   console.log(this.model.CreatedBy)
+   
   }
   
   getIP()
@@ -153,33 +156,3 @@ export class BookingReferenceComponent implements OnInit {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
- 
-//   fullUpdate() {
-//     this.form.setValue({firstName: 'Partial', password: 'monkey'});
-// }
-
-// partialUpdate() {
-//     this.model.patchValue({RefName: 'Partial'});
-// }
-
-   // this.form.valueChanges
-    //     .map((value) => {
-    //         value.RefName = value.RefName.toUpperCase();
-    //         return value;
-            
-    //     })
-    //     .filter((value) => this.form.valid)
-    //     .subscribe((value) => {
-    //        console.log("Model Driven Form valid value: vm = ",
-    //                    JSON.stringify(value));
-    //     });
