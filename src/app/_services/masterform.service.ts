@@ -18,16 +18,30 @@ export class MasterformService {
   constructor(private http: HttpClient) { }
 
 
-  GetBankdetails()
+  GetBankdetails(branchcode:string)
   {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetBankdetails');
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetBankdetails?BranchCode=' + branchcode);
      
   }
 
-  getreferencedetail()
+  getreferencedetail(branchcode:string)
   {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Getreference');
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Getreference?BranchCode=' + branchcode);
      
   }
+  getplan()
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Plan');
+     
+  }
+  getwalet()
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/walet');  
+  }
+  getothertax(branchcode:string)
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertax?BranchCode=' + branchcode);  
+  }
+  
   
 }

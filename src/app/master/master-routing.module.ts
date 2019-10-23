@@ -92,8 +92,10 @@ const routes: Routes = [
         path: 'visit',
         loadChildren: './visitpurpose/visitpurpose.module#VisitpurposeModule'
       },
-     
-     
+      {
+        path: 'planmaster',
+         loadChildren: './planmaster/planmaster.module#PlanmasterModule'
+       },
 
       {
         path: 'walet',

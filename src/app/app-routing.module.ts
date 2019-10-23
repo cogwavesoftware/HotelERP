@@ -315,12 +315,13 @@ const routes: Routes = [
       {
         path: 'walet',
          loadChildren: './master/walet/walet.module#WaletModule'
-       }
+       },
 
-      // {
-      //   path: 'walet',
-      //   loadChildren: './master/walet/walet.module#WaletModule'
-      // }
+       {
+        path: 'planmaster',
+         loadChildren: './master/planmaster/planmaster.module#PlanmasterModule'
+       },
+
       
      
     ]

@@ -4,8 +4,8 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Reference Creation</h5>         
-                  <span class="ng-tns-c6-1 ng-star-inserted">Creating Hotel  Reference for Branch </span>
+                  <h5 class="ng-tns-c6-1">Walet Creation</h5>         
+                  <span class="ng-tns-c6-1 ng-star-inserted">Creating Walet for Branch </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
                     <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
@@ -20,10 +20,7 @@
             <div class="formouter rotate" >
              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
                  <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
-                 <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
-                 <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
-                 <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
-                 
+                
                  <div class="auth-box card">
                        <div class="card-block">
                          <div class="frmdata" >              
@@ -34,79 +31,24 @@
                                       <div class="row">
                                             <div class="col-md-6">
         
-                                                <label class="required">Reference Name*</label>
-                                                  <input type="text" name="RefName" class="form-control" [(ngModel)]="model.RefName" #RefName="ngModel" value="{{RefName}}"  [ngClass]="{'is-invalid': RefName.touched && RefName.invalid}"  required autocomplete="off">
-                                                  <div *ngIf="RefName.touched && RefName.invalid" class="invalid-feedback">
-                                                      <div *ngIf="RefName.errors.required">RefName is invalid</div>
+                                                <label class="required">WaletName*</label>
+                                                  <input type="text" name="WaletName" class="form-control" [(ngModel)]="model.WaletName" #WaletName="ngModel" value="{{WaletName}}"  [ngClass]="{'is-invalid': WaletName.touched && WaletName.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="WaletName.touched && WaletName.invalid" class="invalid-feedback">
+                                                      <div *ngIf="WaletName.errors.required">WaletName is invalid</div>
                                                   </div>
-                                            </div>                            
-                                            <div class="col-md-6">
-                                                <label>RefEmail*</label>
-                                                <input type="text" name="RefEmail" class="form-control" [(ngModel)]="model.RefEmail" #RefEmail="ngModel" value="{{RefEmail}}"  [ngClass]="{'is-invalid': RefEmail.touched && RefEmail.invalid}"  required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" autocomplete="off">
-                                                <div *ngIf="RefEmail.touched && RefEmail.invalid" class="invalid-feedback">
-                                                  <div *ngIf="RefEmail.errors.required">RefEmail is required</div>
-                                                  <div *ngIf="RefEmail.errors.pattern">RefEmail is invalid</div>
-                                                </div>
-                                        </div>
+                                            </div>  
+
       
                                       </div>
-                                        <div class="row">
-                                           
-                                                <div class="col-md-6">
-                                                    <label>MobileNo*</label>
-                                                    <input type="number" name="RefMobileNo" class="form-control" [(ngModel)]="model.RefMobileNo" #RefMobileNo="ngModel" value="{{RefMobileNo}}"  [ngClass]="{'is-invalid': RefMobileNo.touched && RefMobileNo.invalid}"  required   autocomplete="off">
-                                                    <div *ngIf="RefMobileNo.touched && RefMobileNo.invalid" class="invalid-feedback">
-                                                      <div *ngIf="RefMobileNo.errors.required">RefMobileNo Cant'be Empty</div>
-                                                    </div>
-                                                </div>
-                                            
-    
-                                                <div class='col-md-6'>
-                                                        <div class="form-group">
-                                                            <label class="form-control-label" for="RefDob">Transaction Date</label>
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                  <input class="form-control" placeholder="Date" name="RefDob" [(ngModel)]="model.RefDob" value="{{model.RefDob | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
-                                                                  <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                                                    <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                                  </div>
-                                                                </div>
-                                                              </div>                                                         
-                                                        </div>
-                                                    </div> 
-                                        </div>
-      
-      
-                                        <div class="row">
-                                           
-                                            <div class="col-md-12">
-                                                <label>Address*</label>
-                                                <textarea type="text" name="RefAdress" class="form-control" [(ngModel)]="model.RefAdress" #RefAdress="ngModel" value="{{RefAdress}}"  [ngClass]="{'is-invalid': RefAdress.touched && RefAdress.invalid}"  required autocomplete="off"></textarea> 
-                                                <div *ngIf="RefAdress.touched && RefAdress.invalid" class="invalid-feedback">
-                                                  <div *ngIf="RefAdress.errors.required">Address is invalid</div>
-                                                </div>
-                                            </div>
-                                        
-                                        </div>
-                                          <div class="row">
-                                                <div class="col-md-6">
-                                                        <label>RefPoints*</label>
-                                                        <input type="number" name="RefPoints" class="form-control" [(ngModel)]="model.RefPoints" #RefPoints="ngModel" value="{{RefPoints}}"  [ngClass]="{'is-invalid': RefPoints.touched && RefPoints.invalid}"  required autocomplete="off">
-                                                        <div *ngIf="RefPoints.touched && RefPoints.invalid" class="invalid-feedback">
-                                                          <div *ngIf="RefPoints.errors.required">RefPoints can't be Blank</div>
-                                                        </div>
-                                                    </div>
-    
-    
-                                              <div class="col-md-6">
-                                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
-                                                      <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
-                                                      <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
-                                              </div>
-    
-                                              
-                                          </div>
-                                        
+                                      <div class="row">
+
+                                          <div class="col-md-6">
+                                              <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
+                                              <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
+                                              <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                      </div>
+                                      </div>
+
                                   </div>
                    
                               
@@ -135,7 +77,7 @@
               <div class="row">  
     
                   <div class="col-xs-12 col-sm-12 col-md-6">
-                      <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Other Tax Data List</div>
+                      <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Walet List</div>
                       </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
                       <div style="text-align: right;">
@@ -152,14 +94,15 @@
                   <thead>
                   <tr class="blueorange-gradient">                
                     <th>
-                      <mfDefaultSorter  by="TaxCode">Tax Code</mfDefaultSorter>
+                      <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
                     </th>
                     <th>
-                      <mfDefaultSorter  by="TaxName">Tax Name</mfDefaultSorter>
+                      <mfDefaultSorter  by="WaletName">WaletName</mfDefaultSorter>
                     </th>
                     <th>
-                      <mfDefaultSorter  by="TaxPer">Tax %</mfDefaultSorter>
-                    </th>
+                        <mfDefaultSorter  by="IsActive">Status</mfDefaultSorter>
+                      </th>
+                   
                     
                     <th>
                       <mfDefaultSorter>Action</mfDefaultSorter>
@@ -171,9 +114,9 @@
                   <tbody>
                       
                    <tr *ngFor="let item of mf.data; let i = index;">
-                     <td>{{item.RefName}}</td>
-                    <td>{{item.RefName}}</td>
-                    <td>{{item.RefName}}</td>                  
+                     <td>{{item.Id}}</td>
+                    <td>{{item.WaletName}}</td>
+                    <td>{{item.IsActive}}</td>
                     <td class="action-icon">
                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
                         <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
@@ -184,10 +127,10 @@
                   <tfoot>
                   <tr class="blueorange-gradient">
                     <!-- <th>Profile</th> -->
-                    <th>Tax Code</th>
-                    <th>Tax Name</th>
-                    <th>Tax %</th>     
-                    <th></th>             
+                    <th>Id</th>
+                    <th>WaletName</th>
+                    <th>Active</th>
+                    <th>Action</th>             
                   </tr>
                   <tr>
                     <td colspan="10">
@@ -221,23 +164,14 @@
                     <td>{{ model.Id }}</td>
                   </tr>
                   <tr>
-                    <td>RefName :</td>
-                    <td>{{ model.RefName }}</td>
+                    <td>WaletName :</td>
+                    <td>{{ model.WaletName }}</td>
                   </tr>
                   <tr>
-                    <td>RefEmail :</td>
-                    <td>{{ model.RefEmail }}</td>
-                  </tr>
-                  <tr>
-                    <td>RefMobileNo :</td>
-                    <td>{{ model.RefMobileNo }}</td>
-                  </tr>
-                  <tr>
-                    <td>RefAdress :</td>
-                    <td>{{ model.RefAdress }}</td>
+                    <td>IsActive :</td>
+                    <td>{{ model.IsActive }}</td>
                   </tr>
                  
-                  
                  </table>      
                  <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
             </div>

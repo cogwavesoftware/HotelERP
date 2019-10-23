@@ -2,8 +2,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { DataTableModule } from './../../theme/table/data-table/data-table.module';
 
+import {DataTableModule} from 'angular2-datatable';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { WaletRoutingModule } from './walet-routing.module';
 import { WaletComponent } from './walet.component';

@@ -45,7 +45,7 @@ export class BanknameComponent implements OnInit {
   {
  
   this.btitle="Add Item"
-  this.data = this._masterformservice.GetBankdetails()
+  //this.data = this._masterformservice.GetBankdetails()
   console.log(this.data)
   this.model.BranchCode=localStorage.getItem('BranchCode');
   this.model.IpAdd=localStorage.getItem('LOCAL_IP');
@@ -53,6 +53,16 @@ export class BanknameComponent implements OnInit {
    console.log(this.model.BranchCode)
    console.log(this.model.IpAdd)
    console.log(this.model.CreatedBy)
+
+   if(!this.model.BranchCode)
+   {
+     this.data = this._masterformservice.GetBankdetails('CW_1001')
+   }
+   else
+   {
+     this.data = this._masterformservice.GetBankdetails(this.model.BranchCode)
+   }
+
   }
   
   getIP()
