@@ -1,6 +1,9 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
  import { Observable } from 'rxjs';
+ import { MasterformService } from './../../_services/masterform.service';
+import { IpserviceService } from 'src/app/_services/ipservice.service';
+
 @Component({
   selector: 'app-other-tax',
   templateUrl: './other-tax.component.html',
@@ -33,19 +36,28 @@ export class OtherTaxComponent implements OnInit {
   isroomc:string;
   @ViewChild('f',{static:false}) form: any;
   
-  constructor() { }
+  constructor(private _masterformservice:MasterformService,private _ipservice:IpserviceService) { }
 
   ngOnInit() 
      {
       this.btitle="Add Item"
-      //this.data = this._masterformservice.GetBankdetails()
-      console.log(this.data)
+   
       this.model.BranchCode=localStorage.getItem('BranchCode');
       this.model.IpAdd=localStorage.getItem('LOCAL_IP');
       this.model.CreatedBy=localStorage.getItem('id');
        console.log(this.model.BranchCode)
        console.log(this.model.IpAdd)
        console.log(this.model.CreatedBy)  
+       if(!this.model.BranchCode)
+        {
+          this.data = this._masterformservice.getothertax('CW_1001')
+        }
+        else
+        {
+          this.data = this._masterformservice.getothertax(this.model.BranchCode)
+        }
+      
+       console.log(this.data)
   }
   getIP()
   {

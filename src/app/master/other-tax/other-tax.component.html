@@ -19,6 +19,7 @@
         <div class="formouter rotate" >
          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+            <input type="hidden" name="TaxCode" class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel" value="{{TaxCode}}"  >
             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
@@ -31,13 +32,13 @@
                                 <div class="col-md-12">
                                          
                                   <div class="row">
-                                    <div class="col-md-4">    
+                                    <!-- <div class="col-md-4">    
                                         <label class="required">TaxCode*</label>
                                             <input type="text" name="TaxCode" class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel" value="{{TaxCode}}"  [ngClass]="{'is-invalid': TaxCode.touched && TaxCode.invalid}"  required autocomplete="off">
                                             <div *ngIf="TaxCode.touched && TaxCode.invalid" class="invalid-feedback">
                                                 <div *ngIf="TaxCode.errors.required">Tax Code is invalid</div>
                                             </div>
-                                    </div> 
+                                    </div>  -->
 
                                     <div class="col-md-4">
                                         <label>TaxName*</label>
@@ -98,7 +99,10 @@
             <div class="table-responsive">
               <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
                 <thead>
-                <tr class="blueorange-gradient">                
+                <tr class="blueorange-gradient"> 
+                    <th>
+                        <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
+                      </th>               
                   <th>
                     <mfDefaultSorter  by="TaxCode">Tax Code</mfDefaultSorter>
                   </th>
@@ -119,11 +123,12 @@
                 <tbody>
                     
                  <tr *ngFor="let item of mf.data; let i = index;">
+                    <td>{{item.Id}}</td>
                    <td>{{item.TaxCode}}</td>
                   <td>{{item.TaxName}}</td>
                   <td>{{item.TaxPer}}</td>                  
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                       
                   </td>
@@ -132,10 +137,11 @@
                 <tfoot>
                 <tr class="blueorange-gradient">
                   <!-- <th>Profile</th> -->
+                  <th>Id</th>
                   <th>Tax Code</th>
                   <th>Tax Name</th>
                   <th>Tax %</th>     
-                  <th></th>             
+                  <th>Action</th>             
                 </tr>
                 <tr>
                   <td colspan="10">
@@ -156,7 +162,7 @@
 
 
 <!-- lightbox-->
-<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
   <h3 class="f-15">View  Other Tax Details</h3>
   
     <div class="app-modal-body text-center"> 
