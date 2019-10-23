@@ -41,7 +41,7 @@ export class PlancreationComponent implements OnInit {
   ngOnInit() {
     this.btitle="Add Item"
   // this.data = this._masterformservice.GetBankdetails()
-  console.log(this.data)
+  
   this.model.BranchCode=localStorage.getItem('BranchCode');
   this.model.IpAdd=localStorage.getItem('LOCAL_IP');
   this.model.CreatedBy=localStorage.getItem('id');
