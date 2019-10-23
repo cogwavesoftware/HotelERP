@@ -16,11 +16,12 @@ export class PlancreationComponent implements OnInit {
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
+  catageryhasError:boolean;
   public isShown:boolean = false;
   model: any = {};
   btitle:string="Add";
   isValid:boolean;
-
+  //catagerys=['Room','Hall'];
   dtat:string;
   title: string;
   msg: string;
@@ -32,7 +33,8 @@ export class PlancreationComponent implements OnInit {
   isroomt:string;
   isroomc:string;
   ipAddress:string;
- 
+  catagerys:any;
+  roles : any[];
   @ViewChild('f',{static:false}) form: any;
   constructor(private _masterformservice:MasterformService,private _ipservice:IpserviceService) { }
 
@@ -43,9 +45,38 @@ export class PlancreationComponent implements OnInit {
   this.model.BranchCode=localStorage.getItem('BranchCode');
   this.model.IpAdd=localStorage.getItem('LOCAL_IP');
   this.model.CreatedBy=localStorage.getItem('id');
-   console.log(this.model.BranchCode)
-   console.log(this.model.IpAdd)
-   console.log(this.model.CreatedBy)
+ 
+   this.model.catagery="default";
+   if(!this.model.BranchCode)
+   {
+     this.data = this._masterformservice.getallplanopr('CW_1001')
+   }
+   else
+   {
+     this.data = this._masterformservice.getallplanopr(this.model.BranchCode)
+   }
+
+   this._masterformservice.getplan().subscribe(res=>{
+     this.catagerys=res;
+   })
+
+   this._masterformservice.getothertax('CW_1001').subscribe(
+    (data : any)=>{
+      data.forEach(obj => obj.selected = false);
+      this.roles = data;
+      console.log(this.roles)
+    }
+  );
+ 
+  }
+
+
+  validateplan(value) {
+    if (value === 'default') {
+      this.catageryhasError = true;
+    } else {
+      this.catageryhasError = false;
+    }
   }
 
   getIP()
@@ -99,6 +130,10 @@ export class PlancreationComponent implements OnInit {
    }
    onSubmit()
    {
+
+    var x = this.roles.filter(x => x.selected).map(y => y.TaxName);
+
+    console.log(x);
      console.log(this.form.value);          
      if (this.form.valid)
      {

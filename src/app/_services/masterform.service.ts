@@ -43,5 +43,15 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertax?BranchCode=' + branchcode);  
   }
   
+  getplanbyid(branchcode:string,plan:number)
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planbyId?BranchCode=' + branchcode + '&PlanId=' + plan);  
+  }
+   
+  getallplanopr(branchcode:string)
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planopr?BranchCode=' + branchcode);  
+  }
+  
   
 }
