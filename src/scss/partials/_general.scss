@@ -5931,8 +5931,13 @@ outerdiv{
     .form-group .input-group .bg-default{
         height: 24px;
     }
-    .form-group label{
-        margin-bottom:0.1rem;
+    .form-group label,
+    .formdesign  label {
+        margin-bottom: 0.1em;
+    } 
+    .form-group .row,
+    .formdesign  .row{
+        margin-bottom: 10px;
     }
     .form-group select.form-control:not([size]):not([multiple]){
         height: auto;

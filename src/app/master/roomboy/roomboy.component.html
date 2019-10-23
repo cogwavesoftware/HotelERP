@@ -3,7 +3,7 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Roolboy Creation</h5>         
+                  <h5 class="ng-tns-c6-1">Roomboy Creation</h5>         
                   <span class="ng-tns-c6-1 ng-star-inserted">Purpose of Room boy Details </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -50,7 +50,7 @@
 
                                                            
                                         <div class="col-md-6">    
-                                                <label class="required">StwardName*</label>
+                                                <label class="required form-control-label">StwardName*</label>
                                                     <input type="text" name="StwardName" class="form-control" [(ngModel)]="model.StwardName" #StwardName="ngModel" value="{{StwardName}}"  [ngClass]="{'is-invalid': StwardName.touched && StwardName.invalid}"  required autocomplete="off">
                                                     <div *ngIf="StwardName.touched && StwardName.invalid" class="invalid-feedback">
                                                         <div *ngIf="StwardName.errors.required">StwardName is invalid</div>
@@ -60,7 +60,7 @@
                                       </div>
                                          <div class="row">
                                                 <div class="col-md-12">    
-                                                        <label class="required">Address*</label>
+                                                        <label class="required form-control-label">Address*</label>
                                                             <textarea name="Address" class="form-control" [(ngModel)]="model.Address" #Address="ngModel" value="{{Address}}"  [ngClass]="{'is-invalid': Address.touched && Address.invalid}"  required autocomplete="off"rows="5"></textarea>
                                                             <div *ngIf="Address.touched && Address.invalid" class="invalid-feedback">
                                                                 <div *ngIf="Address.errors.required">Address is invalid</div>
@@ -69,14 +69,14 @@
                                          </div>
                                          <div class="row">
                                                 <div class="col-md-6">    
-                                                        <label class="required">Nation*</label>
+                                                        <label class="required form-control-label">Nation*</label>
                                                             <input type="text" name="Nation" class="form-control" [(ngModel)]="model.Nation" #Nation="ngModel" value="{{Nation}}"  [ngClass]="{'is-invalid': Nation.touched && Nation.invalid}"  required autocomplete="off">
                                                             <div *ngIf="Nation.touched && Nation.invalid" class="invalid-feedback">
                                                                 <div *ngIf="Nation.errors.required">Nation is invalid</div>
                                                             </div>
                                                 </div> 
                                                 <div class="col-md-6">    
-                                                        <label class="required">Mobile*</label>
+                                                        <label class="required form-control-label">Mobile*</label>
                                                             <input type="number" name="Mobile" maxlength="10" class="form-control" [(ngModel)]="model.Mobile" #Mobile="ngModel" value="{{Mobile}}"  [ngClass]="{'is-invalid': Mobile.touched && Mobile.invalid}"  required autocomplete="off">
                                                             <div *ngIf="Mobile.touched && Mobile.invalid" class="invalid-feedback">
                                                                 <div *ngIf="Mobile.errors.required">Mobile is invalid</div>
@@ -85,14 +85,14 @@
                                         </div>
                                         <div class="row">
                                                 <div class="col-md-6">    
-                                                        <label class="required">Email*</label>
+                                                        <label class="required form-control-label">Email*</label>
                                                             <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" name="Email" class="form-control" [(ngModel)]="model.Email" #Email="ngModel" value="{{Email}}"  [ngClass]="{'is-invalid': Email.touched && Email.invalid}"  required autocomplete="off">
                                                             <div *ngIf="Email.touched && Email.invalid" class="invalid-feedback">
                                                                 <div *ngIf="Email.errors.required">Email is invalid</div>
                                                             </div>
                                                 </div> 
                                                 <div class="col-md-6">    
-                                                        <label class="required">IsActive*</label>
+                                                        <label class="required form-control-label">IsActive*</label>
                                                             <input type="checkbox" name="IsActive"  class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off" style="width: 20px;">
                                                             <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
                                                                 <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
@@ -144,8 +144,23 @@
                 <thead>
                 <tr class="blueorange-gradient">                
                   <th>
-                    <mfDefaultSorter  by="Name">Name</mfDefaultSorter>
-                  </th>            
+                    <mfDefaultSorter  by="DoB">DoB</mfDefaultSorter>
+                  </th>  
+                  <th>
+                     <mfDefaultSorter  by="StwardName">StwardName</mfDefaultSorter>
+                      </th> 
+                            <th>
+                            <mfDefaultSorter  by="Address">Address</mfDefaultSorter>
+                            </th> 
+                            <th>
+                            <mfDefaultSorter  by="Nation">Nation</mfDefaultSorter>
+                            </th> 
+                            <th>
+                            <mfDefaultSorter  by="Mobile">Mobile</mfDefaultSorter>
+                            </th> 
+                            <th>
+                            <mfDefaultSorter  by="Email">Email</mfDefaultSorter>
+                            </th>           
                   <th>
                     <mfDefaultSorter>Action</mfDefaultSorter>
                   </th>
@@ -156,7 +171,13 @@
                 <tbody>
                     
                  <tr *ngFor="let item of mf.data; let i = index;">
-                   <td>{{item.Name}}</td>   
+                   <td>{{item.DoB}}</td>   
+                   <td>{{item.StwardName}}</td>
+                   <td>{{item.Address}}</td>
+                   <td>{{item.Nation}}</td>
+                   <td>{{item.Mobile}}</td>
+                   <td>{{item.Email}}</td>
+                    
                        
                   <td class="action-icon">
                       <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
@@ -167,7 +188,13 @@
                 </tbody>
                 <tfoot>
                 <tr class="blueorange-gradient">          
-                  <th>Name</th>         
+                  <th>DoB</th>    
+                  <th>StwardName</th>
+                  <th>Address</th>
+                  <th>Nation</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                
                   <th></th>             
                 </tr>
                 <tr>
