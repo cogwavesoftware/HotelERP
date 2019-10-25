@@ -52,6 +52,12 @@ export class MasterformService {
   {  
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planopr?BranchCode=' + branchcode);  
   }
+
+     
+  getledger(branchcode:string)
+  {  
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/ledger?BranchCode=' + branchcode);  
+  }
   
   
 }

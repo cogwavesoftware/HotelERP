@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 
 import { Routes,RouterModule } from '@angular/router';
 import { BookingReferenceComponent } from './booking-reference.component';
+
+
 const routes:Routes = [{
   path:'',
   component:BookingReferenceComponent,

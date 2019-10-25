@@ -251,7 +251,7 @@ const routes: Routes = [
         loadChildren: './master/bankname/bankname.module#BanknameModule'
       },
        {
-        path: 'credicard',
+        path: 'creditcard',
          loadChildren: './master/creditcard/creditcard.module#CreditcardModule'
        },
 

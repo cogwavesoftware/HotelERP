@@ -1,1 +1,84 @@
-<p>gridtest works!</p>
+<div class="outerdiv">
+
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+        <div class="row">
+            <div class="col-md-11">
+                <h5 class="ng-tns-c6-1">Reference Creation</h5>
+                <span class="ng-tns-c6-1 ng-star-inserted">Creating Hotel Reference for Branch </span>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-1">
+                <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()"> <i
+                        class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="formdesign aqua-gradient">
+        <div class="formouter rotate">
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+
+                <div class="auth-box card">
+                    <div class="card-block">
+                        <div class="frmdata">
+                            <div class="containar">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- [ngClass]="{'is-invalid': password.touched && password.invalid}" -->
+                                                <label class="required">Password*</label>
+                                                <input type="password" name="password" class="form-control"  ngModel #password="ngModel"  required>
+                                                <div class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+                                                    Password Is Required
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="col-md-6">
+
+                                                <label class="required">Conform Password*</label>
+                                                <input type="password" name="passwordConform" class="form-control"
+                                                   ngModel #passwconfrm="ngModel"  required compare="password">
+                                                    <div class="text-danger" *ngIf="passwconfrm.invalid && (passwconfrm.dirty || passwconfrm.touched)">
+                                                        <div *ngIf="passwconfrm.errors['required']">Password confom is required</div>
+                                                        <div *ngIf="passwconfrm.errors['compare']">Password confom not match</div>
+                                                    </div>
+                                                    
+
+                                            </div>
+                                            
+
+                                        </div>
+                                
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </form>
+
+            <br>
+            <div class="card">
+                    <div class="card-body">
+                       <h5 class="card-title"> Formstatus: {{f.status}}</h5>
+                       <h6 class="card-subtitle mb-2 text-muted">formValue </h6>
+
+                       <pre>
+                           {{f.value | json}}
+                       </pre>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: 'app-gridtest',
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridtestComponent implements OnInit {
 
+  model:any={}
   constructor() { }
 
   ngOnInit() {
