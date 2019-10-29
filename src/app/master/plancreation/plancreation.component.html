@@ -39,22 +39,17 @@
                                                 </div>
                                         </div>  -->
 
+                                     
                                         <div class="col-md-6">
                                             <label>Select Plan*</label>
-                                                <select class="custom-select" (blur)="validateplan(catagery.value)" (change)="validateplan(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
+                                                <select class="custom-select" (blur)="validateplan(catagery.value)" (change)="validateplan(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="PlanId" [(ngModel)]="model.PlanId">
                                                   <option value="default">Please Select</option>
-                                                  <option *ngFor="let catagery of catagerys">{{ catagery.PlanName }}</option>
+                                                  <option [ngValue]="catagery.Id" *ngFor="let catagery of catagerys">{{ catagery.PlanName }}</option>
                                                 </select>
                                                 <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>
                                         </div>
 
-                                        <!-- <div class="col-md-4">
-                                            <label>Tax Id*</label>
-                                            <input type="number" name="TaxId" class="form-control" [(ngModel)]="model.TaxId" #TaxId="ngModel" value="{{TaxId}}"  [ngClass]="{'is-invalid': TaxId.touched && TaxId.invalid}"  required autocomplete="off">
-                                            <div *ngIf="TaxId.touched && TaxId.invalid" class="invalid-feedback">
-                                                <div *ngIf="TaxId.errors.required">TaxId is invalid - Please enter numeric value</div>
-                                            </div>
-                                        </div> -->
+                                     
                                         <div class="col-md-6">
                                             <label>Plan Amount*</label>
                                             <input type="number" name="PlanAmount" class="form-control" [(ngModel)]="model.PlanAmount" #PlanAmount="ngModel" value="{{PlanAmount}}"  [ngClass]="{'is-invalid': PlanAmount.touched && PlanAmount.invalid}"  required autocomplete="off">
@@ -63,7 +58,8 @@
                                             </div>
                                         </div>
                                       </div>
-                                      <div class="row" *ngIf="roles">
+                                      {{emailFormArray | json}}
+                                      <div class="row">
                                           <label>Select Tax*</label>
                                               <!-- <ul>
                                                 <li *ngFor="let item of roles;let i = index">
@@ -71,12 +67,28 @@
                                                   <label [for]="'roles-'+i">{{item.TaxName}}</label>
                                                 </li>
                                               </ul> -->
-
+                                           
 <!-- 
                                                  <div *ngFor="let choice of roles;let i=index">
                                                       <label>{{ choice.TaxName }}</label>
                                                  <input type="checkbox" [value]="{{ choice.Id }}" id="{{ choice.Id }}" #IsActive="ngModel" name="{{ choice.Id }}" /> 
                                                   </div>  -->
+
+<div class="form-check" >
+ 
+  <ul>
+    <li *ngFor="let cat of categories">
+        <input class="form-check-input"  (change)="onChange(cat.Id, $event.target.checked)" 
+        [(ngModel)]="cat.ischecked" name="{{ cat.name }}" type="checkbox" id="{{cat.Id}}">
+        <label class="form-check-label" for="{{cat.name}}">
+            {{cat.name}}
+        </label>
+        
+    </li>
+  </ul>
+
+   
+</div>
 
 
                                       </div>
@@ -162,7 +174,7 @@
                       <td>{{item.PlanAmount}}</td>
                       <td>{{item.TaxId}}</td>
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                           <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
 
                       </td>
@@ -196,7 +208,7 @@
 
 
     <!-- lightbox-->
-    <app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+    <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
       <h3 class="f-15">View  Other Tax Details</h3>
 
         <div class="app-modal-body text-center">

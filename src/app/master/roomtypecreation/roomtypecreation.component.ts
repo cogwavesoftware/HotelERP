@@ -55,7 +55,8 @@ export class RoomtypecreationComponent implements OnInit {
   }
 
   validateroom(value) {
-    if (value === 'default') {
+    if (value === 'default') 
+    {
       this.catageryhasError = true;
     } else {
       this.catageryhasError = false;
