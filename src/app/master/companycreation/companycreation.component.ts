@@ -29,6 +29,7 @@ export class CompanycreationComponent implements OnInit {
   public sortBy = '';
   public sortOrder = 'desc';
   public isShown:boolean = false;
+  public isAgGridshow:boolean=false;
   model: any = {};   
   btitle:string="Add";
   
@@ -131,14 +132,34 @@ export class CompanycreationComponent implements OnInit {
  };  
 }
 
+openMyModalData(event) {   
+   this.btitle="Hide Form"    
+   this.isShown = true;
+   this.data.subscribe(response => {
+     this.model.Id=response[event]['Id'];
+     this.model.CompanyName = response[event]['CompanyName'];
+     this.model.GSTNO=response[event]['GSTNO'];
+     this.model.CompanyType=response[event]['CompanyType']; 
+     this.model.ContactName=response[event]['ContactName'];      
+     this.model.MobileNo=response[event]['MobileNo'];      
+     this.model.Address=response[event]['Address'];      
+     this.model.City=response[event]['City'];      
+     this.model.State=response[event]['State'];      
+     this.model.Country=response[event]['Country'];       
+     this.model.Email=response[event]['Email'];
+     this.model.Status=response[event]['Status'];
+     this.model.Discount=response[event]['Discount'];     
+   });
  
+ }
 
 
 onSubmit()
 {
   console.log("submit data", this.model)
   console.log(this.form.value);
-  console.log(this.str);
+  console.log("agrid data "+this.str);
+  this.isAgGridshow=true;
   if (this.form.valid)
   {
     console.log("Form Submitted!");   
@@ -155,7 +176,17 @@ onSubmit()
        Id:data.Id,
        CompanyCode:data.CompanyCode,
        CompanyName: data.CompanyName,
-       GSTNO :data.GSTNO,           
+       GSTNO :data.GSTNO,
+       CompanyType :data.CompanyType,
+       ContactName :data.ContactName,
+       MobileNo :data.MobileNo,
+       Address :data.Address,
+       City :data.City,
+       State :data.State,
+       Country :data.Country,
+       Email :data.Email,
+       Status :data.Status,
+       Discount :data.Discount               
      };
      document.querySelector('#' + event).classList.add('md-show');
    }
