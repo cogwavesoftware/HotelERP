@@ -29,9 +29,10 @@
                                     <div class='col-12 col-sm-6'>
                                         <div class="form-group">
                                             <label class="form-control-label" for="Floor Name">Floor Name</label>
-                                            <input type="text" name="FloorName" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid': f.submitted && FloorName.invalid}"  required autocomplete="off">
+                                            <input type="text" name="FloorName" (keyup)="CallKeytype(FloorName.value)" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid':  f.submitted && FloorName.invalid}"  required autocomplete="off">
                                             <div *ngIf="f.submitted && FloorName.invalid" class="invalid-feedback">
                                               <div *ngIf="FloorName.errors.required">FloorName is invalid</div>
+                                              
                                             </div>
                                         </div>
                                     </div>
