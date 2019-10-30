@@ -15,7 +15,8 @@
 
 
 
-    <div class="formdesign aqua-gradient" *ngIf="isShown">
+    <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
+        <div class="formdesign aqua-gradient" >
         <div class="formouter rotate" >
          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
@@ -62,7 +63,43 @@
                                   </div>
 
                                   <div class="row">
-                                  
+                                    <div class="col-md-6">
+                                        <input type="checkbox" (change)="changeModel($event, modelArr, option.value)" [checked]="modelArr.includes(option.value)" />
+                                        <!-- <ul class="list-group">
+                                            <li class="list-group-item">
+                                              <input type="checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1" (change)="checkUncheckAll()"/> <strong>Select/ Unselect All</strong>
+                                            </li>
+                                          </ul> -->
+                                          <ul class="list-group">
+                                            <li class="list-group-item" *ngFor="let item of checklist">
+                                              <input type="checkbox" [(ngModel)]="item.checked" name="list_name" value="{{item.id}}"  />
+                                              {{item.value}}
+                                            </li>
+                                          </ul>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <code>{{checkedList}}</code>
+                                      </div>
+
+
+
+                                      <div class="form-group">
+                                          <label for="options">Options :</label>
+                                          <div *ngFor="#option of options; #i = index">
+                                              <label>
+                                                  <input type="checkbox"
+                                                         name="options"
+                                                         value="{{option}}"
+                                                         [checked]="options.indexOf(option) >= 0"
+                                                         (change)="updateCheckedOptions(option, $event)"/>
+                                                  {{option}}
+                                              </label>
+                                          </div>
+                                      </div>
+
+                                     
+
+
                                   </div>
                                      
                               </div>

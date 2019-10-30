@@ -6,10 +6,11 @@ import { SharedModule } from './../../shared/shared.module';
 
 import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+ 
 import { CompanycreationRoutingModule } from './companycreation-routing.module';
 import { CompanycreationComponent } from './companycreation.component';
-
+import { AgGridModule } from 'ag-grid-angular';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -18,9 +19,10 @@ import { CompanycreationComponent } from './companycreation.component';
     CommonModule,CompanycreationRoutingModule,
     SharedModule,
     HttpClientModule,
-    DataTableModule,
+    DataTableModule, 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule.withComponents([])
   ]
 })
 export class CompanycreationModule { }

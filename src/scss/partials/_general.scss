@@ -5761,17 +5761,17 @@ outerdiv{
     margin-bottom: 30px;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    .aqua-gradient{
-        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;          
-        color: #fff;        
+    .outerdiv .formdesign.aqua-gradient{
+        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;         
+           
     }
-    .peach-gradient {
+    .outerdiv .formdesign.peach-gradient {
         background: linear-gradient(40deg,#ffd86f,#fc6262)!important;
     }
-    .purple-gradient {
+    .outerdiv .formdesign.purple-gradient {
         background: linear-gradient(40deg,#ff6ec4,#7873f5)!important;
     }
-    .blackred-gradiant {
+    .outerdiv .formdesign.blackred-gradiant {
         background: linear-gradient(40deg, #000000, #ff0f0f) !important;             
         h5{
             color: #fff!important;  
@@ -5905,6 +5905,7 @@ outerdiv{
      .formdesign .form-group.listproducts label{         
        padding:10px;
        width: 100%;
+       color:#455a64!important
     }
     .branchform .form-group input.form-control{
         border: 1px solid hsl(218, 22%, 90%);

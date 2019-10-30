@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
  import { Observable } from 'rxjs';
  import { MasterformService } from './../../_services/masterform.service';
 import { IpserviceService } from 'src/app/_services/ipservice.service';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-creditcard',
   templateUrl: './creditcard.component.html',
@@ -32,9 +33,59 @@ export class CreditcardComponent implements OnInit {
   isroomt:string;
   isroomc:string;
   ipAddress:string;
-  @ViewChild('f',{static:false}) form: any;
-  constructor(private _masterformservice:MasterformService,private _ipservice:IpserviceService) { }
 
+  //checkbox
+  masterSelected:boolean;
+  checklist:any;
+  checkedList:any;
+
+
+  @ViewChild('f',{static:false}) form: any;
+  constructor(private _masterformservice:MasterformService,private _ipservice:IpserviceService) {
+
+    //checkbox
+      this.masterSelected = false;
+      
+      this.checklist = [
+        {id:1,value:'POS',checked:true},
+        {id:2,value:'HOTEL',checked:false},
+        {id:3,value:'ERP',checked:false}         
+      ];
+      this.getCheckedItemList();
+   }
+   public changeModel(ev, list, val) {
+    if (ev.target.checked) {
+      list.push(val);
+    } else {
+      let i = list.indexOf(val);
+      list.splice(i, 1);
+    }
+  }
+  //  checkUncheckAll() {
+  //   for (var i = 0; i < this.checklist.length; i++) {
+  //     this.checklist[i].isSelected = this.masterSelected;
+  //   }
+  //   this.getCheckedItemList();
+  // }
+  // isAllSelected() {
+  //   this.masterSelected = this.checklist.every(function(item:any) {
+  //       return item.isSelected == true;
+  //     })
+  //   this.getCheckedItemList();
+  // }
+ 
+  getCheckedItemList(){
+    debugger;
+    return this.checklist.filter(opt => opt.checked)
+              .map(opt => opt.value)
+    // this.checkedList = [];
+    // for (var i = 0; i < this.checklist.length; i++) {
+    //   if(this.checklist[i].isSelected )
+    //   this.checkedList.push(this.checklist[i]);
+    // }
+   // this.checkedList = JSON.stringify(this.checkedList);
+  }
+ 
   ngOnInit() {
     this.btitle="Add Item"
       //this.data = this._masterformservice.GetBankdetails()
