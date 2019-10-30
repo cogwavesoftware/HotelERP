@@ -98,6 +98,26 @@ export class MasterformService {
   {  
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/item?BranchCode=' + branchcode);  
   }
-     
+  getAllRoles()
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/role'); 
+  }
+
+  getclientproduct(branchcode:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/cproduct?BranchCode=' + branchcode); 
+  }
+  // registerUser(user: User,roles : string[]) {
+  //   const body = {
+  //     UserName: user.UserName,
+  //     Password: user.Password,
+  //     Email: user.Email,
+  //     FirstName: user.FirstName,
+  //     LastName: user.LastName,
+  //     Roles : roles
+  //   }
+  //   var reqHeader = new HttpHeaders({'No-Auth':'True'});
+  //   return this.http.post(environment.apiURL + '/api/User/Register', body,{headers : reqHeader});
+  // }
   
 }

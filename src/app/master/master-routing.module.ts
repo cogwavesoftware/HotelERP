@@ -97,10 +97,16 @@ const routes: Routes = [
          loadChildren: './planmaster/planmaster.module#PlanmasterModule'
        },
 
-      {
+       {
         path: 'walet',
          loadChildren: './walet/walet.module#WaletModule'
-       }
+       },
+       {
+         path: 'tax',
+         loadChildren: './tax/tax.module#TaxModule'
+       },
+       
+
     ]
   }
 ];

@@ -110,6 +110,10 @@ export class FloorcreationComponent implements OnInit {
     }
   }
 
+
+ 
+
+
   Showhide() {
     this.resetForm();
     if (this.btitle == "Hide Form") {

@@ -18,18 +18,83 @@
 
     <div class="formdesign aqua-gradient">
         <div class="formouter rotate">
-            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
-
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">
+                <input type="hidden" name="UserId" class="form-control" [(ngModel)]="model.UserId" #UserId="ngModel" value="{{UserId}}"  >
+               
                 <div class="auth-box card">
                     <div class="card-block">
                         <div class="frmdata">
                             <div class="containar">
                                 <div class="row">
                                     <div class="col-md-12">
+                                         <div class="row">
+                                            <div class="col-md-6">
+    
+                                                <label class="required">UserName*</label>
+                                                  <input type="text" name="UserName" class="form-control" [(ngModel)]="model.UserName" #UserName="ngModel" value="{{UserName}}"  [ngClass]="{'is-invalid': UserName.touched && UserName.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="UserName.touched && UserName.invalid" class="invalid-feedback">
+                                                      <div *ngIf="UserName.errors.required">RoomCode is invalid</div>
+                                                  </div>
+                                            </div> 
+                                            <div class="col-md-6">
+    
+                                                <label class="required">FirstName*</label>
+                                                  <input type="text" name="FirstName" class="form-control" [(ngModel)]="model.FirstName" #FirstName="ngModel" value="{{FirstName}}"  [ngClass]="{'is-invalid': FirstName.touched && FirstName.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="FirstName.touched && FirstName.invalid" class="invalid-feedback">
+                                                      <div *ngIf="FirstName.errors.required">FirstName is invalid</div>
+                                                  </div>
+                                            </div> 
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <!-- [ngClass]="{'is-invalid': password.touched && password.invalid}" -->
+    
+                                                <label class="required">LastName*</label>
+                                                  <input type="text" name="LastName" class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel" value="{{LastName}}"  [ngClass]="{'is-invalid': LastName.touched && LastName.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="LastName.touched && LastName.invalid" class="invalid-feedback">
+                                                      <div *ngIf="LastName.errors.required">LastName is invalid</div>
+                                                  </div>
+                                            </div> 
+                                            <div class="col-md-6">
+    
+                                                <label class="required">MobileNo*</label>
+                                                  <input type="text" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
+                                                      <div *ngIf="MobileNo.errors.required">MobileNo is invalid</div>
+                                                  </div>
+                                            </div> 
+                                        </div>
+
+                                        <div class="row">
+
+                                                <div class='col-md-6'>
+                                                        <div class="form-group">
+                                                            <label class="form-control-label" for="DOB">DOB Date</label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                  <input class="form-control" placeholder="Date" name="DOB" [(ngModel)]="model.DOB" value="{{model.DOB | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
+                                                                  <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                                                    <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>                                                         
+                                                        </div>
+                                                    </div>
+                                                    <div class='col-md-6'>                                                          
+                                                        <label class="required">EmailId*</label>
+                                                            <input type="email" name="EmailId" class="form-control" [(ngModel)]="model.EmailId" #EmailId="ngModel" value="{{EmailId}}"  [ngClass]="{'is-invalid': EmailId.touched && EmailId.invalid}"   required autocomplete="off">
+                                                            <div *ngIf="EmailId.touched && EmailId.invalid" class="invalid-feedback">
+                                                              <div *ngIf="EmailId.errors.required">EmailId is invalid</div>
+                                                            </div>
+                                                    </div>                                               
+                                        </div>
+                                       
+
+ 
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                
                                                 <label class="required">Password*</label>
                                                 <input type="password" name="password" class="form-control"  ngModel #password="ngModel"  required>
                                                 <div class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
@@ -41,7 +106,7 @@
                                             <div class="col-md-6">
 
                                                 <label class="required">Conform Password*</label>
-                                                <input type="password" name="passwordConform" class="form-control"
+                                                <input type="password" name="ConformPassword" class="form-control"
                                                    ngModel #passwconfrm="ngModel"  required compare="password">
                                                     <div class="text-danger" *ngIf="passwconfrm.invalid && (passwconfrm.dirty || passwconfrm.touched)">
                                                         <div *ngIf="passwconfrm.errors['required']">Password confom is required</div>
@@ -50,19 +115,93 @@
                                                     
 
                                             </div>
-                                            
 
                                         </div>
-                                
 
+                                        <div class="row">
+                                                <div class="col-md-12">
+    
+                                                        <label>Address*</label>
+                                                          <textarea name="Address" class="form-control" [(ngModel)]="model.Address" #Address="ngModel" value="{{Address}}"  [ngClass]="{'is-invalid': Address.touched && Address.invalid}"  required  autocomplete="off"></textarea>   
+                                                          <div *ngIf="Address.touched && Address.invalid" class="invalid-feedback">
+                                                              <div *ngIf="Address.errors.required">Address is Required </div>
+                                                          </div>
+                                                    </div>
+                                        </div> 
+                                        <div class="row">
+                                                <div class="col-md-6">
+    
+                                                        <label class="required">GracePeroid*</label>
+                                                          <input type="number" name="GracePeroid" max="12" class="form-control" [(ngModel)]="model.GracePeroid" #GracePeroid="ngModel" value="{{GracePeroid}}"  [ngClass]="{'is-invalid': GracePeroid.touched && GracePeroid.invalid}"  required autocomplete="off">
+                                                          <div *ngIf="GracePeroid.touched && GracePeroid.invalid" class="invalid-feedback">
+                                                              <div *ngIf="GracePeroid.errors.required">GracePeroid is invalid</div>
+                                                          </div>
+                                                    </div> 
 
+                                                    <div class="col-md-6">
+                                                            <label>Discount Type*</label>
+                                                                <select class="custom-select" (blur)="validatediscount(discounttype.value)" (change)="validatediscount(discounttype.value)" #discounttype="ngModel" [class.is-invalid]="distypeicHasError && discounttype.touched" name="discounttype" [(ngModel)]="model.discounttype">
+                                                                  <option value="default">Please Select</option>
+                                                                  <option [value]="dis" *ngFor="let dis of Distype">{{ dis }}</option>
+                                                                </select>
+                                                                <small class="text-danger" [class.d-none]="!distypeicHasError || dis.untouched">Please choose a topic</small>                
+                                                    </div> 
+                                        </div>
+
+                                        <div class="row">
+                                                
+
+                                                <div class="col-md-6">
+    
+                                                        <label class="required">Discount Value*</label>
+                                                          <input type="number" name="DiscountAmount" class="form-control" [(ngModel)]="model.DiscountAmount" #DiscountAmount="ngModel" value="{{DiscountAmount}}"  [ngClass]="{'is-invalid': DiscountAmount.touched && DiscountAmount.invalid}"  required autocomplete="off">
+                                                          <div *ngIf="DiscountAmount.touched && DiscountAmount.invalid" class="invalid-feedback">
+                                                              <div *ngIf="DiscountAmount.errors.required">Discount Value is invalid</div>
+                                                          </div>
+                                                    </div> 
+
+                                                    <div class="col-md-6">
+                                                            <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
+                                                            <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
+                                                            <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                                    </div>
+                                        </div>
+
+                                       
+                                                <div class="row" >
+                                                        <label>Select Role*</label>
+                                                        <ul>
+                                                          <li *ngFor="let item of roles;let i = index">
+                                                            <input type="checkbox" [id]="'roles-'+i" value="{{item.Id}}" [checked]="item.selected"  (change)="updateSelectedRoles(i)">
+                                                            <label [for]="'roles-'+i">{{item.Name}}</label>
+                                                          </li>
+                                                        </ul>
+                                                </div>
+                                                <div class="row">
+                                                        <label>Select Product To Access*</label>
+                                                        
+                                                                <ul>
+                                                                        <li *ngFor="let cat of prulist; let k = index">
+                                                                                <input type="checkbox" [id]="'prulist-'+k" value="{{cat.Id}}" [checked]="cat.selected" (change)="updateProduct(k)"  >
+                                                                                <label [for]="'prulist-'+k">{{cat.Name}}</label>
+
+                                                                        </li>
+                                                                </ul>
+                                                        
+                                                </div>
                                     </div>
 
 
                                 </div>
                             </div>
                         </div>
-                       
+                        <div class="row m-t-30">
+                                <div class="col-md-12 text-center" >
+        
+                                  <button type="submit" [class.green]="f.form.valid"  [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                                  <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                                </div>
+                              </div>
                     </div>
                 </div>
             </form>

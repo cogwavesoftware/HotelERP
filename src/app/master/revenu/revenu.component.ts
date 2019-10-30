@@ -53,11 +53,9 @@ export class RevenuComponent implements OnInit {
     this.model.CreatedBy = "4";
 
     this.model.catagery = "default";
-    if (!this.model.BranchCode) {
-      this.data = this._masterformservice.getrevenudata("CW_1001");
-    } else {
+  
       this.data = this._masterformservice.getrevenudata(this.model.BranchCode);
-    }
+    
 
  
 

@@ -32,8 +32,8 @@
                                             <input type="text" name="FloorName" (keyup)="CallKeytype(FloorName.value)" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid':  f.submitted && FloorName.invalid}"  required autocomplete="off">
                                             <div *ngIf="f.submitted && FloorName.invalid" class="invalid-feedback">
                                               <div *ngIf="FloorName.errors.required">FloorName is invalid</div>
-                                              
                                             </div>
+                                            <small class="text-danger" [class.d-none]="!IsExistdata || FloorName.untouched">Floor Name Aleady Exist</small>
                                         </div>
                                     </div>
                                   <div class='col-12 col-sm-6'>

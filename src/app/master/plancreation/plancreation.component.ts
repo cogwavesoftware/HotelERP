@@ -54,11 +54,9 @@ export class PlancreationComponent implements OnInit {
     this.model.CreatedBy = "4";
 
     this.model.catagery = "default";
-    if (!this.model.BranchCode) {
-      this.data = this._masterformservice.getallplanopr("CW_1001");
-    } else {
+    
       this.data = this._masterformservice.getallplanopr(this.model.BranchCode);
-    }
+    
 
     this._masterformservice.getplan().subscribe(res => {
       this.catagerys = res;
