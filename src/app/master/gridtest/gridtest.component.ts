@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { MasterformService } from "./../../_services/masterform.service";
-
+import { Observable } from "rxjs";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 
 @Component({
@@ -17,14 +17,39 @@ export class GridtestComponent implements OnInit {
   roles:any=[];
   prulist:any[];
   distypeicHasError:boolean=false;
+
+  public data: Observable<any>;
+  public rowsOnPage = 10;
+  public filterQuery = "";
+  public sortBy = "";
+  public sortOrder = "desc";
+  catageryhasError: boolean;
+  public isShown: boolean = false;
+
+  btitle: string = "Add";
+  isValid: boolean;
+  //catagerys=['Room','Hall'];
+  dtat: string;
+  title: string;
+  msg: string;
+  returnUrl: string;
+  showClose = true;
+  theme = "bootstrap";
+  type = "default";
+  closeOther = false;
+  isroomt: string;
+  isroomc: string;
+  ipAddress: string;
+  catagerys: any;
+  categories: any[];
+
   constructor(private _masterformservice: MasterformService,private _ipservice: IpserviceService) {
     this.model.discounttype = "default";
   }
 
   ngOnInit() {
 
-    this.resetForm();
-
+  this.resetForm();
     this._masterformservice.getAllRoles().subscribe(
       (data: any) => {
         data.forEach(obj => obj.selected = false);
@@ -43,14 +68,19 @@ export class GridtestComponent implements OnInit {
 
   resetForm(form?: NgForm) {
     this.model = {
-      Id: 0,
-      Name: null,
-      IFSCCode: null,
-      BankBranchName: null,
-      City: null,
-      BankBranchCode: null,
-      MICRCode: null,
+      UserId: 0,
+      UserName: null,
+      FirstName: null,
+      LastName: null,
+      MobileNo: null,
+      DOB: null,
+      EmailId: null,
+      password: null,
+      ConformPassword: null,
       Address: null,
+      GracePeroid: null,
+      discounttype: null,
+      DiscountAmount: null,
       IsActive: null,
       BranchCode: localStorage.getItem("BranchCode"),
       IpAdd: localStorage.getItem("LOCAL_IP"),
@@ -59,6 +89,20 @@ export class GridtestComponent implements OnInit {
     if (this.roles)
     this.roles.map(x => x.selected = false);
     this.model.discounttype = "default";
+    if(this.prulist)
+    this.prulist.map(x=>x.selected==false);
+  }
+
+  Showhide() {
+    this.resetForm();
+    if (this.btitle == "Hide Form") {
+      this.isShown = false;
+      this.btitle = "Add Item";
+    } else {
+      this.isShown = true;
+      this.btitle = "Hide Form";
+    }
+   
   }
 
   onSubmit(form: NgForm) {
@@ -67,9 +111,6 @@ export class GridtestComponent implements OnInit {
     var f=this.prulist.filter(x=>x.selected).map(y=>y.Id); 
     console.log(form);
     console.log(form.value);
-
-   
-
 
     this.model = { 
       UserId:form.value.UserId,

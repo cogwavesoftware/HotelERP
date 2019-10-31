@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
+import { AddressComponent } from './address/address.component';
+import { AddressbookComponent } from './addressbook/addressbook.component';
+import { UserrightsComponent } from './userrights/userrights.component';
+import { FinancialmasterComponent } from './financialmaster/financialmaster.component';
 
 // import { OtherTaxComponent } from './other-tax/other-tax.component';
 // import { VisitpurposeComponent } from './visitpurpose/visitpurpose.component';
@@ -20,7 +24,7 @@ import { MasterRoutingModule } from './master-routing.module';
 // import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [AddressComponent, AddressbookComponent, UserrightsComponent, FinancialmasterComponent],
   imports: [
     CommonModule,MasterRoutingModule
   ]

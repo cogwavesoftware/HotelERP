@@ -3,8 +3,8 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
         <div class="row">
             <div class="col-md-11">
-                <h5 class="ng-tns-c6-1">Reference Creation</h5>
-                <span class="ng-tns-c6-1 ng-star-inserted">Creating Hotel Reference for Branch </span>
+                <h5 class="ng-tns-c6-1">User Creation</h5>
+                <span class="ng-tns-c6-1 ng-star-inserted">User Creation  for Branch </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1">
                 <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()"> <i
@@ -16,7 +16,7 @@
 
 
 
-    <div class="formdesign aqua-gradient">
+    <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate">
             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">
                 <input type="hidden" name="UserId" class="form-control" [(ngModel)]="model.UserId" #UserId="ngModel" value="{{UserId}}"  >
@@ -58,7 +58,7 @@
                                             <div class="col-md-6">
     
                                                 <label class="required">MobileNo*</label>
-                                                  <input type="text" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
+                                                  <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
                                                   <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
                                                       <div *ngIf="MobileNo.errors.required">MobileNo is invalid</div>
                                                   </div>
