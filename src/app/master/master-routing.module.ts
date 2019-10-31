@@ -44,10 +44,10 @@ const routes: Routes = [
         loadChildren: './companycreation/companycreation.module#CompanycreationModule'
       },
 
-      {
-        path: 'financial',
-        loadChildren: './financial/financial.module#FinancialModule'
-      },
+      // {
+      //   path: 'financial',
+      //   loadChildren: './financial/financial.module#FinancialModule'
+      // },
 
       {
         path: 'gridtest',
@@ -105,7 +105,18 @@ const routes: Routes = [
          path: 'tax',
          loadChildren: './tax/tax.module#TaxModule'
        },
-       
+       {
+        path: 'address',
+        loadChildren: './address/address.module#AddressModule'
+      },
+      {
+        path:'userrights',
+        loadChildren: './userrights/userrights.module#UserrightsModule'
+       },
+       {
+        path:'financial',
+        loadChildren: './financialmaster/financialmaster.module#FinancialmasterModule'
+       },
 
     ]
   }

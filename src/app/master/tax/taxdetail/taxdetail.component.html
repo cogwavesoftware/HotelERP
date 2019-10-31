@@ -30,7 +30,14 @@
                             <div class="containar">
                                 <div class="row">
                                     <div class="col-md-12">
-                                             
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="modelPopup" ngbDatepicker #d="ngbDatepicker">
+                                              <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                              </div>
+                                            </div>
+                                          </div>
                                       <div class="row">
                                         <div class="col-md-6">    
                                             <label class="required">Tax Code*</label>
