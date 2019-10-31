@@ -1,1 +1,295 @@
-<p>taxdetail works!</p>
+<div class="outerdiv">
+
+        <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+          <div class="row">
+              <div class="col-md-11">
+                  <h5 class="ng-tns-c6-1">Tax Master Description Creation</h5>         
+                  <span class="ng-tns-c6-1 ng-star-inserted">Details about tax master description </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-1"> 
+                    <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                  </button>
+                </div>
+          </div>
+        </div>
+    
+    
+    
+        <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
+            <div class="formdesign aqua-gradient" >
+            <div class="formouter rotate" >
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
+                <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+                <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+                <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+                <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
+                
+                 <div class="auth-box card">
+                       <div class="card-block">
+                         <div class="frmdata" >              
+                            <div class="containar">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                             
+                                      <div class="row">
+                                        <div class="col-md-6">    
+                                            <label class="required">Tax Code*</label>
+                                                <input type="text" name="TaxCode" readonly class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel"  [ngClass]="{'is-invalid': TaxCode.touched && TaxCode.invalid}"  required autocomplete="off">
+                                                <div *ngIf="TaxCode.touched && TaxCode.invalid" class="invalid-feedback">
+                                                    <div *ngIf="TaxCode.errors.required">TaxCode is invalid</div>
+                                                </div>
+                                        </div> 
+    
+                                        <div class="col-md-6">
+                                            <label>Tax Name*</label>
+                                            <select class="custom-select" (blur)="validateplan(TaxName.value)" (change)="validateplan(TaxName.value)" #TaxName="ngModel" [class.is-invalid]="catageryhasError && TaxName.touched" name="TaxName" [(ngModel)]="model.TaxName">
+                                                    <option value="default">Please Select</option>
+                                                    <option [value]="TaxName.Id" *ngFor="let TaxName of catagerys" >{{ TaxName }}</option>
+                                                    </select>
+                                                    <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a RevName</small> 
+                                        </div>
+    
+                                 
+      
+                                      </div>
+                                        <div class="row">
+                                            <div class="col-md-6">                                                   
+                                                            <label>From Amount*</label>
+                                                            <input type="number" name="FromAmount" class="form-control" [(ngModel)]="model.FromAmount" #FromAmount="ngModel" value="{{FromAmount}}"  [ngClass]="{'is-invalid': FromAmount.touched && FromAmount.invalid}"  required autocomplete="off">
+                                                            <div *ngIf="FromAmount.touched && FromAmount.invalid" class="invalid-feedback">
+                                                                <div *ngIf="FromAmount.errors.required">FromAmount is invalid</div>
+                                                            </div>   
+                                                         </div>
+                                            <div class="col-md-6">
+                                                    <label>To Amount*</label>
+                                                    <input type="number" name="ToAmount" class="form-control" [(ngModel)]="model.ToAmount" #ToAmount="ngModel" value="{{ToAmount}}"  [ngClass]="{'is-invalid': ToAmount.touched && ToAmount.invalid}"  required autocomplete="off">
+                                                    <div *ngIf="ToAmount.touched && ToAmount.invalid" class="invalid-feedback">
+                                                        <div *ngIf="ToAmount.errors.required">ToAmount is invalid</div>
+                                                    </div> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-6">                                                   
+                                                   <label>Tax Percenttage*</label>
+                                                   <input type="number" name="TaxPer" class="form-control" [(ngModel)]="model.TaxPer" #TaxPer="ngModel" value="{{TaxPer}}"  [ngClass]="{'is-invalid': TaxPer.touched && TaxPer.invalid}"  required autocomplete="off">
+                                                   <div *ngIf="TaxPer.touched && TaxPer.invalid" class="invalid-feedback">
+                                                       <div *ngIf="TaxPer.errors.required">TaxPer is invalid</div>
+                                                   </div> 
+                                                 </div>
+                                                <div class="col-md-6">
+                                                        <div class="row" style="margin-bottom: 0px;">
+                                                        <div class="col-md-6">                                                   
+                                                                <div class="form-group">
+                                                                        <label class="form-control-label" for="EffectiveDate">Effective  Date</label>
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                              <input class="form-control" placeholder="EffectiveDate" name="EffectiveDate" [(ngModel)]="model.EffectiveDate" value="{{model.EffectiveDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker"   required autocomplete="off">
+                                                                              <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                                              </div>
+                                                                            
+                                                                            </div>
+                                                                          
+                                                                          </div>                                                         
+                                                                    </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">                                                   
+                                                                <div class="form-group">
+                                                                        <label class="form-control-label" for="ToDate">To Date</label>
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                              <input class="form-control" placeholder="ToDate" name="ToDate" [(ngModel)]="model.ToDate" value="{{model.ToDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
+                                                                              <div class="input-group-append bg-default" (click)="dd.toggle()" >
+                                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>                                                         
+                                                                    </div> 
+                                                        </div>
+                                                        </div>
+                                                        
+                                                </div>
+                                            </div>
+                                      <div class="row">
+                                            <div class='col-md-12'>
+                                                    <label>Tax Description*</label>
+                                                   <textarea rows="3" name="TaxDesc" class="form-control" [(ngModel)]="model.TaxDesc" #TaxDesc="ngModel" value="{{TaxDesc}}"  [ngClass]="{'is-invalid': TaxDesc.touched && TaxDesc.invalid}"  required autocomplete="off"></textarea>
+                                                   <div *ngIf="TaxDesc.touched && TaxDesc.invalid" class="invalid-feedback">
+                                                       <div *ngIf="TaxDesc.errors.required">TaxDesc is invalid</div>
+                                                   </div> 
+                                                </div> 
+                                                     
+                                      </div>
+
+                                      <div class="row">
+                                            <div class="col-md-6">
+                                                    <label>Room Type*</label>
+                                                    <ul class="list-group">
+                                                            <li class="list-group-item"  *ngFor="let item of roomtypes">
+                                                              <input type="radio" [(ngModel)]="model.roomtype" name="roomtype" value="{{item}}"  /> 
+                                                              {{item}}
+                                                  
+                                                            </li>
+                                                      </ul>
+
+
+
+                                                    <!-- <div class="row" style="margin-bottom: 0px;">
+                                                            <label style="width: 100%;">Room Type*</label> 
+                                                    <div class="col-md-3">                                                   
+                                                            <input style="width:20px; float:left" id="room" [value]="true" type="radio" class="form-control" value="Room1" name="roomtype" [(ngModel)]="model.roomtype">
+                                                            <label class="form-control-label" for="room">Room</label>
+                                                            
+                                                    </div>
+
+                                                    <div class="col-md-3">                                                   
+                                                            <input style="width:20px; float:left" id="hall" [value]="false" type="radio" class="form-control" value="Hall1" name="roomtype" [(ngModel)]="model.roomtype">
+                                                                    <label class="form-control-label" for="hall">Hall</label>                                                            
+                                                    </div>
+                                                    </div> -->
+                                                    
+                                            </div>
+                                            <div class="col-md-6">                                                   
+                                               <label>Active*</label>
+                                               <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">
+                                               <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
+                                                   <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
+                                               </div> 
+                                             </div>
+                                           
+                                        </div>
+                                         
+                                  </div>
+                   
+                              
+                                </div>
+                              </div>
+                         </div>
+                         <div class="row m-t-30">
+                            <div class="col-md-12 text-center" >
+                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                            </div>
+                          </div>
+                        </div>
+                  </div>       
+              </form>
+           </div> 
+         </div>
+    
+    
+    <!-- -----------table start Here------------ -->
+    <div class="productlist">
+            <div class="shadow p-3 mb-5 bg-white rounded" >
+          <div class="table-content crm-table">
+            <div class="project-table">
+              <div id="crm-contact" class="dt-responsive"  *ngIf="data | async as data">
+                <div class="row">  
+      
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Tax Master Data List</div>
+                        </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div style="text-align: right;">
+                          <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                            <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                          </label>
+                        </div>
+                      </div>  
+    
+                </div>
+                 
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                    <thead>
+                    <tr class="blueorange-gradient">                
+                      <th>
+                        <mfDefaultSorter  by="TaxCode">TaxCode</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter  by="TaxName">TaxName</mfDefaultSorter>
+                      </th>               
+                    <th>
+                    <mfDefaultSorter  by="EffectiveDate">EffectiveDate</mfDefaultSorter>
+                    </th>
+                    <th>
+                    <mfDefaultSorter  by="ToDate">ToDate</mfDefaultSorter>
+                    </th>
+                      <th>
+                        <mfDefaultSorter>Action</mfDefaultSorter>
+                      </th>
+                    </tr>
+                    <tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                     <tr *ngFor="let item of mf.data; let i = index;">
+                       <td>{{item.TaxCode}}</td>
+                       <td>{{item.TaxName}}</td>
+                       <td>{{item.EffectiveDate}}</td>
+                      <td>{{item.ToDate}}</td>     
+
+                      <td class="action-icon">
+                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                          
+                      </td>
+                    </tr>  
+                    </tbody>
+                    <tfoot>
+                    <tr class="blueorange-gradient">
+                      <!-- <th>Profile</th> -->
+                      <th>TaxCode</th>
+                      <th>TaxName</th>    
+                      <th>EffectiveDate</th>
+                      <th>ToDate</th>                 
+                      <th></th>             
+                    </tr>
+                    <tr>
+                      <td colspan="10">
+                        <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                      </td>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+    </div>
+    </div>
+    <!-- -----------table End Here------------ -->
+    </div>
+    
+    
+    <!-- lightbox-->
+    <app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+      <h3 class="f-15">View TaxMaster Details</h3>
+      
+        <div class="app-modal-body text-center"> 
+            <table class="table table-striped text-left m-t-10">
+                <tr>
+                <td>TaxCode :</td>
+                <td>{{ model.TaxCode }}</td>
+                </tr>
+                <tr>
+                <td>TaxName :</td>
+                <td>{{ model.TaxName }}</td>
+                </tr>
+                <tr>
+                <td>EffectiveDate :</td>
+                <td>{{ model.EffectiveDate }}</td>
+                </tr>
+                <tr>
+                <td>ToDate :</td>
+                <td>{{ model.ToDate }}</td>
+                </tr>
+                   
+               </table>      
+               <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+          </div>
+           
+        </app-modal-animation>

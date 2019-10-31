@@ -1,13 +1,13 @@
 
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { TaxmasterRoutingModule } from './taxmaster-routing.module';
-import { TaxmasterComponent } from './taxmaster.component';
-
+import { TaxmasterComponent } from './taxmaster.component'; 
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import { TaxmasterComponent } from './taxmaster.component';
     DataTableModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class TaxmasterModule { }
