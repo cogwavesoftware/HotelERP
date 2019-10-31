@@ -3,13 +3,18 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TaxdetailRoutingModule } from './taxdetail-routing.module';
 import { TaxdetailComponent } from './taxdetail.component';
-
+import {DatePipe} from '@angular/common';
+import {DataTableModule} from 'angular2-datatable';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+ 
 
 
 @NgModule({
   declarations: [TaxdetailComponent],
   imports: [
-    CommonModule,SharedModule,TaxdetailRoutingModule
-  ]
+    CommonModule,SharedModule,TaxdetailRoutingModule,DataTableModule,FormsModule,ReactiveFormsModule,HttpClientModule
+  ],
+  providers:[DatePipe]
 })
 export class TaxdetailModule { }
