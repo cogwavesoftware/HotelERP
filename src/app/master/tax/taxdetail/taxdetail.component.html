@@ -205,17 +205,30 @@
                     <thead>
                     <tr class="blueorange-gradient">                
                       <th>
-                        <mfDefaultSorter  by="TaxCode">TaxCode</mfDefaultSorter>
+                      <mfDefaultSorter  by="TaxCode">TaxCode</mfDefaultSorter>
                       </th>
                       <th>
-                        <mfDefaultSorter  by="TaxName">TaxName</mfDefaultSorter>
+                      <mfDefaultSorter  by="TaxName">TaxName</mfDefaultSorter>
+                      </th>
+                      <th>
+                      <mfDefaultSorter  by="TaxType">TaxType</mfDefaultSorter>
+                      </th>
+                      <th>
+                      <mfDefaultSorter  by="FromAmount">FromAmount</mfDefaultSorter>
                       </th>               
-                    <th>
-                    <mfDefaultSorter  by="EffectiveDate">EffectiveDate</mfDefaultSorter>
-                    </th>
-                    <th>
-                    <mfDefaultSorter  by="ToDate">ToDate</mfDefaultSorter>
-                    </th>
+                      <th>
+                      <mfDefaultSorter  by="ToAmount">ToAmount</mfDefaultSorter>
+                      </th>
+                      <th>
+                      <mfDefaultSorter  by="TaxPer">TaxPer</mfDefaultSorter>
+                      </th>
+                      <th>
+                      <mfDefaultSorter  by="EffectiveDate">EffectiveDate</mfDefaultSorter>
+                      </th>
+                      <th>
+                      <mfDefaultSorter  by="ToDate">ToDate</mfDefaultSorter>
+                      </th>
+                      
                       <th>
                         <mfDefaultSorter>Action</mfDefaultSorter>
                       </th>
@@ -226,10 +239,14 @@
                     <tbody>
                         
                      <tr *ngFor="let item of mf.data; let i = index;">
-                       <td>{{item.TaxCode}}</td>
-                       <td>{{item.TaxName}}</td>
-                       <td>{{item.EffectiveDate}}</td>
-                      <td>{{item.ToDate}}</td>     
+                      <td>{{item.TaxCode}}</td>
+                      <td>{{item.TaxName}}</td>
+                      <td>{{item.TaxType}}</td>  
+                      <td>{{item.FromAmount}}</td>
+                      <td>{{item.ToAmount}}</td>
+                      <td>{{item.TaxPer}}</td>  
+                      <td>{{item.EffectiveDate}}</td>
+                      <td>{{item.ToDate}}</td>                        
 
                       <td class="action-icon">
                           <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
@@ -243,8 +260,13 @@
                       <!-- <th>Profile</th> -->
                       <th>TaxCode</th>
                       <th>TaxName</th>    
-                      <th>EffectiveDate</th>
-                      <th>ToDate</th>                 
+                      <th>TaxType</th>  
+                      <th>FromAmount</th>    
+                      <th>ToAmount</th>
+                      <th>TaxPer</th>  
+                      <th>EffectiveDate</th>    
+                      <th>ToDate</th>    
+                                       
                       <th></th>             
                     </tr>
                     <tr>
@@ -271,22 +293,46 @@
       
         <div class="app-modal-body text-center"> 
             <table class="table table-striped text-left m-t-10">
-                <tr>
-                <td>TaxCode :</td>
-                <td>{{ model.TaxCode }}</td>
-                </tr>
-                <tr>
-                <td>TaxName :</td>
-                <td>{{ model.TaxName }}</td>
-                </tr>
-                <tr>
-                <td>EffectiveDate :</td>
-                <td>{{ model.EffectiveDate }}</td>
-                </tr>
-                <tr>
-                <td>ToDate :</td>
-                <td>{{ model.ToDate }}</td>
-                </tr>
+              <tr>
+              <td>TaxCode :</td>
+              <td>{{ model.TaxCode }}</td>
+              </tr>
+              <tr>
+              <td>TaxName :</td>
+              <td>{{ model.TaxName }}</td>
+              </tr>
+              <tr>
+              <td>TaxType :</td>
+              <td>{{ model.TaxType }}</td>
+              </tr>
+              <tr>
+              <td>FromAmount :</td>
+              <td>{{ model.FromAmount }}</td>
+              </tr>
+              <tr>
+              <td>ToAmount :</td>
+              <td>{{ model.ToAmount }}</td>
+              </tr>
+              <tr>
+              <td>TaxPer :</td>
+              <td>{{ model.TaxPer }}</td>
+              </tr>
+              <tr>
+              <td>TaxPer :</td>
+              <td>{{ model.TaxPer }}</td>
+              </tr>
+
+              <tr>
+              <td>EffectiveDate :</td>
+              <td>{{ model.EffectiveDate }}</td>
+              </tr>
+
+              <tr>
+              <td>ToDate :</td>
+              <td>{{ model.ToDate }}</td>
+              </tr>
+
+              
                    
                </table>      
                <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    

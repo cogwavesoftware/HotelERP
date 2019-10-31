@@ -149,7 +149,11 @@ export class TaxdetailComponent implements OnInit {
        TaxCode:data.TaxCode,   
        TaxName: data.TaxName,
        EffectiveDate:data.EffectiveDate,
-       ToDate:data.ToDate      
+       ToDate:data.ToDate,   
+       FromAmount:data.FromAmount,   
+       ToAmount:data.ToAmount,
+       IsActive:data.IsActive,
+       TaxType:data.TaxType
      };
      document.querySelector('#' + event).classList.add('md-show');
    }
