@@ -24,7 +24,7 @@ import { FinancialmasterComponent } from './financialmaster/financialmaster.comp
 // import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
-  declarations: [AddressComponent, AddressbookComponent, UserrightsComponent, FinancialmasterComponent],
+  declarations: [],
   imports: [
     CommonModule,MasterRoutingModule
   ]

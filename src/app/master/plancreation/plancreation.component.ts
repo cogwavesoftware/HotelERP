@@ -68,7 +68,7 @@ export class PlancreationComponent implements OnInit {
       this.categories = data;
       console.log(this.categories);
     });
-
+    this.model.PlanId=null
   }
   // getothertaxEdit
   onChange(ids: number, isChecked: boolean) {
@@ -119,6 +119,7 @@ export class PlancreationComponent implements OnInit {
     this.model = {
       Id: 0,
       PlanName: null,
+      PlanId:'-1',
       TaxId: null,
       PlanAmount: null,
       BranchCode: localStorage.getItem("BranchCode"),
