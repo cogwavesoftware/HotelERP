@@ -1,3 +1,29 @@
+.commonstyles .users-card-style .blackred-gradiant {
+    background: linear-gradient(40deg, #000000, #ff0f0f) !important;        
+    h5{
+        color: #fff;
+    }   
+}
+
+.homethreebox .aqua-gradient{
+    background: linear-gradient(40deg, #2096ff, #05ffa3) !important; 
+    h5{
+        color: #fff;      
+    }
+    
+}
+.homethreebox .peach-gradient{
+    background: linear-gradient(40deg,#ffd86f,#fc6262)!important;
+    h5{
+        color: #fff;      
+    }
+}
+.homethreebox .purple-gradient{
+    background: linear-gradient(40deg,#ff6ec4,#7873f5)!important;
+    h5{
+        color: #fff;      
+    }
+}
 // /* You can add global styles to this file, and also import other style files */
 // button.btn-submit{
 //     background-color: #38547b;
