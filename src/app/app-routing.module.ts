@@ -211,6 +211,19 @@ const routes: Routes = [
         path: 'tax',
          loadChildren: './master/tax/tax.module#TaxModule'
        },
+       {
+        path: 'address',
+         loadChildren: './master/address/address.module#AddressModule'
+       },
+       {
+        path:'userrights',
+        loadChildren: './master/userrights/userrights.module#UserrightsModule'
+       },
+       {
+        path:'financial',
+        loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
+       },
+       
      
     ]
   },
