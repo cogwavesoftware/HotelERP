@@ -22,8 +22,12 @@ export class AuthenticationService {
    private _username: string;
  constructor(private http: HttpClient) { }
 
+
+
     gologin(username, password) 
     {       
+
+     
          let urlSearchParams = new URLSearchParams();
          urlSearchParams.append('UserName', username);
          urlSearchParams.append('Password', password);
@@ -32,6 +36,7 @@ export class AuthenticationService {
         return this.http.post<any>(environment.apiURL + '/token',  body,{ headers:environment.BASE_CONTENTTYPE_HEADER }) 
         .pipe(map(user => {
             // login successful if there's a user in the response
+            
             if (user) 
             {                 
                 // store user details and basic auth credentials in local storage 
@@ -92,7 +97,7 @@ export class AuthenticationService {
             // login successful if there's a user in the response
             if (user) 
             {      
-              alert("user")           
+                        
                 // store user details and basic auth credentials in local storage 
                 // to keep user logged in between page refreshes
                 user.authdata = window.btoa(username + ':' + password);
@@ -112,8 +117,8 @@ export class AuthenticationService {
     GetloginuserDetailsbyMobileno(mobileno): Observable<loginMaster>
     {
        
-      return this.http.get<loginMaster>(environment.apiURL + '/api/common/HMSAccount/Getlogin?mobileno=' + mobileno) 
-      .catch(this.errorHandler); 
+      return this.http.get<loginMaster>(environment.apiURL + '/api/common/HMSAccount/Getloginbymobile?mobileno=' + mobileno) 
+      
     }
 
      GenerateonetimeOTP(mobileno)   
@@ -132,7 +137,8 @@ export class AuthenticationService {
 
     errorHandler(error: HttpErrorResponse)
     {
-     return Observable.throw(error.message || "server ERROR");
+      return Observable.throw(error.message || "server ERROR");
+   
     }
 
     getData(): Observable<any>

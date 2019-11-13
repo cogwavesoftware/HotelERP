@@ -1,7 +1,7 @@
 
 import { Component, OnInit,NgZone } from '@angular/core';
 import { AuthenticationService } from './../_services/authentication.service';
-
+import {HttpClient} from '@angular/common/http';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 // import {TranslateService } from '@ngx-translate/core';
 
@@ -56,6 +56,7 @@ declare global {
   ]
 })
 export class CommonpageComponent implements OnInit {
+  ipAddress:any;
   public navType: string;
   public themeLayout: string;
   public verticalPlacement: string;
@@ -87,7 +88,18 @@ export class CommonpageComponent implements OnInit {
 
   private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
 
-  constructor(private _authservice:AuthenticationService,private zone: NgZone) {
+  constructor(private _authservice:AuthenticationService,private zone: NgZone,private http: HttpClient) {
+
+
+
+  this.http.get<{ip:string}>('https://jsonip.com')
+  .subscribe( data => {
+    console.log('th data', data);
+    localStorage.removeItem('LOCAL_IP');
+    this.ipAddress= localStorage.setItem('LOCAL_IP', data.ip)
+    
+   })
+
 
    // translate.addLangs(['en','fr','ta','zh']);
     //translate.setDefaultLang('fr');
@@ -123,8 +135,9 @@ export class CommonpageComponent implements OnInit {
 
   ngOnInit() {
   this._authservice.logout();
-  this.determineLocalIp();
+  //this.determineLocalIp();
 
+  
   }
 
   private determineLocalIp() {
@@ -139,8 +152,8 @@ export class CommonpageComponent implements OnInit {
         if (!ice || !ice.candidate || !ice.candidate.candidate) {
           return;
         }
-
         this.localIp = this.ipRegex.exec(ice.candidate.candidate)[1];
+        alert(this.localIp)
         localStorage.removeItem('LOCAL_IP');
         localStorage.setItem('LOCAL_IP', this.localIp)
         pc.onicecandidate = () => {};

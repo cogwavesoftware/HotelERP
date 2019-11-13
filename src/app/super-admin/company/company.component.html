@@ -1,263 +1,266 @@
 <div class="outerdiv">
-    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
-        <div class="row">
-            <div class="col-md-11">
-                <h5 class="ng-tns-c6-1">Company Creation</h5>         
-                <span class="ng-tns-c6-1 ng-star-inserted">Creating company details</span>
-              </div>
-              <div class="col-xs-12 col-sm-12 col-md-1"> 
-                  <button type="button" class="btn btn-sm btn-success text-white" (click)="openMyModal()"  > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
-                  </button>
-               
-              </div>
-        </div>
+  <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+      <div class="row">
+          <div class="col-md-11">
+              <h5 class="ng-tns-c6-1">Company Creation {{this.mode}}</h5>         
+              <span class="ng-tns-c6-1 ng-star-inserted">Creating company details</span>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-1"> 
+                <button type="button" class="btn btn-sm btn-success text-white" (click)="openMyModal()"  > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                </button>
+             
+            </div>
       </div>
+    </div>
 
-   
-      <div class="formdesign aqua-gradient" *ngIf="isShown">
-    <div class="formouter rotate" >
-        <!-- <form #form="ngForm" autocomplete="off"  class="md-float-material form-material contact-form"  (submit)="onSubmit(form)"> -->
-      <!-- <form  #loginForms="ngForm" class="md-float-material form-material contact-form" action="javascript:"> -->
-          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">    
-          <input type="hidden" ngModel value="{{Id}}" #Id [(ngModel)]="model.Id" name="Id" class="form-control" autocomplete="off">
-          <div class="auth-box card">
-           <div class="card-block">
-        
-             <div class="frmdata" >          
-               
-                <div class="containar">
-                    <div class="row">
-                      <div class="col-md-12">
-                          <div class="row">
-                              <!-- <div class='col-md-6'>
-                                  <div class="form-group">
-                                      <label class="form-control-label" for="Branchcode">Name</label>
-                                      <input type="text"  ngModel value="{{ClientName}}" #ClientName1 [(ngModel)]="ClientName" name="ClientName"  class="form-control" required="required" autocomplete="off">                                                            
-                                  </div>
-                              </div> -->
-
-                              <div class="col-md-6">
     
-                                  <label>Company Name*</label>
-                                    <input type="text" name="ClientName" class="form-control" [(ngModel)]="model.ClientName" #ClientName="ngModel" value="{{ClientName}}"  [ngClass]="{'is-invalid': ClientName.touched && ClientName.invalid}"  required autocomplete="off">
-                                    <div *ngIf="ClientName.touched && ClientName.invalid" class="invalid-feedback">
-                                        <div *ngIf="ClientName.errors.required">ClientName is Required </div>
-                                    </div>
-                              </div> 
-
-                              <!-- <div class='col-md-6'>
-                                  <div class="form-group">
-                                      <label class="form-control-label" for="Branchcode">MobileNo</label>
-                                      <input type="text"  ngModel value="{{MobileNo}}" #MobileNo1 [(ngModel)]="MobileNo" name="MobileNo" maxlength="10"  class="form-control" required="required">                                                              
-                                  </div>
-                              </div> -->
-
-
-                              <div class="col-md-6">
-                                  <label>MobileNo*</label>
-                                    <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required pattern="^\d{10}$" autocomplete="off">
-                                    <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
-                                        <div *ngIf="MobileNo.errors.required">MobileNo is Required </div>
-                                        <div *ngIf="MobileNo.errors.pattern">Invalid MobileNo</div>
-                                    </div>
-                              </div> 
-                          </div>
-
-                         
-                          <div class="mb-3">
-    
-                              <label>Address*</label>
-                                <textarea name="ClientAddress" class="form-control" [(ngModel)]="model.ClientAddress" #ClientAddress="ngModel" value="{{ClientAddress}}"  [ngClass]="{'is-invalid': ClientAddress.touched && ClientAddress.invalid}"  required  autocomplete="off"></textarea>   
-                                <div *ngIf="ClientAddress.touched && ClientAddress.invalid" class="invalid-feedback">
-                                    <div *ngIf="ClientAddress.errors.required">Address is Required </div>
+ 
+    <div class="formdesign aqua-gradient" *ngIf="isShown">
+  <div class="formouter rotate" >
+      <!-- <form #form="ngForm" autocomplete="off"  class="md-float-material form-material contact-form"  (submit)="onSubmit(form)"> -->
+    <!-- <form  #loginForms="ngForm" class="md-float-material form-material contact-form" action="javascript:"> -->
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">    
+        <input type="hidden" ngModel value="{{Id}}" #Id [(ngModel)]="model.Id" name="Id" class="form-control" autocomplete="off">
+        <div class="auth-box card">
+         <div class="card-block">
+      
+           <div class="frmdata" >          
+             
+              <div class="containar">
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <!-- <div class='col-md-6'>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="Branchcode">Name</label>
+                                    <input type="text"  ngModel value="{{ClientName}}" #ClientName1 [(ngModel)]="ClientName" name="ClientName"  class="form-control" required="required" autocomplete="off">                                                            
                                 </div>
-                          </div>
-                          
+                            </div> -->
+
+                            <div class="col-md-6">
+  
+                                <label>Company Name*</label>
+                                  <input type="text" name="ClientName" (keyup)="CallKeytype(ClientName.value)" class="form-control" [(ngModel)]="model.ClientName" #ClientName="ngModel" value="{{ClientName}}"  [ngClass]="{'is-invalid': ClientName.touched && ClientName.invalid  }"  required autocomplete="off">
+                                  <div *ngIf="ClientName.touched && ClientName.invalid" class="invalid-feedback">
+                                      <div *ngIf="ClientName.errors.required">Company Name is Required </div>    
+                                  </div>
+
+                                  <small class="text-danger" [class.d-none]="!IsExistdata || ClientName.untouched">Companyname Allready Exist</small>
+                            </div> 
+
+                            <!-- <div class='col-md-6'>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="Branchcode">MobileNo</label>
+                                    <input type="text"  ngModel value="{{MobileNo}}" #MobileNo1 [(ngModel)]="MobileNo" name="MobileNo" maxlength="10"  class="form-control" required="required">                                                              
+                                </div>
+                            </div> -->
+
+
+                            <div class="col-md-6">
+                                <label>MobileNo*</label>
+                                  <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required pattern="^\d{10}$" autocomplete="off">
+                                  <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
+                                      <div *ngIf="MobileNo.errors.required">MobileNo is Required </div>
+                                      <div *ngIf="MobileNo.errors.pattern">Invalid MobileNo</div>
+                                  </div>
+                            </div> 
+                        </div>
+
+                       
+                        <div class="mb-3">
+  
+                            <label>Address*</label>
+                              <textarea name="ClientAddress" class="form-control" [(ngModel)]="model.ClientAddress" #ClientAddress="ngModel" value="{{ClientAddress}}"  [ngClass]="{'is-invalid': ClientAddress.touched && ClientAddress.invalid}"  required  autocomplete="off"></textarea>   
+                              <div *ngIf="ClientAddress.touched && ClientAddress.invalid" class="invalid-feedback">
+                                  <div *ngIf="ClientAddress.errors.required">Address is Required </div>
+                              </div>
+                        </div>
+                        
+
+
+                      
+                        <!-- <div class="form-group">
+                            <label class="form-control-label" for="Email">Address</label>
+                            <!-- <input type="textarea"  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress"  class="form-control" required="" autocomplete="off">     -->
+                            <!-- <textarea  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress" class="form-control" required="required">
+
+                            </textarea>                                       
+                        </div> -->
+                     
 
 
                         
-                          <!-- <div class="form-group">
-                              <label class="form-control-label" for="Email">Address</label>
-                              <!-- <input type="textarea"  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress"  class="form-control" required="" autocomplete="off">     -->
-                              <!-- <textarea  ngModel value="{{ClientAddress}}" #ClientAddress1 [(ngModel)]="ClientAddress" name="ClientAddress" class="form-control" required="required">
+                        <div class="row">
+                            
 
-                              </textarea>                                       
-                          </div> -->
-                       
+                        <div class="col-md-6">
+                            <label>Email*</label>
+                              <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" name="EmailId" class="form-control" [(ngModel)]="model.EmailId" #EmailId="ngModel" value="{{EmailId}}"  [ngClass]="{'is-invalid': EmailId.touched && EmailId.invalid}"  required    />
+                               <div *ngIf="EmailId.touched && EmailId.invalid" class="invalid-feedback">
+                                  <div *ngIf="EmailId.errors.required">Email is Required </div>
+                                  <div *ngIf="EmailId.errors.pattern">Invalid Email</div>
+                              </div>
+                        </div> 
 
-
-                          
-                          <div class="row">
-                              
-
-                          <div class="col-md-6">
-                              <label>Email*</label>
-                                <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" name="EmailId" class="form-control" [(ngModel)]="model.EmailId" #EmailId="ngModel" value="{{EmailId}}"  [ngClass]="{'is-invalid': EmailId.touched && EmailId.invalid}"  required    />
-                                 <div *ngIf="EmailId.touched && EmailId.invalid" class="invalid-feedback">
-                                    <div *ngIf="EmailId.errors.required">Email is Required </div>
-                                    <div *ngIf="EmailId.errors.pattern">Invalid Email</div>
-                                </div>
-                          </div> 
-
-                            <div class='col-md-6'>
-                                  <div class="form-group">
-                                      <label class="form-control-label" for="Branchcode">Transaction Date</label>
-                                      <div class="form-group">
-                                          <div class="input-group">
-                                            <input class="form-control" placeholder="Date" name="Trdate" [(ngModel)]="model.Trdate" value="{{model.Trdate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
-                                            <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                              <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                            </div>
+                          <div class='col-md-6'>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="Branchcode">Transaction Date</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                          <input class="form-control" placeholder="Date"  name="Trdate" [(ngModel)]="model.Trdate" value="{{model.Trdate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
+                                          <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                            <span class="icofont icofont-ui-calendar input-group-text"></span>
                                           </div>
-                                        </div>                                                         
-                                  </div>
-                              </div> 
-                          </div>
-                      </div>
-                      
-     
-
+                                        </div>
+                                      </div>                                                         
+                                </div>
+                            </div> 
+                        </div>
                     </div>
-                  </div>
-
-       
-             </div>
-             <div class="row m-t-30">
-                <div class="col-md-12 text-center" >
-                  <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                  <button type="button" (click)="closepopup()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
-                </div>
-              </div>
-             <!-- <div class="row m-t-30">
-               <div class="col-md-12 text-center" >
-                 <button type="submit" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                 <button type="button" (click)="closepopup()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
-               </div>
-             </div> -->
-            </div>
-         </div>       
-      </form>
-    </div> 
-  </div>
-
-  <div class="productlist">
-      <div class="shadow p-3 mb-5 bg-white rounded" >
+                    
    
-    <div class="table-content crm-table">
-      <div class="project-table">
-        <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
-          <div class="row">
- 
 
+                  </div>
+                </div>
+
+     
+           </div>
+           <div class="row m-t-30">
+              <div class="col-md-12 text-center" >
+                <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                <button type="button" (click)="closepopup()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+              </div>
+            </div>
+           <!-- <div class="row m-t-30">
+             <div class="col-md-12 text-center" >
+               <button type="submit" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+               <button type="button" (click)="closepopup()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+             </div>
+           </div> -->
+          </div>
+       </div>       
+    </form>
+  </div> 
+</div>
+
+<div class="productlist">
+    <div class="shadow p-3 mb-5 bg-white rounded" >
+ 
+  <div class="table-content crm-table">
+    <div class="project-table">
+      <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+        <div class="row">
+
+
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Data List</div>
+                </div>
               <div class="col-xs-12 col-sm-12 col-md-6">
-                  <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Data List</div>
-                  </div>
-                <div class="col-xs-12 col-sm-12 col-md-6">
-                  <div style="text-align: right;">
-                    <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
-                      <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
-                      <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
-                    </label>
-                  </div>
-                </div>  
+                <div style="text-align: right;">
+                  <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                    <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
+                    <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                  </label>
+                </div>
+              </div>  
 
 
 
 <!--                 
-            <div class="col-xs-12 col-sm-12 col-md-6"> 
-              <div style="text-align: right;">
-                <label>Search:
-                  <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
-                </label>
-              </div>
-            </div> -->
-          </div>
-           
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
-              <thead>
-              <tr class="blueorange-gradient">
-                <!-- <th>
-                  <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
-                </th> -->
-                <th>
-                  <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter  by="ClientName">Name</mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter  by="ClientAddress">Address</mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="MobileNo">MobileNo</mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter  by="EmailId">EmailId</mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter  by="Trdate">Start date</mfDefaultSorter>
-                </th>
+          <div class="col-xs-12 col-sm-12 col-md-6"> 
+            <div style="text-align: right;">
+              <label>Search:
+                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+              </label>
+            </div>
+          </div> -->
+        </div>
+         
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+            <thead>
+            <tr class="blueorange-gradient">
+              <!-- <th>
+                <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+              </th> -->
+              <th>
+                <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter  by="ClientName">Name</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter  by="ClientAddress">Address</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="MobileNo">MobileNo</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter  by="EmailId">EmailId</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter  by="Trdate">Start date</mfDefaultSorter>
+              </th>
 
-                <th>
-                  <mfDefaultSorter>Action</mfDefaultSorter>
-                </th>
-              </tr>
-              <tr>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let item of mf.data; let i = index;">
-                <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
-                <td>{{item.Id}}</td>
-                <td>{{item.ClientName}}</td>
-                <td>{{item.ClientAddress}}</td>
-                <td>{{item.MobileNo}}</td>
-                <td>{{item.EmailId}}</td>
-                <!-- <td class="text-primary text-center">
-                  <span *ngIf="item.age > 45"><i class="fa fa-star" aria-hidden="true"></i></span>
-                  <span *ngIf="item.age <= 45 && item.age > 25"><i class="fa fa-star-half-o" aria-hidden="true"></i></span>
-                  <span *ngIf="item.age <= 25"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                </td> -->
-                <!-- <td>{{item.phone_no}}</td> -->
-                <td>{{item.Trdate  | date: 'dd/MM/yyyy'}}</td>
+              <th>
+                <mfDefaultSorter>Action</mfDefaultSorter>
+              </th>
+            </tr>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of mf.data; let i = index;">
+              <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
+              <td>{{item.Id}}</td>
+              <td>{{item.ClientName}}</td>
+              <td>{{item.ClientAddress}}</td>
+              <td>{{item.MobileNo}}</td>
+              <td>{{item.EmailId}}</td>
+              <!-- <td class="text-primary text-center">
+                <span *ngIf="item.age > 45"><i class="fa fa-star" aria-hidden="true"></i></span>
+                <span *ngIf="item.age <= 45 && item.age > 25"><i class="fa fa-star-half-o" aria-hidden="true"></i></span>
+                <span *ngIf="item.age <= 25"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+              </td> -->
+              <!-- <td>{{item.phone_no}}</td> -->
+              <td>{{item.Trdate  | date: 'dd/MM/yyyy'}}</td>
 
-                 
-                <td class="action-icon">
-                    <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalDataview('effect-13',item)"><i class="fa fa-book"></i></a>
+               
+              <td class="action-icon">
+                  <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalDataview('effect-4',item)"><i class="fa fa-book"></i></a>
+                  <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                <!-- <a href="javascript:;" class="crm-action-delete text-danger"><i class="fa fa-trash"></i></a> -->
+
+                <!-- <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
                     <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
-                  <!-- <a href="javascript:;" class="crm-action-delete text-danger"><i class="fa fa-trash"></i></a> -->
-
-                  <!-- <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
-                      -->
-                </td>
-              </tr>
-              </tbody>
-              <tfoot>
-              <tr class="blueorange-gradient">
-                <!-- <th>Profile</th> -->
-                <th>Id</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>MobileNo</th>
-                <th>EmailId</th>                
-                <th>Start date</th>
-                <th>Action</th>
-              </tr>
-              <tr>
-                <td colspan="10">
-                  <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-                </td>
-              </tr>
-              </tfoot>
-            </table>
-          </div>
+                    -->
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr class="blueorange-gradient">
+              <!-- <th>Profile</th> -->
+              <th>Id</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>MobileNo</th>
+              <th>EmailId</th>                
+              <th>Start date</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td colspan="10">
+                <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
     </div>
-   
-      </div></div>
+  </div>
+ 
+    </div></div>
 
 
 <!-- Add Contact Start Model -->
@@ -267,81 +270,83 @@
 
 <app-modal-basic #modalDefault>
 
-  <div class="app-modal-header">
-    <h4 class="modal-title"># {{ Id }} - {{ Name }} Details</h4>
-    <button type="button" class="close basic-close" (click)="modalDefault.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="app-modal-body text-center">
-      
-    <table class="table table-striped text-left m-t-20">
-      <tr>
-         <td>Id :</td>
-        <td>{{ Id }}</td>
-      </tr>
-      <tr>
-        <td>Name :</td>
-        <td>{{ ClientName }}</td>
-      </tr>
-      <tr>
-        <td>Address :</td>
-        <td>{{ ClientAddress }}</td>
-      </tr>
-      <tr>
-        <td>MobileNo :</td>
-        <td>{{ MobileNo }}</td>
-      </tr>
-      <tr>
-        <td>EmailId :</td>
-        <td>{{ EmailId }}</td>
-      </tr>
-      <tr>
-        <td>Start date. :</td>
-        <td>{{ Trdate  }}</td>
-      </tr>    
-    </table>
+<div class="app-modal-header">
+  <h4 class="modal-title"># {{ Id }} - {{ Name }} Details</h4>
+  <button type="button" class="close basic-close" (click)="modalDefault.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="app-modal-body text-center">
+    
+  <table class="table table-striped text-left m-t-20">
+    <tr>
+       <td>Id :</td>
+      <td>{{ Id }}</td>
+    </tr>
+    <tr>
+      <td>Name :</td>
+      <td>{{ ClientName }}</td>
+    </tr>
+    <tr>
+      <td>Address :</td>
+      <td>{{ ClientAddress }}</td>
+    </tr>
+    <tr>
+      <td>MobileNo :</td>
+      <td>{{ MobileNo }}</td>
+    </tr>
+    <tr>
+      <td>EmailId :</td>
+      <td>{{ EmailId }}</td>
+    </tr>
+    <tr>
+      <td>Start date. :</td>
+      <td>{{ Trdate  }}</td>
+    </tr>    
+  </table>
 
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-default waves-effect" (click)="modalDefault.hide()">Close</button>
-    <!-- <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button> -->
-  </div>
+</div>
+<div class="app-modal-footer">
+  <button type="button" class="btn btn-default waves-effect" (click)="modalDefault.hide()">Close</button>
+  <!-- <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button> -->
+</div>
 </app-modal-basic>
 
 
 
-<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
-  <h3 class="f-15">View  Floor Details</h3>
-  
-    <div class="app-modal-body text-center"> 
-      <table class="table table-striped text-left m-t-20">
-        <tr>
-           <td>Id :</td>
-          <td>{{ model.Id }}</td>
-        </tr>
-        <tr>
-          <td>Name :</td>
-          <td>{{ model.ClientName }}</td>
-        </tr>
-        <tr>
-          <td>Address :</td>
-          <td>{{ model.ClientAddress }}</td>
-        </tr>
-        <tr>
-          <td>MobileNo :</td>
-          <td>{{ model.MobileNo }}</td>
-        </tr>
-        <tr>
-          <td>EmailId :</td>
-          <td>{{ model.EmailId }}</td>
-        </tr>
-           
-      </table>
-           <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
-      </div>
-       
-    </app-modal-animation>
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
+<h3 class="f-15">View Company Details</h3>
+
+  <div class="app-modal-body text-center"> 
+    <table class="table table-striped text-left m-t-20">
+      <tr>
+         <td>Id :</td>
+        <td>{{ model.Id }}</td>
+      </tr>
+      <tr>
+        <td>Name :</td>
+        <td>{{ model.ClientName }}</td>
+      </tr>
+      <tr>
+        <td>Address :</td>
+        <td>{{ model.ClientAddress }}</td>
+      </tr>
+      <tr>
+        <td>MobileNo :</td>
+        <td>{{ model.MobileNo }}</td>
+      </tr>
+      <tr>
+        <td>EmailId :</td>
+        <td>{{ model.EmailId }}</td>
+      </tr>
+         
+    </table>
+         <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+    </div>
+     
+  </app-modal-animation>
+
+  <ng2-toasty [position]="position"></ng2-toasty>
 
 
 

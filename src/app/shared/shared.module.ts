@@ -16,6 +16,7 @@ import {SpinnerComponent} from './spinner/spinner.component';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {DataFilterPipe} from './elements/data-filter.pipe';
 import { CompareValidatorDirective } from './compare-validator.directive';
+import { SelectRequiredValidatorDirective } from './select-validator.directive'
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -44,7 +45,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalAnimationComponent,
     SpinnerComponent,
     ClickOutsideModule,
-    DataFilterPipe,CompareValidatorDirective
+    DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective
     
   ],
   declarations: [
@@ -58,7 +59,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
-    DataFilterPipe,CompareValidatorDirective
+    DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective
   
     
   ],

@@ -4,7 +4,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Branch Creation</h5>         
+              <h5 class="ng-tns-c6-1">Branch Creation {{this.mode}}</h5>         
               <span class="ng-tns-c6-1 ng-star-inserted">Creating branch details for company</span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -309,17 +309,7 @@
   <!-- Row starting -->
   <div class="row">
    
-    <!-- <div class='col-12 col-sm-6'>
-        <div class="form-group row">
-            <label class="col-sm-3 form-control-label" for="LicenceType">Licence Type</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control tooltip-form" id="LicenceTypep" formControlName="LicenceType" name="LicenceType" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.LicenceType.errors || form.controls.LicenceType.touched || form.controls.LicenceType.dirty}" />
-                <div class="messages text-danger invalid-feedback"  *ngIf="form.controls.LicenceType.errors?.required">
-                    LicenceType can't be blank
-                </div>
-            </div>                    
-        </div>
-    </div>   -->
+
   
   
      <div class='col-12 col-sm-6'>
@@ -382,16 +372,7 @@
   
     
   <div class="row">
-    <!-- <div class="form-group">
-                <label for="options">Options :</label>
-                <li *ngFor="let item of ordersData;let i = index">
-                  <input type="checkbox" [id]="'ordersData-'+i" value="{{item.ProductName}}" [checked]="item.IsActive">
-                   <label [for]="'ordersData-'+i">{{item.ProductName}}</label> 
-                </li>
-            </div> -->
-      
-    
-    
+   
       <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
         <input type="checkbox" [formControlName]="i">
         {{ordersData[i].ProductName}}
@@ -410,7 +391,7 @@
           </div>
           <div class="col-sm-12">
               <div class="form-group text-center">               
-                  <button class="btn btn-primary">Register</button>
+                  <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Register</button>
               </div>
             </div> 
       

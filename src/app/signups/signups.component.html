@@ -46,7 +46,7 @@
                               </div>
                           </div>
                            
-                          <form #loginForms="ngForm" class="form-group" (ngSubmit)="OnSubmit(email.value,password.value)">
+                          <form #loginForms="ngForm" class="form-group">
                               <div class="row loginform">
                                   <div class="col-md-12">
                                      
@@ -97,4 +97,4 @@
   </footer>
   </div>
  
-  
+  <ng2-toasty [position]="position"></ng2-toasty>
