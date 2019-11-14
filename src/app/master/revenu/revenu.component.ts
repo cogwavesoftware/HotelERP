@@ -4,6 +4,9 @@ import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
+
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
+
 @Component({
   selector: 'app-revenu',
   templateUrl: './revenu.component.html',
@@ -35,35 +38,33 @@ export class RevenuComponent implements OnInit {
   catagerys: any;
   categories: any[];
   emailFormArray: Array<any> = [];
-  @ViewChild("f", { static: false }) form: any;
+  @ViewChild("f", { static: false }) form: any;  
+  mode: string;
+  Branch:string;
+  filterdata:any;
+  IsExistdata:boolean;
   constructor(
     private _masterformservice: MasterformService,
-    private _ipservice: IpserviceService
-  ) { }
+    private _ipservice: IpserviceService,
+    private toastyService: ToastyService
+  ) { this.Branch= localStorage.getItem("BranchCode");
+}
 
   ngOnInit() {
+    this.mode = "(List)";
     this.btitle = "Add Item";
-    // this.data = this._masterformservice.GetBankdetails()
+   this.data = this._masterformservice.getrevenudata(this.Branch);
 
-    this.model.BranchCode = localStorage.getItem("BranchCode");
-    this.model.IpAdd = localStorage.getItem("LOCAL_IP");
-    this.model.CreatedBy = localStorage.getItem("id");
-    //delete
-    this.model.BranchCode = "CW_1001";
-    this.model.CreatedBy = "4";
-
-    this.model.catagery = "default";
-  
-      this.data = this._masterformservice.getrevenudata(this.model.BranchCode);
+   this._masterformservice.getrevenudata(this.Branch).subscribe(data=>{
+     this.filterdata=data;
+   });
     
-
- 
-
-    this._masterformservice.getothertax("CW_1001").subscribe((data: any) => {
+    this._masterformservice.getothertax(this.Branch).subscribe((data: any) => {
       data.forEach(obj => (obj.selected = false));
       this.categories = data;
       console.log(this.categories);
     });
+
 
   }
   // getothertaxEdit
@@ -99,9 +100,11 @@ export class RevenuComponent implements OnInit {
     if (this.btitle == "Hide Form") {
       this.isShown = false;
       this.btitle = "Add Item";
+      this.mode = "(List)";
     } else {
       this.isShown = true;
       this.btitle = "Hide Form";
+      this.mode = "(New)";
     }
     this._masterformservice.getothertax("CW_1001").subscribe((data: any) => {
       data.forEach(obj => (obj.selected = false));
@@ -117,9 +120,7 @@ export class RevenuComponent implements OnInit {
       PlanName: null,
       TaxId: null,
       PlanAmount: null,
-      BranchCode: localStorage.getItem("BranchCode"),
-      IpAdd: localStorage.getItem("LOCAL_IP"),
-      CreatedBy: localStorage.getItem("id")
+      IsActive:true
     };
     //delete
     this.model.BranchCode = "CW_1001";
@@ -139,6 +140,7 @@ export class RevenuComponent implements OnInit {
       this.model.IpAdd = response[event]["IpAdd"];
       this.model.ModifyBy = response[event]["CreatedBy"];
 
+      this.mode = "(Edit)"+  this.model.RevName;
       console.log( this.model.Id)
       this._masterformservice.getaxEditforRevenu("CW_1001", this.model.Id).subscribe((data: any) => {
         data.forEach(obj => {
@@ -153,7 +155,7 @@ export class RevenuComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSuddbmit(form?: NgForm) {
 
     console.log(this.emailFormArray);
     console.log(this.form.value);
@@ -185,8 +187,76 @@ export class RevenuComponent implements OnInit {
     }
   }
 
+
+
+  onSubmit(form?: NgForm) {
+
+
+    form.value.BranchCode = localStorage.getItem("BranchCode");
+    form.value.CreatedBy = localStorage.getItem("id");
+    form.value.ModifyBy = localStorage.getItem("id");
+    form.value.IpAdd = localStorage.getItem("LOCAL_IP");
+
+    form.value.SelectedTax = this.emailFormArray;
+
+
+   
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+
+    if (this.IsExistdata === true) {
+      this.addToast("Cogwave Software", "RevenuName already Exist ", "warning");
+      return;
+    }
+
+    this._masterformservice.Saverevenu(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "RevenuName Data Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            IsActive: "true",
+            BranchCode: localStorage.getItem("BranchCode"),
+            Id: "0"
+          });
+          this.isShown = true;
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "RevenuName Data Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      } else {
+        this.addToast("Cogwave Software", "RevenuName Data Not Saved", "error");
+        form.reset({
+          IsActive: "true",
+          BranchCode: localStorage.getItem("BranchCode"),
+          Id: "0"
+        });
+        this.isShown = true;
+      }
+    });
+    this.data = this._masterformservice.getrevenudata(this.Branch);
+  
+  }
+
+
   Closeform() {
+    this.isShown = false;
+    this.btitle = "Add Item";
     this.resetForm();
+    this.mode = "(List)";
   }
 
   openMyModal(event, data) {
@@ -203,5 +273,47 @@ export class RevenuComponent implements OnInit {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"
     );
+  }
+
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
   }
 }

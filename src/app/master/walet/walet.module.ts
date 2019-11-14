@@ -8,8 +8,12 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { WaletRoutingModule } from './walet-routing.module';
 import { WaletComponent } from './walet.component';
 import {HttpClientModule} from '@angular/common/http';
+
+import { ToastyModule } from 'ng2-toasty';
+
 @NgModule({
   declarations: [WaletComponent],
-  imports: [CommonModule,WaletRoutingModule,SharedModule,FormsModule,DataTableModule]
+  imports: [CommonModule,WaletRoutingModule,SharedModule,FormsModule,DataTableModule,
+  ToastyModule.forRoot()]
 })
 export class WaletModule { }

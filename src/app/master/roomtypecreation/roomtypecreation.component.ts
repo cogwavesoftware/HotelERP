@@ -121,6 +121,8 @@ export class RoomtypecreationComponent implements OnInit {
             Sixth: 0,
             ExtraChild: 0
           });
+          this.model.topic = "default";
+          this.model.catagery = "default";
           this.isShown = true;
         } else {
           this.addToast(
@@ -138,9 +140,20 @@ export class RoomtypecreationComponent implements OnInit {
         form.reset({
           IsActive: "true",
           BranchCode: localStorage.getItem("BranchCode"),
-          RNo: "0"
+          RNo: "0",
+          ChannelRoomCode: "CHNL0001",
+          Seventh: 0,
+          Eighth: 0,
+          Nineth: 0,
+          Tenth: 0,
+          Defaultpax: 2,
+          Fivth: 0,
+          Sixth: 0,
+          ExtraChild: 0
         });
         this.isShown = true;
+        this.model.topic = "default";
+        this.model.catagery = "default";
       }
     });
 

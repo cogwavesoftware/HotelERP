@@ -4,7 +4,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">BankDetail Creation</h5>         
+              <h5 class="ng-tns-c6-1">BankDetail Creation {{mode}}</h5>         
               <span class="ng-tns-c6-1 ng-star-inserted">Creating Hotel  BankDetail for Branch </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -18,7 +18,7 @@
 
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">      
              <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
              <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
              <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -35,7 +35,7 @@
                                         <div class="col-md-6">
     
                                             <label class="required">BankName*</label>
-                                              <input type="text" name="Name" class="form-control" [(ngModel)]="model.Name" #Name="ngModel" value="{{Name}}"  [ngClass]="{'is-invalid': Name.touched && Name.invalid}"  required autocomplete="off">
+                                              <input type="text" name="Name"  class="form-control" [(ngModel)]="model.Name" #Name="ngModel" value="{{Name}}"  [ngClass]="{'is-invalid': Name.touched && Name.invalid}"  required autocomplete="off">
                                               <div *ngIf="Name.touched && Name.invalid" class="invalid-feedback">
                                                   <div *ngIf="Name.errors.required">Bankname is invalid</div>
                                               </div>
@@ -53,7 +53,7 @@
                                        
                                             <div class="col-md-6">
                                                 <label>City*</label>
-                                                <input type="text" name="City" class="form-control" [(ngModel)]="model.City" #City="ngModel" value="{{City}}"  [ngClass]="{'is-invalid': City.touched && City.invalid}"  required   autocomplete="off">
+                                                <input type="text" name="City"  class="form-control" [(ngModel)]="model.City" #City="ngModel" value="{{City}}"  [ngClass]="{'is-invalid': City.touched && City.invalid}"  required   autocomplete="off">
                                                 <div *ngIf="City.touched && City.invalid" class="invalid-feedback">
                                                   <div *ngIf="City.errors.required">City Cant'be Empty</div>
                                                 </div>
@@ -82,6 +82,7 @@
                                     
                                     </div>
                                       <div class="row">
+
                                             <div class="col-md-6">
                                                     <label>MICRCode*</label>
                                                     <input type="text" name="MICRCode" class="form-control" [(ngModel)]="model.MICRCode" #MICRCode="ngModel" value="{{MICRCode}}"  [ngClass]="{'is-invalid': MICRCode.touched && MICRCode.invalid}"  required autocomplete="off">
@@ -91,14 +92,24 @@
                                                 </div>
 
 
+                                                <div class="col-md-6">
+                                                    <label> IFSCCode*</label>
+                                                    <input type="text" name="IFSCCode" class="form-control" [(ngModel)]="model.IFSCCode" #IFSCCode="ngModel" value="{{IFSCCode}}"  [ngClass]="{'is-invalid': IFSCCode.touched && IFSCCode.invalid}"  required autocomplete="off">
+                                                    <div *ngIf="IFSCCode.touched && IFSCCode.invalid" class="invalid-feedback">
+                                                      <div *ngIf="IFSCCode.errors.required">Bank BranchCode is invalid</div>
+                                                    </div>
+                                                </div>
+                                              </div>
+
+                                <div class="row">
                                           <div class="col-md-6">
-                                                  <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
+                                                  <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
                                                   <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
                                                   <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                           </div>
-
+                                        </div>
                                           
-                                      </div>
+                                      
                                     
                               </div>
                
@@ -195,7 +206,7 @@
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
+                <tr class="blueorange-gradient">
                   <!-- <th>Profile</th> -->
                   <th>Id</th>
                   <th>Name</th>
@@ -260,3 +271,6 @@
         </div>
          
       </app-modal-animation>
+
+
+      <ng2-toasty [position]="position"></ng2-toasty>

@@ -33,6 +33,11 @@ export class MasterformService {
   getwalet() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/walet');
   }
+   
+  getothertaxAll(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxall?BranchCode=' + branchcode);
+  }
+
   getothertax(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertax?BranchCode=' + branchcode);
   }
@@ -82,6 +87,36 @@ export class MasterformService {
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveroomdetails',roomdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+
+  SaveBankDetail(Bankdetail)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savebankdetails',Bankdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+  SavePlanmaster(Planmaster:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savecommonplan',Planmaster,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SaveWalet(walet:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savewallet',walet,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+  Saveothertax(othertax:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveothertax',othertax,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SaveLedger(ledger:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveledgers',ledger,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  Saverevenu(rev:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saverevenue',rev,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

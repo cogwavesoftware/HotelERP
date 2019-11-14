@@ -205,6 +205,7 @@ export class FloorcreationComponent implements OnInit {
     this.isShown = false;
     this.btitle = "Add Item";
     this.resetForm();
+    this.mode = "(List)";
   }
   openMyModalData(event) {
     this.isEdit = true;

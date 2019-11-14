@@ -4,7 +4,7 @@ import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
-
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 @Component({
   selector: "app-plancreation",
   templateUrl: "./plancreation.component.html",
@@ -36,39 +36,37 @@ export class PlancreationComponent implements OnInit {
   catagerys: any;
   categories: any[];
   emailFormArray: Array<any> = [];
+  
+ mode: string;
+ Branch:string;
+ filterdata:any;
+ IsExistdata:boolean;
   @ViewChild("f", { static: false }) form: any;
   constructor(
     private _masterformservice: MasterformService,
-    private _ipservice: IpserviceService
-  ) { }
+    private _ipservice: IpserviceService,
+    private toastyService: ToastyService
+  ) { 
+    this.Branch= localStorage.getItem("BranchCode");
+  }
 
   ngOnInit() {
+    this.resetForm()
     this.btitle = "Add Item";
-    // this.data = this._masterformservice.GetBankdetails()
-
-    this.model.BranchCode = localStorage.getItem("BranchCode");
-    this.model.IpAdd = localStorage.getItem("LOCAL_IP");
-    this.model.CreatedBy = localStorage.getItem("id");
-    //delete
-    this.model.BranchCode = "CW_1001";
-    this.model.CreatedBy = "4";
-
-    this.model.catagery = -1;
-    
-      this.data = this._masterformservice.getallplanopr(this.model.BranchCode);
-    
+    this.mode = "(New)";
+    this.data = this._masterformservice.getallplanopr(this.Branch);
 
     this._masterformservice.getplan().subscribe(res => {
       this.catagerys = res;
     });
 
 
-    this._masterformservice.getothertax("CW_1001").subscribe((data: any) => {
+    this._masterformservice.getothertax(this.Branch).subscribe((data: any) => {
       data.forEach(obj => (obj.selected = false));
       this.categories = data;
       console.log(this.categories);
     });
-    this.model.PlanId=null
+    
   }
   // getothertaxEdit
   onChange(ids: number, isChecked: boolean) {
@@ -80,34 +78,20 @@ export class PlancreationComponent implements OnInit {
     }
   }
 
-  validateplan(value) {
-    if (value === "default") {
-      this.catageryhasError = true;
-    } else {
-      this.catageryhasError = false;
-    }
-  }
-
-  getIP() {
-    this._ipservice.getIpAddress().subscribe((res: any) => {
-      this.ipAddress = res.ip;
-      console.log(this.ipAddress);
-    });
-  }
 
   Showhide() {
-
-
     this.emailFormArray = [];
     this.resetForm();
     if (this.btitle == "Hide Form") {
       this.isShown = false;
       this.btitle = "Add Item";
+      this.mode = "(List)";
     } else {
       this.isShown = true;
       this.btitle = "Hide Form";
+      this.mode = "(New)";
     }
-    this._masterformservice.getothertax("CW_1001").subscribe((data: any) => {
+    this._masterformservice.getothertax(this.Branch).subscribe((data: any) => {
       data.forEach(obj => (obj.selected = false));
       this.categories = data;
       console.log(this.categories);
@@ -143,8 +127,9 @@ export class PlancreationComponent implements OnInit {
       this.model.IpAdd = response[event]["IpAdd"];
       this.model.ModifyBy = response[event]["CreatedBy"];
       console.log(this.model.PlanId)
+      this.mode = "(Edit)"+  this.model.PlanId;
       this.emailFormArray=[];
-      this._masterformservice.getothertaxEdit("CW_1001", this.model.PlanId).subscribe((data: any) => {
+      this._masterformservice.getothertaxEdit(this.Branch, this.model.PlanId).subscribe((data: any) => {
         data.forEach(obj => {
           if (obj.ischecked == true) {
             console.log(obj);
@@ -157,7 +142,7 @@ export class PlancreationComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSuvbmit() {
 
     console.log(this.emailFormArray);
     console.log(this.form.value);
@@ -189,8 +174,75 @@ export class PlancreationComponent implements OnInit {
     }
   }
 
+  onSubmit(form?: NgForm) {
+
+
+    form.value.BranchCode = localStorage.getItem("BranchCode");
+    form.value.CreatedBy = localStorage.getItem("id");
+    form.value.ModifyBy = localStorage.getItem("id");
+    form.value.IpAdd = localStorage.getItem("LOCAL_IP");
+
+    form.value.SelectedTax = this.emailFormArray;
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+
+    if (this.IsExistdata === true) {
+      this.addToast("Cogwave Software", "RevenuName already Exist ", "warning");
+      return;
+    }
+
+    this._masterformservice.Saverevenu(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "RevenuName Data Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            IsActive: "true",
+            BranchCode: localStorage.getItem("BranchCode"),
+            Id: "0"
+          });
+          this.isShown = true;
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "RevenuName Data Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      } else {
+        this.addToast("Cogwave Software", "RevenuName Data Not Saved", "error");
+        form.reset({
+          IsActive: "true",
+          BranchCode: localStorage.getItem("BranchCode"),
+          Id: "0"
+        });
+        this.isShown = true;
+      }
+    });
+    this.data = this._masterformservice.getrevenudata(this.Branch);
+  
+  }
+
+
+
+
+
+
   Closeform() {
+    this.isShown = false;
+    this.btitle = "Add Item";
     this.resetForm();
+    this.mode = "(List)";
   }
 
   openMyModal(event, data) {
@@ -208,4 +260,46 @@ export class PlancreationComponent implements OnInit {
       "md-show"
     );
   }
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
+  }
+
 }

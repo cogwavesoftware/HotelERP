@@ -38,7 +38,7 @@ export class RoomorganizerComponent implements OnInit {
   public Floorlist:any;
   private IsExistdata:boolean;
   private filterData:any;
-
+  isroomc: string;
   constructor(private _masterformervice: MasterformService,private _roomtypeservice: RoomtypeService,
     private _floorservice: FloormasterService, private toastyService:ToastyService ) {
     this.Branch = localStorage.getItem("BranchCode");
@@ -106,9 +106,10 @@ export class RoomorganizerComponent implements OnInit {
             BranchCode: localStorage.getItem("BranchCode"),
             RNo: "0",
             RoomCode: '-1',
-            Prioritys: "P",
+            priority: "P",
             FloorName:'select'
           });
+          this.model.catagery = "default";
           this.isShown = true;
         } else {
           this.addToast(
@@ -128,7 +129,7 @@ export class RoomorganizerComponent implements OnInit {
           BranchCode: localStorage.getItem("BranchCode"),
           RNo: "0",
           RoomCode: '-1',
-          Prioritys: "P",
+          priority: "P",
           FloorName:'select'
         });
         this.isShown = true;
@@ -152,7 +153,7 @@ export class RoomorganizerComponent implements OnInit {
       RoomCode: '-1',
       RoomNo: null,
       RoomDesc: "g", 
-      Prioritys: "P",
+      priority: "P",
       IsRoom: null, 
       IsActive:true,
       FloorName:'select'
@@ -168,10 +169,16 @@ export class RoomorganizerComponent implements OnInit {
       this.model.RoomCode = response[event]["RoomCode"];
       this.model.RoomNo = response[event]["RoomNo"];
       this.model.RoomDesc = response[event]["RoomDesc"];
-      this.model.Prioritys = response[event]["Prioritys"];
+      this.model.priority = response[event]["priority"];
       this.model.IsActive = response[event]["IsActive"];
       this.model.FloorName = response[event]["FloorName"];
       this.mode = "(Edit) " + this.model.RoomNo;
+      this.isroomc = response[event]["IsRoom"];
+      if (this.isroomc = "true") {
+        this.model.catagery = "Room";
+      } else {
+        this.model.catagery = "Hall";
+      }
     
     });
   }
@@ -181,7 +188,7 @@ export class RoomorganizerComponent implements OnInit {
       RoomCode: data.RoomCode,
       RoomNo: data.RoomNo,
       RoomDesc: data.RoomDesc,
-      Prioritys: data.Prioritys,
+      priority: data.priority,
       FloorName: data.FloorName,
       IsActive: data.IsActive,
       BranchCode: data.BranchCode

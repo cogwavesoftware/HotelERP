@@ -16,7 +16,7 @@ import { ValidationErrors, Validator, AbstractControl, NG_VALIDATORS } from "@an
 export class SelectRequiredValidatorDirective implements Validator {
     @Input('appSelectValidator') defaultValue: string;
     validate(control: AbstractControl): { [key: string]: any } | null {
-        alert('f')
+       
         return control.value === this.defaultValue ? { 'defaultSelected': true } : null;
     }
 }

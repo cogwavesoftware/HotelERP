@@ -4,7 +4,7 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Walet Creation</h5>         
+                  <h5 class="ng-tns-c6-1">Walet Creation {{mode}}</h5>         
                   <span class="ng-tns-c6-1 ng-star-inserted">Creating Walet for Branch </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -18,7 +18,7 @@
     
         <div class="formdesign aqua-gradient" *ngIf="isShown">
             <div class="formouter rotate" >
-             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">      
                  <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
                 
                  <div class="auth-box card">
@@ -31,7 +31,7 @@
                                       <div class="row">
                                             <div class="col-md-6">
         
-                                                <label class="required">WaletName*</label>
+                                                <label class="required">Walet Name*</label>
                                                   <input type="text" name="WaletName" class="form-control" [(ngModel)]="model.WaletName" #WaletName="ngModel" value="{{WaletName}}"  [ngClass]="{'is-invalid': WaletName.touched && WaletName.invalid}"  required autocomplete="off">
                                                   <div *ngIf="WaletName.touched && WaletName.invalid" class="invalid-feedback">
                                                       <div *ngIf="WaletName.errors.required">WaletName is invalid</div>
@@ -43,7 +43,7 @@
                                       <div class="row">
 
                                           <div class="col-md-6">
-                                              <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
+                                              <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
                                               <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
                                               <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                       </div>
@@ -177,3 +177,6 @@
             </div>
              
           </app-modal-animation>
+
+
+          <ng2-toasty [position]="position"></ng2-toasty>
