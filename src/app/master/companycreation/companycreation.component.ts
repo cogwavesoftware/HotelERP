@@ -31,6 +31,7 @@ export class CompanycreationComponent implements OnInit {
   public isShown:boolean = false;
   public isAgGridshow:boolean=false;
   model: any = {};   
+  CompanyType:any = {};
   btitle:string="Add";
   
   isValid:boolean;
@@ -46,7 +47,9 @@ export class CompanycreationComponent implements OnInit {
   isroomt:string;
   isroomc:string;
   catageryhasError:boolean;   
-  catagerys=['Room','Hall'];
+  catageryhasError1:boolean;   
+  companytypes=['MNC','Local' ];   
+  typeoflevels=['Level1','Level2','Level3','Level4'];
   public str;
 
   @ViewChild('f',{static:false}) form: any;
@@ -77,6 +80,8 @@ export class CompanycreationComponent implements OnInit {
         this.data = this._masterformservice.getothertax(this.model.BranchCode)
       }    
      console.log(this.data)
+     
+      
   }
 /* ag grid code starting */
   onSelectionChanged() {
@@ -99,7 +104,14 @@ export class CompanycreationComponent implements OnInit {
     this.catageryhasError = false;
   }
 }
-
+validatelevels(value) {
+  if (value === 'default') {
+    this.catageryhasError1 = true;
+  } else {
+    this.catageryhasError1 = false;
+  }
+}
+ 
  Showhide(){
   this.resetForm();
   if (this.btitle=="Hide Form"){
@@ -166,7 +178,9 @@ onSubmit()
   }
 }
 
-
+savegridvalue(){
+  console.log("on click save grid data "+this.str);
+}
  Closeform() {
   this.resetForm(); 
    }
