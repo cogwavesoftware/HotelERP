@@ -12,7 +12,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { PlancreationRoutingModule } from './plancreation-routing.module';
 import { PlancreationComponent } from './plancreation.component';
 
-
+import {ToastyModule} from 'ng2-toasty';
+ 
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PlancreationComponent } from './plancreation.component';
     HttpClientModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastyModule.forRoot()
   ]
 })
 export class PlancreationModule { }

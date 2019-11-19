@@ -3,7 +3,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Other Tax Creation</h5>         
+              <h5 class="ng-tns-c6-1">Other Tax Creation {{mode}}</h5>         
               <span class="ng-tns-c6-1 ng-star-inserted">Creating Other Tax details  </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -17,7 +17,7 @@
 
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
             <input type="hidden" name="TaxCode" class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel" value="{{TaxCode}}"  >
             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
@@ -55,6 +55,19 @@
                                         </div>
                                     </div>
                                   </div>
+
+
+                                  <div class="row">
+                                     
+                                      <div class='col-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
+                                            <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
+                                          
+                                        </div>
+                                    </div>
+      
+                              </div>
                                      
                               </div>
                
@@ -65,7 +78,7 @@
                      <div class="row m-t-30">
                         <div class="col-md-12 text-center" >
                           <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
                         </div>
                       </div>
                     </div>
@@ -184,3 +197,6 @@
       </div>
        
     </app-modal-animation>
+
+    
+<ng2-toasty [position]="position"></ng2-toasty>

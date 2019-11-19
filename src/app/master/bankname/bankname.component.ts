@@ -1,16 +1,15 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
-
 import { IpserviceService } from "src/app/_services/ipservice.service";
-
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 @Component({
   selector: "app-bankname",
   templateUrl: "./bankname.component.html",
   styleUrls: ["./bankname.component.scss"]
 })
+
 export class BanknameComponent implements OnInit {
   public data: Observable<any>;
   public rowsOnPage = 10;
@@ -21,7 +20,7 @@ export class BanknameComponent implements OnInit {
   model: any = {};
   btitle: string = "Add";
   isValid: boolean;
-
+  IsExistdata:boolean
   dtat: string;
   title: string;
   msg: string;
@@ -33,30 +32,32 @@ export class BanknameComponent implements OnInit {
   isroomt: string;
   isroomc: string;
   ipAddress: string;
-
+  mode: string;
+  Branch:string;
+  filterdata:any;
   @ViewChild("f", { static: false }) form: any;
-
   constructor(
     private _masterformservice: MasterformService,
-    private _ipservice: IpserviceService
-  ) {}
+    private _ipservice: IpserviceService,
+    private toastyService: ToastyService
+  ) {
+    this.Branch= localStorage.getItem("BranchCode");
+  }
 
   ngOnInit() {
+    this.resetForm();
     this.btitle = "Add Item";
-    //this.data = this._masterformservice.GetBankdetails()
-    console.log(this.data);
-    this.model.BranchCode = localStorage.getItem("BranchCode");
-    this.model.IpAdd = localStorage.getItem("LOCAL_IP");
-    this.model.CreatedBy = localStorage.getItem("id");
-    // console.log(this.model.BranchCode);
-    // console.log(this.model.IpAdd);
-    // console.log(this.model.CreatedBy);
-
-    if (!this.model.BranchCode) {
+    this.mode = "(List)";
+    if (!this.Branch) {
       this.data = this._masterformservice.GetBankdetails("CW_1001");
     } else {
-      this.data = this._masterformservice.GetBankdetails(this.model.BranchCode);
+      this.data = this._masterformservice.GetBankdetails(this.Branch);
     }
+  
+    this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
+      this.filterdata = data;
+    });
+
   }
 
   getIP() {
@@ -68,13 +69,14 @@ export class BanknameComponent implements OnInit {
 
   Showhide() {
     this.resetForm();
-
     if (this.btitle == "Hide Form") {
       this.isShown = false;
       this.btitle = "Add Item";
+      this.mode = "(List)";
     } else {
       this.isShown = true;
       this.btitle = "Hide Form";
+      this.mode = "(New)";
     }
   }
 
@@ -88,12 +90,22 @@ export class BanknameComponent implements OnInit {
       BankBranchCode: null,
       MICRCode: null,
       Address: null,
-      IsActive: null,
-      BranchCode: localStorage.getItem("BranchCode"),
-      IpAdd: localStorage.getItem("LOCAL_IP"),
-      CreatedBy: localStorage.getItem("id")
+      IsActive: true,
     };
   }
+
+
+  CallKeytype() {
+    let datas = this.filterdata.find(
+      ob => ob.Name == this.form.value.Name
+    );
+    if (datas == undefined) {
+      this.IsExistdata = false;
+    } else {
+      this.IsExistdata = true;
+    }
+  }
+
 
   openMyModalData(event) {
     // CreatedBy
@@ -113,31 +125,94 @@ export class BanknameComponent implements OnInit {
       this.model.BranchCode = response[event]["BranchCode"];
       this.model.IpAdd = response[event]["IpAdd"];
       this.model.ModifyBy = response[event]["ModifyBy"];
+      this.mode = "(Edit)"+  this.model.Name;
     });
   }
 
-  onSubmit() {
-    console.log(this.form.value);
-    console.log(this.form.value.Address);
-    this.form.value.Address;
-    if (this.form.valid) {
-      console.log("Form Submitted!");
-      //  this.form.reset();
+  // onSubmit() {
+  //   console.log(this.form.value);
+  //   console.log(this.form.value.Address);
+  //   this.form.value.Address;
+  //   if (this.form.valid) {
+  //     console.log("Form Submitted!"); 
+  //   }
+  // }
+
+
+  onSubmit(form?: NgForm) {
+    // form.controls.BranchCode.setValue(localStorage.getItem('BranchCode'));
+    // form.controls.CreatedBy.setValue(localStorage.getItem('id'));
+
+    // form.controls.IpAddress.setValue(localStorage.getItem('LOCAL_IP'));
+
+    form.value.BranchCode = localStorage.getItem("BranchCode")
+    form.value.CreatedBy = localStorage.getItem("id")
+    form.value.ModifyBy = localStorage.getItem("id")
+    form.value.IpAdd = localStorage.getItem("LOCAL_IP")
+
+   
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
     }
-    //this.form.reset();
+
+    if (this.IsExistdata === true) {
+      this.addToast("Cogwave Software", "FloorName already Exist ", "warning");
+      return;
+    }
+
+    this._masterformservice.SaveBankDetail(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "Bank Data Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            IsActive: "true",
+            BranchCode: localStorage.getItem("BranchCode"),
+            Id: "0"
+          });
+          this.isShown = true;
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "Bank Data Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      } else {
+        this.addToast("Cogwave Software", "Bank Data Not Saved", "error");
+        form.reset({
+          IsActive: "true",
+          BranchCode: localStorage.getItem("BranchCode"),
+          Id: "0"
+        });
+        this.isShown = true;
+      }
+    });
+
+    this.data = this._masterformservice.GetBankdetails(this.Branch);
+
+    this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
+      this.filterdata = data;
+    });
   }
+
+
 
   Closeform() {
-    //this.btitle="Add Item"
+    this.isShown = false;
+    this.btitle = "Add Item";
     this.resetForm();
-
-    // this.model.BranchCode=localStorage.getItem('BranchCode');
-    // this.model.IpAdd=localStorage.getItem('LOCAL_IP');
-    // this.model.CreatedBy=localStorage.getItem('id');
-    // this.form.set('BranchCode').value='f'
-    //this.isShown = false;
+    this.mode = "(List)";
   }
-
   openMyModal(event, data) {
     this.model = {
       Id: data.Id,
@@ -147,7 +222,8 @@ export class BanknameComponent implements OnInit {
       MICRCode: data.MICRCode,
       BankBranchCode: data.BankBranchCode,
       IsActive: data.IsActive,
-      Address: data.Address
+      Address: data.Address,
+      
     };
     document.querySelector("#" + event).classList.add("md-show");
   }
@@ -156,5 +232,47 @@ export class BanknameComponent implements OnInit {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"
     );
+  }
+
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
   }
 }

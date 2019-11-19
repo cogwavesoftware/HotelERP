@@ -61,19 +61,7 @@ export class CreditcardComponent implements OnInit {
       list.splice(i, 1);
     }
   }
-  //  checkUncheckAll() {
-  //   for (var i = 0; i < this.checklist.length; i++) {
-  //     this.checklist[i].isSelected = this.masterSelected;
-  //   }
-  //   this.getCheckedItemList();
-  // }
-  // isAllSelected() {
-  //   this.masterSelected = this.checklist.every(function(item:any) {
-  //       return item.isSelected == true;
-  //     })
-  //   this.getCheckedItemList();
-  // }
- 
+
   getCheckedItemList(){
     debugger;
     return this.checklist.filter(opt => opt.checked)

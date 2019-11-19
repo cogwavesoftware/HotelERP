@@ -7,7 +7,7 @@ const routes:Routes=[{
   path:'',
   component:RoomtypecreationComponent,
   data:{
-    title:'room',
+    title:'RoomType',
     icon:'icon-home',
     caption: 'Room Type Creation Module',
     status: true

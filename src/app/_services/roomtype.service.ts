@@ -1,3 +1,4 @@
+import { stringify } from 'querystring';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
@@ -6,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from "rxjs/observable";
 import 'rxjs/add/operator/catch';
 import { Alert } from 'selenium-webdriver';
-import { stringify } from '@angular/compiler/src/util';
+
 import { Floormodel } from './../_models/floormodel';
 import { throwError } from 'rxjs';
 
@@ -18,20 +19,15 @@ export class RoomtypeService {
 
   constructor(private http: HttpClient) { }
 
-  GetRoomType()
+  GetRoomType(Branchcode:string):Observable<any>
   {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetRoomType');
-     
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetRoomType?Branchcode=' + Branchcode);    
   }
-  
-   SaveRoomType(company:any)
+   SaveRoomType(roomtype:any)
    {
+   
+     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveroomtype',roomtype,{ headers:environment.BASE_CONTENTTYPE_HEADER })
      
-     return this.http.post(environment.apiURL + '/api/common/HMSCompany/Savecompany',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })
-     .pipe(map(res=>
-      {
-        return res;
-      }));
    }
   
 }

@@ -17,96 +17,106 @@ export class MasterformService {
 
   constructor(private http: HttpClient) { }
 
-
-  GetBankdetails(branchcode:string)
-  {  
+  GetBankdetails(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetBankdetails?BranchCode=' + branchcode);
-     
   }
-
-  getreferencedetail(branchcode:string)
-  {  
+  getreferencedetail(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Getreference?BranchCode=' + branchcode);
-     
   }
-  getplan()
-  {  
+  getplan() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Plan');
-     
+  }
+  GetAllRoomNo(branchcode: string): Observable<any> {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/roomdetails?BranchCode=' + branchcode);
   }
 
-  
-  getwalet()
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/walet');  
-  }
-  getothertax(branchcode:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertax?BranchCode=' + branchcode);  
-  }
-  getothertaxEdit(branchcode:string,Id:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxEdit?BranchCode=' + branchcode + '&Id=' + Id);  
-  }
-  
-  getplanbyid(branchcode:string,plan:number)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planbyId?BranchCode=' + branchcode + '&PlanId=' + plan);  
+  getwalet() {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/walet');
   }
    
-  getallplanopr(branchcode:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planopr?BranchCode=' + branchcode);  
+  getothertaxAll(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxall?BranchCode=' + branchcode);
   }
 
-
-  getrevenudata(branchcode:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/revenue?BranchCode=' + branchcode);  
+  getothertax(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertax?BranchCode=' + branchcode);
   }
-     
-  getledger(branchcode:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/ledger?BranchCode=' + branchcode);  
+  getothertaxEdit(branchcode: string, Id: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxEdit?BranchCode=' + branchcode + '&Id=' + Id);
   }
 
-
-  saveplancreation(planmodel:any)
-  {    
-    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveplanopr',planmodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })
-    .pipe(map(res=>
-     {
-       return res;
-     }));
+  getplanbyid(branchcode: string, plan: number) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planbyId?BranchCode=' + branchcode + '&PlanId=' + plan);
+  }
+  getallplanopr(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planopr?BranchCode=' + branchcode);
+  }
+  getrevenudata(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/revenue?BranchCode=' + branchcode);
+  }
+  getledger(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/ledger?BranchCode=' + branchcode);
+  }
+  saveplancreation(planmodel: any) {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveplanopr', planmodel, { headers: environment.BASE_CONTENTTYPE_HEADER })
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+  SaveitemMaster(itemmodel: any) {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveitem', itemmodel, { headers: environment.BASE_CONTENTTYPE_HEADER })
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+  getaxEditforRevenu(branchcode: string, Id: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/taxEditreven?BranchCode=' + branchcode + '&Id=' + Id);
   }
 
-  SaveitemMaster(itemmodel:any)
+  getitemmaster(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/item?BranchCode=' + branchcode);
+  }
+  getAllRoles() {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/role');
+  }
+
+  getclientproduct(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/cproduct?BranchCode=' + branchcode);
+  }
+  SaveRoomDetail(roomdetail:any)
   {
-    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveitem',itemmodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })
-    .pipe(map(res=>
-     {
-       return res;
-     }));
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveroomdetails',roomdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
-  getaxEditforRevenu(branchcode:string,Id:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/taxEditreven?BranchCode=' + branchcode + '&Id=' + Id);  
-  }
-
-  getitemmaster(branchcode:string)
-  {  
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/item?BranchCode=' + branchcode);  
-  }
-  getAllRoles()
+  SaveBankDetail(Bankdetail)
   {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/role'); 
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savebankdetails',Bankdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+  SavePlanmaster(Planmaster:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savecommonplan',Planmaster,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
-  getclientproduct(branchcode:string)
+  SaveWalet(walet:any)
   {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/cproduct?BranchCode=' + branchcode); 
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savewallet',walet,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+  Saveothertax(othertax:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveothertax',othertax,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SaveLedger(ledger:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveledgers',ledger,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  Saverevenu(rev:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saverevenue',rev,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,
@@ -119,5 +129,5 @@ export class MasterformService {
   //   var reqHeader = new HttpHeaders({'No-Auth':'True'});
   //   return this.http.post(environment.apiURL + '/api/User/Register', body,{headers : reqHeader});
   // }
-  
+
 }

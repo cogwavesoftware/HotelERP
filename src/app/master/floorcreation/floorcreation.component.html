@@ -4,7 +4,7 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Floor Creation</h5>         
+                  <h5 class="ng-tns-c6-1">Floor Creation {{mode}}</h5>         
                   <span class="ng-tns-c6-1 ng-star-inserted">Creating Floor details for Branch </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -16,10 +16,13 @@
 
         <div class="formdesign aqua-gradient" *ngIf="isShown" >
                 <div class="formouter rotate" >
-                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">  
+                <form name="form" (ngSubmit)="onSubmit(f.form)" #f="ngForm">  
                     
                 <input type="hidden" name="FloorCode" class="form-control" [(ngModel)]="model.FloorCode" #FloorCode="ngModel" value="{{FloorCode}}"  >
-                
+                <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+                <input type="hidden" name="IpAddress" class="form-control" [(ngModel)]="model.IpAddress" #IpAddress="ngModel" value="{{IpAddress}}">
+                <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+    
                  <div class="auth-box card">
                        <div class="card-block">
                          <div class="frmdata" >              
@@ -29,33 +32,44 @@
                                     <div class='col-12 col-sm-6'>
                                         <div class="form-group">
                                             <label class="form-control-label" for="Floor Name">Floor Name</label>
-                                            <input type="text" name="FloorName" (keyup)="CallKeytype(FloorName.value)" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid':  f.submitted && FloorName.invalid}"  required autocomplete="off">
-                                            <div *ngIf="f.submitted && FloorName.invalid" class="invalid-feedback">
+                                            <input type="text" name="FloorName" (keyup)="CallKeytype(FloorName.value)" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid':  FloorName.touched && FloorName.invalid}"  required autocomplete="off">
+                                            <!-- <div *ngIf="f.submitted && FloorName.invalid" class="invalid-feedback">
                                               <div *ngIf="FloorName.errors.required">FloorName is invalid</div>
-                                            </div>
+                                            </div> -->
+                                            <div *ngIf="FloorName.touched && FloorName.invalid" class="invalid-feedback">
+                                              <div *ngIf="FloorName.errors.required">FloorName is Required </div>    
+                                          </div>
+        
                                             <small class="text-danger" [class.d-none]="!IsExistdata || FloorName.untouched">Floor Name Aleady Exist</small>
                                         </div>
                                     </div>
                                   <div class='col-12 col-sm-6'>
                                       <div class="form-group">
-                                          <label class="form-control-label" for="Maximum Room">Maximum Room</label>
-                                          <input type="number" name="MaxRoom" class="form-control" [(ngModel)]="model.MaxRoom" #MaxRoom="ngModel" value="{{MaxRoom}}"  [ngClass]="{'is-invalid': f.submitted && MaxRoom.invalid}"  required autocomplete="off">
-                                          <div *ngIf="f.submitted && MaxRoom.invalid" class="invalid-feedback">
+                                          <label class="form-control-label" for="Maximum No Room in Floor">Maximum No Room in Floor</label>
+                                          <input type="number" name="MaxRoom" class="form-control" [(ngModel)]="model.MaxRoom" #MaxRoom="ngModel" value="{{MaxRoom}}"  [ngClass]="{'is-invalid': MaxRoom.touched && MaxRoom.invalid}"  required autocomplete="off">
+                                          <div *ngIf="MaxRoom.touched && MaxRoom.invalid" class="invalid-feedback">
                                             <div *ngIf="MaxRoom.errors.required">MaxRoom is invalid</div>
                                           </div>
                                       </div>
                                   </div>                   
                             </div>
                             <div class="row">
-                                <div class='col-12 col-sm-6'>
+                                <!-- <div class='col-12 col-sm-6'>
                                     <div class="form-group">
-                                        
-                                        <input type="checkbox" name="IsActive" id="IsActive" class="" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': f.submitted && IsActive.invalid }" required>
+                                        <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
                                         <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
-                                        <div *ngIf="f.submitted && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                        <div *ngIf="IsActive.touched  && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                     </div>
-                                </div>
-                                     
+                                </div>  -->
+
+                                <div class='col-12 col-sm-6'>
+                                  <div class="form-group">
+                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
+                                      <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
+                                    
+                                  </div>
+                              </div>
+
                         </div>
   
                 </div>
@@ -63,10 +77,10 @@
             
             
                          <div class="row m-t-30">
-                           <div class="col-md-12 text-center" >
-    
-                             <button type="submit" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                             <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                           <div class="col-md-12 text-center" >      
+                             <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple pull-right ">Close</button>
+                             <button type="submit" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10 pull-right">Save</button>
+                            
                            </div>
                          </div>
                         </div>
@@ -88,7 +102,7 @@
                
               
                             <div class="col-xs-12 col-sm-12 col-md-6">
-                                <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Data List</div>
+                                <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Floor Data List</div>
                                 </div>
                               <div class="col-xs-12 col-sm-12 col-md-6">
                                 <div style="text-align: right;">
@@ -144,14 +158,14 @@
                               <td>{{item.Alloted}}</td>
                               <td>{{item.IsActive}}</td>
                               <td class="action-icon">
-                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-10',item)"><i class="fa fa-book"></i></a>
+                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                                   <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                                   
                               </td>
                             </tr>
                             </tbody>
                             <tfoot>
-                            <tr>
+                            <tr class="blueorange-gradient">
                               <!-- <th>Profile</th> -->
                               <th>FloorCode</th>
                               <th>FloorName</th>
@@ -187,7 +201,7 @@
    
 
 
-      <app-modal-animation [modalID]="'effect-10'" [modalClass]="'md-effect-10'">
+      <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
           <h3 class="f-15">View  Floor Details</h3>
           
             <div class="app-modal-body text-center"> 
@@ -225,10 +239,14 @@
               </div>
                
             </app-modal-animation>
+
+
+
             
 
 
       
       
       
+            <ng2-toasty [position]="position"></ng2-toasty>
       

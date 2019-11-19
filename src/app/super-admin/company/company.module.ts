@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {DatePipe} from '@angular/common';
 
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
   declarations: [CompanyComponent],
@@ -19,7 +20,7 @@ import {DatePipe} from '@angular/common';
     HttpClientModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,ToastyModule.forRoot()
   ],
   providers:[DatePipe]
 })

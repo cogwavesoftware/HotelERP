@@ -1,149 +1,210 @@
-
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Observable } from 'rxjs';
-import { MasterformService } from './../../_services/masterform.service';
-import { IpserviceService } from 'src/app/_services/ipservice.service';
-
+import { Observable } from "rxjs";
+import { MasterformService } from "./../../_services/masterform.service";
+import { IpserviceService } from "src/app/_services/ipservice.service";
+import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 @Component({
-  selector: 'app-walet',
-  templateUrl: './walet.component.html',
-  styleUrls: ['./walet.component.scss']
+  selector: "app-walet",
+  templateUrl: "./walet.component.html",
+  styleUrls: ["./walet.component.scss"]
 })
-
 export class WaletComponent implements OnInit {
-
   public data: Observable<any>;
   public rowsOnPage = 10;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
-  public isShown:boolean = false;
-  model: any = {};   
-  btitle:string="Add";
-  
-  isValid:boolean;
- 
+  public filterQuery = "";
+  public sortBy = "";
+  public sortOrder = "desc";
+  public isShown: boolean = false;
+  model: any = {};
+  btitle: string = "Add";
 
-  dtat:string;
+  isValid: boolean;
+
+  dtat: string;
   title: string;
   msg: string;
-  returnUrl:string;
+  returnUrl: string;
   showClose = true;
-  theme = 'bootstrap';
-  type = 'default';
+  theme = "bootstrap";
+  type = "default";
   closeOther = false;
-  isroomt:string;
-  isroomc:string;
-  @ViewChild('f',{static:false}) form: any;
+  isroomt: string;
+  isroomc: string;
+  @ViewChild("f", { static: false }) form: any;
 
- 
-  ipAddress:string;
- 
-  
-  constructor(private _masterformservice:MasterformService,private _ipservice:IpserviceService) { }
-   
-  ngOnInit() 
-  {
- 
-  this.btitle="Add Item"
-  this.data = this._masterformservice.getwalet()
-  console.log(this.data)
-  // this.model.BranchCode=localStorage.getItem('BranchCode');
-  //this.model.IpAdd=localStorage.getItem('LOCAL_IP');
-  //this.model.CreatedBy=localStorage.getItem('id');
-   
+  Branch: string;
+  ipAddress: string;
+  mode: string;
+  filterdata: any;
+  IsExistdata: boolean;
+  constructor(
+    private _masterformservice: MasterformService,
+    private toastyService: ToastyService
+  ) {
+    this.Branch = localStorage.getItem("BranchCode");
   }
-  
-  getIP()
-  {
-    this._ipservice.getIpAddress().subscribe((res:any)=>{
-      this.ipAddress=res.ip;
-      console.log(this.ipAddress)
+
+  ngOnInit() {
+    this.mode = "(List)";
+    this.resetForm();
+    this.btitle = "Add Item";
+    this.data = this._masterformservice.getwalet();
+    this._masterformservice.getwalet().subscribe((data: any) => {
+      this.filterdata = data;
+      
     });
   }
 
+  Showhide() {
+    this.resetForm();
 
- 
-  Showhide()
-  {
-   this.resetForm();
-   
-   if (this.btitle=="Hide Form"){
-    this.isShown = false;
-    this.btitle="Add Item"}
-   else{    
-    this.isShown = true; 
-    this.btitle="Hide Form"
+    if (this.btitle == "Hide Form") {
+      this.isShown = false;
+      this.btitle = "Add Item";
+      this.mode = "(List)";
+    } else {
+      this.isShown = true;
+      this.btitle = "Hide Form";
+      this.mode = "(New)";
     }
-    
   }
-  
-  resetForm(form?: NgForm)
-  {
-     this.model = {
+
+  resetForm(form?: NgForm) {
+    this.model = {
       Id: 0,
-      WaletName:null,
-      IsActive:null,
-      // BranchCode:localStorage.getItem('BranchCode'),
-      // IpAdd:localStorage.getItem('LOCAL_IP'),
-      // CreatedBy:localStorage.getItem('id'),
-    };  
+      WaletName: null,
+      IsActive: true
+    };
   }
 
   openMyModalData(event) {
-   // CreatedBy
-   //IpAdd
-    this.btitle="Hide Form"    
+    this.btitle = "Hide Form";
     this.isShown = true;
     this.data.subscribe(response => {
-      this.model.Id=response[event]['Id'];
-      this.model.WaletName=response[event]['WaletName'];
-      // this.model.RefEmail=response[event]['RefEmail'];
-      // this.model.RefMobileNo=response[event]['RefMobileNo'];
-      // this.model.RefAdress=response[event]['RefAdress'];
-      // this.model.RefDob=response[event]['RefDob'];
-      // this.model.RefPoints=response[event]['RefPoints'];
-      this.model.IsActive=response[event]['IsActive']; 
-      // this.model.BranchCode=response[event]['BranchCode']; 
-      // this.model.IpAdd=response[event]['IpAdd'];  
-      // this.model.ModifyBy=response[event]['ModifyBy'];    
+      this.model.Id = response[event]["Id"];
+      this.model.WaletName = response[event]["WaletName"];
+      this.model.IsActive = response[event]["IsActive"];
+      this.mode = "(Edit)" + this.model.WaletName;
     });
-  
   }
 
+  onSubmit(form?: NgForm) {
 
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
 
-  onSubmit()
-  {
-    console.log(this.form.value);  
-    if (this.form.valid)
-    {
-      console.log("Form Submitted!"); 
-    } 
+    if (this.IsExistdata === true) {
+      this.addToast("Cogwave Software", "Walet already Exist ", "warning");
+      return;
+    }
+
+    this._masterformservice.SaveWalet(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "Walet Data Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            IsActive: "true",
+            
+            Id: "0"
+          });
+          this.isShown = true;
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "Walet Data Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      } else {
+        this.addToast("Cogwave Software", "Walet Data Not Saved", "error");
+        form.reset({
+          IsActive: "true",
+          Id: "0"
+        });
+        this.isShown = true;
+      }
+    });
+
+    this.data = this._masterformservice.getwalet();
+    console.log(this.data)
+    this._masterformservice.getwalet().subscribe((data: any) => {
+      this.filterdata = data;
+      console.log( this.filterdata)
+    });
   }
 
-
-  Closeform() 
-  {
-      this.resetForm();  
+  Closeform() {
+    this.isShown = false;
+    this.btitle = "Add Item";
+    this.resetForm();
+    this.mode = "(List)";
   }
 
-
-  openMyModal(event,data) 
-  {
-    this.model = {  
-      Id:data.Id,
-      WaletName:data.WaletName,
-     
-      IsActive :data.IsActive,
-     
+  openMyModal(event, data) {
+    this.model = {
+      Id: data.Id,
+      WaletName: data.WaletName,
+      IsActive: data.IsActive
     };
-    document.querySelector('#' + event).classList.add('md-show');
+    document.querySelector("#" + event).classList.add("md-show");
   }
 
   closeMyModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+    event.target.parentElement.parentElement.parentElement.classList.remove(
+      "md-show"
+    );
+  }
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
   }
 }
-

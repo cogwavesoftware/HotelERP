@@ -33,11 +33,8 @@ export class FloormasterService {
    SavefloorData(company:any)
    {
      
-     return this.http.post(environment.apiURL + '/api/common/HMSCompany/Savecompany',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })
-     .pipe(map(res=>
-      {
-        return res;
-      }));
+     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Savefloor',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+     
    }
   
 }

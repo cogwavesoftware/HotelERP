@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { RoomtypecreationRoutingModule } from './roomtypecreation-routing.module';
 import { RoomtypecreationComponent } from './roomtypecreation.component';
 
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
   declarations: [RoomtypecreationComponent],
@@ -17,7 +18,7 @@ import { RoomtypecreationComponent } from './roomtypecreation.component';
     HttpClientModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,ToastyModule.forRoot()
   ],
   providers:[DatePipe]
 })

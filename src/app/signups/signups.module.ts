@@ -5,12 +5,13 @@ import { SignupsComponent } from './signups.component';
 import { SignupsRoutingModule } from "./signups-routing.module";
 
 import { FormsModule ,ReactiveFormsModule} from "@angular/forms";
-
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
   declarations: [SignupsComponent],
   imports: [
-    CommonModule,SignupsRoutingModule,SharedModule,FormsModule,ReactiveFormsModule
+    CommonModule,SignupsRoutingModule,SharedModule,FormsModule,ReactiveFormsModule,
+    ToastyModule.forRoot()
   ]
 })
 export class SignupsModule { }

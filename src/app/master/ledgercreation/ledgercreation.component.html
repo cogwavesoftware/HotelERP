@@ -5,8 +5,8 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Plan Creation</h5>         
-              <span class="ng-tns-c6-1 ng-star-inserted">Creating Plan for Branch </span>
+              <h5 class="ng-tns-c6-1">Ledger Creation {{mode}}</h5>         
+              <span class="ng-tns-c6-1 ng-star-inserted">Creating Ledger for Branch </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
                 <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
@@ -19,10 +19,11 @@
 
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">
+
                 <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
                 <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
-                 <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+                <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
              
              <div class="auth-box card">
                    <div class="card-block">
@@ -34,20 +35,20 @@
                                 <div class="row">
                                                            
                                         <div class="col-md-6">
-                                                <label>LadgerName*</label>
-                                                <input type="text" name="LadgerName" (keyup)="onEnter(LadgerName.value)" class="form-control" [(ngModel)]="model.LadgerName" #LadgerName="ngModel" value="{{LadgerName}}"  [ngClass]="{'is-invalid': LadgerName.touched && LadgerName.invalid}"  required  autocomplete="off">
+                                                <label>LedgerName*</label>
+                                                <input type="text" name="LadgerName" class="form-control" [(ngModel)]="model.LadgerName" #LadgerName="ngModel" value="{{LadgerName}}"  [ngClass]="{'is-invalid': LadgerName.touched && LadgerName.invalid}"  required  autocomplete="off">
                                                 <div *ngIf="LadgerName.touched && LadgerName.invalid" class="invalid-feedback">
-                                                  <div *ngIf="LadgerName.errors.required">LadgerName is required</div>
+                                                  <div *ngIf="LadgerName.errors.required">LedgerName is required</div>
                                                   
                                                 </div>
                                         </div>
- <p>{{value}}</p>
+                                 
                                 </div>
                                 <div class="row">
                                                       
                                   
                                         <div class="col-md-6">
-                                                <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
+                                                <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
                                                 <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
                                                 <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                         </div>
@@ -61,8 +62,8 @@
                      </div>
                      <div class="row m-t-30">
                         <div class="col-md-12 text-center" >
-                          <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="partialUpdate()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                          <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10 ">Save</button>
+                          <button type="button" (click)="Closeform()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
                         </div>
                       </div>
                     </div>
@@ -85,7 +86,7 @@
    
   
                 <div class="col-xs-12 col-sm-12 col-md-6">
-                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Plan Data List</div>
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Ledger Data List</div>
                     </div>
                   <div class="col-xs-12 col-sm-12 col-md-6">
                     <div style="text-align: right;">
@@ -143,7 +144,7 @@
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
+                <tr class="blueorange-gradient">
                   <!-- <th>Profile</th> -->
                   <th>Id</th>
                   <th>LadgerName</th>
@@ -205,3 +206,6 @@
         </div>
          
       </app-modal-animation>
+
+
+      <ng2-toasty [position]="position"></ng2-toasty>

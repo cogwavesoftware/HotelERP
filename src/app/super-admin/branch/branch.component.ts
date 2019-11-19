@@ -14,11 +14,7 @@ import { Branchmodel,  } from 'src/app/_models/Branchmodel';
 import { Router,ActivatedRoute } from '@angular/router';
 import {CustomValidators} from 'ng2-validation';
 import { companymodel } from 'src/app/_models/companymodel';
-import { id } from '@swimlane/ngx-datatable/release/utils';
-
-import { of } from 'rxjs';
 import { ClientProduct } from './../../_models/ClientPorduct';
-import { Identifiers } from '@angular/compiler';
 
 @Component({
   selector: 'app-branch',
@@ -41,9 +37,7 @@ export class BranchComponent implements OnInit {
   
   isValid:boolean;
   public isShown:boolean = false;
-
   @Input('modalDefault') modalDefault: any;
-   
   title: string;
   msg: string;
   returnUrl:string;
@@ -51,12 +45,10 @@ export class BranchComponent implements OnInit {
   theme = 'bootstrap';
   type = 'default';
   closeOther = false;
-
  checkboxx:ClientProduct[];
-
  branch : Branchmodel[];
  Branchfor:Branchmodel;
- //ordersData :[];
+
  companylist:companymodel[]; 
  submitted = false;
  public data:Observable<Branchmodel>;
@@ -69,8 +61,8 @@ export class BranchComponent implements OnInit {
   constructor(public _branchservice:BranchService,public router:Router,public formBuilder: FormBuilder,private route: ActivatedRoute,private _companyservice:CompanyService)
    { 
     
-    
-     this.mode="add";
+    this.mode = "(List)";
+   
      this.form = this.formBuilder.group({
        'HotelId': formBuilder.control({ value: '', disabled: true }),
        'PurchaseId': formBuilder.control({ value: '', disabled: false},Validators.required),
@@ -126,26 +118,26 @@ export class BranchComponent implements OnInit {
     {
       this.form.reset();
       this.Show=true;
-      this.btitle="Hide"  ;
+      this.btitle="Hide";
+      this.mode = "(New)";
     }
     else
     {
       this.Show=false;
       this.btitle="ADD"
       this.form.reset(); 
+      this.mode = "(List)";
     }
   }
 
   
   Submit() 
   {
+    
     // console.log(this.form.value.orders);
     // const selectedOrderIdcs = this.form.value.orders.map((v, i) => v ? this.ordersData[i].Id : false)
     // .filter(v => v  !== false);
-    //  console.log(selectedOrderIdcs);
-
-
-
+    //  console.log(selectedOrderIdcs)
 
     const selectedOrderIds = this.form.value.orders
     .map((v, i) => v ? this.ordersData[i].Id : null)
@@ -201,30 +193,6 @@ export class BranchComponent implements OnInit {
 
   ngOnInit()
    {
-    // this.form = this.formBuilder.group({
-    //   BranchName: ['',Validators.required],
-    //   BranchCode: ['',Validators.required],      
-    //   HotelMobile: ['',Validators.required],
-    //   HotelEmailId: ['',Validators.required],
-    //   HotelPassword:['',Validators.required],
-    //   HotelAddress: ['', Validators.required],      
-    //   PurchaseId:['',Validators.required],
-    //   City:['', Validators.required],
-    //   State:['',Validators.required],
-    //   Nation:['',Validators.required],
-    //   StateCode:['',Validators.required],
-    //   ManagerEmail:['',Validators.required],
-    //   ManagerMobileNo:['',Validators.required],
-    //   PoliceEmail:['',Validators.required],
-    //   GSTNO:['',Validators.required],
-    //   TaxNo:['',Validators.required],
-    //   LicenceNo:['',Validators.required],
-    //   PanNo:['',Validators.required],
-    //   TrDate:['',Validators.required],
-    //   LicenceType:['', Validators.required]
-
-    // })
-     
     
     this.form.reset();
     this.btitle="ADD"
@@ -240,6 +208,8 @@ export class BranchComponent implements OnInit {
 
   EditForm(Editform)
   { 
+
+    this.mode = "(Edit)";
    this.Show=true
     this.btitle="Hide";
     this.Branchfor=Editform;
