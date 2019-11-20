@@ -28,7 +28,7 @@
             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
             
              <div class="auth-box card">
-                   <div class="card-block">
+                   <div class="card-block" style="padding-bottom: 0;">
                      <div class="frmdata" >              
                         <div class="containar">
                             <div class="row">
@@ -37,7 +37,7 @@
                                   <div class="row">                                    
 
                                     <div class="col-md-4">
-                                        <label>CompanyName*</label>
+                                        <label>Company Name*</label>
                                         <input type="text" name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"  [ngClass]="{'is-invalid': CompanyName.touched && CompanyName.invalid}"  required autocomplete="off">
                                         <div *ngIf="CompanyName.touched && CompanyName.invalid" class="invalid-feedback">
                                             <div *ngIf="CompanyName.errors.required">CompanyName is invalid</div>
@@ -52,9 +52,9 @@
                                     </div>
                                     <!-- <div class="col-md-4">
                                             <label>CompanyType*</label>
-                                            <select class="custom-select" (blur)="validateplan(catagery.value)" (change)="validateplan(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
+                                            <select class="custom-select" (blur)="validateplan(CompanyType.value)" (change)="validateplan(CompanyType.value)" #CompanyType="ngModel" [class.is-invalid]="catageryhasError && CompanyType.touched" name="CompanyType" [(ngModel)]="model.CompanyType">
                                                     <option value="default">Please Select</option>
-                                                    <option *ngFor="let catagery of catagerys">{{ catagery.PlanName }}</option>
+                                                    <option *ngFor="let item of companytypes"  >{{ item }}</option>
                                                   </select>
                                                   <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>
                                         </div> -->
@@ -82,10 +82,12 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label>MobileNo*</label>
-                                            <input type="text" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
+                                            <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo"  maxlength="10" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
                                             <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
                                               <div *ngIf="MobileNo.errors.required">MobileNo is invalid</div>
                                             </div>
+
+                                            
                                         </div>
                                         <div class="col-md-4">
                                                 <label>Email*</label>
