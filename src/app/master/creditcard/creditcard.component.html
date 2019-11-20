@@ -16,7 +16,7 @@
 
 
     <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
-        <div class="formdesign aqua-gradient" >
+        <div class="formdesign aqua-gradient"  *ngIf="isShown" >
         <div class="formouter rotate" >
          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
@@ -40,67 +40,16 @@
                                             </div>
                                     </div> 
 
-                                    <div class="col-md-4">
-                                        <label>Card No*</label>
-                                        <div class="input-group">
-                                        <input type="number" name="CardNo" required=""  class="form-control" [(ngModel)]="model.CardNo" #CardNo="ngModel" value="{{CardNo}}"  [ngClass]="{'is-invalid': CardNo.touched && CardNo.invalid}"  required autocomplete="off">
-                                        <div class="" [class.green]="f.form.valid">
-                                            <span class="input-group-text text-muted">
-                                                <i class="fa fa-cc-visa"></i>   <i class="fa fa-cc-amex"></i>   
-                                                <i class="fa fa-cc-mastercard"></i> 
-                                            </span>
+                                    <div class='col-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
+                                            <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
+                                          
                                         </div>
-                                       
-                                        <div *ngIf="CardNo.touched && CardNo.invalid" class="invalid-feedback">
-                                            <div *ngIf="CardNo.errors.required">CardNo is invalid</div>
-                                        </div>
-                                        </div>
-                                  
                                     </div>
-
-                             
-  
                                   </div>
 
-                                  <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="checkbox" (change)="changeModel($event, modelArr, option.value)" [checked]="modelArr.includes(option.value)" />
-                                        <!-- <ul class="list-group">
-                                            <li class="list-group-item">
-                                              <input type="checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1" (change)="checkUncheckAll()"/> <strong>Select/ Unselect All</strong>
-                                            </li>
-                                          </ul> -->
-                                          <ul class="list-group">
-                                            <li class="list-group-item" *ngFor="let item of checklist">
-                                              <input type="checkbox" [(ngModel)]="item.checked" name="list_name" value="{{item.id}}"  />
-                                              {{item.value}}
-                                            </li>
-                                          </ul>
-                                      </div>
-                                      <div class="col-md-6">
-                                          <code>{{checkedList}}</code>
-                                      </div>
-
-
-
-                                      <div class="form-group">
-                                          <label for="options">Options :</label>
-                                          <div *ngFor="#option of options; #i = index">
-                                              <label>
-                                                  <input type="checkbox"
-                                                         name="options"
-                                                         value="{{option}}"
-                                                         [checked]="options.indexOf(option) >= 0"
-                                                         (change)="updateCheckedOptions(option, $event)"/>
-                                                  {{option}}
-                                              </label>
-                                          </div>
-                                      </div>
-
-                                     
-
-
-                                  </div>
+                               
                                      
                               </div>
                
@@ -111,7 +60,7 @@
                      <div class="row m-t-30">
                         <div class="col-md-12 text-center" >
                           <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
                         </div>
                       </div>
                     </div>
@@ -147,11 +96,14 @@
                 <thead>
                 <tr class="blueorange-gradient">                
                   <th>
-                    <mfDefaultSorter  by="Name">Name</mfDefaultSorter>
+                    <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter  by="CardNo">CardNo</mfDefaultSorter>
-                  </th>               
+                    <mfDefaultSorter  by="Name">Name</mfDefaultSorter>
+                  </th>  
+                  <th>
+                      <mfDefaultSorter  by="IsActive">IsActive</mfDefaultSorter>
+                    </th>              
                   
                   <th>
                     <mfDefaultSorter>Action</mfDefaultSorter>
@@ -163,10 +115,11 @@
                 <tbody>
                     
                  <tr *ngFor="let item of mf.data; let i = index;">
-                   <td>{{item.Name}}</td>
-                  <td>{{item.CardNo}}</td>                                 
+                   <td>{{item.Id}}</td>
+                  <td>{{item.Name}}</td>  
+                  <td>{{item.IsActive}}</td>                               
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                       
                   </td>
@@ -175,9 +128,10 @@
                 <tfoot>
                 <tr class="blueorange-gradient">
                   <!-- <th>Profile</th> -->
-                  <th>Name</th>
-                  <th>CardNo</th>                 
-                  <th></th>             
+                  <th>Id</th>
+                  <th>Name</th>   
+                  <th>IsActive</th>                 
+                  <th>Action</th>             
                 </tr>
                 <tr>
                   <td colspan="10">
@@ -198,18 +152,18 @@
 
 
 <!-- lightbox-->
-<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
   <h3 class="f-15">View Credit Card Details</h3>
   
     <div class="app-modal-body text-center"> 
         <table class="table table-striped text-left m-t-10">
             <tr>
-              <td>Name :</td>
-              <td>{{ model.Name }}</td>
+              <td>Id :</td>
+              <td>{{ model.Id }}</td>
             </tr>
             <tr>
-              <td>Card :</td>
-              <td>{{ model.CardNo }}</td>
+              <td>Name :</td>
+              <td>{{ model.Name }}</td>
             </tr>
                
            </table>      
@@ -217,3 +171,5 @@
       </div>
        
     </app-modal-animation>
+
+    <ng2-toasty [position]="position"></ng2-toasty>

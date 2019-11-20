@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './layout/admin/admin.component';
 import { AppComponent } from './app.component';
 
-
 import { AuthComponent } from './layout/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
@@ -18,7 +17,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS,HttpClient } from '@angular/common/h
 import { NgMarqueeModule } from "ng-marquee";
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
- import * as moment from 'moment';
+
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 

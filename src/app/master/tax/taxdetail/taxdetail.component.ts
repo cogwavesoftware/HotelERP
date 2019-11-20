@@ -4,7 +4,7 @@ import { MasterformService } from '../../../_services/masterform.service';
 import { IpserviceService } from 'src/app/_services/ipservice.service';
 import { Observable } from "rxjs"; 
 import { DatePipe } from "@angular/common";
-
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 
  
 @Component({
@@ -18,6 +18,7 @@ export class TaxdetailComponent implements OnInit {
   
   public TaxCode:any; 
   public data: Observable<any>;
+  public datafilt: Observable<any>;
 
   public filterdatax: any;
   catageryhasError: boolean;
@@ -42,24 +43,33 @@ export class TaxdetailComponent implements OnInit {
   IsExistdata: boolean = false;
   ipAddress:string;
   @ViewChild("f", { static: false }) form: any;
+  mode: string;
+ Branch:string;
+ filterdata:any;
+ taxmaster:any;
   public radioSelected:string;
-  public roomtypes=["Room","Hall"];
-  constructor(private datePipe: DatePipe,private _masterformservice:MasterformService,private _ipservice:IpserviceService) {
+  
+  constructor(private datePipe: DatePipe,private _masterformservice:MasterformService,
+    private toastyService: ToastyService,
+    private _ipservice:IpserviceService)
+    {
     this.model.roomtype="Room";
-    
+    this.Branch= localStorage.getItem("BranchCode");
    }
 
   ngOnInit() {
     this.btitle="Add Item";
-    this.model.TaxCode ="1";  
-     
-    console.log(this.data)
-    this.model.BranchCode=localStorage.getItem('BranchCode');
-    this.model.IpAdd=localStorage.getItem('LOCAL_IP');
-    this.model.CreatedBy=localStorage.getItem('id');
-     console.log(this.model.BranchCode)
-     console.log(this.model.IpAdd)
-     console.log(this.model.CreatedBy)
+    this.resetForm();
+    this.data = this._masterformservice.GetRoomTaxDetail(this.Branch);
+    this.datafilt=Object.assign({},this.data) 
+   
+    this._masterformservice.GetRoomTaxDetail(this.Branch).subscribe(data=>{
+      this.filterdata=data;
+    });
+
+    this._masterformservice.GetRoomTaxMaster(this.Branch).subscribe(res=>{
+      this.taxmaster=res;
+    });
   }
   validateplan(value) {
     if (value === "default") {
@@ -75,19 +85,21 @@ export class TaxdetailComponent implements OnInit {
       console.log(this.ipAddress)
     });
   }
-  Showhide()
-  {
-   this.resetForm();
-   
-   if (this.btitle=="Hide Form"){
-    this.isShown = false;
-    this.btitle="Add Item"}
-   else{    
-    this.isShown = true; 
-    this.btitle="Hide Form"
+
+
+  Showhide() {
+    this.resetForm();
+    if (this.btitle == "Hide Form") {
+      this.isShown = false;
+      this.btitle = "Add Item";
+      this.mode = "(List)";
+    } else {
+      this.isShown = true;
+      this.btitle = "Hide Form";
+      this.mode = "(New)";
     }
-    
   }
+
   validateroom(value) {
     if (value === 'default') 
     {
@@ -99,18 +111,16 @@ export class TaxdetailComponent implements OnInit {
   resetForm(form?: NgForm)
   {
      this.model = {
-      Id: 0,
-      TaxCode:null,   
+      RNO: 0,
+      TaxCode:'-1',   
       TaxName:null,
       FromAmount:null,
       ToAmount:null,
       TaxPer:null,      
       EffectiveDate:null, 
       ToDate:null,
-      IsActive:null,
-      BranchCode:localStorage.getItem('BranchCode'),
-      IpAdd:localStorage.getItem('LOCAL_IP'),
-      CreatedBy:localStorage.getItem('id'),
+      IsActive:true,
+      TaxCode1:'-1'
     };  
   }
   openMyModalData(event) {     
@@ -125,10 +135,27 @@ export class TaxdetailComponent implements OnInit {
        this.model.FromAmount=response[event]['FromAmount']; 
        this.model.ToAmount=response[event]['ToAmount'];         
        this.model.IsActive=response[event]['IsActive']; 
-       this.model.TaxType = response[event]['TaxType'];
+       this.model.TaxPer=response[event]['TaxPer']; 
+       this.model.TaxType = response[event]['TaxType']; 
+        this.mode = "(Edit)"+  this.model.TaxName;
      });
    
    }
+   LoadTaxData(value)
+   {
+     if(value=="-1")
+     {
+     
+      this.data = this._masterformservice.GetRoomTaxDetail(this.Branch);
+    
+     }
+     else{
+      this.data = this._masterformservice.GetRoomTaxDetailByTaxName(this.Branch,value);
+     }
+    
+
+   }
+
    onSubmit()
    {
      console.log(this.form.value);          
@@ -138,10 +165,14 @@ export class TaxdetailComponent implements OnInit {
      }     
    }
 
-   Closeform() 
-   {       
-       this.resetForm();        
-   }
+ 
+   Closeform() {
+    this.isShown = false;
+    this.btitle = "Add Item";
+    this.resetForm();
+    this.mode = "(List)";
+  }
+
    openMyModal(event,data) 
    {
      this.model = {  

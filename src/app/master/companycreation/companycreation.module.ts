@@ -13,6 +13,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import {HttpClientModule} from '@angular/common/http';
 
 
+import {ToastyModule} from 'ng2-toasty';
+ 
+
 @NgModule({
   declarations: [CompanycreationComponent],
   imports: [
@@ -22,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
     DataTableModule, 
     FormsModule,
     ReactiveFormsModule,
+    ToastyModule.forRoot(),
     AgGridModule.withComponents([])
   ]
 })

@@ -6,7 +6,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Company Creation</h5>         
+              <h5 class="ng-tns-c6-1">Company Creation {{mode}}</h5>         
               <span class="ng-tns-c6-1 ng-star-inserted">Creating Company details  </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -20,9 +20,9 @@
 
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
-            <input type="hidden" name="TaxCode" class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel" value="{{TaxCode}}"  >
+            <input type="hidden" name="CompanyCode" class="form-control" [(ngModel)]="model.CompanyCode" #CompanyCode="ngModel" value="{{CompanyCode}}"  >
             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
@@ -45,19 +45,31 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>GSTNO*</label>
-                                        <input type="number" name="GSTNO" class="form-control" [(ngModel)]="model.GSTNO" #GSTNO="ngModel" value="{{GSTNO}}"  [ngClass]="{'is-invalid': GSTNO.touched && GSTNO.invalid}"  required autocomplete="off">
+                                        <input type="text" name="GSTNO" class="form-control" [(ngModel)]="model.GSTNO" #GSTNO="ngModel" value="{{GSTNO}}"  [ngClass]="{'is-invalid': GSTNO.touched && GSTNO.invalid}"  required autocomplete="off">
                                         <div *ngIf="GSTNO.touched && GSTNO.invalid" class="invalid-feedback">
                                           <div *ngIf="GSTNO.errors.required">GSTNO is invalid</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                             <label>CompanyType*</label>
                                             <select class="custom-select" (blur)="validateplan(catagery.value)" (change)="validateplan(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
                                                     <option value="default">Please Select</option>
                                                     <option *ngFor="let catagery of catagerys">{{ catagery.PlanName }}</option>
                                                   </select>
                                                   <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>
-                                        </div>
+                                        </div> -->
+
+                                        <div class="col-md-4" [class.has-error]="CompanyType.errors?.defaultSelected && CompanyType.touched">
+                                          <label>Select Type*</label>
+                                              <select id="CompanyType" appSelectValidator="-1" class="custom-select"  #CompanyType="ngModel"  name="CompanyType" [(ngModel)]="model.CompanyType">
+                                                <option value="-1">Select Type</option>
+                                                <option [value]="cty.Name" *ngFor="let cty of companytype">{{ cty.Name }}</option>
+                                              </select>
+                                              <span class="help-block" *ngIf="CompanyType.touched && CompanyType.errors?.defaultSelected">
+                                                CompanyType is required
+                                                </span>  
+                                      </div>
+
                                   </div>
 
                                   <div class="row">
@@ -77,8 +89,8 @@
                                         </div>
                                         <div class="col-md-4">
                                                 <label>Email*</label>
-                                                <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" name="Email" class="form-control" [(ngModel)]="model.Email" #Email="ngModel" value="{{Email}}"  [ngClass]="{'is-invalid': Email.touched && Email.invalid}"  required autocomplete="off">
-                                                <div *ngIf="Email.touched && MobileNo.invalid" class="invalid-feedback">
+                                                <input type="email" name="Email" class="form-control" [(ngModel)]="model.Email" #Email="ngModel" value="{{Email}}"  [ngClass]="{'is-invalid': Email.touched && Email.invalid}"  required autocomplete="off">
+                                                <div *ngIf="Email.touched && Email.invalid" class="invalid-feedback">
                                                   <div *ngIf="Email.errors.required">Email is invalid</div>
                                                 </div>
                                             </div>
@@ -109,94 +121,122 @@
                                            <div class="row">
                                                 <div class="col-md-12">
                                                      <label>Address*</label>
-                                                     <textarea class="form-control" name="Address" [(ngModel)]="model.Address" #Address="ngModel" value="{{Address}}"  [ngClass]="{'is-invalid': Address.touched && Address.invalid}"  required autocomplete="off" rows="3"></textarea>
+                                                     <textarea class="form-control" name="Address" [(ngModel)]="model.Address" #Address="ngModel" value="{{Address}}"  [ngClass]="{'is-invalid': Address.touched && Address.invalid}"  required autocomplete="off" rows="2"></textarea>
                                                      <div *ngIf="Address.touched && Address.invalid" class="invalid-feedback">
                                                          <div *ngIf="Address.errors.required">Address is invalid</div>
                                                      </div>
                                                  </div> 
                                                  </div>
 
+
+                                              <div class="row">
+                                                 
+  
+                                                      <div class="col-md-6">
+                                                              <label>Discount Type*</label>
+                                                                  <select class="custom-select" (blur)="validatediscount(discounttype.value)" (change)="validatediscount(discounttype.value)" #discounttype="ngModel" [class.is-invalid]="distypeicHasError && discounttype.touched" name="discounttype" [(ngModel)]="model.discounttype">
+                                                                    <option value="default">Please Select</option>
+                                                                    <option [value]="dis" *ngFor="let dis of Distype">{{ dis }}</option>
+                                                                  </select>
+                                                                  <small class="text-danger" [class.d-none]="!distypeicHasError || dis.untouched">Please choose a topic</small>                
+                                                      </div> 
+
+
+                                                      
+                                                <div class="col-md-6">
+    
+                                                  <label class="required">Discount Value*</label>
+                                                    <input type="number" name="Discount" class="form-control" [(ngModel)]="model.Discount" #Discount="ngModel" value="{{Discount}}"  [ngClass]="{'is-invalid': Discount.touched && Discount.invalid}"  required autocomplete="off">
+                                                    <div *ngIf="Discount.touched && Discount.invalid" class="invalid-feedback">
+                                                        <div *ngIf="Discount.errors.required">Discount Value is invalid</div>
+                                                    </div>
+                                              </div> 
+
+                                          </div>
+
                                                  <div class="row">
-                                                        <div class="col-md-4">
-                                                             <label>Discount*</label>
-                                                             <input type="number" name="Discount" class="form-control" [(ngModel)]="model.Discount" #Discount="ngModel" value="{{Discount}}"  [ngClass]="{'is-invalid': Discount.touched && Discount.invalid}"  required autocomplete="off">
-                                                             <div *ngIf="Discount.touched && Discount.invalid" class="invalid-feedback">
-                                                                 <div *ngIf="Discount.errors.required">Discount is invalid</div>
-                                                             </div>
-                                                         </div>
+                                                        
                                                          <div class="col-md-4">
                                                              <label>Status*</label>
-                                                             <input type="checkbox" name="Status" class="form-control" [(ngModel)]="model.Status" #Status="ngModel" value="{{Status}}"  [ngClass]="{'is-invalid': Status.touched && Status.invalid}"  required autocomplete="off" style="width: 20px;">
-                                                             <div *ngIf="Status.touched && Status.invalid" class="invalid-feedback">
-                                                               <div *ngIf="Status.errors.required">Status is invalid</div>
+                                                             <input type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"   autocomplete="off" style="width: 20px;">
+                                                             <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
+                                                               <div *ngIf="IsActive.errors.required">Status is invalid</div>
                                                              </div>
                                                          </div>
                                                          
-                                                       </div>
+                                                   </div>
+                                                   <!-- <div class="table-content crm-table" *ngIf="f.form.valid"> -->
+
+                                                  <div class="table-content crm-table">
+                                                    <div class="project-table">
+                                                      <div id="crm-contact" class="dt-responsive"  >
+                                                        <div class="row">  
+                                                            
+                                                            <div class="col-xs-12 col-sm-12 col-md-6" style="padding-left: 0px;">
+                                                                <div class="levelselection">
+                                                                  <p>Please Allocate RoomRate</p>
+                                                                 </div>
+                                                              </div>
+                                                              
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped table-bordered full-data-table">                           
+                                                                      <tbody>                              
+                                                                       <tr>
+                                                                          <td>
+                                                                             <ag-grid-angular  
+                                                                              #agGrid
+                                                                              id="agGrid"     
+                                                                              style="width: 100%; height: 300px" 
+                                                                              class="ag-theme-balham"
+                                                                              [rowData]="rowData  | async" 
+                                                                              [columnDefs]="columnDefs"
+                                                                              (gridReady)="onGridReady($event)"
+                                                                              (selectionChanged)="onSelectionChanged($event)"
+                                                                              [groupDefaultExpanded]="groupDefaultExpanded"
+                                                                                [suppressAggFuncInHeader]="true"
+                                                                                [enableCellChangeFlash]="true"
+                                                                                [animateRows]="true"
+                                                                              rowSelection = "multiple" 
+                                                                              rowMultiSelectWithClick="true"                              
+                                                                               >
+                                                                          </ag-grid-angular></td>
+                                                                         
+                                                                      </tr>  
+                                                                      </tbody>
+                                                                    
+                                                                    </table>
+                                                                  </div>
+                                                        </div>
+                                                         
+                                                         
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                 
+                                            
+
                               </div>
                
                           
                             </div>
                           </div>
                      </div>
+
+
+
                      <div class="row m-t-30">
                         <div class="col-md-12 text-center" >
-                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple pull-right ">Close</button>
+                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10 pull-right ">Save</button>
+                       
                         </div>
                       </div>
                     </div>
               </div>       
           </form>
-          <div class="productlist agGridList" *ngIf="isAgGridshow">
-            <div class="shadow p-3 mb-5 bg-white rounded" >
-          <div class="table-content crm-table">
-            <div class="project-table">
-              <div id="crm-contact" class="dt-responsive"  >
-                <div class="row">  
-                    
-                    <div class="col-xs-12 col-sm-12 col-md-6" style="padding-left: 0px;">
-                        <div class="levelselection">
-                          <p>Please add fields here....(level,)</p>
-                         </div>
-                        </div>
-                      
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered full-data-table">                           
-                              <tbody>                              
-                               <tr>
-                                  <td>
-                                     <ag-grid-angular  
-                                      #agGrid
-                                      id="agGrid"     
-                                      style="width: 100%; height: 800px" 
-                                      class="ag-theme-balham"
-                                      [rowData]="rowData  | async" 
-                                      [columnDefs]="columnDefs"
-                                      (gridReady)="onGridReady($event)"
-                                      (selectionChanged)="onSelectionChanged($event)"
-                                      [groupDefaultExpanded]="groupDefaultExpanded"
-                                        [suppressAggFuncInHeader]="true"
-                                        [enableCellChangeFlash]="true"
-                                        [animateRows]="true"
-                                      rowSelection = "multiple"                               
-                                       >
-                                  </ag-grid-angular></td>
-                                 
-                              </tr>  
-                              </tbody>
-                            
-                            </table>
-                          </div>
-                </div>
-                 
-                 
-              </div>
-            </div>
-          </div>
-         
-    </div>
-    </div>
+
+
+
        </div> 
      </div>
 
@@ -222,9 +262,7 @@
                 </label>
               </div>
             </div>
-
       </div>
-
       <div class="table-responsive">
         <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
           <thead>
@@ -238,9 +276,7 @@
             <th>
               <mfDefaultSorter  by="GSTNO">GSTNO</mfDefaultSorter>
             </th>
-            <th>
-                <mfDefaultSorter  by="CompanyType">CompanyType</mfDefaultSorter>
-            </th>
+            
             <th>
                 <mfDefaultSorter  by="ContactName">ContactName</mfDefaultSorter>
             </th>
@@ -256,15 +292,11 @@
             <th>
                 <mfDefaultSorter  by="State">State</mfDefaultSorter>
             </th>
-            <th>
-                <mfDefaultSorter  by="Country">Country</mfDefaultSorter>
-            </th>
+           
             <th>
                 <mfDefaultSorter  by="Email">Email</mfDefaultSorter>
             </th>
-            <th>
-                <mfDefaultSorter  by="Status">Status</mfDefaultSorter>
-            </th>
+           
             <th>
                 <mfDefaultSorter  by="Discount">Discount</mfDefaultSorter>
             </th>
@@ -282,15 +314,15 @@
           <td>{{item.CompanyCode}}</td>
           <td>{{item.CompanyName}}</td>
           <td>{{item.GSTNO}}</td>
-          <td>{{item.CompanyType}}</td>
+         
           <td>{{item.ContactName}}</td>
           <td>{{item.MobileNo}}</td>
           <td>{{item.Address}}</td>
           <td>{{item.City}}</td>
           <td>{{item.State}}</td>
-          <td>{{item.Country}}</td>
+        
           <td>{{item.Email}}</td>
-          <td>{{item.Status}}</td>
+          
           <td>{{item.Discount}}</td>
           <td class="action-icon">
           <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
@@ -304,15 +336,15 @@
           <th>CompanyCode</th>
           <th>CompanyName</th>
           <th>GSTNO</th>
-          <th>CompanyType</th>
+          
           <th>ContactName</th>
           <th>MobileNo</th>
           <th>Address</th>
           <th>City</th>
           <th>State</th>
-          <th>Country</th>
+         
           <th>Email</th>
-          <th>Status</th>
+         
           <th>Discount</th>
           <th>Action</th>
           </tr>
@@ -336,7 +368,7 @@
 
 
  <!-- lightbox-->
-<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
     <h3 class="f-15">View Company creation details</h3>
     
       <div class="app-modal-body text-center"> 
@@ -349,10 +381,7 @@
               <td>GSTNO :</td>
               <td>{{ model.GSTNO }}</td>
               </tr>
-              <tr>
-              <td>CompanyType :</td>
-              <td>{{ model.CompanyType }}</td>
-              </tr>
+              
               <tr>
               <td>ContactName :</td>
               <td>{{ model.ContactName }}</td>
@@ -369,22 +398,13 @@
               <td>City :</td>
               <td>{{ model.City }}</td>
               </tr>
-              <tr>
-              <td>State :</td>
-              <td>{{ model.State }}</td>
-              </tr>
-              <tr>
-              <td>Country :</td>
-              <td>{{ model.Country }}</td>
-              </tr>
+              
+              
               <tr>
               <td>Email :</td>
               <td>{{ model.Email }}</td>
               </tr>
-              <tr>
-              <td>Status :</td>
-              <td>{{ model.Status }}</td>
-              </tr>
+              
               <tr>
               <td>Discount :</td>
               <td>{{ model.Discount }}</td>
@@ -394,3 +414,5 @@
         </div>
          
       </app-modal-animation>
+
+      <ng2-toasty [position]="position"></ng2-toasty>
