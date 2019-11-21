@@ -7,12 +7,11 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {UserrightsComponent }  from '../userrights/userrights.component';
 import { UserrightsRoutingModule  }  from './userrights-routing.module';
-
-
+import { TreeviewModule } from 'ngx-treeview';
 @NgModule({
   declarations: [UserrightsComponent],
   imports: [
-    CommonModule,UserrightsRoutingModule,SharedModule,DataTableModule,FormsModule, ReactiveFormsModule,HttpClientModule
+    CommonModule,UserrightsRoutingModule,SharedModule,DataTableModule,FormsModule, ReactiveFormsModule,HttpClientModule,TreeviewModule.forRoot()
   ]
 })
 export class UserrightsModule { }

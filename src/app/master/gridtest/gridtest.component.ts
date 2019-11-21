@@ -4,11 +4,11 @@ import { NgForm } from "@angular/forms";
 import { MasterformService } from "./../../_services/masterform.service";
 import { Observable } from "rxjs";
 import { IpserviceService } from "src/app/_services/ipservice.service";
-
+ 
 @Component({
   selector: 'app-gridtest',
   templateUrl: './gridtest.component.html',
-  styleUrls: ['./gridtest.component.scss']
+  styleUrls: ['./gridtest.component.scss'], 
 })
 export class GridtestComponent implements OnInit {
   Distype = ['Percentage', 'Amount'];
@@ -100,6 +100,8 @@ export class GridtestComponent implements OnInit {
       this.imgURL = reader.result;
     }
   }
+
+
 
   resetForm(form?: NgForm) {
     this.model = {

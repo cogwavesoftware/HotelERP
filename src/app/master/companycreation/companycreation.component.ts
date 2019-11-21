@@ -31,21 +31,43 @@ export class CompanycreationComponent implements OnInit {
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
+<<<<<<< HEAD
   public isShown: boolean = false;
   public isAgGridshow: boolean = true;
   model: any = {};
   btitle: string = "Add";
   isValid: boolean;
   dtat: string;
+=======
+  public isShown:boolean = false;
+  public isAgGridshow:boolean=false;
+  model: any = {};   
+   
+  btitle:string="Add";
+  
+  isValid:boolean;
+ 
+
+  dtat:string;   
+>>>>>>> 0876307b5e34d9cbb467513e9938df8d41478341
   msg: string;
   returnUrl: string;
   showClose = true;
   theme = 'bootstrap';
   type = 'default';
   closeOther = false;
+<<<<<<< HEAD
   isroomt: string;
   isroomc: string;
   catageryhasError: boolean;
+=======
+  isroomt:string;
+  isroomc:string;
+  catageryhasError:boolean;   
+  catageryhasError1:boolean;   
+  companytypes=['MNC','Local'];   
+  typeoflevels=['Level1','Level2','Level3','Level4'];
+>>>>>>> 0876307b5e34d9cbb467513e9938df8d41478341
   public str;
   Distype = ['%', 'Amount'];
   companytype: any;

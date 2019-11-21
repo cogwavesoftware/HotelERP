@@ -5820,7 +5820,7 @@ outerdiv{
         background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
     }
     .aqua-gradient{
-        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;          
+        background: linear-gradient(40deg, #7A9DD6 0%, #2F5588 51%, rgb(192, 215, 245) 100%) !important;          
            
     }
     .rgba-gradient {
@@ -5885,7 +5885,8 @@ outerdiv{
     }
     .card-header{
         color:#fff;
-        background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
+        background: linear-gradient(-40deg,#360033 0%, #0b8793 51%, #360033 100%) !important;
+        // background: linear-gradient(-40deg,#ffd86f,#fc6262) !important;
         h5{
             color:#fff;
         }

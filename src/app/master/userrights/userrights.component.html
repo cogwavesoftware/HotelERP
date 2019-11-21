@@ -1,1 +1,68 @@
-<p>userrights works!</p>
+
+<div class="outerdiv">
+
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+      <div class="row">
+          <div class="col-md-11">
+              <h5 class="ng-tns-c6-1">USER Rights</h5>         
+              <span class="ng-tns-c6-1 ng-star-inserted">User rights details </span>
+            </div>
+           
+      </div>
+    </div>
+
+
+
+    <div class="formdesign aqua-gradient" >
+        <div class="formouter rotate" >
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+             
+             
+             <div class="auth-box card">
+                   <div class="card-block">
+                     <div class="frmdata" >              
+                        <div class="containar">
+                            <div class="row">
+                                <div class="col-md-12">
+                                         
+                                  <div class="row">
+                                        <div class='col-md-6'>
+                                            <ngx-treeview
+                                            [config]="config"
+                                            [items]="items"
+                                            (selectedChange)="onSelectedChange($event)"
+                                            (filterChange)="onFilterChange($event)">
+                                            </ngx-treeview>
+                                            </div> 
+                                                      
+  
+                                  </div>
+                                    
+                               
+  
+                                 
+                              </div>
+               
+                          
+                            </div>
+                          </div>
+                     </div>
+                 
+
+                    </div>
+              </div>       
+          </form>
+       </div> 
+     </div>
+
+
+<!-- -----------table start Here------------ -->
+
+
+ 
+    <!-- -----------table End Here------------ -->
+
+
+
+
+</div>
