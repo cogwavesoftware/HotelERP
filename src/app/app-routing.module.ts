@@ -223,7 +223,10 @@ const routes: Routes = [
         path:'financial',
         loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
        },
-       
+       {
+        path:'addressbook',
+        loadChildren: './master/addressbook/addressbook.module#AddressbookModule'
+       },
      
     ]
   },

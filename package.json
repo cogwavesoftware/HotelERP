@@ -71,6 +71,7 @@
     "zone.js": "~0.9.1",
     "ag-grid": "^18.1.2",
     "ag-grid-angular": "^21.2.2",
+    "ngx-treeview": "^6.0.2",
     "ag-grid-community": "^21.2.2"
   },
   "devDependencies": {

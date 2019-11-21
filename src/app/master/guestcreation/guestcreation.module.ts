@@ -9,8 +9,8 @@ import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { GuestcreationRoutingModule } from './guestcreation-routing.module';
-
-
+import {DatePipe} from '@angular/common';
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
   declarations: [GuestcreationComponent],
@@ -19,9 +19,10 @@ import { GuestcreationRoutingModule } from './guestcreation-routing.module';
     SharedModule,
     HttpClientModule,
     DataTableModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    FormsModule,ToastyModule.forRoot()
+  ],
+  providers:[DatePipe]
 })
 export class GuestcreationModule { }
 

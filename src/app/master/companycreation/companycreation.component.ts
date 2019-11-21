@@ -13,7 +13,7 @@ import { IpserviceService } from 'src/app/_services/ipservice.service';
 })
 export class CompanycreationComponent implements OnInit {
   @ViewChild('agGrid',{static: false }) agGrid: AgGridAngular;
-  private gridApi;
+  public gridApi;
   private gridColumnApi;   
   private defaultColDef;   
   private groupDefaultExpanded;
@@ -31,7 +31,7 @@ export class CompanycreationComponent implements OnInit {
   public isShown:boolean = false;
   public isAgGridshow:boolean=false;
   model: any = {};   
-  CompanyType:any = {};
+   
   btitle:string="Add";
   
   isValid:boolean;
@@ -48,22 +48,29 @@ export class CompanycreationComponent implements OnInit {
   isroomc:string;
   catageryhasError:boolean;   
   catageryhasError1:boolean;   
-  companytypes=['MNC','Local' ];   
+  companytypes=['MNC','Local'];   
   typeoflevels=['Level1','Level2','Level3','Level4'];
   public str;
 
   @ViewChild('f',{static:false}) form: any;
   constructor(private http: HttpClient,private _masterformservice:MasterformService,private _ipservice:IpserviceService) { 
-    this.columnDefs = [
-      {headerName: 'Make', field: 'make', sortable: true, filter: true,checkboxSelection: true },
-      {headerName: 'Model', field: 'model', sortable: true, filter: true},
-      {headerName: 'Price', field: 'price', sortable: true, filter: true,editable:true,type: "valueColumn"}
+    this.columnDefs = [  {         
+      
+        headerCheckboxSelection: true,            
+        checkboxSelection: true,
+    },
+
+      {headerName: 'Make', field: 'make', sortable: true, filter: true  },
+      {headerName: 'Model', field: 'model', sortable: true, filter: true,},
+      {headerName: 'Price', field: 'price', editable:true,type: "valueColumn"}
       // {headerName: 'Total', field:'total',valueGetter:'data.Qty * data.price',editable:true }
   ];
   }
-  ngOnInit(){            
+  ngOnInit(){
+    
     console.log("init");           
     this.rowData = this.http.get('https://api.myjson.com/bins/15psn9');
+    console.log(this.rowData );
     this.btitle="Add Item";   
     this.model.BranchCode=localStorage.getItem('BranchCode');
     this.model.IpAdd=localStorage.getItem('LOCAL_IP');
@@ -88,13 +95,49 @@ export class CompanycreationComponent implements OnInit {
     var selectedRows = this.gridApi.getSelectedRows();
     var selectedRowsString = "";
      this.str =  JSON.stringify(selectedRows);
+
+
+
          
   }
-  onGridReady(params) {
+  public onRowDataChanged(): void {
+   
+
+ 
+  }
+  selectrow(currentRow) {
+     this.gridApi.forEachNode(function(node) {
+      if (node.data.make === "Ford") {  
+       console.log("yes");
+        node.setSelected(true);
+      }
+    });
+    console.log("dfdsfdfsdf");
+     this.gridApi.forEachNode(node => node.rowIndex ? 0 : node.setSelected(true));
+     if (this.gridApi != null  ) {
+      this.gridApi.forEachNode((node, index) => {
+        if (index === currentRow) {
+          node.setSelected(true)
+        }
+      })
+    }
+  }
+   
+  onGridReady(params   ) { 
     console.log("onGridReady");
+     
     this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    params.api.sizeColumnsToFit();          
+    this.gridColumnApi = params.columnApi; 
+    params.api.sizeColumnsToFit();         
+    this.gridApi.forEachNode(function(node) {
+      if (node.data.make === "Toyota") {  
+        alert("yes");
+        node.setSelected(true);
+      }
+    }); 
+
+
+
   }
  /* ag grid code ending */
  validateplan(value) {
@@ -177,7 +220,15 @@ onSubmit()
     console.log("Form Submitted!");   
   }
 }
-
+valuechange(value){
+  console.log(value.length);  
+  if(value.length>10){     
+    alert("Mobile no should not exceed 10 digit");
+    this.model.MobileNo="";
+    return false;  
+    
+  }
+}
 savegridvalue(){
   console.log("on click save grid data "+this.str);
 }

@@ -4,11 +4,16 @@ import { NgForm } from "@angular/forms";
 import { MasterformService } from "./../../_services/masterform.service";
 import { Observable } from "rxjs";
 import { IpserviceService } from "src/app/_services/ipservice.service";
+import { TreeviewItem, TreeviewConfig } from '../../shared/service/lib';
+import { TreeviewItemService } from '../../shared/service/treeview-item.service';
 
 @Component({
   selector: 'app-gridtest',
   templateUrl: './gridtest.component.html',
-  styleUrls: ['./gridtest.component.scss']
+  styleUrls: ['./gridtest.component.scss'],
+  providers: [
+    TreeviewItemService //tree service
+]
 })
 export class GridtestComponent implements OnInit {
   Distype = ['Percentage', 'Amount'];
@@ -43,11 +48,25 @@ export class GridtestComponent implements OnInit {
   catagerys: any;
   categories: any[];
 
-  constructor(private _masterformservice: MasterformService,private _ipservice: IpserviceService) {
+   /* tree property */
+  dropdownEnabled = true;
+  items: TreeviewItem[];
+  values: number[];
+  config = TreeviewConfig.create({
+      hasAllCheckBox: false,
+      hasFilter: true,
+      hasCollapseExpand: true,
+      decoupleChildFromParent: false,
+      maxHeight: 500
+  });
+/* tree property end */
+
+  constructor(private service: TreeviewItemService,private _masterformservice: MasterformService,private _ipservice: IpserviceService) {
     this.model.discounttype = "default";
   }
 
   ngOnInit() {
+    this.items = this.service.getBooks(); //tree
 
   this.resetForm();
     this._masterformservice.getAllRoles().subscribe(
@@ -65,6 +84,17 @@ export class GridtestComponent implements OnInit {
 
 
   }
+
+/* tree property */
+  onFilterChange(value: string) {
+    //console.log('filter:', value);
+  }
+  onSelectedChange(value:string){
+    console.log('change filter:', value);
+    console.log("json value" + JSON.stringify(value));
+    console.log("json parse" + JSON.parse(JSON.stringify(value)));
+  }
+/* end tree property */
 
   resetForm(form?: NgForm) {
     this.model = {
