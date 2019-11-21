@@ -25,5 +25,6 @@ import { ToastyModule } from 'ng2-toasty';
   ],
   providers:[DatePipe]
 })
+
 export class FloorcreationModule { }
 

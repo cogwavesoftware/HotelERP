@@ -3,7 +3,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Item Creation</h5>
+              <h5 class="ng-tns-c6-1">Item Creation {{mode}} </h5>
               <span class="ng-tns-c6-1 ng-star-inserted">Item Creation details  </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1">
@@ -17,7 +17,7 @@
 
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -56,27 +56,22 @@
                                   <div class="row">
                                       
    
-                                    <div class="col-md-6">
+                                    <div class="col-md-6"  [class.has-error]="RevId.touched && RevId.errors?.defaultSelected" >
                                         <label>Select RevName*</label>
-                                            <select class="custom-select" (blur)="validateplan(catagery.value)" (change)="validateplan(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="RevId" [(ngModel)]="model.RevId">
-                                              <option value="default">Please Select</option>
-                                              <option [value]="catagery.Id" *ngFor="let catagery of catagerys" >{{ catagery.RevName }}</option>
+                                            <select class="custom-select" id="RevId" appSelectValidator="-1"  #RevId="ngModel"  name="RevId" [(ngModel)]="model.RevId">
+                                              <option value="-1">Please Select</option>
+                                              <option *ngFor="let revs of catagerys"  [value]="revs.Id">{{ revs.RevName }}</option>
                                             </select>
-                                            <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a RevName</small>
-                                    </div>
+                                            <span class="help-block" *ngIf="RevId.touched && RevId.errors?.defaultSelected">
+                                                Revnue Name is required
+                                            </span>           
+                                                       
+                                    </div> 
 
 
-                                    <!-- <div class="col-md-6">
-                                        <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
-                                        <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
-                                        <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
-                                </div>  -->
-  
+
 
                                   </div>
-
-                               
-
 
                               </div>
 
@@ -87,7 +82,7 @@
                      <div class="row m-t-30">
                         <div class="col-md-12 text-center" >
                           <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">close</button>
                         </div>
                       </div>
                     </div>
@@ -212,3 +207,7 @@
       </div>
 
     </app-modal-animation>
+
+    
+
+<ng2-toasty [position]="position"></ng2-toasty>

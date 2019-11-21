@@ -3,7 +3,7 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Tax Master Description Creation</h5>         
+                  <h5 class="ng-tns-c6-1">Tax Detail Description Creation{{mode}}</h5>         
                   <span class="ng-tns-c6-1 ng-star-inserted">Details about tax master description </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -16,10 +16,10 @@
     
     
         <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
-            <div class="formdesign aqua-gradient" >
+            <div class="formdesign aqua-gradient" *ngIf="isShown" >
             <div class="formouter rotate" >
-             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
-                <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(F.form)" #f="ngForm"> 
+                <input type="hidden" name="RNO" class="form-control" [(ngModel)]="model.RNO" #RNO="ngModel" value="{{RNO}}"  >
                 <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                 <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
                 <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
@@ -30,31 +30,31 @@
                             <div class="containar">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="modelPopup" ngbDatepicker #d="ngbDatepicker">
-                                              <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                              </div>
-                                            </div>
-                                          </div>
+                                        
                                       <div class="row">
+
+                                          <div class="col-md-6"  [class.has-error]="TaxCode.touched && TaxCode.errors?.defaultSelected" >
+                                              <label>Select Tax*</label>
+                                                  <select class="custom-select" id="TaxCode" appSelectValidator="-1"  #TaxCode="ngModel"  name="TaxCode" [(ngModel)]="model.TaxCode">
+                                                    <option value="-1">All</option>
+                                                    <option *ngFor="let revs of taxmaster"  [value]="revs.TaxCode">{{ revs.TaxName }}</option>
+                                                  </select>
+                                                  <span class="help-block" *ngIf="TaxCode.touched && TaxCode.errors?.defaultSelected">
+                                                      Tax Name is required
+                                                  </span>           
+                                                             
+                                          </div> 
+      
+
                                         <div class="col-md-6">    
-                                            <label class="required">Tax Code*</label>
-                                                <input type="text" name="TaxCode" readonly class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel"  [ngClass]="{'is-invalid': TaxCode.touched && TaxCode.invalid}"  required autocomplete="off">
-                                                <div *ngIf="TaxCode.touched && TaxCode.invalid" class="invalid-feedback">
-                                                    <div *ngIf="TaxCode.errors.required">TaxCode is invalid</div>
+                                            <label class="required">TaxName*</label>
+                                                <input type="text" name="TaxName" readonly class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
+                                                <div *ngIf="TaxName.touched && TaxName.invalid" class="invalid-feedback">
+                                                    <div *ngIf="TaxName.errors.required">TaxName is invalid</div>
                                                 </div>
                                         </div> 
     
-                                        <div class="col-md-6">
-                                            <label>Tax Name*</label>
-                                            <select class="custom-select" (blur)="validateplan(TaxName.value)" (change)="validateplan(TaxName.value)" #TaxName="ngModel" [class.is-invalid]="catageryhasError && TaxName.touched" name="TaxName" [(ngModel)]="model.TaxName">
-                                                    <option value="default">Please Select</option>
-                                                    <option [value]="TaxName.Id" *ngFor="let TaxName of catagerys" >{{ TaxName }}</option>
-                                                    </select>
-                                                    <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a RevName</small> 
-                                        </div>
+                                        
     
                                  
       
@@ -118,54 +118,33 @@
                                                         
                                                 </div>
                                             </div>
+                                     
                                       <div class="row">
-                                            <div class='col-md-12'>
-                                                    <label>Tax Description*</label>
-                                                   <textarea rows="3" name="TaxDesc" class="form-control" [(ngModel)]="model.TaxDesc" #TaxDesc="ngModel" value="{{TaxDesc}}"  [ngClass]="{'is-invalid': TaxDesc.touched && TaxDesc.invalid}"  required autocomplete="off"></textarea>
-                                                   <div *ngIf="TaxDesc.touched && TaxDesc.invalid" class="invalid-feedback">
-                                                       <div *ngIf="TaxDesc.errors.required">TaxDesc is invalid</div>
-                                                   </div> 
-                                                </div> 
-                                                     
+                                        <div class="form-group" [class.has-error]="TaxType.touched && TaxType.invalid">
+                                          <label class="control-label">TaxType</label>
+                                          <div >
+                                            <label class="radio-inline">
+                                              <input type="radio" required #TaxType="ngModel" value="ROOM" name="TaxType" [(ngModel)]="model.TaxType"> RoomTax
+                                            </label>
+                                            <label class="radio-inline">
+                                              <input type="radio" required #TaxType="ngModel" value="HALL" name="TaxType" [(ngModel)]="model.TaxType"> HallTax
+                                            </label>
+                                          </div>
+                                          <span class="help-block" *ngIf="TaxType.touched && TaxType.invalid">
+                                            TaxType is required
+                                          </span>
+                                        </div>
+
+                                        <div class="col-md-6">                                                   
+                                          <label>Active*</label>
+                                          <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">
+                                          <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
+                                              <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
+                                          </div> 
+                                        </div>
                                       </div>
 
-                                      <div class="row">
-                                            <div class="col-md-6">
-                                                    <label>Room Type*</label>
-                                                    <ul class="list-group">
-                                                            <li class="list-group-item"  *ngFor="let item of roomtypes">
-                                                              <input type="radio" [(ngModel)]="model.roomtype" name="roomtype" value="{{item}}"  /> 
-                                                              {{item}}
-                                                  
-                                                            </li>
-                                                      </ul>
-
-
-
-                                                    <!-- <div class="row" style="margin-bottom: 0px;">
-                                                            <label style="width: 100%;">Room Type*</label> 
-                                                    <div class="col-md-3">                                                   
-                                                            <input style="width:20px; float:left" id="room" [value]="true" type="radio" class="form-control" value="Room1" name="roomtype" [(ngModel)]="model.roomtype">
-                                                            <label class="form-control-label" for="room">Room</label>
-                                                            
-                                                    </div>
-
-                                                    <div class="col-md-3">                                                   
-                                                            <input style="width:20px; float:left" id="hall" [value]="false" type="radio" class="form-control" value="Hall1" name="roomtype" [(ngModel)]="model.roomtype">
-                                                                    <label class="form-control-label" for="hall">Hall</label>                                                            
-                                                    </div>
-                                                    </div> -->
-                                                    
-                                            </div>
-                                            <div class="col-md-6">                                                   
-                                               <label>Active*</label>
-                                               <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">
-                                               <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
-                                                   <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
-                                               </div> 
-                                             </div>
-                                           
-                                        </div>
+                                      
                                          
                                   </div>
                    
@@ -191,6 +170,18 @@
             <div class="shadow p-3 mb-5 bg-white rounded" >
           <div class="table-content crm-table">
             <div class="project-table">
+             <div class="row">
+                <div class="col-md-6">
+                    <label>Filter Tax</label>
+                        <select class="custom-select" (change)="LoadTaxData(TaxCode1.value)" id="TaxCode1" appSelectValidator="-1"  #TaxCode1="ngModel"  name="TaxCode1" [(ngModel)]="model.TaxCode1">
+                          <option value="-1">All</option>
+                          <option *ngFor="let revs of taxmaster"  [value]="revs.TaxCode">{{ revs.TaxName }}</option>
+                        </select>                       
+                </div> 
+
+              </div>
+              <br>
+
               <div id="crm-contact" class="dt-responsive"  *ngIf="data | async as data">
                 <div class="row">  
       
@@ -215,17 +206,19 @@
                       <mfDefaultSorter  by="TaxCode">TaxCode</mfDefaultSorter>
                       </th>
                       <th>
+                          <mfDefaultSorter  by="TaxType">TaxType</mfDefaultSorter>
+                          </th>
+                          <th>
+                              <mfDefaultSorter  by="FromAmount">FromAmount</mfDefaultSorter>
+                              </th>               
+                              <th>
+                              <mfDefaultSorter  by="ToAmount">ToAmount</mfDefaultSorter>
+                              </th>
+                      <th>
                       <mfDefaultSorter  by="TaxName">TaxName</mfDefaultSorter>
                       </th>
-                      <th>
-                      <mfDefaultSorter  by="TaxType">TaxType</mfDefaultSorter>
-                      </th>
-                      <th>
-                      <mfDefaultSorter  by="FromAmount">FromAmount</mfDefaultSorter>
-                      </th>               
-                      <th>
-                      <mfDefaultSorter  by="ToAmount">ToAmount</mfDefaultSorter>
-                      </th>
+                      
+                      
                       <th>
                       <mfDefaultSorter  by="TaxPer">TaxPer</mfDefaultSorter>
                       </th>
@@ -247,16 +240,18 @@
                         
                      <tr *ngFor="let item of mf.data; let i = index;">
                       <td>{{item.TaxCode}}</td>
-                      <td>{{item.TaxName}}</td>
                       <td>{{item.TaxType}}</td>  
+                     
                       <td>{{item.FromAmount}}</td>
                       <td>{{item.ToAmount}}</td>
+                      <td>{{item.TaxName}}</td>
+                     
                       <td>{{item.TaxPer}}</td>  
                       <td>{{item.EffectiveDate}}</td>
                       <td>{{item.ToDate}}</td>                        
 
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                           <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                           
                       </td>
@@ -266,15 +261,16 @@
                     <tr class="blueorange-gradient">
                       <!-- <th>Profile</th> -->
                       <th>TaxCode</th>
-                      <th>TaxName</th>    
                       <th>TaxType</th>  
                       <th>FromAmount</th>    
                       <th>ToAmount</th>
+                      <th>TaxName</th>    
+                     
                       <th>TaxPer</th>  
                       <th>EffectiveDate</th>    
                       <th>ToDate</th>    
                                        
-                      <th></th>             
+                      <th>Action</th>             
                     </tr>
                     <tr>
                       <td colspan="10">
@@ -295,7 +291,7 @@
     
     
     <!-- lightbox-->
-    <app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+    <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
       <h3 class="f-15">View TaxMaster Details</h3>
       
         <div class="app-modal-body text-center"> 
@@ -308,10 +304,7 @@
               <td>TaxName :</td>
               <td>{{ model.TaxName }}</td>
               </tr>
-              <tr>
-              <td>TaxType :</td>
-              <td>{{ model.TaxType }}</td>
-              </tr>
+             
               <tr>
               <td>FromAmount :</td>
               <td>{{ model.FromAmount }}</td>
@@ -320,10 +313,7 @@
               <td>ToAmount :</td>
               <td>{{ model.ToAmount }}</td>
               </tr>
-              <tr>
-              <td>TaxPer :</td>
-              <td>{{ model.TaxPer }}</td>
-              </tr>
+              
               <tr>
               <td>TaxPer :</td>
               <td>{{ model.TaxPer }}</td>
@@ -346,3 +336,5 @@
           </div>
            
         </app-modal-animation>
+
+        <ng2-toasty [position]="position"></ng2-toasty>

@@ -19,7 +19,6 @@ export class AddressbookComponent implements OnInit {
   model: any = {};
   btitle: string = "Add";
   isValid: boolean;
-
   dtat: string;
   title: string;
   msg: string;

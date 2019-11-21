@@ -3,7 +3,7 @@
   <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
     <div class="row">
         <div class="col-md-11">
-            <h5 class="ng-tns-c6-1">Purpose of Visit Creation</h5>         
+            <h5 class="ng-tns-c6-1">Purpose of Visit Creation {{mode}} </h5>         
             <span class="ng-tns-c6-1 ng-star-inserted">Purpose of Visit details </span>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -17,7 +17,7 @@
 
   <div class="formdesign aqua-gradient" *ngIf="isShown">
       <div class="formouter rotate" >
-       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
+       <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
           <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
           <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
           <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -32,10 +32,10 @@
                                        
                                 <div class="row">
                                   <div class="col-md-4">    
-                                      <label class="required">Name*</label>
+                                      <label class="required">Purpose of Visit*</label>
                                           <input type="text" name="Name" class="form-control" [(ngModel)]="model.Name" #Name="ngModel" value="{{Name}}"  [ngClass]="{'is-invalid': Name.touched && Name.invalid}"  required autocomplete="off">
                                           <div *ngIf="Name.touched && Name.invalid" class="invalid-feedback">
-                                              <div *ngIf="Name.errors.required">Name is invalid</div>
+                                              <div *ngIf="Name.errors.required">Purpose of Visit is invalid</div>
                                           </div>
                                   </div>                              
                                  
@@ -49,8 +49,8 @@
                    </div>
                    <div class="row m-t-30">
                       <div class="col-md-12 text-center" >
-                        <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                        <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                        <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10  pull-right">Save</button>
+                        <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple pull-right">Close</button>
                       </div>
                     </div>
                   </div>
@@ -85,8 +85,11 @@
           <thead>
           <tr class="blueorange-gradient">                
             <th>
-              <mfDefaultSorter  by="Name">Name</mfDefaultSorter>
-            </th>            
+              <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
+            </th>  
+            <th>
+                <mfDefaultSorter  by="Name">PURPOSE OF VISIT</mfDefaultSorter>
+              </th>            
             <th>
               <mfDefaultSorter>Action</mfDefaultSorter>
             </th>
@@ -97,6 +100,8 @@
           <tbody>
               
            <tr *ngFor="let item of mf.data; let i = index;">
+              <td>{{item.Id}}</td>   
+                 
              <td>{{item.Name}}</td>   
                  
             <td class="action-icon">
@@ -107,9 +112,10 @@
           </tr>  
           </tbody>
           <tfoot>
-          <tr class="blueorange-gradient">          
-            <th>Name</th>         
-            <th></th>             
+          <tr class="blueorange-gradient">  
+            <th>Id</th>          
+            <th>Purpose of Visit</th>         
+            <th>Action</th>             
           </tr>
           <tr>
             <td colspan="10">
@@ -137,7 +143,12 @@
     <div class="app-modal-body text-center"> 
         <table class="table table-striped text-left m-t-10">
             <tr>
-              <td>Name :</td>
+              <td>Id :</td>
+              <td>{{ model.Id }}</td>
+            </tr>
+
+            <tr>
+              <td>Purpose of Visit :</td>
               <td>{{ model.Name }}</td>
             </tr>
                 
@@ -146,3 +157,6 @@
       </div>
        
     </app-modal-animation>
+
+    <ng2-toasty [position]="position"></ng2-toasty>
+

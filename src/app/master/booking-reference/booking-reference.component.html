@@ -4,7 +4,7 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Reference Creation</h5>         
+                  <h5 class="ng-tns-c6-1">Reference Creation {{mode}} </h5>         
                   <span class="ng-tns-c6-1 ng-star-inserted">Creating Hotel  Reference for Branch </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -18,7 +18,7 @@
     
         <div class="formdesign aqua-gradient" *ngIf="isShown">
             <div class="formouter rotate" >
-             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">      
                  <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
                  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                  <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -60,20 +60,15 @@
                                                     </div>
                                                 </div>
                                             
+
+                                                <div class="col-md-6">
+                                                    <label>RefPoints*</label>
+                                                    <input type="number" name="RefPoints" class="form-control" [(ngModel)]="model.RefPoints" #RefPoints="ngModel" value="{{RefPoints}}"  [ngClass]="{'is-invalid': RefPoints.touched && RefPoints.invalid}"  required autocomplete="off">
+                                                    <div *ngIf="RefPoints.touched && RefPoints.invalid" class="invalid-feedback">
+                                                      <div *ngIf="RefPoints.errors.required">RefPoints can't be Blank</div>
+                                                    </div>
+                                                </div>
     
-                                                <div class='col-md-6'>
-                                                        <div class="form-group">
-                                                            <label class="form-control-label" for="RefDob">Transaction Date</label>
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                  <input class="form-control" placeholder="Date" name="RefDob" [(ngModel)]="model.RefDob" value="{{model.RefDob | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
-                                                                  <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                                                    <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                                  </div>
-                                                                </div>
-                                                              </div>                                                         
-                                                        </div>
-                                                    </div> 
                                         </div>
       
       
@@ -89,19 +84,13 @@
                                         
                                         </div>
                                           <div class="row">
-                                                <div class="col-md-6">
-                                                        <label>RefPoints*</label>
-                                                        <input type="number" name="RefPoints" class="form-control" [(ngModel)]="model.RefPoints" #RefPoints="ngModel" value="{{RefPoints}}"  [ngClass]="{'is-invalid': RefPoints.touched && RefPoints.invalid}"  required autocomplete="off">
-                                                        <div *ngIf="RefPoints.touched && RefPoints.invalid" class="invalid-feedback">
-                                                          <div *ngIf="RefPoints.errors.required">RefPoints can't be Blank</div>
-                                                        </div>
-                                                    </div>
+                                                
     
     
                                               <div class="col-md-6">
-                                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
+                                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
                                                       <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
-                                                      <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                                      
                                               </div>
     
                                               
@@ -116,7 +105,7 @@
                          <div class="row m-t-30">
                             <div class="col-md-12 text-center" >
                               <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                              <button type="button" (click)="partialUpdate()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                              <button type="button" (click)="Closeform()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
                             </div>
                           </div>
                         </div>
@@ -195,14 +184,14 @@
                       <td>{{item.RefAdress}}</td>
                       <td>{{item.IsActive}}</td>
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-2',item)"><i class="fa fa-book"></i></a>
+                          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                           <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                           
                       </td>
                     </tr>
                     </tbody>
                     <tfoot>
-                    <tr>
+                    <tr  class="blueorange-gradient">
                       <!-- <th>Profile</th> -->
                       <th>Id</th>
                       <th>RefName</th>
@@ -235,7 +224,7 @@
     
     
     
-    <app-modal-animation [modalID]="'effect-2'" [modalClass]="'md-effect-2'">
+    <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
         <h3 class="f-15">View  Floor Details</h3>
         
           <div class="app-modal-body text-center"> 
@@ -267,3 +256,5 @@
             </div>
              
           </app-modal-animation>
+
+          <ng2-toasty [position]="position"></ng2-toasty>
