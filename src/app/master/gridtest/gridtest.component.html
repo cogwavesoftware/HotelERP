@@ -3,7 +3,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
         <div class="row">
             <div class="col-md-11">
-                <h5 class="ng-tns-c6-1">User Creation</h5>
+                <h5 class="ng-tns-c6-1">User Creation{{mode}}</h5>
                 <span class="ng-tns-c6-1 ng-star-inserted">User Creation  for Branch </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1">
@@ -96,7 +96,7 @@
                                             <div class="col-md-6">
                                                 
                                                 <label class="required">Password*</label>
-                                                <input type="password" name="password" class="form-control"  ngModel #password="ngModel"  required>
+                                                <input type="password" name="password" class="form-control"  [(ngModel)]="model.password" #password="ngModel" value="{{password}}"  required>
                                                 <div class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
                                                     Password Is Required
                                                 </div>
@@ -107,7 +107,7 @@
 
                                                 <label class="required">Conform Password*</label>
                                                 <input type="password" name="ConformPassword" class="form-control"
-                                                   ngModel #passwconfrm="ngModel"  required compare="password">
+                                                [(ngModel)]="model.ConformPassword" #passwconfrm="ngModel" value="{{ConformPassword}}"  required compare="password">
                                                     <div class="text-danger" *ngIf="passwconfrm.invalid && (passwconfrm.dirty || passwconfrm.touched)">
                                                         <div *ngIf="passwconfrm.errors['required']">Password confom is required</div>
                                                         <div *ngIf="passwconfrm.errors['compare']">Password confom not match</div>
@@ -140,7 +140,7 @@
 
                                                     <div class="col-md-6">
                                                             <label>Discount Type*</label>
-                                                                <select class="custom-select" (blur)="validatediscount(discounttype.value)" (change)="validatediscount(discounttype.value)" #discounttype="ngModel" [class.is-invalid]="distypeicHasError && discounttype.touched" name="discounttype" [(ngModel)]="model.discounttype">
+                                                                <select class="custom-select" (blur)="validatediscount(Discount.value)" (change)="validatediscount(Discount.value)" #Discount="ngModel" [class.is-invalid]="distypeicHasError && Discount.touched" name="Discount" [(ngModel)]="model.Discount">
                                                                   <option value="default">Please Select</option>
                                                                   <option [value]="dis" *ngFor="let dis of Distype">{{ dis }}</option>
                                                                 </select>
@@ -189,6 +189,14 @@
                                                                 </ul>
                                                         
                                                 </div>
+
+                                                <!-- <div class="row">
+                                                    <h3>Angular 7 Image Preview before Upload:</h3>
+                                                    <span style="color:red;" *ngIf="message">{{message}}</span>
+                                                    <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+                                                    <img [src]="imgURL" height="200" *ngIf="imgURL">
+
+                                                </div> -->
                                     </div>
 
 
@@ -206,18 +214,165 @@
                 </div>
             </form>
 
-            <br>
-            <div class="card">
-                    <div class="card-body">
-                       <h5 class="card-title"> Formstatus: {{f.status}}</h5>
-                       <h6 class="card-subtitle mb-2 text-muted">formValue </h6>
-
-                       <pre>
-                           {{f.value | json}}
-                       </pre>
-                    </div>
-
-            </div>
+           
         </div>
     </div>
+
+    <div class="productlist">
+        <div class="shadow p-3 mb-5 bg-white rounded" >
+      <div class="table-content crm-table">
+        <div class="project-table">
+          <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+            <div class="row">
+   
+  
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Floor Data List</div>
+                    </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div style="text-align: right;">
+                      <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                        <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                      </label>
+                    </div>
+                  </div>  
+
+            </div>
+             
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                <thead>
+                <tr class="blueorange-gradient">
+                  <!-- <th>
+                    <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+                  </th> -->
+                  <th>
+                    <mfDefaultSorter  by="UserId">UserId</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="UserName">UserName</mfDefaultSorter>
+                  </th>
+                 
+                  <th>
+                    <mfDefaultSorter by="IsRole">IsRole</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="GracePeroid">GracePeroid</mfDefaultSorter>
+                  </th>
+
+                    <th>
+                        <mfDefaultSorter  by="Discount">Discount</mfDefaultSorter>
+                    </th>
+
+                    <th>
+                        <mfDefaultSorter  by="DiscountAmount">DiscountAmount</mfDefaultSorter>
+                    </th>
+                  <th>
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;">
+                  <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
+                  <td>{{item.UserId}}</td>
+                  <td>{{item.UserName}}</td>
+                  
+                  <td>{{item.IsRole}}</td>
+                  <td>{{item.GracePeroid}}</td>
+                  <td>{{item.Discount}}</td>
+                  <td>{{item.DiscountAmount}}</td>
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                      
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="blueorange-gradient">
+                  <!-- <th>Profile</th> -->
+                  <th>FloorCode</th>
+                  <th>UserName</th>
+                 
+                  <th>IsRole</th>
+                  <th>GracePeroid</th>                
+                  <th>Discount</th>
+                  <th>DiscountAmount</th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                  <td colspan="10">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
 </div>
+</div>
+
+
+
+
+
+
+</div> 
+
+
+
+
+
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
+<h3 class="f-15">View  Floor Details</h3>
+
+<div class="app-modal-body text-center"> 
+    <table class="table table-striped text-left m-t-10">
+        <tr>
+          <td>Id :</td>
+          <td>{{ model.UserId }}</td>
+        </tr>
+        <tr>
+          <td>UserName :</td>
+          <td>{{ model.UserName }}</td>
+        </tr>
+        <tr>
+          <td>FirstName :</td>
+          <td>{{ model.FirstName }}</td>
+        </tr>
+        <tr>
+          <td>Role :</td>
+          <td>{{ model.IsRole }}</td>
+        </tr>
+        <tr>
+          <td>GracePeroid :</td>
+          <td>{{ model.GracePeroid }}</td>
+        </tr>
+        <tr>
+          <td>Discount. :</td>
+          <td>{{ model.Discount }}</td>
+        </tr>
+        <tr>
+          <td>DiscountAmount :</td>
+          <td>{{ model.DiscountAmount }}</td>
+        </tr>
+       </table>      
+       <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+  </div>
+   
+</app-modal-animation>
+
+
+
+
+
+
+
+

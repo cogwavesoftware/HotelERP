@@ -48,6 +48,11 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxEdit?BranchCode=' + branchcode + '&Id=' + Id);
   }
 
+  GetUserProductEdit(branchcode: string, Id: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/userproductEdit?BranchCode=' + branchcode + '&Id=' + Id);
+  }
+
+
   getplanbyid(branchcode: string, plan: number) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/planbyId?BranchCode=' + branchcode + '&PlanId=' + plan);
   }
@@ -176,6 +181,11 @@ export class MasterformService {
   
   SaveCompany(company:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savecompany',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
+  GetAlluserDetails(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getAlluser?BranchCode=' + branchcode);
   }
 
   // registerUser(user: User,roles : string[]) {

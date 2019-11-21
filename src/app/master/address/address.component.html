@@ -13,7 +13,12 @@
           </div>
         </div>
       
-      
+        <!-- <button 
+        type="button" 
+        [appConfirm]="visitRangle" 
+        confirmMessage="Click ok to visit Rangle.io!">
+        Visit Rangle
+      </button> -->
       
         <div class="formdesign aqua-gradient" *ngIf="isShown" >
             <div class="formouter rotate" >
@@ -36,9 +41,9 @@
                                                       
                                                         <div class="form-group">                                                       
                                                             <label class="required form-control-label">Area*</label>
-                                                                <input type="text" name="Area" class="form-control" [(ngModel)]="model.Area" #Area="ngModel" value="{{Area}}"  [ngClass]="{'is-invalid': Area.touched && Area.invalid}"  required autocomplete="off">
-                                                                <div *ngIf="Area.touched && Area.invalid" class="invalid-feedback">
-                                                                    <div *ngIf="Area.errors.required">Area is invalid</div>
+                                                                <input type="text" name="AreaData" class="form-control" [(ngModel)]="model.AreaData" #AreaData="ngModel" value="{{AreaData}}"  [ngClass]="{'is-invalid': AreaData.touched && AreaData.invalid}"  required autocomplete="off">
+                                                                <div *ngIf="AreaData.touched && AreaData.invalid" class="invalid-feedback">
+                                                                    <div *ngIf="AreaData.errors.required">Area is invalid</div>
                                                                 </div>                                                      
                                                         </div>
                                                         <label class="required form-control-label">City*</label>
@@ -118,7 +123,7 @@
                             <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
                             </th> 
                             <th>
-                                <mfDefaultSorter  by="Area">Area</mfDefaultSorter>
+                                <mfDefaultSorter  by="AreaData">AreaData</mfDefaultSorter>
                                 </th>               
                     <th>
                     <mfDefaultSorter  by="City">City</mfDefaultSorter>
@@ -140,7 +145,7 @@
                     
                  <tr *ngFor="let item of mf.data; let i = index;">
                    <td>{{item.Id}}</td>  
-                   <td>{{item.Area}}</td>   
+                   <td>{{item.AreaData}}</td>   
                    <td>{{item.City}}</td>   
                    <td>{{item.Pincode}}</td>
                    <td>{{item.State}}</td>
@@ -193,7 +198,7 @@
                       </tr>
                       <tr>
                           <td>Area :</td>
-                          <td>{{ model.Area }}</td>
+                          <td>{{ model.AreaData }}</td>
                           </tr>
                 <tr>
                 <td>City :</td>

@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Floormodel } from "./../../_models/floormodel";
 import { Observable } from "rxjs";
-
 import { FloormasterService } from "./../../_services/floormaster.service";
 import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";

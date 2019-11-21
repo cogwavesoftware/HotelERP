@@ -1,3 +1,4 @@
+
 import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -16,8 +17,8 @@ import {SpinnerComponent} from './spinner/spinner.component';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {DataFilterPipe} from './elements/data-filter.pipe';
 import { CompareValidatorDirective } from './compare-validator.directive';
-import { SelectRequiredValidatorDirective } from './select-validator.directive'
-
+import { SelectRequiredValidatorDirective } from './select-validator.directive';
+import { ConfirmValidatorDirective } from './confirm-validator.directive';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -45,7 +46,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalAnimationComponent,
     SpinnerComponent,
     ClickOutsideModule,
-    DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective
+    DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
     
   ],
   declarations: [
@@ -59,7 +60,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
-    DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective
+    DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
   
     
   ],

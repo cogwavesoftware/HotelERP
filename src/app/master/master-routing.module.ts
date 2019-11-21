@@ -110,6 +110,10 @@ const routes: Routes = [
         loadChildren: './address/address.module#AddressModule'
       },
       {
+        path: 'addressbook',
+        loadChildren: './addressbook/addressbook.module#AddressbookModule'
+      },
+      {
         path:'userrights',
         loadChildren: './userrights/userrights.module#UserrightsModule'
        },

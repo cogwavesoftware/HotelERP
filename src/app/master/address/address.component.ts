@@ -79,19 +79,24 @@ export class AddressComponent implements OnInit {
       City: null,
       Pincode: null,
       State: null,
-      Area: null
+      AreaData: null
     };
+  }
+
+  visitRangle() {
+    console.log('Visiting rangle');
+    location.href = 'https://rangle.io';
   }
   openMyModalData(event) {
     this.btitle = "Hide Form";
     this.isShown = true;
     this.data.subscribe(response => {
       this.model.Id = response[event]["Id"];
-      this.model.Area = response[event]["Area"];
+      this.model.AreaData = response[event]["AreaData"];
       this.model.City = response[event]["City"];
       this.model.Pincode = response[event]["Pincode"];
       this.model.State = response[event]["State"];
-      this.mode = "(Edit)" + this.model.Area;
+      this.mode = "(Edit)" + this.model.AreaData;
     });
   }
 
@@ -152,7 +157,8 @@ export class AddressComponent implements OnInit {
       Id: data.Id,
       City: data.City,
       Pincode: data.Pincode,
-      State: data.State
+      State: data.State,
+      AreaData:data.AreaData
     };
     document.querySelector("#" + event).classList.add("md-show");
   }

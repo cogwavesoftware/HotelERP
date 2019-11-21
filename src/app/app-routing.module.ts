@@ -216,6 +216,10 @@ const routes: Routes = [
          loadChildren: './master/address/address.module#AddressModule'
        },
        {
+        path: 'addressbook',
+         loadChildren: './master/addressbook/addressbook.module#AddressbookModule'
+       },
+       {
         path:'userrights',
         loadChildren: './master/userrights/userrights.module#UserrightsModule'
        },
@@ -224,7 +228,6 @@ const routes: Routes = [
         loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
        },
        
-     
     ]
   },
 
