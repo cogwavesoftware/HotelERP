@@ -15,18 +15,23 @@ export class UserrightsComponent implements OnInit {
      items: TreeviewItem[];
      values: number[];
      config = TreeviewConfig.create({
-         hasAllCheckBox: false,
+         hasAllCheckBox: true,
          hasFilter: true,
          hasCollapseExpand: true,
          decoupleChildFromParent: false,
-         maxHeight: 500
+         maxHeight: 500 
+         
      });
    /* tree property end */
 
   constructor(private service: TreeviewItemService) { }
 
   ngOnInit() {
-    this.items = this.service.getBooks(); //tree
+    this.items = this.service.getBooks(); //tree     
+    this.items.forEach(item => {
+      item.checked = false;
+      item["internalChildren"].forEach(item => { item.checked = false; })
+    })
   }
 
   /* tree property */
@@ -34,9 +39,9 @@ export class UserrightsComponent implements OnInit {
     //console.log('filter:', value);
   }
   onSelectedChange(value:string){
-    console.log('change filter:', value);
+    //console.log('change filter:', value);
     console.log("json value" + JSON.stringify(value));
-    console.log("json parse" + JSON.parse(JSON.stringify(value)));
+    //console.log("json parse" + JSON.parse(JSON.stringify(value)));
   }
 /* end tree property */
 }

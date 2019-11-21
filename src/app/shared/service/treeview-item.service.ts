@@ -20,17 +20,16 @@ export class TreeviewItemService {
 
                 { text: 'Userrights', value: 'Userrights'  },
                 {
-                    text: 'Backend', value: 912, children: [
-                        { text: 'C#', value: 9121 },
-                        { text: 'Java', value: 9122 },
-                        { text: 'Python', value: 9123, checked: false, disabled: true }
+                    text: 'Backend', value: 'Backendvalue', children: [
+                        { text: 'C#', value: 'C#value' },
+                        { text: 'Java', value: 'Javavalue' }                         
                     ]
                 }]
             },
             {
                 text: 'Networking', value: 92, children: [
-                    { text: 'Internet', value: 921 },
-                    { text: 'Security', value: 922 }
+                    { text: 'Internet', value: "Internetvalue" },
+                    { text: 'Security', value: 'Securityvalue' }
                 ]
             }
         ]
