@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridtestComponent } from './gridtest.component';
 import {  Routes,RouterModule } from "@angular/router";
-import { TreeviewModule } from 'ngx-treeview';
+ 
 
 const routes:Routes = [{
   path:'',
@@ -20,7 +20,7 @@ const routes:Routes = [{
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,RouterModule.forChild(routes),TreeviewModule.forRoot()
+    CommonModule,RouterModule.forChild(routes) 
   ],
   exports:[RouterModule]
 })

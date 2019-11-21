@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import {UserrightsComponent} from './userrights.component';
 import { Routes,RouterModule } from '@angular/router';
 import { Component } from 'ag-grid-community';
- 
+import { TreeviewModule } from 'ngx-treeview';
+
 const routes:Routes = [{
   path:'',
   component:UserrightsComponent,
@@ -18,7 +19,7 @@ const routes:Routes = [{
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,RouterModule.forChild(routes)
+    CommonModule,RouterModule.forChild(routes),TreeviewModule.forRoot()
   ],
   exports:[RouterModule]
 })
