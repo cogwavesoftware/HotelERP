@@ -1,9 +1,11 @@
+
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
+import { AuthenticationService } from './../../_services/authentication.service';
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 
-import { IpserviceService } from "src/app/_services/ipservice.service";
 
 @Component({
   selector: 'app-financialmaster',
@@ -32,60 +34,67 @@ export class FinancialmasterComponent implements OnInit {
   isroomt: string;
   isroomc: string;
   ipAddress: string;
-
+  Branch:string;
+  mode:string;
+  IsReset:boolean=true;
+  iscontinue:boolean=true;
   @ViewChild("f", { static: false }) form: any;
-  constructor(private _masterformservice: MasterformService,
-    private _ipservice: IpserviceService) { }
+  constructor(private _masterformservice: MasterformService,private _authenservice: AuthenticationService,
+    private toastyService: ToastyService
+    ) { }
 
     ngOnInit() {
-      this.btitle="Add Item"
-    // this.data = this._masterformservice.GetBankdetails()
-    console.log(this.data)
-    this.model.BranchCode=localStorage.getItem('BranchCode');
-    this.model.IpAdd=localStorage.getItem('LOCAL_IP');
-    this.model.CreatedBy=localStorage.getItem('id');
-     console.log(this.model.BranchCode)
-     console.log(this.model.IpAdd)
-     console.log(this.model.CreatedBy)
+      this.resetForm();
+      this.btitle = "Add Item";
+      this.mode = "(List)";
+      this.isShown = true;
+      this.Branch= localStorage.getItem("BranchCode");
+      this.data = this._masterformservice.GetAllFinancial(this.Branch);
     }
-    getIP()
-    {
-      this._ipservice.getIpAddress().subscribe((res:any)=>{
-        this.ipAddress=res.ip;
-        console.log(this.ipAddress)
-      });
-    }
-    Showhide()
-    {
-     this.resetForm();
-     
-     if (this.btitle=="Hide Form"){
-      this.isShown = false;
-      this.btitle="Add Item"}
-     else{    
-      this.isShown = true; 
-      this.btitle="Hide Form"
+    mouseEnter(div : string){
+      if(div=="Re"){
+      this.IsReset=!this.IsReset;
       }
-      
+      else
+      {
+        this.iscontinue=!this.iscontinue;
+      }
+   }
+
+   mouseLeave(div : string){
+    if(div=="Re"){
+      this.IsReset=!this.IsReset;
+      }
+      else
+      {
+        this.iscontinue=!this.iscontinue;
+      }
+   }
+    Showhide() {
+      this.resetForm();
+      if (this.btitle == "Hide Form") {
+        this.isShown = false;
+        this.btitle = "Add Item";
+        this.mode = "(List)";
+      } else {
+        this.resetForm();
+        this.isShown = true;
+        this.btitle = "Hide Form";
+        this.mode = "(New)";
+      }
     }
-    resetForm(form?: NgForm)
+  resetForm(form?: NgForm)
   {
-     this.model = {
-      Id: 0,
-      TrDate:null,   
-      FinFromDt:null,
-      FinToDt:null,
-      FinCYear:null,
-      FinNYear:null,
-      CurrentStatus:null,      
+     this.model = {     
       BranchCode:localStorage.getItem('BranchCode'),
       IpAdd:localStorage.getItem('LOCAL_IP'),
       CreatedBy:localStorage.getItem('id'),
     };  
   }
+
+  
   openMyModalData(event) {
-    // CreatedBy
-    //IpAdd
+   
      this.btitle="Hide Form"    
      this.isShown = true;
      this.data.subscribe(response => {
@@ -107,10 +116,46 @@ export class FinancialmasterComponent implements OnInit {
        console.log("Form Submitted!");    
      }     
    }
-   Closeform() 
-   {       
-       this.resetForm();        
+
+
+   ProcessData(ProcessD :string)
+   {
+    this.model.BranchCode = localStorage.getItem("BranchCode");
+    this.model.CreatedBy = localStorage.getItem("id");
+    this.model.ModifyBy = localStorage.getItem("id");
+    this.model.IpAdd = localStorage.getItem("LOCAL_IP");
+    this.model.Process=ProcessD;
+    this._masterformservice.Savefinancial(this.model).subscribe(data => {
+      if (data == true) 
+      {
+        this.addToast(
+          "Cogwave Software",
+          "Sucessfully Processed Financial Please Login",
+          "success"
+        );
+       this._authenservice.logout();
+      } 
+        else {
+          this.addToast(
+            "Cogwave Software",
+            "Floor Data Updated Sucessfully",
+            "success"
+          );
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      
+    });
+
+   
    }
+   Closeform() {
+    this.isShown = false;
+    this.btitle = "Add Item";
+    this.resetForm();
+    this.mode = "(List)";
+  }
    openMyModal(event,data) 
    {
      this.model = {  
@@ -128,4 +173,46 @@ export class FinancialmasterComponent implements OnInit {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
 
+
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
+  }
 }

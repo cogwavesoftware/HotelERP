@@ -167,25 +167,44 @@
                                                     </div>
                                         </div>
 
-                                       
-                                                <div class="row" >
-                                                        <label>Select Role*</label>
-                                                        <ul>
-                                                          <li *ngFor="let item of roles;let i = index">
-                                                            <input type="checkbox" [id]="'roles-'+i" value="{{item.Id}}" [checked]="item.selected"  (change)="updateSelectedRoles(i)">
-                                                            <label [for]="'roles-'+i">{{item.Name}}</label>
-                                                          </li>
-                                                        </ul>
+
+                                                <div class="form-check" >
+ 
+                                                  <ul>
+                                                    <li *ngFor="let item of roles; let i = index">
+                                                        <input class="form-check-input" 
+                                                        [(ngModel)]="item.ischecked" name="{{ item.Name }}" type="checkbox" (change)="updateSelectedRoles(i)" id="{{item.Id}}">
+                                                        <label class="form-check-label" for="{{item.Name}}">
+                                                            {{item.Name}}
+                                                        </label>
+                                                        
+                                                    </li>
+                                                  </ul>
+                                                
+                                                   
                                                 </div>
+                                                
+
+
                                                 <div class="row">
                                                         <label>Select Product To Access*</label>
                                                         
                                                                 <ul>
-                                                                        <li *ngFor="let cat of prulist; let k = index">
+                                                                        <!-- <li *ngFor="let cat of prulist; let k = index">
                                                                                 <input type="checkbox" [id]="'prulist-'+k" value="{{cat.Id}}" [checked]="cat.selected" (change)="updateProduct(k)"  >
                                                                                 <label [for]="'prulist-'+k">{{cat.Name}}</label>
 
-                                                                        </li>
+                                                                        </li> -->
+
+
+                                                                        <li *ngFor="let cat of prulist">
+                                                                          <input class="form-check-input" 
+                                                                          [(ngModel)]="cat.selected" name="{{ cat.Name }}" type="checkbox" id="{{cat.Id}}">
+                                                                          <label class="form-check-label" for="{{cat.Name}}">
+                                                                              {{cat.Name}}
+                                                                          </label>
+                                                                          
+                                                                      </li>
                                                                 </ul>
                                                         
                                                 </div>

@@ -19,7 +19,7 @@
         <div class="formdesign aqua-gradient" *ngIf="isShown">
             <div class="formouter rotate" >
              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
-                 <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+                 <input type="hidden" name="RNO" class="form-control" [(ngModel)]="model.RNO" #Id="ngModel" value="{{RNO}}"  >
                  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                  <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
                  <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
@@ -31,97 +31,41 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                              
-                                      <div class="row">
-                                            <div class='col-md-6'>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="Transaction Date">Transaction Date</label>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                              <input class="form-control" placeholder="Date" name="Trdate" [(ngModel)]="model.Trdate" value="{{model.Trdate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
-                                                              <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                              </div>
-                                                            </div>
-                                                          </div>                                                         
-                                                    </div>
-                                                </div> 
-                                            <div class='col-md-6'>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="FinFromDt">FinFromDt</label>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                              <input class="form-control" placeholder="Date" name="FinFromDt" [(ngModel)]="model.FinFromDt" value="{{model.FinFromDt | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
-                                                              <div class="input-group-append bg-default" (click)="dd.toggle()" >
-                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                              </div>
-                                                            </div>
-                                                          </div>                                                         
-                                                    </div>
-                                                </div>               
-      
-                                      </div>
-                                        
-                                      <div class="row">
-                                            <div class='col-md-6'>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="FinToDt">FinToDt</label>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                              <input class="form-control" placeholder="Date" name="FinToDt" [(ngModel)]="model.FinToDt" value="{{model.FinToDt | date: 'dd-MM-yyyy'}}" ngbDatepicker #ddd="ngbDatepicker">
-                                                              <div class="input-group-append bg-default" (click)="ddd.toggle()" >
-                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                              </div>
-                                                            </div>
-                                                          </div>                                                         
-                                                    </div>
-                                                </div> 
-                                            <div class='col-md-6'>
-                                              <div class="form-group">
-                                                  <label>FinCYear*</label>
-                                                  <input type="number" min="0" name="FinCYear" class="form-control" [(ngModel)]="model.FinCYear" #FinCYear="ngModel" value="{{FinCYear}}"  [ngClass]="{'is-invalid': FinCYear.touched && FinCYear.invalid}"  required autocomplete="off">
-                                                  <div *ngIf="FinCYear.touched && FinCYear.invalid" class="invalid-feedback">
-                                                    <div *ngIf="FinCYear.errors.required">FinCYear can't be Blank</div>
-                                                  </div>
-                                                </div>
-                                                </div>               
-      
-                                      </div>
-      
-                                      <div class="row">
-                                        <div class='col-md-6'>
-                                          <div class="form-group">
-                                              <label>FinNYear*</label>
-                                              <input type="number" min="0" name="FinNYear" class="form-control" [(ngModel)]="model.FinNYear" #FinNYear="ngModel" value="{{FinNYear}}"  [ngClass]="{'is-invalid': FinNYear.touched && FinNYear.invalid}"  required autocomplete="off">
-                                              <div *ngIf="FinNYear.touched && FinNYear.invalid" class="invalid-feedback">
-                                                <div *ngIf="FinNYear.errors.required">FinNYear can't be Blank</div>
-                                              </div>
- 
+                                       <div class="row">
+                                        <div class="col-md-6">
+                                            <!-- <button type="button" (mouseenter) ="mouseEnter('Re') "  (mouseleave) ="mouseLeave('Re')" class="btn peach-gradient btn-lg">ReSet All BillNo</button> -->
+                                            <button type="button" (click)="ProcessData('Re')"  class="btn peach-gradient btn-lg">ReSet All BillNo</button>
                                         </div>
-                                            </div> 
-                                        <div class='col-md-6'>
-                                          <div class="form-group">
-                                              <label>CurrentStatus*</label>
-                                              <input style="width: 20px;" type="checkbox" name="CurrentStatus" class="form-control" [(ngModel)]="model.CurrentStatus" #CurrentStatus="ngModel" value="{{CurrentStatus}}"  [ngClass]="{'is-invalid': CurrentStatus.touched && CurrentStatus.invalid}"  required autocomplete="off">
-                                              <div *ngIf="CurrentStatus.touched && CurrentStatus.invalid" class="invalid-feedback">
-                                                <div *ngIf="CurrentStatus.errors.required">Current Status can't be Blank</div>
-                                              </div> 
-                                            </div>
-                                            </div>               
-  
-                                  </div>
+
+                                       <div class="col-md-6">
+                                          
+                                        <button type="button"  (click)="ProcessData('Co')" class="btn btn-primary btn-lg">Continue BillNo</button>
+                                        </div>
+                                      
+      
+                                      </div> 
+                                   
+                                      <hr>
+                                      <div class="row">
                                         
+                                        
+                                          <div class="col-md-6" >
+                                           <span>Reset Process will reset All Bill Serious 0 .BillNo Will restart from 1</span>
+                                          </div>
+
+                                          <div class="col-md-6" >
+                                              <span>Continue Bill Process continue with old BillNo</span>
+                                            </div>
+                                      </div>
+                                     
+                                   
                                   </div>
                    
-                              
+                      
                                 </div>
                               </div>
                          </div>
-                         <div class="row m-t-30">
-                            <div class="col-md-12 text-center" >
-                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                              <button type="button" (click)="Closeform()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
-                            </div>
-                          </div>
+                       
 
                         </div>
                   </div>       
@@ -163,9 +107,7 @@
                       <!-- <th>
                         <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
                       </th> -->
-                      <th>
-                        <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
-                      </th>
+                     
                       <th>
                         <mfDefaultSorter  by="TrDate">TrDate</mfDefaultSorter>
                       </th>
@@ -176,14 +118,14 @@
                         <mfDefaultSorter by="FinToDt">FinToDt</mfDefaultSorter>
                       </th>
                       <th>
-                        <mfDefaultSorter  by="FinCYear">FinCYear</mfDefaultSorter>
+                        <mfDefaultSorter  by="FinCode">FinCode</mfDefaultSorter>
                       </th>
                       <th>
-                        <mfDefaultSorter  by="FinNYear">FinNYear</mfDefaultSorter>
+                        <mfDefaultSorter  by="FinYear">FinYear</mfDefaultSorter>
                       </th>
     
                         <th>
-                            <mfDefaultSorter  by="CurrentStatus">CurrentStatus</mfDefaultSorter>
+                            <mfDefaultSorter  by="IsActive">IsActive</mfDefaultSorter>
                         </th>
                       <th>
                         <mfDefaultSorter>Action</mfDefaultSorter>
@@ -195,12 +137,12 @@
                     <tbody>
                     <tr *ngFor="let item of mf.data; let i = index;">
                       <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
-                      <td>{{item.Id}}</td>
+                      
                       <td>{{item.TrDate}}</td>
                       <td>{{item.FinFromDt}}</td>
                       <td>{{item.FinToDt}}</td>
-                      <td>{{item.FinCYear}}</td>
-                      <td>{{item.FinNYear}}</td>
+                      <td>{{item.FinCode}}</td>
+                      <td>{{item.Finyear}}</td>
                       <td>{{item.IsActive}}</td>
                       <td class="action-icon">
                           <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
@@ -212,12 +154,12 @@
                     <tfoot>
                     <tr>
                       <!-- <th>Profile</th> -->
-                      <th>Id</th>
+                     
                       <th>TrDate</th>
                       <th>FinFromDt</th>
                       <th>FinToDt</th>
-                      <th>FinCYear</th>                
-                      <th>FinNYear</th>
+                      <th>FinCode</th>                
+                      <th>Finyear</th>
                       <th>IsActive</th>
                       <th> </th>
                     </tr>
@@ -249,10 +191,7 @@
         
           <div class="app-modal-body text-center"> 
               <table class="table table-striped text-left m-t-10">
-                  <tr>
-                    <td>Id :</td>
-                    <td>{{ model.Id }}</td>
-                  </tr>
+                  
                   <tr>
                     <td>TrDate :</td>
                     <td>{{ model.TrDate }}</td>
@@ -266,16 +205,16 @@
                     <td>{{ model.FinToDt }}</td>
                   </tr>
                   <tr>
-                    <td>FinCYear :</td>
-                    <td>{{ model.FinCYear }}</td>
+                    <td>FinCode :</td>
+                    <td>{{ model.FinCode }}</td>
                   </tr>
                   <tr>
-                    <td>FinNYear :</td>
-                    <td>{{ model.FinNYear }}</td>
+                    <td>FinYear :</td>
+                    <td>{{ model.FinYear }}</td>
                   </tr>
                   <tr>
                     <td>CurrentStatus :</td>
-                    <td>{{ model.CurrentStatus }}</td>
+                    <td>{{ model.IsActive }}</td>
                   </tr>
                   
                  </table>      

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, SimpleChanges } from '@angular/core';
+
+import { Component, OnInit, ViewChild, SimpleChanges, AfterViewChecked } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { NgForm } from "@angular/forms";
@@ -8,11 +9,11 @@ import { IpserviceService } from 'src/app/_services/ipservice.service';
 import { RoomtypeService } from 'src/app/_services/roomtype.service';
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty'
 @Component({
-  selector: 'app-companycreation',
-  templateUrl: './companycreation.component.html',
-  styleUrls: ['./companycreation.component.scss']
+  selector: 'app-taxrule',
+  templateUrl: './taxrule.component.html',
+  styleUrls: ['./taxrule.component.scss']
 })
-export class CompanycreationComponent implements OnInit {
+export class TaxruleComponent implements OnInit {
   @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
   private gridApi;
   distypeicHasError: boolean = false;
@@ -25,11 +26,12 @@ export class CompanycreationComponent implements OnInit {
   private rowSelection: any;
   title = 'app';
   public data: Observable<any>;
+  public data1: any;
   public rowsOnPage = 10;
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
-  public isShown: boolean = false;
+  public isShown: boolean = true;
   public isAgGridshow: boolean = true;
   model: any = {};
   btitle: string = "Add";
@@ -51,72 +53,82 @@ export class CompanycreationComponent implements OnInit {
   Branch: string;
   filterdata: any;
   IsExistdata: boolean;
-
+  RulId:string;
   @ViewChild('f', { static: false }) form: any;
   constructor(private http: HttpClient, private _masterformservice: MasterformService,
     private _roomtypeservice: RoomtypeService, private toastyService: ToastyService,
     private _ipservice: IpserviceService) {
     this.columnDefs = [
       { headerName: 'Select', field: 'Select', sortable: true, filter: true, checkboxSelection: true },
-      { headerName: 'RoomCode', field: 'RoomCode', sortable: true, filter: true },
-      { headerName: 'Single', field: 'SingleRate', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      { headerName: 'Double', field: 'DoubleRate', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      { headerName: 'Trible', field: 'TribleRate', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      { headerName: 'QuadR', field: 'QuadRate', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      { headerName: 'Fivth', field: 'Fivth', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      { headerName: 'Sixth', field: 'Sixth', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      // {headerName: 'Seventh', field: 'Seventh', sortable: true, filter: true,editable:true,type: "valueColumn"},
-      // {headerName: 'Eighth', field: 'Eighth', sortable: true, filter: true,editable:true,type: "valueColumn"},
-      // {headerName: 'Nineth', field: 'Nineth', sortable: true, filter: true,editable:true,type: "valueColumn"},
-      // {headerName: 'Tenth', field: 'Tenth', sortable: true, filter: true,editable:true,type: "valueColumn"},
-      { headerName: 'Ex-Adult', field: 'ExtraAdult', sortable: true, filter: true, editable: true, type: "valueColumn" },
-      { headerName: 'Ex-Child', field: 'ExtraChild', sortable: true, filter: true, editable: true, type: "valueColumn" }
+      { headerName: 'RNO', field: 'RNO', sortable: true, filter: true },
+      { headerName: 'Tarriff', field: 'Tarriff', sortable: true, filter: true, editable: false },
+      { headerName: 'Operation1', field: 'Operation1', sortable: true, filter: true, editable: false },
+      { headerName: 'Type1', field: 'Type1', sortable: true, filter: true, editable: false },
+      { headerName: 'Operation2', field: 'Operation2', sortable: true, filter: true, editable: false },
+      { headerName: 'Type2', field: 'Type2', sortable: true, filter: true, editable: false }
+      
     ];
     this.Branch = localStorage.getItem("BranchCode");
 
   }
-  ngOnInit() {
-
+  ngOnInit() {  
     this.resetForm();
     this.btitle = "Add Item";
-    
-    console.log(this.rowData)
-    this.data = this._masterformservice.GetRoomcomany('CW_1001');
-    this._masterformservice.GetAllRoomCompanyType().subscribe(res => {
-      this.companytype = res
+    this.data = this._masterformservice.GetRuledApplicable(this.Branch);
+    this.data.subscribe(data=>
+    {
+      this.RulId=data[0].TaxRuleId;
+      console.log(this.RulId);
     });
   }
 
 
-  
+ 
+
+
   /* ag grid code starting */
-  onSelectionChanged() {
-    
+  onSelectionChanged() { 
+   
     var selectedRows = this.gridApi.getSelectedRows();
     var selectedRowsString = "";
     this.str = JSON.stringify(selectedRows);
   }
   onGridReady(params) {
-    alert('f')
-    console.log("f");
-    this.rowData = this._roomtypeservice.GetRoomType('CW_1001');
+    this.rowData = this._masterformservice.GetAllTaxRule();
     console.log(params);
+    
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     console.log(this.gridColumnApi)
     params.api.sizeColumnsToFit();
-  }
-  /* ag grid code ending */
-  validateplan(value) {
-    if (value === 'default') {
-      this.catageryhasError = true;
-    } else {
-      this.catageryhasError = false;
-    }
+    setTimeout(()=>{
+      let SelIds=this.RulId;
+      this.gridApi.forEachNodeAfterFilter(function(node) { 
+        
+        node.setSelected(node.data.RNO ===SelIds);
+        
+      });
+   }, 1000);
+     
+    
   }
 
+  /* ag grid code ending */
+ 
+  selectAllAmerican() {
+    let SelId=this.RulId;
+    this.gridApi.forEachNodeAfterFilter(function(node) { 
+      node.setSelected(node.data.RNO ===SelId);
+      //node.setSelected(true)
+    });
+
+  }
+
+ 
+
+
   Showhide() {
-    this.resetForm();
+    //this.resetForm();
     if (this.btitle == "Hide Form") {
       this.isShown = false;
       this.btitle = "Add Item";
@@ -129,23 +141,6 @@ export class CompanycreationComponent implements OnInit {
   }
   resetForm(form?: NgForm) {
 
-    this.model = {
-      Id: 0,
-      CompanyCode: null,
-      CompanyName: null,
-      GSTNO: null,
-      CompanyType: '-1',
-      ContactName: null,
-      MobileNo: null,
-      Address: null,
-      City: null,
-      State: null,
-      Country: null,
-      Email: null,
-      IsActive: true,
-      Discount: null,
-      discounttype: "default"
-    };
   }
 
   openMyModalData(event) {
@@ -175,76 +170,66 @@ export class CompanycreationComponent implements OnInit {
 
   onSubmit(form?: NgForm) {
 
-    form.value.BranchCode = localStorage.getItem("BranchCode")
-    form.value.CreatedBy = localStorage.getItem("id")
-    form.value.ModifyBy = localStorage.getItem("id")
-    form.value.IpAdd = localStorage.getItem("LOCAL_IP")
-    this.form.value.companytariff = JSON.parse(this.str);
-    console.log(1)
+    this.model.BranchCode = localStorage.getItem("BranchCode")
+    this.model.CreatedBy = localStorage.getItem("id")
+    this.model.ModifyBy = localStorage.getItem("id")
+    this.model.IpAdd = localStorage.getItem("LOCAL_IP")
+    //this.form.value.companytariff = JSON.parse(this.str);
+    //console.log(1)
     console.log(this.form.value.companytariff)
 
     console.log("JSON")
     var sdata = JSON.parse(this.str);
     console.log(sdata)
+    
+    var ChangedId=sdata[0].RNO;
+    console.log(ChangedId)
+    this.model.TaxId=ChangedId;
 
-    if (form.invalid) {
-      console.log(form.value);
-      this.addToast("Cogwave Software", "invalid Data", "warning");
+    if (ChangedId == this.RulId) {
+      this.addToast("Cogwave Software", "Tax Ruke already Exist ", "warning");
       return;
     }
+    
+    // if (form.invalid) {
+    //   console.log(form.value);
+    //   this.addToast("Cogwave Software", "invalid Data", "warning");
+    //   return;
+    // }
+    
+    
 
-    if (this.IsExistdata === true) {
-      this.addToast("Cogwave Software", "CompanyName already Exist ", "warning");
-      return;
-    }
-    this._masterformservice.SaveCompany(form.value).subscribe(data => {
+    this._masterformservice.SaveCompany(this.model).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
+        
           this.addToast(
             "Cogwave Software",
-            "Company Data Saved Sucessfully",
+            "Tax Rule  Saved Sucessfully",
             "success"
           );
           form.reset({
-            IsActive: "true",
-            BranchCode: localStorage.getItem("BranchCode"),
-            Id: "0",
-            discounttype: "default",
-            CompanyType: '-1',
+            BranchCode: localStorage.getItem("BranchCode"), 
           });
           this.isShown = true;
-        } else {
-          this.addToast(
-            "Cogwave Software",
-            "Company Data Updated Sucessfully",
-            "success"
-          );
-          form.reset();
-          this.mode = "(List)";
-          this.isShown = false;
-          this.btitle = "Add Item";
-        }
+        
       } else {
-        this.addToast("Cogwave Software", "Company Data Not Saved", "error");
+        this.addToast("Cogwave Software", "Tax Rule Not Saved", "error");
         form.reset({
-          IsActive: "true",
           BranchCode: localStorage.getItem("BranchCode"),
-          Id: "0",
-          discounttype: "default",
-          CompanyType: '-1',
         });
         this.isShown = true;
       }
     });
 
-    this.rowData = this._roomtypeservice.GetRoomType('CW_1001');
-
-    this.data = this._masterformservice.GetRoomcomany('CW_1001');
-
-    this._masterformservice.GetAllRoomCompanyType().subscribe(res => {
-      this.companytype = res
+    this.data = this._masterformservice.GetRuledApplicable(this.Branch);
+    this.data.subscribe(data=>
+    {
+      this.RulId=data[0].TaxRuleId;
+      console.log(this.RulId);
     });
+    this.rowData = this._masterformservice.GetAllTaxRule();
 
+   
   }
 
 
@@ -253,14 +238,6 @@ export class CompanycreationComponent implements OnInit {
     this.btitle = "Add Item";
     this.resetForm();
     this.mode = "(List)";
-  }
-
-  validatediscount(value) {
-    if (value === "default") {
-      this.distypeicHasError = true;
-    } else {
-      this.distypeicHasError = false;
-    }
   }
 
   openMyModal(event, data) {
@@ -339,4 +316,4 @@ export class CompanycreationComponent implements OnInit {
     //   }
     //   selectedRowsString += selectedRow.make;
     // });
-  // document.querySelector("#selectedRows").innerHTML = str;   
+    // document.querySelector("#selectedRows").innerHTML = str;   

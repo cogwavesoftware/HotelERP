@@ -9,7 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { FinancialmasterRoutingModule  }  from './financialmaster-routing.module';
 import {FinancialmasterComponent }  from './financialmaster.component';
 
-
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
   declarations: [FinancialmasterComponent],
@@ -20,7 +20,7 @@ import {FinancialmasterComponent }  from './financialmaster.component';
     FormsModule,
     ReactiveFormsModule,   
     DataTableModule,
-    HttpClientModule
+    HttpClientModule,ToastyModule.forRoot()
     
   ]
 })

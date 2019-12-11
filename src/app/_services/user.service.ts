@@ -39,7 +39,6 @@ var reqHeader = new HttpHeaders({'No-Auth':'True'});
       // login successful if there's a user in the response
       if (user) 
       {
-       
           // store user details and basic auth credentials in local storage 
           // to keep user logged in between page refreshes
           user.authdata = window.btoa(username + ':' + password);
@@ -49,8 +48,6 @@ var reqHeader = new HttpHeaders({'No-Auth':'True'});
           localStorage.setItem('userToken', user["access_token"]);
           // localStorage.setItem('token_type', user["token_type"]);
           // localStorage.setItem('expires_in', user["expires_in"]);
-
-          
       }      
       return user;
   }));

@@ -188,6 +188,24 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getAlluser?BranchCode=' + branchcode);
   }
 
+  GetAllFinancial(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getfinancial?BranchCode=' + branchcode);
+  }
+
+
+  Savefinancial(financial:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Savefinancial',financial,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
+  GetAllTaxRule() {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getalltaxrule')
+  }
+  GetRuledApplicable(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getruledApplicable?BranchCode=' + branchcode);
+  }
+
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,
