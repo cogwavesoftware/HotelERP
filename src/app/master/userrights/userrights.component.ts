@@ -15,12 +15,11 @@ export class UserrightsComponent implements OnInit {
      items: TreeviewItem[];
      values: number[];
      config = TreeviewConfig.create({
-         hasAllCheckBox: true,
+         hasAllCheckBox: false,
          hasFilter: true,
          hasCollapseExpand: true,
          decoupleChildFromParent: false,
          maxHeight: 500 
-         
      });
    /* tree property end */
 
@@ -28,10 +27,6 @@ export class UserrightsComponent implements OnInit {
 
   ngOnInit() {
     this.items = this.service.getBooks(); //tree     
-    this.items.forEach(item => {
-      item.checked = false;
-      item["internalChildren"].forEach(item => { item.checked = false; })
-    })
   }
 
   /* tree property */

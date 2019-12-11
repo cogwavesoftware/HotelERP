@@ -19,12 +19,7 @@ export class TreeviewItemService {
                 }, 
 
                 { text: 'Userrights', value: 'Userrights'  },
-                {
-                    text: 'Backend', value: 'Backendvalue', children: [
-                        { text: 'C#', value: 'C#value' },
-                        { text: 'Java', value: 'Javavalue' }                         
-                    ]
-                }]
+                ]
             },
             {
                 text: 'Networking', value: 92, children: [
