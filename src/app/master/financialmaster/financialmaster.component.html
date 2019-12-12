@@ -19,7 +19,7 @@
         <div class="formdesign aqua-gradient" *ngIf="isShown">
             <div class="formouter rotate" >
              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
-                 <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+                 <input type="hidden" name="RNO" class="form-control" [(ngModel)]="model.RNO" #Id="ngModel" value="{{RNO}}"  >
                  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                  <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
                  <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
@@ -60,18 +60,24 @@
                                         
                  
                                         
+                                        
+                                          <div class="col-md-6" >
+                                           <span>Reset Process will reset All Bill Serious 0 .BillNo Will restart from 1</span>
+                                          </div>
+
+                                          <div class="col-md-6" >
+                                              <span>Continue Bill Process continue with old BillNo</span>
+                                            </div>
+                                      </div>
+                                     
+                                   
                                   </div>
                    
-                              
+                      
                                 </div>
                               </div>
                          </div>
-                         <div class="row m-t-30">
-                            <div class="col-md-12 text-center" >
-                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                              <button type="button" (click)="Closeform()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
-                            </div>
-                          </div>
+                       
 
                         </div>
                   </div>       
@@ -113,9 +119,7 @@
                       <!-- <th>
                         <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
                       </th> -->
-                      <th>
-                        <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
-                      </th>
+                     
                       <th>
                         <mfDefaultSorter  by="ShortDescription">Short Description</mfDefaultSorter>
                       </th>
@@ -185,10 +189,7 @@
         
           <div class="app-modal-body text-center"> 
               <table class="table table-striped text-left m-t-10">
-                  <tr>
-                    <td>Id :</td>
-                    <td>{{ model.Id }}</td>
-                  </tr>
+                  
                   <tr>
                     <td>ShortDescription :</td>
                     <td>{{ model.ShortDescription }}</td>

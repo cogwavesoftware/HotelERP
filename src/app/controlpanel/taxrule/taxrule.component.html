@@ -1,0 +1,249 @@
+ 
+ 
+
+ <div class="outerdiv">
+
+        <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+          <div class="row">
+              <div class="col-md-11">
+                  <h5 class="ng-tns-c6-1">Company Creation {{mode}}</h5>         
+                  <span class="ng-tns-c6-1 ng-star-inserted">Creating Company details  </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-1"> 
+                    <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                  </button>
+                </div>
+          </div>
+        </div>
+    
+    
+    
+        <div class="formdesign aqua-gradient" *ngIf="isShown">
+            <div class="formouter rotate" >
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
+               
+                <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+                <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+                <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
+                
+                 <div class="auth-box card">
+                       <div class="card-block" style="padding-bottom: 0;">
+                         <div class="frmdata" >              
+                            <div class="containar">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            
+ 
+                                                      <div class="table-content crm-table">
+                                                        <div class="project-table">
+                                                          <div id="crm-contact" class="dt-responsive"  >
+                                                            <div class="row">  
+                                                                
+                                                                <div class="col-xs-12 col-sm-12 col-md-6" style="padding-left: 0px;">
+                                                                    <div class="levelselection">
+                                                                      <p>Please Allocate RoomRate</p>
+                                                                     </div>
+                                                                  </div>
+                                                                  
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-striped table-bordered full-data-table">                           
+                                                                          <tbody>                              
+                                                                           <tr>
+                                                                              <td>
+                                                                                 <ag-grid-angular  
+                                                                                  #agGrid
+                                                                                  id="agGrid"     
+                                                                                  style="width: 100%; height: 300px" 
+                                                                                  class="ag-theme-balham"
+                                                                                  [rowData]="rowData  | async" 
+                                                                                  [columnDefs]="columnDefs"
+                                                                                  (gridReady)="onGridReady($event)"
+                                                                                  (selectionChanged)="onSelectionChanged($event)"
+                                                                                  [groupDefaultExpanded]="groupDefaultExpanded"
+                                                                                    [suppressAggFuncInHeader]="true"
+                                                                                    [enableCellChangeFlash]="true"
+                                                                                    [animateRows]="true"
+                                                                                                              
+                                                                                   >
+                                                                              </ag-grid-angular></td>
+                                                                             
+                                                                          </tr>  
+                                                                          </tbody>
+                                                                        
+                                                                        </table>
+                                                                      </div>
+                                                            </div>
+                                                             
+                                                             
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                     
+                                                
+    
+                                  </div>
+                   
+                              
+                                </div>
+                              </div>
+                         </div>
+    
+    
+    
+                         <div class="row m-t-30">
+                            <div class="col-md-12 text-center" >
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple pull-right ">Close</button>
+                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10 pull-right ">Save</button>
+                           
+                            </div>
+                          </div>
+                        </div>
+                  </div>       
+              </form>
+    
+    
+    
+           </div> 
+         </div>
+    
+    
+    <!-- -----------table start Here------------ -->
+    
+    <!-- -----------table End Here------------ -->
+     <!-- -----------table start Here------------ -->
+     <div class="productlist">
+      <div class="shadow p-3 mb-5 bg-white rounded" >
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div id="crm-contact" class="dt-responsive"  *ngIf="data | async as data">
+          <div class="row">
+    
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Company Creation Data List</div>
+                  </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                  <div style="text-align: right;">
+                    <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                      <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                    </label>
+                  </div>
+                </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+              <tr class="blueorange-gradient">
+                <th>
+                  <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="TaxRuleId">TaxRuleId</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="FromDate">FromDate</mfDefaultSorter>
+                </th>
+                
+                <th>
+                    <mfDefaultSorter  by="ToDate">ToDate</mfDefaultSorter>
+                </th>
+                <th>
+                    <mfDefaultSorter  by="IsActive">IsActive</mfDefaultSorter>
+                </th>
+                <th>
+                    <mfDefaultSorter  by="BranchCode">BranchCode</mfDefaultSorter>
+                </th>
+                
+               
+              </tr>
+              <tr>
+              </tr>
+              </thead>
+              <tbody>
+    
+               <tr *ngFor="let item of mf.data; let i = index;">
+              <td>{{item.Id}}</td>
+              <td>{{item.TaxRuleId}}</td>
+              <td>{{item.FromDate}}</td>
+             
+              <td>{{item.ToDate}}</td>
+              <td>{{item.IsActive}}</td>
+              <td>{{item.BranchCode}}</td>
+<!--              
+              <td class="action-icon">
+              <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
+              <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+    
+              </td> -->
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr class="blueorange-gradient">
+              <th>Id</th>
+              <th>TaxRuleId</th>
+              <th>FromDate</th>
+              
+              <th>ToDate</th>
+              <th>IsActive</th>
+              <th>BranchCode</th>
+              
+              <!-- <th>Action</th> -->
+              </tr>
+              <tr>
+                <td colspan="10">
+                  <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+    </div>
+    <!-- -----------table End Here------------ -->
+    </div> <!-- outer div end here -->
+    
+    
+    
+     <!-- lightbox-->
+    <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
+        <h3 class="f-15">View Company creation details</h3>
+        
+          <div class="app-modal-body text-center"> 
+              <table class="table table-striped text-left m-t-10">
+                  <tr>
+                  <td>Id :</td>
+                  <td>{{ model.Id }}</td>
+                  </tr>
+                  <tr>
+                  <td>TaxRuleId :</td>
+                  <td>{{ model.TaxRuleId }}</td>
+                  </tr>
+                  
+                  <tr>
+                  <td>FromDate :</td>
+                  <td>{{ model.FromDate }}</td>
+                  </tr>
+                  <tr>
+                  <td>ToDate :</td>
+                  <td>{{ model.ToDate }}</td>
+                  </tr>
+                  <tr>
+                  <td>IsActive :</td>
+                  <td>{{ model.IsActive }}</td>
+                  </tr>
+                  <tr>
+                        <td>BranchCode :</td>
+                        <td>{{ model.BranchCode }}</td>
+                    </tr>
+                
+                 </table>      
+                 <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+            </div>
+             
+          </app-modal-animation>
+    
+          <ng2-toasty [position]="position"></ng2-toasty>
+    

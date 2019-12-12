@@ -18,6 +18,7 @@ export class SoftwaresetupComponent implements OnInit {
   smtphost:string;
   smtpport:string;
   btitle:string="+ Add"
+  
   //catagerys=['CheckoutBill','CheckoutBillBTC','CheckoutBillBTB','Advance','CheckinAdvance','ReservationAdvance','PostCharge','Extrabed','SettlementReceipt','Outstanding Settlement Receipt','ComplimentaryBill'];
   topicHasError = true;
   Roomtyeps=['I Need Prefix','I dont Want Prefix on Bill'];

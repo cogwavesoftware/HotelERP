@@ -7,11 +7,11 @@ import { IpserviceService } from "src/app/_services/ipservice.service";
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
  
 @Component({
-  selector: 'app-gridtest',
-  templateUrl: './gridtest.component.html',
-  styleUrls: ['./gridtest.component.scss'], 
+  selector: 'app-usercreation',
+  templateUrl: './usercreation.component.html',
+  styleUrls: ['./usercreation.component.scss']
 })
-export class GridtestComponent implements OnInit {
+export class UsercreationComponent implements OnInit {
   Distype = ['Percentage', 'Amount'];
   model: any = {}
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";

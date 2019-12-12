@@ -1,13 +1,18 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes,RouterModule } from '@angular/router';
-import { AddressbookComponent } from './addressbook.component';
+
+import {  Routes,RouterModule } from "@angular/router";
+import { UsercreationComponent } from './usercreation.component';
+
+
+
+
 const routes:Routes = [{
   path:'',
-  component:AddressbookComponent,
+  component:UsercreationComponent,
   data:{
-    title:'AddressBook',
+    title:'User Creation',
     icon:'icon-home',
     caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
     status: true
@@ -18,9 +23,9 @@ const routes:Routes = [{
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,RouterModule.forChild(routes)
+    CommonModule,RouterModule.forChild(routes) 
   ],
   exports:[RouterModule]
 })
-export class AddressbookRoutingModule { }
+export class UsercreationRoutingModule { }
 

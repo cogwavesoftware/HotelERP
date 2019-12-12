@@ -47,14 +47,12 @@ export class LoginsComponent implements OnInit {
   type = 'default';
   closeOther = false;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private toastyService: ToastyService
-  ) {}
+    private toastyService: ToastyService) {}
 
   ngOnInit() {
     // reset login status
@@ -62,7 +60,6 @@ export class LoginsComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
     // alert(this.returnUrl)
-
     // this.body.classList.add("loginsignupbg");
   }
 

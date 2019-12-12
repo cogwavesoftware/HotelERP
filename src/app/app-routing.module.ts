@@ -149,10 +149,6 @@ const routes: Routes = [
         loadChildren: './master/companycreation/companycreation.module#CompanycreationModule'
       },
 
-      // {
-      //   path: 'financial',
-      //   loadChildren: './master/financial/financial.module#FinancialModule'
-      // },
 
       {
         path: 'gridtest',
@@ -228,6 +224,30 @@ const routes: Routes = [
         loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
        },
        
+    ]
+  },
+
+
+  {
+    path: 'Control Panel',
+    component: AdminComponent,
+    
+    children: [ 
+      {
+        path: 'Control Panel',
+        redirectTo: 'Control Panel/floor',
+        pathMatch: 'full'
+      },
+
+      {
+         path: 'usercreation',
+         loadChildren: './controlpanel/usercreation/usercreation.module#UsercreationModule'
+       },
+
+       {
+        path: 'taxrule',
+        loadChildren: './controlpanel/taxrule/taxrule.module#TaxruleModule'
+      },
     ]
   },
 
