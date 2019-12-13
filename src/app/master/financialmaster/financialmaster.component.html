@@ -4,8 +4,8 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Financial Creation</h5>         
-                  <span class="ng-tns-c6-1 ng-star-inserted">Financial details </span>
+                  <h5 class="ng-tns-c6-1">Miscellaneous Creation</h5>         
+                  <span class="ng-tns-c6-1 ng-star-inserted">Miscellaneous details </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
                     <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
@@ -29,24 +29,36 @@
                          <div class="frmdata" >              
                             <div class="containar">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                             
-                                       <div class="row">
-                                        <div class="col-md-6">
-                                            <!-- <button type="button" (mouseenter) ="mouseEnter('Re') "  (mouseleave) ="mouseLeave('Re')" class="btn peach-gradient btn-lg">ReSet All BillNo</button> -->
-                                            <button type="button" (click)="ProcessData('Re')"  class="btn peach-gradient btn-lg">ReSet All BillNo</button>
-                                        </div>
-
-                                       <div class="col-md-6">
-                                          
-                                        <button type="button"  (click)="ProcessData('Co')" class="btn btn-primary btn-lg">Continue BillNo</button>
-                                        </div>
-                                      
-      
-                                      </div> 
-                                   
-                                      <hr>
+                                    <div class="col-md-12">                                             
                                       <div class="row">
+                                        <div class="col-md-4" [class.has-error]="Description.errors?.defaultSelected && Description.touched">
+                                          <label> Miscellaneous Type *</label>
+                                              <select class="custom-select" appSelectValidator="-1" id="Description"  #Description ="ngModel"  name="Description" [(ngModel)]="model.Description">
+                                                <option value="-1">Please Select</option>
+                                                <option *ngFor="let roomty of Descriptionlist" [value]="roomty.RoomCode" >{{ roomty.RoomCode }}</option>
+                                              </select>
+                                              <span class="help-block" *ngIf="Description.touched && Description.errors?.defaultSelected">
+                                                MiscellaneousType is required
+                                                </span>                   
+                                      </div>
+                                            <div class='col-md-4'>                                                 
+                                                <label class="required">Short Description</label>
+                                                  <input type="text" name="ShortDescription" class="form-control" [(ngModel)]="ShortDescription"   />                
+                                           
+                                                </div>    
+                                                <div class='col-md-4'>
+                                                  <div class="form-group">
+                                                      <label>Active </label>
+                                                      <input style="width: 20px;" type="checkbox" name="Activeyn" class="form-control" [(ngModel)]="model.Activeyn" #Activeyn="ngModel" value="{{Activeyn}}"  [ngClass]="{'is-invalid': Activeyn.touched && Activeyn.invalid}"  required autocomplete="off">
+                                                      <div *ngIf="Activeyn.touched && Activeyn.invalid" class="invalid-feedback">
+                                                        <div *ngIf="Activeyn.errors.required">Active  can't be Blank</div>
+                                                      </div> 
+                                                    </div>
+                                                    </div>             
+      
+                                      </div>
+                                        
+                 
                                         
                                         
                                           <div class="col-md-6" >
@@ -87,7 +99,7 @@
        
       
                     <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Financial Data List</div>
+                        <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Miscellaneous Data List</div>
                         </div>
                       <div class="col-xs-12 col-sm-12 col-md-6">
                         <div style="text-align: right;">
@@ -109,24 +121,14 @@
                       </th> -->
                      
                       <th>
-                        <mfDefaultSorter  by="TrDate">TrDate</mfDefaultSorter>
+                        <mfDefaultSorter  by="ShortDescription">Short Description</mfDefaultSorter>
                       </th>
                       <th>
-                        <mfDefaultSorter  by="FinFromDt">FinFromDt</mfDefaultSorter>
+                        <mfDefaultSorter  by="Description">Description</mfDefaultSorter>
                       </th>
                       <th>
-                        <mfDefaultSorter by="FinToDt">FinToDt</mfDefaultSorter>
-                      </th>
-                      <th>
-                        <mfDefaultSorter  by="FinCode">FinCode</mfDefaultSorter>
-                      </th>
-                      <th>
-                        <mfDefaultSorter  by="FinYear">FinYear</mfDefaultSorter>
-                      </th>
-    
-                        <th>
-                            <mfDefaultSorter  by="IsActive">IsActive</mfDefaultSorter>
-                        </th>
+                        <mfDefaultSorter by="Activeyn">Active Status</mfDefaultSorter>
+                      </th>                          
                       <th>
                         <mfDefaultSorter>Action</mfDefaultSorter>
                       </th>
@@ -137,12 +139,10 @@
                     <tbody>
                     <tr *ngFor="let item of mf.data; let i = index;">
                       <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
-                      
-                      <td>{{item.TrDate}}</td>
-                      <td>{{item.FinFromDt}}</td>
-                      <td>{{item.FinToDt}}</td>
-                      <td>{{item.FinCode}}</td>
-                      <td>{{item.Finyear}}</td>
+                      <td>{{item.Id}}</td>
+                      <td>{{item.ShortDescription}}</td>
+                      <td>{{item.Description}}</td>
+                      <td>{{item.Activeyn}}</td>                      
                       <td>{{item.IsActive}}</td>
                       <td class="action-icon">
                           <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
@@ -154,12 +154,10 @@
                     <tfoot>
                     <tr>
                       <!-- <th>Profile</th> -->
-                     
-                      <th>TrDate</th>
-                      <th>FinFromDt</th>
-                      <th>FinToDt</th>
-                      <th>FinCode</th>                
-                      <th>Finyear</th>
+                      <th>Id</th>
+                      <th>ShortDescription</th>
+                      <th>Description</th>
+                      <th>Activeyn</th>                     
                       <th>IsActive</th>
                       <th> </th>
                     </tr>
@@ -193,29 +191,18 @@
               <table class="table table-striped text-left m-t-10">
                   
                   <tr>
-                    <td>TrDate :</td>
-                    <td>{{ model.TrDate }}</td>
+                    <td>ShortDescription :</td>
+                    <td>{{ model.ShortDescription }}</td>
                   </tr>
                   <tr>
-                    <td>FinFromDt :</td>
-                    <td>{{ model.FinFromDt }}</td>
+                    <td>Description :</td>
+                    <td>{{ model.Description }}</td>
                   </tr>
                   <tr>
-                    <td>FinToDt :</td>
-                    <td>{{ model.FinToDt }}</td>
+                    <td>Activeyn :</td>
+                    <td>{{ model.Activeyn }}</td>
                   </tr>
-                  <tr>
-                    <td>FinCode :</td>
-                    <td>{{ model.FinCode }}</td>
-                  </tr>
-                  <tr>
-                    <td>FinYear :</td>
-                    <td>{{ model.FinYear }}</td>
-                  </tr>
-                  <tr>
-                    <td>CurrentStatus :</td>
-                    <td>{{ model.IsActive }}</td>
-                  </tr>
+                   
                   
                  </table>      
                  <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    

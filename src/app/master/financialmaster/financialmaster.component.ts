@@ -85,7 +85,11 @@ export class FinancialmasterComponent implements OnInit {
     }
   resetForm(form?: NgForm)
   {
-     this.model = {     
+     this.model = {
+      Id: 0,
+      Description:null,
+      ShortDescription:null,        
+      Activeyn:null,          
       BranchCode:localStorage.getItem('BranchCode'),
       IpAdd:localStorage.getItem('LOCAL_IP'),
       CreatedBy:localStorage.getItem('id'),
@@ -99,12 +103,9 @@ export class FinancialmasterComponent implements OnInit {
      this.isShown = true;
      this.data.subscribe(response => {
        this.model.Id=response[event]['Id'];
-       this.model.TrDate=response[event]['TrDate']; 
-       this.model.FinFromDt=response[event]['FinFromDt'];
-       this.model.FinToDt=response[event]['FinToDt'];
-       this.model.FinCYear=response[event]['FinCYear'];
-       this.model.FinNYear=response[event]['FinNYear'];
-       this.model.CurrentStatus=response[event]['CurrentStatus'];           
+       this.model.Description=response[event]['Description']; 
+       this.model.ShortDescription=response[event]['ShortDescription'];
+       this.model.Activeyn=response[event]['Activeyn'];              
      });
    
    }
@@ -160,12 +161,9 @@ export class FinancialmasterComponent implements OnInit {
    {
      this.model = {  
        Id:data.Id,
-       TrDate:data.TrDate,   
-       FinFromDt: data.FinFromDt,
-       FinToDt:data.FinToDt,
-       FinCYear:data.FinCYear,
-       FinNYear:data.FinNYear,
-       CurrentStatus:data.CurrentStatus        
+       Description:data.Description,   
+       ShortDescription: data.ShortDescription,
+       Activeyn:data.Activeyn              
      };
      document.querySelector('#' + event).classList.add('md-show');
    }
