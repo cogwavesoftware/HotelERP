@@ -28,6 +28,7 @@ export const environment = {
   //apiURL : 'http://192.168.0.106:777',
   BASE_ACCEPT_HEADER: acceptHeaders,
   BASE_CONTENTTYPE_HEADER: contentTypeHeaders,
+  GuestimagePath:'/assets/images/GuestImage',
   
  
 };

@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { UsercreationComponent } from './usercreation/usercreation.component';
 
 import { ControlpanelRoutingModule } from './controlpanel-routing.module';
-import { TaxruleComponent } from './taxrule/taxrule.component';
+
 
 @NgModule({
-  declarations: [TaxruleComponent],
+  declarations: [],
   imports: [
     CommonModule,ControlpanelRoutingModule
   ]

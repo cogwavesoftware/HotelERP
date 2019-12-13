@@ -248,6 +248,11 @@ const routes: Routes = [
         path: 'taxrule',
         loadChildren: './controlpanel/taxrule/taxrule.module#TaxruleModule'
       },
+
+      {
+        path:'financial',
+        loadChildren: './controlpanel/financialmasters/financialmasters.module#FinancialmastersModule'
+       },
     ]
   },
 

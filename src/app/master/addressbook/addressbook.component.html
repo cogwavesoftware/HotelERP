@@ -4,7 +4,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Addressbook Creation</h5>         
+              <h5 class="ng-tns-c6-1">Addressbook Creation {{mode}} </h5>         
               <span class="ng-tns-c6-1 ng-star-inserted">Addressbook details </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -18,7 +18,7 @@
 
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">      
              <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
              <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
              <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -109,7 +109,7 @@
    
   
                 <div class="col-xs-12 col-sm-12 col-md-6">
-                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Financial Data List</div>
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Address Book List</div>
                     </div>
                   <div class="col-xs-12 col-sm-12 col-md-6">
                     <div style="text-align: right;">
@@ -168,16 +168,16 @@
                   <td>{{item.Website}}</td>
                   <td>{{item.Description}}</td>
                   <td>{{item.Address}}</td>
-                  <td>{{item.IsActive}}</td>
+                 
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
                       
                   </td>
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
+                <tr class="blueorange-gradient">
                   <!-- <th>Profile</th> -->
                   <th>Id</th>
                   <th>Name</th>
@@ -186,7 +186,7 @@
                   <th>Website</th>                
                   <th>Description</th>
                   <th>Address</th>
-                  <th>IsActive</th>
+                
                   <th> </th>
                 </tr>
                 <tr>
@@ -209,7 +209,7 @@
 
 
 </div>
-<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
     <h3 class="f-15">View Addressbook Details</h3>
     
       <div class="app-modal-body text-center"> 
@@ -248,3 +248,6 @@
         </div>
          
       </app-modal-animation>
+
+      
+      <ng2-toasty [position]="position"></ng2-toasty>

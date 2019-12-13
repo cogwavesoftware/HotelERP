@@ -8,12 +8,12 @@ import { GuestcreationComponent } from './guestcreation.component';
 const routes:Routes = [{
   path:'',
   component:GuestcreationComponent,
-  data:{
-    title:'GuestCreation',
-    icon:'icon-home',
-    caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
-    status: true
-  }
+  // data:{
+  //   title:'GuestCreation',
+  //   icon:'icon-home',
+  //   caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+  //   status: true
+  // }
   }];
 
 

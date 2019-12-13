@@ -117,10 +117,7 @@ const routes: Routes = [
         path:'userrights',
         loadChildren: './userrights/userrights.module#UserrightsModule'
        },
-       {
-        path:'financial',
-        loadChildren: './financialmaster/financialmaster.module#FinancialmasterModule'
-       },
+       
 
     ]
   }

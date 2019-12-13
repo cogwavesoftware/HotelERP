@@ -32,6 +32,7 @@ export class CompanycreationComponent implements OnInit {
   public isShown: boolean = false;
   public isAgGridshow: boolean = true;
   model: any = {};
+  
   btitle: string = "Add";
   isValid: boolean;
   dtat: string;

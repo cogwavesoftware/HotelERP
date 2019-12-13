@@ -1,12 +1,13 @@
 import { Component, OnInit,ViewChild,SimpleChanges } from '@angular/core'; 
-import {HttpClient} from '@angular/common/http'; 
+
 import { NgForm } from "@angular/forms";
 import { Observable } from 'rxjs';
 import { MasterformService } from './../../_services/masterform.service';
 import { IpserviceService } from 'src/app/_services/ipservice.service'; 
 import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
-
-
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { DatePipe } from "@angular/common";
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-guestcreation',
   templateUrl: './guestcreation.component.html',
@@ -14,7 +15,7 @@ import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 })
 export class GuestcreationComponent implements OnInit {
   public data: Observable<any>;
-  public rowsOnPage = 10;
+  public rowsOnPage = 12;
   public filterQuery = "";
   public sortBy = "";
   public sortOrder = "desc";
@@ -26,6 +27,8 @@ export class GuestcreationComponent implements OnInit {
   dtat: string;
   title: string;
   msg: string;
+  imagePath:File;
+  imagePath1:string;
   returnUrl: string;
   showClose = true;
   theme = "bootstrap";
@@ -37,27 +40,181 @@ export class GuestcreationComponent implements OnInit {
   mode: string;
   Branch:string;
   filterdata:any;
+  error:string;
   genderhasError:boolean;  
-  gendertypes=['MALE','FEMALE'];
+  gendertypes=[];
+  GuestTitle=[];
+  GuestTdproof=[];
   @ViewChild("f", { static: false }) form: any;
-  constructor(private _masterformservice: MasterformService,
-    private _ipservice: IpserviceService,private toastyService: ToastyService,
-     ) { this.Branch= localStorage.getItem("BranchCode");}
+   GuestPhotpath:string;
+   GuestIdFrontpath:string;
+   GuestIdBackpath:string;
+  fileData: File = null;
+  fileDataIdfront: File = null;
+  fileDataIdBack: File = null;
+
+  previewUrl:any = null;
+  previewUrl2:any = null;
+  previewUrl3:any = null;
+  fileUploadProgress: string = null;
+  uploadedFilePath: string = null;
+
+  constructor(private _masterformservice: MasterformService,private http: HttpClient,
+    private _ipservice: IpserviceService,private toastyService: ToastyService, private datePipe: DatePipe,
+     ) { this.Branch= localStorage.getItem("BranchCode");
+     
+
+    }
 
   ngOnInit() {
     this.resetForm();
     this.btitle = "Add Item";
     this.mode = "(List)";
+    // this.isroomc="CW_1001_36296769926386front.png";
+    this.imagePath1=environment.GuestimagePath+ this.isroomc;
+    this._masterformservice.Getmiscellaneous('Gender').subscribe(data=>{
+      this.gendertypes=data;
+    })
+    this._masterformservice.Getmiscellaneous('Title').subscribe(data=>{
+      this.GuestTitle=data;
+    })
+
+    this._masterformservice.Getmiscellaneous('IdProff').subscribe(data=>{
+      this.GuestTdproof=data;
+    })
+
     if (!this.Branch) {
-      this.data = this._masterformservice.GetBankdetails("CW_1001");
+      this.data = this._masterformservice.GetGuestDetails("CW_1001");
     } else {
-      this.data = this._masterformservice.GetBankdetails(this.Branch);
+      this.data = this._masterformservice.GetGuestDetails(this.Branch);
     }
   
-    this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
-      this.filterdata = data;
-    });
+    // this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
+    //   this.filterdata = data;
+    // });
   }
+
+ 
+
+onSubmit() {
+  debugger;
+  this.form.BranchCode = localStorage.getItem("BranchCode");
+  this.form.CreatedBy = localStorage.getItem("id");
+  this.form.ModifyBy = localStorage.getItem("id");
+  this.form.IpAdd = localStorage.getItem("LOCAL_IP");
+  console.log(this.form.value);
+  this.GuestPhotpath="0";
+  this.GuestIdFrontpath="0";
+  this.GuestIdBackpath="0";
+  const formData = new FormData();
+  var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+  var Rans=+timerandom *  Math.floor(Math.random() * (99999 - 10000)) + 10000;
+  var Guest=this.Branch +'_'+ Rans.toString()+"GuestPhoto" + '.png'
+  console.log(Guest)
+
+  var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
+  var Rans1=+timerandom1 *  Math.floor(Math.random() * (99999 - 10000)) + 10000;
+  var Idfront=this.Branch +'_'+ Rans1.toString()+"front" + '.png'
+  console.log(Idfront)
+
+  var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+  var Rans=+timerandom *  Math.floor(Math.random() * (99999 - 10000)) + 10000;
+  var Idback=this.Branch +'_'+ Rans.toString()+"GuestPhoto" + '.png'
+  console.log(Idback)
+
+  if(this.fileData!=null)
+  {
+    formData.append('GuestPohto', this.fileData, Guest);
+  }
+   
+  if(this.fileDataIdfront!=null)
+  {
+    formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
+  }
+
+  if(this.fileDataIdBack!=null)
+  {
+    formData.append('GuestIdBack', this.fileDataIdBack, Idback);
+  }
+
+  
+  this._masterformservice.SavaImsData(formData)
+    .subscribe(res => {
+      console.log('res');
+
+    //   console.log(res);
+
+    //  this.GuestPhotpath=res["GuestPohto"];
+    //  this.GuestIdFrontpath=res["GuestIdFront"];
+    //  this.GuestIdBackpath=res["GuestIdBack"];
+     this.form.GuestPhotoPath=Guest;
+     this.form.GuestIdFront=Idfront;
+     this.form.GuestIdBack=Idback;
+    },
+    error => {    
+      alert('e')    
+      this.error = error;
+      this.error=error.message;  
+      this.addToast("Cogwave Software😃", this.error + "👊", "error");
+    }); 
+
+    return; 
+  if (this.form.valid)
+    {
+      console.log(this.form.value);
+      console.log("Form Submitted!"); 
+      this._masterformservice.SaveGuestData(this.form.value).subscribe(data => {
+        if (data == true) {
+          if (this.form.value.GuestCode == "0") {
+            this.addToast(
+              "Cogwave Software",
+              "Guest Data Saved Sucessfully",
+              "success"
+            );
+            this.form.reset({
+              
+              BranchCode: localStorage.getItem("BranchCode"),
+              GuestCode: "0",
+              GuestTittle: 'select',
+              Gender: 'select',
+              GdProof:'select',
+            });
+            this.isShown = true;
+          } else {
+            this.addToast(
+              "Cogwave Software",
+              "Guest Data Updated Sucessfully",
+              "success"
+            );
+            this.form.reset();
+            this.mode = "(List)";
+            this.isShown = false;
+            this.btitle = "Add Item";
+          }
+        } else {
+          this.addToast("Cogwave Software", "Guest Data Not Saved", "error");
+          this.form.reset({ 
+            BranchCode: localStorage.getItem("BranchCode"),
+            GuestCode: "0",
+            GuestTittle: 'select',
+            Gender: 'select',
+            GdProof:'select',
+          });
+          this.isShown = true;
+        }
+      });
+      this.data = this._masterformservice.GetGuestDetails(this.Branch);
+    }
+    else
+    {
+    
+        this.addToast("Cogwave Software", "invalid Data", "warning");
+        return;
+    }
+    
+
+
+}
 
   getIP() {
     this._ipservice.getIpAddress().subscribe((res: any) => {
@@ -81,26 +238,28 @@ export class GuestcreationComponent implements OnInit {
 
   resetForm(form?: NgForm) {
     this.model = {
-      Id: 0,
-      GuestTittle: null,
-      Gender: null,
+      GuestCode: 0,
+      GuestTittle: 'select',
+      Gender: 'select',
+      GdProof:'select',
       GuestName: null,
       GuestAddress: null,
       City: null,
       State: null,
       Nation: null,
-      MobileNo: true,
+      MobileNo: null,
       Email: null,
       GSTNO: null,
-      PANNO: true,
-      GDOB: null,
-      GDOA: true
+      PINCode: null,
+     
+      IdNo:null
+      // GDOB: null,
+      // GDOA: true
     };
   }
 
   openMyModalData(event) {
-    // CreatedBy
-    //IpAdd
+   
     this.btitle = "Hide Form";
     this.isShown = true;
     this.data.subscribe(response => {
@@ -115,11 +274,14 @@ export class GuestcreationComponent implements OnInit {
       this.model.MobileNo = response[event]["MobileNo"];
       this.model.Email = response[event]["Email"];
       this.model.GSTNO = response[event]["GSTNO"];
-      this.model.PANNO = response[event]["PANNO"];
-      this.model.GDOB = response[event]["GDOB"];
-      this.model.GDOA = response[event]["GDOA"];
+      this.model.PINCode = response[event]["PINCode"];
+      // this.model.GDOB = response[event]["GDOB"];
+      // this.model.GDOA = response[event]["GDOA"];
       this.model.ModifyBy = response[event]["ModifyBy"];
-      this.mode = "(Edit)"+  this.model.Name;
+      this.model.GdProof = response[event]["GdProof"];
+      this.model.IdNo = response[event]["IdNo"];
+    
+      this.mode = "(Edit)"+  this.model.GuestName;
     });
   }
 
@@ -145,9 +307,12 @@ export class GuestcreationComponent implements OnInit {
       MobileNo: data.MobileNo,
       Email: data.Email,
       GSTNO: data.GSTNO,
-      PANNO: data.PANNO,
-      GDOB: data.GDOB,
-      GDOA: data.GDOA      
+      PINCode: data.PINCode,
+      GdProof :data.GdProof,
+      IdNo : data.IdNo
+    
+      // GDOB: data.GDOB,
+      // GDOA: data.GDOA      
     };
     document.querySelector("#" + event).classList.add("md-show");
   }
@@ -203,13 +368,64 @@ export class GuestcreationComponent implements OnInit {
         break;
     }
   }
-  onSubmit()
-  {
-    console.log(this.form.value);          
-    if (this.form.valid)
-    {
-      console.log("Form Submitted!");    
-    }     
+  fileProgress(fileInput: any) {
+    debugger;
+    this.fileData = <File>fileInput.target.files[0];
+    this.preview1();
+}
+
+preview1() {
+  
+  var mimeType = this.fileData.type;
+  if (mimeType.match(/image\/*/) == null) {
+    return;
   }
+
+  var reader = new FileReader();      
+  reader.readAsDataURL(this.fileData); 
+  reader.onload = (_event) => { 
+    this.previewUrl = reader.result; 
+  }
+}
+
+
+fileProgressIdfFront(fileInput: any) {
+  this.fileDataIdfront = <File>fileInput.target.files[0];
+  this.preview2();
+}
+preview2() {
+  
+  var mimeType = this.fileDataIdfront.type;
+  if (mimeType.match(/image\/*/) == null) {
+    return;
+  }
+
+  var reader = new FileReader();      
+  reader.readAsDataURL(this.fileDataIdfront); 
+  reader.onload = (_event) => { 
+    this.previewUrl2 = reader.result; 
+  }
+}
+
+fileProgressIdfback(fileInput: any) {
+  debugger;
+  this.fileDataIdBack = <File>fileInput.target.files[0];
+  this.preview3();
+}
+
+
+preview3() {
+ 
+  var mimeType = this.fileDataIdBack.type;
+  if (mimeType.match(/image\/*/) == null) {
+    return;
+  }
+
+  var reader = new FileReader();      
+  reader.readAsDataURL(this.fileDataIdBack); 
+  reader.onload = (_event) => { 
+    this.previewUrl3 = reader.result; 
+  }
+}
 
 }

@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
-
+import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 @Component({
   selector: 'app-addressbook',
   templateUrl: './addressbook.component.html',
@@ -30,20 +30,27 @@ export class AddressbookComponent implements OnInit {
   isroomt: string;
   isroomc: string;
   ipAddress: string;
+  
+  mode: string;
+  Branch: string;
+  filterdata: any;
+  IsExistdata: boolean;
   @ViewChild("f", { static: false }) form: any;
 
   constructor(private _masterformservice: MasterformService,
-    private _ipservice: IpserviceService) { }
+    private _ipservice: IpserviceService,private toastyService: ToastyService) {
+      this.Branch = localStorage.getItem("BranchCode");
+     }
 
   ngOnInit() {
-    this.btitle="Add Item";    
-    console.log(this.data)
-    this.model.BranchCode=localStorage.getItem('BranchCode');
-    this.model.IpAdd=localStorage.getItem('LOCAL_IP');
-    this.model.CreatedBy=localStorage.getItem('id');
-     console.log(this.model.BranchCode)
-     console.log(this.model.IpAdd)
-     console.log(this.model.CreatedBy)
+    this.resetForm();
+    this.btitle = "Add Item";
+    this.mode = "(List)";
+    if (!this.Branch) {
+      this.data = this._masterformservice.GetAddressBook("CW_1001");
+    } else {
+      this.data = this._masterformservice.GetAddressBook(this.Branch);
+    }
   }
   getIP()
   {
@@ -52,19 +59,18 @@ export class AddressbookComponent implements OnInit {
       console.log(this.ipAddress)
     });
   }
-  Showhide()
-    {
-     this.resetForm();
-     
-     if (this.btitle=="Hide Form"){
+  Showhide() {
+    this.resetForm();
+    if (this.btitle == "Hide Form") {
       this.isShown = false;
-      this.btitle="Add Item"}
-     else{    
-      this.isShown = true; 
-      this.btitle="Hide Form"
-      }
-      
+      this.btitle = "Add Item";
+      this.mode = "(List)";
+    } else {
+      this.isShown = true;
+      this.btitle = "Hide Form";
+      this.mode = "(New)";
     }
+  }
     resetForm(form?: NgForm)
   {
      this.model = {
@@ -74,10 +80,8 @@ export class AddressbookComponent implements OnInit {
       Email:null,
       Website:null,
       Description:null,
-      Address:null,      
-      BranchCode:localStorage.getItem('BranchCode'),
-      IpAdd:localStorage.getItem('LOCAL_IP'),
-      CreatedBy:localStorage.getItem('id'),
+      Address:null
+     
     };  
   }
   openMyModalData(event) {
@@ -92,22 +96,120 @@ export class AddressbookComponent implements OnInit {
        this.model.Email=response[event]['Email'];
        this.model.Website=response[event]['Website'];
        this.model.Description=response[event]['Description'];
-       this.model.Address=response[event]['Address'];           
+       this.model.Address=response[event]['Address'];  
+       this.mode = "(Edit)" + this.model.Name;         
      });
    
    }
-   onSubmit()
-   {
-     console.log(this.form.value);          
-     if (this.form.valid)
-     {
-       console.log("Form Submitted!");    
-     }     
-   }
-   Closeform() 
-   {       
-       this.resetForm();        
-   }
+   onSubmit(form?: NgForm) {
+    // form.controls.BranchCode.setValue(localStorage.getItem('BranchCode'));
+    // form.controls.CreatedBy.setValue(localStorage.getItem('id'));
+
+    // form.controls.IpAddress.setValue(localStorage.getItem('LOCAL_IP'));
+
+    form.value.BranchCode = localStorage.getItem("BranchCode");
+    form.value.CreatedBy = localStorage.getItem("id");
+    form.value.ModifyBy = localStorage.getItem("id");
+    form.value.IpAdd = localStorage.getItem("LOCAL_IP");
+
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "Invalid Data", "warning");
+      return;
+    }
+
+    // if (this.IsExistdata === true) {
+    //   this.addToast("Cogwave Software", "Referance already Exist ", "warning");
+    //   return;
+    // }
+
+    this._masterformservice.SaveAddressBook(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "Address Book Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            BranchCode: localStorage.getItem("BranchCode"),
+            Id: "0"
+          });
+          this.isShown = true;
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "Address Book Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      } else {
+        this.addToast("Cogwave Software", "Address Book Not Saved", "error");
+        form.reset({
+         
+          BranchCode: localStorage.getItem("BranchCode"),
+          Id: "0"
+        });
+        this.isShown = true;
+      }
+    });
+
+    this.data = this._masterformservice.GetAddressBook(this.Branch);
+  }
+
+
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
+  }
+
+  Closeform() {
+    this.isShown = false;
+    this.btitle = "Add Item";
+    this.resetForm();
+    this.mode = "(List)";
+  }
    openMyModal(event,data) 
    {
      this.model = {  

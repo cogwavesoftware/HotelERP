@@ -1,0 +1,224 @@
+
+<div class="outerdiv">
+
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+      <div class="row">
+          <div class="col-md-11">
+              <h5 class="ng-tns-c6-1">Financial Creation</h5>         
+              <span class="ng-tns-c6-1 ng-star-inserted">Financial details </span>
+            </div>
+            <!-- <div class="col-xs-12 col-sm-12 col-md-1"> 
+                <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+              </button>
+            </div> -->
+      </div>
+    </div>
+
+
+
+    <div class="formdesign aqua-gradient" *ngIf="isShown">
+        <div class="formouter rotate" >
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+             <input type="hidden" name="RNO" class="form-control" [(ngModel)]="model.RNO" #Id="ngModel" value="{{RNO}}"  >
+             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+             
+             <div class="auth-box card">
+                   <div class="card-block">
+                     <div class="frmdata" >              
+                        <div class="containar">
+                            <div class="row">
+                                <div class="col-md-12">
+                                         
+                                   <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- <button type="button" (mouseenter) ="mouseEnter('Re') "  (mouseleave) ="mouseLeave('Re')" class="btn peach-gradient btn-lg">ReSet All BillNo</button> -->
+                                        <button type="button" (click)="ProcessData('Re')"  class="btn peach-gradient btn-lg">ReSet All BillNo</button>
+                                    </div>
+
+                                   <div class="col-md-6">
+                                      
+                                    <button type="button"  (click)="ProcessData('Co')" class="btn btn-primary btn-lg">Continue BillNo</button>
+                                    </div>
+                                  
+  
+                                  </div> 
+                               
+                                  <hr>
+                                  <div class="row">
+                                    
+                                    
+                                      <div class="col-md-6" >
+                                       <span>Reset Process will reset All Bill Serious 0 .BillNo Will restart from 1</span>
+                                      </div>
+
+                                      <div class="col-md-6" >
+                                          <span>Continue Bill Process continue with old BillNo</span>
+                                        </div>
+                                  </div>
+                                 
+                               
+                              </div>
+               
+                  
+                            </div>
+                          </div>
+                     </div>
+                   
+
+                    </div>
+              </div>       
+          </form>
+       </div> 
+     </div>
+
+
+<!-- -----------table start Here------------ -->
+
+
+
+     <div class="productlist">
+        <div class="shadow p-3 mb-5 bg-white rounded" >
+      <div class="table-content crm-table">
+        <div class="project-table">
+          <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+            <div class="row">
+   
+  
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Financial Data List</div>
+                    </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div style="text-align: right;">
+                      <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                        <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                      </label>
+                    </div>
+                  </div>  
+
+            </div>
+             
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                <thead>
+                <tr class="blueorange-gradient">
+                  <!-- <th>
+                    <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+                  </th> -->
+                 
+                  <th>
+                    <mfDefaultSorter  by="TrDate">TrDate</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="FinFromDt">FinFromDt</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="FinToDt">FinToDt</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="FinCode">FinCode</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="FinYear">FinYear</mfDefaultSorter>
+                  </th>
+
+                    <th>
+                        <mfDefaultSorter  by="IsActive">IsActive</mfDefaultSorter>
+                    </th>
+                  <!-- <th>
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                  </th> -->
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;">
+                  <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
+                  
+                  <td>{{item.TrDate}}</td>
+                  <td>{{item.FinFromDt}}</td>
+                  <td>{{item.FinToDt}}</td>
+                  <td>{{item.FinCode}}</td>
+                  <td>{{item.Finyear}}</td>
+                  <td>{{item.IsActive}}</td>
+                  <!-- <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                      
+                  </td> -->
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="blueorange-gradient">
+                  <!-- <th>Profile</th> -->
+                 
+                  <th>TrDate</th>
+                  <th>FinFromDt</th>
+                  <th>FinToDt</th>
+                  <th>FinCode</th>                
+                  <th>Finyear</th>
+                  <th>IsActive</th>
+                  <!-- <th> </th> -->
+                </tr>
+                <tr>
+                  <td colspan="10">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+</div>
+</div>
+    <!-- -----------table End Here------------ -->
+
+
+
+
+</div>
+
+
+
+<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+    <h3 class="f-15">View Financial Details</h3>
+    
+      <div class="app-modal-body text-center"> 
+          <table class="table table-striped text-left m-t-10">
+              
+              <tr>
+                <td>TrDate :</td>
+                <td>{{ model.TrDate }}</td>
+              </tr>
+              <tr>
+                <td>FinFromDt :</td>
+                <td>{{ model.FinFromDt }}</td>
+              </tr>
+              <tr>
+                <td>FinToDt :</td>
+                <td>{{ model.FinToDt }}</td>
+              </tr>
+              <tr>
+                <td>FinCode :</td>
+                <td>{{ model.FinCode }}</td>
+              </tr>
+              <tr>
+                <td>FinYear :</td>
+                <td>{{ model.FinYear }}</td>
+              </tr>
+              <tr>
+                <td>CurrentStatus :</td>
+                <td>{{ model.IsActive }}</td>
+              </tr>
+              
+             </table>      
+             <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+        </div>
+         
+      </app-modal-animation>

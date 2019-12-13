@@ -15,11 +15,35 @@
 
 
 
+    <!-- <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h3>Choose File</h3>            
+              <div class="form-group">
+                  <input type="file" name="image" (change)="fileProgress($event)" />
+              </div>
+              <div *ngIf="fileUploadProgress">
+                  Upload progress: {{ fileUploadProgress }}
+              </div>
+              <div class="image-preview mb-3" *ngIf="previewUrl">
+                  <img [src]="previewUrl" height="300" />                 
+              </div>
+   
+              <div class="mb-3" *ngIf="uploadedFilePath">
+                  {{uploadedFilePath}}
+              </div>
+               
+              
+          </div>
+      </div>
+  </div> -->
+
+
     <div class="formdesign aqua-gradient" *ngIf="isShown">
         <div class="formouter rotate" >
          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
-            <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
-            <input type="hidden" name="TaxCode" class="form-control" [(ngModel)]="model.TaxCode" #TaxCode="ngModel" value="{{TaxCode}}"  >
+            <input type="hidden" name="GuestCode" class="form-control" [(ngModel)]="model.GuestCode" #GuestCode="ngModel" value="{{GuestCode}}"  >
+          
             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
@@ -33,29 +57,46 @@
                                   <div class="row">
                                      <div class="col-md-6 border border-right-0 p-10">
                                    
-                                        <div class="row  form-group">
-                                            <div class="col-md-12">
-                                              <label ><span class="red">*</span> GuestCode</label>  
-                                              <input type="text" name="GuestCode" class="form-control" [(ngModel)]="model.GuestCode" #GuestCode="ngModel" value="{{GuestCode}}"  [ngClass]="{'is-invalid': GuestCode.touched && GuestCode.invalid}"  required autocomplete="off">
-                                              <div *ngIf="GuestCode.touched && GuestCode.invalid" class="invalid-feedback">
-                                                  <div *ngIf="GuestCode.errors.required">GuestCode is invalid</div>
-                                              </div>                                             
-                                            </div>                                    
-                                           
-                                          </div>
+                                      
                                        <div class="row form-group">
-                                          <div class="col-md-3 ">
-                                            <label  >  Tittle</label>  
-                                            <input type="text" name="GuestTittle" class="form-control" [(ngModel)]="model.GuestTittle" #GuestTittle="ngModel" value="{{GuestTittle}}"   required autocomplete="off">
-                                          </div>
-                                          <div class="col-md-3  ">
-                                            <label  >Gender</label>  
-                                            <select class="custom-select" (blur)="validategender(Gender.value)" (change)="validategender(Gender.value)" #Gender="ngModel" [class.is-invalid]="genderhasError && Gender.touched" name="Gender" [(ngModel)]="model.Gender">
-                                                <option value="default">Please Select</option>
-                                                <option *ngFor="let item of gendertypes" [value]="item"  >{{ item  }}</option>
-                                              </select>
-                                              <small class="text-danger" [class.d-none]="!genderhasError || Gender.untouched">Please choose a Gender</small>
-                                          </div>
+                                          
+                                        <!-- <div class="col-md-3  ">
+                                          <label  >Title</label>  
+                                          <select class="custom-select"  #GuestTittle="ngModel" [class.is-invalid]="genderhasError && GuestTittle.touched" name="GuestTittle" [(ngModel)]="model.GuestTittle">
+                                              <option value="default">Please Select</option>
+                                              <option *ngFor="let item of GuestTitle" [value]="item.Description"  >{{ item.Description  }}</option>
+                                            </select>
+                                            <small class="text-danger" [class.d-none]="!genderhasError || GuestTittle.untouched">Please choose a GuestTittle</small>
+                                        </div> -->
+
+
+                                        <div class="col-md-3"  [class.has-error]="GuestTittle.touched && GuestTittle.errors?.defaultSelected" >
+                                            <label>Title *</label>
+                                                <select class="custom-select" id="GuestTittle" appSelectValidator="select"  #GuestTittle="ngModel"  name="GuestTittle" [(ngModel)]="model.GuestTittle">
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let item of GuestTitle"  [value]="item.Description">{{ item.Description }}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="GuestTittle.touched && GuestTittle.errors?.defaultSelected">
+                                                    GuestTittle is required
+                                                </span>           
+                                                           
+                                        </div> 
+
+                                        <div class="col-md-3"  [class.has-error]="Gender.touched && Gender.errors?.defaultSelected" >
+                                            <label>Gender *</label>
+                                                <select class="custom-select" id="Gender" appSelectValidator="select"  #Gender="ngModel"  name="Gender" [(ngModel)]="model.Gender">
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let item of gendertypes"  [value]="item.Description">{{ item.Description }}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="Gender.touched && Gender.errors?.defaultSelected">
+                                                    Gender is required
+                                                </span>           
+                                                           
+                                        </div> 
+
+
+
+
                                           <div class="col-md-6  ">
                                             <label  >GuestName</label> 
                                             <input type="text" name="GuestName" class="form-control" [(ngModel)]="model.GuestName" #GuestName="ngModel" value="{{GuestName}}"  [ngClass]="{'is-invalid': GuestName.touched && GuestName.invalid}"  required autocomplete="off">
@@ -67,31 +108,44 @@
                                         <div class="row">
                                           <div class="col-md-12">
                                             <label for="GuestAddress">Guest Address</label> 
-                                            <textarea class="form-control rounded-0" id="GuestAddress" rows="3"></textarea>
+                                            <textarea class="form-control rounded-0" id="GuestAddress" name="GuestAddress" class="form-control" [(ngModel)]="model.GuestAddress" #GuestAddress="ngModel" value="{{GuestAddress}}"  rows="2"></textarea>
+
+                 
                                           </div>
                                         </div>
 
+
+
                                         <div class="row form-group">
-                                            <div class="col-md-3 ">
-                                              <label  >  City</label>  
-                                              <input type="text" name="City" class="form-control" [(ngModel)]="model.City" #City="ngModel" value="{{City}}"   required autocomplete="off">                                            </div>
-                                            <div class="col-md-3  ">
+                                          <div class="col-md-6 ">
+                                              <label >Pincode</label> 
+                                              <input type="pin" name="PINCode" class="form-control validate" [(ngModel)]="model.PINCode" #PINCode="ngModel" value="{{PINCode}}"  [ngClass]="{'is-invalid': PINCode.touched && PINCode.invalid}"  required autocomplete="off">
+                                              <div *ngIf="PINCode.touched && PINCode.invalid" class="invalid-feedback">
+                                                <div *ngIf="PINCode.errors.required">PINCode is invalid</div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6 ">
+                                            <label  >City</label>  
+                                            <input type="text" name="City" class="form-control" [(ngModel)]="model.City" #City="ngModel" value="{{City}}"   required autocomplete="off">                                    
+                                          </div>
+                                 
+                                        </div>
+
+                                        <div class="row form-group"> 
+                                            <div class="col-md-6">
                                                 <label >State</label>  
                                                 <input type="text" name="State" class="form-control" [(ngModel)]="model.State" #State="ngModel" value="{{State}}"   required autocomplete="off">
                                              </div>
                                             <div class="col-md-6  ">
                                                 <label >Nation</label> 
-                                                <input type="text" name="State" class="form-control" [(ngModel)]="model.State" #State="ngModel" value="{{State}}"  [ngClass]="{'is-invalid': GuestName.touched && GuestName.invalid}"  required autocomplete="off">
+                                                <input type="text" name="Nation" class="form-control" [(ngModel)]="model.Nation" #Nation="ngModel" value="{{Nation}}"  [ngClass]="{'is-invalid': Nation.touched && Nation.invalid}"  required autocomplete="off">
                                             </div>
                                           </div>
 
                                           <div class="row form-group">
                                               <div class="col-md-6 ">
                                                   <label >MobileNo</label> 
-                                                  <input type="tel" name="MobileNo" class="form-control validate" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
-                                                  <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
-                                                    <div *ngIf="MobileNo.errors.required">MobileNo is invalid</div>
-                                                  </div>
+                                                  <input type="tel" name="MobileNo" class="form-control validate" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" value="{{MobileNo}}"     autocomplete="off">  
                                               </div>
                                               <div class="col-md-6 ">
                                                 <label  >Email</label>  
@@ -105,14 +159,33 @@
                                                     <input type="text" name="GSTNO" class="form-control" [(ngModel)]="model.GSTNO" #GSTNO="ngModel" value="{{GSTNO}}"   autocomplete="off">
                                                     
                                                 </div>
-                                                <div class="col-md-6">
-                                                  <label>PANNO</label>  
-                                                  <input type="text" name="PANNO" class="form-control" [(ngModel)]="model.PANNO" #PANNO="ngModel" value="{{PANNO}}" autocomplete="off">  
-                                                </div>                                       
+
+                                              <div class="col-md-6"  [class.has-error]="GdProof.touched && GdProof.errors?.defaultSelected" >
+                                                  <label>IdProof*</label>
+                                                      <select class="custom-select" id="GdProof" appSelectValidator="select"  #GdProof="ngModel"  name="GdProof" [(ngModel)]="model.GdProof">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of GuestTdproof"  [value]="item.Description">{{ item.Description }}</option>
+                                                      </select>
+                                                      <span class="help-block" *ngIf="GdProof.touched && GdProof.errors?.defaultSelected">
+                                                          IdProof is required
+                                                      </span>           
+                                                                 
+                                              </div> 
+
+
+
+                                                                                  
                                               </div>
                                               <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <label>IdNo*</label>
+                                                  <input type="text" name="IdNo" class="form-control" [(ngModel)]="model.IdNo" #IdNo="ngModel" value="{{IdNo}}"   autocomplete="off">
+                               
+                                                </div>
+                                              </div>
+                                              <!-- <div class="row form-group">
                                                   <div class="col-md-6">
-                                                      <label>GDOB</label>  
+                                                      <label>Guest Birthday</label>  
                                                       <div class="input-group">
                                                           <input type="text" class="form-control"   name="GDOB" [(ngModel)]="model.GDOB" value="{{model.GDOB | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
                                                           <div class="input-group-append bg-default" (click)="dd.toggle()" >
@@ -121,7 +194,7 @@
                                                         </div>
                                                   </div>
                                                   <div class="col-md-6">
-                                                      <label>GDOA</label>  
+                                                      <label>Guest Anniversary</label>  
                                                       <div class="input-group">
                                                           <input type="text" class="form-control"   name="GDOA" [(ngModel)]="model.GDOA" value="{{model.GDOA | date: 'dd-MM-yyyy'}}" ngbDatepicker #ddd="ngbDatepicker">
                                                           <div class="input-group-append bg-default" (click)="ddd.toggle()" >
@@ -129,20 +202,23 @@
                                                           </div>
                                                         </div>
                                                   </div>                                       
-                                                </div>          
+                                                </div>           -->
                                                
-
                                     </div>
+
+                                    <!-- <img [src]="imagePath1">
+                 -->
+                                 
                                     <div class="col-md-6 border p-10">
                                  
                                        <div class="row form-group">
                                             <div class="col-md-12 ">
-                                                <label  >Id Proof</label>  
-                                                <input type="file" name="IdProof" class="form-control" [(ngModel)]="model.IdProof" #IdProof="ngModel"   >
+                                                <label >Id Proof</label>  
+                                                <input type="file" name="GuestPhotoPath"  (change)="fileProgress($event)" class="form-control" [(ngModel)]="model.GuestPhotoPath" #GuestPhotoPath="ngModel"   >
                                                 <div class="col-md-12 border p-10">
                                                     <div class="row" style="margin-left:0">
-                                                        <img id="myImg" src="../../../assets/images/coming-soon/cs-2.jpg" alt="Snow" style="width:100%;max-width:300px">
-                                                                                  
+                                                      
+                                                       <img [src]="previewUrl" style="width:100%;max-width:300px" />  
                                                       </div>
                                                 </div>
                                             </div>
@@ -152,18 +228,17 @@
                                           <div class="row form-group" style="margin-left:0;margin-right:0">
                                             <div class="col-md-6 border">
                                                 <label  >Id Proof Front</label>
-                                                <input type="file" name="IdProofFront" class="form-control" [(ngModel)]="model.IdProofFront" #IdProofFront="ngModel"   >
+                                                <input type="file" name="GuestIdFront" (change)="fileProgressIdfFront($event)" class="form-control" [(ngModel)]="model.GuestIdFront" #GuestIdFront="ngModel"   >
                                                 <div class="row" style="margin-left:0;margin-right:0">
-                                                    <img id="myImg" src="../../../assets/images/coming-soon/cs-2.jpg" alt="Snow" style="width:100%;max-width:300px">
+                                                    <img [src]="previewUrl2"  style="width:100%;max-width:300px">
                                                                               
                                                   </div>
                                             </div>
                                             <div class="col-md-6 border">
                                                 <label  >Id Proof Back</label>
-                                                <input type="file" name="IdProofBack" class="form-control" [(ngModel)]="model.IdProofBack" #IdProofBack="ngModel"  >
+                                                <input type="file" name="GuestIdBack" (change)="fileProgressIdfback($event)" class="form-control" [(ngModel)]="model.GuestIdBack" #GuestIdBack="ngModel"  >
                                                 <div class="row" style="margin-left:0;margin-right:0">
-                                                    <img id="myImg" src="../../../assets/images/coming-soon/cs-2.jpg" alt="Snow" style="width:100%;max-width:300px">
-                                                                              
+                                                  <img [src]="previewUrl3"  style="width:100%;max-width:300px">                          
                                                   </div>
                                             </div>
                                           </div>
@@ -187,6 +262,7 @@
                         <div class="col-md-12 text-center" >
                           <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
                           <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                         
                         </div>
                       </div>
                     </div>
@@ -259,6 +335,9 @@
             <th>
                 <mfDefaultSorter  by="GDOB">GDOB</mfDefaultSorter>
             </th>
+            <th>
+              <mfDefaultSorter  by="GDOA">GDOA</mfDefaultSorter>
+          </th>
             
 
             <th>

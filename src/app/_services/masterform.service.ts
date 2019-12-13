@@ -205,6 +205,33 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getruledApplicable?BranchCode=' + branchcode);
   }
 
+  GetAddressBook(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getaddressbook?BranchCode=' + branchcode);
+  }
+
+
+  SaveAddressBook(Addressbook:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveaddressbook',Addressbook,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SavaImsData(formData:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/SavaImss',formData,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+   
+
+  Getmiscellaneous(HeadersDesc: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Miscell?HeaderDescription=' + HeadersDesc);
+  }
+
+
+  GetGuestDetails(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/guest?Branchcode=' + branchcode);
+  }
+
+  SaveGuestData(GuestData:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveguest',GuestData,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+  
 
   // registerUser(user: User,roles : string[]) {
   //   const body = {

@@ -21,6 +21,12 @@ const routes: Routes = [
         path: 'taxrule',
         loadChildren: './taxrule/taxrule.module#TaxruleModule'
       },
+
+      {
+        path: 'financial',
+        loadChildren: './financialmasters/financialmasters.module#FinancialmastersModule'
+      },
+     
      
     ]
   }
