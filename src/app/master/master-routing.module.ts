@@ -113,10 +113,7 @@ const routes: Routes = [
         path: 'addressbook',
         loadChildren: './addressbook/addressbook.module#AddressbookModule'
       },
-      {
-        path:'userrights',
-        loadChildren: './userrights/userrights.module#UserrightsModule'
-       },
+     
        
 
     ]
