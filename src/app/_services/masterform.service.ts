@@ -96,6 +96,11 @@ export class MasterformService {
   getclientproduct(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/cproduct?BranchCode=' + branchcode);
   }
+
+
+  GetUserproduct(branchcode: string,UserId:number) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/UserproductDate?BranchCode=' + branchcode + '&UserId=' + UserId);
+  }
   SaveRoomDetail(roomdetail:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveroomdetails',roomdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
@@ -219,6 +224,13 @@ export class MasterformService {
   }
    
 
+  
+
+
+  SaveuserRight(userdata:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Userrightlistsave',userdata,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
   Getmiscellaneous(HeadersDesc: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Miscell?HeaderDescription=' + HeadersDesc);
   }
@@ -231,8 +243,22 @@ export class MasterformService {
   SaveGuestData(GuestData:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveguest',GuestData,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
-  
+  getBookss() 
+  {
+     
+     var Sql=environment.apiURL + '/api/CloudHMS/Master/Userrightlist';
+     console.log(Sql)
+     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Userrightlist');
+  }
 
+
+  GetUserRights(UserId:number,ProductId:number) 
+  {
+     
+     var Sql=environment.apiURL + '/api/CloudHMS/Master/Userrightlist';
+     console.log(Sql)
+     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Userrightlist?UserId=' + UserId + '&ProductId=' + ProductId);
+  }
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

@@ -4,8 +4,8 @@ import { AuthenticationService } from './../_services/authentication.service';
 import {HttpClient} from '@angular/common/http';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 // import {TranslateService } from '@ngx-translate/core';
-
-
+import { TreeviewItemService } from '../shared/service/treeview-item.service';
+import { TreeviewItem, TreeviewConfig } from '../shared/service/lib';
 declare global {
   interface Window {
     RTCPeerConnection: RTCPeerConnection;
@@ -56,6 +56,11 @@ declare global {
   ]
 })
 export class CommonpageComponent implements OnInit {
+
+
+
+
+  items: TreeviewItem[];
   ipAddress:any;
   public navType: string;
   public themeLayout: string;
@@ -88,7 +93,8 @@ export class CommonpageComponent implements OnInit {
 
   private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
 
-  constructor(private _authservice:AuthenticationService,private zone: NgZone,private http: HttpClient) {
+  constructor(private _authservice:AuthenticationService,private zone: NgZone,
+    private http: HttpClient,private service: TreeviewItemService) {
 
 
 
@@ -134,6 +140,8 @@ export class CommonpageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.items = this.service.getBooks(); //tree  
+    
   this._authservice.logout();
   //this.determineLocalIp();
 

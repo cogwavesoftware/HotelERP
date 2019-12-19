@@ -50,6 +50,7 @@ export class FloorcreationComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
 
+
     // this.model.BranchCode=localStorage.getItem('BranchCode');
     // this.model.IpAdd=localStorage.getItem('LOCAL_IP');
     // this.model.CreatedBy=localStorage.getItem('id');

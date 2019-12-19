@@ -35,6 +35,7 @@ export class BanknameComponent implements OnInit {
   mode: string;
   Branch:string;
   filterdata:any;
+  itemss:any;
   @ViewChild("f", { static: false }) form: any;
   constructor(
     private _masterformservice: MasterformService,
@@ -45,6 +46,10 @@ export class BanknameComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+
+
     this.resetForm();
     this.btitle = "Add Item";
     this.mode = "(List)";
@@ -57,6 +62,12 @@ export class BanknameComponent implements OnInit {
     this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
       this.filterdata = data;
     });
+ 
+    
+    this.itemss = this._masterformservice.getBookss().subscribe(res=>{
+      console.log(res);
+    }); //tree  
+
 
   }
 

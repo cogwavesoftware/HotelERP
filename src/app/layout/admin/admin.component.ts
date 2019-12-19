@@ -274,8 +274,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   
-   
     this.setBackgroundPattern('theme1');
   //   let IsRole = localStorage.getItem('IsRole');
   //   if (IsRole=="SuperAdmin")
