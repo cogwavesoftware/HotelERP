@@ -90,6 +90,7 @@ export class UsercreationComponent implements OnInit {
 
   
     if (this.Userrole === "Admin") {
+
       this.data = this._masterformservice.GetAlluserDetails(this.Branch)
       this._masterformservice.GetAlluserDetails(this.Branch).subscribe(res => {
         this.filterdata = res;
