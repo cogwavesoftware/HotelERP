@@ -30,9 +30,11 @@
                          <div class="frmdata" >              
                             <div class="containar">
                                 <div class="row">
+                                
                                     <div class="col-md-12">                                             
                                       <div class="row">
-                                            <div class="col-md-6">        
+                                        
+                                            <div class="col-md-2">        
                                                 <label class="required">Room No*</label>
                                                   <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
                                                   <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
@@ -41,17 +43,44 @@
                                             </div> 
 
 
-                                            <div class="col-md-6" [class.has-error]="RoomCode.errors?.defaultSelected && RoomCode.touched">
+                                            <div class="col-md-2" [class.has-error]="RoomCode.errors?.defaultSelected && RoomCode.touched">
                                               <label> Room Code*</label>
                                                   <select class="custom-select" appSelectValidator="-1" id="RoomCode"  #RoomCode="ngModel"  name="RoomCode" [(ngModel)]="model.RoomCode">
                                                     <option value="-1">Please Select</option>
                                                     <option *ngFor="let roomty of roomtypelist" [value]="roomty.RoomCode" >{{ roomty.RoomCode }}</option>
                                                   </select>
-                                                  <span class="help-block" *ngIf="RoomCode.touched && RoomCode.errors?.defaultSelected">
+                                                  <small class="text-danger" *ngIf="RoomCode.touched && RoomCode.errors?.defaultSelected">
                                                       RoomCode is required
-                                                    </span>                   
+                                                    </small>                   
                                           </div>
-
+                                          <div class="col-md-2">
+                                            <label>Select Catagery*</label>
+                                                <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
+                                                  <option value="default">Please Select</option>
+                                                  <option *ngFor="let catagery of catagerys">{{ catagery }}</option>
+                                                </select>
+                                                <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>                
+                                        </div> 
+                                        <div class="col-md-2"  [class.has-error]="FloorName.touched && FloorName.errors?.defaultSelected" >
+                                          <label>Select Floor*</label>
+                                              <select class="custom-select" id="FloorName" appSelectValidator="select"  #FloorName="ngModel"  name="FloorName" [(ngModel)]="model.FloorName">
+                                                <option value="select">Please Select</option>
+                                                <option *ngFor="let floor of Floorlist"  [value]="floor.FloorName">{{ floor.FloorName }}</option>
+                                              </select>
+                                              <small class="text-danger" *ngIf="FloorName.touched && FloorName.errors?.defaultSelected">
+                                                FloorName is required
+                                              </small>           
+                                                         
+                                      </div> 
+                                      <div class="col-md-2">        
+                                        <label class="required">Priority</label>
+                                          <input type="text" name="priority" class="form-control" [(ngModel)]="priority" [disabled]="true" />                
+                                    </div> 
+                                    <div class="col-md-2">
+                                      <label class="form-control-label" for="IsActive"  style="padding-right: 25px;">IsActive*  </label>
+                                          <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">                                                
+                                          <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                  </div>
                                          </div>
                                          <div class="row">
                                           <div class="col-md-12">        
@@ -63,47 +92,11 @@
                                         </div> 
                                          </div>
 
-                                         <div class="row">
-
-                                          <div class="col-md-6">        
-                                              <label class="required">Priority</label>
-                                                <input type="text" name="priority" class="form-control" [(ngModel)]="priority" [disabled]="true" />                
-                                          </div> 
-
-                                          <div class="col-md-6">
-                                            <label>Select Catagery*</label>
-                                                <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
-                                                  <option value="default">Please Select</option>
-                                                  <option *ngFor="let catagery of catagerys">{{ catagery }}</option>
-                                                </select>
-                                                <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>                
-                                        </div> 
-
-
-
-                                      
-
-
-
-                                       </div>
+                     
                                        <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-control-label" for="IsActive"  style="padding-right: 25px;">IsActive*  </label>
-                                                <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">                                                
-                                                <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
-                                        </div>
+                                       
 
-                                         <div class="col-md-6"  [class.has-error]="FloorName.touched && FloorName.errors?.defaultSelected" >
-                                          <label>Select Floor*</label>
-                                              <select class="custom-select" id="FloorName" appSelectValidator="select"  #FloorName="ngModel"  name="FloorName" [(ngModel)]="model.FloorName">
-                                                <option value="select">Please Select</option>
-                                                <option *ngFor="let floor of Floorlist"  [value]="floor.FloorName">{{ floor.FloorName }}</option>
-                                              </select>
-                                              <span class="help-block" *ngIf="FloorName.touched && FloorName.errors?.defaultSelected">
-                                                FloorName is required
-                                              </span>           
-                                                         
-                                      </div> 
+                                     
 
                                         <!------------------this also will work ------------->
                                         
