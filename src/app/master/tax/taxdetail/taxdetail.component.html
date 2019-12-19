@@ -120,6 +120,7 @@
                                             </div>
                                      
                                       <div class="row">
+                                        <div class="col-md-6"> 
                                         <div class="form-group" [class.has-error]="TaxType.touched && TaxType.invalid">
                                           <label class="control-label">TaxType</label>
                                           <div >
@@ -134,7 +135,7 @@
                                             TaxType is required
                                           </span>
                                         </div>
-
+                                        </div>
                                         <div class="col-md-6">                                                   
                                           <label>Active*</label>
                                           <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">

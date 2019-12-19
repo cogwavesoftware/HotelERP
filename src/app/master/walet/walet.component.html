@@ -26,31 +26,24 @@
                          <div class="frmdata" >              
                             <div class="containar">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                             
+                                    <div class="col-md-12">                                             
                                       <div class="row">
-                                            <div class="col-md-6">
-        
+                                            <div class="col-md-6">        
                                                 <label class="required">Walet Name*</label>
                                                   <input type="text" name="WaletName" class="form-control" [(ngModel)]="model.WaletName" #WaletName="ngModel" value="{{WaletName}}"  [ngClass]="{'is-invalid': WaletName.touched && WaletName.invalid}"  required autocomplete="off">
                                                   <div *ngIf="WaletName.touched && WaletName.invalid" class="invalid-feedback">
                                                       <div *ngIf="WaletName.errors.required">WaletName is invalid</div>
                                                   </div>
-                                            </div>  
-
-      
+                                            </div>       
                                       </div>
                                       <div class="row">
-
                                           <div class="col-md-6">
-                                              <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
-                                              <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
+                                            <label class="form-control-label" for="IsActive" >IsActive*  </label>
+                                              <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
                                               <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                       </div>
                                       </div>
-
-                                  </div>
-                   
+                                  </div>                  
                               
                                 </div>
                               </div>
