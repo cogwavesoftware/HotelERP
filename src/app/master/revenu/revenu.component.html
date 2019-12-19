@@ -33,52 +33,49 @@
                                 <div class="col-md-12">
 
                                   <div class="row">
-                                     <div class="col-md-4">
-                                        <label class="required">Revenu Name*</label>
+                                     <div class="col-md-3">
+                                        <label class="required">Revenue Name*</label>
                                             <input type="text" name="RevName" class="form-control" [(ngModel)]="model.RevName" #RevName="ngModel" value="{{RevName}}"  [ngClass]="{'is-invalid': RevName.touched && RevName.invalid}"  required autocomplete="off">
                                             <div *ngIf="RevName.touched && RevName.invalid" class="invalid-feedback">
-                                                <div *ngIf="RevName.errors.required">RevName is invalid</div>
+                                                <div *ngIf="RevName.errors.required">Revenue  is invalid</div>
                                             </div>
                                     </div>  
-
-                                 
-                                    
-
-                                 
-                                    <div class="col-md-6">
+           
+                                    <div class="col-md-3">
                                         <label>HSNCode*</label>
                                         <input type="text" name="HSNCode" class="form-control" [(ngModel)]="model.HSNCode" #HSNCode="ngModel" value="{{HSNCode}}"  [ngClass]="{'is-invalid': HSNCode.touched && HSNCode.invalid}"  required autocomplete="off">
                                         <div *ngIf="HSNCode.touched && HSNCode.invalid" class="invalid-feedback">
                                           <div *ngIf="HSNCode.errors.required">HSNCode is invalid</div>
                                         </div>
                                     </div>
-                                  </div>
-
-                                  <div class="row">
-                                       <div class="col-md-6">
-                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
-                                      <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
+                                    <div class="col-md-3">
+                                      <label class="form-control-label" for="IsActive"  >IsActive*  </label>
+                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
                                       <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
-                                    </div>  
-
+                                    </div> 
                                   </div>
-                                  {{emailFormArray | json}}
-                                  <div class="row">
-                                      <label>Select Tax*</label>
-                                  <div class="form-check" >
-                                 <ul>
-                                 <li *ngFor="let cat of categories">
-                                <input class="form-check-input"  (change)="onChange(cat.Id, $event.target.checked)" 
-                                 [(ngModel)]="cat.ischecked" name="{{ cat.name }}" type="checkbox" id="{{cat.Id}}">
-                                <label class="form-check-label" for="{{cat.name}}">
-                                 {{cat.name}}
-                                  </label>
-    
-                   </li>
-                        </ul>
 
-
-                          </div>
+                                   
+                                  
+                                  <div class="row  ">
+                                    <div class="col-md-4 userlist">
+                                      <label style="padding:0px 20px 0 20px">Select Tax*</label> 
+                                      <div class="form-check taxcheckbox" >
+                                     <ul  >
+                                     <li *ngFor="let cat of categories">
+                                    <input class="form-control"   (change)="onChange(cat.Id, $event.target.checked)" 
+                                     [(ngModel)]="cat.ischecked" name="{{ cat.name }}" type="checkbox" id="{{cat.Id}}">
+                                    <label class="form-check-label" for="{{cat.name}}">
+                                     {{cat.name}}
+                                      </label>    
+                                    </li>
+                                          </ul>
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4 userlist"> 
+                                      <label>Selected Value</label> <br/>
+                                     {{emailFormArray | json}}
+                                    </div>
 
 
                                   </div>
