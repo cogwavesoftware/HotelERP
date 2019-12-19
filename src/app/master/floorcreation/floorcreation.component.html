@@ -29,7 +29,7 @@
                             <div class="containar">
 
                                 <div class="row">
-                                    <div class='col-12 col-sm-6'>
+                                    <div class='col-12 col-sm-5'>
                                         <div class="form-group">
                                             <label class="form-control-label" for="Floor Name">Floor Name</label>
                                             <input type="text" name="FloorName" (keyup)="CallKeytype(FloorName.value)" class="form-control" [(ngModel)]="model.FloorName" #FloorName="ngModel" value="{{FloorName}}"  [ngClass]="{'is-invalid':  FloorName.touched && FloorName.invalid}"  required autocomplete="off">
@@ -43,7 +43,7 @@
                                             <small class="text-danger" [class.d-none]="!IsExistdata || FloorName.untouched">Floor Name Aleady Exist</small>
                                         </div>
                                     </div>
-                                  <div class='col-12 col-sm-6'>
+                                  <div class='col-12 col-sm-5'>
                                       <div class="form-group">
                                           <label class="form-control-label" for="Maximum No Room in Floor">Maximum No Room in Floor</label>
                                           <input type="number" name="MaxRoom" class="form-control" [(ngModel)]="model.MaxRoom" #MaxRoom="ngModel" value="{{MaxRoom}}"  [ngClass]="{'is-invalid': MaxRoom.touched && MaxRoom.invalid}"  required autocomplete="off">
@@ -51,7 +51,13 @@
                                             <div *ngIf="MaxRoom.errors.required">MaxRoom is invalid</div>
                                           </div>
                                       </div>
-                                  </div>                   
+                                  </div>  
+                                  <div class='col-12 col-sm-2'>                                    
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="isactive">IsActive</label>
+                                        <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
+                                         </div>
+                                  </div>                    
                             </div>
                             <div class="row">
                                 <!-- <div class='col-12 col-sm-6'>
@@ -63,11 +69,7 @@
                                 </div>  -->
 
                                 <div class='col-12 col-sm-6'>
-                                  <div class="form-group">
-                                      <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
-                                      <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
-                                    
-                                  </div>
+                                  
                               </div>
 
                         </div>

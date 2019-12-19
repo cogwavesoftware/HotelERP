@@ -103,9 +103,9 @@
 
                                 <div class="row">
                                           <div class="col-md-6">
-                                                  <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
-                                                  <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
-                                                  <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                            <label class="form-control-label" for="IsActive"   >IsActive*  </label>
+                                            <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
+                                            <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                           </div>
                                         </div>
                                           

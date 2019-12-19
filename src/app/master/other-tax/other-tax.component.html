@@ -54,20 +54,18 @@
                                           <div *ngIf="TaxPer.errors.required">Tax Percentage is invalid</div>
                                         </div>
                                     </div>
+                                    <div class='col-12 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="IsActive" >IsActive  </label>
+                                        <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
+                                          
+                                        
+                                      </div>
+                                  </div>
                                   </div>
 
 
-                                  <div class="row">
-                                     
-                                      <div class='col-12 col-sm-6'>
-                                        <div class="form-group">
-                                            <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
-                                            <label class="form-control-label" for="IsActive" style="padding-left: 10px;">IsActive  </label>
-                                          
-                                        </div>
-                                    </div>
-      
-                              </div>
+                                 
                                      
                               </div>
                
