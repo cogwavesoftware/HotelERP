@@ -64,7 +64,8 @@ $icon-color: #448aff,#b71c1c,#4CAF50,#d84315,#4527a0,#37474f,#7C4DFF,#FF5370;
     }
 
     .main-menu-header {
-        padding: 15px 0;
+        // padding: 15px 0;
+        padding: 0px 0;
         background-image: url("../assets/images/user-bg.jpg");
         background-size: cover;
         text-align: center;
@@ -75,7 +76,7 @@ $icon-color: #448aff,#b71c1c,#4CAF50,#d84315,#4527a0,#37474f,#7C4DFF,#FF5370;
         }
         .user-details {
             display: block;
-            margin-top: 10px;
+            margin-top: 0px;
             position: relative;
 
             #more-details {
