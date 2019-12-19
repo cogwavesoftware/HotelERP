@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: './financialmasters/financialmasters.module#FinancialmastersModule'
       },
      
+      {
+        path:'userrights',
+        loadChildren: './userrights/userrights.module#UserrightsModule'
+       },
      
     ]
   }

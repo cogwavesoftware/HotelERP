@@ -259,6 +259,22 @@ export class MasterformService {
      console.log(Sql)
      return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Userrightlist?UserId=' + UserId + '&ProductId=' + ProductId);
   }
+
+  SaveuserCreation(usermodel:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveusercreation',usermodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
+  GetSwardDetail(branchcode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getstward?BranchCode=' + branchcode);
+  }
+
+  SaveStwardDetails(Stward:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

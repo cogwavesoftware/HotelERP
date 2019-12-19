@@ -3,7 +3,7 @@
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
-                  <h5 class="ng-tns-c6-1">Roomboy Creation</h5>         
+                  <h5 class="ng-tns-c6-1">Roomboy Creation-  {{mode}} </h5>         
                   <span class="ng-tns-c6-1 ng-star-inserted">Purpose of Room boy Details </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -15,9 +15,10 @@
       
       
       
+
         <div class="formdesign aqua-gradient" *ngIf="isShown">
             <div class="formouter rotate" >
-             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
                 <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
                 <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                 <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -224,7 +225,7 @@
               <table class="table table-striped text-left m-t-10">
                   <tr>
                     <td>Name :</td>
-                    <td>{{ model.Name }}</td>
+                    <td>{{ model.StwardName }}</td>
                   </tr>
                       
                  </table>      
@@ -232,3 +233,6 @@
             </div>
              
           </app-modal-animation>
+
+          
+    <ng2-toasty [position]="position"></ng2-toasty>

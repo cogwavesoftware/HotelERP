@@ -5,7 +5,9 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { Observable } from "rxjs";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
- 
+import { DatePipe } from "@angular/common";
+import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+
 @Component({
   selector: 'app-usercreation',
   templateUrl: './usercreation.component.html',
@@ -51,17 +53,18 @@ export class UsercreationComponent implements OnInit {
   filterdata: any;
   IsExistdata: boolean;
   Userrole:string;
-  constructor(private _masterformservice: MasterformService, private _ipservice: IpserviceService) {
+ 
+  constructor(private _masterformservice: MasterformService,
+     private _ipservice: IpserviceService,  private toastyService: ToastyService) {
     this.model.discounttype = "default";
     this.Branch = localStorage.getItem("BranchCode");
   }
 
   ngOnInit() {
-
+    this.btitle = "Add Item";
+    this.mode = "(List)";
     this.resetForm();
     this.Userrole = localStorage.getItem("IsRole")
-   
-
     this._masterformservice.getAllRoles().subscribe(
       (data: any) => {
         data.forEach(obj => obj.ischecked =false);
@@ -80,25 +83,19 @@ export class UsercreationComponent implements OnInit {
     //   };
     // }
   
-
     this._masterformservice.getclientproduct(this.Branch).subscribe((data: any) => {
       data.forEach(obj => obj.selected = true);
       this.prulist = data;
       console.log(this.prulist);
     });
 
-
-  
     if (this.Userrole === "Admin") {
 
       this.data = this._masterformservice.GetAlluserDetails(this.Branch)
       this._masterformservice.GetAlluserDetails(this.Branch).subscribe(res => {
         this.filterdata = res;
         console.log(this.filterdata)
-      })
-
-
-    }
+      })}
 
   }
 
@@ -130,7 +127,7 @@ export class UsercreationComponent implements OnInit {
       MobileNo: null,
       DOB: null,
       EmailId: null,
-      password: '55',
+      password: null,
       ConformPassword: null,
       Address: null,
       GracePeroid: null,
@@ -151,11 +148,19 @@ export class UsercreationComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    var x = this.roles.filter(x => x.selected).map(y => y.Id);
+
+
+    var x = this.roles.filter(x => x.ischecked).map(y => y.Name);
     console.log(x);
+
     var f = this.prulist.filter(x => x.selected).map(y => y.Id);
     console.log(form);
     console.log(form.value);
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
 
     this.model = {
       UserId: form.value.UserId,
@@ -167,7 +172,6 @@ export class UsercreationComponent implements OnInit {
       EmailId: form.value.EmailId,
       password: form.value.password,
       ConformPassword: form.value.ConformPassword,
-
       Address: form.value.Address,
       GracePeroid: form.value.GracePeroid,
       Discount: form.value.Discount,
@@ -179,11 +183,56 @@ export class UsercreationComponent implements OnInit {
       IpAdd: localStorage.getItem("LOCAL_IP"),
       CreatedBy: localStorage.getItem("id"),
       ModifyBy: localStorage.getItem("id"),
-
     }
     console.log(this.model)
+    return;
+    this._masterformservice.SaveuserCreation(this.model).subscribe(data => {
+      if (data == true) {
+        if (form.value.UserId == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "User Creation Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            IsActive: "true",
+            BranchCode: localStorage.getItem("BranchCode"),
+            UserId: "0"
+          });
+          this.isShown = true;
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "User Creation Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+        }
+      } else {
+        this.addToast("Cogwave Software", "User Creation Not Saved", "error");
+        form.reset({
+          IsActive: "true",
+          BranchCode: localStorage.getItem("BranchCode"),
+          UserId: "0"
+        });
+        this.isShown = true;
+      }
+    });
 
+   
+    if (this.Userrole === "Admin") {
+      this.data = this._masterformservice.GetAlluserDetails(this.Branch)
+      this._masterformservice.GetAlluserDetails(this.Branch).subscribe(res => {
+        this.filterdata = res;
+        console.log(this.filterdata)
+      })}
   }
+
+
+  
 
   Showhide() {
     this.resetForm();
@@ -291,14 +340,55 @@ export class UsercreationComponent implements OnInit {
   }
 
   updateSelectedRoles(index) {
-    alert(index);
+    
     this.roles.map(x => x.ischecked = false);
-    alert('index');
     this.roles[index].ischecked = !this.roles[index].ischecked;
   }
 
   updateProduct(index) {
 
     this.prulist[index].selected = !this.prulist[index].selected;
+  }
+
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
   }
 }
