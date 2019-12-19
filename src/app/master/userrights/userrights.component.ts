@@ -141,7 +141,7 @@ export class UserrightsComponent implements OnInit {
             "UserRights Data Saved Sucessfully",
             "success"
           );
-          this.isShown = false;}
+          this.isShown = true;}
          
        else {
         this.addToast("Cogwave Software", "UserRights Data Not Saved", "error");
