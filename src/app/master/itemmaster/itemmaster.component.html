@@ -62,9 +62,9 @@
                                               <option value="-1">Please Select</option>
                                               <option *ngFor="let revs of catagerys"  [value]="revs.Id">{{ revs.RevName }}</option>
                                             </select>
-                                            <span class="help-block" *ngIf="RevId.touched && RevId.errors?.defaultSelected">
-                                                Revnue Name is required
-                                            </span>           
+                                            <small class="help-block" *ngIf="RevId.touched && RevId.errors?.defaultSelected">
+                                                Revenue Name is required
+                                            </small>           
                                                        
                                     </div> 
 
