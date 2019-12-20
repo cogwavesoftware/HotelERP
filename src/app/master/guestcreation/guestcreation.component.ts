@@ -137,16 +137,11 @@ onSubmit() {
     formData.append('GuestIdBack', this.fileDataIdBack, Idback);
   }
 
+    debugger;
   
   this._masterformservice.SavaImsData(formData)
     .subscribe(res => {
       console.log('res');
-
-    //   console.log(res);
-
-    //  this.GuestPhotpath=res["GuestPohto"];
-    //  this.GuestIdFrontpath=res["GuestIdFront"];
-    //  this.GuestIdBackpath=res["GuestIdBack"];
      this.form.GuestPhotoPath=Guest;
      this.form.GuestIdFront=Idfront;
      this.form.GuestIdBack=Idback;
@@ -157,8 +152,10 @@ onSubmit() {
       this.error=error.message;  
       this.addToast("Cogwave Software😃", this.error + "👊", "error");
     }); 
+ 
+ console.log(this.form.value);
+return;
 
-    return; 
   if (this.form.valid)
     {
       console.log(this.form.value);

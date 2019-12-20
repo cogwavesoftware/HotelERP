@@ -22,7 +22,7 @@ export class TaxmasterComponent implements OnInit {
   public filterQuery = "";
   public sortBy = "";
   public sortOrder = "desc";
-   
+   position='top-right';
   isValid: boolean;
   public isShown: boolean = false;
   dtat: string;
@@ -165,8 +165,11 @@ export class TaxmasterComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.GetRoomTaxMaster(this.Branch);
-
+    setTimeout(() => {
+      this.data = this._masterformservice.GetRoomTaxMaster(this.Branch);
+ 
+    }, 0);
+   
     this._masterformservice.GetRoomTaxMaster(this.Branch).subscribe(data=>{
       this.filterdata=data;
     });

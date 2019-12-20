@@ -20,7 +20,8 @@ export class BanknameComponent implements OnInit {
   model: any = {};
   btitle: string = "Add";
   isValid: boolean;
-  IsExistdata:boolean
+  IsExistdata:boolean;
+  position = 'top-right';
   dtat: string;
   title: string;
   msg: string;
@@ -164,12 +165,12 @@ export class BanknameComponent implements OnInit {
    
     if (form.invalid) {
       console.log(form.value);
-      this.addToast("Cogwave Software", "invalid Data", "warning");
+      this.addToast("Cogwave Software", "Invalid Data", "warning");
       return;
     }
 
     if (this.IsExistdata === true) {
-      this.addToast("Cogwave Software", "FloorName already Exist ", "warning");
+      this.addToast("Cogwave Software", "BankName already Exist ", "warning");
       return;
     }
 
@@ -187,6 +188,8 @@ export class BanknameComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.GetBankdetails(this.Branch);
+
         } else {
           this.addToast(
             "Cogwave Software",
@@ -197,6 +200,8 @@ export class BanknameComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.GetBankdetails(this.Branch);
+
         }
       } else {
         this.addToast("Cogwave Software", "Bank Data Not Saved", "error");
@@ -209,8 +214,7 @@ export class BanknameComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.GetBankdetails(this.Branch);
-
+    
     this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
       this.filterdata = data;
     });

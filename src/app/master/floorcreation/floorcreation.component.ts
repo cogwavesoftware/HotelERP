@@ -117,6 +117,8 @@ export class FloorcreationComponent implements OnInit {
             BranchCode: localStorage.getItem("BranchCode"),
             FloorCode: "0"
           });
+          this.data = this._floorservice.GetfloorData();
+
           this.isShown = true;
         } else {
           this.addToast(
@@ -128,6 +130,8 @@ export class FloorcreationComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._floorservice.GetfloorData();
+
         }
       } else {
         this.addToast("Cogwave Software", "Floor Data Not Saved", "error");
@@ -140,8 +144,7 @@ export class FloorcreationComponent implements OnInit {
       }
     });
 
-    this.data = this._floorservice.GetfloorData();
-
+    
     this._floorservice.GetfloorData().subscribe((data: any) => {
       this.filterdatax = data;
       console.log(this.filterdatax);

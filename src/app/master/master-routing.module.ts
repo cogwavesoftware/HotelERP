@@ -44,10 +44,10 @@ const routes: Routes = [
         loadChildren: './companycreation/companycreation.module#CompanycreationModule'
       },
 
-      // {
-      //   path: 'financial',
-      //   loadChildren: './financial/financial.module#FinancialModule'
-      // },
+     {
+       path: 'financial',
+         loadChildren: './financial/financial.module#FinancialModule'
+       },
 
       {
         path: 'gridtest',

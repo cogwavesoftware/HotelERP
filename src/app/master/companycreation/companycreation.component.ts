@@ -172,8 +172,6 @@ export class CompanycreationComponent implements OnInit {
   }
 
 
-
-
   onSubmit(form?: NgForm) {
 
     form.value.BranchCode = localStorage.getItem("BranchCode")
@@ -187,6 +185,9 @@ export class CompanycreationComponent implements OnInit {
     console.log("JSON")
     var sdata = JSON.parse(this.str);
     console.log(sdata)
+
+    console.log(form.value)
+    alert('3')
 
     if (form.invalid) {
       console.log(form.value);

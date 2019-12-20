@@ -5,6 +5,7 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+import { setInterval } from 'timers';
 
 @Component({
   selector: "app-creditcard",
@@ -32,6 +33,7 @@ export class CreditcardComponent implements OnInit {
   isroomt: string;
   isroomc: string;
   ipAddress: string;
+  position = 'top-right';
   mode: string;
   Branch: string;
   filterdata: any;
@@ -121,6 +123,7 @@ export class CreditcardComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          
         } else {
           this.addToast(
             "Cogwave Software",
@@ -131,6 +134,7 @@ export class CreditcardComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+         
         }
       } else {
         this.addToast("Cogwave Software", "Credit Card  Data Not Saved", "error");
@@ -143,8 +147,11 @@ export class CreditcardComponent implements OnInit {
       }
     });
 
+    setTimeout(()=>{
+           
     this.data = this._masterformservice.GetCreditCard(this.Branch);
-
+        }, 0);
+    
    
   }
 
