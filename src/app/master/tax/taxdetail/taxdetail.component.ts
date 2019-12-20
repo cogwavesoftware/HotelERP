@@ -19,7 +19,7 @@ export class TaxdetailComponent implements OnInit {
   public TaxCode:any; 
   public data: Observable<any>;
   public datafilt: Observable<any>;
-
+ position='top-right';
   public filterdatax: any;
   catageryhasError: boolean;
   public rowsOnPage = 10;

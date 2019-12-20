@@ -111,6 +111,8 @@ export class RoomorganizerComponent implements OnInit {
           });
           this.model.catagery = "default";
           this.isShown = true;
+          this.data = this._masterformervice.GetAllRoomNo(this.Branch);
+
         } else {
           this.addToast(
             "Cogwave Software",
@@ -121,6 +123,8 @@ export class RoomorganizerComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformervice.GetAllRoomNo(this.Branch);
+
         }
       } else {
         this.addToast("Cogwave Software", "RoomType Data Not Saved", "error");
@@ -137,8 +141,7 @@ export class RoomorganizerComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformervice.GetAllRoomNo(this.Branch);
-
+   
     this._masterformervice.GetAllRoomNo(this.Branch ).subscribe((data: any) => {
       this.filterData = data;  
     });
