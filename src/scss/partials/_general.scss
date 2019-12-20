@@ -69,7 +69,8 @@ b,strong{
 ==========================  **/
 .main-body {
     .page-wrapper {
-        padding: 1.8rem;
+        // padding: 1.8rem;
+        padding: 0;
         transition: all ease-in 0.3s;
     }
 }
@@ -479,7 +480,7 @@ b,strong{
     }
 
     .page-block {
-        padding: 14px 40px;
+        padding: 0px 30px;
 
         .breadcrumb-title {
             float: right;
@@ -5999,6 +6000,9 @@ outerdiv{
                 vertical-align: bottom;
                 margin: 7px 10px 0px 0px;
                 display: inline-block;
+            }
+            .marginright{
+                margin-right:20px;            
             }
 }
 
