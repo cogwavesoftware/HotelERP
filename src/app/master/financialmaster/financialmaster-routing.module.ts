@@ -7,9 +7,9 @@ const routes:Routes = [{
   path:'',
   component:FinancialmasterComponent,
   data:{
-    title:'Financial',
+    title:'Miscellaneous ',
     icon:'icon-home',
-    caption: 'This page is describe the financial',
+    caption: 'This page is describe the Miscellaneous ',
     status: true
   }
   }];

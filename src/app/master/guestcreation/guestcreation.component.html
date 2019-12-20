@@ -209,7 +209,7 @@
                                     <!-- <img [src]="imagePath1">
                  -->
                                  
-                                    <div class="col-md-6 border p-10">
+                                    <div class="col-md-6 border p-10 userlist">
                                  
                                        <div class="row form-group">
                                             <div class="col-md-12 ">
@@ -226,7 +226,7 @@
                                           </div>
                                         
                                           <div class="row form-group" style="margin-left:0;margin-right:0">
-                                            <div class="col-md-6 border">
+                                            <div class="col-md-6 border  ">
                                                 <label  >Id Proof Front</label>
                                                 <input type="file" name="GuestIdFront" (change)="fileProgressIdfFront($event)" class="form-control" [(ngModel)]="model.GuestIdFront" #GuestIdFront="ngModel"   >
                                                 <div class="row" style="margin-left:0;margin-right:0">
@@ -234,7 +234,7 @@
                                                                               
                                                   </div>
                                             </div>
-                                            <div class="col-md-6 border">
+                                            <div class="col-md-6 border  ">
                                                 <label  >Id Proof Back</label>
                                                 <input type="file" name="GuestIdBack" (change)="fileProgressIdfback($event)" class="form-control" [(ngModel)]="model.GuestIdBack" #GuestIdBack="ngModel"  >
                                                 <div class="row" style="margin-left:0;margin-right:0">
@@ -258,10 +258,10 @@
                             </div>
                           </div>
                      </div>
-                     <div class="row">
+                     <div  class="m-b-20">
                         <div class="col-md-12 text-center" >
-                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center  ripple m-r-10">Save</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center   ripple">Reset</button>
                          
                         </div>
                       </div>
