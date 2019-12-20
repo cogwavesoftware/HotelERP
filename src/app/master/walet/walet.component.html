@@ -34,24 +34,23 @@
                                                   <div *ngIf="WaletName.touched && WaletName.invalid" class="invalid-feedback">
                                                       <div *ngIf="WaletName.errors.required">WaletName is invalid</div>
                                                   </div>
-                                            </div>       
+                                            </div>  
+                                            <div class="col-md-6">
+                                              <label class="form-control-label" for="IsActive" >IsActive*  </label>
+                                                <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
+                                                <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
+                                        </div>     
                                       </div>
-                                      <div class="row">
-                                          <div class="col-md-6">
-                                            <label class="form-control-label" for="IsActive" >IsActive*  </label>
-                                              <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" >
-                                              <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
-                                      </div>
-                                      </div>
+                                      
                                   </div>                  
                               
                                 </div>
                               </div>
                          </div>
-                         <div class="row m-t-30">
+                         <div class=" ">
                             <div class="col-md-12 text-center" >
-                              <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                              <button type="button" (click)="partialUpdate()"  class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                              <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center ripple m-r-10">Save</button>
+                              <button type="button" (click)="partialUpdate()"  class="btn btn-primary btn-md btn-sml waves-light text-center   ripple">Reset</button>
                             </div>
                           </div>
                         </div>

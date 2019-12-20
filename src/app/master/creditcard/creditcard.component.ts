@@ -5,7 +5,6 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
-
 @Component({
   selector: "app-creditcard",
   templateUrl: "./creditcard.component.html",
