@@ -134,7 +134,7 @@
                                               <div class="row">
                                                  
   
-                                                      <div class="col-md-6">
+                                                      <div class="col-md-4">
                                                               <label>Discount Type*</label>
                                                                   <select class="custom-select" (blur)="validatediscount(discounttype.value)" (change)="validatediscount(discounttype.value)" #discounttype="ngModel" [class.is-invalid]="distypeicHasError && discounttype.touched" name="discounttype" [(ngModel)]="model.discounttype">
                                                                     <option value="default">Please Select</option>
@@ -145,7 +145,7 @@
 
 
                                                       
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
     
                                                   <label class="required">Discount Value*</label>
                                                     <input type="number" name="Discount" class="form-control" [(ngModel)]="model.Discount" #Discount="ngModel" value="{{Discount}}"  [ngClass]="{'is-invalid': Discount.touched && Discount.invalid}"  required autocomplete="off">
@@ -153,20 +153,16 @@
                                                         <div *ngIf="Discount.errors.required">Discount Value is invalid</div>
                                                     </div>
                                               </div> 
-
+                                              <div class="col-md-4">
+                                                <label>Status*</label>
+                                                <input type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"   autocomplete="off" style="width: 20px;">
+                                                <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
+                                                  <div *ngIf="IsActive.errors.required">Status is invalid</div>
+                                                </div>
+                                            </div>
                                           </div>
 
-                                                 <div class="row">
-                                                        
-                                                         <div class="col-md-4">
-                                                             <label>Status*</label>
-                                                             <input type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"   autocomplete="off" style="width: 20px;">
-                                                             <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
-                                                               <div *ngIf="IsActive.errors.required">Status is invalid</div>
-                                                             </div>
-                                                         </div>
-                                                         
-                                                   </div>
+                                                
                                                    <!-- <div class="table-content crm-table" *ngIf="f.form.valid"> -->
 
                                                   <div class="table-content crm-table">
@@ -226,10 +222,10 @@
 
 
 
-                     <div class="row m-t-30">
+                     <div class="m-b-20">
                         <div class="col-md-12 text-center" >
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple pull-right ">Close</button>
-                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10 pull-right ">Save</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center  ripple pull-right m-b-20">Close</button>
+                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center ripple m-r-10 pull-right m-b-20">Save</button>
                        
                         </div>
                       </div>

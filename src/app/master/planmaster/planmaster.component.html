@@ -64,8 +64,8 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                    <input type="checkbox" name="IsActive" id="IsActive" class="form-check-input" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
-                                                    <label class="form-control-label" for="IsActive"  style="padding-right: 10px;">IsActive*  </label>
+                                              <label class="form-control-label" for="IsActive"  >IsActive*  </label>
+                                                    <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" required>
                                                     <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">Active is required</div>
                                             </div>
                                     </div>
@@ -76,10 +76,10 @@
                                 </div>
                               </div>
                          </div>
-                         <div class="row m-t-30">
+                         <div class=" ">
                             <div class="col-md-12 text-center" >
-                              <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10 pull-right">Save</button>
-                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple pull-right ">Close</button>
+                              <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center  ripple m-r-10 ">Save</button>
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center    ripple ">Close</button>
                             </div>
                           </div>
                         </div>
