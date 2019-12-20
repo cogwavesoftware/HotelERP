@@ -18,7 +18,7 @@
         <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
             <div class="formdesign aqua-gradient" *ngIf="isShown" >
             <div class="formouter rotate" >
-             <form name="form" (ngSubmit)="f.form.valid && onSubmit(F.form)" #f="ngForm"> 
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
                 <input type="hidden" name="RNO" class="form-control" [(ngModel)]="model.RNO" #RNO="ngModel" value="{{RNO}}"  >
                 <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                 <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -48,7 +48,7 @@
 
                                         <div class="col-md-6">    
                                             <label class="required">TaxName*</label>
-                                                <input type="text" name="TaxName" readonly class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
+                                                <input type="text" name="TaxName"  class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
                                                 <div *ngIf="TaxName.touched && TaxName.invalid" class="invalid-feedback">
                                                     <div *ngIf="TaxName.errors.required">TaxName is invalid</div>
                                                 </div>
@@ -138,7 +138,7 @@
                                         </div>
                                         <div class="col-md-6">                                                   
                                           <label>Active*</label>
-                                          <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">
+                                          <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"   autocomplete="off">
                                           <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
                                               <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
                                           </div> 

@@ -126,6 +126,7 @@ export class LedgercreationComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.getledger(this.Branch);
         } else {
           this.addToast(
             "Cogwave Software",
@@ -136,6 +137,7 @@ export class LedgercreationComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.getledger(this.Branch);
         }
       } else {
         this.addToast("Cogwave Software", "Ledger Data Not Saved", "error");
@@ -148,7 +150,7 @@ export class LedgercreationComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.getledger(this.Branch);
+    
     console.log(this.filterdata);
     this._masterformservice.getledger(this.Branch).subscribe((data: any) => {
       this.filterdata = data;

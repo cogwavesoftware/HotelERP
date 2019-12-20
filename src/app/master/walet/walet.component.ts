@@ -137,10 +137,9 @@ export class WaletComponent implements OnInit {
       }
     });
 
-    setTimeout(()=>{
-           
+    setTimeout(()=>{  
       this.data = this._masterformservice.getwalet();
-          }, 0);
+          }, 1000);
    
     console.log(this.data)
     this._masterformservice.getwalet().subscribe((data: any) => {
