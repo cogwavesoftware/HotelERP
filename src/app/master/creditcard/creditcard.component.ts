@@ -5,8 +5,7 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
-import { setInterval } from 'timers';
-
+ 
 @Component({
   selector: "app-creditcard",
   templateUrl: "./creditcard.component.html",
