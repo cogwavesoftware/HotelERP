@@ -111,8 +111,7 @@ export class PlancreationComponent implements OnInit {
       CreatedBy: localStorage.getItem("id")
     };
     //delete
-    this.model.BranchCode = "CW_1001";
-    this.model.CreatedBy = "4";
+   
   }
 
   openMyModalData(event) {
@@ -142,8 +141,7 @@ export class PlancreationComponent implements OnInit {
   }
 
 
-  onSuvbmit() {
-
+  onSubmit(form?: NgForm) {
     console.log(this.emailFormArray);
     console.log(this.form.value);
     console.log(this.model);
@@ -162,19 +160,54 @@ export class PlancreationComponent implements OnInit {
         CreatedBy: localStorage.getItem("id"),
         selectedTax: newstr1,
       }
-      console.log('moe')
+    
       console.log(this.model);
       this._masterformservice.saveplancreation(this.model).subscribe(data => {
-        if (data) {
-          this.form.reset();
+        if (data == true) {
+          if (form.value.Id == "0") {
+            this.addToast(
+              "Cogwave Software",
+              "RevenuName Data Saved Sucessfully",
+              "success"
+            );
+            form.reset({
+              IsActive: "true",
+              BranchCode: localStorage.getItem("BranchCode"),
+              Id: "0"
+            });
+            this.isShown = true;
+            this.data = this._masterformservice.getallplanopr(this.Branch);
+
+            this.emailFormArray = [];
+          } else {
+            this.addToast(
+              "Cogwave Software",
+              "RevenuName Data Updated Sucessfully",
+              "success"
+            );
+            form.reset();
+            this.mode = "(List)";
+            this.isShown = false;
+            this.btitle = "Add Item";
+            this.data = this._masterformservice.getallplanopr(this.Branch);
+
+            this.emailFormArray = [];
+          }
+        } else {
+          this.addToast("Cogwave Software", "RevenuName Data Not Saved", "error");
+          form.reset({
+            IsActive: "true",
+            BranchCode: localStorage.getItem("BranchCode"),
+            Id: "0"
+          });
+          this.emailFormArray = [];
+          this.isShown = true;
         }
-        this.isShown = false;
-        this.ngOnInit();
       })
     }
   }
 
-  onSubmit(form?: NgForm) {
+  onSubmitc(form?: NgForm) {
 
 
     form.value.BranchCode = localStorage.getItem("BranchCode");

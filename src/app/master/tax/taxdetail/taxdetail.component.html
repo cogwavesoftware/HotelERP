@@ -18,7 +18,7 @@
         <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
             <div class="formdesign aqua-gradient" *ngIf="isShown" >
             <div class="formouter rotate" >
-             <form name="form" (ngSubmit)="f.form.valid && onSubmit(F.form)" #f="ngForm"> 
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
                 <input type="hidden" name="RNO" class="form-control" [(ngModel)]="model.RNO" #RNO="ngModel" value="{{RNO}}"  >
                 <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
                 <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -30,6 +30,38 @@
                             <div class="containar">
                                 <div class="row">
                                     <div class="col-md-12">
+<<<<<<< HEAD
+=======
+                                        
+                                      <div class="row">
+
+                                          <div class="col-md-6"  [class.has-error]="TaxCode.touched && TaxCode.errors?.defaultSelected" >
+                                              <label>Select Tax*</label>
+                                                  <select class="custom-select" id="TaxCode" appSelectValidator="-1"  #TaxCode="ngModel"  name="TaxCode" [(ngModel)]="model.TaxCode">
+                                                    <option value="-1">All</option>
+                                                    <option *ngFor="let revs of taxmaster"  [value]="revs.TaxCode">{{ revs.TaxName }}</option>
+                                                  </select>
+                                                  <span class="help-block" *ngIf="TaxCode.touched && TaxCode.errors?.defaultSelected">
+                                                      Tax Name is required
+                                                  </span>           
+                                                             
+                                          </div> 
+      
+
+                                        <div class="col-md-6">    
+                                            <label class="required">TaxName*</label>
+                                                <input type="text" name="TaxName"  class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
+                                                <div *ngIf="TaxName.touched && TaxName.invalid" class="invalid-feedback">
+                                                    <div *ngIf="TaxName.errors.required">TaxName is invalid</div>
+                                                </div>
+                                        </div> 
+    
+                                        
+    
+                                 
+      
+                                      </div>
+>>>>>>> e5bd095abd9158fc2908fcfb5c09084723217631
                                         <div class="row">
                                           <div class="col-md-6 mx-auto userlist">
                                             <div class="row">
@@ -138,7 +170,16 @@
                                             </div> 
                                           </div>
                                         </div>
+<<<<<<< HEAD
                                           </div>
+=======
+                                        <div class="col-md-6">                                                   
+                                          <label>Active*</label>
+                                          <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"   autocomplete="off">
+                                          <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
+                                              <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
+                                          </div> 
+>>>>>>> e5bd095abd9158fc2908fcfb5c09084723217631
                                         </div>
 
                                        

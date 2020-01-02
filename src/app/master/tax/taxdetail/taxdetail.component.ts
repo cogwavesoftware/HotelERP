@@ -156,14 +156,67 @@ export class TaxdetailComponent implements OnInit {
 
    }
 
-   onSubmit()
-   {
-     console.log(this.form.value);          
-     if (this.form.valid)
-     {
-       console.log("Form Submitted!");    
-     }     
-   }
+   
+
+   onSubmit(form?: NgForm) {
+
+    form.value.BranchCode = localStorage.getItem("BranchCode")
+    form.value.CreatedBy = localStorage.getItem("id")
+    form.value.ModifyBy = localStorage.getItem("id")
+    form.value.IpAdd = localStorage.getItem("LOCAL_IP")
+
+
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+
+    // if (this.IsExistdata === true) {
+    //   this.addToast("Cogwave Software", "TaxDetail already Exist ", "warning");
+    //   return;
+    // }
+
+    this._masterformservice.SaveTaxdetail(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.RNO == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "TaxDetail Data Saved Sucessfully",
+            "success"
+          );
+          form.reset({
+            IsActive: "true",
+            RNO: "0",
+            TaxCode1:'-1'
+          });
+          this.isShown = true;
+          this.data = this._masterformservice.GetRoomTaxDetail(this.Branch);
+        } else {
+          this.addToast(
+            "Cogwave Software",
+            "TaxDetail Data Updated Sucessfully",
+            "success"
+          );
+          form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+          this.data = this._masterformservice.GetRoomTaxDetail(this.Branch);
+        }
+      } else {
+        this.addToast("Cogwave Software", "TaxDetail Data Not Saved", "error");
+        form.reset({
+          IsActive: "true",
+          RNO: "0",
+          TaxCode1:'-1'
+        });
+        this.isShown = true;
+      }
+    });
+
+  
+  }
 
  
    Closeform() {
@@ -190,5 +243,47 @@ export class TaxdetailComponent implements OnInit {
    }
    closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  }
+
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
   }
 }

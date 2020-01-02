@@ -5,7 +5,6 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
- 
 @Component({
   selector: "app-creditcard",
   templateUrl: "./creditcard.component.html",
@@ -107,7 +106,7 @@ export class CreditcardComponent implements OnInit {
       this.addToast("Cogwave Software", "Credit Card  already Exist ", "warning");
       return;
     }
-
+    debugger;
     this._masterformservice.SaveCreditCard(form.value).subscribe(data => {
       if (data == true) {
         if (form.value.Id == "0") {
@@ -148,8 +147,8 @@ export class CreditcardComponent implements OnInit {
 
     setTimeout(()=>{
            
-    this.data = this._masterformservice.GetCreditCard(this.Branch);
-        }, 0);
+     this.data = this._masterformservice.GetCreditCard(this.Branch);
+        }, 1);
     
    
   }

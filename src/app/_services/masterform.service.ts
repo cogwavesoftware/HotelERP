@@ -165,6 +165,9 @@ export class MasterformService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/SaveTaxmaster',taxmaster,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
 
+  SaveTaxdetail(taxdetail:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savetaxdetail',taxdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
 
   GetRoomTaxDetail(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/taxdetail?BranchCode=' + branchcode);
