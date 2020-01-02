@@ -30,120 +30,122 @@
                             <div class="containar">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        
-                                      <div class="row">
-
-                                          <div class="col-md-6"  [class.has-error]="TaxCode.touched && TaxCode.errors?.defaultSelected" >
-                                              <label>Select Tax*</label>
-                                                  <select class="custom-select" id="TaxCode" appSelectValidator="-1"  #TaxCode="ngModel"  name="TaxCode" [(ngModel)]="model.TaxCode">
-                                                    <option value="-1">All</option>
-                                                    <option *ngFor="let revs of taxmaster"  [value]="revs.TaxCode">{{ revs.TaxName }}</option>
-                                                  </select>
-                                                  <span class="help-block" *ngIf="TaxCode.touched && TaxCode.errors?.defaultSelected">
-                                                      Tax Name is required
-                                                  </span>           
-                                                             
+                                        <div class="row">
+                                          <div class="col-md-6 mx-auto userlist">
+                                            <div class="row">
+                                              <div class="col-md-6"  [class.has-error]="TaxCode.touched && TaxCode.errors?.defaultSelected" >
+                                                <label>Select Tax*</label>
+                                                    <select class="custom-select" id="TaxCode" appSelectValidator="-1"  #TaxCode="ngModel"  name="TaxCode" [(ngModel)]="model.TaxCode">
+                                                      <option value="-1">All</option>
+                                                      <option *ngFor="let revs of taxmaster"  [value]="revs.TaxCode">{{ revs.TaxName }}</option>
+                                                    </select>
+                                                    <span class="help-block" *ngIf="TaxCode.touched && TaxCode.errors?.defaultSelected">
+                                                        Tax Name is required
+                                                    </span>           
+                                                               
+                                            </div> 
+        
+  
+                                          <div class="col-md-6">    
+                                              <label class="required">TaxName*</label>
+                                                  <input type="text" name="TaxName" readonly class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="TaxName.touched && TaxName.invalid" class="invalid-feedback">
+                                                      <div *ngIf="TaxName.errors.required">TaxName is invalid</div>
+                                                  </div>
                                           </div> 
-      
-
-                                        <div class="col-md-6">    
-                                            <label class="required">TaxName*</label>
-                                                <input type="text" name="TaxName" readonly class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
-                                                <div *ngIf="TaxName.touched && TaxName.invalid" class="invalid-feedback">
-                                                    <div *ngIf="TaxName.errors.required">TaxName is invalid</div>
-                                                </div>
-                                        </div> 
-    
-                                        
-    
-                                 
-      
-                                      </div>
-                                        <div class="row">
-                                            <div class="col-md-6">                                                   
-                                                            <label>From Amount*</label>
-                                                            <input type="number" name="FromAmount" class="form-control" [(ngModel)]="model.FromAmount" #FromAmount="ngModel" value="{{FromAmount}}"  [ngClass]="{'is-invalid': FromAmount.touched && FromAmount.invalid}"  required autocomplete="off">
-                                                            <div *ngIf="FromAmount.touched && FromAmount.invalid" class="invalid-feedback">
-                                                                <div *ngIf="FromAmount.errors.required">FromAmount is invalid</div>
-                                                            </div>   
-                                                         </div>
-                                            <div class="col-md-6">
-                                                    <label>To Amount*</label>
-                                                    <input type="number" name="ToAmount" class="form-control" [(ngModel)]="model.ToAmount" #ToAmount="ngModel" value="{{ToAmount}}"  [ngClass]="{'is-invalid': ToAmount.touched && ToAmount.invalid}"  required autocomplete="off">
-                                                    <div *ngIf="ToAmount.touched && ToAmount.invalid" class="invalid-feedback">
-                                                        <div *ngIf="ToAmount.errors.required">ToAmount is invalid</div>
-                                                    </div> 
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                                <div class="col-md-6">                                                   
-                                                   <label>Tax Percenttage*</label>
-                                                   <input type="number" name="TaxPer" class="form-control" [(ngModel)]="model.TaxPer" #TaxPer="ngModel" value="{{TaxPer}}"  [ngClass]="{'is-invalid': TaxPer.touched && TaxPer.invalid}"  required autocomplete="off">
-                                                   <div *ngIf="TaxPer.touched && TaxPer.invalid" class="invalid-feedback">
-                                                       <div *ngIf="TaxPer.errors.required">TaxPer is invalid</div>
-                                                   </div> 
-                                                 </div>
-                                                <div class="col-md-6">
-                                                        <div class="row" style="margin-bottom: 0px;">
-                                                        <div class="col-md-6">                                                   
-                                                                <div class="form-group">
-                                                                        <label class="form-control-label" for="EffectiveDate">Effective  Date</label>
-                                                                        <div class="form-group">
-                                                                            <div class="input-group">
-                                                                              <input class="form-control" placeholder="EffectiveDate" name="EffectiveDate" [(ngModel)]="model.EffectiveDate" value="{{model.EffectiveDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker"   required autocomplete="off">
-                                                                              <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                                              </div>
-                                                                            
-                                                                            </div>
-                                                                          
-                                                                          </div>                                                         
-                                                                    </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">                                                   
-                                                                <div class="form-group">
-                                                                        <label class="form-control-label" for="ToDate">To Date</label>
-                                                                        <div class="form-group">
-                                                                            <div class="input-group">
-                                                                              <input class="form-control" placeholder="ToDate" name="ToDate" [(ngModel)]="model.ToDate" value="{{model.ToDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
-                                                                              <div class="input-group-append bg-default" (click)="dd.toggle()" >
-                                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                                              </div>
-                                                                            </div>
-                                                                          </div>                                                         
-                                                                    </div> 
-                                                        </div>
-                                                        </div>
-                                                        
-                                                </div>
-                                            </div>
-                                     
-                                      <div class="row">
-                                        <div class="col-md-6"> 
-                                        <div class="form-group" [class.has-error]="TaxType.touched && TaxType.invalid">
-                                          <label class="control-label">TaxType</label>
-                                          <div >
-                                            <label class="radio-inline">
-                                              <input type="radio" required #TaxType="ngModel" value="ROOM" name="TaxType" [(ngModel)]="model.TaxType"> RoomTax
-                                            </label>
-                                            <label class="radio-inline">
-                                              <input type="radio" required #TaxType="ngModel" value="HALL" name="TaxType" [(ngModel)]="model.TaxType"> HallTax
-                                            </label>
+                                            <div class="row">
+                                              <div class="col-md-6">                                                   
+                                                              <label>From Amount*</label>
+                                                              <input type="number" name="FromAmount" class="form-control" [(ngModel)]="model.FromAmount" #FromAmount="ngModel" value="{{FromAmount}}"  [ngClass]="{'is-invalid': FromAmount.touched && FromAmount.invalid}"  required autocomplete="off">
+                                                              <div *ngIf="FromAmount.touched && FromAmount.invalid" class="invalid-feedback">
+                                                                  <div *ngIf="FromAmount.errors.required">FromAmount is invalid</div>
+                                                              </div>   
+                                                           </div>
+                                              <div class="col-md-6">
+                                                      <label>To Amount*</label>
+                                                      <input type="number" name="ToAmount" class="form-control" [(ngModel)]="model.ToAmount" #ToAmount="ngModel" value="{{ToAmount}}"  [ngClass]="{'is-invalid': ToAmount.touched && ToAmount.invalid}"  required autocomplete="off">
+                                                      <div *ngIf="ToAmount.touched && ToAmount.invalid" class="invalid-feedback">
+                                                          <div *ngIf="ToAmount.errors.required">ToAmount is invalid</div>
+                                                      </div> 
+                                              </div>
                                           </div>
-                                          <span class="help-block" *ngIf="TaxType.touched && TaxType.invalid">
-                                            TaxType is required
-                                          </span>
+                                          <div class="row">
+                                            <div class="col-md-6">                                                   
+                                               <label>Tax Percenttage*</label>
+                                               <input type="number" name="TaxPer" class="form-control" [(ngModel)]="model.TaxPer" #TaxPer="ngModel" value="{{TaxPer}}"  [ngClass]="{'is-invalid': TaxPer.touched && TaxPer.invalid}"  required autocomplete="off">
+                                               <div *ngIf="TaxPer.touched && TaxPer.invalid" class="invalid-feedback">
+                                                   <div *ngIf="TaxPer.errors.required">TaxPer is invalid</div>
+                                               </div> 
+                                             </div>
+                                            <div class="col-md-6">
+                                                    <div class="row" style="margin-bottom: 0px;">
+                                                    <div class="col-md-6">                                                   
+                                                            <div class="form-group">
+                                                                    <label class="form-control-label" for="EffectiveDate">Effective  Date</label>
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                          <input class="form-control" placeholder="EffectiveDate" name="EffectiveDate" [(ngModel)]="model.EffectiveDate" value="{{model.EffectiveDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker"   required autocomplete="off">
+                                                                          <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                                                            <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                                          </div>
+                                                                        
+                                                                        </div>
+                                                                      
+                                                                      </div>                                                         
+                                                                </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">                                                   
+                                                            <div class="form-group">
+                                                                    <label class="form-control-label" for="ToDate">To Date</label>
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                          <input class="form-control" placeholder="ToDate" name="ToDate" [(ngModel)]="model.ToDate" value="{{model.ToDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
+                                                                          <div class="input-group-append bg-default" (click)="dd.toggle()" >
+                                                                            <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>                                                         
+                                                                </div> 
+                                                    </div>
+                                                    </div>
+                                                    
+                                            </div>
                                         </div>
+                                        <div class="row">
+                                          <div class="col-md-6"> 
+                                          <div class="form-group" [class.has-error]="TaxType.touched && TaxType.invalid">
+                                            <label class="control-label">TaxType</label>
+                                            <div >
+                                              <label class="radio-inline">
+                                                <input type="radio" required #TaxType="ngModel" value="ROOM" name="TaxType" [(ngModel)]="model.TaxType"> RoomTax
+                                              </label>
+                                              <label class="radio-inline">
+                                                <input type="radio" required #TaxType="ngModel" value="HALL" name="TaxType" [(ngModel)]="model.TaxType"> HallTax
+                                              </label>
+                                            </div>
+                                            <span class="help-block" *ngIf="TaxType.touched && TaxType.invalid">
+                                              TaxType is required
+                                            </span>
+                                          </div>
+                                          </div>
+                                          <div class="col-md-6">                                                   
+                                            <label>Active*</label>
+                                            <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">
+                                            <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
+                                                <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
+                                            </div> 
+                                          </div>
                                         </div>
-                                        <div class="col-md-6">                                                   
-                                          <label>Active*</label>
-                                          <input style="width: 20px;" type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"  required autocomplete="off">
-                                          <div *ngIf="IsActive.touched && IsActive.invalid" class="invalid-feedback">
-                                              <div *ngIf="IsActive.errors.required">IsActive is invalid</div>
-                                          </div> 
+                                          </div>
                                         </div>
-                                      </div>
+
+                                       
+                                      
+                                       
+                                     
+                                      
 
                                       
                                          
@@ -153,10 +155,10 @@
                                 </div>
                               </div>
                          </div>
-                         <div class="row m-t-30">
+                         <div class=" ">
                             <div class="col-md-12 text-center" >
-                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Reset</button>
+                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center   ripple m-r-10">Save</button>
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center    ripple">Reset</button>
                             </div>
                           </div>
                         </div>

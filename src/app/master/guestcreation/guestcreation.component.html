@@ -49,6 +49,16 @@
             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
             
              <div class="auth-box card">
+              <div class="col-md-12" id="leftNavBar">
+                <ul *ngFor="let item of roomsdetail | async" style="display: block">
+                  <li class="parentNav">{{item.mainfloors}}</li>
+                  <li class="childData">
+                    <ul style="display: inline-block">
+                      <li style="float: left; margin-left: 20px;" *ngFor="let child of item.rooms" (click)="changestatus(child)"><button   name = {{child}} >{{child}}</button></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
                    <div class="card-block" style="padding-bottom: 0;">
                      <div class="frmdata" >              
                         <div class="containar">
@@ -118,8 +128,17 @@
 
                                         <div class="row form-group">
                                           <div class="col-md-6 ">
-                                              <label >Pincode</label> 
+                                            <div class="row">
+                                              <div class="col-md-10 col-sm-10">
+                                                <label >Pincode</label> 
                                               <input type="pin" name="PINCode" class="form-control validate" [(ngModel)]="model.PINCode" #PINCode="ngModel" value="{{PINCode}}"  [ngClass]="{'is-invalid': PINCode.touched && PINCode.invalid}"  required autocomplete="off">
+                                              </div>
+                                              <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0"> <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)"><i class="fa fa-search"></i></a>
+                                              </div>
+                                            </div>
+
+                                              
+                                             
                                               <div *ngIf="PINCode.touched && PINCode.invalid" class="invalid-feedback">
                                                 <div *ngIf="PINCode.errors.required">PINCode is invalid</div>
                                               </div>
@@ -362,7 +381,7 @@
           <td>{{item.GDOB}}</td>
           <td>{{item.GDOA}}</td>           
           <td class="action-icon">
-          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-4',item)"><i class="fa fa-book"></i></a>
+          <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-5',item)"><i class="fa fa-book"></i></a>
           <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
 
           </td>
@@ -402,7 +421,99 @@
 
 
  <!-- lightbox-->
- <app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+ <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">
+  <h3 class="f-15">Guest Details</h3>
+ 
+    <div class="app-modal-body text-center" style="position: relative;"> 
+   
+      <div *ngIf="showloader" class="text-center loader-block" style="position: absolute; z-index: 9999; left:42%; top:20%">
+        <div class="preloader4">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    
+      <div class="table-content crm-table">
+        <div class="project-table addressproject-table">
+          <div id="crm-contact" class="dt-responsive"  *ngIf="data1 | async as data1">
+            <div class="row">         
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div >
+                      
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;">
+                       
+                    </div>
+                  </div> 
+      
+            </div>
+             
+             <div class="table-responsive">
+             
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data1 | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                    <thead>
+                    <tr class="blueorange-gradient">  
+                         
+                            <th>
+                                <mfDefaultSorter  by="AreaData">AreaData</mfDefaultSorter>
+                                </th>               
+                    <th>
+                    <mfDefaultSorter  by="City">City</mfDefaultSorter>
+                    </th>  
+                    <th>
+                    <mfDefaultSorter  by="Pincode">Pincode</mfDefaultSorter>
+                    </th> 
+                    <th>
+                    <mfDefaultSorter  by="State">State</mfDefaultSorter>
+                    </th> 
+                     <th>
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                    </th>
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                    
+                 <tr *ngFor="let item of mf.data; let i = index;">                     
+                   <td>{{item.AreaData}}</td>   
+                   <td>{{item.City}}</td>   
+                   <td>{{item.Pincode}}</td>
+                   <td>{{item.State}}</td>
+                    
+                       
+                  <td class="action-icon">
+                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyPincodeModalData(i)">Get Details</a>
+                      
+                  </td>
+                </tr>  
+                </tbody>
+                <tfoot>
+                <tr class="blueorange-gradient"> 
+                   
+                    <th>Area</th>            
+                <th>City</th>    
+                <th>Pincode</th> 
+                <th>State</th>     
+                <th></th>      
+                </tr>
+                <tr>
+                  <td colspan="6">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div> 
+          </div>
+        </div>
+      </div>
+     
+           <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+          
+      </div>
+       
+    </app-modal-animation>
+ <app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5'">
     <h3 class="f-15">Guest Details</h3>
     
       <div class="app-modal-body text-center"> 

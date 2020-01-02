@@ -1,0 +1,17 @@
+[
+    {          
+      "mainfloors": "First Floor", 
+        "rooms": ["Room1", "Room2"]
+     },
+    { 
+        
+      "mainfloors": "Second Floor", 
+        "rooms": ["Room1","Room2","Room3"] 
+      },
+    {
+         
+       "mainfloors": "Third Floor",
+        "rooms": ["Room1","Room2","Room3","Room4"] 
+    }
+  ]
+ 

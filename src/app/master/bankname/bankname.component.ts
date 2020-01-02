@@ -37,6 +37,7 @@ export class BanknameComponent implements OnInit {
   Branch:string;
   filterdata:any;
   itemss:any;
+  public showloader  ="false;";
   @ViewChild("f", { static: false }) form: any;
   constructor(
     private _masterformservice: MasterformService,

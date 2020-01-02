@@ -272,7 +272,9 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
-
+  displayRooms(){
+    return this.http.get<any>(`assets/data/floors.json`);
+  }
 
 
   // registerUser(user: User,roles : string[]) {

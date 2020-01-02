@@ -6004,5 +6004,40 @@ outerdiv{
             .marginright{
                 margin-right:20px;            
             }
+            .taxcheckboxlbl ul li label{
+                display: block;
+                padding: 20px 0px 0px 20px;
+            }
+          
 }
+
+.pcoded-content .pcoded-inner-content .main-body .page-wrapper  .md-modal{     
+    max-width: 820px!important;
+    height:500px;
+    max-height: 400px;
+    overflow-y: scroll;
+     
+}
+.addressmodeleffect .md-content > div{     
+    padding:15px 10px 20px 10px;
+    font-size:90%;
+}
+.addressmodeleffect .table td{
+    padding:5px;
+}
+  .loader-block{  
+      background: #fff;
+  }
+.addressmodeleffect .preloader4{
+        margin: 55px; 
+        border-radius: 50px;
+}
+.addressmodeleffect .pagination-main  .pagination {
+    padding-bottom: 0;
+}
+.pcoded-content .pcoded-inner-content .main-body .page-wrapper .app-modal-body{    
+    min-height:700px;
+    max-height: 100%;
+}
+ 
 
