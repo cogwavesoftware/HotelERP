@@ -49,6 +49,8 @@
             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
             
              <div class="auth-box card">
+
+              <!-- please cut below code for rooms dashborad -->
               <div class="col-md-12" id="leftNavBar">
                 <ul *ngFor="let item of roomsdetail | async" style="display: block">
                   <li class="parentNav">{{item.mainfloors}}</li>
@@ -59,6 +61,8 @@
                   </li>
                 </ul>
               </div>
+      <!-- end rooms dashborad -->
+
                    <div class="card-block" style="padding-bottom: 0;">
                      <div class="frmdata" >              
                         <div class="containar">
