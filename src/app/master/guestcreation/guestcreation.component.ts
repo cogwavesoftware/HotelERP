@@ -24,6 +24,7 @@ export class GuestcreationComponent implements OnInit {
   public isShown: boolean = false;
   model: any = {};
   model1:any ={};
+  model2:any={};
   btitle: string = "Add";
   isValid: boolean;
   IsExistdata:boolean
@@ -62,8 +63,9 @@ export class GuestcreationComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
   showloader: boolean;
-  
-   
+  isShowLinksPop:boolean;
+  roomname:any;
+  floorname:any;
   constructor(private _masterformservice: MasterformService,private http: HttpClient,
     private _ipservice: IpserviceService,private toastyService: ToastyService, private datePipe: DatePipe,
      ) { this.Branch= localStorage.getItem("BranchCode");
@@ -130,8 +132,8 @@ export class GuestcreationComponent implements OnInit {
   changestatus( items ){ 
     console.log(items);
 
-}y
-
+}
+ 
 onSubmit() {
   debugger;
   this.form.BranchCode = localStorage.getItem("BranchCode");
@@ -389,6 +391,13 @@ return;
       AreaData:data.AreaData
     };
     
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  openRoomsPopup(event, roomname ) {
+      this.model2 = {       
+          roomname: roomname,        
+      };
+    console.log("roomname"+ roomname  );
     document.querySelector("#" + event).classList.add("md-show");
   }
   closeMyModal(event) {

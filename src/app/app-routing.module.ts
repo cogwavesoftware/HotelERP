@@ -220,7 +220,10 @@ const routes: Routes = [
         path:'financial',
         loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
        },
-       
+       {
+        path:'dashboard',
+        loadChildren: './master/maindashboard/maindashboard.module#MaindashboardModule'
+       },
     ]
   },
 
