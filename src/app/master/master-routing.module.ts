@@ -114,7 +114,10 @@ const routes: Routes = [
         loadChildren: './addressbook/addressbook.module#AddressbookModule'
       },
      
-       
+      {
+        path: 'roomcheckin',
+        loadChildren: './checkin/checkin.module#CheckinModule'
+      },
 
     ]
   }

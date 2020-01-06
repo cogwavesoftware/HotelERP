@@ -89,13 +89,10 @@ export class CreditcardComponent implements OnInit {
   }
  
   onSubmit(form?: NgForm) {
-  
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy = localStorage.getItem("id")
     form.value.ModifyBy = localStorage.getItem("id")
     form.value.IpAddress = localStorage.getItem("LOCAL_IP")
-
-
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
@@ -121,7 +118,7 @@ export class CreditcardComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
-          
+          this.data = this._masterformservice.GetCreditCard(this.Branch); 
         } else {
           this.addToast(
             "Cogwave Software",
@@ -132,7 +129,7 @@ export class CreditcardComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
-         
+          this.data = this._masterformservice.GetCreditCard(this.Branch);
         }
       } else {
         this.addToast("Cogwave Software", "Credit Card  Data Not Saved", "error");
@@ -145,11 +142,7 @@ export class CreditcardComponent implements OnInit {
       }
     });
 
-    setTimeout(()=>{
-           
-     this.data = this._masterformservice.GetCreditCard(this.Branch);
-        }, 1);
-    
+ 
    
   }
 

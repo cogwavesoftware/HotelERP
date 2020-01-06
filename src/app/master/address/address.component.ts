@@ -145,7 +145,6 @@ export class AddressComponent implements OnInit {
     });
 
     this.data = this._masterformservice.GetPinAddress();
-
     this._masterformservice.GetPinAddress().subscribe((data: any) => {
       this.filterdata = data;
       console.log(this.filterdata);

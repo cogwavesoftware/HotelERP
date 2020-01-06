@@ -220,10 +220,13 @@ const routes: Routes = [
         path:'financial',
         loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
        },
+       {
+        path:'roomcheckin',
+        loadChildren: './master/checkin/checkin.module#CheckinModule'
+       },
        
     ]
   },
-
 
   {
     path: 'Control Panel',

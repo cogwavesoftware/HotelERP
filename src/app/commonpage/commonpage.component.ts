@@ -98,14 +98,16 @@ export class CommonpageComponent implements OnInit {
 
 
 
-  this.http.get<{ip:string}>('https://jsonip.com')
-  .subscribe( data => {
-    console.log('th data', data);
-    localStorage.removeItem('LOCAL_IP');
-    this.ipAddress= localStorage.setItem('LOCAL_IP', data.ip)
+  // this.http.get<{ip:string}>('https://jsonip.com')
+  // .subscribe( data => {
+  //   console.log('th data', data);
+  //   localStorage.removeItem('LOCAL_IP');
+  //   this.ipAddress= localStorage.setItem('LOCAL_IP', data.ip)
     
-   })
+  //  })
 
+
+  this.ipAddress= localStorage.setItem('LOCAL_IP', '192.168.0.1')
 
    // translate.addLangs(['en','fr','ta','zh']);
     //translate.setDefaultLang('fr');
@@ -140,7 +142,6 @@ export class CommonpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.items = this.service.getBooks(); //tree  
     
   this._authservice.logout();
   //this.determineLocalIp();

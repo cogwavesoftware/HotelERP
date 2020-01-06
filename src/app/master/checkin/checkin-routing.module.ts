@@ -1,23 +1,21 @@
 
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { BanknameComponent } from './bankname.component';
-
 import { Routes,RouterModule } from '@angular/router';
-
+import { CheckinComponent } from './checkin.component';
 
 const routes:Routes = [{
   path:'',
-  component:BanknameComponent,
-  data:{
+  component:CheckinComponent,
+   data:{
     title:'Bank Name',
     icon:'icon-home',
     caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
     status: true
   }
   }];
+
+
 
 @NgModule({
   declarations: [],
@@ -27,5 +25,4 @@ const routes:Routes = [{
   exports:[RouterModule]
 
 })
-export class BanknameRoutingModule { }
-
+export class CheckinRoutingModule { }
