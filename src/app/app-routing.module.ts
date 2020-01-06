@@ -224,7 +224,10 @@ const routes: Routes = [
         path:'roomcheckin',
         loadChildren: './master/checkin/checkin.module#CheckinModule'
        },
-       
+       {
+        path:'dashboard',
+        loadChildren: './master/maindashboard/maindashboard.module#MaindashboardModule'
+       },
     ]
   },
 

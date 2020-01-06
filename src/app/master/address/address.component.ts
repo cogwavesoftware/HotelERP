@@ -47,6 +47,7 @@ export class AddressComponent implements OnInit {
     this.btitle = "Add Item";
     this.mode = "(List)";
     this.data = this._masterformservice.GetPinAddress();
+    console.log("test" +this.data);
   }
   getIP() {
     this._ipservice.getIpAddress().subscribe((res: any) => {
@@ -91,6 +92,7 @@ export class AddressComponent implements OnInit {
     this.btitle = "Hide Form";
     this.isShown = true;
     this.data.subscribe(response => {
+      console.log("aea datasis "+ response[event]["AreaData"]);
       this.model.Id = response[event]["Id"];
       this.model.AreaData = response[event]["AreaData"];
       this.model.City = response[event]["City"];

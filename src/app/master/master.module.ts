@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
+<<<<<<< HEAD
 //import { CheckinComponent } from './checkin/checkin.component';
 // import { AddressComponent } from './address/address.component';
+=======
+ // import { AddressComponent } from './address/address.component';
+>>>>>>> 95245474c4878f6d7e413c0107f9ea8fcefa286d
 // import { AddressbookComponent } from './addressbook/addressbook.component';
 // import { UserrightsComponent } from './userrights/userrights.component';
 // import { FinancialmasterComponent } from './financialmaster/financialmaster.component';

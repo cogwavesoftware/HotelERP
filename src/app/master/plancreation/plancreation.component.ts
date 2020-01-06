@@ -4,7 +4,7 @@ import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
-import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty';
 @Component({
   selector: "app-plancreation",
   templateUrl: "./plancreation.component.html",

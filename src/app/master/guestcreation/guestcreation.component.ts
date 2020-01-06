@@ -15,12 +15,16 @@ import { environment } from 'src/environments/environment';
 })
 export class GuestcreationComponent implements OnInit {
   public data: Observable<any>;
+  public data1: Observable<any>;
+  public roomsdetail:Observable<any>;
   public rowsOnPage = 12;
   public filterQuery = "";
   public sortBy = "";
   public sortOrder = "desc";
   public isShown: boolean = false;
   model: any = {};
+  model1:any ={};
+  model2:any={};
   btitle: string = "Add";
   isValid: boolean;
   IsExistdata:boolean
@@ -58,20 +62,51 @@ export class GuestcreationComponent implements OnInit {
   previewUrl3:any = null;
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
-
+  showloader: boolean;
+  isShowLinksPop:boolean;
+  roomname:any;
+  floorname:any;
   constructor(private _masterformservice: MasterformService,private http: HttpClient,
     private _ipservice: IpserviceService,private toastyService: ToastyService, private datePipe: DatePipe,
      ) { this.Branch= localStorage.getItem("BranchCode");
+
+     
+     setTimeout(()=>{
+      
+       this.data1 = this._masterformservice.GetPinAddress();
+       this.roomsdetail = this._masterformservice.GetSwardDetail(this.Branch);
+          console.log(this.data);
+       
+     },1);
+     
      
 
     }
-
+   
   ngOnInit() {
+    
+    setTimeout(()=>{    
+      
+      this.data1 = this._masterformservice.GetPinAddress();
+         
+      this.roomsdetail = this._masterformservice.displayRooms();
+
+      //this.data1 = this._masterformservice.GetPinAddress();
+     
+    },1);
+    
+    console.log(JSON.stringify("pinvalue"+ this.data1));
     this.resetForm();
     this.btitle = "Add Item";
     this.mode = "(List)";
     // this.isroomc="CW_1001_36296769926386front.png";
-    this.imagePath1=environment.GuestimagePath+ this.isroomc;
+    this.isroomc="CW_1001_148857913375854GuestPhoto.png";
+    
+    this.imagePath1=environment.GuestimagePath+"/"+this.isroomc;
+    console.log("image name with path"+ this.imagePath1);
+
+   
+
     this._masterformservice.Getmiscellaneous('Gender').subscribe(data=>{
       this.gendertypes=data;
     })
@@ -94,8 +129,11 @@ export class GuestcreationComponent implements OnInit {
     // });
   }
 
- 
+  changestatus( items ){ 
+    console.log(items);
 
+}
+ 
 onSubmit() {
   debugger;
   this.form.BranchCode = localStorage.getItem("BranchCode");
@@ -277,11 +315,41 @@ return;
       this.model.ModifyBy = response[event]["ModifyBy"];
       this.model.GdProof = response[event]["GdProof"];
       this.model.IdNo = response[event]["IdNo"];
-    
+      // this.model.previewUrl = this.previewUrl ;
+      this.previewUrl = this.imagePath1;
       this.mode = "(Edit)"+  this.model.GuestName;
     });
   }
+  openMyPincodeModalData(event){
+    console.log("calling");
+   // this.model.State  = "sakthi";
+    // this._ipservice.getIpAddress().subscribe((res: any) => {
+    //   this.ipAddress = res.ip;
+    //   console.log(this.ipAddress);
+    // });
+    // this._masterformservice.GetPinAddress().subscribe((res:any)=>{
+    //     this.model.GuestAddress = res[event]["AreaData"];
+    //     this.model.City = res[event]["City"];
+    //     this.model.PINCode = res[event]["Pincode"];
+    //     this.model.State = res[event]["State"];
+    //     this.model.Nation = res[event]["Nation"];
+    //     console.log(this.model.State);
+    // })
+    this.showloader = true;
+    setTimeout(()=>{
+      this.data1.subscribe(response =>{     
+        this.showloader = false;
+        this.model.GuestAddress = response[event]["AreaData"];
+          this.model.City = response[event]["City"];
+          this.model.PINCode = response[event]["Pincode"];
+          this.model.State = response[event]["State"];
+          this.model.Nation = response[event]["Nation"];
+          console.log(this.model.State);
+       })
+    },1000);
+  
 
+  }
 
   Closeform() {
     this.isShown = false;
@@ -313,7 +381,25 @@ return;
     };
     document.querySelector("#" + event).classList.add("md-show");
   }
+  openMyModalPincode(event, data){
 
+    this.model1 = {      
+      Id: data.Id,
+      City: data.City,
+      Pincode: data.Pincode,
+      State: data.State,
+      AreaData:data.AreaData
+    };
+    
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  openRoomsPopup(event, roomname ) {
+      this.model2 = {       
+          roomname: roomname,        
+      };
+    console.log("roomname"+ roomname  );
+    document.querySelector("#" + event).classList.add("md-show");
+  }
   closeMyModal(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"

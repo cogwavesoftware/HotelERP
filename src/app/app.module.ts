@@ -19,7 +19,7 @@ import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
 
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
-
+ 
 
 // import { MasterComponent } from './master/master.component';
 // import { FloorcreationComponent } from './master/floorcreation/floorcreation.component';
@@ -44,7 +44,14 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent,
+<<<<<<< HEAD
 
+=======
+      
+  
+    
+    
+>>>>>>> 95245474c4878f6d7e413c0107f9ea8fcefa286d
   ],
   imports: [
     BrowserModule,

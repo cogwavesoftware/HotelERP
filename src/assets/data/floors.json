@@ -1,0 +1,17 @@
+[
+    {          
+      "mainfloors": "First Floor", 
+        "rooms": ["101 (ACSGL)", "102 (ACSGL)"]
+     },
+    { 
+        
+      "mainfloors": "Second Floor", 
+        "rooms": ["201 (ACDBL)","202 (ACSGL)","203 (ACSGL)"] 
+      },
+    {
+         
+       "mainfloors": "Third Floor",
+        "rooms": ["301 (ACSGL)","302 (ACSGL)","303 PRM","304 (ACSGL)"] 
+    }
+  ]
+ 
