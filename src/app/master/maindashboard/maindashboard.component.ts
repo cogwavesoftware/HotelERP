@@ -21,8 +21,9 @@ export class MaindashboardComponent implements OnInit {
     private _ipservice: IpserviceService  ) { }
 
   ngOnInit() {
-  
-  
+    setTimeout(()=>{   
+       this.roomsdetail = this._masterformservice.displayRooms();
+    },1);  
   }
 
   openRoomsPopup(event, roomname ) {
