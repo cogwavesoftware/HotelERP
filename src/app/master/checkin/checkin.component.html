@@ -167,11 +167,18 @@
                                         </div>
                                         <div class="row form-group">  
                                           <div class="col-md-12">                                
-                                                  <label>PROCEEDING  </label>
-                                                  <select class="custom-select" id="proceeding" appSelectValidator="select"  #proceeding="ngModel"  name="proceeding" [(ngModel)]="model.proceeding">
-                                                      <option value="select">Select</option>
-                                                      <option *ngFor="let item of gendercategory" [value]="item">{{ item }}</option>
-                                                    </select> 
+                                                <div class="row">
+                                                  <div class="col-md-8">  <label>PROCEEDING  </label>
+                                                    <select class="custom-select" id="proceeding" appSelectValidator="select"  #proceeding="ngModel"  name="proceeding" [(ngModel)]="model.proceeding">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of gendercategory" [value]="item">{{ item }}</option>
+                                                      </select> </div>
+                                                      
+                                                    <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0">
+                                                       <a href="javascript:;" (click)="openproceedingdetails('effect-6',data)" class="m-r-15 crm-action-view text-info" ><i class="fa fa-search"></i></a>
+                                                    </div> 
+
+                                                </div>
                                           </div> 
                                         </div>
               
@@ -504,3 +511,31 @@
           </div>
     
         </app-modal-animation>
+
+        <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6'">
+          <h3 class="f-15">View  Other Tax Details</h3>
+        
+            <div class="app-modal-body text-center">
+                <table class="table table-striped text-left m-t-10">
+                    <tr>
+                        <td>Id :</td>
+                        <td>{{ model.roomno }}</td>
+                      </tr>
+                    <tr>
+                      <td>ItemName :</td>
+                      <td>{{ model.roomno }}</td>
+                    </tr>
+        
+                    <tr>
+                      <td>RevId :</td>
+                      <td>{{ model.roomno }}</td>
+                    </tr>
+                    <tr>
+                        <td>Rate :</td>
+                        <td>{{ model.roomno }}</td>
+                      </tr>
+                   </table>
+                   <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+              </div>
+        
+            </app-modal-animation>
