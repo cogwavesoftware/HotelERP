@@ -50,21 +50,7 @@
             
              <div class="auth-box card">
 
-              <!-- please cut below code for rooms dashborad -->
-              <div class="col-md-12" id="leftNavBar">
-                <ul *ngFor="let item of roomsdetail | async" style="display: block">
-                  <li class="parentNav">{{item.mainfloors}}</li>
-                  <li class="childData">
-                    <ul style="display: inline-block" >
-                      <li style="float: left; margin-left: 20px;"  *ngFor="let child of item.rooms" (click)="openRoomsPopup('effect-2',child )">
-                        <button  name = {{child}}  >{{child}}  </button>
-                        
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-      <!-- end rooms dashborad -->
+               
 
                    <div class="card-block" style="padding-bottom: 0;">
                      <div class="frmdata" >              
@@ -103,7 +89,7 @@
                                             <label>Gender *</label>
                                                 <select class="custom-select" id="Gender" appSelectValidator="select"  #Gender="ngModel"  name="Gender" [(ngModel)]="model.Gender">
                                                   <option value="select">Select</option>
-                                                  <option *ngFor="let item of gendertypes"  [value]="item.Description">{{ item.Description }}</option>
+                                                  <option *ngFor="let item of gendertypes"  [value]="item">{{item}}</option>
                                                 </select>
                                                 <span class="help-block" *ngIf="Gender.touched && Gender.errors?.defaultSelected">
                                                     Gender is required

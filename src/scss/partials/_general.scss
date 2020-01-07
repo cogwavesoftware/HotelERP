@@ -188,8 +188,7 @@ b,strong{
             right: 10px;
             top: 13px;
             display: inline-block;
-            float: right;
-            padding: 7px 0;
+             padding: 7px 0;
             position: absolute;
             @media only screen and (max-width: 575px) {
                 display: none;
@@ -5835,7 +5834,7 @@ outerdiv{
         background: #1e5799; /* Old browsers */
         background: -moz-linear-gradient(left, #1e5799 0%, #986ecc 86%); /* FF3.6-15 */
         background: -webkit-linear-gradient(left, #1e5799 0%,#986ecc 86%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to right, #1e5799 0%,#986ecc 86%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        background: linear-gradient(to left, #1e5799 0%,#986ecc 86%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#986ecc',GradientType=1 ); /* IE6-9 */
     }
     .blueorange-gradient {
@@ -6063,7 +6062,25 @@ outerdiv{
     margin-bottom: 10px;
     margin-top:10px;
 }   
-     
+.checkindetails {
+    h2{
+        color:#ffffff;
+        font-size:100%;     
+        width: 100%;
+        padding: 3px 3px 3px 10px;
+        margin: 0px 0px 5px 0px;    
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 4%, rgba(0,212,255,1) 100%);
+    }
+    
+    .userlistbox{
+       
+        box-shadow: 
+             inset 0 -3em 3em rgba(0,0,0,0.1), 
+                   0 0  0 2px rgb(255,255,255),
+                   0.3em 0.3em 1em rgba(0,0,0,0.3);
+                }
+}     
 
 /* press button */
 .testbutton3{

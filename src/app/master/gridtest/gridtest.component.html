@@ -104,7 +104,6 @@
                                             </div>
 
                                             <div class="col-md-6">
-
                                                 <label class="required">Conform Password*</label>
                                                 <input type="password" name="ConformPassword" class="form-control"
                                                 [(ngModel)]="model.ConformPassword" #passwconfrm="ngModel" value="{{ConformPassword}}"  required compare="password">
@@ -112,9 +111,7 @@
                                                         <div *ngIf="passwconfrm.errors['required']">Password confom is required</div>
                                                         <div *ngIf="passwconfrm.errors['compare']">Password confom not match</div>
                                                     </div>
-                                                    
-
-                                            </div>
+                                                  </div>
 
                                         </div>
 
