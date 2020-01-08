@@ -1,1 +1,24 @@
-<p>checkout works!</p>
+<div class="outerdiv">
+
+        <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+          <div class="row">
+              <div class="col-md-11">
+                  <h5 class="ng-tns-c6-1">Credit Card Details Creation{{mode}} </h5>         
+                  <span class="ng-tns-c6-1 ng-star-inserted">Details about credit card  </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-1"> 
+                    <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+                  </button>
+                </div>
+                
+                {{finalMenu.Vacant}}
+          <div *ngFor="let flor of finalMenu.Floors">
+            <hr style="margin-top: 5px;margin-bottom: 10px;">
+            <div class="row">
+                <span>{{flor.FloorName}}</span>
+            </div>
+          </div>
+              
+
+          </div>
+        </div>

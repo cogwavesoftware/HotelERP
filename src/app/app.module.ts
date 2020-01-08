@@ -44,14 +44,11 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent,
-<<<<<<< HEAD
 
-=======
       
   
     
     
->>>>>>> 95245474c4878f6d7e413c0107f9ea8fcefa286d
   ],
   imports: [
     BrowserModule,
