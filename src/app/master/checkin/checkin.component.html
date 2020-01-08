@@ -1,0 +1,544 @@
+<<<<<<< HEAD
+=======
+<div class="outerdiv">
+  <div class="card-header"><h5>Checkin Details</h5></div>
+<div class="maindashboard checkindetails formdesign "> 
+    <div class="container ">
+        <div class="row">
+           
+            <form style="display: contents;"> 
+              <app-card [title]="'  tabs'"  >
+                <div class="row">
+                  <div class="col-md-12 ">             
+                    <ngb-tabset>
+                      <ngb-tab title="Guest Information">
+                        <ng-template ngbTabContent>
+                          <div [@fadeInOutTranslate] class="m-t-15">
+                          <div class="row">
+                            <div class="col-md-8">
+             
+                              <div class="row userlistbox  ">
+                                
+                                  <div class="col-md-4">
+                                      <div class="row form-group">  
+                                            <div class="col-md-8"   >
+                                              <label  >Room  No</label>  <br/>
+                                              
+                                              <label class="p-l-20" >100</label>
+                                                        
+                                          </div> 
+                                          <div class="col-md-4">   
+                                                   <input type="checkbox" style="margin-top: 10px;"> Ref #</div>  
+                                       </div>
+                                         <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>Booking ID  </label>
+                                              <input type="text" name="bookingid" class="form-control" [(ngModel)]="model.bookingid" #bookingid="ngModel" value="{{bookingid}}"  [ngClass]="{'is-invalid': bookingid.touched && name.invalid}"  required autocomplete="off">
+                                              <div *ngIf="bookingid.touched && bookingid.invalid" class="invalid-feedback">
+                                                <div *ngIf="bookingid.errors.required">bookingid is invalid</div>
+                                              </div>   
+                                      </div> 
+                                    </div> 
+                                    <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>Convenience Fee</label>
+                                              <input type="text" name="convenience" class="form-control" [(ngModel)]="model.convenience" #convenience="ngModel" value="{{convenience}}"  [ngClass]="{'is-invalid': convenience.touched && convenience.invalid}"  required autocomplete="off">
+                                              <div *ngIf="convenience.touched && convenience.invalid" class="invalid-feedback">
+                                                <div *ngIf="convenience.errors.required">convenience is invalid</div>
+                                              </div>   
+                                      </div> 
+                                    </div> 
+                                    <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>Booking Type</label>
+                                              <select class="custom-select" id="bookingtype" appSelectValidator="select"  #bookingtype="ngModel"  name="bookingtype" [(ngModel)]="model.bookingtype">
+                                                <option value="select">Select</option>
+                                                <option *ngFor="let item of bookingtypes" [value]="item"  >{{item}} </option>
+                                              </select>    
+                                      </div> 
+                                    </div> 
+                                       <div class="row form-group">  
+                                          <div class="col-md-4">                                
+                                                  <label>Name *</label>
+                                                      <select class="custom-select" id="genderitems" appSelectValidator="select"  #genderitems="ngModel"  name="genderitems" [(ngModel)]="model.genderitems">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of gendercategory" [value]="item"  >{{item}} </option>
+                                                      </select>    
+                                          </div> 
+                                          <div class="col-md-8" >   
+                                              <label> </label>                         
+                                            <input type="text" name="name" class="form-control" [(ngModel)]="model.roomno" #name="ngModel" value="{{name}}"  [ngClass]="{'is-invalid': name.touched && name.invalid}"  required autocomplete="off">
+                                            <div *ngIf="name.touched && name.invalid" class="invalid-feedback">
+                                              <div *ngIf="name.errors.required">name is invalid</div>
+                                            </div>          
+                                        </div> 
+                                      
+                                     </div>
+                                     <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>Gender  </label>
+                                                  <select class="custom-select" id="gender" appSelectValidator="select"  #gender="ngModel"  name="gender" [(ngModel)]="model.gender">
+                                                    <option value="select">Select</option>
+                                                    <option *ngFor="let item of gendercatagerys" [value]="item">{{ item }}</option>
+                                                  </select>    
+                                      </div> 
+                                    </div>     
+                                    <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>Address  </label>
+                                              <textarea class="form-control rounded-0" id="address" name="address" class="form-control" [(ngModel)]="model.address" #address="ngModel" value="{{address}}"  rows="2" autocomplete="off"></textarea>
+              
+                                      </div> 
+                                    </div>               
+                                    <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>Pincode  </label>
+                                              <input type="text" name="pincode" class="form-control" [(ngModel)]="model.pincode" #pincode="ngModel" value="{{pincode}}"  [ngClass]="{'is-invalid': pincode.touched && pincode.invalid}"  required autocomplete="off">
+                                              <div *ngIf="pincode.touched && pincode.invalid" class="invalid-feedback">
+                                                <div *ngIf="pincode.errors.required">pincode is invalid</div>
+                                              </div>  
+                                      </div> 
+                                    </div>
+                                    <div class="row form-group">  
+                                      <div class="col-md-12">                                
+                                              <label>State  </label>
+                                              <input type="text" name="state" class="form-control" [(ngModel)]="model.state" #state="ngModel" value="{{state}}"  [ngClass]="{'is-invalid': state.touched && state.invalid}"  required autocomplete="off">
+                                              <div *ngIf="state.touched && state.invalid" class="invalid-feedback">
+                                                <div *ngIf="state.errors.required">state is invalid</div>
+                                              </div>  
+                                      </div> 
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                              <div class="row">
+                                                <div class="col-md-8">
+                                                  <label>Company  </label>
+                                                  <input type="text" name="company" class="form-control" [(ngModel)]="model.company" #company="ngModel" value="{{company}}"  [ngClass]="{'is-invalid': company.touched && company.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="company.touched && company.invalid" class="invalid-feedback">
+                                                    <div *ngIf="company.errors.required">company is invalid</div>
+                                                  </div>  
+                                                </div>
+                                                <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0">
+                                                   <a href="javascript:;" (click)="opencompanydetails('effect-4',data)" class="m-r-15 crm-action-view text-info" ><i class="fa fa-search"></i></a>
+                                                </div>
+                                              </div>
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>GSTNO  </label>
+                                                  <input type="text" name="gstno" class="form-control" [(ngModel)]="model.gstno" #gstno="ngModel" value="{{gstno}}"  [ngClass]="{'is-invalid': gstno.touched && gstno.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="gstno.touched && gstno.invalid" class="invalid-feedback">
+                                                    <div *ngIf="gstno.errors.required">gstno is invalid</div>
+                                                  </div>  
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>Mobile  </label>
+                                                  <input type="text" name="mobile" class="form-control" [(ngModel)]="model.mobile" #mobile="ngModel" value="{{gstno}}"  [ngClass]="{'is-invalid': mobile.touched && gstno.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="mobile.touched && mobile.invalid" class="invalid-feedback">
+                                                    <div *ngIf="mobile.errors.required">mobile is invalid</div>
+                                                  </div>  
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>Email  </label>
+                                                  <input type="email" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel" value="{{email}}"  [ngClass]="{'is-invalid': email.touched && email.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
+                                                    <div *ngIf="email.errors.required">email is invalid</div>
+                                                  </div>  
+                                          </div> 
+                                        </div> 
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                <div class="row">
+                                                  <div class="col-md-8">  <label>AR FROM  </label>
+                                                    <select class="custom-select" id="ARFrom" appSelectValidator="select"  #ARFrom="ngModel"  name="ARFrom" [(ngModel)]="model.ARFrom">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of gendercategory" [value]="item">{{ item }}</option>
+                                                      </select></div>
+                                                      <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0"> <a href="javascript:;" (click)="openARdetails('effect-5',data)" class="m-r-15 crm-action-view text-info" ><i class="fa fa-search"></i></a>
+                                                      </div> 
+                
+                                                </div> 
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                <div class="row">
+                                                  <div class="col-md-8">  <label>PROCEEDING  </label>
+                                                    <select class="custom-select" id="proceeding" appSelectValidator="select"  #proceeding="ngModel"  name="proceeding" [(ngModel)]="model.proceeding">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of gendercategory" [value]="item">{{ item }}</option>
+                                                      </select> </div>
+                                                      
+                                                    <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0">
+                                                       <a href="javascript:;" (click)="openproceedingdetails('effect-6',data)" class="m-r-15 crm-action-view text-info" ><i class="fa fa-search"></i></a>
+                                                    </div> 
+
+                                                </div>
+                                          </div> 
+                                        </div>
+              
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>purvisit  </label>
+                                                  <select class="custom-select" id="purvisit" appSelectValidator="select"  #purvisit="ngModel"  name="purvisit" [(ngModel)]="model.purvisit">
+                                                      <option value="select">Select</option>
+                                                      <option *ngFor="let item of gendercategory" [value]="item">{{ item }}</option>
+                                                    </select> 
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>D.O.B  </label>
+                                                  <div class="form-group">
+                                                      <div class="input-group">
+                                                        <input class="form-control" placeholder="Date" name="DOB" [(ngModel)]="model.DOB" value="{{model.DOB | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
+                                                        <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                                          <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                        </div>
+                                                      </div>
+                                                    </div>  
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>City  </label>
+                                                  <select class="custom-select" id="purvisit" appSelectValidator="select"  #purvisit="ngModel"  name="purvisit" [(ngModel)]="model.purvisit">
+                                                    <option value="select">Select</option>
+                                                    <option *ngFor="let item of Cities" [value]="item">{{ item }}</option>
+                                                  </select>  
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>Foreign Guest  </label>
+                                                  <select class="custom-select" id="purvisit" appSelectValidator="select"  #purvisit="ngModel"  name="purvisit" [(ngModel)]="model.purvisit">
+                                                    <option value="select">Select</option>
+                                                    <option *ngFor="let item of foriegnguest" [value]="item">{{ item }}</option>
+                                                  </select>  
+                                          </div> 
+                                        </div>
+              
+                                  </div>
+                                  <div class="col-md-4" style=" padding-left: 0; padding-right: 0; display: none; ">
+                                      <div class="col-md-12">
+                                          <label>Thumb Verification *</label>
+                                          <input type="checkbox" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}"  [ngClass]="{'is-invalid': IsActive.touched && IsActive.invalid}"   autocomplete="off" style="width: 20px;">
+                                          <img src="../../../assets/images/coming-soon/cs-1.jpg" width="98%">
+                                          <div class="text-center m-t-10">
+                                          <button type="button" class="btn btn-primary btn-xs m-r-10">OK</button>
+                                          <button type="button" class="btn btn-primary btn-xs">CAPTURE</button>
+                                          </div>
+                                          
+                                       </div>
+                                  </div>
+                          </div>
+              
+                          <div class="row userlistbox  ">
+                            <h2><i class="fa fa-user" aria-hidden="true"></i>
+                              ROOM TARIFF MODULE</h2>
+                              </div>
+                              test
+                          </div>
+                          <div class="col-md-4 ">
+                              <div class="row userlistbox">
+                                <h2><i class="fa fa-user" aria-hidden="true"></i>
+                                  GUEST STAY INFORMATION</h2>
+                                  <div class="col-md-12 userlistbox">
+                                      <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <div class="row">
+                                                    <div class="col-md-6">
+                                                      <label>Check In Date  </label>
+                                                  <div class="form-group">
+                                                      <div class="input-group">
+                                                        <input class="form-control" placeholder="Date" name="checkindate" [(ngModel)]="model.checkindate" value="{{model.checkindate | date: 'dd-MM-yyyy HH:mm:ss a'}}" ngbDatepicker #dd="ngbDatepicker">
+                                                        <div class="input-group-append bg-default" (click)="dd.toggle()" >
+                                                          <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                        </div>
+                                                      </div>
+                                                    </div>  
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                      <label>Checkin  Time  </label>
+                                                      <div class="form-group">
+                                                          <div class="input-group">
+                                                             <input type="time" step="2" class="form-control" placeholder="Time" name="checkintime" [(ngModel)]="model.checkintime" value="{{model.checkintime }}" >
+                                                             
+                                                          </div>
+                                                        </div> 
+                                                    </div>
+                                                  </div>
+                                          </div> 
+                                        </div> 
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">  
+                                                                        
+                                                  <label>No Of Days  </label>
+                                                  <select class="custom-select" id="nofdays" appSelectValidator="select"  #nofdays="ngModel"  name="nofdays" [(ngModel)]="model.nofdays">
+                                                      <option value="select">Select</option>
+                                                      <option *ngFor="let item of data" [value]="item">{{ item }}</option>
+                                                    </select> 
+                                          </div> 
+                                        </div>
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">    
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                <label>Check Out Date  </label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                      <input class="form-control" placeholder="Date" name="checkoutdate" [(ngModel)]="model.checkoutdate" value="{{model.checkoutdate | date: 'dd-MM-yyyy HH:mm:ss a'}}" ngbDatepicker #ddd="ngbDatepicker">
+                                                      <div class="input-group-append bg-default" (click)="ddd.toggle()" >
+                                                        <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                      </div>
+                                                    </div>
+                                                  </div>  
+                                              </div>
+                                              <div class="col-md-6">
+                                                <label>Checkout  Time  </label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                       <input type="time" step="2" class="form-control" placeholder="Time" name="checkouttime" [(ngModel)]="model.checkouttime" value="{{model.checkouttime }}" >
+                                                       
+                                                    </div>
+                                                  </div> 
+                                              </div>
+                                            </div>  
+                                            
+                                            
+                                                
+                                          </div> 
+                                        </div> 
+                                  </div>
+                                  <div class="col-md-12 userlistbox">
+                                    <div class="row">
+                                    <h2><i class="fa fa-user" aria-hidden="true"></i>
+                                      PAYMENT</h2>
+                                      <div class="col-md-6"><div class="row form-group">  
+                                        <div class="col-md-12"> 
+                                          <label>Select Mode  </label>
+                                                <select class="custom-select" id="selmode" appSelectValidator="select"  #selmode="ngModel"  name="selmode" [(ngModel)]="model.selmode">
+                                                    <option value="select">Select Mode</option>
+                                                    <option *ngFor="let item of paymentmode" [value]="item">{{ item }}</option>
+                                                  </select> 
+                                        </div> 
+                                      </div></div>
+                                      <div class="col-md-6">   <div class="row form-group">  
+                                        <div class="col-md-12">                                
+                                                <label>Amount  </label>
+                                                <input type="text" name="payamount" class="form-control" [(ngModel)]="model.payamount" #payamount="ngModel" value="{{payamount}}"  [ngClass]="{'is-invalid': payamount.touched && payamount.invalid}"  required autocomplete="off">
+                                                <div *ngIf="payamount.touched && payamount.invalid" class="invalid-feedback">
+                                                  <div *ngIf="payamount.errors.required">payamount is invalid</div>
+                                                </div>  
+                                        </div> 
+                                      </div> </div>
+                                      <div class="col-md-12">
+                                        <div class="row form-group">  
+                                          <div class="col-md-12">                                
+                                                  <label>Description  </label>
+                                                  <textarea class="form-control rounded-0" id="paymntdesc" name="paymntdesc" class="form-control" [(ngModel)]="model.paymntdesc" #paymntdesc="ngModel" value="{{paymntdesc}}"  rows="2" autocomplete="off"></textarea>
+                                                   
+                                          </div> 
+                                        </div> 
+                                      </div>
+                                   
+                                    
+                                        </div>
+                                  </div>
+                                  <div class="col-md-12 userlistbox" style="padding:20px;">
+                                    <div class="row"> 
+                                    <h2><i class="fa fa-user" aria-hidden="true"></i>
+                                      DISCOUNT / GRACE PERIOD  </h2>
+                                    
+                                      <div class="row form-group">  
+                                          <div class="col-md-12 p-l-20  " >    
+                                              <div class="row">
+                                              <div class="col-md-6"><label>Discount Type  </label>
+                                                  <select class="custom-select" id="disctype" appSelectValidator="select"  #disctype="ngModel"  name="disctype" [(ngModel)]="model.disctype">
+                                                      <option value="select">Select</option>
+                                                      <option *ngFor="let item of data" [value]="item">{{ item }}</option>
+                                                    </select>  
+                                                  </div>   
+                                                  <div class="col-md-5 m-t-20" style="background-color: orange; color:#ffffff; "> 
+                                                      <input type="checkbox" class="form-control" name="applycoupen" style="width: 20px;float: left;">
+                                                      <label style="padding:0px 0px 0px 0px">Apply Coupon </label>  
+                                                    </div>   
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="col-md-6"> 
+                                                                               
+                                                        <label>Discount Value  </label>
+                                                        <input type="text" name="discvalue" class="form-control" [(ngModel)]="model.discvalue" #discvalue="ngModel" value="{{discvalue}}"  [ngClass]="{'is-invalid': discvalue.touched && discvalue.invalid}"  required autocomplete="off">
+                                                        <div *ngIf="discvalue.touched && discvalue.invalid" class="invalid-feedback">
+                                                          <div *ngIf="discvalue.errors.required">discvalue is invalid</div>
+                                                        </div>  
+                                               
+                                                        </div>   
+                                                        <div class="col-md-6 "> 
+                                                          <label>Grace Period  </label>
+                                                          <input type="text" name="graceperiod" class="form-control" [(ngModel)]="model.graceperiod" #graceperiod="ngModel" value="{{graceperiod}}"  [ngClass]="{'is-invalid': graceperiod.touched && graceperiod.invalid}"  required autocomplete="off">
+                                                          <div *ngIf="graceperiod.touched && graceperiod.invalid" class="invalid-feedback">
+                                                            <div *ngIf="graceperiod.errors.required">graceperiod is invalid</div>
+                                                          </div> 
+                                                          </div>   
+                                                        </div>
+                                                        <div class="row">
+                                                          <div class="col-md-6"> 
+                                                                                     
+                                                              <label style="color: orange;">Discount Type:  </label>
+                                                              <label class="p-l-20">0  </label>                                                 
+                                                     
+                                                              </div>   
+                                                              <div class="col-md-6 "> 
+                                                                <label style="color: orange;">Last Discount:   </label>
+                                                                <label class="p-l-20">0</label >    
+                                                              </div>
+                                                              </div>
+              
+                                          </div> <!-- red -->
+                                          <div class="col-md-6">
+                                            
+                                          </div>  
+                                        </div>
+                                        <div class="row form-group">  
+                                             
+                                        </div>
+                                        <div class="col-md-12">
+                                          <div class="row form-group">  
+                                            <div class="col-md-12">                                
+                                                    
+                                            </div> 
+                                          </div>
+                                        </div>
+                                        </div>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>
+                           </div>
+                        </ng-template>
+                      </ngb-tab>
+                      <ngb-tab title="Guest Document">
+                        <ng-template ngbTabContent>
+                          <div [@fadeInOutTranslate] class="m-t-15">
+                            <p class="m-4">2. Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                          </div>
+                        </ng-template>
+                      </ngb-tab>
+                      <ngb-tab title="Driver Commission">
+                        <ng-template ngbTabContent>
+                          <div [@fadeInOutTranslate] class="m-t-15">
+                            <p class="m-4">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                          </div>
+                        </ng-template>
+                      </ngb-tab>
+                  
+                    </ngb-tabset>
+                  </div>
+                  
+                </div>
+              </app-card>
+         
+        </form>
+        </div>
+    </div>
+    <div class="col-md-12 p-b-5 p-t-5" style="border:2px solid #ccc; ">
+      <button type="button" id="printgrcbtn" class="btn btn-primary ">PRINT GRC</button>
+      <button type="button" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">CHECK-IN</button>
+      <button type="button" id="closebtn" class="btn btn-danger">CLOSE</button>
+    </div>
+</div>
+</div>
+    
+<!-- lightbox-->
+<app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4'">
+  <h3 class="f-15">View  Other Tax Details</h3>
+
+    <div class="app-modal-body text-center">
+        <table class="table table-striped text-left m-t-10">
+            <tr>
+                <td>Id :</td>
+                <td>{{ model.roomno }}</td>
+              </tr>
+            <tr>
+              <td>ItemName :</td>
+              <td>{{ model.roomno }}</td>
+            </tr>
+
+            <tr>
+              <td>RevId :</td>
+              <td>{{ model.roomno }}</td>
+            </tr>
+            <tr>
+                <td>Rate :</td>
+                <td>{{ model.roomno }}</td>
+              </tr>
+           </table>
+           <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+      </div>
+
+    </app-modal-animation>
+
+    <app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5'">
+      <h3 class="f-15">View  Other Tax Details</h3>
+    
+        <div class="app-modal-body text-center">
+            <table class="table table-striped text-left m-t-10">
+                <tr>
+                    <td>Id :</td>
+                    <td>{{ model.roomno }}</td>
+                  </tr>
+                <tr>
+                  <td>ItemName :</td>
+                  <td>{{ model.roomno }}</td>
+                </tr>
+    
+                <tr>
+                  <td>RevId :</td>
+                  <td>{{ model.roomno }}</td>
+                </tr>
+                <tr>
+                    <td>Rate :</td>
+                    <td>{{ model.roomno }}</td>
+                  </tr>
+               </table>
+               <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+          </div>
+    
+        </app-modal-animation>
+
+        <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6'">
+          <h3 class="f-15">View  Other Tax Details</h3>
+        
+            <div class="app-modal-body text-center">
+                <table class="table table-striped text-left m-t-10">
+                    <tr>
+                        <td>Id :</td>
+                        <td>{{ model.roomno }}</td>
+                      </tr>
+                    <tr>
+                      <td>ItemName :</td>
+                      <td>{{ model.roomno }}</td>
+                    </tr>
+        
+                    <tr>
+                      <td>RevId :</td>
+                      <td>{{ model.roomno }}</td>
+                    </tr>
+                    <tr>
+                        <td>Rate :</td>
+                        <td>{{ model.roomno }}</td>
+                      </tr>
+                   </table>
+                   <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+              </div>
+        
+            </app-modal-animation>
+>>>>>>> 5bd1592b15cb10b38f2eb5603891c810be0ab072
