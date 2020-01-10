@@ -1,4 +1,5 @@
  
+ 
 
 <!-- new for design-->
 <div class="outerdiv">  
@@ -35,6 +36,7 @@
                                             <div class="row">
                                               <div class="col-sm-3">  
                                                  <label style="border: 1px solid #ccc; height: 23px;">1000</label>
+ 
                                               </div>   
                                               <div class="col-sm-6">
                                                 <input type="checkbox"  (click)="openreferencedetails('effect-4',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> Ref #
@@ -360,7 +362,13 @@
                                   </div>
                     
                                   </div> <!-- payment final row-->
+                                  <div class="col-md-12 p-b-5 p-t-5" style="border:2px solid #ccc; ">
+                                    <button type="button" id="printgrcbtn" class="btn btn-primary ">PRINT GRC</button>
+                                    <button type="button" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">CHECK-IN</button>
+                                    <button type="button" id="closebtn" class="btn btn-danger">CLOSE</button>
+                                  </div>
                               </ng-template>
+                             
                             </ngb-panel>
                           </ngb-accordion>
 
@@ -408,11 +416,7 @@
          
        
         
-        <div class="col-sm-12">
-            <div class="form-group text-center">               
-                <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Register</button>
-            </div>
-          </div> 
+    
     
         </div>
       </div><!-- container -->
@@ -544,3 +548,4 @@
                   </div>
             
                 </app-modal-animation>
+ 

@@ -1,3 +1,4 @@
+ 
 import { Component, OnDestroy,OnInit,ViewEncapsulation } from '@angular/core';
 import {Observable, empty} from 'rxjs';
 import { NgForm } from '@angular/forms';
@@ -16,6 +17,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
+ 
 import {animate, style, transition, trigger} from '@angular/animations';
 
  
