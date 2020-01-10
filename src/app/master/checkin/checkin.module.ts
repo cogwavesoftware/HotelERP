@@ -12,16 +12,19 @@ import { PlancreationRoutingModule } from './../plancreation/plancreation-routin
 import { PlancreationComponent } from './../plancreation/plancreation.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CheckoutRoutingModule } from './checkout/checkout-routing.module';
-
-
+import {SelectModule} from 'ng-select';
+import {TagInputModule} from 'ngx-chips';
+import { SelectOptionService } from 'src/app/shared/elements/select-option.service';
+ 
 @NgModule({
   declarations: [CheckinComponent, CheckoutComponent],
+  providers: [SelectOptionService],
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
     SharedModule,
     HttpClientModule,
     DataTableModule,
-    FormsModule,
+     FormsModule,
     
     ReactiveFormsModule,ToastyModule.forRoot()
   ]
