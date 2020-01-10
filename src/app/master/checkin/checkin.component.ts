@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import { Component, OnInit } from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 
@@ -83,4 +81,3 @@ export class CheckinComponent implements OnInit {
   }
   
 }
->>>>>>> 5bd1592b15cb10b38f2eb5603891c810be0ab072
