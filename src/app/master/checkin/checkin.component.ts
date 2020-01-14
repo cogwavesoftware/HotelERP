@@ -19,7 +19,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
  
 import {animate, style, transition, trigger} from '@angular/animations';
-
+declare var $: any;
  
 @Component({
   selector: 'app-checkin',
@@ -108,7 +108,9 @@ export class CheckinComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    $(document).ready(function() {
+      console.log('I am Called From jQuery');
+    });
     this.model = {
         roomno:1000,
         name:null,
@@ -135,6 +137,7 @@ export class CheckinComponent implements OnInit {
       this.characters = options;
     });
   
+     
 
   }
   openguestnamedetails(event){      

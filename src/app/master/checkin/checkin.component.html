@@ -5,7 +5,7 @@
 <div class="outerdiv">  
   <div class="formdesign checkinforms"  >
   
-      <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow p-3 mb-5 bg-white rounded" autocomplete="off" >
+      <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow   mb-5 bg-white rounded" autocomplete="off" >
           
          <div class="container">
           <div class='row tabouter'  >
@@ -27,29 +27,46 @@
                             
                                  <div class="col-md-12">
                                    <div class="row">
-                                     <div class="col-sm-10">
-                                      <div class="row">
-                                        <div class='col-12 col-sm-2'>
-                                          <div class="form-group">                                
-                                            <label class="form-control-label" for="firstname">   </label> 
-            
-                                            <div class="row">
-                                              <div class="col-sm-3">  
-                                                 <label style="border: 1px solid #ccc; height: 23px;">1000</label>
- 
-                                              </div>   
-                                              <div class="col-sm-6">
-                                                <input type="checkbox"  (click)="openreferencedetails('effect-4',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> Ref #
-                                                <div class="invalid-feedback" *ngIf="form.controls.referenceid.errors?.required" >referenceid Name is required</div>
-                                               </div>  
-                                            </div>
-            
-            
+                                     <div class="col-sm-12">
+                                      
+                                    
+                                      
+                                
+                                     
+                                
+
+                                       <!--  test row 1-->
+                                       <div class="userlist " style="margin-bottom: 30px; position: relative;">
+                                        <div class="row">
+                                          <div class='col-12 col-sm-6'>
+                                            <div class="form-group">                                
+                                              <label class="form-control-label" for="firstname">   </label> 
+              
+                                              <div class="row">
+                                                <div class="col-sm-12">  
+                                                  <label  >Room No</label>
+                                                   <label style="border: 1px solid #ccc; height: 23px;">1000</label>
+   
+                                                </div>   
+                                                <div class="col-sm-6">
+                                                  <input type="checkbox"  (click)="openreferencedetails('effect-4',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> Ref #
+                                                  <div class="invalid-feedback" *ngIf="form.controls.referenceid.errors?.required" >referenceid Name is required</div>
+                                                 </div>  
+                                              </div>
+              
+              
+                                                
                                               
-                                            
-                                           </div>  
-                                        </div>
-                                        <div class='col-12 col-sm-2'>
+                                             </div>  
+                                          </div>
+                                 
+                                          
+                                       
+                                     
+                                      </div>
+                                               <div class="row  ">
+                                       
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="firstname">Source </label>
                                            <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
@@ -62,7 +79,8 @@
                                             <!-- <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small> -->
                                            </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                        
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="arivalmode">Arrival Mode </label>
                                            <select class="custom-select"  name="arivalmode" formControlName="arivalmode"  id="arivalmodeid" [ngClass]="{ 'is-invalid': submitted && form.arivalmode.errors }"> 
@@ -74,14 +92,14 @@
                                           </div>
                                             </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="Booking">Booking Id </label>
                                             <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="booking" name="booking" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.booking.errors || form.controls.booking.touched || form.controls.booking.dirty}" required  />  
                                             <div class="invalid-feedback" *ngIf="form.controls.booking.errors?.required" >booking Name is required</div>
                                             </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="Booking">Convenience fees </label>
                                             <input type="text" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.convenience.errors || form.controls.convenience.touched || form.controls.convenience.dirty}" required  />  
@@ -89,9 +107,10 @@
                                             </div>  
                                         </div>
                                     </div>
-                                    
-                                     <div class="row">
-                                      <div class='col-12 col-sm-2'>
+
+
+                                    <div class="row  ">
+                                      <div class='col-12 col-sm-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="Guest Name">Guest Name </label>
                                           <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
@@ -99,7 +118,7 @@
                                           <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                           </div>  
                                       </div>
-                                      <div class='col-12 col-sm-2'>
+                                      <div class='col-12 col-sm-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="gender">  Gender </label>
                                          <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
@@ -111,45 +130,34 @@
                                         </div>
                                           </div>  
                                       </div>
-                                      <div class='col-12 col-sm-2'>
+                                      <div class='col-12 col-sm-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="mobile">Mobile </label>
                                           <input type="text" class="form-control tooltip-form" id="mobileid" formControlName="mobile" name="mobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobile.errors || form.controls.mobile.touched || form.controls.mobile.dirty}" required  />  
                                           <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >mobile   is required</div>
                                           </div>  
                                       </div>
-                                      <div class='col-12 col-sm-2'>
+                                      <div class='col-12 col-sm-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="email">Email </label>
                                           <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
                                           <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
                                           </div>  
                                       </div>
-                                      <div class='col-12 col-sm-2'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="Foreign Guest ">  Foreign Guest  </label>
-                                         <select class="custom-select"  name="foriegnguest" formControlName="foriegnguest"  id="foriegnguest" [ngClass]="{ 'is-invalid': submitted && form.foriegnguest.errors }"> 
-                                           <option value="select">Select</option> 
-                                           <option [ngValue]="sour.Id" *ngFor="let sour of foriegnguest" [value]="sour">{{ sour  }}</option>
-                                         </select>
-                                         <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
-                                          <div *ngIf="form.gender.errors.required">foriegnguest is required</div>
-                                        </div>
-                                          </div>  
-                                      </div>
+                                  
                                       
                                      </div>
                                      <div class="row">
                                       <div class='col-12 col-sm-12'>
                                            <div class="form-group">
                                             <label class="form-control-label" for="address">Address </label>
-                                            <textarea class="form-control col-sm-10" id="address" rows="2"  ></textarea>
+                                            <textarea class="form-control col-sm-12" id="address" rows="2"  ></textarea>
                                             <div class="invalid-feedback" *ngIf="form.controls.address.errors?.required" >address   is required</div>
                                             </div>  
                                         </div> 
-                                       </div>
+                                       </div> <!-- address row ednd-->
                                        <div class="row">
-                                        <div class='col-12 col-sm-2'>
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="pincode">Pincode </label>
                                             <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required  />  
@@ -158,7 +166,7 @@
                                             <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
                                             </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="city">City </label>
                                             <input type="text" class="form-control tooltip-form searchiconrelative" id="city" formControlName="city" name="city" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.city.errors || form.controls.city.touched || form.controls.city.dirty}" required  />  
@@ -166,30 +174,46 @@
                                             <div class="invalid-feedback" *ngIf="form.controls.city.errors?.required" >city   is required</div>
                                             </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="state">State </label>
                                             <input type="text" class="form-control tooltip-form" id="state" formControlName="state" name="state" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.state.errors || form.controls.state.touched || form.controls.state.dirty}" required  />  
                                             <div class="invalid-feedback" *ngIf="form.controls.state.errors?.required" >state   is required</div>
                                             </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="nation">Nation </label>
                                             <input type="text" class="form-control tooltip-form" id="nation" formControlName="nation" name="nation" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.nation.errors || form.controls.nation.touched || form.controls.nation.dirty}" required  />  
                                             <div class="invalid-feedback" *ngIf="form.controls.nation.errors?.required" >nation   is required</div>
                                             </div>  
                                         </div>
-                                        <div class='col-12 col-sm-2'>
+                                   
+                                       </div><!-- row end -->
+
+                                       <div class="row">
+                                        <div class='col-12 col-sm-3'>
                                           <div class="form-group">
-                                            <label class="form-control-label" for="gstno">GSTNO </label>
-                                            <input type="text" class="form-control tooltip-form" id="gstno" formControlName="gstno" name="gstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.gstno.errors || form.controls.gstno.touched || form.controls.gstno.dirty}" required  />  
-                                            <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
+                                            <label class="form-control-label" for="Foreign Guest ">  Foreign Guest  </label>
+                                           <select class="custom-select"  name="foriegnguest" formControlName="foriegnguest"  id="foriegnguest" [ngClass]="{ 'is-invalid': submitted && form.foriegnguest.errors }"> 
+                                             <option value="select">Select</option> 
+                                             <option [ngValue]="sour.Id" *ngFor="let sour of foriegnguest" [value]="sour">{{ sour  }}</option>
+                                           </select>
+                                           <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
+                                            <div *ngIf="form.gender.errors.required">foriegnguest is required</div>
+                                          </div>
                                             </div>  
                                         </div>
-                                       </div>
-                                       <div class="row">
-                                        <div class='col-12 col-sm-10'>
+  
+                                              <div class='col-12 col-sm-3'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="gstno">GSTNO </label>
+                                              <input type="text" class="form-control tooltip-form" id="gstno" formControlName="gstno" name="gstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.gstno.errors || form.controls.gstno.touched || form.controls.gstno.dirty}" required  />  
+                                              <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
+                                              </div>  
+                                          </div>
+
+                                        <div class='col-12 col-sm-6'>
                                           <div class="form-group">
                                             <label class="form-control-label" for="company">Company </label>
                                             <input type="text" class="form-control tooltip-form" id="company" formControlName="company" name="company" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.company.errors || form.controls.company.touched || form.controls.company.dirty}" required  />  
@@ -197,9 +221,12 @@
                                             </div>  
                                             <!-- <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [(ngModel)]="selectedOption"> </ng-select> -->
                                         </div>
-                                       </div>
-                                     </div>
-                                     <div class="col-sm-2" style="border: 1px solid yellow;">
+                                       </div> <!-- row end -->
+</div>
+                                      
+                                    
+                                     </div> <!-- col-10 end-->
+                                     <!-- <div class="col-sm-2" style="border: 1px solid yellow;">
                                       
                                         <div class=" ">
                                           <label style="font-size: 90%;">Thumb Verification *</label>
@@ -208,12 +235,11 @@
                                            <img src="../../../assets/images/avatar-7.jpg" width="100%; height:auto">
                                           <div class="text-center m-t-10">
                                           <button type="button" class="btn btn-primary btn-xs m-r-10">OK</button>
-                                          <!-- <button type="button" class="btn btn-primary btn-xs">CAPTURE</button> -->
-                                          </div>
+                                           </div>
                                           
                                        </div>
                                      
-                                     </div>
+                                     </div> -->
                                    </div>
                                  </div>
                               </ng-template>

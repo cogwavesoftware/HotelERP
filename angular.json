@@ -32,7 +32,7 @@
               "src/scss/style.scss"
               
             ],
-            "scripts": []
+            "scripts": ["node_modules/jquery/dist/jquery-3.4.1.min.js"]
           },
           "configurations": {
             "production": {

@@ -5,10 +5,7 @@ import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
 //import { CheckinComponent } from './checkin/checkin.component';
 // import { AddressComponent } from './address/address.component';
-<<<<<<< HEAD
-=======
  // import { AddressComponent } from './address/address.component';
->>>>>>> 5bd1592b15cb10b38f2eb5603891c810be0ab072
 // import { AddressbookComponent } from './addressbook/addressbook.component';
 // import { UserrightsComponent } from './userrights/userrights.component';
 // import { FinancialmasterComponent } from './financialmaster/financialmaster.component';
