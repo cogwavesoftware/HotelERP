@@ -320,7 +320,7 @@ return;
       this.mode = "(Edit)"+  this.model.GuestName;
     });
   }
-  openMyPincodeModalData(event){
+  openMyPincodeModalData(event,evt){
     console.log("calling");
    // this.model.State  = "sakthi";
     // this._ipservice.getIpAddress().subscribe((res: any) => {
@@ -345,12 +345,17 @@ return;
           this.model.State = response[event]["State"];
           this.model.Nation = response[event]["Nation"];
           console.log(this.model.State);
+          this.customclose();
        })
     },1000);
-  
+   
 
   }
-
+  customclose(){   
+  document.querySelector(".md-modal").classList.add("customclosepopup");
+   document.querySelector(".md-modal").classList.remove("md-show");
+   document.querySelector(".md-modal").classList.remove("customclosepopup");
+}
   Closeform() {
     this.isShown = false;
     this.btitle = "Add Item";
