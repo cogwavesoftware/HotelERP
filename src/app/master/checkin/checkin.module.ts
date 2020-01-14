@@ -13,16 +13,23 @@ import { PlancreationComponent } from './../plancreation/plancreation.component'
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CheckoutRoutingModule } from './checkout/checkout-routing.module';
 
-
+import {TagInputModule} from 'ngx-chips';
+import { SelectOptionService } from 'src/app/shared/elements/select-option.service';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {SelectModule} from 'ng-select';
+import {DatePipe} from '@angular/common';
 @NgModule({
   declarations: [CheckinComponent, CheckoutComponent],
+  providers: [SelectOptionService,DatePipe],
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
     SharedModule,
     HttpClientModule,
     DataTableModule,
-    FormsModule,
-    
+     FormsModule,
+     SelectModule,
+     BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ]
 })

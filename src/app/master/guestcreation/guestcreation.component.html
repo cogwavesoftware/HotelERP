@@ -126,7 +126,8 @@
                                                 <label >Pincode</label> 
                                               <input type="pin" name="PINCode" class="form-control validate" [(ngModel)]="model.PINCode" #PINCode="ngModel" value="{{PINCode}}"  [ngClass]="{'is-invalid': PINCode.touched && PINCode.invalid}"  required autocomplete="off">
                                               </div>
-                                              <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0"> <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)"><i class="fa fa-search"></i></a>
+                                              <div class="col-md-1 col-sm-1" style="padding: 20px 0px 0px 0px; margin:0"> 
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)"><i class="fa fa-search"></i></a>
                                               </div>
                                             </div>
 
@@ -446,9 +447,9 @@
                     <thead>
                     <tr class="blueorange-gradient">  
                          
-                            <th>
-                                <mfDefaultSorter  by="AreaData">AreaData</mfDefaultSorter>
-                                </th>               
+                    <th>
+                     <mfDefaultSorter  by="AreaData">AreaData</mfDefaultSorter>
+                     </th>               
                     <th>
                     <mfDefaultSorter  by="City">City</mfDefaultSorter>
                     </th>  
@@ -471,23 +472,19 @@
                    <td>{{item.AreaData}}</td>   
                    <td>{{item.City}}</td>   
                    <td>{{item.Pincode}}</td>
-                   <td>{{item.State}}</td>
-                    
-                       
+                   <td>{{item.State}}</td>         
                   <td class="action-icon">
-                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyPincodeModalData(i)">Get Details</a>
-                      
+                       <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)">Get Details</a>
                   </td>
                 </tr>  
                 </tbody>
                 <tfoot>
-                <tr class="blueorange-gradient"> 
-                   
-                    <th>Area</th>            
+                <tr class="blueorange-gradient">     
+                <th>Area</th>            
                 <th>City</th>    
                 <th>Pincode</th> 
                 <th>State</th>     
-                <th></th>      
+                <th>Action</th>      
                 </tr>
                 <tr>
                   <td colspan="6">
@@ -506,6 +503,8 @@
       </div>
        
     </app-modal-animation>
+
+
  <app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5'">
     <h3 class="f-15">Guest Details</h3>
     
