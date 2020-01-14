@@ -192,7 +192,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
     console.log('this.countries')
    
      

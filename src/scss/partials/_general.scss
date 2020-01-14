@@ -6439,9 +6439,9 @@ button {
             display:inline-block;
         }
         .col-12.col-sm-2,
-         .col-sm-12,.col-sm-10,.col-sm-6{
-            padding-left:2px;
-            padding-right:2px;
+         .col-sm-12,.col-sm-10,.col-sm-6,.col-sm-3{
+            // padding-left:2px;
+            // padding-right:2px;
         }
          .card-header .btn{
             color:#ffffff;
@@ -6463,6 +6463,32 @@ button {
             right: 0;
             top: 21px;
         }
+        .testrow2{
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 3px;
+            padding:10px;
+            label{
+                color:#ffffff;
+            }
+            .userlist{
+                padding: 20px;
+        box-shadow: 
+       inset 0 -3em 3em rgba(0,0,0,0.1), 
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+            }
+            .row{
+                margin-bottom: 0px;
+            }
+        }
+        .testrow3{
+            padding:10px;
+            label{
+                padding-left:10px;
+                padding-right:10px;
+            }
+        }
+
     }
 }
 .pcoded-content .pcoded-inner-content .main-body .page-wrapper  .md-modal{     
@@ -6494,4 +6520,24 @@ button {
     max-height: 100%;
 }
  
+// .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
+      
+//     width:70px!important;
+//  }
+ 
+// .pcoded[theme-layout="vertical"][vertical-nav-type="collapsed"] .main-menu{
+//     border:2px solid green!important;
+//     width:70px!important;
+// }
+ 
+ 
+// .pcoded[theme-layout="vertical"][vertical-nav-type="collapsed"] {
+//     .main-menu-content,
+//     .main-menu-header {
+//         display: none;
+//     }
 
+//     .main-menu {
+//         width: 70px;
+//     }
+// }
