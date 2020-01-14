@@ -278,7 +278,14 @@ export class MasterformService {
   displayRooms(){
     return this.http.get<any>(`assets/data/floors.json`);
   }
-
+  GetCheckinDetail(RoomNo:string,Branchcode:string) {   
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
+    //return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxEdit?BranchCode=' + branchcode + '&Id=' + Id);
+  }
+  GetBookingData(formData:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/GetBookingData',formData);
+  }
 
   // registerUser(user: User,roles : string[]) {
   //   const body = {

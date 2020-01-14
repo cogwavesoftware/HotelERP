@@ -266,6 +266,7 @@ export class SelectOptionService {
     }
 
     loadCharacters(): Observable<Array<IOption>> {
+        alert('s')
         return this.loadOptions(SelectOptionService.PLAYER_ONE);
     }
 
