@@ -1,5 +1,5 @@
 .test123{
-    border: 1px solid red;
+     
     /* You can add global styles to this file, and also import other style files */
 .grid-table
 {
@@ -62,3 +62,19 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
   50% { opacity: 1; }
 }
 }
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid red!important;
+    }
+
+}
+ @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid red!important;
+    }
+  }

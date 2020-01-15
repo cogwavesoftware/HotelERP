@@ -15,14 +15,14 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { IOption } from "ng-select";
 import { Subscription } from "rxjs/Subscription";
 import { SelectOptionService } from "src/app/shared/elements/select-option.service";
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/first';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/debounceTime';
+// import 'rxjs/add/operator/distinctUntilChanged';
+// import 'rxjs/add/observable/of';
+// import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/do';
+// import 'rxjs/add/operator/switchMap';
+// import 'rxjs/add/operator/first';
 import { animate, style, transition, trigger } from "@angular/animations";
 import { RoomtypeService } from "./../../_services/roomtype.service";
 import { MasterformService } from "src/app/_services/masterform.service";
@@ -60,7 +60,7 @@ export interface Checkinss {
     ])
   ]
 })
-export class CheckinComponent implements OnInit, OnDestroy {
+export class CheckinComponent implements OnInit {
   NodaysChanged: number = 0;
   form: FormGroup;
   datePickerConfig: Partial<BsDatepickerConfig>;
@@ -69,7 +69,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   public data: Observable<any>
   //forms: FormArray = this.formBuilder.array([]);
   model: any = {};
-  simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
+  //simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
   selectedOption = "3";
   isDisabled = true;
   characters: Array<IOption>;
@@ -120,14 +120,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
     public selectOptionService: SelectOptionService) {
       
 
-      this.IsShowloader=true;
-      this.data = this._masterservice.GetPinAddress();
+      // this.IsShowloader=true;
+      // this.data = this._masterservice.GetPinAddress();
     
-      setTimeout(()=>{
-       this.IsShowloader=false;
-      },5000)
+      // setTimeout(()=>{
+      //  this.IsShowloader=false;
+      // },5000)
  
-      console.log(this.data)
+      // console.log(this.data)
 
 
     this.datePickerConfig = Object.assign({},
@@ -186,19 +186,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
-      thumbverification: ["", [Validators.required]]
+      thumbverification: ["", [Validators.required]],
+      GuestPhotoPath:["",[Validators.required]],
+      GuestIdFront:["",[Validators.required]],
+      GuestIdBack:["",[Validators.required]],
+      
     });
   }
 
   ngOnInit() {
 
-    console.log('this.countries')
-   
      
-    console.log(this.simpleOption)
-
-
-    console.log('this.countries')
 
     this.masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
@@ -236,9 +234,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    if (this.dataSub !== null) { this.dataSub.unsubscribe(); }
-  }
+ 
   CreateNoofDays(number) {
     for (var i = 1; i <= number; i++) {
       this.noofdays.push(i);
