@@ -1,3 +1,6 @@
+import { AddressService } from './../_services/address.service';
+
+import { Observable } from 'rxjs/observable';
 
 import { Component, OnInit,NgZone } from '@angular/core';
 import { AuthenticationService } from './../_services/authentication.service';
@@ -6,6 +9,7 @@ import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/a
 // import {TranslateService } from '@ngx-translate/core';
 import { TreeviewItemService } from '../shared/service/treeview-item.service';
 import { TreeviewItem, TreeviewConfig } from '../shared/service/lib';
+import { MasterformService } from './../_services/masterform.service';
 declare global {
   interface Window {
     RTCPeerConnection: RTCPeerConnection;
@@ -59,7 +63,7 @@ export class CommonpageComponent implements OnInit {
 
 
 
-
+  public data:Observable<any>;
   items: TreeviewItem[];
   ipAddress:any;
   public navType: string;
@@ -94,7 +98,8 @@ export class CommonpageComponent implements OnInit {
   private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
 
   constructor(private _authservice:AuthenticationService,private zone: NgZone,
-    private http: HttpClient,private service: TreeviewItemService) {
+    private http: HttpClient,private service: TreeviewItemService,private adreeservice:AddressService,
+    public _masterservice:MasterformService) {
 
 
 
@@ -104,6 +109,7 @@ export class CommonpageComponent implements OnInit {
   //   localStorage.removeItem('LOCAL_IP');
   //   this.ipAddress= localStorage.setItem('LOCAL_IP', data.ip)
     
+
   //  })
 
 
@@ -146,7 +152,13 @@ export class CommonpageComponent implements OnInit {
   this._authservice.logout();
   //this.determineLocalIp();
 
+   this._masterservice.GetPinAddress().subscribe(res=>{
+    this.data =res;
+    //console.log(this.data)
+    this.adreeservice.SetMessages(this.data)
+   });
   
+    
   }
 
   private determineLocalIp() {

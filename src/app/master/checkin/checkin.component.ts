@@ -27,6 +27,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
 import { RoomtypeService } from "./../../_services/roomtype.service";
 import { MasterformService } from "src/app/_services/masterform.service";
 import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
+import { AddressService } from './../../_services/address.service';
 
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from "@angular/common";
@@ -116,18 +117,18 @@ export class CheckinComponent implements OnInit, OnDestroy {
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private roomservice: RoomtypeService,
-    private masterservice: MasterformService,
+    private masterservice: MasterformService,public _addressservice:AddressService,
     public selectOptionService: SelectOptionService) {
       
 
-      this.IsShowloader=true;
-      this.data = this._masterservice.GetPinAddress();
+     // this.IsShowloader=true;
+      //this.data = this._masterservice.GetPinAddress();
     
-      setTimeout(()=>{
-       this.IsShowloader=false;
-      },5000)
+      // setTimeout(()=>{
+      //  this.IsShowloader=false;
+      // },5000)
  
-      console.log(this.data)
+      // console.log(this.data)
 
 
     this.datePickerConfig = Object.assign({},
@@ -192,13 +193,19 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log('this.countries')
    
      
-    console.log(this.simpleOption)
+    this._addressservice.getMessage().subscribe(data=>{
+      this.data=data;
+      setTimeout(()=>{
+        console.log(this.data)
+
+      },6000)
+     
+     });
 
 
-    console.log('this.countries')
+    
 
     this.masterservice.getplan().subscribe(res => {
       this.planlist = res as [];

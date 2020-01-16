@@ -237,6 +237,13 @@ export class MasterformService {
   Getmiscellaneous(HeadersDesc: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Miscell?HeaderDescription=' + HeadersDesc);
   }
+  GetMiscHeaders() {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/MiscHeader');
+  }
+
+  SaveMisc(misc:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveMiscDetails',misc,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
 
 
   GetGuestDetails(branchcode: string) {

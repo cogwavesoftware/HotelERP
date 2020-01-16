@@ -33,7 +33,7 @@
               "node_modules/font-awesome-scss/scss/font-awesome.scss",
               "src/scss/style.scss"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery-3.4.1.min.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
