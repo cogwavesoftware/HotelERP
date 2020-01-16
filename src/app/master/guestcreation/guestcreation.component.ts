@@ -326,7 +326,11 @@ return;
     this.closeMyModal(event);
 
   }
-
+  customclose(){   
+  document.querySelector(".md-modal").classList.add("customclosepopup");
+   document.querySelector(".md-modal").classList.remove("md-show");
+   document.querySelector(".md-modal").classList.remove("customclosepopup");
+}
   Closeform() {
     this.isShown = false;
     this.btitle = "Add Item";
