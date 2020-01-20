@@ -25,6 +25,23 @@
 .tbody .td select{
      
     width: 115px;
+    height: 23px;
+}
+.thead .td .btn.btn-outline-success{
+    border-radius: 5px;
+    width: 38px;
+    padding: 0;
+    background: green;
+    color: #fff;
+    font-size: 90%;
+}
+.tbody .td button.ng-tns-c5-1{   
+    border-radius: 5px;
+    width: 30px;
+    padding: 0;
+    background: red;
+    color: #fff;
+    font-size: 115%;
 }
 .tr
 {
@@ -68,13 +85,13 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
     .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
-        border:2px solid red!important;
+        border:2px solid yellow!important;
     }
 
 }
  @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
-        border:2px solid red!important;
+        border:2px solid blue!important;
     }
   }

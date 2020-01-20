@@ -251,7 +251,7 @@
                                 </ngb-panel>
 
 
-                                <ngb-panel id="ngb-close-p1" title="Grid ">
+                                <ngb-panel id="ngb-close-p2" class ="gridtable" title="Grid ">
                                   <ng-template ngbPanelContent>
                                     <div class="test123 userlist " style="padding: 2px;">
                                       <div class="grid-table" style="width: 100%;">
@@ -268,7 +268,7 @@
 
                                             <div class="td">
                                               <button class="btn btn-outline-success" (click)="AddBokingButtonClick()">
-                                                <i class="fa fa-plus"></i> Add
+                                                <i class="fa fa-plus" aria-hidden="true">add</i>
                                               </button>
                                             </div>
                                             <!-- <div class="td">
@@ -286,7 +286,7 @@
                                             <div [formGroupName]="i">
                                               <div class="tr">
                                                 <div class="td">
-                                                  <select class="" formControlName="RoomCode"
+                                                  <select class=" " formControlName="RoomCode"
                                                     (change)="RoomTypeChanged(i,'RoomCode')">
                                                     <option value="0">Select</option>
                                                     <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
@@ -295,11 +295,11 @@
                                                 </div>
 
                                                 <div class="td">
-                                                  <input class="" formControlName="RoomNo">
+                                                  <input class=" " formControlName="RoomNo">
                                                 </div>
 
                                                 <div class="td">
-                                                  <select class="" formControlName="Pax"
+                                                  <select class=" " formControlName="Pax"
                                                     (change)="RoomTypeChanged(i,'Pax')">
                                                     <option value="0">Select</option>
                                                     <option value="1">1</option>
@@ -351,7 +351,7 @@
                                                     
                                                  </button>  -->
                                                   <button (click)="onDelete(0,i)">
-                                                    Remove
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                                   </button>
                                                 </div>
                                               </div>
