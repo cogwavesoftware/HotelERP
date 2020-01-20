@@ -270,6 +270,12 @@ export class MasterformService {
      return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Userrightlist?UserId=' + UserId + '&ProductId=' + ProductId);
   }
 
+  GetAllNation() 
+  {
+     
+         return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Nation');
+  }
+
   SaveuserCreation(usermodel:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveusercreation',usermodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }

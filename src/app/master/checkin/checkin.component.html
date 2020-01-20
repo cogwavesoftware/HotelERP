@@ -50,34 +50,31 @@
                                            <!--  test row 1-->
                                            <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
                                             <div class="row" style="margin-bottom:0">
-                                              <div class='col-12 col-sm-3'>
+                                              <div class='col-12 col-sm-2'>
                                                 <div class="form-group">                                
-                                                  <label class="form-control-label" for="firstname">   </label>                   
-                                                  <div class="row">
-                                                    <div class="col-sm-6">  
+                                                  <label class="form-control-label" for="firstname">   </label>                                                                                                                  
                                                       <label >Room No </label>
-                                                       <label style="padding-left: 3px; font-weight: bold;" >1000</label>
-       
-                                                    </div>   
-                                                    <div class="col-sm-4" style="padding-left: 0;">
-                                                      <input type="checkbox"  (click)="openreferencedetails('effect-4',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> Ref #
-                                                      <div class="invalid-feedback" *ngIf="form.controls.referenceid.errors?.required" >referenceid Name is required</div>
-                                                     </div>  
-                                                  </div> 
-                                                 </div>  
-
-                                                
+                                                       <label style="padding-left: 3px; font-weight: bold;" >1000</label>                                                     
+                                                 </div>       
                                               </div> 
+
+                                              <div class="col-sm-4" style="padding-left: 0;">
+                                                <div class="form-group">
+                                                  <input type="checkbox"  (click)="openreferencedetails('effect-4',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> Ref #
+                                                  <div class="invalid-feedback" *ngIf="form.controls.referenceid.errors?.required" >referenceid Name is required</div>
+                                                </div>
+                                               
+                                               </div>  
                                             
                                              </div>
-                                                   <div class="row  " style="margin-bottom:0">
+                                          <div class="row " style="margin-bottom:0">
                                            
                                             <div class='col-12 col-sm-2'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="firstname">Source </label>
                                                <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
                                                  <option value="select">Select</option> 
-                                                 <option [ngValue]="sour.Id" *ngFor="let sour of sourcelist" [value]="sour">{{ sour  }}</option>
+                                                 <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
                                                </select>
                                                <div *ngIf="submitted && form.source.errors" class="invalid-feedback">
                                                 <div *ngIf="form.source.errors.required">Source is required</div>
@@ -91,7 +88,7 @@
                                                 <label class="form-control-label" for="arivalmode">Arrival Mode </label>
                                                <select class="custom-select"  name="arivalmode" formControlName="arivalmode"  id="arivalmodeid" [ngClass]="{ 'is-invalid': submitted && form.arivalmode.errors }"> 
                                                  <option value="select">Select</option> 
-                                                 <option [ngValue]="sour.Id" *ngFor="let sour of arivalmode" [value]="sour">{{ sour  }}</option>
+                                                 <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
                                                </select>
                                                <div *ngIf="submitted && form.arivalmode.errors" class="invalid-feedback">
                                                 <div *ngIf="form.arivalmode.errors.required">arivalmode is required</div>
@@ -117,6 +114,7 @@
                                                 <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
                                                 <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="openguestnamedetails('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                              
                                                 <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                 </div>  
                                             </div>
@@ -125,7 +123,7 @@
                                                 <label class="form-control-label" for="gender">  Gender </label>
                                                <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
                                                  <option value="select">Select</option> 
-                                                 <option [ngValue]="sour.Id" *ngFor="let sour of gendercatagerys" [value]="sour">{{ sour  }}</option>
+                                                 <option *ngFor="let sour of gendertypes" [value]="sour.Description">{{ sour.Description  }}</option>
                                                </select>
                                                <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
                                                 <div *ngIf="form.gender.errors.required">gender is required</div>
@@ -176,11 +174,26 @@
                                               </div>  
                                           </div>
                                           <div class='col-12 col-sm-2'>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                               <label class="form-control-label" for="nation">Nation </label>
                                               <input type="text" class="form-control tooltip-form" id="nation" formControlName="nation" name="nation" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.nation.errors || form.controls.nation.touched || form.controls.nation.dirty}" required  />  
                                               <div class="invalid-feedback" *ngIf="form.controls.nation.errors?.required" >nation   is required</div>
-                                              </div>  
+                                              </div>   -->
+
+                                              <div class="form-group">
+                                                  <label class="form-control-label" for="nation ">Nation</label>
+                                                  <select class="custom-select" name="nation" formControlName="nation"
+                                                    id="nation"
+                                                    [ngClass]="{ 'is-invalid': submitted && form.nation.errors }">
+                                                    <option value="select">Select</option> 
+                                                    <option  *ngFor="let Nationd of Nationlist"
+                                                      [value]="Nationd">{{ Nationd  }}</option>
+                                                  </select>
+                                                  <div *ngIf="submitted && form.nation.errors" class="invalid-feedback">
+                                                    <div *ngIf="form.nation.errors.required">Nation </div>
+                                                  </div>
+                                                </div>
+
                                           </div>
                                           
                                          </div> <!-- end of row-->
@@ -252,6 +265,7 @@
 
 
                                 <ngb-panel id="ngb-close-p2" class ="gridtable" title="Grid ">
+                                <ngb-panel id="ngb-close-p1" title="Booking Table ">
                                   <ng-template ngbPanelContent>
                                     <div class="test123 userlist " style="padding: 2px;">
                                       <div class="grid-table" style="width: 100%;">
@@ -448,7 +462,7 @@
                                     </div>
                                   </ng-template>
                                 </ngb-panel>
-                                <ngb-panel id="ngb-close-p1" title="Payment">
+                                <ngb-panel id="ngb-close-p1" title="Advance Payment">
                                   <ng-template ngbPanelContent>
                                     <div class="row paymentrow userlist">
 
@@ -458,7 +472,7 @@
                                           <select class="custom-select" name="selmode" formControlName="selmode"
                                             id="selmode" [ngClass]="{ 'is-invalid': submitted && form.selmode.errors }">
                                             <option value="select">Select</option>
-                                            <option [ngValue]="sour.Id" *ngFor="let sour of paymentmode" [value]="sour">
+                                            <option *ngFor="let sour of paymentmode" [value]="sour">
                                               {{ sour  }}</option>
                                           </select>
                                           <div *ngIf="submitted && form.selmode.errors" class="invalid-feedback">
@@ -504,7 +518,7 @@
                                             id="disctype"
                                             [ngClass]="{ 'is-invalid': submitted && form.disctype.errors }">
                                             <option value="select">Select</option>
-                                            <option [ngValue]="sour.Id" *ngFor="let sour of discounttypes"
+                                            <option *ngFor="let sour of discounttypes"
                                               [value]="sour">{{ sour  }}</option>
                                           </select>
                                           <div *ngIf="submitted && form.disctype.errors" class="invalid-feedback">
@@ -550,6 +564,188 @@
                                       </div>
 
                                     </div> <!-- payment final row-->
+                                   
+                                  </ng-template>
+
+                                </ngb-panel>
+
+
+
+
+
+
+                                <ngb-panel id="ngb-close-p1" title="Other Details">
+                                  <ng-template ngbPanelContent>
+                                    <div class="row  " style="margin-bottom:0">
+
+                                      <div class='col-12 col-sm-2'>
+                                      
+
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Arrivalfrom">Arrivalfrom From</label>
+                                            <input type="text" class="form-control tooltip-form" id="Vehicle"
+                                              formControlName="Arrivalfrom" name="Arrivalfrom" autocomplete="off"/>
+                                             
+                                               
+                                    
+                                          </div>
+
+
+                                      </div>
+                                      <div class='col-12 col-sm-2'>
+                                    
+
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="Proceeding">Proceeding From</label>
+                                            <input type="text" class="form-control tooltip-form" id="Vehicle"
+                                              formControlName="Proceeding" name="Proceeding" autocomplete="off" />
+                                              
+                      
+                                          </div>
+
+                                      </div>
+                                      <div class='col-12 col-sm-2'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="visit ">Purposse of Visit</label>
+                                          <select class="custom-select" name="visit" formControlName="visit"
+                                            id="visit"
+                                            [ngClass]="{ 'is-invalid': submitted && form.visit.errors }">
+                                            <option value="select">Select</option>
+                                            <option  *ngFor="let sour of purposeofvisit"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.visit.errors" class="invalid-feedback">
+                                            <div *ngIf="form.visit.errors.required">visit Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-sm-2'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="Vehicle">Vehicle No</label>
+                                              <input type="text" class="form-control tooltip-form" id="Vehicle"
+                                                formControlName="Vehicle" name="Vehicle" autocomplete="off"
+                                                [ngClass]="{'is-invalid' : submitted && form.controls.Vehicle.errors || form.controls.Vehicle.touched || form.controls.Vehicle.dirty}"
+                                                required />
+                                              <div class="invalid-feedback"
+                                                *ngIf="form.controls.Vehicle.errors?.required">Vehicle is required</div>
+                                            </div>
+
+
+
+                                      </div>
+                                      <div class='col-12 col-sm-2'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Bags ">No Of Bags</label>
+                                          <select class="custom-select" name="Bags" formControlName="Bags"
+                                            id="Bags"
+                                            [ngClass]="{ 'is-invalid': submitted && form.Bags.errors }">
+                                            <option value="select">Select</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                           
+                                          </select>
+                                          <div *ngIf="submitted && form.Bags.errors" class="invalid-feedback">
+                                            <div *ngIf="form.Bags.errors.required">Bags Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class='col-12 col-sm-2'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="news ">News Paper</label>
+                                          <select class="custom-select" name="news" formControlName="news"
+                                            id="news"
+                                            [ngClass]="{ 'is-invalid': submitted && form.news.errors }">
+                                            <option value="select">Select</option>
+                                            <option *ngFor="let sour of newspaper"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.news.errors" class="invalid-feedback">
+                                            <div *ngIf="form.news.errors.required">news Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div> <!-- payment final row-->
+
+
+                                    <div class="row  " style="margin-bottom:0">
+                                      <div class='col-12 col-sm-2'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Billing ">Billing Instruction</label>
+                                          <select class="custom-select" name="Billing" formControlName="Billing"
+                                            id="Billing"
+                                            [ngClass]="{ 'is-invalid': submitted && form.Billing.errors }">
+                                            <option value="select">Select</option>
+                                            <option  *ngFor="let sour of billinginstruction"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.Billing.errors" class="invalid-feedback">
+                                            <div *ngIf="form.Billing.errors.required">Billing Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class='col-12 col-sm-2'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="cometoknow ">How D U c to Know?</label>
+                                          <select class="custom-select" name="cometoknow" formControlName="cometoknow"
+                                            id="cometoknow"
+                                            [ngClass]="{ 'is-invalid': submitted && form.cometoknow.errors }">
+                                            <option value="select">Select</option>
+                                            <option  *ngFor="let sour of howuknow"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.cometoknow.errors" class="invalid-feedback">
+                                            <div *ngIf="form.cometoknow.errors.required">cometoknow Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class='col-12 col-sm-2'>
+                                          <label class="form-control-label" for="DOB">Date of Birth</label>
+                                          <div class="form-group">
+                                            <div class="input-group">
+                                              <input id="DOB" name="DOB"  formControlName="DOB" placement="right" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control">                                     
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class='col-12 col-sm-2'>
+                                            <label class="form-control-label" for="DOA">Date of Anniversary</label>
+                                            <div class="form-group">
+                                              <div class="input-group">
+                                                <input id="DOA" name="DOA"  formControlName="DOA" placement="right" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control">                                     
+                                              </div>
+                                            </div>
+                                          </div>
+                                     
+
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="title ">Title</label>
+                                              <select class="custom-select" name="title" formControlName="title"
+                                                id="title"
+                                                [ngClass]="{ 'is-invalid': submitted && form.title.errors }">
+                                                <option value="select">Select</option> 
+                                                <option  *ngFor="let Title of Titlelist"
+                                                  [value]="Title.Description">{{ Title.Description  }}</option>
+                                              </select>
+                                              <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
+                                                <div *ngIf="form.title.errors.required">title </div>
+                                              </div>
+                                            </div>
+                                    
+                                    
+                                    </div>
+
+
                                     <div class="col-md-12 p-b-5 p-t-5 userlist" style="border:2px solid #ccc; text-align: center; ">
                                       <button type="button" id="printgrcbtn" class="btn btn-primary ">PRINT GRC</button>
                                        <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">Create Checkin</button> 
@@ -560,6 +756,8 @@
                                   </ng-template>
 
                                 </ngb-panel>
+
+
                               </ngb-accordion>
 
 
@@ -702,34 +900,93 @@
 
 </app-modal-animation>
 
-<app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5'">
-  <h3 class="f-15">Guest Name details</h3>
 
-  <div class="app-modal-body text-center">
-    <table class="table table-striped text-left m-t-10">
-      <tr>
-        <td>Id :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-      <tr>
-        <td>ItemName :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-
-      <tr>
-        <td>RevId :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-      <tr>
-        <td>Rate :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-    </table>
-    <button (click)="closeMyModal('effect-5')"
-      class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
-  </div>
-
-</app-modal-animation>
+<!-- 
+////guestname -->
+<app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5 addressmodeleffect'">
+  <h3 class="f-15">Guest Details</h3>
+ 
+    <div class="app-modal-body text-center" style="position: relative;"> 
+   
+    
+      <div class="table-content crm-table">
+        <div class="project-table addressproject-table">
+          <div id="crm-contact" class="dt-responsive"  *ngIf="data1 | async as data">
+            <div class="row">         
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                     <div >
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
+                    </div> 
+                  </div> 
+      
+            </div>
+             
+             <div class="table-responsive">
+             
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                    <thead>
+                    <tr class="blueorange-gradient">        
+                    <th>
+                     <mfDefaultSorter  by="GuestName">GuestName</mfDefaultSorter>
+                     </th>               
+                    <th>
+                    <mfDefaultSorter  by="City">City</mfDefaultSorter>
+                    </th>  
+                    <th>
+                    <mfDefaultSorter  by="Pincode">Pincode</mfDefaultSorter>
+                    </th> 
+                   
+                    <th>
+                      <mfDefaultSorter  by="MobileNo">MobileNo</mfDefaultSorter>
+                      </th> 
+                   
+                        
+                     <th>
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                    </th>
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                    
+                 <tr *ngFor="let item of mf.data; let i = index;">                     
+                   <td>{{item.GuestName}}</td>   
+                   <td>{{item.City}}</td>   
+                   <td>{{item.Pincode}}</td>
+                   
+                   <td>{{item.MobileNo}}</td>        
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)">Get Details</a>
+                      
+                  </td>
+                </tr>  
+                </tbody>
+                <tfoot>
+                <tr class="blueorange-gradient">     
+                <th>GuestName</th>            
+                <th>City</th>    
+                <th>Pincode</th> 
+                <th>MobileNo</th>     
+                <th>Action</th>      
+                </tr>
+                <tr>
+                  <td colspan="6">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div> 
+          </div>
+        </div>
+      </div>
+     
+           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+          
+      </div>
+       
+    </app-modal-animation>
 
 
 

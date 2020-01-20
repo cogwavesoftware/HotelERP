@@ -153,6 +153,10 @@ onSubmit() {
   var Idback=this.Branch +'_'+ Rans.toString()+"GuestPhoto" + '.png'
   console.log(Idback)
 
+  console.log('this.fileData');
+
+  console.log(this.fileData)
+return;
   if(this.fileData!=null)
   {
     formData.append('GuestPohto', this.fileData, Guest);
@@ -455,6 +459,7 @@ preview1() {
     this.previewUrl = reader.result; 
   }
 }
+
 
 
 fileProgressIdfFront(fileInput: any) {
