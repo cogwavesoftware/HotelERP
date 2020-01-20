@@ -22,7 +22,7 @@ import { ConfirmValidatorDirective } from './confirm-validator.directive';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
-
+import {WebcamModule} from 'ngx-webcam';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,7 +45,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
-    ClickOutsideModule,
+    ClickOutsideModule,WebcamModule,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
     
   ],

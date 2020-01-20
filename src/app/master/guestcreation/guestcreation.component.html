@@ -85,6 +85,7 @@
                                                            
                                         </div> 
 
+                                        
                                         <div class="col-md-3"  [class.has-error]="Gender.touched && Gender.errors?.defaultSelected" >
                                             <label>Gender *</label>
                                                 <select class="custom-select" id="Gender" appSelectValidator="select"  #Gender="ngModel"  name="Gender" [(ngModel)]="model.Gender">
@@ -235,7 +236,8 @@
                                                       </div>
                                                 </div>
                                             </div>
-                                                                                
+                                                            
+                                            
                                           </div>
                                         
                                           <div class="row form-group" style="margin-left:0;margin-right:0">
@@ -244,7 +246,7 @@
                                                 <input type="file" name="GuestIdFront" (change)="fileProgressIdfFront($event)" class="form-control" [(ngModel)]="model.GuestIdFront" #GuestIdFront="ngModel"   >
                                                 <div class="row" style="margin-left:0;margin-right:0">
                                                     <img [src]="previewUrl2"  style="width:100%;max-width:300px">
-                                                                              
+                  
                                                   </div>
                                             </div>
                                             <div class="col-md-6 border  ">

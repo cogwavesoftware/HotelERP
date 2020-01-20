@@ -6,7 +6,6 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { AuthenticationService } from './../../_services/authentication.service';
 import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 
-
 @Component({
   selector: 'app-financialmaster',
   templateUrl: './financialmaster.component.html',

@@ -28,7 +28,7 @@ import { RoomtypeService } from "./../../_services/roomtype.service";
 import { MasterformService } from "src/app/_services/masterform.service";
 import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
 import { AddressService } from './../../_services/address.service';
-
+import { environment } from 'src/environments/environment';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from "@angular/common";
 export interface Checkinss {
@@ -68,6 +68,7 @@ export class CheckinComponent implements OnInit {
   timepicker: Partial<TimepickerConfig>;
   planlist = [];
   public data: Observable<any>
+  public data1: Observable<any>
   //forms: FormArray = this.formBuilder.array([]);
   model: any = {};
   //simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
@@ -80,16 +81,11 @@ export class CheckinComponent implements OnInit {
   private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
-  gendercategory: string[] = ["Mr", "Miss1", "Mrs"];
-  gendercatagerys: string[] = ["Male", "Female"];
+  
   paymentmode: string[] = ["Online", "Credit Card", "Cash"];
   public noofdays: number[] = [];
-  bookingtypes: string[] = ["OT", "Traval"];
-  foriegnguest: string[] = ["YES", "NO"];
-  Cities: string[] = ["TN", "KA"];
-  sourcelist: string[] = ["source1", "source2"];
-  arivalmode = ["Banas Kandha", "Naja"];
-  discounttypes = ["aaaa", "bbbbb"];
+  foriegnguest: string[] = ["Yes", "No"];
+  discounttypes = ["Amount", "%"];
   genderitems: any;
   gender: any;
   pincode: any;
@@ -110,7 +106,22 @@ export class CheckinComponent implements OnInit {
   isValid(event: boolean): void {
     this.valid = event;
   }
-
+  gendertypes=[];
+  GuestTitle=[];
+  GuestTdproof=[];
+  arrivalmode=[];
+  sourcemode=[];
+  Arrivalfrom =[];
+  purposeofvisit=[];
+  newspaper=[];
+  billinginstruction=[];
+  howuknow=[];
+  Nationlist=[];
+  Titlelist=[];
+  
+  previewUrl:any = null;
+  previewUrl2:any = null;
+  previewUrl3:any = null;
 
   constructor(private datePipe: DatePipe,public _masterservice:MasterformService,
     public router: Router,
@@ -121,16 +132,52 @@ export class CheckinComponent implements OnInit {
     public selectOptionService: SelectOptionService) {
       
 
-      // this.IsShowloader=true;
-      // this.data = this._masterservice.GetPinAddress();
-    
-      // setTimeout(()=>{
-      //  this.IsShowloader=false;
-      // },5000)
+      this.IsShowloader=true;
+      //this.data = this._masterservice.GetPinAddress();
+      this.data1 = this._masterservice.GetGuestDetails("CW_1001");
+      setTimeout(()=>{
+       this.IsShowloader=false;
+      },5000)
  
-      // console.log(this.data)
+      console.log(this.data)
+       
 
+      this._masterservice.Getmiscellaneous('Gender').subscribe(data=>{
+        this.gendertypes=data;
+      })
 
+      this._masterservice.GetAllNation().subscribe(data=>{
+        this.Nationlist=data;
+      })
+
+      this._masterservice.Getmiscellaneous('Title').subscribe(data=>{
+        this.Titlelist=data;
+      })
+
+      this._masterservice.Getmiscellaneous('Arrival Mode').subscribe(data=>{
+        this.arrivalmode=data;
+      })
+      this._masterservice.Getmiscellaneous('Source').subscribe(data=>{
+        this.sourcemode=data;
+      })
+  
+      this._masterservice.Getmiscellaneous('Purpose of Visit').subscribe(data=>{
+        this.purposeofvisit=data;
+      })
+
+      this._masterservice.Getmiscellaneous('News Paper').subscribe(data=>{
+        this.newspaper=data;
+      })
+
+      this._masterservice.Getmiscellaneous('Billing Instruction').subscribe(data=>{
+        this.billinginstruction=data;
+      })
+
+      this._masterservice.Getmiscellaneous('How Do You Know').subscribe(data=>{
+        this.howuknow=data;
+      })
+  
+    
     this.datePickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
@@ -158,20 +205,21 @@ export class CheckinComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       referenceid: ["", [Validators.required]],
-      source: ["", [Validators.required]],
-      arivalmode: ["", [Validators.required]],
+      source: ["select", [Validators.required]],
+      arivalmode: ["Walk-IN", [Validators.required]],
+      title: ["Walk-IN", [Validators.required]],
       booking: ["", [Validators.required]],
       convenience: ["", [Validators.required]],
       guestname: ["", [Validators.required]],
       gender: ["Male", [Validators.required]],
       mobile: ["", [Validators.required]],
       email: ["", [Validators.required]],
-      foriegnguest: ["NO", [Validators.required]],
+      foriegnguest: ["No", [Validators.required]],
       address: ["", [Validators.required]],
       pincode: ["", [Validators.required]],
       city: ["", [Validators.required]],
       state: ["", [Validators.required]],
-      nation: ["", [Validators.required]],
+      nation: ["India", [Validators.required]],
       company: ["", [Validators.required]],
       gstno: ["", [Validators.required]],
       other: this.formBuilder.array([this.AddbokingGrid()]),
@@ -183,7 +231,7 @@ export class CheckinComponent implements OnInit {
       selmode: ["Cash", [Validators.required]],
       payamount: ["", [Validators.required]],
       paymntdesc: ["", [Validators.required]],
-      disctype: ["", [Validators.required]],
+      disctype: ["select", [Validators.required]],
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
@@ -191,7 +239,16 @@ export class CheckinComponent implements OnInit {
       GuestPhotoPath:["",[Validators.required]],
       GuestIdFront:["",[Validators.required]],
       GuestIdBack:["",[Validators.required]],
-      
+      Arrivalfrom:["",[Validators.required]],
+      Proceeding:["",[Validators.required]],
+      Vehicle:["",[Validators.required]],
+      Bags:["select",[Validators.required]],
+      news:["select",[Validators.required]],
+      visit:["select",[Validators.required]],
+      cometoknow:["select",[Validators.required]],
+      Billing:["select",[Validators.required]],
+      DOB:["",[Validators.required]],
+      DOA:["",[Validators.required]]
     });
   }
 
@@ -263,11 +320,41 @@ export class CheckinComponent implements OnInit {
     }) 
   }
 
+  openMyGuestNameModalData(SelectedData:any,event:any){ 
+    console.log('SelectedData')
+    console.log(SelectedData)
+    this.form.patchValue({
+      guestname: SelectedData.GuestName,
+      title: SelectedData.GuestTittle,
+      gender:SelectedData.Gender,
+      address:SelectedData.GuestAddress,
+      city: SelectedData.City,
+      state:SelectedData.State,
+      nation:"India",
+      mobile:SelectedData.MobileNo,
+      email:SelectedData.Email,
+      pincode:SelectedData.PINCode,
+      gstno:SelectedData.GSTNO,
+      DOB: SelectedData.GDOB,
+      DOA: SelectedData.GDOA,
+
+    }) 
+   ;
+    this.previewUrl=environment.GuestimagePath+"/"+SelectedData.GuestPhotoPath;
+    this.previewUrl2=environment.GuestimagePath+"/"+SelectedData.GuestIdFront;
+    this.previewUrl3=environment.GuestimagePath+"/"+SelectedData.GuestIdBack;
+  }
+ 
+
   openMyModalPincode(event, data){
     this.filterQuery="";
     document.querySelector("#" + event).classList.add("md-show");
   }
-
+  openguestnamedetails(event, data)
+{
+  this.filterQuery="";
+  document.querySelector("#" + event).classList.add("md-show");
+}
 
   RoomTypeChanged(index: number, Changed: string) {
     //let dd = this.form.controls[index].get("RoomCode").value;
@@ -331,12 +418,7 @@ export class CheckinComponent implements OnInit {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
 
-  openguestnamedetails(event) {
-    setTimeout(() => {
-      console.log("openguestnamedetails calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
+ 
   openpincodedetails(event) {
     setTimeout(() => {
       console.log("openpincodedetails calling");
