@@ -1,6 +1,6 @@
 
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
-import { Observable, empty } from "rxjs";
+ import { Observable, Observer,empty } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import {
@@ -31,6 +31,12 @@ import { AddressService } from './../../_services/address.service';
 import { environment } from 'src/environments/environment';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from "@angular/common";
+
+import { Subject } from 'rxjs/Subject';
+
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+ 
+
 export interface Checkinss {
   RoomCode: string;
   RoomNo: string;
@@ -62,6 +68,35 @@ export interface Checkinss {
   ]
 })
 export class CheckinComponent implements OnInit {
+  //web camara data 
+
+  public OnCamera: string = "OnCamera"
+  public Iscamaraon: boolean = false;
+  // toggle webcam on/off
+  public showWebcam = true;
+  public allowCameraSwitch = true;
+  public multipleWebcamsAvailable = false;
+  public deviceId: string;
+  name = 'Angular';
+  base64TrimmedURL: any;
+  base64DefaultURL: any;
+  generatedImage: any;
+
+  public videoOptions: MediaTrackConstraints = {
+    // width: {ideal: 1024},
+    // height: {ideal: 576}
+  };
+  public errors: WebcamInitError[] = [];
+
+  // latest snapshot
+  public webcamImage: WebcamImage = null;
+
+  // webcam snapshot trigger
+  private trigger: Subject<void> = new Subject<void>();
+  // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+  //web camara data end 
+
   NodaysChanged: number = 0;
   form: FormGroup;
   datePickerConfig: Partial<BsDatepickerConfig>;
@@ -123,12 +158,12 @@ export class CheckinComponent implements OnInit {
   previewUrl2:any = null;
   previewUrl3:any = null;
 
-  constructor(private datePipe: DatePipe,public _masterservice:MasterformService,
+  constructor(private datePipe: DatePipe,public _masterformservice:MasterformService,
     public router: Router,
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private roomservice: RoomtypeService,
-    private masterservice: MasterformService,public _addressservice:AddressService,
+    private _masterservice: MasterformService,public _addressservice:AddressService,
     public selectOptionService: SelectOptionService) {
       
 
@@ -248,15 +283,24 @@ export class CheckinComponent implements OnInit {
       cometoknow:["select",[Validators.required]],
       Billing:["select",[Validators.required]],
       DOB:["",[Validators.required]],
-      DOA:["",[Validators.required]]
+      DOA:["",[Validators.required]],
+      drivername:["",[Validators.required]],
+      drivermobile:["",[Validators.required]],
+      vehicleno:["",[Validators.required]],
+      charge:["",[Validators.required]]
     });
   }
 
   ngOnInit() {
 
      
+    WebcamUtil.getAvailableVideoInputs()
+    .then((mediaDevices: MediaDeviceInfo[]) => {
+      this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+    });
 
-    this.masterservice.getplan().subscribe(res => {
+
+    this._masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
       console.log(this.planlist);
     });
@@ -268,7 +312,7 @@ export class CheckinComponent implements OnInit {
 
     if (this.isSingleCheckin == true) {
       console.log(this.form);
-      this.masterservice.GetCheckinDetail("101", "CW_1001").subscribe(data => {
+      this._masterservice.GetCheckinDetail("101", "CW_1001").subscribe(data => {
         this.checkinform = data;
         console.log(this.checkinform);
         console.log("this.checkinform");
@@ -292,7 +336,98 @@ export class CheckinComponent implements OnInit {
 
   }
 
- 
+  public triggerSnapshot(): void {
+    this.trigger.next();
+    this.toggleWebcam();
+    this.Iscamaraon = true;
+
+  }
+
+  public toggleWebcam(): void {
+    this.showWebcam = !this.showWebcam;
+  }
+
+  public handleInitError(error: WebcamInitError): void {
+    this.errors.push(error);
+  }
+
+  public showNextWebcam(directionOrDeviceId: boolean | string): void {
+    // true => move forward through devices
+    // false => move backwards through devices
+    // string => move to device with given deviceId
+    this.nextWebcam.next(directionOrDeviceId);
+  }
+
+  public handleImage(webcamImage: WebcamImage): void {
+    console.info('received webcam image', webcamImage);
+    this.webcamImage = webcamImage;
+    this.getImage(webcamImage.imageAsBase64)
+
+  }
+
+  public cameraWasSwitched(deviceId: string): void {
+    console.log('active device: ' + deviceId);
+    this.deviceId = deviceId;
+  }
+
+  public get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  public get nextWebcamObservable(): Observable<boolean | string> {
+    return this.nextWebcam.asObservable();
+  }
+
+  
+
+  getImage(url) {
+  debugger;
+    // Base64 url of image trimmed one without data:image/png;base64
+   this.base64DefaultURL= url;
+    // Naming the image
+    const date = new Date().valueOf();
+    let text = '';
+    const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(Math.floor(Math.random() * possibleText.length));
+    }
+    // Replace extension according to your media type
+    const imageName = date +'_'+  text + '.png';
+    // call method that creates a blob from dataUri
+    //const imageBlob = this.dataURItoBlob(this.base64DefaultURL);
+    const formData = new FormData();
+    let imageBlob;
+    this.dataURItoBlob(this.base64DefaultURL).subscribe(data => {
+      imageBlob = data;
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      formData.append('GuestPohto', imageFile, imageName);
+    });
+  
+    this._masterformservice.SavaImsData(formData)
+    .subscribe(res => {
+      console.log('res');   
+    },
+    error => {    
+      alert('e') 
+      console.log(error);        
+    }); 
+
+  }
+
+ dataURItoBlob(dataURI): Observable<Blob> {
+    return Observable.create((observer: Observer<Blob>) => {
+      const byteString = window.atob(dataURI);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: 'image/jpeg' });
+      observer.next(blob);
+      observer.complete();
+    });
+  } 
+
   CreateNoofDays(number) {
     for (var i = 1; i <= number; i++) {
       this.noofdays.push(i);
@@ -371,7 +506,7 @@ export class CheckinComponent implements OnInit {
       BranchCode: "CW_1001"
     };
 
-    this.masterservice.GetBookingData(this.Formcheckin).subscribe(data => {
+    this._masterservice.GetBookingData(this.Formcheckin).subscribe(data => {
       this.other.controls[index].patchValue({
         RoomNo: data["RoomNo"],
         RoomCode: data["RoomCode"],
@@ -418,7 +553,10 @@ export class CheckinComponent implements OnInit {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
 
- 
+  openMyModalDriverMobile (event){    
+    console.log("openMyModalDriverMobile calling");  
+    document.querySelector("#" + event).classList.add("md-show");
+  }
   openpincodedetails(event) {
     setTimeout(() => {
       console.log("openpincodedetails calling");
