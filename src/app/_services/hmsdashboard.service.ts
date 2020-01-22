@@ -19,6 +19,7 @@ export class HmsdashboardService {
 
   
   GetHmsDashboard(branchcode: string) {
+   // alert('api/CloudHMS/Dashboard');
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Dashboard/dashboard?BranchCode=' + branchcode);
   }
 }

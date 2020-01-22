@@ -7,10 +7,7 @@ const routes: Routes = [{
   path:'',
   component:MaindashboardComponent ,
   data:{
-    title:'Main Dashboard',
-    icon:'icon-home',
-    caption: 'MAinDashboard',
-    status: true
+    
   }
 }];
 

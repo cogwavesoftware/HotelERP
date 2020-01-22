@@ -1,90 +1,50 @@
 <div class="maindashboard"> 
-  
+   
 <div class="roomsrow">
-  <div class="row">
-     <div class=" col-md-12">
-     <app-roomgrid></app-roomgrid>
-    </div>
-   </div>
-</div>
-
-
-<div class="roomsrow">
-    <div class="row">
-       <div class=" col-md-12">
-        <app-card [title]="'Products Sales'">
+     
+      
           <div class="row">
-  <div class="col-md-8 userlist"> 
-    <div class="row">
-      <div class="col-md-12  ">
-
-       
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12  "> 
-           
-            <!-- Bootstrap tab card start -->
-            <app-card [title]="'  Rooms'"  >
+  <div class="col-md-12  "> 
+    
+     
+      <div class="col-md-12  ">  
               <div class="row">
-                <div class="col-md-12 ">             
-                   <!-- please cut below code for rooms dashborad -->
-         <div class="col-md-12" id="leftNavBar">
-          <ul *ngFor="let item of roomsdetail | async" style="display: block">
-            <li class="parentNav">{{item.mainfloors}}</li>
-            <li class="childData">
+                <div class="col-md-12 ">     
+         <div class="col-md-12" id="leftNavBar">          
+            <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors"  >
+            <li class="parentNav  peach-gradient">
+              <i class="fa fas fa-building"></i>               
+                {{item.FloorName}}</li>
+             <li class="childData">
               <ul style="display: inline-block" >
-                <li style="float: left; margin-left: 20px;"  *ngFor="let child of item.rooms" (click)="openRoomsPopup('effect-2',child )">
-                  <button class="greenbutton"  name = {{child}}  >{{child}}  </button>                  
+                <li style="float: left; margin-left: 5px "  *ngFor="let child of finalMenu.Rooms" (click)="openRoomsPopup('effect-2',child )">
+                  <div *ngIf="item.FloorCode==child.FloorCode ">
+                    <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button> 
+                  </div>                                   
                 </li>
               </ul>
-            </li>
-          </ul>
+            </li> 
+          </ul>  
           
- 
-          <div class="container">
-            
-            <div class="button2" id="button-4">
-              <div id="underline"></div>
-              <a href="#">Let's Go!</a>
-            </div>
-            <div class="button button-1">Neon</div>
-            <div class="button button-2">Angle bg</div>
-            <div class="button button-3">Shadow</div>
-            <div class="button button-4">Pulse</div>
-            <div class="button button-5">Gradient</div>
-            <div class="testbutton"> 
-            <button id='b00' class='press-on'>CLICK</button>
-            <button id='b10' class='invert'>CLICK</button>
-              </div>
-              <div class="testbutton2">
-                <a href="#" class="button">Press Me</a>
-              </div>
-              <div class="testbutton3">
-                <a class="push_button red" href="#">Take The Red Pill</a> 
-              <a class="push_button blue" href="#">Take The Blue Pill</a>
-              </div>
-
-              
-          </div>
+  
 
         </div>
 <!-- end rooms dashborad -->
                 </div>
                 
               </div>
-            </app-card>
+            
             <!-- Bootstrap tab card end -->
            
          
       </div>
-    </div>
+     
 
 <div class="row">
   <div class="col-md-12  "> 
        
         <!-- Bootstrap tab card start -->
-        <app-dashtabs></app-dashtabs>
+        <!-- <app-dashtabs></app-dashtabs> -->
     
         <!-- Bootstrap tab card end -->
        
@@ -92,14 +52,10 @@
   </div>
 </div>
   </div>
-  <div class="col-col-4"> 
-    <app-productstatus></app-productstatus>
-
-  </div>
+ 
           </div>
-        </app-card>
-      </div>
-     </div>
+      
+      
   </div>
  
 </div>

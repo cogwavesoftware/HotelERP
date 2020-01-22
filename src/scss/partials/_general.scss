@@ -6079,11 +6079,21 @@ outerdiv{
 }
 .maindashboard li.parentNav{     
     color: #000;
-    box-shadow: 3px 3px lightgrey;
+   
     padding: 5px;
     margin-bottom: 10px;
     margin-top:10px;
-}   
+}  
+.maindashboard .borderbtmforrooms {
+    box-shadow: 3px 3px orange;
+     
+}
+.maindashboard .roomstyle{
+    float: left; 
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+ 
 .checkindetails {
     h2{
         color:#ffffff;
@@ -6215,14 +6225,14 @@ outerdiv{
     font-size: 90%;
     outline: none;
     color: #fff;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 6px  6px #000;
-    width: 60px;
-    min-height: 52px;
+    border: none;   
+    box-shadow: 1px  1px #000;
+    width: 80px;
+    min-height: 42px;     
+    font-family: Poppins-Regular;
 }
 .greenbutton{
-    background-color: cornflowerblue;
+    background-color: rgb(5, 199, 47);
 }
 .greenbutton:hover {background-color: #9bee9d}
 .greenbutton:active {
