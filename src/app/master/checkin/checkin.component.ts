@@ -62,7 +62,7 @@ export interface Checkinss {
 export class CheckinComponent implements OnInit,OnDestroy {
   //web camara data 
 
- 
+  public snapshotshow =false;
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
   // toggle webcam on/off
@@ -299,7 +299,9 @@ export class CheckinComponent implements OnInit,OnDestroy {
       drivername: ["", [Validators.required]],
       drivermobile: ["", [Validators.required]],
       vehicleno: ["", [Validators.required]],
-      charge: ["", [Validators.required]]
+      charge: ["", [Validators.required]],
+      idproof:[""],
+      idproofno:[""]
     });
   }
 
@@ -397,12 +399,19 @@ export class CheckinComponent implements OnInit,OnDestroy {
   public triggerSnapshot(): void {
     this.trigger.next();
     this.toggleWebcam();
-    this.Iscamaraon = true;
+    //this.Iscamaraon = true;
   }
 
   public SwitchOnCamara()
   {
+    if(this.showWebcam){
+      this.snapshotshow =true;
+    }
+    else{
+      this.snapshotshow =false;
+    }
     this.showWebcam = !this.showWebcam;
+    
   }
 
   
@@ -448,6 +457,7 @@ export class CheckinComponent implements OnInit,OnDestroy {
 
   public toggleWebcam(): void {
     this.showWebcam = !this.showWebcam;
+    this.snapshotshow =true;
   }
 
   public handleInitError(error: WebcamInitError): void {
@@ -588,7 +598,7 @@ export class CheckinComponent implements OnInit,OnDestroy {
       DOB: SelectedData.GDOB,
       DOA: SelectedData.GDOA,
     });
-      
+    this.snapshotshow =true;
     this.previewUrl = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
     this.previewUrl2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
     this.previewUrl3 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;

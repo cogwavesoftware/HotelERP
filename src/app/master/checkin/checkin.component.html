@@ -238,9 +238,13 @@
                                                            (initError)="handleInitError($event)"
                                                    ></webcam>
                                                    
+                                                   <div class="snapshot ">
+                                                                    <div *ngIf="snapshotshow">                               
+                                                        <img  [height]="100" [width]="150" [src]="previewUrl" style="border:2px solid #000000; border-radius:3px"/>
+                                                      </div>   
+                                                      </div> 
                                                  
-                                                 
-                                                   <br/>
+                                                   
                                                  
                                                </div> 
                                                <h4 *ngIf="errors.length > 0">Messages:</h4>
@@ -260,10 +264,7 @@
                                                </div>
 
                                                <div class="col-sm-4">
-                                                <div class="snapshot" *ngIf="webcamImage">
-                                                  <label class="form-control-label" for="PhotoTaken">Taken Photo </label>                                                    
-                                                      <img  [height]="100" [width]="150" [src]="previewUrl" style="border:2px solid #000000; border-radius:3px"/>
-                                                    </div>                                                 
+                                                                                                
                                                </div>
 
                                              </div>
@@ -800,22 +801,18 @@
                                  
                           <div class="row form-group">
                                <div class="col-md-12 ">
-                                   <label >Id Proof</label>  
-                                   <input type="file" class="form-control tooltip-form" id="state" formControlName="GuestPhotoPath" name="GuestPhotoPath" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestPhotoPath.errors || form.controls.GuestPhotoPath.touched || form.controls.GuestPhotoPath.dirty}" required  />  
+                                   <label >Guest Photo1</label>  
+                                   <input type="file" class="form-control tooltip-form" id="GuestPhotoPath" formControlName="GuestPhotoPath" name="GuestPhotoPath" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestPhotoPath.errors || form.controls.GuestPhotoPath.touched || form.controls.GuestPhotoPath.dirty}" required  />  
                                                 <div class="invalid-feedback" *ngIf="form.controls.GuestPhotoPath.errors?.required" >GuestPhotoPath   is required</div>
-
                                     <div class="col-md-12 border p-10">
                                        <div class="row" style="margin-left:0">                                         
-                                          <img [src]="previewUrl" style="width:100%;max-width:300px" />  
+                                          <img [src]="previewUrl" style="width:100%;max-width:300px;border:1px solid red" />  
                                          </div>
                                    </div>
                                </div>
                                    
-                          
-
-
                              </div>
-                           
+                             
                              <div class="row form-group" style="margin-left:0;margin-right:0">
                                <div class="col-md-6 border  ">
                                 <div class='col-12 col-lg-12 '>
@@ -828,9 +825,11 @@
                                                                 
                                     </div>
                                   </div>
-                          <div class='col-12 col-lg-12'>
+
+
+                         <div class='col-12 col-lg-12'>
                                 <div class="form-group">
-                                  <label class="form-control-label" for="idproof">ID Proof</label>
+                                  <label class="form-control-label" for="idproof">ID ProofBack</label>
                                   <select class="custom-select" name="idproof" formControlName="idproof"
                                     id="idproof"
                                     [ngClass]="{ 'is-invalid': submitted && form.idproof.errors }">
@@ -845,33 +844,13 @@
                               </div>
                               <div class="col-12 col-lg-12 ">
                                 <label >Id No</label>  
-                                <input type="text" class="form-control tooltip-form" id="proofidno" formControlName="proofidno" name="proofidno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.proofidno.errors || form.controls.proofidno.touched || form.controls.proofidno.dirty}" required  />  
-                                             <div class="invalid-feedback" *ngIf="form.controls.proofidno.errors?.required" >proofidno   is required</div>
+                                <input type="text" class="form-control tooltip-form" id="idproofno" formControlName="idproofno" name="idproofno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.idproofno.errors || form.controls.idproofno.touched || form.controls.idproofno.dirty}" required  />  
+                                             <div class="invalid-feedback" *ngIf="form.controls.idproofno.errors?.required" >proofidno   is required</div>
  
-                            </div>
+                            </div> 
 
 
-                            <div class='col-12 col-lg-12'>
-                              <div class="form-group">
-                                <label class="form-control-label" for="idproofb">ID Proof Back</label>
-                                <select class="custom-select" name="idproof" formControlName="idproofb"
-                                  id="idproofb"
-                                  [ngClass]="{ 'is-invalid': submitted && form.idproofb.errors }">
-                                  <option value="select">Select</option>
-                                  <option  *ngFor="let sour of howuknow"
-                                    [value]="sour.Description">{{ sour.Description  }}</option>
-                                </select>
-                                <div *ngIf="submitted && form.idproofb.errors" class="invalid-feedback">
-                                  <div *ngIf="form.idproofb.errors.required">idproofback </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12 col-lg-12 ">
-                              <label >Id No back</label>  
-                              <input type="text" class="form-control tooltip-form" id="proofidnobck" formControlName="proofidnobck" name="proofidnobck" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.proofidnobck.errors || form.controls.proofidnobck.touched || form.controls.proofidnobck.dirty}" required  />  
-                                           <div class="invalid-feedback" *ngIf="form.controls.proofidnobck.errors?.required" >proofidnobck   is required</div>
-
-                          </div>
+                        
 
                                </div>
                                <div class="col-md-6 border  ">
@@ -1010,7 +989,7 @@
 
 
 
-<!-- ////companymodel --> -->
+<!-- ////companymodel --> 
 <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">
   <h3 class="f-15">Company List Details</h3>
  
