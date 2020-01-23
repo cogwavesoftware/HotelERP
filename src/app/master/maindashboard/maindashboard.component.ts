@@ -19,7 +19,7 @@ export class MaindashboardComponent implements OnInit {
   @ViewChild("f", { static: false }) form: any;
   roomname:any;
   floorname:any;
-
+  
   finalMenu = new Array();
   floor=new Array<any>();
 

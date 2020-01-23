@@ -711,9 +711,20 @@
           width: 75%!important;
          
       }
+      .maindashboard .roomsrow{    
+        padding-bottom: 30px;         
+    }
+    .maindashboard .stickytab{ 
+        position: unset;
+    }
       .roomcodep-l-25{
         padding-left: 25px;
       }
+//       .outerdiv .tabouter .taboutercreatebtn .otherrow .col-12.col-sm-2,
+// .outerdiv .tabouter .taboutercreatebtn .discountouter .col-12.col-sm-2{
+//     padding-right:15px;
+//     padding-left:15px;
+// }
 }
 @media only screen and (max-width: 767px) {
     .signup-card {

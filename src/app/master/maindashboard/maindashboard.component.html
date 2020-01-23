@@ -1,64 +1,234 @@
 <div class="maindashboard"> 
-   
-<div class="roomsrow">
-     
-      
-          <div class="row">
-  <div class="col-md-12  "> 
+  <div class="container-fluid">
+    <div class="col-md-12" style="padding-right:0; padding-left:0">
+      <div class="row ">
+       
+        <div class="col-md-9 " style="padding-left: 0; border:1px solid #ccc">
+          <h2 class="blueorange-gradient">Header Text</h2>
+          <div class=" ">
+             
+          <div class="col-md-12 test " style="padding:10px 10px 10px 0px;"> 
+            <ul>
+              <li>
+                <img src="assets/images/product2.png"> <span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Group Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"> <span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Group Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"> <span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Group Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"><span>Checkin</span>
+              </li>
+              <li>
+                <img src="assets/images/product2.png"> <span>Checkin</span>
+              </li>
     
-     
-      <div class="col-md-12  ">  
-              <div class="row">
-                <div class="col-md-12 ">     
-         <div class="col-md-12" id="leftNavBar">          
-            <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors"  >
-            <li class="parentNav  peach-gradient">
-              <i class="fa fas fa-building"></i>               
-                {{item.FloorName}}</li>
-             <li class="childData">
-              <ul style="display: inline-block" >
-                <li style="float: left; margin-left: 5px "  *ngFor="let child of finalMenu.Rooms" (click)="openRoomsPopup('effect-2',child )">
-                  <div *ngIf="item.FloorCode==child.FloorCode ">
-                    <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button> 
-                  </div>                                   
-                </li>
-              </ul>
-            </li> 
-          </ul>  
-          
-  
-
-        </div>
-<!-- end rooms dashborad -->
-                </div>
-                
+            </ul>
+            <div class="row">
               </div>
-            
-            <!-- Bootstrap tab card end -->
+          </div>
+        </div>
+
+        <div class="roomsrow">
+        <div class="col-md-12  "> 
+        <div class="row">
+        
+        <div class="col-md-12 ">  
+          <div class="row">
+              <div class="col-md-12">          
+                    <ul class="roomstatus" >
+                    <li class="  ">
+                    <label class="label label-success">Vacant : {{finalMenu.Vacant}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-danger">Occupied : {{finalMenu.Occupied}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-inverse">Dirty : {{finalMenu.Dirty}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-warning">Blocked : {{finalMenu.Blocked}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-primary">Un_Settel : {{finalMenu.Un_Settel}}</label>
+                    </li>
+                    
+                    <li class="  ">
+                    <label class="label label-primary">Management : {{finalMenu.Management}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-primary">Occupancy : {{finalMenu.Occ}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-primary">TodayCheckin : {{finalMenu.TodayCheckin}}</label>
+                    </li>
+                    <li class="  ">
+                    <label class="label label-primary">TodayCheckout : {{finalMenu.TodayCheckout}}</label>
+                    </li>
+                    </ul> 
+              </div>
+          </div>
+        
+        <div class="row">
+              <div class="col-md-12 ">     
+                  <div class=" " id="leftNavBar">          
+                    <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors"  >
+                    <li class="parentNav  peach-gradient">
+                    <i class="fa fas fa-building"></i>               
+                    {{item.FloorName}}</li>
+                      <li class="childData">
+                        <ul style="display: inline-block" >
+                          <li style="float: left; margin-left: 0px "  *ngFor="let child of finalMenu.Rooms" (click)="openRoomsPopup('effect-2',child )">
+                          <div *ngIf="item.FloorCode==child.FloorCode ">
+                          <div *ngIf = "child.Status == 'V'">                       
+                          <span class="mytooltip tooltip-effect-1">
+                          <span class="tooltip-item">
+                          <button type="button" class="btn btn-success btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          {{child.RoomNo}} <br> 
+                          <span class=" ">{{child.RoomCode}}</span>
+                          </button></span>
+                          <span class="tooltip-content clearfix">
+                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          </span>
+                          </span>       
+                          </div> <!-- end of if condition -->
+                          <div *ngIf = "child.Status == 'O'">                      
+                          <span class="mytooltip tooltip-effect-1">
+                          <span class="tooltip-item">
+                          <button type="button" class="btn btn-danger ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          {{child.RoomNo}}  <br>
+                          <span class="">{{child.RoomCode}}</span>
+                          </button></span>
+                          <span class="tooltip-content clearfix">
+                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          </span>
+                          </span> 
+                          </div><!-- end of if condition -->
+                          <div *ngIf = "child.Status == 'D'">                      
+                          <span class="mytooltip tooltip-effect-1">
+                          <span class="tooltip-item">
+                          <button type="button" class="btn btn-inverse btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          {{child.RoomNo}}  <br>
+                          <span class=" ">{{child.RoomCode}}</span>
+                          </button></span>
+                          <span class="tooltip-content clearfix">
+                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          </span>
+                          </span> 
+                          </div><!-- end of if condition -->
+                          <div *ngIf = "child.Status == 'B'">                      
+                          <span class="mytooltip tooltip-effect-1">
+                          <span class="tooltip-item">
+                          <button type="button" class="btn btn-warning btn-square ripple" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          {{child.RoomNo}}  <br>
+                          <span class=" ">{{child.RoomCode}}</span>
+                          </button></span>
+                          <span class="tooltip-content clearfix">
+                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          </span>
+                          </span> 
+                          </div><!-- end of if condition -->
+                          <div *ngIf = "child.Status == 'M'">                      
+                          <span class="mytooltip tooltip-effect-1">
+                          <span class="tooltip-item">
+                          <button type="button" class="btn btn-primary btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          {{child.RoomNo}}  <br>
+                          <span class=" ">{{child.RoomCode}}</span>
+                          </button></span>
+                          <span class="tooltip-content clearfix">
+                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          </span>
+                          </span> 
+                          </div><!-- end of if condition -->
+                          <!-- <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button>  -->
+                          </div>     
+                          
+                                              
+                          </li>
+                        </ul>
+                      </li> 
+                    </ul>  
+                  
+                  
+                  
+                  </div>
+              <!-- end rooms dashborad -->
+              </div>
+        
+        </div>
+        
+        <!-- Bootstrap tab card end -->
+        
+        
+        </div>
+        
+   
+        </div>
+        </div><!-- col-md-12-->
+
+      
+
+
+        </div> <!-- roomsrow -->
+
+       
+        
+        </div> <!-- col md 9  end -->
+        <div class="col-md-7 stickytab ">          
+            <div class="row" >
+              <div class="col-md-12">  
+              <app-dashtabs></app-dashtabs>
+              </div>
+            </div>
+             
+                    
+          </div>
+        
+        <div class="col-md-3">          
+            <div class="row" style="border: 1px solid #ccc;">
+            <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+            </div>
            
-         
+        </div>
       </div>
      
+    </div>
+  </div>
+  
 
-<div class="row">
-  <div class="col-md-12  "> 
-       
-        <!-- Bootstrap tab card start -->
-        <!-- <app-dashtabs></app-dashtabs> -->
-    
-        <!-- Bootstrap tab card end -->
-       
-     
-  </div>
-</div>
-  </div>
- 
-          </div>
-      
-      
-  </div>
- 
-</div>
+
+</div> <!-- maindashboard-->
 
 <app-modal-animation [modalID]="'effect-2'" [modalClass]="'md-effect-2'">
   <h3 class="f-15">Guest Details</h3>
@@ -75,6 +245,7 @@
                
 
            </table>      
+           
            <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
       </div>
        
