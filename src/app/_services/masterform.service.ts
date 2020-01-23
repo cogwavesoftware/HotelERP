@@ -93,6 +93,12 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/pincode');
   }
 
+  
+  SearchGuestAddress(search:any) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/pincodesearch?search=' + search);
+  }
+
+
   getclientproduct(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/cproduct?BranchCode=' + branchcode);
   }
@@ -250,6 +256,10 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/guest?Branchcode=' + branchcode);
   }
 
+  GuetDataSearch(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GuetDataSearch?Branchcode=' + branchcode + '&search=' + search);
+  }
+
   SaveGuestData(GuestData:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveguest',GuestData,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
@@ -288,7 +298,7 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
-  displayRooms(){
+  GetPindata(){
     return this.http.get<any>(`assets/data/floors.json`);
   }
   GetCheckinDetail(RoomNo:string,Branchcode:string) {   

@@ -14,10 +14,11 @@
           <br/>
           <div class="snapshot" *ngIf="webcamImage">
                 <h2>Photo Taken</h2>
-                <img  [height]="250" [width]="250" [src]="webcamImage.imageAsDataUrl"/>
+                <img  *ngIf="Iscamaraon" [height]="250" [width]="250" [src]="webcamImage.imageAsDataUrl"/>
               </div> 
           <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-          <button *ngIf="Iscamaraon" class="actionBtn" (click)="toggleWebcam();">{{OnCamera}}</button>
+          <button class="actionBtn" (click)="oncamara();">oncamara()</button>
+        <!-- //  <button *ngIf="Iscamaraon" class="actionBtn" (click)="toggleWebcam();">{{OnCamera}}</button> -->
           <br/>
         
       </div>
