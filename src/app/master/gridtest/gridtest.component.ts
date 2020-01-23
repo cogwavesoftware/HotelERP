@@ -24,19 +24,15 @@ export class GridtestComponent implements OnInit {
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
   // toggle webcam on/off
-  public showWebcam = true;
+  public showWebcam = false;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
-
-
 
   name = 'Angular';
   base64TrimmedURL: any;
   base64DefaultURL: any;
   generatedImage: any;
-
-
 
 
   public videoOptions: MediaTrackConstraints = {
@@ -70,7 +66,15 @@ export class GridtestComponent implements OnInit {
   public triggerSnapshot(): void {
     this.trigger.next();
     this.toggleWebcam();
-    this.Iscamaraon = true;
+   
+  }
+
+
+  public oncamara()
+  {
+    this.toggleWebcam();
+    this.Iscamaraon = false;
+   
 
   }
 
