@@ -154,10 +154,10 @@ onSubmit() {
   console.log(Idback)
 
   console.log('this.fileData');
-
   console.log(this.fileData)
-return;
-  if(this.fileData!=null)
+
+
+return;  if(this.fileData!=null)
   {
     formData.append('GuestPohto', this.fileData, Guest);
   }

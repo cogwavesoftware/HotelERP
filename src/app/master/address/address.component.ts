@@ -4,6 +4,8 @@ import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+import { BankService } from 'src/app/_services/bank.service';
+import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 @Component({
   selector: "app-address",
   templateUrl: "./address.component.html",
@@ -37,18 +39,32 @@ export class AddressComponent implements OnInit {
   filterdata: any;
   IsExistdata: boolean;
   @ViewChild("f", { static: false }) form: any;
-  constructor(
+  constructor(private _bankservice:BankService,
     private _masterformservice: MasterformService,
     private _ipservice: IpserviceService,
-    private toastyService: ToastyService
+    private toastyService: ToastyService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit() {
+    
     this.btitle = "Add Item";
     this.mode = "(List)";
     this.data = this._masterformservice.GetPinAddress();
     console.log("test" +this.data);
+ 
+  
+    // let currentUserrrr = JSON.parse(localStorage.getItem('currentUser'));
+    // console.log(currentUserrrr);
+
+
+    // let fff=currentUserrrr['access_token']
+    // console.log(fff);
+
+    
+
   }
+  
   getIP() {
     this._ipservice.getIpAddress().subscribe((res: any) => {
       this.ipAddress = res.ip;
@@ -66,6 +82,11 @@ export class AddressComponent implements OnInit {
       this.btitle = "Hide Form";
       this.mode = "(New)";
     }
+  }
+  public openConfirmationDialog() {
+    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to ... ?')
+    .then((confirmed) => console.log('User confirmed:', confirmed))
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
   Closeform() {

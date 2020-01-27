@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
+
+//import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 //import { CheckinComponent } from './checkin/checkin.component';
 // import { AddressComponent } from './address/address.component';
  // import { AddressComponent } from './address/address.component';
@@ -20,7 +22,7 @@ import { MasterRoutingModule } from './master-routing.module';
 // import { RoomboyComponent } from './roomboy/roomboy.component';
 // import { LedgercreationComponent } from './ledgercreation/ledgercreation.component';
 // import { FinancialComponent } from './financial/financial.component';
-// import { GridtestComponent } from './gridtest/gridtest.component';
+ //import { GridtestComponent } from './gridtest/gridtest.component';
 // import { SuperAdminRoutingModule } from './super-admin-routing.module';
 // import { CompanyComponent } from './company/company.component';
 // import { BranchComponent } from './branch/branch.component';
@@ -29,6 +31,8 @@ import { MasterRoutingModule } from './master-routing.module';
   declarations: [],
   imports: [
     CommonModule,MasterRoutingModule
-  ]
+  ],
+  providers:[],
+ 
 })
 export class MasterModule { }

@@ -17,7 +17,7 @@ import {TagInputModule} from 'ngx-chips';
 import { SelectOptionService } from 'src/app/shared/elements/select-option.service';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {SelectModule} from 'ng-select';
+// import {SelectModule} from 'ng-select';
 import {DatePipe} from '@angular/common';
 @NgModule({
   declarations: [CheckinComponent, CheckoutComponent],
@@ -25,10 +25,10 @@ import {DatePipe} from '@angular/common';
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
     SharedModule,
-    HttpClientModule,
-    DataTableModule,
+     HttpClientModule,
+     DataTableModule,
      FormsModule,
-     SelectModule,
+     //SelectModule,
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ]

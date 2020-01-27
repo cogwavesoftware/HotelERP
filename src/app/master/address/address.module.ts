@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './../../shared/shared.module';
@@ -14,7 +15,8 @@ import {ToastyModule} from 'ng2-toasty';
   imports: [
     CommonModule,AddressRoutingModule,SharedModule,DataTableModule,FormsModule,
     ReactiveFormsModule,HttpClientModule,
-    ToastyModule.forRoot()
-  ]
+    ToastyModule.forRoot(),
+  ],
+  
 })
 export class AddressModule { }

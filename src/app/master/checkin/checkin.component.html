@@ -12,12 +12,9 @@
   </div>
 </div>
 
-<div class="col-sm-12 col-xl-4">
-   
-   
+<div class="col-sm-12 col-xl-4">  
   </div>
-
-
+ 
 <div class="outerdiv">
   <div class="formdesign checkinforms" style="padding: 0;">
 
@@ -63,8 +60,8 @@
 
                                               <div class="col-sm-4" style="padding-left: 0;">
                                                 <div class="form-group">
-                                                  <input type="checkbox"  (click)="openreferencedetails('effect-4',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> Ref #
-                                                  <div class="invalid-feedback" *ngIf="form.controls.referenceid.errors?.required" >referenceid Name is required</div>
+                                                  <input type="checkbox"  (click)="OpenReferanceModel('effect-6',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off"  required style="width: 15px; float: left;" /> Ref : {{referanceName}}
+                                                 
                                                 </div>
                                                
                                                </div>  
@@ -96,7 +93,7 @@
                                               <div class="form-group">
                                                 <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
-                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="openguestnamedetails('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
                                               
                                                 <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                 </div>  
@@ -424,7 +421,7 @@
                                         <label class="form-control-label" for="pincode">Checkin Date </label>
                                         <div class="form-group">
                                           <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkindate" name="checkindate"  formControlName="checkindate" placement="right" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control"> 
+                                            <input id="checkindate" name="checkindate"  formControlName="checkindate" placement="right" type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                           </div>
                                         </div>
                                       </div>
@@ -454,13 +451,13 @@
 
                                         <div class="form-group">
                                           <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control">
+                                            <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
                                           </div>
                                         </div>
                                       </div>
 
 
-
+                                      
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="checkouttime">Checkout Time </label>
@@ -952,119 +949,60 @@
 
 
 </div>
-<!-- end new form desing-->
-<!-- lightbox-->
-<app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6'">
-  <h3 class="f-15">View Other Tax Details</h3>
-
-  <div class="app-modal-body text-center">
-    <table class="table table-striped text-left m-t-10">
-      <tr>
-        <td>Id :</td>
-        <td>{{ model.roomno }}</td>
-
-      </tr>
-      <tr>
-        <td>ItemName :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-
-      <tr>
-        <td>RevId :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-      <tr>
-        <td>Rate :</td>
-        <td>{{ model.roomno }}</td>
-      </tr>
-    </table>
-    <button (click)="closeMyModal('effect-6')"
-      class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
-  </div>
-
-</app-modal-animation>
-
 
 
 
 
 
 <!-- ////companymodel --> 
-<app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">
-  <h3 class="f-15">Company List Details</h3>
- 
-    <div class="app-modal-body text-center" style="position: relative;"> 
-   
-    
-      <div class="table-content crm-table">
-        <div class="project-table addressproject-table">
-          <div id="crm-contact" class="dt-responsive"  *ngIf="data2 | async as data">
-            <div class="row">         
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                     <div >
-                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                    </div> 
-                  </div> 
-      
+
+    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">
+      <h3 class="f-15">Company Details</h3>
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          <div class="table-content crm-table">
+            <div class="project-table addressproject-table">
+              <div id="crm-contact" class="dt-responsive">
+                <div class="row">         
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                         <div >               
+                            <input type="text"  #searchTermcompany  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
+                        </div> 
+                      </div>      
+                </div>             
+                 <div class="table-responsive">
+                  <table class="table table-striped table-bordered full-data-table"> 
+                        <thead>
+                        <tr class="blueorange-gradient">        
+                        <th>CompanyName</th>             
+                        <th> GSTNO </th>                       
+                        <th>Action</th>
+                    </tr>
+                    <tr> </tr>               
+                    </thead>
+                    <tbody>                    
+                     <tr *ngFor="let item of companylist; let i = index;">                     
+                       <td>{{item.CompanyName}}</td>   
+                       <td>{{item.GSTNO}}</td>                              
+                      <td class="action-icon">
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)">Get Details</a>                     
+                      </td>
+                    </tr>  
+                    </tbody>
+                    <tfoot>
+                    <tr class="blueorange-gradient">     
+                    <th>CompanyName</th>            
+                    <th>GSTNO</th>                          
+                    <th>Action</th>      
+                    </tr>              
+                    </tfoot>
+                  </table>
+                </div> 
+              </div>
             </div>
-             
-             <div class="table-responsive">
-             
-              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
-                    <thead>
-                    <tr class="blueorange-gradient">        
-                    <th>
-                     <mfDefaultSorter  by="CompanyName">CompanyName</mfDefaultSorter>
-                     </th>               
-                    <th>
-                    <mfDefaultSorter  by="GSTNO">GSTNO</mfDefaultSorter>
-                    </th>  
-
-                     <th>
-                    <mfDefaultSorter>Action</mfDefaultSorter>
-                    </th>
-                </tr>
-                <tr>
-                </tr>
-                </thead>
-                <tbody>
-                    
-                 <tr *ngFor="let item of mf.data; let i = index;">                     
-                   <td>{{item.CompanyName}}</td>   
-                   <td>{{item.GSTNO}}</td>   
-                      
-                  <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)">Get Details</a>
-                      
-                  </td>
-                </tr>  
-                </tbody>
-                <tfoot>
-                <tr class="blueorange-gradient">     
-                <th>CompanyName</th>            
-                <th>GSTNO</th>    
-                    
-                <th>Action</th>      
-                </tr>
-                <tr>
-                  <td colspan="6">
-                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-                  </td>
-                </tr>
-                </tfoot>
-              </table>
-            </div> 
-          </div>
-        </div>
-      </div>
-     
-           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
-          
-      </div>
-       
-    </app-modal-animation>
-
-
+          </div>     
+               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+          </div>      
+        </app-modal-animation>
 
 
 
@@ -1082,50 +1020,28 @@
                      <div >               
                         <input type="text"  #searchTermguest  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
                     </div> 
-                  </div> 
-      
-            </div>
-             
+                  </div>      
+            </div>             
              <div class="table-responsive">
               <table class="table table-striped table-bordered full-data-table"> 
                     <thead>
                     <tr class="blueorange-gradient">        
-                    <th>
-                      GuestName
-                    
-                     </th>               
-                    <th>
-                      City
-                    
-                    </th>  
-                    <th>
-                      Pincode
-                    </th> 
-                   
-                    <th>
-                      MobileNo
-                      </th> 
-                   
-                        
-                     <th>
-                      Action
-                  
-                    </th>
+                    <th> GuestName</th>             
+                    <th> City </th>
+                    <th>Pincode </th>
+                    <th> MobileNo </th> 
+                    <th>Action</th>
                 </tr>
-                <tr>
-                </tr>
+                <tr> </tr>               
                 </thead>
-                <tbody>
-                    
+                <tbody>                    
                  <tr *ngFor="let item of guest; let i = index;">                     
                    <td>{{item.GuestName}}</td>   
                    <td>{{item.City}}</td>   
-                   <td>{{item.PINCode}}</td>
-                   
+                   <td>{{item.PINCode}}</td>                   
                    <td>{{item.MobileNo}}</td>        
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)">Get Details</a>
-                      
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)">Get Details</a>                     
                   </td>
                 </tr>  
                 </tbody>
@@ -1136,25 +1052,21 @@
                 <th>Pincode</th> 
                 <th>MobileNo</th>     
                 <th>Action</th>      
-                </tr>
-               
+                </tr>              
                 </tfoot>
               </table>
             </div> 
           </div>
         </div>
-      </div>
-     
-           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
-          
-      </div>
-       
+      </div>     
+           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+      </div>      
     </app-modal-animation>
 
 
+ 
 
-
-
+<!--//pincode model -->
     <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">
       <h3 class="f-15">Pincode Details</h3>
         <div class="app-modal-body text-center" style="position: relative;"> 
@@ -1166,50 +1078,29 @@
                          <div >               
                             <input type="text"  #searchTerm  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
                         </div> 
-                      </div> 
-          
-                </div>
-                 
+                      </div>           
+                </div>                
                  <div class="table-responsive">
                   <table class="table table-striped table-bordered full-data-table"> 
                         <thead>
                         <tr class="blueorange-gradient">        
-                        <th>
-                          AreaData
-                        
-                         </th>               
-                        <th>
-                          City
-                        
-                        </th>  
-                        <th>
-                          Pincode
-                        </th> 
-                       
-                        <th>
-                          State
-                          </th> 
-                       
-                            
-                         <th>
-                          Action
-                      
-                        </th>
+                        <th> AreaData</th>
+                        <th>City</th>
+                        <th> Pincode</th>
+                        <th> State</th>
+                        <th>Action</th>                                               
                     </tr>
                     <tr>
                     </tr>
                     </thead>
-                    <tbody>
-                        
+                    <tbody>                        
                      <tr *ngFor="let item of picodelist; let i = index;">                     
                        <td>{{item.AreaData}}</td>   
                        <td>{{item.City}}</td>   
-                       <td>{{item.Pincode}}</td>
-                       
+                       <td>{{item.Pincode}}</td>                      
                        <td>{{item.State}}</td>        
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)">Get Details</a>
-                          
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)">Get Details</a>                          
                       </td>
                     </tr>  
                     </tbody>
@@ -1220,134 +1111,71 @@
                     <th>Pincode</th> 
                     <th>State</th>     
                     <th>Action</th>      
-                    </tr>
-                   
+                    </tr>                  
                     </tfoot>
                   </table>
                 </div> 
               </div>
             </div>
-          </div>
-         
-               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
-              
-          </div>
-           
+          </div>        
+               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                 
+          </div>          
         </app-modal-animation>
 
 
 
-<!-- //Pincode Search -->
-<app-modal-animation [modalID]="'effect-44'" [modalClass]="'md-effect-44 addressmodeleffect'">
-  <h3 class="f-15">Pincode Details</h3>
- 
-    <div class="app-modal-body text-center" style="position: relative;"> 
-   
-    
-      <div class="table-content crm-table">
-        <div class="project-table addressproject-table">
-          <div id="crm-contact" class="dt-responsive"  *ngIf="data | async as data">
-            <div class="row">         
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                     <div >
-                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                    </div> 
-                  </div> 
-      
+
+<!-- 
+   Referance Model -->
+
+    <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6 addressmodeleffect'">
+      <h3 class="f-15">Referance Details</h3>
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          <div class="table-content crm-table">
+            <div class="project-table addressproject-table">
+              <div id="crm-contact" class="dt-responsive">
+                <div class="row">         
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                         <div >               
+                            <input type="text"  #searchTermref  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
+                        </div> 
+                      </div>           
+                </div>              
+                 <div class="table-responsive">
+                  <table class="table table-striped table-bordered full-data-table"> 
+                        <thead>
+                        <tr class="blueorange-gradient">        
+                        <th>Id</th>                                                             
+                        <th>RefName</th>                                                
+                        <th>RefMobileNo</th> 
+                         <th> Action</th>
+                    </tr>
+                    <tr> </tr>                  
+                    </thead>
+                    <tbody>                      
+                     <tr *ngFor="let item of referencelist; let i = index;">                     
+                       <td>{{item.Id}}</td>   
+                       <td>{{item.RefName}}</td>   
+                       <td>{{item.RefMobileNo}}</td>     
+                      <td class="action-icon">
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="PatchRefenceDetail(item,$event)">Get Details</a>                          
+                      </td>
+                    </tr>  
+                    </tbody>
+                    <tfoot>
+                    <tr class="blueorange-gradient">     
+                    <th>Id</th>            
+                    <th>RefName</th>    
+                    <th>RefMobileNo</th>                       
+                    <th>Action</th>      
+                    </tr>                   
+                    </tfoot>
+                  </table>
+                </div> 
+              </div>
             </div>
-             
-             <div class="table-responsive">
-             
-              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
-                    <thead>
-                    <tr class="blueorange-gradient">        
-                    <th>
-                     <mfDefaultSorter  by="AreaData">AreaData</mfDefaultSorter>
-                     </th>               
-                    <th>
-                    <mfDefaultSorter  by="City">City</mfDefaultSorter>
-                    </th>  
-                    <th>
-                    <mfDefaultSorter  by="Pincode">Pincode</mfDefaultSorter>
-                    </th> 
-                    <th>
-                    <mfDefaultSorter  by="State">State</mfDefaultSorter>
-                    </th> 
-                     <th>
-                    <mfDefaultSorter>Action</mfDefaultSorter>
-                    </th>
-                </tr>
-                <tr>
-                </tr>
-                </thead>
-                <tbody>
-                    
-                 <tr *ngFor="let item of mf.data; let i = index;">                     
-                   <td>{{item.AreaData}}</td>   
-                   <td>{{item.City}}</td>   
-                   <td>{{item.Pincode}}</td>
-                   <td>{{item.State}}</td>         
-                  <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)">Get Details</a>
-                      
-                  </td>
-                </tr>  
-                </tbody>
-                <tfoot>
-                <tr class="blueorange-gradient">     
-                <th>Area</th>            
-                <th>City</th>    
-                <th>Pincode</th> 
-                <th>State</th>     
-                <th>Action</th>      
-                </tr>
-                <tr>
-                  <td colspan="6">
-                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-                  </td>
-                </tr>
-                </tfoot>
-              </table>
-            </div> 
+          </div>         
+               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                  
           </div>
-        </div>
-      </div>
-     
-           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>           
-      </div>   
-    </app-modal-animation>
-
-
-
-
-
-
-
-    <app-modal-animation [modalID]="'effect-8'" [modalClass]="'md-effect-8'">
-      <h3 class="f-15">Driver details</h3>
-    
-      <div class="app-modal-body text-center">
-        <table class="table table-striped text-left m-t-10">
-          <tr>
-            <td>Id :</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>ItemName :</td>
-            <td>2</td>
-          </tr>
-    
-          <tr>
-            <td>RevId :</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Rate :</td>
-            <td>3</td>
-          </tr>
-        </table>
-        <button (click)="closeMyModal('effect-8')"
-          class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
-      </div>
-    
-    </app-modal-animation>
+           
+        </app-modal-animation>

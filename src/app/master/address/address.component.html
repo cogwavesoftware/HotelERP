@@ -13,12 +13,7 @@
           </div>
         </div>
       
-        <!-- <button 
-        type="button" 
-        [appConfirm]="visitRangle" 
-        confirmMessage="Click ok to visit Rangle.io!">
-        Visit Rangle
-      </button> -->
+        <button (click)="openConfirmationDialog()" type="button" class="btn btn-primary">Open dialog</button>
       
         <div class="formdesign aqua-gradient" *ngIf="isShown" >
             <div class="formouter rotate" >
