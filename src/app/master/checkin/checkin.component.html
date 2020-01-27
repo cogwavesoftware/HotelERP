@@ -51,15 +51,15 @@
                                            <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
                                             <div class="row" style="margin-bottom:0">
                                               <div class='col-12 col-sm-2' style="padding-left: 0;">
-                                                <div class="form-group" style="padding-top:15px;">                                
+                                                <div class="form-group" style="padding-top:10px;">                                
                                                   <label class="form-control-label" for="firstname">   </label>                                                                                                                  
                                                       <label >Room No </label>
                                                        <label style="padding-left: 3px; font-weight: bold;" >1000</label>                                                     
                                                  </div>       
                                               </div> 
 
-                                              <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;">
-                                                <div class="form-group" style="display:inline-block">
+                                              <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;  ">
+                                                <div class="form-group" >
                                                   <ng-select [items]="roomtypelist"
                                                 bindLabel="name" name="name1"
                                                 placeholder="Select Roomcode"  
@@ -69,16 +69,19 @@
                                                   <!-- <input type="checkbox"  (click)="OpenReferanceModel('effect-6',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off"  required style="width: 15px; float: left;" /> Ref : {{referanceName}} -->
                                                  
                                                 </div>
+                                               
+                                               </div>  
+                                               <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;">
                                                 <a  (click)="OpenReferanceModel('effect-6',item)" ><i style="font-size: 110%;
                                                   padding-top: 2px;
                                                   display: inline-block;
                                                   padding-left: 10px" class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                                               </div>  
-                                            
+                                              </div>
+
                                              </div>
                                           <div class="row guestinfofirstrow" style="margin-bottom:0">
                                            
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="title ">Title</label>
                                                 <select class="custom-select" name="title" formControlName="title"
@@ -98,7 +101,7 @@
                                             
                                              
                                     
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
@@ -107,7 +110,7 @@
                                                 <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                 </div>  
                                             </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="gender">  Gender </label>
                                                <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
@@ -319,7 +322,7 @@
                                 </ngb-panel>
 
 
-                                <ngb-panel id="ngb-close-p2" title="Booking Table ">
+                                <ngb-panel id="ngb-close-p1" title="Booking Table ">
                                   <ng-template ngbPanelContent>
                                     <div class="test123 userlist " style="padding: 2px;">
                                       <div class="grid-table" style="width: 100%;">
@@ -788,7 +791,7 @@
 
                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <div class="form-group">
-                                            <label class="form-control-label" for="idproof">ID ProofBack</label>
+                                            <label class="form-control-label" for="idproof">ID Proof</label>
                                             <select class="custom-select" name="idproof" formControlName="idproof"
                                               id="idproof"
                                               [ngClass]="{ 'is-invalid': submitted && form.idproof.errors }">
@@ -843,36 +846,7 @@
                       </div>
                     </ng-template>
                   </ngb-tab>
-                  <ngb-tab title="Guest Document">
-                    <ng-template ngbTabContent>
-                      <div [@fadeInOutTranslate] class="m-t-15">
-                        <div class="col-md-6 border p-10  ">
-                                 
-                          <div class="row form-group">
-                              
-                                   
-                             </div>
-                             
-                             <div class="row form-group" style="margin-left:0;margin-right:0">
-                               <div class="col-md-6 border  ">
-                               
-
-
-                         
-
-
-                        
-
-                               </div>
-                              
-                             </div>
-
-
-                             
-                       </div> <!-- border end -->
-                      </div>
-                    </ng-template>
-                  </ngb-tab>
+                
                   <ngb-tab title="Driver Commission">
                     <ng-template ngbTabContent>
                       <div [@fadeInOutTranslate] class="m-t-15">
