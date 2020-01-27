@@ -54,6 +54,12 @@
                                            <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
                                             <div class="row" style="margin-bottom:0">
                                               <div class='col-12 col-sm-2'>
+                                                <ng-select [items]="roomtypelist"
+                                                bindLabel="name" name="name1"
+                                                placeholder="Select Roomcode"  
+                                                [(ngModel)]="selectedRoomcode" formControlName="name1">
+                                              </ng-select>
+
                                                 <div class="form-group">                                
                                                   <label class="form-control-label" for="firstname">   </label>                                                                                                                  
                                                       <label >Room No </label>

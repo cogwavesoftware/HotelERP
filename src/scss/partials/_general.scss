@@ -5791,10 +5791,17 @@ outerdiv{
     position: absolute;
     right:0;
 }
+.outerdiv .tabouter .taboutercreatebtn .custom-select{
+    border-radius: 0;
+}
 .outerdiv .tabouter .taboutercreatebtn .otherrow .col-lg-2,
 .outerdiv .tabouter .taboutercreatebtn .discountouter .col-lg-2,
 .outerdiv .tabouter .taboutercreatebtn .paymentrow .col-lg-2,
-.outerdiv .tabouter .taboutercreatebtn .gueststayinfo .col-lg-2{
+.outerdiv .tabouter .taboutercreatebtn .gueststayinfo .col-lg-2,
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-2,
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-12.col-lg-6,
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-1,
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-4{
     padding-right:1px;
     padding-left:0;
 }
@@ -6308,7 +6315,7 @@ outerdiv{
     
 }
 .pcoded-content .pcoded-inner-content .main-body .page-wrapper  .md-modal{     
-    max-width: 820px!important;
+    // max-width: 820px!important;
     height:500px;
     max-height: 400px;
     overflow-y: scroll;
@@ -6332,7 +6339,7 @@ outerdiv{
     padding-bottom: 0;
 }
 .pcoded-content .pcoded-inner-content .main-body .page-wrapper .app-modal-body{    
-    min-height:700px;
+    // min-height:700px;
     max-height: 100%;
 }
  .customclosepopup{

@@ -6,12 +6,25 @@ import { RoomtypeService } from "src/app/_services/roomtype.service";
 import { NgForm } from "@angular/forms";
 import { FloormasterService } from './../../_services/floormaster.service';
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+
+
 @Component({
   selector: "app-roomorganizer",
   templateUrl: "./roomorganizer.component.html",
   styleUrls: ["./roomorganizer.component.scss"]
 })
 export class RoomorganizerComponent implements OnInit {
+//   cities = [
+//     {id: 1, name: 'Vilnius'},
+//     {id: 2, name: 'Kaunas'},
+//     {id: 3, name: 'Pavilnys', disabled: true},
+//     {id: 4, name: 'Pabradė'},
+//     {id: 5, name: 'Klaipėda'}
+// ];
+selectedRoomcode: any;
+
   model: any = {};
   topicHasError = true;
   catagerys = ["Room", "Hall"];
