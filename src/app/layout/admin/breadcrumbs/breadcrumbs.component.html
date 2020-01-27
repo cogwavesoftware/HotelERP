@@ -5,7 +5,7 @@
         <div class="col-md-8" style="padding-left: 0;">
           <div class="page-header-title">
             <span *ngFor="let breadcrumb of breadcrumbs; let last = last"><h5 *ngIf="last" class="m-t-10">{{ breadcrumb.label }}</h5></span>
-            <p class="m-b-0" *ngIf="breadcrumb.caption">{{ breadcrumb.caption }}</p>
+            <p class="m-b-0" *ngIf="breadcrumb.caption">{{ breadcrumb.caption }} </p>
           </div>
         </div>
         <div class="col-md-4">

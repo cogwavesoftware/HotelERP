@@ -29,7 +29,7 @@ export class TitleComponent {
 
                if (title !== undefined ) {
 
-          this.titleService.setTitle(title + ' | Mega Able Angular 7+');
+          this.titleService.setTitle(title + ' | Cogwave Software');
         }
       });
   }

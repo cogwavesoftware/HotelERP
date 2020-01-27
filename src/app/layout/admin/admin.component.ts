@@ -1,7 +1,8 @@
+import { BankService } from './../../_services/bank.service';
 
 import { AuthenticationService } from './../../_services/authentication.service';
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit,} from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 import {MenuItems, Menu} from '../../shared/menu-items/menu-items';
 import { Menus } from 'src/app/_models/Menu';
@@ -87,8 +88,9 @@ import { Observable } from "rxjs/observable";
   ]
 })
 export class AdminComponent implements OnInit, OnDestroy {
-
+public test="fra";
   menuItems1: Menu[];
+
   finalMenu = new Array<Menu>();
   public animateSidebar: string;
   public navType: string;
@@ -173,7 +175,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public menuItems: MenuItems, public _authservice:AuthenticationService) {
+  constructor(public menuItems: MenuItems, public _authservice:AuthenticationService,private _bankservice:BankService) {
     this.animateSidebar = '';
     this.navType = 'st2';
     this.themeLayout = 'vertical';
@@ -272,8 +274,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   } 
 
   }
-
+  
   ngOnInit() {
+   this._bankservice.currentMessage.subscribe(message => this.verticalNavType = message)
     this.setBackgroundPattern('theme1');
   //   let IsRole = localStorage.getItem('IsRole');
   //   if (IsRole=="SuperAdmin")
@@ -292,6 +295,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   // } 
   }
 
+ 
+ 
   onResize(event) {
     this.windowWidth = event.target.innerWidth;
     this.setHeaderAttributes(this.windowWidth);
@@ -350,6 +355,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   toggleHeaderNavRight() {
+    
     this.navRight = this.navRight === 'nav-on' ? 'nav-off' : 'nav-on';
     this.chatTopPosition = this.chatTopPosition === 'nav-on' ? '112px' : '';
     if (this.navRight === 'nav-off' && this.innerChatSlideInOut === 'in') {
@@ -471,14 +477,21 @@ export class AdminComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
+
+  ngAfterViewInt()
+  {
+    
+   // this.verticalNavType="collapsed";
+  }
   onClickedOutsideSidebar(e: Event) {
+    
     if ((this.windowWidth <= 992 && this.toggleOn && this.verticalNavType !== 'offcanvas') || this.verticalEffect === 'overlay') {
       this.toggleOn = true;
       this.verticalNavType = 'offcanvas';
       this.toggleIcon = 'icon-toggle-left';
     }
   }
-
+  
   toggleRightbar() {
     this.configOpenRightBar = this.configOpenRightBar === 'open' ? '' : 'open';
   }
@@ -581,6 +594,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   toggleOpenedSidebar() {
+   
     this.isCollapsedSideBar = this.isCollapsedSideBar === 'yes-block' ? 'no-block' : 'yes-block';
     if (this.verticalNavType !== 'collapsed') {
       this.sidebarFixedHeight = this.isCollapsedSideBar === 'yes-block' ? 'calc(100vh - 56px)' : 'calc(100vh - 56px)';

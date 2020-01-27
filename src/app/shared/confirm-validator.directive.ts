@@ -10,7 +10,7 @@ import { ValidationErrors, Validator, AbstractControl, NG_VALIDATORS } from "@an
   export class ConfirmValidatorDirective {
     @Input() appConfirm = () => {};
     @Input() confirmMessage = 'Are you sure you want to do this?';
-  
+
     @HostListener('click', ['$event'])
     confirmFirst() {
       const confirmed = window.confirm(this.confirmMessage);

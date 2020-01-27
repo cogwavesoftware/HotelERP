@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit, ViewEncapsulation,ViewChild,ElementRef } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Observable, Observer, empty } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
@@ -24,9 +24,9 @@ import { AddressService } from './../../_services/address.service';
 import { environment } from 'src/environments/environment';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from "@angular/common";
-
+import { BankService } from 'src/app/_services/bank.service';
 import { Subject } from 'rxjs/Subject';
-import {fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
  
 import { filter, debounceTime, distinctUntilChanged, tap ,switchMap} from 'rxjs/operators'
@@ -81,16 +81,19 @@ selectedRoomcode: any;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
-  name = 'Angular';
+  
   base64TrimmedURL: any;
   base64DefaultURL: any;
   generatedImage: any;
   guest: any;
   picodelist: any;
-  public videoOptions: MediaTrackConstraints = {
-    // width: {ideal: 1024},
-    // height: {ideal: 576}
-  };
+  referencelist: any;
+  companylist:any;
+  //public videoOptions: MediaTrackConstraints = {
+  // width: {ideal: 1024},
+  // height: {ideal: 576}
+  //};
+
   public errors: WebcamInitError[] = [];
   // latest snapshot
   public webcamImage: WebcamImage = null;
@@ -106,8 +109,7 @@ selectedRoomcode: any;
   timepicker: Partial<TimepickerConfig>;
   planlist = [];
   public data: Observable<any>
-  public data1: Observable<any>
-  public data2: Observable<any>
+
   //forms: FormArray = this.formBuilder.array([]);
   model: any = {};
   //simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
@@ -120,7 +122,6 @@ selectedRoomcode: any;
   private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
-
   paymentmode: string[] = ["Online", "Credit Card", "Cash"];
   public noofdays: number[] = [];
   foriegnguest: string[] = ["Yes", "No"];
@@ -133,7 +134,7 @@ selectedRoomcode: any;
   maxDate = new Date();
   myTime = new Date();
   ismeridian: boolean = false;
-  CurrentDate: Date;
+  minDate: Date;
   valid: boolean = true;
   IsShowloader: boolean = false;
   public rowsOnPage = 12;
@@ -141,7 +142,7 @@ selectedRoomcode: any;
   public sortBy = "";
   public sortOrder = "desc";
   public isShown: boolean = false;
-
+  referanceName:string;
   isValid(event: boolean): void {
     this.valid = event;
   }
@@ -168,14 +169,13 @@ selectedRoomcode: any;
 
   private _searchTerm: string;
   @ViewChild('searchTerm', { static: false }) searchTerm: ElementRef;
+  @ViewChild('searchTermref', { static: false }) searchTermref: ElementRef;
   @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
+  @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
+  public Guestphotopathurl: string;
+  public GuestDoucmentFrontpathurl: string;
+  public GuestDoucmentBackpathurl: string;
 
-  public Guestphotopathurl:string;
-  
-  public GuestDoucmentFrontpathurl:string;
-  
-  public GuestDoucmentBackpathurl:string;
-  
 
   //   return this._searchTerm;
   // }
@@ -193,7 +193,7 @@ selectedRoomcode: any;
   //             return this._masterformservice.GetPinAddress();
   //          })
   //          ).subscribe(res => this.picodelist = res);
-   
+
   //  this._searchTerm = value;
   //  this.guest = this.filtereguestdata(value);
 
@@ -231,31 +231,35 @@ selectedRoomcode: any;
 @ViewChild('f', { static: false }) form1: any;
   constructor(private datePipe: DatePipe, public _masterformservice: MasterformService,
     public router: Router,
-    public formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,private _bankservice:BankService,
     private route: ActivatedRoute,
     private roomservice: RoomtypeService,
     private _masterservice: MasterformService, public _addressservice: AddressService
-     ) {
+   ) {
 
+      this._bankservice.changeMessage("collapsed")
     this.IsShowloader = false;
     //this.data = this._masterservice.GetPindata();
     // this.data = this._masterservice.GetPinAddress();
     //this.data1 = this._masterservice.GetGuestDetails("CW_1001");
-    this.data2 = this._masterformservice.GetRoomcomany('CW_1001');
-
+    //this.data2 = this._masterformservice.GetRoomcomany('CW_1001');
     setTimeout(() => {
       this.IsShowloader = false;
     }, 2000)
 
 
-    this.datePickerConfig = Object.assign({},
-      {
-        containerClass: 'theme-dark-blue',
-        dateInputFormat: 'DD/MM/YYYY',
-        adaptivePosition: true
+    // this.datePickerConfig = Object.assign({},
+    //   {
+    //     containerClass: 'theme-dark-blue',
+    //     dateInputFormat: 'DD/MM/YYYY',
+    //     adaptivePosition: true,
+    //     date:'short'
 
-      });
+    //   });
+
+    this.minDate=new Date(); 
     this.maxDate.setDate(this.maxDate.getDate() + 1);
+
     this.navRight = "nav-off";
     this.timepicker = Object.assign({},
       {
@@ -320,13 +324,9 @@ selectedRoomcode: any;
       drivermobile: ["", [Validators.required]],
       vehicleno: ["", [Validators.required]],
       charge: ["", [Validators.required]],
-      idproof:[""],
-      idproofno:[""],
-      CompanyName:[""],
-      GSTNO:[""],
-      mobileNo:[""],
-      Email:[],
-      name1:[]
+      idproof: [""],
+      idproofno: [""],
+      name1:[""]
     });
   }
 
@@ -416,9 +416,9 @@ selectedRoomcode: any;
   }
 
 
-  ngOnDestroy()
-  {
-    this.showWebcam=false;
+  ngOnDestroy() {
+    this.showWebcam = false;
+    this._bankservice.changeMessage("expanded")
   }
 
 
@@ -441,57 +441,83 @@ selectedRoomcode: any;
       
 
     }
-    else{
-      this.snapshotshow =false;
+    else {
+      this.snapshotshow = false;
     }
     this.showWebcam = !this.showWebcam;
-    
+
   }
 
-  
+
 
   ngAfterViewInit() {
     // server-side search
-   
 
-    
-
-    fromEvent(this.searchTermguest.nativeElement,'keyup')
-    .pipe(
-      filter(text=>this.searchTermguest.nativeElement.value.length>2),
-      debounceTime(1000),
-      distinctUntilChanged(),
-     // tap(x=>console.log('from tap' + x)),
-      switchMap(id => {
-              //console.log(id)
-              console.log('guestmap')
-              return this._masterformservice.GuetDataSearch('CW_1001',this.searchTermguest.nativeElement.value);
-           })
-           ).subscribe(res => this.guest = res);
-    
+    fromEvent(this.searchTermguest.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermguest.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          console.log('guestmap')
+          return this._masterformservice.GuetDataSearch('CW_1001', this.searchTermguest.nativeElement.value);
+        })
+      ).subscribe(res => this.guest = res);
 
 
+    fromEvent(this.searchTerm.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTerm.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          console.log('switchMap')
+          return this._masterformservice.SearchGuestAddress(this.searchTerm.nativeElement.value);
+        })
+      ).subscribe(res => this.picodelist = res);
 
-   
-    fromEvent(this.searchTerm.nativeElement,'keyup')
-    .pipe(
-      filter(text=>this.searchTerm.nativeElement.value.length>2),
-      debounceTime(1000),
-      distinctUntilChanged(),
-     // tap(x=>console.log('from tap' + x)),
-      switchMap(id => {
-              //console.log(id)
-              console.log('switchMap')
-              return this._masterformservice.SearchGuestAddress(this.searchTerm.nativeElement.value);
-           })
-           ).subscribe(res => this.picodelist = res);
-    
 
-}
+    fromEvent(this.searchTermref.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermref.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+         
+          return this._masterformservice.SearchReferance('CW_1001', this.searchTermref.nativeElement.value);
+        })
+      ).subscribe(res => this.referencelist = res);
+
+
+
+      fromEvent(this.searchTermcompany.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermcompany.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+         
+          return this._masterformservice.SearchComanyDate('CW_1001', this.searchTermcompany.nativeElement.value);
+        })
+      ).subscribe(res =>{
+        this.companylist = res;
+        console.log(this.companylist)
+      } );
+
+      
+  }
 
   public toggleWebcam(): void {
     this.showWebcam = !this.showWebcam;
-    this.snapshotshow =true;
+    this.snapshotshow = true;
   }
 
   public handleInitError(error: WebcamInitError): void {
@@ -508,7 +534,7 @@ selectedRoomcode: any;
   public handleImage(webcamImage: WebcamImage): void {
     console.info('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
-    this.previewUrl=webcamImage.imageAsDataUrl
+    this.previewUrl = webcamImage.imageAsDataUrl
     this.getImage(webcamImage.imageAsBase64)
 
   }
@@ -552,7 +578,7 @@ selectedRoomcode: any;
     this._masterformservice.SavaImsData(formData)
       .subscribe(res => {
         console.log(imageName);
-        this.Guestphotopathurl=imageName;
+        this.Guestphotopathurl = imageName;
         console.log(res);
 
       },
@@ -585,11 +611,18 @@ selectedRoomcode: any;
     }
   }
 
-  ChangeCheckoutDate(NoOfDays: number) {
-    this.NodaysChanged = NoOfDays;
+  ChangeCheckoutDate(NoOfDays) {
+    //this.NodaysChanged = NoOfDays;
     // var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
-    var result = this.datePipe.transform(new Date().getDay() + 2, "dd/MM/yyyy");
-    //alert(result)
+    //var result = this.datePipe.transform(new Date().getDay() + 2, "dd/MM/yyyy");
+  
+    this.minDate=new Date(); 
+    this.maxDate.setDate(this.minDate.getDate() + parseInt(NoOfDays));
+    var result = this.datePipe.transform(this.maxDate, "dd/MM/yyyy");
+     this.form.patchValue({
+      checkoutdate:result
+     })
+    
   }
 
 
@@ -612,10 +645,17 @@ selectedRoomcode: any;
       company: SelectedData.CompanyName,
       gstno: SelectedData.GSTNO,
       companycode: SelectedData.CompanyCode
-
     })
   }
 
+
+  PatchRefenceDetail(SelectedData: any, event: any)
+  {
+    this.form.patchValue({
+      referenceid: SelectedData.Id
+    })
+    this.referanceName= SelectedData.RefName
+  }
 
   openMyGuestNameModalData(SelectedData: any, event: any) {
     console.log('SelectedData')
@@ -636,11 +676,11 @@ selectedRoomcode: any;
       DOA: SelectedData.GDOA,
     });
 
-    this.snapshotshow =true;
-    this.Guestphotopathurl=SelectedData.GuestPhotoPath;
-    this.GuestDoucmentFrontpathurl=SelectedData.GuestIdFront;
-    this.GuestDoucmentBackpathurl=SelectedData.GuestIdBack;
-    
+    this.snapshotshow = true;
+    this.Guestphotopathurl = SelectedData.GuestPhotoPath;
+    this.GuestDoucmentFrontpathurl = SelectedData.GuestIdFront;
+    this.GuestDoucmentBackpathurl = SelectedData.GuestIdBack;
+
     this.previewUrl = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
     this.previewUrl2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
     this.previewUrl3 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
@@ -651,10 +691,20 @@ selectedRoomcode: any;
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
-  openguestnamedetails(event, data) {
+  OpenGuestMosel(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
+
+  OpenReferanceModel(event, data) {
+    this.filterQuery = "";
+    this.referanceName='';
+    this.form.patchValue({
+      referenceid: '0'
+    })
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
 
 
   Opencompanymodel(event, data) {
@@ -692,43 +742,77 @@ selectedRoomcode: any;
     });
   }
 
+  fileProgressIdfFront(fileInput: any) {
+    this.fileDataIdfront = <File>fileInput.target.files[0];
+    this.preview2();
+  }
+
+
+  preview2() {
+    var mimeType = this.fileDataIdfront.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(this.fileDataIdfront);
+    reader.onload = (_event) => {
+      this.previewUrl2 = reader.result;
+    }
+  }
+
+  fileProgressIdfback(fileInput: any) {
+    debugger;
+    this.fileDataIdBack = <File>fileInput.target.files[0];
+    this.preview3();
+  }
+
+  preview3() {
+
+    var mimeType = this.fileDataIdBack.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    var reader = new FileReader();
+    reader.readAsDataURL(this.fileDataIdBack);
+    reader.onload = (_event) => {
+      this.previewUrl3 = reader.result;
+    }
+  }
+
   Submit() {
 
     const formData = new FormData();
-    if(this.GuestDoucmentFrontpathurl.length<5)
-    {
-      if(this.fileDataIdfront!=null)
-      {
+    if (this.GuestDoucmentFrontpathurl.length < 5) {
+      if (this.fileDataIdfront != null) {
         var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
-        var Rans1=+timerandom1 *  Math.floor(Math.random() * (99999 - 10000)) + 10000;
-        var Idfront='CW_1001' +'_'+ Rans1.toString()+"front" + '.png'      
+        var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+        var Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
         formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
-      }   
+      }
     }
 
-    if(this.GuestDoucmentBackpathurl.length<5)
-    {
-      if(this.fileDataIdBack!=null)
-      {
+    if (this.GuestDoucmentBackpathurl.length < 5) {
+      if (this.fileDataIdBack != null) {
         var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
-        var Rans=+timerandom *  Math.floor(Math.random() * (99999 - 10000)) + 10000;
-        var Idback='CW_1001' +'_'+ Rans.toString()+"GuestPhoto" + '.png'
+        var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+        var Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
         formData.append('GuestIdBack', this.fileDataIdBack, Idback);
-      }   
+      }
     }
-    
+
     this._masterformservice.SavaImsData(formData)
-    .subscribe(res => {
-      console.log('res');
-     this.GuestDoucmentFrontpathurl=Idfront;
-     this.GuestDoucmentBackpathurl=Idback;
-    },
-    error => {    
-      // alert('e')    
-      // this.error = error;
-      // this.error=error.message;  
-      // this.addToast("Cogwave Software??", this.error + "??", "error");
-    }); 
+      .subscribe(res => {
+        console.log('res');
+        this.GuestDoucmentFrontpathurl = Idfront;
+        this.GuestDoucmentBackpathurl = Idback;
+      },
+        error => {
+          // alert('e')    
+          // this.error = error;
+          // this.error=error.message;  
+          // this.addToast("Cogwave Software😃", this.error + "👊", "error");
+        });
 
     console.log(this.form.value)
 
@@ -764,50 +848,12 @@ selectedRoomcode: any;
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
 
-  openMyModalDriverMobile(event) {
-    console.log("openMyModalDriverMobile calling");
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-  openpincodedetails(event) {
-    setTimeout(() => {
-      console.log("openpincodedetails calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-  opencitydetails(event) {
-    setTimeout(() => {
-      console.log("opencitydetails calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
 
-  openreferencedetails(event) {
-    setTimeout(() => {
-      console.log("openreferencedetails calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-  opencompanydetails(event) {
-    setTimeout(() => {
-      console.log("compamny calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-  openproceedingdetails(event) {
-    setTimeout(() => {
-      console.log("openprocedingdetails calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-  openARdetails(event) {
-    setTimeout(() => {
-      console.log("openARdetails calling");
-    }, 1000);
-    document.querySelector("#" + event).classList.add("md-show");
-  }
+
+
+
 
   closeMyModalPin(event) {
-
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"
     );

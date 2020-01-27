@@ -26,8 +26,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
     SharedModule,
-    HttpClientModule,
-    DataTableModule,
+     HttpClientModule,
+     DataTableModule,
      FormsModule,
       NgSelectModule,
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),

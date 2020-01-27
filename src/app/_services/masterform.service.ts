@@ -23,6 +23,12 @@ export class MasterformService {
   getreferencedetail(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Getreference?BranchCode=' + branchcode);
   }
+    
+  SearchReferance(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/RefSearch?BranchCode=' + branchcode + '&search=' + search);
+  }
+
+
   getplan() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Plan');
   }
@@ -186,6 +192,10 @@ export class MasterformService {
   
   GetRoomcomany(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/roomcompany?BranchCode=' + branchcode);
+  }
+
+  SearchComanyDate(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/CompanySearch?BranchCode=' + branchcode + '&search=' + search);
   }
 
 
