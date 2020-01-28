@@ -20,7 +20,9 @@ import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
 
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
- 
+//import { ConfirmationDialogService } from './_services/confirmation-dialog.service';
+//import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
+
 // import { FloorcreationComponent } from './master/floorcreation/floorcreation.component';
 // import { RoomtypecreationComponent } from './master/roomtypecreation/roomtypecreation.component';
 // import { RoomorganizerComponent } from './master/roomorganizer/roomorganizer.component';
@@ -74,8 +76,8 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
 
     // provider used to create fake backend
     //fakeBackendProvider
-  
   ],
+
 
   
   bootstrap: [AppComponent]

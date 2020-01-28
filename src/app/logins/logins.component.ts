@@ -87,7 +87,8 @@ export class LoginsComponent implements OnInit {
           localStorage.setItem("IsRole", data.IsRole.toString());
           localStorage.setItem("BranchCode", data.BranchCode.toString());
           this.addToast("Cogwave Software", "Login Sucessfully", "success");
-           this.router.navigate(['/dashboard/default']);
+          // this.router.navigate(['/dashboard/default']);
+           this.router.navigate(["/Master/dashboard"]);
         },error => {        
           this.error = error;
           this.error=error.message;  
@@ -178,7 +179,8 @@ export class LoginsComponent implements OnInit {
             localStorage.setItem("BranchCode", data.BranchCode.toString());
             sessionStorage.setItem("UserName", data.UserName);    
             this.addToast("Cogwave Software", "Login Sucessfully", "success");
-            this.router.navigate(["/dashboard/default"]);
+            this.router.navigate(["/Master/dashboard"]);
+
           });
       },
       error => {

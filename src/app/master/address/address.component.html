@@ -15,6 +15,7 @@
       
         <button (click)="openConfirmationDialog()" type="button" class="btn btn-primary">Open dialog</button>
       
+     
         <div class="formdesign aqua-gradient" *ngIf="isShown" >
             <div class="formouter rotate" >
              <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
@@ -214,4 +215,6 @@
              
           </app-modal-animation>
 
+
+      
           <ng2-toasty [position]="position"></ng2-toasty>

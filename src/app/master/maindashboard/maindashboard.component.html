@@ -4,51 +4,45 @@
       <div class="row ">
        
         <div class="col-md-9 " style="padding-left: 0; border:1px solid #ccc">
-          <h2 class="blueorange-gradient">Header Text</h2>
+      
           <div class=" ">
              
           <div class="col-md-12 test " style="padding:10px 10px 10px 0px;"> 
             <ul>
               <li>
-                <img src="assets/images/product2.png"> <span>Checkin</span>
+                <img width="40"  src="assets/images/product2.png"> <span>Reservation</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Group Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Refresh</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Checkin</span>
+                <img  width="40" src="assets/images/product2.png"><span>Checkin</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"> <span>Checkin</span>
+                <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Group Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Group</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"> <span>Checkin</span>
+                <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Group Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Group </span>
               </li>
               <li>
-                <img src="assets/images/product2.png"><span>Checkin</span>
+                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
               </li>
-              <li>
-                <img src="assets/images/product2.png"><span>Checkin</span>
-              </li>
-              <li>
-                <img src="assets/images/product2.png"> <span>Checkin</span>
-              </li>
-    
+             
             </ul>
             <div class="row">
               </div>
@@ -106,6 +100,8 @@
                         <ul style="display: inline-block" >
                           <li style="float: left; margin-left: 0px "  *ngFor="let child of finalMenu.Rooms" (click)="openRoomsPopup('effect-2',child )">
                           <div *ngIf="item.FloorCode==child.FloorCode ">
+
+
                           <div *ngIf = "child.Status == 'V'">                       
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
@@ -113,12 +109,11 @@
                           {{child.RoomNo}} <br> 
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
-                          <span class="tooltip-content clearfix">
-                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
-                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
-                          </span>
+                         
                           </span>       
                           </div> <!-- end of if condition -->
+
+
                           <div *ngIf = "child.Status == 'O'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
@@ -127,11 +122,23 @@
                           <span class="">{{child.RoomCode}}</span>
                           </button></span>
                           <span class="tooltip-content clearfix">
-                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
-                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          <img src="assets/images/GuestImage/CW_1001_21194414585719GuestPhoto.png" width="150" alt="Ecluid.png">
+                          <span class="tooltip-text"> 
+                            <span>Name:Francis </span>  
+                            <span>Pax :2 </span><br> 
+                            <span>CheckinDate :27/01/2020 </span> 
+                            <span>CheckinTime:17:15 </span> <br> 
+                            <span>CheckoutDate :27/01/2020 </span> 
+                            <span>CheckoutTime:17:15 </span> <br>  
+                            <span>PlanName:CP </span> 
+                      
+                        </span>
                           </span>
                           </span> 
                           </div><!-- end of if condition -->
+
+
+
                           <div *ngIf = "child.Status == 'D'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
@@ -140,11 +147,13 @@
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
                           <span class="tooltip-content clearfix">
-                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
-                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
+                          <span class="tooltip-text">The Room is Dirty</span>
                           </span>
                           </span> 
                           </div><!-- end of if condition -->
+
+
                           <div *ngIf = "child.Status == 'B'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
@@ -153,11 +162,13 @@
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
                           <span class="tooltip-content clearfix">
-                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
-                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
+                          <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
                           </span>
                           </span> 
                           </div><!-- end of if condition -->
+
+
                           <div *ngIf = "child.Status == 'M'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
@@ -167,10 +178,12 @@
                           </button></span>
                           <span class="tooltip-content clearfix">
                           <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
-                          <span class="tooltip-text">Also known as Euclid of andria, was a Greek mathematician, often referred.</span>
+                          <span class="tooltip-text">Room is Management .Reason Md Guest.</span>
                           </span>
                           </span> 
                           </div><!-- end of if condition -->
+
+
                           <!-- <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button>  -->
                           </div>     
                           
@@ -183,6 +196,54 @@
                   
                   
                   </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- Bootstrap tab card start -->
+                     
+                        <div class="row">
+                          <div class="col-md-12 col-xl-6">
+                         
+                            <ngb-tabset>
+                              <ngb-tab title="Home">
+                                <ng-template ngbTabContent>
+                                  <div [@fadeInOutTranslate] class="m-t-15">
+                                    <p class="m-4">1. This is Photoshop's versinAenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                              <ngb-tab title="Profile">
+                                <ng-template ngbTabContent>
+                                  <div [@fadeInOutTranslate] class="m-t-15">
+                                    <p class="m-4">2. Cras consequat in terdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                              <ngb-tab title="Messages">
+                                <ng-template ngbTabContent>
+                                  <div [@fadeInOutTranslate] class="m-t-15">
+                                    <p class="m-4">3. This is Photoshop's icitudin, s natoque penatibus et magnis dis.....</p>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                              <ngb-tab title="Settings">
+                                <ng-template ngbTabContent>
+                                  <div [@fadeInOutTranslate] class="m-t-15">
+                                    <p class="m-4">4. Cras consequat diet felis amet.</p>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                            </ngb-tabset>
+                          </div>
+                        
+                        </div>
+                     
+                      <!-- Bootstrap tab card end -->
+                    </div>
+                  </div>
+
+                   
               <!-- end rooms dashborad -->
               </div>
         
@@ -205,19 +266,11 @@
        
         
         </div> <!-- col md 9  end -->
-        <div class="col-md-7 stickytab ">          
-            <div class="row" >
-              <div class="col-md-12">  
-              <app-dashtabs></app-dashtabs>
-              </div>
-            </div>
-             
-                    
-          </div>
+      
         
         <div class="col-md-3">          
             <div class="row" style="border: 1px solid #ccc;">
-            <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+            <!--<img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
             </div>
            
         </div>

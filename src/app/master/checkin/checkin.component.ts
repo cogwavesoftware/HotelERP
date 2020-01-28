@@ -12,8 +12,8 @@ import {
   Validators
 } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs/Subscription";
-
+//import { Subscription } from "rxjs/Subscription";
+import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 import { animate, style, transition, trigger } from "@angular/animations";
 import { RoomtypeService } from "./../../_services/roomtype.service";
 import { MasterformService } from "src/app/_services/masterform.service";
@@ -107,7 +107,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   selectedCharacter = "3";
   timeLeft = 5;
   roomtype = [];
-  private dataSub: Subscription = null;
+ // private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
   paymentmode: string[] = ["Online", "Credit Card", "Cash"];
@@ -221,7 +221,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     public router: Router,
     public formBuilder: FormBuilder,private _bankservice:BankService,
     private route: ActivatedRoute,
-    private roomservice: RoomtypeService,
+    private roomservice: RoomtypeService, private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService
    ) {
 
@@ -758,6 +758,13 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   Submit() {
+
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
+    .then((confirmed) => console.log('User confirmed:', confirmed))
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+
+return;
 
     const formData = new FormData();
     if (this.GuestDoucmentFrontpathurl.length < 5) {

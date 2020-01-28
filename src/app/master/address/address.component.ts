@@ -84,9 +84,12 @@ export class AddressComponent implements OnInit {
     }
   }
   public openConfirmationDialog() {
-    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to ... ?')
+
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
     .then((confirmed) => console.log('User confirmed:', confirmed))
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+    
   }
 
   Closeform() {
