@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef 
 import { Observable, Observer, empty } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 import {
   FormBuilder,
   FormGroup,
@@ -12,8 +13,14 @@ import {
   Validators
 } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+<<<<<<< HEAD
 //import { Subscription } from "rxjs/Subscription";
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
+=======
+// import { IOption } from "ng-select";
+import { Subscription } from "rxjs/Subscription";
+// import { SelectOptionService } from "src/app/shared/elements/select-option.service";
+>>>>>>> 09867ec7bc11345ee5217107ef452449c8132109
 import { animate, style, transition, trigger } from "@angular/animations";
 import { RoomtypeService } from "./../../_services/roomtype.service";
 import { MasterformService } from "src/app/_services/masterform.service";
@@ -26,8 +33,8 @@ import { BankService } from 'src/app/_services/bank.service';
 import { Subject } from 'rxjs/Subject';
 import { fromEvent } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-
-import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+ 
+import { filter, debounceTime, distinctUntilChanged, tap ,switchMap} from 'rxjs/operators'
 export interface Checkinss {
   RoomCode: string;
   RoomNo: string;
@@ -58,10 +65,20 @@ export interface Checkinss {
     ])
   ]
 })
-export class CheckinComponent implements OnInit, OnDestroy {
+export class CheckinComponent implements OnInit,OnDestroy {
+  roomtypelist = [
+            {id: 1, name: 'Vilnius'},
+            {id: 2, name: 'Kaunas'},
+            {id: 3, name: 'Pavilnys', disabled: true},
+            {id: 4, name: 'Pabradė'},
+            {id: 5, name: 'Klaipėda'}
+];
+selectedRoomcode: any;
+  
   //web camara data 
-
-  public snapshotshow = false;
+  SnapshotbuttonDisabled: boolean  ;
+  camarabuttonDisabled: boolean  ;
+  public snapshotshow =false;
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
   // toggle webcam on/off
@@ -103,7 +120,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   //simpleOption: Array<IOption> = this.selectOptionService.getCharacters();
   selectedOption = "3";
   isDisabled = true;
- 
+  //characters: Array<IOption>;
   selectedCharacter = "3";
   timeLeft = 5;
   roomtype = [];
@@ -216,7 +233,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   // }
 
-
+@ViewChild('f', { static: false }) form1: any;
   constructor(private datePipe: DatePipe, public _masterformservice: MasterformService,
     public router: Router,
     public formBuilder: FormBuilder,private _bankservice:BankService,
@@ -313,12 +330,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
       vehicleno: ["", [Validators.required]],
       charge: ["", [Validators.required]],
       idproof: [""],
-      idproofno: [""]
+      idproofno: [""],
+      name1:[""]
     });
   }
 
   ngOnInit() {
-    
+    this.camarabuttonDisabled = false;
+    this.SnapshotbuttonDisabled = true;
     // this._masterservice.GetGuestDetails("CW_1001").subscribe(res => {
     //   this.guest = res;
     //   this.filterguest = res;
@@ -412,11 +431,20 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.trigger.next();
     this.toggleWebcam();
     //this.Iscamaraon = true;
+
+    this.SnapshotbuttonDisabled = true;
+    this.camarabuttonDisabled = false;
   }
 
-  public SwitchOnCamara() {
-    if (this.showWebcam) {
-      this.snapshotshow = true;
+  public SwitchOnCamara()
+  {
+    this.SnapshotbuttonDisabled = false;
+    this.camarabuttonDisabled = true;
+
+      if(this.showWebcam){
+      this.snapshotshow =true;
+      
+
     }
     else {
       this.snapshotshow = false;
@@ -560,7 +588,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
       },
         error => {
-          alert('e')
+         // alert('e')
           console.log(error);
         },
         () => {
@@ -816,7 +844,9 @@ return;
     });
   }
 
-
+  // onSubmit(ff?: NgForm) {
+  //   alert("test");
+  // }
 
 
 
@@ -845,7 +875,21 @@ return;
     document.querySelector("#" + event).classList.add("md-close");
     document.querySelector("#" + event).classList.remove("md-show");
   }
+  onSubmit(form?: NgForm) {  
+    alert("fff");  
+    console.log(form.value) ;
+    
+  }// end of form
 
+
+  runTimer() {
+    const timer = setInterval(() => {
+      this.timeLeft -= 1;
+      if (this.timeLeft === 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+  }
 }
 
 

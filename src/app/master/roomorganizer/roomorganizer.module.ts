@@ -9,14 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 import { RoomorganizerRoutingModule } from './roomorganizer-routing.module';
 import { RoomorganizerComponent } from './roomorganizer.component';
 import { ToastyModule } from 'ng2-toasty';
+ import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [RoomorganizerComponent],
   imports: [
-    CommonModule,RoomorganizerRoutingModule,
+    CommonModule,RoomorganizerRoutingModule ,    
     SharedModule,
     HttpClientModule,
     DataTableModule,
-    FormsModule,
+    FormsModule,NgSelectModule,
     ReactiveFormsModule,ToastyModule.forRoot()
   ]
  

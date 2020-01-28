@@ -21,6 +21,7 @@ import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog
 import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
 // import {SelectModule} from 'ng-select';
 import {DatePipe} from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [CheckinComponent, CheckoutComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
@@ -30,7 +31,7 @@ import {DatePipe} from '@angular/common';
      HttpClientModule,
      DataTableModule,
      FormsModule,
-     //SelectModule,
+      NgSelectModule,
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],

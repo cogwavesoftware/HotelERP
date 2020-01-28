@@ -50,26 +50,38 @@
                                            <!--  test row 1-->
                                            <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
                                             <div class="row" style="margin-bottom:0">
-                                              <div class='col-12 col-sm-2'>
-                                                <div class="form-group">                                
+                                              <div class='col-12 col-sm-2' style="padding-left: 0;">
+                                                <div class="form-group" style="padding-top:10px;">                                
                                                   <label class="form-control-label" for="firstname">   </label>                                                                                                                  
                                                       <label >Room No </label>
                                                        <label style="padding-left: 3px; font-weight: bold;" >1000</label>                                                     
                                                  </div>       
                                               </div> 
 
-                                              <div class="col-sm-4" style="padding-left: 0;">
-                                                <div class="form-group">
-                                                  <input type="checkbox"  (click)="OpenReferanceModel('effect-6',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off"  required style="width: 15px; float: left;" /> Ref : {{referanceName}}
+                                              <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;  ">
+                                                <div class="form-group" >
+                                                  <ng-select [items]="roomtypelist"
+                                                bindLabel="name" name="name1"
+                                                placeholder="Select Roomcode"  
+                                                [(ngModel)]="selectedRoomcode" formControlName="name1"  >
+                                              </ng-select>
+
+                                                  <!-- <input type="checkbox"  (click)="OpenReferanceModel('effect-6',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off"  required style="width: 15px; float: left;" /> Ref : {{referanceName}} -->
                                                  
                                                 </div>
                                                
                                                </div>  
-                                            
+                                               <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;">
+                                                <a  (click)="OpenReferanceModel('effect-6',item)" ><i style="font-size: 110%;
+                                                  padding-top: 2px;
+                                                  display: inline-block;
+                                                  padding-left: 10px" class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                              </div>
+
                                              </div>
                                           <div class="row guestinfofirstrow" style="margin-bottom:0">
                                            
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="title ">Title</label>
                                                 <select class="custom-select" name="title" formControlName="title"
@@ -89,7 +101,7 @@
                                             
                                              
                                     
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
@@ -98,7 +110,7 @@
                                                 <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                 </div>  
                                             </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="gender">  Gender </label>
                                                <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
@@ -137,7 +149,7 @@
                                         </div> <!-- end row -->
     
     
-                                        <div class="row  " style="margin-bottom:0">
+                                        <div class="row  guestinfofirstrow" style="margin-bottom:0">
                                           
                                           
                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
@@ -213,20 +225,24 @@
                                         
                                            
     
-                                           <div class="row" style="margin-bottom:0"> 
-                                             <div class='col-12 col-sm-6'>
+                                           <div class="row guestinfofirstrow" style="margin-bottom:0"> 
+                                             <div class='col-12 col-lg-6'>
                                               <div class="form-group">
-                                               <label class="form-control-label" for="address">Address </label>
-                                               <textarea class="form-control col-sm-12" id="address" rows="4" formControlName="address"  ></textarea>
+                                               <label class="form-control-label" for="address"> Address </label>       
+                                               <textarea class="form-control col-sm-12" id="address" rows="4" formControlName="address"   style="min-height:121px"></textarea>
                                                <div class="invalid-feedback" *ngIf="form.controls.address.errors?.required" >address   is required</div>
                                                </div>  
                                            </div> 
-                                           <div class='col-12 col-sm-6'>
+                                           <div class='col-12 col-lg-6'>
                                              <div class="row">
                                                <div class="col-sm-4">
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="address">Guest Photo </label>
                                                   <div >
+
+                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabled" (click)="triggerSnapshot();"  >Take A Snapshot</button>
+                                                    <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabled" (click)="SwitchOnCamara()"  >Switch On</button>
+
                                                    <webcam [height]="100" [width]="250" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
                                                            [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
                                                            [videoOptions]="videoOptions"
@@ -255,13 +271,28 @@
                                                </div>
 
                                                <div class="col-sm-4">
-                                                <button class="actionBtn" (click)="triggerSnapshot();" style="margin-bottom:10px;">Take A Snapshot</button>
-                                                <button class="actionBtn" (click)="SwitchOnCamara()" style="margin-bottom:10px;">Switch On</button>
-                                                <button *ngIf="Iscamaraon" class="actionBtn" (click)="toggleWebcam();"><img src="../../../assets/images/cogwaveimages/camaraon.png" style="width: 100px; height:auto; padding:10px" ></button>
+                                                <div class='col-12 col-lg-12 '>
+                                                  <label  >Id Proof Front</label>
+                                                 <input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdFront.errors || form.controls.GuestIdFront.touched || form.controls.GuestIdFront.dirty}" required  />  
+                                                   <div class="invalid-feedback" *ngIf="form.controls.GuestIdFront.errors?.required" >GuestIdFront   is required</div>                                   
+                                                   <div class="row" style="margin-left:0;margin-right:0">
+                                                     <img [src]="previewUrl2"  style="width:100%;max-width:300px">
+                                                                               
+                                                   </div>
+                                                 </div>
+                                                 
                                                </div>
 
                                                <div class="col-sm-4">
-                                                                                                
+                                                <div class="col-12 col-lg-12    ">
+                                                  <label  >Id Proof Back</label>
+                                                  <input type="file" class="form-control tooltip-form" id="GuestIdBack" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdBack.errors || form.controls.GuestIdBack.touched || form.controls.GuestIdBack.dirty}" required  />  
+                                                   <div class="invalid-feedback" *ngIf="form.controls.GuestIdBack.errors?.required" >GuestIdBack   is required</div>
+               
+                                                   <div class="row" style="margin-left:0;margin-right:0">
+                                                    <img [src]="previewUrl3"  style="width:100%;max-width:300px">                          
+                                                    </div>
+                                              </div>                                    
                                                </div>
 
                                              </div>
@@ -757,6 +788,30 @@
                                             </div>
                                           </div>
                                         </div>  
+
+                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                          <div class="form-group">
+                                            <label class="form-control-label" for="idproof">ID Proof</label>
+                                            <select class="custom-select" name="idproof" formControlName="idproof"
+                                              id="idproof"
+                                              [ngClass]="{ 'is-invalid': submitted && form.idproof.errors }">
+                                              <option value="select">Select</option>
+                                              <option  *ngFor="let sour of howuknow"
+                                                [value]="sour.Description">{{ sour.Description  }}</option>
+                                            </select>
+                                            <div *ngIf="submitted && form.idproof.errors" class="invalid-feedback">
+                                              <div *ngIf="form.idproof.errors.required">idproof </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-12 col-lg-2 col-md-4 col-sm-4 ">
+                                          <label >Id No</label>  
+                                          <input type="text" class="form-control tooltip-form" id="idproofno" formControlName="idproofno" name="idproofno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.idproofno.errors || form.controls.idproofno.touched || form.controls.idproofno.dirty}" required  />  
+                                                       <div class="invalid-feedback" *ngIf="form.controls.idproofno.errors?.required" >proofidno   is required</div>
+           
+                                      </div> 
+
+
                                        </div><!-- end 3rd row-->
                                        <div class="row" style="margin-bottom:0;">
                                           <!-- button start  -->
@@ -791,82 +846,7 @@
                       </div>
                     </ng-template>
                   </ngb-tab>
-                  <ngb-tab title="Guest Document">
-                    <ng-template ngbTabContent>
-                      <div [@fadeInOutTranslate] class="m-t-15">
-                        <div class="col-md-6 border p-10  ">
-                                 
-                          <div class="row form-group">
-                               <div class="col-md-12 ">
-                                   <label >Guest Photo1</label>  
-                                   <input type="file" class="form-control tooltip-form" id="GuestPhotoPath" formControlName="GuestPhotoPath" name="GuestPhotoPath" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestPhotoPath.errors || form.controls.GuestPhotoPath.touched || form.controls.GuestPhotoPath.dirty}" required  />  
-                                                <div class="invalid-feedback" *ngIf="form.controls.GuestPhotoPath.errors?.required" >GuestPhotoPath   is required</div>
-                                    <div class="col-md-12 border p-10">
-                                       <div class="row" style="margin-left:0">                                         
-                                          <img [src]="previewUrl" style="width:100%;max-width:300px;border:1px solid red" />  
-                                         </div>
-                                   </div>
-                               </div>
-                                   
-                             </div>
-                             
-                             <div class="row form-group" style="margin-left:0;margin-right:0">
-                               <div class="col-md-6 border  ">
-                                <div class='col-12 col-lg-12 '>
-
-                                   <label  >Id Proof Front</label>
-                                  <input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdFront.errors || form.controls.GuestIdFront.touched || form.controls.GuestIdFront.dirty}" required  />  
-                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdFront.errors?.required" >GuestIdFront   is required</div>                                   
-                                    <div class="row" style="margin-left:0;margin-right:0">
-                                      <img [src]="previewUrl2"  style="width:100%;max-width:300px">
-                                                                
-                                    </div>
-                                  </div>
-
-
-                         <div class='col-12 col-lg-12'>
-                                <div class="form-group">
-                                  <label class="form-control-label" for="idproof">ID ProofBack</label>
-                                  <select class="custom-select" name="idproof" formControlName="idproof"
-                                    id="idproof"
-                                    [ngClass]="{ 'is-invalid': submitted && form.idproof.errors }">
-                                    <option value="select">Select</option>
-                                    <option  *ngFor="let sour of howuknow"
-                                      [value]="sour.Description">{{ sour.Description  }}</option>
-                                  </select>
-                                  <div *ngIf="submitted && form.idproof.errors" class="invalid-feedback">
-                                    <div *ngIf="form.idproof.errors.required">idproof </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-12 col-lg-12 ">
-                                <label >Id No</label>  
-                                <input type="text" class="form-control tooltip-form" id="idproofno" formControlName="idproofno" name="idproofno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.idproofno.errors || form.controls.idproofno.touched || form.controls.idproofno.dirty}" required  />  
-                                             <div class="invalid-feedback" *ngIf="form.controls.idproofno.errors?.required" >proofidno   is required</div>
- 
-                            </div> 
-
-
-                        
-
-                               </div>
-                               <div class="col-md-6 border  ">
-                                   <label  >Id Proof Back</label>
-                                   <input type="file" class="form-control tooltip-form" id="GuestIdBack" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdBack.errors || form.controls.GuestIdBack.touched || form.controls.GuestIdBack.dirty}" required  />  
-                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdBack.errors?.required" >GuestIdBack   is required</div>
-
-                                    <div class="row" style="margin-left:0;margin-right:0">
-                                     <img [src]="previewUrl3"  style="width:100%;max-width:300px">                          
-                                     </div>
-                               </div>
-                             </div>
-
-
-                             
-                       </div> <!-- border end -->
-                      </div>
-                    </ng-template>
-                  </ngb-tab>
+                
                   <ngb-tab title="Driver Commission">
                     <ng-template ngbTabContent>
                       <div [@fadeInOutTranslate] class="m-t-15">
