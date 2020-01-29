@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef 
 import { Observable, Observer, empty } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,11 @@ import {
   Validators
 } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+<<<<<<< HEAD
+=======
+import { CheckinService } from './../../_services/checkin.service';
+
+>>>>>>> 70e2b5f41b22f30abd0a03cb826da028234d5968
 //import { Subscription } from "rxjs/Subscription";
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 import { animate, style, transition, trigger } from "@angular/animations";
@@ -27,8 +32,10 @@ import { BankService } from 'src/app/_services/bank.service';
 import { Subject } from 'rxjs/Subject';
 import { fromEvent } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
- 
-import { filter, debounceTime, distinctUntilChanged, tap ,switchMap} from 'rxjs/operators'
+
+import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { isNullOrUndefined } from '@swimlane/ngx-datatable/release/utils';
 export interface Checkinss {
   RoomCode: string;
   RoomNo: string;
@@ -59,20 +66,14 @@ export interface Checkinss {
     ])
   ]
 })
-export class CheckinComponent implements OnInit,OnDestroy {
-  roomtypelist = [
-            {id: 1, name: 'Vilnius'},
-            {id: 2, name: 'Kaunas'},
-            {id: 3, name: 'Pavilnys', disabled: true},
-            {id: 4, name: 'Pabradė'},
-            {id: 5, name: 'Klaipėda'}
-];
-selectedRoomcode: any;
-  
+export class CheckinComponent implements OnInit, OnDestroy {
+
+  selectedRoomcode: any;
+  ReferanceList:any;
   //web camara data 
-  SnapshotbuttonDisabled: boolean  ;
-  camarabuttonDisabled: boolean  ;
-  public snapshotshow =false;
+  SnapshotbuttonDisabled: boolean;
+  camarabuttonDisabled: boolean;
+  public snapshotshow = false;
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
   // toggle webcam on/off
@@ -80,14 +81,20 @@ selectedRoomcode: any;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
-  
+  error:string;
   base64TrimmedURL: any;
   base64DefaultURL: any;
   generatedImage: any;
   guest: any;
   picodelist: any;
   referencelist: any;
-  companylist:any;
+  companylist: any;
+  driverlist:any;
+  theme = "bootstrap";
+  type = "default";
+  closeOther = false;
+ 
+  position = 'top-right';
   //public videoOptions: MediaTrackConstraints = {
   // width: {ideal: 1024},
   // height: {ideal: 576}
@@ -118,7 +125,7 @@ selectedRoomcode: any;
   selectedCharacter = "3";
   timeLeft = 5;
   roomtype = [];
- // private dataSub: Subscription = null;
+  // private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
   paymentmode: string[] = ["Online", "Credit Card", "Cash"];
@@ -128,7 +135,8 @@ selectedRoomcode: any;
   genderitems: any;
   gender: any;
   pincode: any;
-  isSingleCheckin: boolean = true;
+  IsWalkinCheckin: boolean = true;
+  IsCompanyCheckin: boolean=false;
   Formcheckin: Checkinss;
   maxDate = new Date();
   myTime = new Date();
@@ -141,7 +149,7 @@ selectedRoomcode: any;
   public sortBy = "";
   public sortOrder = "desc";
   public isShown: boolean = false;
-  referanceName:string;
+  referanceName: string;
   isValid(event: boolean): void {
     this.valid = event;
   }
@@ -165,15 +173,18 @@ selectedRoomcode: any;
   filterpin: any[];
   fileDataIdfront: File = null;
   fileDataIdBack: File = null;
-
+  Branch:string;
   private _searchTerm: string;
   @ViewChild('searchTerm', { static: false }) searchTerm: ElementRef;
   @ViewChild('searchTermref', { static: false }) searchTermref: ElementRef;
   @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
   @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
+  @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
+
+  
   public Guestphotopathurl: string;
-  public GuestDoucmentFrontpathurl: string;
-  public GuestDoucmentBackpathurl: string;
+  public GuestDoucmentFrontpathurl: string="0";
+  public GuestDoucmentBackpathurl: string="0";
 
 
   //   return this._searchTerm;
@@ -189,7 +200,7 @@ selectedRoomcode: any;
   //     switchMap(id => {
   //             console.log(id);
   //             console.log('Francis');
-  //             return this._masterformservice.GetPinAddress();
+  //             return this._masterservice.GetPinAddress();
   //          })
   //          ).subscribe(res => this.picodelist = res);
 
@@ -227,26 +238,25 @@ selectedRoomcode: any;
 
   // }
 
-@ViewChild('f', { static: false }) form1: any;
-  constructor(private datePipe: DatePipe, public _masterformservice: MasterformService,
-    public router: Router,
-    public formBuilder: FormBuilder,private _bankservice:BankService,
-    private route: ActivatedRoute,
+  @ViewChild('f', { static: false }) form1: any;
+  constructor(private datePipe: DatePipe, 
+    public router: Router,private toastyService: ToastyService,
+    public formBuilder: FormBuilder, private _bankservice: BankService,
+    private route: ActivatedRoute,private savecheckin:CheckinService,
     private roomservice: RoomtypeService, private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService
-   ) {
+  ) {
 
-      this._bankservice.changeMessage("collapsed")
+    this._bankservice.changeMessage("collapsed")
+    this.Branch = localStorage.getItem("BranchCode");
     this.IsShowloader = false;
     //this.data = this._masterservice.GetPindata();
     // this.data = this._masterservice.GetPinAddress();
     //this.data1 = this._masterservice.GetGuestDetails("CW_1001");
-    //this.data2 = this._masterformservice.GetRoomcomany('CW_1001');
+    //this.data2 = this._masterservice.GetRoomcomany('CW_1001');
     setTimeout(() => {
       this.IsShowloader = false;
     }, 2000)
-
-
     // this.datePickerConfig = Object.assign({},
     //   {
     //     containerClass: 'theme-dark-blue',
@@ -255,8 +265,7 @@ selectedRoomcode: any;
     //     date:'short'
 
     //   });
-
-    this.minDate=new Date(); 
+    this.minDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate() + 1);
 
     this.navRight = "nav-off";
@@ -274,7 +283,8 @@ selectedRoomcode: any;
 
     this.form = this.formBuilder.group({
       companycode: ["0", [Validators.required]],
-      referenceid: ["", [Validators.required]],
+      Guestcode: ["0", [Validators.required]],
+      referenceid: ["0", [Validators.required]],
       source: ["select", [Validators.required]],
       arivalmode: ["Walk-IN", [Validators.required]],
       title: ["Mr", [Validators.required]],
@@ -319,25 +329,34 @@ selectedRoomcode: any;
       Billing: ["select", [Validators.required]],
       DOB: ["", [Validators.required]],
       DOA: ["", [Validators.required]],
+      driverTd:["",[Validators.required]],
       drivername: ["", [Validators.required]],
       drivermobile: ["", [Validators.required]],
       vehicleno: ["", [Validators.required]],
       charge: ["", [Validators.required]],
       idproof: [""],
       idproofno: [""],
-      name1:[""]
+      RefName: ["0"],
+      BranchCode:[this.Branch,[Validators.required]],
+      randomCheckinNo:['0',[Validators.required]],
+      IpAdd:[localStorage.getItem("LOCAL_IP")],
+      CreatedBy:[localStorage.getItem("id"),[Validators.required]]
     });
   }
 
   ngOnInit() {
+
+     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
+     this.ReferanceList=res;
+     },
+     error =>{},
+     ()=>{});
+
+     
+       
     this.camarabuttonDisabled = false;
     this.SnapshotbuttonDisabled = true;
-    // this._masterservice.GetGuestDetails("CW_1001").subscribe(res => {
-    //   this.guest = res;
-    //   this.filterguest = res;
-    //  // console.log(this.guest)
-    // });
-
+  
     this._masterservice.Getmiscellaneous('Gender').subscribe(data => {
       this.gendertypes = data;
     })
@@ -390,9 +409,9 @@ selectedRoomcode: any;
       console.log(this.roomtype);
     });
 
-    if (this.isSingleCheckin == true) {
+    if (this.IsWalkinCheckin == true) {
       console.log(this.form);
-      this._masterservice.GetCheckinDetail("105", "CW_1001").subscribe(data => {
+      this._masterservice.GetCheckinDetail("105", this.Branch).subscribe(data => {
         this.checkinform = data;
         console.log(this.checkinform);
         console.log("this.checkinform");
@@ -411,6 +430,8 @@ selectedRoomcode: any;
       });
     }
 
+   
+
     this.CreateNoofDays(31)
   }
 
@@ -421,6 +442,29 @@ selectedRoomcode: any;
   }
 
 
+  public CompanyCheckin(id:string)
+  {
+    
+   this._masterservice.GetCompanyTariffDetail("105", this.Branch,id)
+   .subscribe(result=>{
+    this.checkinform = result;
+    this.other.patchValue([
+      {
+        RoomNo: this.checkinform["checkin"].RoomNo,
+        RoomCode: this.checkinform["checkin"].RoomCode,
+        Pax: this.checkinform["checkin"].Pax,
+        PlanName: this.checkinform["checkin"].PlanName,
+        Food: this.checkinform["checkin"].Food,
+        Tariff: this.checkinform["checkin"].Tariff,
+        Tax: this.checkinform["checkin"].Tax,
+        Grand: this.checkinform["checkin"].Grand
+      }
+    ]);
+   })
+
+
+  }
+
   public triggerSnapshot(): void {
     this.trigger.next();
     this.toggleWebcam();
@@ -430,15 +474,12 @@ selectedRoomcode: any;
     this.camarabuttonDisabled = false;
   }
 
-  public SwitchOnCamara()
-  {
+  public SwitchOnCamara() {
     this.SnapshotbuttonDisabled = false;
     this.camarabuttonDisabled = true;
 
-      if(this.showWebcam){
-      this.snapshotshow =true;
-      
-
+    if (this.showWebcam) {
+      this.snapshotshow = true;
     }
     else {
       this.snapshotshow = false;
@@ -461,7 +502,7 @@ selectedRoomcode: any;
         switchMap(id => {
           //console.log(id)
           console.log('guestmap')
-          return this._masterformservice.GuetDataSearch('CW_1001', this.searchTermguest.nativeElement.value);
+          return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguest.nativeElement.value);
         })
       ).subscribe(res => this.guest = res);
 
@@ -475,7 +516,7 @@ selectedRoomcode: any;
         switchMap(id => {
           //console.log(id)
           console.log('switchMap')
-          return this._masterformservice.SearchGuestAddress(this.searchTerm.nativeElement.value);
+          return this._masterservice.SearchGuestAddress(this.searchTerm.nativeElement.value);
         })
       ).subscribe(res => this.picodelist = res);
 
@@ -488,14 +529,14 @@ selectedRoomcode: any;
         // tap(x=>console.log('from tap' + x)),
         switchMap(id => {
           //console.log(id)
-         
-          return this._masterformservice.SearchReferance('CW_1001', this.searchTermref.nativeElement.value);
+
+          return this._masterservice.SearchReferance(this.Branch, this.searchTermref.nativeElement.value);
         })
       ).subscribe(res => this.referencelist = res);
 
 
 
-      fromEvent(this.searchTermcompany.nativeElement, 'keyup')
+    fromEvent(this.searchTermcompany.nativeElement, 'keyup')
       .pipe(
         filter(text => this.searchTermcompany.nativeElement.value.length > 2),
         debounceTime(1000),
@@ -503,15 +544,34 @@ selectedRoomcode: any;
         // tap(x=>console.log('from tap' + x)),
         switchMap(id => {
           //console.log(id)
-         
-          return this._masterformservice.SearchComanyDate('CW_1001', this.searchTermcompany.nativeElement.value);
+
+          return this._masterservice.SearchComanyDate(this.Branch, this.searchTermcompany.nativeElement.value);
         })
-      ).subscribe(res =>{
+      ).subscribe(res => {
         this.companylist = res;
         console.log(this.companylist)
-      } );
+      });
 
-      
+debugger;
+      fromEvent(this.searchTermdriver.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermdriver.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+
+          return this._masterservice.SearchDriverData(this.Branch, this.searchTermdriver.nativeElement.value);
+        })
+      ).subscribe(res => {
+        this.driverlist = res;
+        console.log( 'this.driverlist');
+        console.log( this.driverlist);
+      });
+
+
+
   }
 
   public toggleWebcam(): void {
@@ -574,7 +634,7 @@ selectedRoomcode: any;
       const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
       formData.append('GuestPohto', imageFile, imageName);
     });
-    this._masterformservice.SavaImsData(formData)
+    this._masterservice.SavaImsData(formData)
       .subscribe(res => {
         console.log(imageName);
         this.Guestphotopathurl = imageName;
@@ -582,7 +642,7 @@ selectedRoomcode: any;
 
       },
         error => {
-         // alert('e')
+          // alert('e')
           console.log(error);
         },
         () => {
@@ -614,14 +674,14 @@ selectedRoomcode: any;
     //this.NodaysChanged = NoOfDays;
     // var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     //var result = this.datePipe.transform(new Date().getDay() + 2, "dd/MM/yyyy");
-  
-    this.minDate=new Date(); 
+
+    this.minDate = new Date();
     this.maxDate.setDate(this.minDate.getDate() + parseInt(NoOfDays));
     var result = this.datePipe.transform(this.maxDate, "dd/MM/yyyy");
-     this.form.patchValue({
-      checkoutdate:result
-     })
-    
+    this.form.patchValue({
+      checkoutdate: result
+    })
+
   }
 
 
@@ -645,17 +705,30 @@ selectedRoomcode: any;
       gstno: SelectedData.GSTNO,
       companycode: SelectedData.CompanyCode
     })
+    this.IsWalkinCheckin=false;
+    this.IsCompanyCheckin=true;
+    this.CompanyCheckin(SelectedData.CompanyCode);
   }
 
 
-  PatchRefenceDetail(SelectedData: any, event: any)
-  {
+  OpenDrivermodelsDetail(SelectedData: any, event: any) {
+    this.form.patchValue({
+      driverTd: SelectedData.DriverId,
+      drivername: SelectedData.DriverName,
+      drivermobile: SelectedData.MobileNo,
+      vehicleno: SelectedData.VechileNo,
+      charge:SelectedData.ChargeAmount,
+    })
+  }
+
+ 
+
+  PatchRefenceDetail(SelectedData: any, event: any) {
     this.form.patchValue({
       referenceid: SelectedData.Id
     })
-    this.referanceName= SelectedData.RefName
+    this.referanceName = SelectedData.RefName
   }
-
   openMyGuestNameModalData(SelectedData: any, event: any) {
     console.log('SelectedData')
     console.log(SelectedData)
@@ -674,7 +747,7 @@ selectedRoomcode: any;
       DOB: SelectedData.GDOB,
       DOA: SelectedData.GDOA,
     });
-
+    this.form.get('guestname').disable({ onlySelf: true });
     this.snapshotshow = true;
     this.Guestphotopathurl = SelectedData.GuestPhotoPath;
     this.GuestDoucmentFrontpathurl = SelectedData.GuestIdFront;
@@ -697,7 +770,7 @@ selectedRoomcode: any;
 
   OpenReferanceModel(event, data) {
     this.filterQuery = "";
-    this.referanceName='';
+    this.referanceName = '';
     this.form.patchValue({
       referenceid: '0'
     })
@@ -707,6 +780,11 @@ selectedRoomcode: any;
 
 
   Opencompanymodel(event, data) {
+    this.filterQuery = "";
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
+  Opendrivermodel(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
@@ -724,7 +802,7 @@ selectedRoomcode: any;
       Tax: this.other.controls[index].get("Tax").value,
       Grand: this.other.controls[index].get("Grand").value,
       ChangeId: Changed,
-      BranchCode: "CW_1001"
+      BranchCode:this.Branch
     };
 
     this._masterservice.GetBookingData(this.Formcheckin).subscribe(data => {
@@ -781,47 +859,117 @@ selectedRoomcode: any;
 
   Submit() {
 
+    debugger;
+
+    const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let text1 = '';
+    for (let i = 0; i < 5; i++) {
+      text1 += randomCheckinNo.charAt(Math.floor(Math.random() * randomCheckinNo.length));
+    }
+
+    this.form.value.randomCheckinNo=text1;
+    this.form.value.BranchCode = localStorage.getItem("BranchCode")
+    this.form.value.CreatedBy = localStorage.getItem("id")
+    this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
+
+    // if (form.invalid) {
+    //   console.log(form.value);
+    //   this.addToast("Cogwave Software", "invalid Data", "warning");
+    //   return;
+    // }
+
+    debugger;
     this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
-    .then((confirmed) => console.log('User confirmed:', confirmed))
-    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {
+          const formData = new FormData();
 
+        console.log(this.GuestDoucmentFrontpathurl);
+        let Idfront="";
+        let Idback="";
+          if (this.GuestDoucmentFrontpathurl=="0") {
+            
+            if (this.fileDataIdfront != null) {
+              var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
+              var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+               Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
+              formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
+            }
+          }      
+          if (this.GuestDoucmentBackpathurl =="0") {
+           
+            if (this.fileDataIdBack != null) {
+              var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+              var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+               Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
+              formData.append('GuestIdBack', this.fileDataIdBack, Idback);
+            }
+          }      
+          this._masterservice.SavaImsData(formData)
+            .subscribe(res => {
+              console.log(res);
+              this.GuestDoucmentFrontpathurl = Idfront;
+              this.GuestDoucmentBackpathurl = Idback;
+              var checkoutDate = '';
+              let cku = this.form.value.checkoutdate;
+              this.form.value.GuestIdFront=this.GuestDoucmentFrontpathurl;
+              this.form.value.GuestIdBack=this.GuestDoucmentBackpathurl;
+              this.form.value.GuestPhotoPath=this.Guestphotopathurl;          
+              if (cku.length == 10) {
+              }
+              else {
+                checkoutDate = this.datePipe.transform(this.form.value.checkoutdate, "dd/MM/yyyy");
+                this.form.value.checkoutdate = checkoutDate;
+              }
+              this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "dd/MM/yyyy");
+              this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
+              this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
+          
+              if (this.form.value.DOB != "") {
+                this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "dd/MM/yyyy");
+              }
+             
+              if (this.form.value.DOA != "") {
+                this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "dd/MM/yyyy");
+              }
+              this.savecheckin.SaveCheckinData(this.form.value)
+              .subscribe(res => {
+                console.log(res);             
+              },
+                error => {            
+                   this.error = "Checkin Data Not Save";                     
+                    this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                   return;
+                },
+                () => {
+                  this.addToast("Cogwave Software","Checkin Saved Sucessfully","success");
+                });
 
-return;
+            },
+              error => {                    
+                  this.error = "Image Guest Not Saved";                   
+                  this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                 return;
+              },
+              ()=>{
+                this.router.navigate(["/Master/dashboard"]);
+              });
+            
+            // -----------------------End Save Image----        
 
-    const formData = new FormData();
-    if (this.GuestDoucmentFrontpathurl.length < 5) {
-      if (this.fileDataIdfront != null) {
-        var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
-        var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-        var Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
-        formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
-      }
-    }
-
-    if (this.GuestDoucmentBackpathurl.length < 5) {
-      if (this.fileDataIdBack != null) {
-        var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
-        var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-        var Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
-        formData.append('GuestIdBack', this.fileDataIdBack, Idback);
-      }
-    }
-
-    this._masterformservice.SavaImsData(formData)
-      .subscribe(res => {
-        console.log('res');
-        this.GuestDoucmentFrontpathurl = Idfront;
-        this.GuestDoucmentBackpathurl = Idback;
-      },
-        error => {
-          // alert('e')    
-          // this.error = error;
-          // this.error=error.message;  
-          // this.addToast("Cogwave Software😃", this.error + "👊", "error");
-        });
-
-    console.log(this.form.value)
-
+        }  //confoirmtrue end  
+        else {
+        }
+      })
+    .catch(() => 
+    {
+      alert('cach')
+      console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+    });
+    
+    
+   
   }
 
   AddbokingGrid(): FormGroup {
@@ -844,6 +992,46 @@ return;
 
 
 
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
+  }
 
 
   onDelete(bankAccountID, i) {
@@ -853,9 +1041,6 @@ return;
   AddBokingButtonClick(): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
-
-
-
 
 
 
@@ -869,21 +1054,17 @@ return;
     document.querySelector("#" + event).classList.add("md-close");
     document.querySelector("#" + event).classList.remove("md-show");
   }
-  onSubmit(form?: NgForm) {  
-    alert("fff");  
-    console.log(form.value) ;
-    
-  }// end of form
+ 
 
 
-  runTimer() {
-    const timer = setInterval(() => {
-      this.timeLeft -= 1;
-      if (this.timeLeft === 0) {
-        clearInterval(timer);
-      }
-    }, 1000);
-  }
+  // runTimer() {
+  //   const timer = setInterval(() => {
+  //     this.timeLeft -= 1;
+  //     if (this.timeLeft === 0) {
+  //       clearInterval(timer);
+  //     }
+  //   }, 1000);
+  // }
 }
 
 

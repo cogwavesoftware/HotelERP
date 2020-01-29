@@ -1,0 +1,22 @@
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Branchmodel, productlist } from '../_models/Branchmodel';
+import { Observable } from "rxjs/observable";
+import 'rxjs/add/operator/catch';
+
+import { throwError } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CheckinService {
+  constructor(private http: HttpClient) { }
+
+  SaveCheckinData(checkin: any) {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/Savecheckin', checkin, { headers: environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+}

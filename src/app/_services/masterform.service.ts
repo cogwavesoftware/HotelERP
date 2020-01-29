@@ -199,6 +199,10 @@ export class MasterformService {
   }
 
 
+  SearchDriverData(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/DriverSearch?BranchCode=' + branchcode + '&search=' + search);
+  }
+
   GetAllRoomCompanyType() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/roomcompanytype');
   }
@@ -313,8 +317,14 @@ export class MasterformService {
   }
   GetCheckinDetail(RoomNo:string,Branchcode:string) {   
     return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
-    //return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/othertaxEdit?BranchCode=' + branchcode + '&Id=' + Id);
+    
   }
+
+  GetCompanyTariffDetail(RoomNo:string,Branchcode:string,Id:string) {   
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/CompanyTariffDetail?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo + '&Id=' + Id);
+    
+  }
+
   GetBookingData(formData:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/GetBookingData',formData);
