@@ -6122,11 +6122,12 @@ outerdiv{
 }
 .maindashboard li.parentNav{     
         background-color:  #63a4ff!important;
-        background-image: linear-gradient(315deg, #63a4ff 74%, #2C3E50 0%)!important;
+        // background-image: linear-gradient(315deg, #63a4ff 74%, #2C3E50 0%)!important;
+        background-image: linear-gradient(315deg, #ffffff 74%, #2C3E50 0%)!important;
         border-top-right-radius:5px;
         color: #fff;    
         padding: 5px;
-        margin-bottom: 10px;
+        margin-bottom: 1px;
         margin-top:10px;
 }  
 .maindashboard .roomstatus li{
@@ -6136,9 +6137,67 @@ outerdiv{
     padding-bottom: 210px;
 }
 
-.maindashboard .dashboarproduct{
+.maindashboard .overflow-container .ps-content ul li {
+    margin:2px 2px 2px 2px;
+}
+.maindashboard .maindashboardrightside{
+    
+        font-family: Poppins-Regular;
+       
+        .table > thead > tr > th,
+        .table > tbody > tr > td {
+            padding:2px;
+            text-align:center;             
+        }
+        .table > thead >  tr:nth-child(odd){ 
+            background: #b8d1f3;
+        }
+        /*  Define the background color for all the EVEN background rows  */
+        .table > thead > tr:nth-child(even){
+            background: #dae5f4;
+        }
+
     border:1px solid #ccc;
-    padding:10px;
+    
+      h2{
+        background-color:  #ffe100!important;
+        background-image: linear-gradient(315deg, #ffe100 74%, #2C3E50 0%)!important;
+        border-top-right-radius:5px;
+        color: #fff;    
+        padding: 5px;         
+        margin-top:10px;
+      }
+    .logo{
+        img{
+           display: block;
+            margin:0 auto;
+        }
+        
+        h2{
+            text-align: left;
+            margin-bottom: 0;
+            background-image: linear-gradient(315deg, #ffe100 74%, #2C3E50 0%)!important;
+        }
+        
+    }
+    .expectedcheckout{
+          
+        h2{
+            margin-bottom: 0;
+            background-image: linear-gradient(315deg, #2C3E50 74%, #ffe100 0%)!important;
+        }
+    }
+    .specialinstruction{
+        h2{
+            background-image: linear-gradient(315deg, #ffe100 74%, #2C3E50 0%)!important;
+        }
+    }
+    .wakeupalarm{
+        h2{
+            margin-bottom: 0;
+            background-image: linear-gradient(315deg, #2C3E50 74%, #ffe100 0%)!important;
+        }
+    }
 }
 .stickytab{     
     background: aliceblue;    
@@ -6150,6 +6209,43 @@ outerdiv{
     
        
  
+}
+.maindashboard .modelgradiant{
+    background-color: #0cbaba;
+    color:#fff; 
+    background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+}
+.maindashboard .dbutton{
+    background : url("/assets/images/3dbutton.png") no-repeat;
+    width: 50px;
+    height: 50px;    
+    background-size: 100%;
+    padding: 0;
+    color: #fff;
+}
+.maindashboard #modelleftNavBar  ul{
+    padding-left:0;
+}
+.maindashboard #modelleftNavBar  ul li{
+    margin-right:10px;
+}
+.maindashboard #modelleftNavBar  ul li button{
+    padding:2px 2px 2px 2px;
+}
+ 
+.maindashboard .md-content .table-responsive .table tr th,
+.maindashboard .md-content .table-responsive .table tr td{
+    padding:2px;
+}
+.maindashboard .modelgradiantright{
+    background-color: #0cbaba;
+    color:#fff; 
+    background-image: linear-gradient(315deg, #380036 0%, #0cbaba 74%);
+}
+.maindashboard .modal-body .modelgradiant.btn-lg{
+    padding: 10px 18px 10px 18px;
+    font-size: 15px;
+    line-height: normal;
 }
 .maindashboard .dashboarproduct h5{
     background-color:  #63a4ff!important;
@@ -6325,9 +6421,9 @@ outerdiv{
 }
 .pcoded-content .pcoded-inner-content .main-body .page-wrapper  .md-modal{     
     // max-width: 820px!important;
-    height:500px;
-    max-height: 400px;
-    overflow-y: scroll;
+    height:auto;
+    max-height: 400px;    
+    background: #ffffff;
      
 }
 .addressmodeleffect .md-content > div{     

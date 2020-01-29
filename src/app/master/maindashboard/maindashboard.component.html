@@ -8,44 +8,49 @@
           <div class=" ">
              
           <div class="col-md-12 test " style="padding:10px 10px 10px 0px;"> 
-            <ul>
-              <li>
-                <img width="40"  src="assets/images/product2.png"> <span>Reservation</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Refresh</span>
-              </li>
-              <li>
-                <img  width="40" src="assets/images/product2.png"><span>Checkin</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Group</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Group </span>
-              </li>
-              <li>
-                <img width="40" src="assets/images/product2.png"><span>Checkin</span>
-              </li>
-             
-            </ul>
-            <div class="row">
-              </div>
+          <div class="row">
+            <div class="col-md-11">
+              <ul>
+                <li>
+                  <img width="40"  src="assets/images/product2.png"> <span>Reservation</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Refresh</span>
+                </li>
+                <li>
+                  <img  width="40" src="assets/images/product2.png"><span>Checkin</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Group</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Group </span>
+                </li>
+                <li>
+                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                </li>
+               
+              </ul>
+             </div>
+            <div class="col-md-1">
+              <button class="btn dbutton" (click)="openMyModal('effect-2',item)">Click</button>
+            </div>
+          </div>
           </div>
         </div>
 
@@ -98,14 +103,14 @@
                     {{item.FloorName}}</li>
                       <li class="childData">
                         <ul style="display: inline-block" >
-                          <li style="float: left; margin-left: 0px "  *ngFor="let child of finalMenu.Rooms" (click)="openRoomsPopup('effect-2',child )">
+                          <li style="float: left; margin-left: 0px "  *ngFor="let child of finalMenu.Rooms"  >
                           <div *ngIf="item.FloorCode==child.FloorCode ">
 
 
                           <div *ngIf = "child.Status == 'V'">                       
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
-                          <button type="button" class="btn btn-success btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalOverflow.show()" class="btn btn-success btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
                           {{child.RoomNo}} <br> 
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
@@ -117,7 +122,7 @@
                           <div *ngIf = "child.Status == 'O'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
-                          <button type="button" class="btn btn-danger ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalOverflow.show()" class="btn btn-danger ripple light" placement="right" ngbTooltip="{{child.RoomNo}}">
                           {{child.RoomNo}}  <br>
                           <span class="">{{child.RoomCode}}</span>
                           </button></span>
@@ -202,39 +207,9 @@
                     <div class="col-sm-12">
                       <!-- Bootstrap tab card start -->
                      
-                        <div class="row">
-                          <div class="col-md-12 col-xl-6">
-                         
-                            <ngb-tabset>
-                              <ngb-tab title="Home">
-                                <ng-template ngbTabContent>
-                                  <div [@fadeInOutTranslate] class="m-t-15">
-                                    <p class="m-4">1. This is Photoshop's versinAenean mas Cum sociis natoque penatibus et magnis dis.....</p>
-                                  </div>
-                                </ng-template>
-                              </ngb-tab>
-                              <ngb-tab title="Profile">
-                                <ng-template ngbTabContent>
-                                  <div [@fadeInOutTranslate] class="m-t-15">
-                                    <p class="m-4">2. Cras consequat in terdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
-                                  </div>
-                                </ng-template>
-                              </ngb-tab>
-                              <ngb-tab title="Messages">
-                                <ng-template ngbTabContent>
-                                  <div [@fadeInOutTranslate] class="m-t-15">
-                                    <p class="m-4">3. This is Photoshop's icitudin, s natoque penatibus et magnis dis.....</p>
-                                  </div>
-                                </ng-template>
-                              </ngb-tab>
-                              <ngb-tab title="Settings">
-                                <ng-template ngbTabContent>
-                                  <div [@fadeInOutTranslate] class="m-t-15">
-                                    <p class="m-4">4. Cras consequat diet felis amet.</p>
-                                  </div>
-                                </ng-template>
-                              </ngb-tab>
-                            </ngb-tabset>
+                        <div class="row stickytab">
+                          <div class="col-md-12  ">                         
+                            <!-- <app-dashtabs></app-dashtabs> -->
                           </div>
                         
                         </div>
@@ -268,38 +243,353 @@
         </div> <!-- col md 9  end -->
       
         
-        <div class="col-md-3">          
-            <div class="row" style="border: 1px solid #ccc;">
-            <!--<img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+        <div class="col-md-3 maindashboardrightside">          
+      
+            <div class="logo">             
+              <img src="assets/images/logo_2.png" alt="Cogwave">
             </div>
-           
+
+            <div class="expectedcheckout">
+              <h2><i class="fa fa-hotel"></i> Expected Checkout</h2>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered full-data-table"  > 
+                  <thead>
+                  <tr class="blueorange-gradient">                    
+                    <th>Room No </th>
+                    <th>Time</th>
+                    <th>Action </th>                   
+                  </tr>                
+                  </thead>
+                  <tbody>
+                  <tr>                    
+                    <td>400</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+                  <tr>                    
+                    <td>402</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+
+                  <tr>                    
+                    <td>403</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+
+                  <tr>                    
+                    <td>404</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+                  </tbody>                   
+                </table>
+              </div>
+            </div>
+            <div class="specialinstruction">
+              <h2><i class="fa fa-gavel"></i> Special Instruction</h2>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered full-data-table"  > 
+                  <thead>
+                  <tr class="blueorange-gradient">                    
+                    <th>Room No </th>
+                    <th>Time</th>
+                    <th>Action </th>                   
+                  </tr>                
+                  </thead>
+                  <tbody>
+                  <tr>                    
+                    <td>400</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openspecial('effect-2',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+                  <tr>                    
+                    <td>402</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+
+                  <tr>                    
+                    <td>403</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+
+                  <tr>                    
+                    <td>404</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+                  </tbody>                   
+                </table>
+              </div>
+            </div>
+            <div class="wakeupalarm">
+              <h2><i class="fa fa-history" ></i> Wakeup Alarm</h2>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered full-data-table"  > 
+                  <thead>
+                  <tr class="blueorange-gradient">                    
+                    <th>Room No </th>
+                    <th>Time</th>
+                    <th>Action </th>                   
+                  </tr>                
+                  </thead>
+                  <tbody>
+                  <tr>                    
+                    <td>400</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+                  <tr>                    
+                    <td>402</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+
+                  <tr>                    
+                    <td>403</td>                   
+                    <td>01:56:43</td>                    
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+
+                  <tr>                    
+                    <td>404</td>                   
+                    <td>01:56:43</td>                   
+                    <td class="action-icon">
+                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                    </td>
+                  </tr>
+                  </tbody>                   
+                </table>
+              </div>
+            </div>
+            
         </div>
-      </div>
-     
-    </div>
-  </div>
-  
+            
 
-
-</div> <!-- maindashboard-->
-
-<app-modal-animation [modalID]="'effect-2'" [modalClass]="'md-effect-2'">
-  <h3 class="f-15">Guest Details</h3>
-  
+ <app-modal-animation [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">
+  <h2 class="f-15" style="color:#ffffff">Guest Details</h2>  
     <div class="app-modal-body text-center"> 
-        <table class="table table-striped text-left m-t-10">
-          <h2>Floors : 
-            {{model2.floorname}} 
-          </h2>
-              <tr>
-              <td>roomname :</td>
-              <td>{{model2.roomname}}</td>
-              </tr>
-               
+      <div class="row">
+        <div class="col-lg-5 col-sm-5 col-xs-2" style="border:1px solid #ccc;">
+          <div class=" " id="modelleftNavBar">    
+               <ul style="display: inline-block" >
+                  <li style="float: left; margin-left: 0px "    >       
+                  <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                  100 <br> 
+                  <span class=" ">DLX100</span>
+                  </button>        
+                  </li>
+                  <li style="float: left; margin-left: 0px "    >       
+                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                    101 <br> 
+                    <span class=" ">DLX101</span>
+                    </button>        
+                    </li>
+                  <li style="float: left; margin-left: 0px "    >       
+                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                    102 <br> 
+                    <span class=" ">DLX102</span>
+                    </button>        
+                    </li>
+                      <li style="float: left; margin-left: 0px "    >       
+                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                    103<br> 
+                    <span class=" ">DLX103</span>
+                    </button>        
+                    </li>
+                    <li style="float: left; margin-left: 0px "    >       
+                      <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                      100 <br> 
+                      <span class=" ">DLX100</span>
+                      </button>        
+                      </li>
+                      <li style="float: left; margin-left: 0px "    >       
+                        <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                        101 <br> 
+                        <span class=" ">DLX101</span>
+                        </button>        
+                        </li>
+                      <li style="float: left; margin-left: 0px "    >       
+                        <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                        102 <br> 
+                        <span class=" ">DLX102</span>
+                        </button>        
+                        </li>
+                          <li style="float: left; margin-left: 0px "    >       
+                        <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                        103<br> 
+                        <span class=" ">DLX103</span>
+                        </button>        
+                        </li>
+                        <li style="float: left; margin-left: 0px "    >       
+                          <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                          100 <br> 
+                          <span class=" ">DLX100</span>
+                          </button>        
+                          </li>
+                          <li style="float: left; margin-left: 0px "    >       
+                            <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                            101 <br> 
+                            <span class=" ">DLX101</span>
+                            </button>        
+                            </li>
+                          <li style="float: left; margin-left: 0px "    >       
+                            <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                            102 <br> 
+                            <span class=" ">DLX102</span>
+                            </button>        
+                            </li>
+                              <li style="float: left; margin-left: 0px "    >       
+                            <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                            103<br> 
+                            <span class=" ">DLX103</span>
+                            </button>        
+                            </li>
 
-           </table>      
-           
+                            <li style="float: left; margin-left: 0px "    >       
+                              <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                              100 <br> 
+                              <span class=" ">DLX100</span>
+                              </button>        
+                              </li>
+                              <li style="float: left; margin-left: 0px "    >       
+                                <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                101 <br> 
+                                <span class=" ">DLX101</span>
+                                </button>        
+                                </li>
+                              <li style="float: left; margin-left: 0px "    >       
+                                <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                102 <br> 
+                                <span class=" ">DLX102</span>
+                                </button>        
+                                </li>
+                                  <li style="float: left; margin-left: 0px "    >       
+                                <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                103<br> 
+                                <span class=" ">DLX103</span>
+                                </button>        
+                                </li>
+
+                                <li style="float: left; margin-left: 0px "    >       
+                                  <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                  100 <br> 
+                                  <span class=" ">DLX100</span>
+                                  </button>        
+                                  </li>
+                                  <li style="float: left; margin-left: 0px "    >       
+                                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                    101 <br> 
+                                    <span class=" ">DLX101</span>
+                                    </button>        
+                                    </li>
+                                  <li style="float: left; margin-left: 0px "    >       
+                                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                    102 <br> 
+                                    <span class=" ">DLX102</span>
+                                    </button>        
+                                    </li>
+                                      <li style="float: left; margin-left: 0px "    >       
+                                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                                    103<br> 
+                                    <span class=" ">DLX103</span>
+                                    </button>        
+                                    </li>
+                </ul>
+              
+             
+             </div><!-- end leftnav-->
+        </div>   
+        <div class="col-lg-7 col-sm-7 col-xs-7" style="border:1px solid #ccc">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered full-data-table"  > 
+          
+              <tbody>
+              <tr> 
+                <td>Name : </td> <td> Rajiv</td>
+              </tr>
+              <tr> 
+                <td>Room No : </td> <td> 1000</td>
+              </tr>
+              <tr> 
+                <td>Mobile : </td> <td> 99999 45555</td>
+              </tr>
+              <tr> 
+                <td>Email : </td> <td> r.jaika@gmail.com</td>
+              </tr>
+             
+              </tbody>                   
+            </table>
+          </div>
+       </div>  
+      </div>
+         
+
            <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
       </div>
        
-    </app-modal-animation>
+    </app-modal-animation>  
+    <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+      <div class="app-modal-body">
+        <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+        </label>       
+        
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+          <div class="row">
+            <div class="col-sm-12">
+              <ul>
+                 
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Link & UNlink</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Post Charge</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Set Complement</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Room Shifting</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Guest</a></li>  
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Amend Date</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Advances</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> ExtraBed Posting</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Edit Extra Pax </a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Grace Period</a></li>               
+              </ul> 
+            </div>
+           
+           
+             
+          </div>
+        </perfect-scrollbar>
+         
+      </div>
+    </app-modal-basic>
+
+ 

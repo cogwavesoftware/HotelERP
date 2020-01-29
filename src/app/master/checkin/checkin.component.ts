@@ -13,14 +13,8 @@ import {
   Validators
 } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-<<<<<<< HEAD
 //import { Subscription } from "rxjs/Subscription";
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
-=======
-// import { IOption } from "ng-select";
-import { Subscription } from "rxjs/Subscription";
-// import { SelectOptionService } from "src/app/shared/elements/select-option.service";
->>>>>>> 09867ec7bc11345ee5217107ef452449c8132109
 import { animate, style, transition, trigger } from "@angular/animations";
 import { RoomtypeService } from "./../../_services/roomtype.service";
 import { MasterformService } from "src/app/_services/masterform.service";
