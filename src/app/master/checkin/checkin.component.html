@@ -28,7 +28,7 @@
             <div class="row" style="margin-bottom: 0;">
               <div class="col-md-12 taboutercreatebtn">
                 <!-- tab starting -->
-                <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 topbtn" style="padding: 6px;">Create Checkin</button> 
+                <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 topbtn" style="padding: 6px;">Save</button> 
                 <ngb-tabset>
                  
 
@@ -60,10 +60,10 @@
 
                                               <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;  ">
                                                 <div class="form-group" >
-                                                  <ng-select [items]="roomtypelist"
-                                                bindLabel="name" name="name1"
-                                                placeholder="Select Roomcode"  
-                                                [(ngModel)]="selectedRoomcode" formControlName="name1"  >
+                                                  <ng-select [items]="ReferanceList"
+                                                bindLabel="RefName" name="RefName"
+                                                placeholder="Select Referance"  
+                                                [(ngModel)]="selectedRoomcode" formControlName="RefName"  >
                                               </ng-select>
 
                                                   <!-- <input type="checkbox"  (click)="OpenReferanceModel('effect-6',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off"  required style="width: 15px; float: left;" /> Ref : {{referanceName}} -->
@@ -286,7 +286,7 @@
                                                <div class="col-sm-4">
                                                 <div class="col-12 col-lg-12    ">
                                                   <label  >Id Proof Back</label>
-                                                  <input type="file" class="form-control tooltip-form" id="GuestIdBack" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdBack.errors || form.controls.GuestIdBack.touched || form.controls.GuestIdBack.dirty}" required  />  
+                                                  <input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfback($event)" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdBack.errors || form.controls.GuestIdBack.touched || form.controls.GuestIdBack.dirty}" required  />  
                                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdBack.errors?.required" >GuestIdBack   is required</div>
                
                                                    <div class="row" style="margin-left:0;margin-right:0">
@@ -452,7 +452,7 @@
                                         <label class="form-control-label" for="pincode">Checkin Date </label>
                                         <div class="form-group">
                                           <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkindate" name="checkindate"  formControlName="checkindate" placement="right" type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                            <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                           </div>
                                         </div>
                                       </div>
@@ -775,7 +775,8 @@
                                         <label class="form-control-label" for="DOB">Date of Birth</label>
                                         <div class="form-group">
                                           <div class="input-group">
-                                            <input id="DOB" name="DOB"  formControlName="DOB" placement="right" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control">                                     
+                                                
+                                            <input id="DOB" name="DOB"  formControlName="DOB"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                               
                                           </div>
                                         </div>
                                       </div>
@@ -784,7 +785,8 @@
                                           <label class="form-control-label" for="DOA">Date of Anniversary</label>
                                           <div class="form-group">
                                             <div class="input-group">
-                                              <input id="DOA" name="DOA"  formControlName="DOA" placement="right" type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control">                                     
+                                              
+                                              <input id="DOA" name="DOA"  formControlName="DOA"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                  
                                             </div>
                                           </div>
                                         </div>  
@@ -817,7 +819,7 @@
                                           <!-- button start  -->
                                         <div class="col-md-12   voilet-gradient " style="border:2px solid #ccc; text-align: center; ">
                                           <button type="button" id="printgrcbtn" class="btn btn-primary ">PRINT GRC</button>
-                                           <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">Create Checkin</button>                                                                                 
+                                           <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">Save</button>                                                                                 
                                           <button type="button" id="closebtn" class="btn btn-danger">CLOSE</button>
                                         </div> <!-- button end -->
                                        </div>
@@ -1159,3 +1161,4 @@
           </div>
            
         </app-modal-animation>
+        <ng2-toasty [position]="position"></ng2-toasty>
