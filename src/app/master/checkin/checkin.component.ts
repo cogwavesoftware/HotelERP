@@ -86,6 +86,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   picodelist: any;
   referencelist: any;
   companylist: any;
+  driverlist:any;
   theme = "bootstrap";
   type = "default";
   closeOther = false;
@@ -131,7 +132,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
   genderitems: any;
   gender: any;
   pincode: any;
-  isSingleCheckin: boolean = true;
+  IsWalkinCheckin: boolean = true;
+  IsCompanyCheckin: boolean=false;
   Formcheckin: Checkinss;
   maxDate = new Date();
   myTime = new Date();
@@ -174,6 +176,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   @ViewChild('searchTermref', { static: false }) searchTermref: ElementRef;
   @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
   @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
+  @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
+
+  
   public Guestphotopathurl: string;
   public GuestDoucmentFrontpathurl: string="0";
   public GuestDoucmentBackpathurl: string="0";
@@ -192,7 +197,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   //     switchMap(id => {
   //             console.log(id);
   //             console.log('Francis');
-  //             return this._masterformservice.GetPinAddress();
+  //             return this._masterservice.GetPinAddress();
   //          })
   //          ).subscribe(res => this.picodelist = res);
 
@@ -231,7 +236,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // }
 
   @ViewChild('f', { static: false }) form1: any;
-  constructor(private datePipe: DatePipe, public _masterformservice: MasterformService,
+  constructor(private datePipe: DatePipe, 
     public router: Router,private toastyService: ToastyService,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute,private savecheckin:CheckinService,
@@ -245,7 +250,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     //this.data = this._masterservice.GetPindata();
     // this.data = this._masterservice.GetPinAddress();
     //this.data1 = this._masterservice.GetGuestDetails("CW_1001");
-    //this.data2 = this._masterformservice.GetRoomcomany('CW_1001');
+    //this.data2 = this._masterservice.GetRoomcomany('CW_1001');
     setTimeout(() => {
       this.IsShowloader = false;
     }, 2000)
@@ -321,13 +326,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
       Billing: ["select", [Validators.required]],
       DOB: ["", [Validators.required]],
       DOA: ["", [Validators.required]],
+      driverTd:["",[Validators.required]],
       drivername: ["", [Validators.required]],
       drivermobile: ["", [Validators.required]],
       vehicleno: ["", [Validators.required]],
       charge: ["", [Validators.required]],
       idproof: [""],
       idproofno: [""],
-      name1: ["0"],
+      RefName: ["0"],
       BranchCode:[this.Branch,[Validators.required]],
       randomCheckinNo:['0',[Validators.required]],
       IpAdd:[localStorage.getItem("LOCAL_IP")],
@@ -337,25 +343,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-     this._masterformservice.getreferencedetail(this.Branch).subscribe(res => {
+     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
      this.ReferanceList=res;
      },
-     error =>{
+     error =>{},
+     ()=>{});
 
-     },
-     ()=>{
-
-     });
      
-     
+       
     this.camarabuttonDisabled = false;
     this.SnapshotbuttonDisabled = true;
-    // this._masterservice.GetGuestDetails("CW_1001").subscribe(res => {
-    //   this.guest = res;
-    //   this.filterguest = res;
-    //  // console.log(this.guest)
-    // });
-
+  
     this._masterservice.Getmiscellaneous('Gender').subscribe(data => {
       this.gendertypes = data;
     })
@@ -408,9 +406,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
       console.log(this.roomtype);
     });
 
-    if (this.isSingleCheckin == true) {
+    if (this.IsWalkinCheckin == true) {
       console.log(this.form);
-      this._masterservice.GetCheckinDetail("105", "CW_1001").subscribe(data => {
+      this._masterservice.GetCheckinDetail("105", this.Branch).subscribe(data => {
         this.checkinform = data;
         console.log(this.checkinform);
         console.log("this.checkinform");
@@ -429,6 +427,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
       });
     }
 
+   
+
     this.CreateNoofDays(31)
   }
 
@@ -438,6 +438,29 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this._bankservice.changeMessage("expanded")
   }
 
+
+  public CompanyCheckin(id:string)
+  {
+    
+   this._masterservice.GetCompanyTariffDetail("105", this.Branch,id)
+   .subscribe(result=>{
+    this.checkinform = result;
+    this.other.patchValue([
+      {
+        RoomNo: this.checkinform["checkin"].RoomNo,
+        RoomCode: this.checkinform["checkin"].RoomCode,
+        Pax: this.checkinform["checkin"].Pax,
+        PlanName: this.checkinform["checkin"].PlanName,
+        Food: this.checkinform["checkin"].Food,
+        Tariff: this.checkinform["checkin"].Tariff,
+        Tax: this.checkinform["checkin"].Tax,
+        Grand: this.checkinform["checkin"].Grand
+      }
+    ]);
+   })
+
+
+  }
 
   public triggerSnapshot(): void {
     this.trigger.next();
@@ -476,7 +499,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         switchMap(id => {
           //console.log(id)
           console.log('guestmap')
-          return this._masterformservice.GuetDataSearch('CW_1001', this.searchTermguest.nativeElement.value);
+          return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguest.nativeElement.value);
         })
       ).subscribe(res => this.guest = res);
 
@@ -490,7 +513,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         switchMap(id => {
           //console.log(id)
           console.log('switchMap')
-          return this._masterformservice.SearchGuestAddress(this.searchTerm.nativeElement.value);
+          return this._masterservice.SearchGuestAddress(this.searchTerm.nativeElement.value);
         })
       ).subscribe(res => this.picodelist = res);
 
@@ -504,7 +527,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         switchMap(id => {
           //console.log(id)
 
-          return this._masterformservice.SearchReferance('CW_1001', this.searchTermref.nativeElement.value);
+          return this._masterservice.SearchReferance(this.Branch, this.searchTermref.nativeElement.value);
         })
       ).subscribe(res => this.referencelist = res);
 
@@ -519,12 +542,31 @@ export class CheckinComponent implements OnInit, OnDestroy {
         switchMap(id => {
           //console.log(id)
 
-          return this._masterformservice.SearchComanyDate('CW_1001', this.searchTermcompany.nativeElement.value);
+          return this._masterservice.SearchComanyDate(this.Branch, this.searchTermcompany.nativeElement.value);
         })
       ).subscribe(res => {
         this.companylist = res;
         console.log(this.companylist)
       });
+
+debugger;
+      fromEvent(this.searchTermdriver.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermdriver.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+
+          return this._masterservice.SearchDriverData(this.Branch, this.searchTermdriver.nativeElement.value);
+        })
+      ).subscribe(res => {
+        this.driverlist = res;
+        console.log( 'this.driverlist');
+        console.log( this.driverlist);
+      });
+
 
 
   }
@@ -589,7 +631,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
       formData.append('GuestPohto', imageFile, imageName);
     });
-    this._masterformservice.SavaImsData(formData)
+    this._masterservice.SavaImsData(formData)
       .subscribe(res => {
         console.log(imageName);
         this.Guestphotopathurl = imageName;
@@ -660,8 +702,23 @@ export class CheckinComponent implements OnInit, OnDestroy {
       gstno: SelectedData.GSTNO,
       companycode: SelectedData.CompanyCode
     })
+    this.IsWalkinCheckin=false;
+    this.IsCompanyCheckin=true;
+    this.CompanyCheckin(SelectedData.CompanyCode);
   }
 
+
+  OpenDrivermodelsDetail(SelectedData: any, event: any) {
+    this.form.patchValue({
+      driverTd: SelectedData.DriverId,
+      drivername: SelectedData.DriverName,
+      drivermobile: SelectedData.MobileNo,
+      vehicleno: SelectedData.VechileNo,
+      charge:SelectedData.ChargeAmount,
+    })
+  }
+
+ 
 
   PatchRefenceDetail(SelectedData: any, event: any) {
     this.form.patchValue({
@@ -669,7 +726,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     })
     this.referanceName = SelectedData.RefName
   }
-
   openMyGuestNameModalData(SelectedData: any, event: any) {
     console.log('SelectedData')
     console.log(SelectedData)
@@ -688,7 +744,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       DOB: SelectedData.GDOB,
       DOA: SelectedData.GDOA,
     });
-
+    this.form.get('guestname').disable({ onlySelf: true });
     this.snapshotshow = true;
     this.Guestphotopathurl = SelectedData.GuestPhotoPath;
     this.GuestDoucmentFrontpathurl = SelectedData.GuestIdFront;
@@ -721,6 +777,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
   Opencompanymodel(event, data) {
+    this.filterQuery = "";
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
+  Opendrivermodel(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
@@ -842,7 +903,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
               formData.append('GuestIdBack', this.fileDataIdBack, Idback);
             }
           }      
-          this._masterformservice.SavaImsData(formData)
+          this._masterservice.SavaImsData(formData)
             .subscribe(res => {
               console.log(res);
               this.GuestDoucmentFrontpathurl = Idfront;
@@ -990,21 +1051,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-close");
     document.querySelector("#" + event).classList.remove("md-show");
   }
-  onSubmit(form?: NgForm) {
-    alert("fff");
-    console.log(form.value);
-
-  }// end of form
+ 
 
 
-  runTimer() {
-    const timer = setInterval(() => {
-      this.timeLeft -= 1;
-      if (this.timeLeft === 0) {
-        clearInterval(timer);
-      }
-    }, 1000);
-  }
+  // runTimer() {
+  //   const timer = setInterval(() => {
+  //     this.timeLeft -= 1;
+  //     if (this.timeLeft === 0) {
+  //       clearInterval(timer);
+  //     }
+  //   }, 1000);
+  // }
 }
 
 
