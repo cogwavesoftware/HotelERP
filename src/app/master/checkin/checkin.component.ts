@@ -13,11 +13,8 @@ import {
   Validators
 } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-<<<<<<< HEAD
-=======
 import { CheckinService } from './../../_services/checkin.service';
 
->>>>>>> 70e2b5f41b22f30abd0a03cb826da028234d5968
 //import { Subscription } from "rxjs/Subscription";
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 import { animate, style, transition, trigger } from "@angular/animations";
