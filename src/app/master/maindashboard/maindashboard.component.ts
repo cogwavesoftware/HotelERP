@@ -12,7 +12,7 @@ import { IpserviceService } from 'src/app/_services/ipservice.service';
   styleUrls: ['./maindashboard.component.scss'],
   
 })
-export class MaindashboardComponent implements OnInit {
+export class MaindashboardComponent implements OnInit,OnDestroy {
   
   // public roomsdetail:Observable<any>;
   public roomsdetail ;
@@ -51,9 +51,9 @@ export class MaindashboardComponent implements OnInit {
   document.querySelector("#" + event).classList.add("md-show");
 }
 
-// ngOnDestroy() {   
-//   this._bankservice.changeMessage("expanded")
-// }
+ ngOnDestroy() {   
+   this._bankservice.changeMessage("expanded")
+ }
 openspecial(event, roomname){
   console.log("openspecial"  );
   document.querySelector("#" + event).classList.add("md-show");
