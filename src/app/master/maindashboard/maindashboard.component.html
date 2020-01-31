@@ -7,43 +7,35 @@
       
           <div class=" ">
              
-          <div class="col-md-12 test " style="padding:10px 10px 10px 0px;"> 
+          <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;"> 
           <div class="row">
             <div class="col-md-11">
               <ul>
                 <li>
-                  <img width="40"  src="assets/images/product2.png"> <span>Reservation</span>
+                  <i class="icon-comments"></i> <span>Reservation</span>
                 </li>
                 <li>
-                  <img width="40" src="assets/images/product2.png"><span>Refresh</span>
+                  <i class="icon-comments"></i><span>Refresh</span>
                 </li>
                 <li>
-                  <img  width="40" src="assets/images/product2.png"><span>Checkin</span>
+                  <i class="icon-comments"></i><span>Checkin</span>
                 </li>
                 <li>
-                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                  <i class="icon-comments"></i><span>Checkin</span>
                 </li>
                 <li>
-                  <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
+                  <i class="icon-comments"></i> <span>Checkin</span>
                 </li>
                 <li>
-                  <img width="40" src="assets/images/product2.png"><span>Group</span>
+                  <i class="icon-comments"></i><span>Group</span>
                 </li>
                 <li>
-                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                  <i class="icon-comments"></i><span>Checkin</span>
                 </li>
                 <li>
-                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
+                  <i class="icon-comments"></i><span>Checkin</span>
                 </li>
-                <li>
-                  <img width="40" src="assets/images/product2.png"> <span>Checkin</span>
-                </li>
-                <li>
-                  <img width="40" src="assets/images/product2.png"><span>Group </span>
-                </li>
-                <li>
-                  <img width="40" src="assets/images/product2.png"><span>Checkin</span>
-                </li>
+             
                
               </ul>
              </div>
@@ -220,6 +212,7 @@
 
                    
               <!-- end rooms dashborad -->
+              
               </div>
         
         </div>
@@ -391,93 +384,101 @@
         </div>
             
 
- <app-modal-animation [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">
-  <h2 class="f-15" style="color:#ffffff">Guest Details</h2>  
+ <app-modal-animation class="modellg" [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">   
+  <h3 class="f-15" style="position: relative;">Guest Details
+    <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModal($event)">Close</button>             
+                 -
+ </h3>
+
     <div class="app-modal-body text-center"> 
-      <div class="row">
-        <div class="col-lg-5 col-sm-5 col-xs-2" style="border:1px solid #ccc;">
-          <div class=" " id="modelleftNavBar">    
-               <ul style="display: inline-block" >
-                  <li style="float: left; margin-left: 0px "    >       
-                  <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                  100 <br> 
-                  <span class=" ">DLX100</span>
-                  </button>        
-                  </li>
-                  <li style="float: left; margin-left: 0px "    >       
+      <perfect-scrollbar class="overflow-container modal-lg"  [style.width]="'100%'" [style.height]="'365px'" [config]="config">
+        <div class="row">
+          <div class="col-lg-12 col-sm-5 col-xs-2" style="border:1px solid #ccc;">
+            <div class=" " id="modelleftNavBar">    
+                 <ul style="display: inline-block" >
+                    <li style="float: left; margin-left: 0px "    >       
                     <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                    101 <br> 
-                    <span class=" ">DLX101</span>
+                    100 <br> 
+                    <span class=" ">DLX100</span>
                     </button>        
                     </li>
-                  <li style="float: left; margin-left: 0px "    >       
-                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                    102 <br> 
-                    <span class=" ">DLX102</span>
-                    </button>        
-                    </li>
-                      <li style="float: left; margin-left: 0px "    >       
-                    <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                    103<br> 
-                    <span class=" ">DLX103</span>
-                    </button>        
-                    </li>
+                    <li style="float: left; margin-left: 0px " >       
+                      <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                      101 <br> 
+                      <span class=" ">DLX101</span>
+                      </button>        
+                      </li>
                     <li style="float: left; margin-left: 0px "    >       
                       <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                      100 <br> 
-                      <span class=" ">DLX100</span>
+                      102 <br> 
+                      <span class=" ">DLX102</span>
+                      </button>        
+                      </li>
+                        <li style="float: left; margin-left: 0px "    >       
+                      <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                      103<br> 
+                      <span class=" ">DLX103</span>
                       </button>        
                       </li>
                       <li style="float: left; margin-left: 0px "    >       
                         <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                        101 <br> 
-                        <span class=" ">DLX101</span>
+                        100 <br> 
+                        <span class=" ">DLX100</span>
                         </button>        
                         </li>
-                      <li style="float: left; margin-left: 0px "    >       
-                        <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                        102 <br> 
-                        <span class=" ">DLX102</span>
-                        </button>        
-                        </li>
-                          <li style="float: left; margin-left: 0px "    >       
-                        <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
-                        103<br> 
-                        <span class=" ">DLX103</span>
-                        </button>        
-                        </li>
-                        
-                </ul>
-              
-             
-             </div><!-- end leftnav-->
-        </div>   
-        <div class="col-lg-7 col-sm-7 col-xs-7" style="border:1px solid #ccc">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered full-data-table"  > 
-          
-              <tbody>
-              <tr> 
-                <td>Name : </td> <td> Rajiv</td>
-              </tr>
-              <tr> 
-                <td>Room No : </td> <td> 1000</td>
-              </tr>
-              <tr> 
-                <td>Mobile : </td> <td> 99999 45555</td>
-              </tr>
-              <tr> 
-                <td>Email : </td> <td> r.jaika@gmail.com</td>
-              </tr>
-             
-              </tbody>                   
-            </table>
-          </div>
-       </div>  
-      </div>
+                        <li style="float: left; margin-left: 0px "    >       
+                          <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                          101 <br> 
+                          <span class=" ">DLX101</span>
+                          </button>        
+                          </li>
+                        <li style="float: left; margin-left: 0px "    >       
+                          <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                          102 <br> 
+                          <span class=" ">DLX102</span>
+                          </button>        
+                          </li>
+                            <li style="float: left; margin-left: 0px "    >       
+                          <button type="button" (mouseover)="modelroomhover()"   class="btn btn-success btn-square ripple light" placement="top" >
+                          103<br> 
+                          <span class=" ">DLX103</span>
+                          </button>        
+                          </li>
+                          
+                  </ul>
+                
+               
+               </div><!-- end leftnav-->
+          </div>   
+          <div class="col-lg-12 col-sm-7 col-xs-7" style="border:1px solid #ccc">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table"  > 
+            
+                <tbody>
+                <tr> 
+                  <td>Name : </td> <td> Rajiv</td>
+                </tr>
+                <tr> 
+                  <td>Room No : </td> <td> 1000</td>
+                </tr>
+                <tr> 
+                  <td>Mobile : </td> <td> 99999 45555</td>
+                </tr>
+                <tr> 
+                  <td>Email : </td> <td> r.jaika@gmail.com</td>
+                </tr>
+               
+                </tbody>                   
+              </table>
+            </div>
+         </div>  
+        </div>
+      </perfect-scrollbar>
+
+     
          
 
-           <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+           <!-- <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>     -->
       </div>
        
     </app-modal-animation>  

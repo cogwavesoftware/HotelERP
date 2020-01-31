@@ -1055,13 +1055,17 @@
           <div class="table-content crm-table">
             <div class="project-table addressproject-table">
               <div id="crm-contact" class="dt-responsive">
+                             
                 <div class="row">         
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div >               
-                            <input type="text"  #searchTermdriver  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                        </div> 
-                      </div>      
-                </div>             
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTermdriver class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>   
                  <div class="table-responsive">
                   <table class="table table-striped table-bordered full-data-table"> 
                         <thead>
@@ -1083,14 +1087,14 @@
                       </td>
                     </tr>  
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                     <tr class="blueorange-gradient">     
                     <th>DriverName</th>            
                     <th>MobileNo</th>                          
                     <th>VehicleNo</th>    
                     <th>Action</th>      
                     </tr>              
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div> 
               </div>
