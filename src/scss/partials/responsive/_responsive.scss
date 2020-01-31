@@ -720,11 +720,8 @@
       .roomcodep-l-25{
         padding-left: 25px;
       }
-//       .outerdiv .tabouter .taboutercreatebtn .otherrow .col-12.col-sm-2,
-// .outerdiv .tabouter .taboutercreatebtn .discountouter .col-12.col-sm-2{
-//     padding-right:15px;
-//     padding-left:15px;
-// }
+      
+
 }
 @media only screen and (max-width: 767px) {
     .signup-card {
@@ -810,6 +807,17 @@
                 margin-bottom: 0;
             }
         }
+    }
+
+    .grid-table .thead .td{  
+        width: 62px!important;
+        text-align: left; 
+    }
+     
+    .grid-table .tbody .td input,
+    .grid-table .tbody .td select{         
+        width: 62px!important;   
+        height: 23px;
     }
 }
 @media only screen and (max-width: 991px) {
@@ -1197,6 +1205,16 @@
             display: block;
             margin: 10px auto;
         }
+    }
+    .grid-table .thead .td{  
+        width: 34px!important;
+        text-align: left;   
+    }
+     
+    .grid-table .tbody .td input,
+    .grid-table .tbody .td select{         
+        width: 34px!important;   
+        height: 23px;
     }
 
 }
