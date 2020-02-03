@@ -914,7 +914,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   Submit() {
     debugger;
 
-    const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    
+
+    const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
       text1 += randomCheckinNo.charAt(Math.floor(Math.random() * randomCheckinNo.length));
