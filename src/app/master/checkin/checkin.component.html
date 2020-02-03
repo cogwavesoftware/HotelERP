@@ -79,7 +79,7 @@
                                               </div>
 
                                              </div>
-                                          <div class="row guestinfofirstrow" style="margin-bottom:0">
+                                          <div class="row guestinfofirstrow" >
                                            
                                             <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                               <div class="form-group">
@@ -149,7 +149,7 @@
                                         </div> <!-- end row -->
     
     
-                                        <div class="row  guestinfofirstrow" style="margin-bottom:0">
+                                        <div class="row  guestinfofirstrow"  >
                                           
                                           
                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
@@ -223,7 +223,7 @@
                                         
                                            
     
-                                           <div class="row guestinfofirstrow" style="margin-bottom:0"> 
+                                           <div class="row guestinfofirstrow" > 
                                              <div class='col-12 col-lg-6'>
                                               <div class="form-group">
                                                <label class="form-control-label" for="address"> Address </label>       
@@ -812,17 +812,8 @@
                                   
                                   </ng-template>
 
-                                </ngb-panel>
-
-
-                              </ngb-accordion>
-
-
-
-
-
-
-
+                                </ngb-panel> 
+                              </ngb-accordion> 
                             </div>
                           </div>
 
@@ -923,52 +914,134 @@
 
 <!-- ////companymodel --> 
 
-    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">
-      <h3 class="f-15">Company Details</h3>
-        <div class="app-modal-body text-center" style="position: relative;"> 
-          <div class="table-content crm-table">
-            <div class="project-table addressproject-table">
-              <div id="crm-contact" class="dt-responsive">
-                <div class="row">         
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div >               
-                            <input type="text"  #searchTermcompany  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
+    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">      
+      <h3 class="f-15" style="position: relative;">Company Details
+        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+     </h3>
+      <div class="container">
+        <div class="col-md-12 userlist ">
+          <div class="row ">
+            <a style="cursor: pointer; display:block; text-align: left; color:blue"*ngIf="addcompanybtn" (click)="addcompanyinmodel()"><i class="fa  fa-plus-circle"></i> Add Company  </a>
+            <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)" class="">
+              <div class="app-modal-body text-center addcompany " *ngIf="addcompanydiv" > 
+   
+               <a style="cursor: pointer; display:block; text-align: left; color:blue"  (click)="backtosearch()"><i class="fa fa-backward"></i> Back to Search  </a>
+               <div class="col-md-12">
+                  
+                 <div class="row">                
+   
+                   <div class="col-md-4">
+                       <label>Company Name*</label>
+                       <input type="text" name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"  [ngClass]="{'is-invalid': CompanyName.touched && CompanyName.invalid}"  required autocomplete="off">
+                       <div *ngIf="CompanyName.touched && CompanyName.invalid" class="invalid-feedback">
+                           <div *ngIf="CompanyName.errors.required">CompanyName is invalid</div>
+                       </div>
+                   </div>
+                   <div class="col-md-4">
+                       <label>GSTNO*</label>
+                       <input type="text" name="GSTNO" class="form-control" [(ngModel)]="model.GSTNO" #GSTNO="ngModel" value="{{GSTNO}}"  [ngClass]="{'is-invalid': GSTNO.touched && GSTNO.invalid}"  required autocomplete="off">
+                       <div *ngIf="GSTNO.touched && GSTNO.invalid" class="invalid-feedback">
+                         <div *ngIf="GSTNO.errors.required">GSTNO is invalid</div>
+                       </div>
+                   </div>
+                   <div class="col-md-4" [class.has-error]="CompanyType.errors?.defaultSelected && CompanyType.touched">
+                     <label>Select Type*</label>
+                         <select id="CompanyType" appSelectValidator="-1" class="custom-select"  #CompanyType="ngModel"  name="CompanyType" [(ngModel)]="model.CompanyType">
+                           <option value="-1">Select Type</option>
+                           <option [value]="cty.Name" *ngFor="let cty of companytype">{{ cty.Name }}</option>
+                         </select>
+                         <span class="help-block" *ngIf="CompanyType.touched && CompanyType.errors?.defaultSelected">
+                           CompanyType is required
+                           </span>  
+                 </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-md-4">
+                        <label>ContactName*</label>
+                        <input type="text" name="ContactName" class="form-control" [(ngModel)]="model.ContactName" #ContactName="ngModel" value="{{ContactName}}"  [ngClass]="{'is-invalid': ContactName.touched && ContactName.invalid}"  required autocomplete="off">
+                        <div *ngIf="ContactName.touched && ContactName.invalid" class="invalid-feedback">
+                            <div *ngIf="ContactName.errors.required">ContactName is invalid</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>MobileNo*</label>
+                        <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo"  maxlength="10" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
+                        <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
+                          <div *ngIf="MobileNo.errors.required">MobileNo is invalid</div>
                         </div> 
-                      </div>      
-                </div>             
-                 <div class="table-responsive">
-                  <table class="table table-striped table-bordered full-data-table"> 
-                        <thead>
-                        <tr class="blueorange-gradient">        
-                        <th>CompanyName</th>             
-                        <th> GSTNO </th>                       
-                        <th>Action</th>
-                    </tr>
-                    <tr> </tr>               
-                    </thead>
-                    <tbody>                    
-                     <tr *ngFor="let item of companylist; let i = index;">                     
-                       <td>{{item.CompanyName}}</td>   
-                       <td>{{item.GSTNO}}</td>                              
-                      <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)">Get Details</a>                     
-                      </td>
-                    </tr>  
-                    </tbody>
-                    <tfoot>
-                    <tr class="blueorange-gradient">     
-                    <th>CompanyName</th>            
-                    <th>GSTNO</th>                          
-                    <th>Action</th>      
-                    </tr>              
-                    </tfoot>
-                  </table>
-                </div> 
+                        </div>
+                    <div class="col-md-4">
+                            <label>Email*</label>
+                            <input type="email" name="Email" class="form-control" [(ngModel)]="model.Email" #Email="ngModel" value="{{Email}}"  [ngClass]="{'is-invalid': Email.touched && Email.invalid}"  required autocomplete="off">
+                            <div *ngIf="Email.touched && Email.invalid" class="invalid-feedback">
+                              <div *ngIf="Email.errors.required">Email is invalid</div>
+                            </div>
+                        </div>
+                  </div>
+                  <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px">Save</button>
+                  
+                  
+   
+               </div>
+         
+             </div> <!-- company div -->
+         </form>
+          </div> <!-- form end -->
+          <div class="row  ">
+            <div class="searchresults" *ngIf="searchresultsdiv" style="width: 100%;">
+              <div class="table-content crm-table">
+                <div class="project-table addressproject-table">
+                  <div id="crm-contact" class="dt-responsive">
+                    <div class="row">         
+                          <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="input-group">
+                              <input type="text" #searchTermcompany class="form-control input-lg full-data-search" placeholder="Search here...">
+                              <span class="input-group-append ripple light" id="basic-addon1">
+                                <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                              </span>
+                            </div> 
+                          </div>      
+                    </div>             
+                     <div class="table-responsive">
+                      <table class="table table-striped table-bordered full-data-table"> 
+                            <thead>
+                            <tr class="blueorange-gradient">        
+                            <th>CompanyName</th>             
+                            <th>GSTNO </th>                       
+                            <th>Action</th>
+                        </tr>
+                        <tr> </tr>               
+                        </thead>
+                        <tbody>                    
+                         <tr *ngFor="let item of companylist; let i = index;">                     
+                           <td>{{item.CompanyName}}</td>   
+                           <td>{{item.GSTNO}}</td>                              
+                          <td class="action-icon">
+                              <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)"><i class="fa fa-download"></i> Get Details</a>                     
+                          </td>
+                        </tr>  
+                        </tbody>
+                      
+                      </table>
+                    </div> 
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>     
-               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
-          </div>      
+            </div>    <!-- search results  div --> 
+          </div><!-- end serach results-->
+        </div>
+      </div>
+     
+      
+
+      
+
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          
+
+               <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>  -->
+          </div>  
+
         </app-modal-animation>
 
 
@@ -982,13 +1055,17 @@
           <div class="table-content crm-table">
             <div class="project-table addressproject-table">
               <div id="crm-contact" class="dt-responsive">
+                             
                 <div class="row">         
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div >               
-                            <input type="text"  #searchTermdriver  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                        </div> 
-                      </div>      
-                </div>             
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTermdriver class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>   
                  <div class="table-responsive">
                   <table class="table table-striped table-bordered full-data-table"> 
                         <thead>
@@ -1010,14 +1087,14 @@
                       </td>
                     </tr>  
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                     <tr class="blueorange-gradient">     
                     <th>DriverName</th>            
                     <th>MobileNo</th>                          
                     <th>VehicleNo</th>    
                     <th>Action</th>      
                     </tr>              
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div> 
               </div>
@@ -1030,19 +1107,25 @@
 
 <!-- 
 ////guestname -->
-<app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5 addressmodeleffect'">
-  <h3 class="f-15">Guest Details</h3>
+<app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5 addressmodeleffect'">   
+  <h3 class="f-15" style="position: relative;">Guest Details
+    <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+ </h3>
     <div class="app-modal-body text-center" style="position: relative;"> 
       <div class="table-content crm-table">
         <div class="project-table addressproject-table">
-          <div id="crm-contact" class="dt-responsive">
+          <div id="crm-contact" class="dt-responsive">           
             <div class="row">         
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                     <div >               
-                        <input type="text"  #searchTermguest  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                    </div> 
-                  </div>      
-            </div>             
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <input type="text" #searchTermguest class="form-control input-lg full-data-search" placeholder="Search here...">
+                  <span class="input-group-append ripple light" id="basic-addon1">
+                    <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                  </span>
+                </div> 
+              </div>      
+        </div>  
+
              <div class="table-responsive">
               <table class="table table-striped table-bordered full-data-table"> 
                     <thead>
@@ -1066,7 +1149,7 @@
                   </td>
                 </tr>  
                 </tbody>
-                <tfoot>
+                <!-- <tfoot>
                 <tr class="blueorange-gradient">     
                 <th>GuestName</th>            
                 <th>City</th>    
@@ -1074,13 +1157,13 @@
                 <th>MobileNo</th>     
                 <th>Action</th>      
                 </tr>              
-                </tfoot>
+                </tfoot> -->
               </table>
             </div> 
           </div>
         </div>
       </div>     
-           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+           <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>              -->
       </div>      
     </app-modal-animation>
 
@@ -1088,19 +1171,27 @@
  
 
 <!--//pincode model -->
+ 
+
     <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">
-      <h3 class="f-15">Pincode Details</h3>
+      <h3 class="f-15" style="position: relative;">Pincode Details 
+        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+     </h3>
         <div class="app-modal-body text-center" style="position: relative;"> 
           <div class="table-content crm-table">
             <div class="project-table addressproject-table">
-              <div id="crm-contact" class="dt-responsive">
+              <div id="crm-contact" class="dt-responsive">                 
                 <div class="row">         
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div >               
-                            <input type="text"  #searchTerm  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                        </div> 
-                      </div>           
-                </div>                
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTerm class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>  
+            <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'365px'" [config]="config">
                  <div class="table-responsive">
                   <table class="table table-striped table-bordered full-data-table"> 
                         <thead>
@@ -1125,7 +1216,7 @@
                       </td>
                     </tr>  
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                     <tr class="blueorange-gradient">     
                     <th>AreaData</th>            
                     <th>City</th>    
@@ -1133,13 +1224,17 @@
                     <th>State</th>     
                     <th>Action</th>      
                     </tr>                  
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div> 
+                
+              </perfect-scrollbar>
+             
               </div>
+              
             </div>
           </div>        
-               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                 
+          <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>               -->
           </div>          
         </app-modal-animation>
 
@@ -1150,18 +1245,27 @@
    Referance Model -->
 
     <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6 addressmodeleffect'">
-      <h3 class="f-15">Referance Details</h3>
+      
+      <h3 class="f-15" style="position: relative;">Referance Details
+        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+                     -
+     </h3>
+
         <div class="app-modal-body text-center" style="position: relative;"> 
           <div class="table-content crm-table">
             <div class="project-table addressproject-table">
               <div id="crm-contact" class="dt-responsive">
                 <div class="row">         
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div >               
-                            <input type="text"  #searchTermref  class="form-control input-lg full-data-search" placeholder="Search name" style="width: 100%!important; margin-left: 0; margin-bottom: 20px;"> 
-                        </div> 
-                      </div>           
-                </div>              
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTermref class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>  
+     
                  <div class="table-responsive">
                   <table class="table table-striped table-bordered full-data-table"> 
                         <thead>
@@ -1183,20 +1287,20 @@
                       </td>
                     </tr>  
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                     <tr class="blueorange-gradient">     
                     <th>Id</th>            
                     <th>RefName</th>    
                     <th>RefMobileNo</th>                       
                     <th>Action</th>      
                     </tr>                   
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div> 
               </div>
             </div>
           </div>         
-               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                  
+               <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                   -->
           </div>
            
         </app-modal-animation>

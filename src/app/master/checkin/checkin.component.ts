@@ -64,7 +64,9 @@ export interface Checkinss {
   ]
 })
 export class CheckinComponent implements OnInit, OnDestroy {
-
+  addcompanydiv: boolean = false;
+  searchresultsdiv:boolean = true;
+  addcompanybtn:boolean=true;
   selectedRoomcode: any;
   ReferanceList:any;
   //web camara data 
@@ -235,7 +237,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   // }
 
-  @ViewChild('f', { static: false }) form1: any;
+  @ViewChild('f', { static: false }) newcompanyform: any;
   constructor(private datePipe: DatePipe, 
     public router: Router,private toastyService: ToastyService,
     public formBuilder: FormBuilder, private _bankservice: BankService,
@@ -342,7 +344,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.searchresultsdiv =true;
      this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
      this.ReferanceList=res;
      },
@@ -546,7 +548,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         console.log(this.companylist)
       });
 
-debugger;
+
       fromEvent(this.searchTermdriver.nativeElement, 'keyup')
       .pipe(
         filter(text => this.searchTermdriver.nativeElement.value.length > 2),
@@ -607,7 +609,7 @@ debugger;
 
 
   getImage(url) {
-    debugger;
+    
     // Base64 url of image trimmed one without data:image/png;base64
     this.base64DefaultURL = url;
     // Naming the image
@@ -832,7 +834,7 @@ debugger;
   }
 
   fileProgressIdfback(fileInput: any) {
-    debugger;
+    
     this.fileDataIdBack = <File>fileInput.target.files[0];
     this.preview3();
   }
@@ -852,7 +854,13 @@ debugger;
   }
 
   Submit() {
+<<<<<<< HEAD
     debugger;
+=======
+
+    
+
+>>>>>>> 86c6d6addc0567d057c5664a420e9f944d00d381
     const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -873,7 +881,7 @@ debugger;
     //   return;
     // }
 
-    debugger;
+    
     this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
       .then((confirmed) => {
         console.log('User confirmed:', confirmed)
@@ -981,14 +989,17 @@ debugger;
     });
   }
 
-  // onSubmit(ff?: NgForm) {
-  //   alert("test");
-  // }
+    onSubmit(fm) {
+      this.searchresultsdiv =true;
+      this.addcompanydiv = false;
+      this.addcompanybtn = true;
+      console.log(fm.value);
+    }
 
 
 
   addToast(title, Message, theme) {
-    debugger;
+     
     this.toastyService.clearAll();
     const toastOptions: ToastOptions = {
       title: title,
@@ -1013,7 +1024,7 @@ debugger;
         this.toastyService.info(toastOptions);
         break;
       case "success":
-        debugger;
+         
         this.toastyService.success(toastOptions);
         break;
       case "wait":
@@ -1036,8 +1047,17 @@ debugger;
   AddBokingButtonClick(): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
-
-
+  addcompanyinmodel(){
+    this.addcompanydiv = true;
+    this.searchresultsdiv =false;
+    this.addcompanybtn =false;
+    console.log("clock");
+  }
+  backtosearch(){
+    this.searchresultsdiv =true;
+    this.addcompanydiv = false;
+    this.addcompanybtn =true;
+  }
 
   closeMyModalPin(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(

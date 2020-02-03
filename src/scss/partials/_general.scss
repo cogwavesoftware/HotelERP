@@ -6068,6 +6068,22 @@ outerdiv{
      
     }
 }
+.modellg .md-modal{
+    max-width:800px;
+    width:75%;
+}
+.modellg .md-modal .table tr th{
+    background:#585858;
+}
+.modellg .md-modal h3{
+    font-family: Poppins-Medium;
+    font-size: 120%;
+    padding: 5px;
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+}
+
+
 .card{
     margin-bottom: 0px;
 }
@@ -6232,8 +6248,28 @@ outerdiv{
 }
 .maindashboard #modelleftNavBar  ul li button{
     padding:2px 2px 2px 2px;
+    width:100px;
 }
- 
+.maindashboard .productheader ul li{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:#ccc;
+    border:5px solid #ccc;
+    width:100px;
+    display: inline-block;
+}
+.maindashboard .productheader ul li img,
+.maindashboard .productheader ul li{
+    
+    text-align: center;
+     
+}
+.maindashboard .productheader ul li span{
+    display:block;
+    text-align:center;
+}
 .maindashboard .md-content .table-responsive .table tr th,
 .maindashboard .md-content .table-responsive .table tr td{
     padding:2px;
@@ -6252,8 +6288,7 @@ outerdiv{
     background-color:  #63a4ff!important;
     background-image: linear-gradient(315deg, #63a4ff 74%, #2C3E50 0%)!important;
 }
-.maindashboard .roomstatus {
-    border:1px solid lavender;
+.maindashboard .roomstatus {    
     padding:10px 10px 10px 0px;
 }
 .maindashboard .childData ul li button{       
@@ -6427,13 +6462,53 @@ outerdiv{
     background: #ffffff;
      
 }
+.addressmodeleffect{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.addressmodeleffect .md-content h3{
+    font-family: Poppins-Medium;
+    font-size:120%;
+    padding:5px;
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+}
+.addressmodeleffect  .table-responsive .table thead tr {
+    background-color: #585858;     
+    color:#ffffff; 
+}
+.addressmodeleffect input.form-control.full-data-search{
+    margin-left:0;
+    height:auto;
+}
+.addressmodeleffect .searchresults a,
+    .addressmodeleffect  .addcompany a{
+        color:blue;
+}
+.addressmodeleffect  .table > thead > tr > th,
+.addressmodeleffect  .table > tbody > tr > td {
+            padding:2px;
+            text-align:center;     
+            border:0 none;        
+        }
+         
+         .addressmodeleffect   .table > tbody > tr:nth-child(odd){
+            background: #b8d1f3;
+        }
+        .addressmodeleffect   .table > tbody > tr:nth-child(even){
+            background: #dae5f4;
+        }
+
+
+.addressmodeleffect .md-content button{
+    font-size:100%;
+    margin-top:10px;
+}
 .addressmodeleffect .md-content > div{     
-    padding:15px 10px 20px 10px;
+    padding:5px;
     font-size:90%;
 }
-.addressmodeleffect .table td{
-    padding:5px;
-}
+ 
   .loader-block{  
       background: #fff;
   }
@@ -6453,7 +6528,25 @@ outerdiv{
      background: none!important;
      opacity:0!important;
  }
-
+ .addressmodeleffect input.form-control{
+    border-radius: 0px;
+    height: 1.50rem;
+    font-size: 100%;
+    padding: 0px 0px 0px 10px;
+    background: none !important;
+ }
+ .addressmodeleffect label{
+    margin-bottom: 0.1em;
+    text-align:left;
+    float:left;
+ }
+ .addressmodeleffect .md-content button{
+    margin:0px 0px 0px 0px;
+ }
+ .addressmodeleffect .backbutton{
+    margin-bottom: 5px;
+    border-bottom: 3px solid orange;
+ }
  
 // .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
       
