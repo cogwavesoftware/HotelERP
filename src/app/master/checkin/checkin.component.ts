@@ -870,8 +870,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
 
     console.log(this.form.value)
-    return;
-
+    
     // if (form.invalid) {
     //   console.log(form.value);
     //   this.addToast("Cogwave Software", "invalid Data", "warning");

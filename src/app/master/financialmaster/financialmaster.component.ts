@@ -121,7 +121,6 @@ export class FinancialmasterComponent implements OnInit {
    {
      debugger;
      if(value=="-1")
-<<<<<<< HEAD
      {
       this.HDesc="";
       this.data = this._masterformservice.Getmiscellaneous(this.HDesc);
@@ -129,15 +128,6 @@ export class FinancialmasterComponent implements OnInit {
      }
      else
      {
-=======
-     {
-      this.HDesc="";
-      this.data = this._masterformservice.Getmiscellaneous(this.HDesc);
-    
-     }
-     else
-     {
->>>>>>> 2de86ea4fe2b9311f760b6bed0c717bc456c844a
        let status:ListItemSimplified =this.mischeader.find(s => s.TypeId == value);
       if(status)
       {

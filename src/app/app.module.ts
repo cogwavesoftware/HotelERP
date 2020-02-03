@@ -71,8 +71,8 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
         provide: NgbDateAdapter,
         useClass: NgbDateNativeAdapter
       },
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+   //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     //fakeBackendProvider
