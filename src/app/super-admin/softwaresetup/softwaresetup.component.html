@@ -25,6 +25,56 @@
                     <div class="containar">
                         <div class="row">
                           <div class="col-md-12">
+
+
+                                              <div class="row">
+              
+              
+                                                      <!-- <div class="col-md-6">
+                                                              <label>Select Company*</label>
+                                                                  <select class="custom-select"  #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model1.catagery">
+                                                                    <option value="default">Please Select</option>
+                                                                    <option *ngFor="let catagery of companylist">{{ catagery.Name }}</option>
+                                                                  </select>
+                                                                                 
+                                                          </div>  -->
+
+
+                                                          <div class="col-md-6" [class.has-error]="CompanyId.errors?.defaultSelected && CompanyId.touched">
+                                                                <label>Select Company*</label>
+                                                                    <select id="CompanyId" appSelectValidator="-1" class="custom-select"  #CompanyId="ngModel"  name="CompanyId" [(ngModel)]="model.CompanyId">
+                                                                      <option value="-1">Please Select</option>
+                                                                      <option [value]="catagery.HotelId" *ngFor="let catagery of companylist">{{ catagery.Name }}</option>
+                                                                    </select>
+                                                                    <span class="help-block" *ngIf="CompanyId.touched && CompanyId.errors?.defaultSelected">
+                                                                        Company is required
+                                                                      </span>  
+                                                            </div>
+
+              
+                                                            <div class="col-md-6" [class.has-error]="PurchaseId.errors?.defaultSelected && PurchaseId.touched">
+                                                                <label>Select Branch*</label>
+                                                                    <select id="PurchaseId" appSelectValidator="-1" class="custom-select"  #PurchaseId="ngModel"  name="PurchaseId" [(ngModel)]="model.PurchaseId">
+                                                                      <option value="-1">Please Select</option>
+                                                                      <option [value]="catagery.PurchaseId" *ngFor="let catagery of branhlist">{{ catagery.BranchName }}</option>
+                                                                    </select>
+                                                                    <span class="help-block" *ngIf="PurchaseId.touched && PurchaseId.errors?.defaultSelected">
+                                                                        Branch is required
+                                                                      </span>  
+                                                            </div>
+                                                 
+                                                     
+                                                  </div>
+
+
+
+
+
+
+
+
+
+
                                 <div class="row">
                                         <div class='col-md-3'>
                                          <label>Enable SMS</label>
@@ -36,7 +86,7 @@
                                                       </div>
                                         </div> -->
                                          <div class="col-md-3">
-                                                <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsHms" id="IsHms" [(ngModel)]="model.IsHms" #IsHms="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>
+                                                <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsSMS" id="IsSMS" [(ngModel)]="model.IsSMS" #IsSMS="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>
                                               
                                       </div> 
 
@@ -44,7 +94,7 @@
                                             <label>Power Automation</label>
                                       </div>
                                             <div class="col-md-3">
-                                                   <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="power" id="power" [(ngModel)]="model.power" #power="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                   <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsPower" id="IsPower" [(ngModel)]="model.IsPower" #IsPower="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
                                            </div> 
 
                                 </div>
@@ -90,7 +140,7 @@
                                                </div> 
                                                
                                                <div class='col-md-3'>
-                                                    <label>Group Checkin</label>
+                                                    <label>Group Checkout</label>
                                               </div>
                                                     <div class="col-md-3">
                                                            <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="groupckout" id="groupckout" [(ngModel)]="model.groupckout" #groupckout="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
@@ -167,14 +217,14 @@
                                 
                                 <div class="row">
                                         <div class='col-md-3'>
-                                                <label>IsCheckoutBill Continous Series</label>
+                                                <label>BTB TO BTC BILL FORMAT </label>
                                           </div>
                                                 <div class="col-md-3">
-                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsCheckoutBillcontinous" id="IsCheckoutBillcontinous" [(ngModel)]="model.IsCheckoutBillcontinous" #IsCheckoutBillcontinous="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="ISBTB_BTCBILL" id="ISBTB_BTCBILL" [(ngModel)]="model.ISBTB_BTCBILL" #ISBTB_BTCBILL="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
                                                </div> 
                                                
                                                <div class='col-md-3'>
-                                                    <label>Advance Receipt Same Serious</label>
+                                                    <label>RoomAdvance Receipt SameSerious</label>
                                               </div>
                                                     <div class="col-md-3">
                                                            <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsAdvanceReceiptserious" id="IsAdvanceReceiptserious" [(ngModel)]="model.IsAdvanceReceiptserious" #IsAdvanceReceiptserious="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
@@ -183,13 +233,19 @@
 
 
                                 <div class="row">
-                                        <div class='col-md-3'>
+                                        <!-- <div class='col-md-3'>
                                                 <label>Post Bill Same Series</label>
                                           </div>
                                                 <div class="col-md-3">
                                                        <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="Ispostbillsameserious" id="Ispostbillsameserious" [(ngModel)]="model.Ispostbillsameserious" #Ispostbillsameserious="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
                                                </div> 
-                                               
+                                                -->
+                                                <div class='col-md-3'>
+                                                        <label>Checkin 24 hr</label>
+                                                  </div>
+                                                        <div class="col-md-3">
+                                                               <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsCheckin24" id="IsCheckin24" [(ngModel)]="model.IsCheckin24" #IsCheckin24="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
+                                                       </div> 
                                                <div class='col-md-3'>
                                                     <label>Payment Gateway</label>
                                               </div>
@@ -200,12 +256,7 @@
 
 
                                 <div class="row">
-                                        <div class='col-md-3'>
-                                                <label>Checkin 24 hr</label>
-                                          </div>
-                                                <div class="col-md-3">
-                                                       <ui-switch class="js-dynamic-state m-r-10" color="#2ecc71" switchColor="#fff" name="IsCheckin24" id="IsCheckin24" [(ngModel)]="model.IsCheckin24" #IsCheckin24="ngModel" size="medium" [disabled]="switchDisable" checked></ui-switch>                                                
-                                               </div> 
+                                        
                                                
                                                <div class='col-md-3'>
                                                     <label>Bluetooth printer</label>
@@ -272,6 +323,76 @@
 
                                 </div>
 
+<br/>
+
+                                <div class="row">
+                                        <div class="col-md-3">
+                                                <label>CompanyAdvance Receipt Serious</label>
+                                                <input type="text" name="CompanyAdvance" maxlength="5"  class="form-control" [(ngModel)]="model.CompanyAdvance" #CompanyAdvance="ngModel" value="{{CompanyAdvance}}"  autocomplete="off">
+                                                 <div *ngIf="CompanyAdvance.touched && CompanyAdvance.invalid" class="invalid-feedback">
+                                                  <div *ngIf="CompanyAdvance.errors.required">CompanyAdvance is invalid</div>
+                                                </div> 
+                                            </div>   
+                                            
+                                            <div class="col-md-3">
+                                                <label>GentralAdvance Receipt Serious</label>
+                                                <input type="text" name="GentralAdvance" maxlength="5"  class="form-control" [(ngModel)]="model.GentralAdvance" #GentralAdvance="ngModel" value="{{GentralAdvance}}"  autocomplete="off">
+                                                 <div *ngIf="GentralAdvance.touched && GentralAdvance.invalid" class="invalid-feedback">
+                                                  <div *ngIf="GentralAdvance.errors.required">GentralAdvance is invalid</div>
+                                                </div> 
+                                            </div>  
+
+                                            <div class="col-md-3">
+                                                <label>PostCharge Voucher Serious</label>
+                                                <input type="text" name="PostCharge" maxlength="5"  class="form-control" [(ngModel)]="model.PostCharge" #PostCharge="ngModel" value="{{PostCharge}}"  autocomplete="off">
+                                                 <div *ngIf="PostCharge.touched && PostCharge.invalid" class="invalid-feedback">
+                                                  <div *ngIf="PostCharge.errors.required">PostCharge is invalid</div>
+                                                </div> 
+                                            </div>  
+
+                                            <div class="col-md-3">
+                                                <label>Extrabed Voucher Serious</label>
+                                                <input type="text" name="Extrabed"  maxlength="5" class="form-control" [(ngModel)]="model.Extrabed" #Extrabed="ngModel" value="{{Extrabed}}"  autocomplete="off">
+                                                 <div *ngIf="Extrabed.touched && Extrabed.invalid" class="invalid-feedback">
+                                                  <div *ngIf="Extrabed.errors.required">Extrabed is invalid</div>
+                                                </div> 
+                                            </div>  
+                                </div>
+
+  <br/>
+  <div class="row">
+        <div class="col-md-3">
+                <label>SettlementReceipt Serious</label>
+                <input type="text" name="SettlementReceipt" maxlength="5"  class="form-control" [(ngModel)]="model.SettlementReceipt" #SettlementReceipt="ngModel" value="{{SettlementReceipt}}"  autocomplete="off">
+                 <div *ngIf="SettlementReceipt.touched && SettlementReceipt.invalid" class="invalid-feedback">
+                  <div *ngIf="SettlementReceipt.errors.required">SettlementReceipt is invalid</div>
+                </div> 
+            </div>   
+            
+            <div class="col-md-3">
+                <label>Outstanding Settlement Receipt Serious</label>
+                <input type="text" name="OutstandingReceipt" maxlength="5"  class="form-control" [(ngModel)]="model.OutstandingReceipt" #OutstandingReceipt="ngModel" value="{{OutstandingReceipt}}"  autocomplete="off">
+                 <div *ngIf="OutstandingReceipt.touched && OutstandingReceipt.invalid" class="invalid-feedback">
+                  <div *ngIf="OutstandingReceipt.errors.required">OutstandingReceipt is invalid</div>
+                </div> 
+            </div>  
+
+            <div class="col-md-3">
+                <label>Refund Bill </label>
+                <input type="text" name="RefundReceipt" maxlength="5"  class="form-control" [(ngModel)]="model.RefundReceipt" #RefundReceipt="ngModel" value="{{RefundReceipt}}"  autocomplete="off">
+                 <div *ngIf="RefundReceipt.touched && RefundReceipt.invalid" class="invalid-feedback">
+                  <div *ngIf="RefundReceipt.errors.required">RefundReceipt is invalid</div>
+                </div> 
+            </div>  
+
+            <div class="col-md-3">
+                <label>ComplimentaryBill Serious</label>
+                <input type="text" name="ComplimentaryBill" maxlength="5" class="form-control" [(ngModel)]="model.ComplimentaryBill" #ComplimentaryBill="ngModel" value="{{ComplimentaryBill}}"  autocomplete="off">
+                 <div *ngIf="ComplimentaryBill.touched && ComplimentaryBill.invalid" class="invalid-feedback">
+                  <div *ngIf="ComplimentaryBill.errors.required">ComplimentaryBill is invalid</div>
+                </div> 
+            </div>  
+</div>
    
                                 <br/>
 
@@ -312,7 +433,7 @@
                                                       </div>
                                                       <div class="col-sm-6">
                                                        
-                                                        <input type="text" name="UserId" class="form-control"  placeholder="UserId" [(ngModel)]="model.UserId" #UserId="ngModel" value="{{UserId}}"  autocomplete="off">
+                                                        <input type="text" name="powerUserId" class="form-control"  placeholder="powerUserId" [(ngModel)]="model.powerUserId" #powerUserId="ngModel" value="{{powerUserId}}"  autocomplete="off">
                                                       </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -329,6 +450,72 @@
                                                 </div>
                                               </div>
 
+
+
+
+
+                                              <div class="row">
+                                                <div class="col-sm-6 mobile-inputs" *ngIf="model.ISBTB_BTCBILL">
+                                                  <h4 class="sub-title">SET BTC AND BTB BILL FORMAT  Max(7Char)</h4>
+                                                  <form action="javascript:">                            
+                                                    <div class="form-group row">
+                                                      <div class="col-sm-6">                                                        
+                                                        <input type="text" name="BTCPREFIX" maxlength="5"  class="form-control"  placeholder="B TO B PREFIX" [(ngModel)]="model.BTCPREFIX" #BTCPREFIX="ngModel" value="{{BTCPREFIX}}"  autocomplete="off">
+                                                      </div>
+                                                      <div class="col-sm-6">
+                                                        
+                                                        <input type="text" name="BTBPREFIX" maxlength="5" class="form-control"  placeholder="B TO C PREFIX" [(ngModel)]="model.BTBPREFIX" #BTBPREFIX="ngModel" value="{{BTBPREFIX}}"  autocomplete="off">
+                                                      </div>
+                                                    </div>
+                                                    
+                                                  </form>
+
+                                                </div>
+                                                <div class="col-sm-6 mobile-inputs" *ngIf="!model.ISBTB_BTCBILL">
+                                                  <h4 class="sub-title">Normal CheckoutBill Max(7Char) </h4>
+                                                  <form action="javascript:">                                                  
+                                                    <div class="form-group row">
+                                                      <div class="col-sm-6">                                                       
+                                                        <input type="text" name="checkoutbillPrefix" maxlength="6" class="form-control"  placeholder="Normal CheckoutBill" [(ngModel)]="model.checkoutbillPrefix" #checkoutbillPrefix="ngModel" value="{{checkoutbillPrefix}}"  autocomplete="off">
+                                                      </div>
+                                                      
+                                                    </div>                                                  
+                                                   
+                                                  </form>
+                                                </div>
+                                              </div>
+
+
+                                              <div class="row">
+                                                <div class="col-sm-6 mobile-inputs" *ngIf="!model.IsAdvanceReceiptserious">
+                                                  <h4 class="sub-title"> Checkin/Reservation Advance Serious Max(7Char)</h4>
+                                                  <form action="javascript:">                            
+                                                    <div class="form-group row">
+                                                      <div class="col-sm-6">                                                        
+                                                        <input type="text" maxlength="5"  name="ReservationAdvanceReceiptserious" class="form-control"  placeholder="Reservation Room Advance Receipt" [(ngModel)]="model.ReservationAdvanceReceiptserious" #ReservationAdvanceReceiptserious="ngModel" value="{{ReservationAdvanceReceiptserious}}"  autocomplete="off">
+                                                      </div>
+                                                      <div class="col-sm-6">
+                                                        
+                                                        <input type="text" name="checkinAdvanceReceiptserious" maxlength="5" class="form-control"  placeholder="Checkin Room Advance Receipt" [(ngModel)]="model.checkinAdvanceReceiptserious" #checkinAdvanceReceiptserious="ngModel" value="{{checkinAdvanceReceiptserious}}"  autocomplete="off">
+                                                      </div>
+                                                    </div>
+                                                    
+                                                  </form>
+
+                                                </div>
+                                                <div class="col-sm-6 mobile-inputs" *ngIf="model.IsAdvanceReceiptserious">
+                                                  <h4 class="sub-title">Normal Advance Serious </h4>
+                                                  <form action="javascript:">                                                  
+                                                    <div class="form-group row">
+                                                      <div class="col-sm-6">                                                       
+                                                        <input type="text" name="normalAdvanceReceiptserious" maxlength="5" class="form-control"  placeholder="Normal AdvanceReceiptserious" [(ngModel)]="model.normalAdvanceReceiptserious" #normalAdvanceReceiptserious="ngModel" value="{{normalAdvanceReceiptserious}}"  autocomplete="off">
+                                                      </div>
+                                                      
+                                                    </div>                                                  
+                                                   
+                                                  </form>
+                                                </div>
+                                              </div>
 
 
 
@@ -359,7 +546,7 @@
 
 
 
-<div class="formdesign aqua-gradient">
+<!-- <div class="formdesign aqua-gradient">
       
         <div class="formouter rotate" >
          <form name="form" (ngSubmit)="f1.form.valid && onSubmit()" #f1="ngForm">          
@@ -419,5 +606,5 @@
             </div>
          </form>                    
         </div>
-    </div>
+    </div> -->
     </div>

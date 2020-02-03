@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { BranchService } from './../../_services/branch.service';
+import { CompanyService } from '../../_services/company.service';
 @Component({
   selector: 'app-softwaresetup',
   templateUrl: './softwaresetup.component.html',
@@ -18,23 +19,33 @@ export class SoftwaresetupComponent implements OnInit {
   smtphost:string;
   smtpport:string;
   btitle:string="+ Add"
-  
-  //catagerys=['CheckoutBill','CheckoutBillBTC','CheckoutBillBTB','Advance','CheckinAdvance','ReservationAdvance','PostCharge','Extrabed','SettlementReceipt','Outstanding Settlement Receipt','ComplimentaryBill'];
+  companylist:any;
+  branhlist:any;
   topicHasError = true;
   Roomtyeps=['I Need Prefix','I dont Want Prefix on Bill'];
-  constructor(private _branchservoce:BranchService) { }
+  constructor(private _branchservoce:BranchService,private _companyservice:CompanyService) { }
 
   ngOnInit() {
-         this.model.smtpport="587"; 
-         this.model.smtphost="smtp.gmail.com";  
-     this._branchservoce.GetAllBillHeader().subscribe(data=>{
-       this.catagerys=data;
-     })
-     this.model.noPrefix=false;
 
+    this._companyservice.getcompanydata().subscribe(res => {   
+      this.companylist = res ;
+    });
+
+   this._branchservoce.getBranchdata().subscribe(res => {   
+    this.branhlist = res ;
+  });
+          
+    //  this._branchservoce.GetAllBillHeader().subscribe(data=>{
+    //    this.catagerys=data;
+    //  })
+    this.model.PurchaseId=-1;
+    this.model.CompanyId=-1;
+     this.model.noPrefix=false;
+     this.model.smtpport="587"; 
+     this.model.smtphost="smtp.gmail.com";
      //switch
-     this.model.IsHms=true;
-    this.model.power=false;
+     this.model.IsSMS=true;
+    this.model.IsPower=false;
     this.model.IsHktab=false;
     this.model.Databackup=true;
     this.model.IsPos=true;
@@ -50,7 +61,7 @@ export class SoftwaresetupComponent implements OnInit {
     this.model.IsBulkprovider=true;
     this.model.mobileApp=true;
     this.model.IsDoorlocking=false;
-    this.model.IsCheckoutBillcontinous=true;
+    this.model.ISBTB_BTCBILL=false;
     this.model.IsAdvanceReceiptserious=true;
     this.model.Ispostbillsameserious=true;
     this.model.IsPaymentgateway=true;
@@ -61,79 +72,33 @@ export class SoftwaresetupComponent implements OnInit {
     this.model.IsHousekeepingNo ;
     this.model.IsReservetionNo ;
     this.model.FrontDesk ;
+    this.model.GentralAdvance="/GEN/"
+    this.model.CompanyAdvance="/COM/"
+    this.model.PostCharge="/POS/"
+    this.model.Extrabed="/EXB/"
+    this.model.SettlementReceipt="/SRE/"
+    this.model.OutstandingReceipt="/SET/"
+    this.model.ReservationAdvanceReceiptserious="/RES/"
+    this.model.normalAdvanceReceiptserious="/ADV/"
+    this.model.checkinAdvanceReceiptserious="/CHK/"
+    this.model.RefundReceipt="/REF/"
+    this.model.ComplimentaryBill="/CMP/"
+    this.model.checkoutbillPrefix="/BILL/"
+    this.model.BTBPREFIX="/BTB/"
+    this.model.BTCPREFIX="/BTC/"
   
-   
-
-    this.model1.topic="default";
-    this.model1.catagery="default";
-    
     
   }
   
-   updateSelectedRoles(index) 
-   {
-     console.log(index)
-   }
-
+  
    onSubmit()
    {
      console.log(this.model)
      this._branchservoce.SaveSoftwaretoolSetup(this.model).subscribe(data=>{
 
      });
-     console.log(this.model1)
+     
    }
-
-   validateTopic(value)
-    {
-    if (value === 'default')
-     {
-      this.topicHasError = true;
-      this.IsCheckoutContinue=false;
-    } 
-    else 
-    {
-    
-      this.topicHasError = false;
-      if(value=="I Need Prefix")
-      {
-        this.IsCheckoutContinue=true;
-        this.minlenth=7
-      }
-      else{
-        this.IsCheckoutContinue=false;
-        this.minlenth=0
-      }
-  
-    }
-  }
-
-   validateroom(value) 
-   {
-    this.minlenth=7
-    if (value === 'default') 
-    {
-      this.catageryhasError = true;
-      this.IsCheckoutContinue=false
-    }
-    else 
-    {
-      this.catageryhasError = false;
-      if(value=="CheckoutBill")
-      {    
-        this.noPrefiixdiv=true  
-        this.IsCheckoutContinue=false           
-      }
-      else
-      {
-        this.noPrefiixdiv=false
-        this.IsCheckoutContinue=true
-      }
- 
-    }
-
-  }
-
 
   
 

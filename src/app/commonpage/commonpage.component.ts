@@ -152,11 +152,11 @@ export class CommonpageComponent implements OnInit {
   this._authservice.logout();
   //this.determineLocalIp();
 
-   this._masterservice.GetPinAddress().subscribe(res=>{
-    this.data =res;
-    //console.log(this.data)
-    this.adreeservice.SetMessages(this.data)
-   });
+  //  this._masterservice.GetPinAddress().subscribe(res=>{
+  //   this.data =res;
+  //   //console.log(this.data)
+  //   this.adreeservice.SetMessages(this.data)
+  //  });
   
     
   }

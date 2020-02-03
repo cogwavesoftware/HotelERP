@@ -72,17 +72,17 @@
                     <label class="label label-inverse">Dirty : {{finalMenu.Dirty}}</label>
                     </li>
                     <li class="  ">
-                    <label class="label label-warning">Blocked : {{finalMenu.Blocked}}</label>
+                    <label class="label label-warning" style="background-color: orange;">Blocked : {{finalMenu.Blocked}}</label>
                     </li>
                     <li class="  ">
-                    <label class="label label-primary">Un_Settel : {{finalMenu.Un_Settel}}</label>
+                    <label class="label label-warning">Un_Settel : {{finalMenu.Un_Settel}}</label>
                     </li>
                     
                     <li class="  ">
                     <label class="label label-primary">Management : {{finalMenu.Management}}</label>
                     </li>
                     <li class="  ">
-                    <label class="label label-primary">Occupancy : {{finalMenu.Occ}}</label>
+                    <label class="label label-danger">Occupancy : {{finalMenu.Occ}}</label>
                     </li>
                     <li class="  ">
                     <label class="label label-primary">TodayCheckin : {{finalMenu.TodayCheckin}}</label>
@@ -110,13 +110,14 @@
                           <div *ngIf = "child.Status == 'V'">                       
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
-                          <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalOverflow.show()" class="btn btn-success btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalVacent.show()" class="btn btn-success btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
                           {{child.RoomNo}} <br> 
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
                          
                           </span>       
                           </div> <!-- end of if condition -->
+
 
 
                           <div *ngIf = "child.Status == 'O'">                      
@@ -127,7 +128,7 @@
                           <span class="">{{child.RoomCode}}</span>
                           </button></span>
                           <span class="tooltip-content clearfix">
-                          <img src="assets/images/GuestImage/CW_1001_21194414585719GuestPhoto.png" width="150" alt="Ecluid.png">
+                          <img src="assets/images/GuestImage/1580366171214_mCx4C.png" width="150" alt="Ecluid.png">
                           <span class="tooltip-text"> 
                             <span>Name:Francis </span>  
                             <span>Pax :2 </span><br> 
@@ -158,31 +159,45 @@
                           </span> 
                           </div><!-- end of if condition -->
 
-
+                          
                           <div *ngIf = "child.Status == 'B'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
-                          <button type="button" class="btn btn-warning btn-square ripple" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          <button type="button" class="btn btn-warning btn-square ripple" (click)="modalBlock.show()"  placement="top" ngbTooltip="{{child.RoomNo}}">
                           {{child.RoomNo}}  <br>
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
                           <span class="tooltip-content clearfix">
-                          <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
+                  
                           <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
                           </span>
                           </span> 
                           </div><!-- end of if condition -->
 
+                          <div *ngIf = "child.Status == 'D'">                      
+                            <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item">
+                            <button type="button" class="btn btn-warning btn-square ripple" placement="top" ngbTooltip="{{child.RoomNo}}">
+                            {{child.RoomNo}}  <br>
+                            <span class=" ">{{child.RoomCode}}</span>
+                            </button></span>
+                            <span class="tooltip-content clearfix">
+                            <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
+                            <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
+                            </span>
+                            </span> 
+                            </div><!-- end of if condition -->
+
 
                           <div *ngIf = "child.Status == 'M'">                      
                           <span class="mytooltip tooltip-effect-1">
                           <span class="tooltip-item">
-                          <button type="button" class="btn btn-primary btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
+                          <button type="button" class="btn btn-primary btn-square ripple light" placement="top" (click)="modalManagement.show()" ngbTooltip="{{child.RoomNo}}">
                           {{child.RoomNo}}  <br>
                           <span class=" ">{{child.RoomCode}}</span>
                           </button></span>
                           <span class="tooltip-content clearfix">
-                          <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png">
+                         
                           <span class="tooltip-text">Room is Management .Reason Md Guest.</span>
                           </span>
                           </span> 
@@ -554,6 +569,9 @@
       </div>
        
     </app-modal-animation>  
+
+<!-- OCCUPIED -->
+ 
     <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
       <div class="app-modal-body">
         <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
@@ -571,25 +589,139 @@
               <ul>
                  
                 <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Link & UNlink</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Post Charge</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Set Complement</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Room Shifting</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Guest</a></li>  
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Amend Date</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Advances</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> ExtraBed Posting</a></li>
+                <li><a  class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Post Charge</a></li>
+                <li><a  class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Room Shifting</a></li>
+                <li><a class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Advances</a></li>
+                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Pax</a></li>
+                <li><a  class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i>ExtraBed</a></li>
+                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Discount</a></li>
+                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Grace Period</a></li>
+                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Set Complement</a></li>       
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Guest</a></li> 
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Keeping</a></li> 
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Room Instruction</a></li>
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Plan</a></li>     
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Company</a></li>              
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Wake Up</a></li>
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Food Coupon</a></li>   
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Link Room</a></li>   
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>UnLink Room</a></li>
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Set Compliment</a></li>
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Pax On Bill</a></li>     
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Sms Coupon</a></li>     
+                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Guest</a></li>     
+                
                 <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Edit Extra Pax </a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Grace Period</a></li>               
+                               
               </ul> 
             </div>
            
-           
-             
+                    
           </div>
         </perfect-scrollbar>
          
       </div>
     </app-modal-basic>
 
+
+
+    <!-- Vacent -->
+
+    <app-modal-basic #modalVacent [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+      <div class="app-modal-body">
+        <button type="button" class="close basic-close-light-box" (click)="modalVacent.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+        </label>       
+        
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+          <div class="row">
+            <div class="col-sm-12">
+              <ul>
+                 
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Block</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Management</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Power on Visit</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Power Off</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Room History</a></li>  
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Guest History</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Tariff Rate</a></li>
+              </ul> 
+            </div>
+           
+                    
+          </div>
+        </perfect-scrollbar>
+         
+      </div>
+    </app-modal-basic>
+
+
+    <!-- Block -->
+    <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+      <div class="app-modal-body">
+        <button type="button" class="close basic-close-light-box" (click)="modalBlock.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+        </label>       
+        
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+          <div class="row">
+            <div class="col-sm-12">
+              <ul>
+                 
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Power on Cleaning</a></li>
+                
+              </ul> 
+            </div>
+           
+                    
+          </div>
+        </perfect-scrollbar>
+         
+      </div>
+    </app-modal-basic>
+
+
+    
+    <!-- Management -->
+    <app-modal-basic #modalManagement [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+      <div class="app-modal-body">
+        <button type="button" class="close basic-close-light-box" (click)="modalManagement.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+        </label>       
+        
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+          <div class="row">
+            <div class="col-sm-12">
+              <ul>
+                 
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
+                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Power on Cleaning</a></li>
+                
+              </ul> 
+            </div>
+           
+                    
+          </div>
+        </perfect-scrollbar>
+         
+      </div>
+    </app-modal-basic>
+ 
  

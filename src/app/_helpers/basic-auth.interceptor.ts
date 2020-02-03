@@ -88,7 +88,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
             // );
         }
         else {
-            this.router.navigateByUrl('/logins');
+            this.router.navigateByUrl('/login');
         }
     }
 

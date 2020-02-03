@@ -9,8 +9,7 @@ import { IpserviceService } from 'src/app/_services/ipservice.service';
  @Component({
   selector: 'app-maindashboard',
   templateUrl: './maindashboard.component.html',
-  styleUrls: ['./maindashboard.component.scss'],
-  
+  styleUrls: ['./maindashboard.component.scss'],  
 })
 export class MaindashboardComponent implements OnInit,OnDestroy {
   
@@ -25,20 +24,34 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   finalMenu = new Array();
   floor=new Array<any>();
 
-
   constructor(private _masterformservice: MasterformService,private http: HttpClient,
-    private _ipservice: IpserviceService,private _hmsdashboard:HmsdashboardService,private _bankservice:BankService  ) { 
-      
+    private _ipservice: IpserviceService,private _hmsdashboard:HmsdashboardService,private _bankservice:BankService  ) {     
       this._bankservice.changeMessage("collapsed")
     }
 
   ngOnInit() {
-   this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
-     this.finalMenu=res;
-     console.log(this.finalMenu);
-   })
+    this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
+      this.finalMenu=res;
+
+
+      setInterval(()=>{
+        this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
+          this.finalMenu=res;
+          console.log(this.finalMenu);
+        })    
+      },7000)
      
+    })
+
+
+
   }
+
+  Datamouseover()
+  {
+    alert('s')
+  }
+
   openMyModal(event,name){
     console.log("roomname"  );
     document.querySelector("#" + event).classList.add("md-show");

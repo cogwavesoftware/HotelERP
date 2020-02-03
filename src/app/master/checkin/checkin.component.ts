@@ -426,9 +426,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
         ]);
       });
     }
-
-   
-
     this.CreateNoofDays(31)
   }
 
@@ -855,9 +852,7 @@ debugger;
   }
 
   Submit() {
-
     debugger;
-
     const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -868,6 +863,9 @@ debugger;
     this.form.value.BranchCode = localStorage.getItem("BranchCode")
     this.form.value.CreatedBy = localStorage.getItem("id")
     this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
+
+    console.log(this.form.value)
+    return;
 
     // if (form.invalid) {
     //   console.log(form.value);
