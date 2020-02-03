@@ -18,11 +18,12 @@ export class FinancialmasterComponent implements OnInit {
   public filterQuery = "";
   public sortBy = "";
   public sortOrder = "desc";
+  public HDesc="";
   public isShown: boolean = false;
   model: any = {};
   btitle: string = "Add";
   isValid: boolean;
-
+  
   dtat: string;
   title: string;
   msg: string;
@@ -38,6 +39,7 @@ export class FinancialmasterComponent implements OnInit {
   mode:string;
   IsReset:boolean=true;
   iscontinue:boolean=true;
+  mischeader:any;
   @ViewChild("f", { static: false }) form: any;
   constructor(private _masterformservice: MasterformService,private _authenservice: AuthenticationService,
     private toastyService: ToastyService
@@ -47,9 +49,14 @@ export class FinancialmasterComponent implements OnInit {
       this.resetForm();
       this.btitle = "Add Item";
       this.mode = "(List)";
-      this.isShown = true;
       this.Branch= localStorage.getItem("BranchCode");
-      this.data = this._masterformservice.GetAllFinancial(this.Branch);
+      this.data = this._masterformservice.Getmiscellaneous(this.HDesc);
+      this._masterformservice.GetMiscHeaders().subscribe(res => {
+        this.mischeader = res;
+        console.log(this.mischeader)
+      });
+      
+       
     }
     mouseEnter(div : string){
       if(div=="Re"){
@@ -86,10 +93,12 @@ export class FinancialmasterComponent implements OnInit {
   resetForm(form?: NgForm)
   {
      this.model = {
-      Id: 0,
+      Code: 0,
+      TypeId: -1,
+      TypeId1: -1,
       Description:null,
       ShortDescription:null,        
-      Activeyn:null,          
+      Activeyn:true,          
       BranchCode:localStorage.getItem('BranchCode'),
       IpAdd:localStorage.getItem('LOCAL_IP'),
       CreatedBy:localStorage.getItem('id'),
@@ -102,54 +111,84 @@ export class FinancialmasterComponent implements OnInit {
      this.btitle="Hide Form"    
      this.isShown = true;
      this.data.subscribe(response => {
-       this.model.Id=response[event]['Id'];
+       this.model.Code=response[event]['Code'];
        this.model.Description=response[event]['Description']; 
        this.model.ShortDescription=response[event]['ShortDescription'];
-       this.model.Activeyn=response[event]['Activeyn'];              
+       this.model.Activeyn=response[event]['Activeyn'];
+       this.model.TypeId=response[event]['TypeId'];              
      });
-   
    }
+   LoadTypeData(value)
+   {
+     debugger;
+     if(value=="-1")
+     {
+      this.HDesc="";
+      this.data = this._masterformservice.Getmiscellaneous(this.HDesc);
+    
+     }
+     else
+     {
+       let status:ListItemSimplified =this.mischeader.find(s => s.TypeId == value);
+      if(status)
+      {
+        this.HDesc=status.Description;
+      }
+      else
+      {
+        this.HDesc="";
+      }
+      
+      this.data = this._masterformservice.Getmiscellaneous(this.HDesc);
+     }
+   }
+
    onSubmit()
    {
-     console.log(this.form.value);          
+     debugger;
+    this.model.BranchCode = localStorage.getItem("BranchCode");
+    this.model.CreatedBy = localStorage.getItem("id");
+    this.model.UpdatedBy = localStorage.getItem("id");
+    this.model.IpAdd = localStorage.getItem("LOCAL_IP");
+     console.log(this.form.value);  
+             
      if (this.form.valid)
      {
-       console.log("Form Submitted!");    
-     }     
+      this._masterformservice.SaveMisc(this.model).subscribe(data => {
+        if (data == true) 
+        {
+          this.addToast(
+            "Cogwave Software",
+            "Sucessfully Added Miscellaneous",
+            "success"
+          );
+         this._authenservice.logout();
+        } 
+          else {
+            this.addToast(
+              "Cogwave Software",
+              "Miscellaneous Data Updated Sucessfully",
+              "success"
+            );
+            
+          }
+          this.form.reset();
+          this.mode = "(List)";
+          this.isShown = false;
+          this.btitle = "Add Item";
+          
+      });   
+     } 
+     this.HDesc ="";  
+     this.data = this._masterformservice.Getmiscellaneous(this.HDesc);  
    }
 
 
    ProcessData(ProcessD :string)
    {
-    this.model.BranchCode = localStorage.getItem("BranchCode");
-    this.model.CreatedBy = localStorage.getItem("id");
-    this.model.ModifyBy = localStorage.getItem("id");
-    this.model.IpAdd = localStorage.getItem("LOCAL_IP");
-    this.model.Process=ProcessD;
-    this._masterformservice.Savefinancial(this.model).subscribe(data => {
-      if (data == true) 
-      {
-        this.addToast(
-          "Cogwave Software",
-          "Sucessfully Processed Financial Please Login",
-          "success"
-        );
-       this._authenservice.logout();
-      } 
-        else {
-          this.addToast(
-            "Cogwave Software",
-            "Floor Data Updated Sucessfully",
-            "success"
-          );
-          this.mode = "(List)";
-          this.isShown = false;
-          this.btitle = "Add Item";
-        }
-      
-    });
-
    
+    this.model.Process=ProcessD;
+
    }
    Closeform() {
     this.isShown = false;
@@ -160,7 +199,8 @@ export class FinancialmasterComponent implements OnInit {
    openMyModal(event,data) 
    {
      this.model = {  
-       Id:data.Id,
+       Code:data.Code,
+       TypeId:data.TypeId,
        Description:data.Description,   
        ShortDescription: data.ShortDescription,
        Activeyn:data.Activeyn              
@@ -213,4 +253,9 @@ export class FinancialmasterComponent implements OnInit {
         break;
     }
   }
+}
+
+export class ListItemSimplified {
+  TypeId: string;          
+  Description: string;         
 }

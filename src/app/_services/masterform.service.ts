@@ -272,6 +272,14 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+  GetMiscHeaders() {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/MiscHeader');
+  }
+
+  SaveMisc(misc:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveMiscDetails',misc,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
 
 
 
