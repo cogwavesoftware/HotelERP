@@ -330,6 +330,12 @@ export class MasterformService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/GetBookingData',formData);
   }
 
+
+  GetAllSubPaymendModeViaMode(BranchCode:string,ModeName:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetAllSubPaymend?BranchCode=' + BranchCode + '&ModeName=' + ModeName);
+    
+  }
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

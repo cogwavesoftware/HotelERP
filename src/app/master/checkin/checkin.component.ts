@@ -65,10 +65,10 @@ export interface Checkinss {
 })
 export class CheckinComponent implements OnInit, OnDestroy {
   addcompanydiv: boolean = false;
-  searchresultsdiv:boolean = true;
-  addcompanybtn:boolean=true;
+  searchresultsdiv: boolean = true;
+  addcompanybtn: boolean = true;
   selectedRoomcode: any;
-  ReferanceList:any;
+  ReferanceList: any;
   //web camara data 
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
@@ -80,7 +80,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
-  error:string;
+  error: string;
   base64TrimmedURL: any;
   base64DefaultURL: any;
   generatedImage: any;
@@ -88,11 +88,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
   picodelist: any;
   referencelist: any;
   companylist: any;
-  driverlist:any;
+  driverlist: any;
   theme = "bootstrap";
   type = "default";
   closeOther = false;
- 
+  subpaymodelist: any;
   position = 'top-right';
   //public videoOptions: MediaTrackConstraints = {
   // width: {ideal: 1024},
@@ -127,7 +127,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
-  paymentmode: string[] = ["Online", "Credit Card", "Cash"];
+  paymentmode: string[] = ["Cash", "Card", "Cheque", "Online", "Walet"];
   public noofdays: number[] = [];
   foriegnguest: string[] = ["Yes", "No"];
   discounttypes = ["Amount", "%"];
@@ -135,7 +135,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   gender: any;
   pincode: any;
   IsWalkinCheckin: boolean = true;
-  IsCompanyCheckin: boolean=false;
+  IsCompanyCheckin: boolean = false;
   Formcheckin: Checkinss;
   maxDate = new Date();
   myTime = new Date();
@@ -172,7 +172,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   filterpin: any[];
   fileDataIdfront: File = null;
   fileDataIdBack: File = null;
-  Branch:string;
+  Branch: string;
   private _searchTerm: string;
   @ViewChild('searchTerm', { static: false }) searchTerm: ElementRef;
   @ViewChild('searchTermref', { static: false }) searchTermref: ElementRef;
@@ -180,10 +180,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
   @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
   @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
 
-  
+
   public Guestphotopathurl: string;
-  public GuestDoucmentFrontpathurl: string="0";
-  public GuestDoucmentBackpathurl: string="0";
+  public GuestDoucmentFrontpathurl: string = "0";
+  public GuestDoucmentBackpathurl: string = "0";
 
 
   //   return this._searchTerm;
@@ -238,16 +238,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // }
 
   @ViewChild('f', { static: false }) newcompanyform: any;
-  constructor(private datePipe: DatePipe, 
-    public router: Router,private toastyService: ToastyService,
+  constructor(private datePipe: DatePipe,
+    public router: Router, private toastyService: ToastyService,
     public formBuilder: FormBuilder, private _bankservice: BankService,
-    private route: ActivatedRoute,private savecheckin:CheckinService,
+    private route: ActivatedRoute, private savecheckin: CheckinService,
     private roomservice: RoomtypeService, private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService
   ) {
 
     this._bankservice.changeMessage("collapsed")
     this.Branch = localStorage.getItem("BranchCode");
+    this.Branch = "CW_1001"
     this.IsShowloader = false;
     //this.data = this._masterservice.GetPindata();
     // this.data = this._masterservice.GetPinAddress();
@@ -307,7 +308,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       checkouttime: [this.myTime, [Validators.required]],
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
-      selmode: ["Cash", [Validators.required]],
+      selmode: ["select", [Validators.required]],
       payamount: ["", [Validators.required]],
       paymntdesc: ["", [Validators.required]],
       disctype: ["select", [Validators.required]],
@@ -326,9 +327,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
       visit: ["select", [Validators.required]],
       cometoknow: ["select", [Validators.required]],
       Billing: ["select", [Validators.required]],
+      PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
       DOB: ["", [Validators.required]],
       DOA: ["", [Validators.required]],
-      driverTd:["",[Validators.required]],
+      driverTd: ["", [Validators.required]],
       drivername: ["", [Validators.required]],
       drivermobile: ["", [Validators.required]],
       vehicleno: ["", [Validators.required]],
@@ -336,26 +338,27 @@ export class CheckinComponent implements OnInit, OnDestroy {
       idproof: [""],
       idproofno: [""],
       RefName: ["0"],
-      BranchCode:[this.Branch,[Validators.required]],
-      randomCheckinNo:['0',[Validators.required]],
-      IpAdd:[localStorage.getItem("LOCAL_IP")],
-      CreatedBy:[localStorage.getItem("id"),[Validators.required]]
+      subpaymode: ["select"],
+      BranchCode: [this.Branch, [Validators.required]],
+      randomCheckinNo: ['0', [Validators.required]],
+      IpAdd: [localStorage.getItem("LOCAL_IP")],
+      CreatedBy: [localStorage.getItem("id"), [Validators.required]]
     });
   }
 
   ngOnInit() {
-    this.searchresultsdiv =true;
-     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
-     this.ReferanceList=res;
-     },
-     error =>{},
-     ()=>{});
+    this.searchresultsdiv = true;
+    this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
+      this.ReferanceList = res;
+    },
+      error => { },
+      () => { });
 
-     
-       
+
+
     this.camarabuttonDisabled = false;
     this.SnapshotbuttonDisabled = true;
-  
+
     this._masterservice.Getmiscellaneous('Gender').subscribe(data => {
       this.gendertypes = data;
     })
@@ -432,31 +435,33 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
+
+
+
   ngOnDestroy() {
     this.showWebcam = false;
     this._bankservice.changeMessage("expanded")
   }
 
 
-  public CompanyCheckin(id:string)
-  {
-    
-   this._masterservice.GetCompanyTariffDetail("105", this.Branch,id)
-   .subscribe(result=>{
-    this.checkinform = result;
-    this.other.patchValue([
-      {
-        RoomNo: this.checkinform["checkin"].RoomNo,
-        RoomCode: this.checkinform["checkin"].RoomCode,
-        Pax: this.checkinform["checkin"].Pax,
-        PlanName: this.checkinform["checkin"].PlanName,
-        Food: this.checkinform["checkin"].Food,
-        Tariff: this.checkinform["checkin"].Tariff,
-        Tax: this.checkinform["checkin"].Tax,
-        Grand: this.checkinform["checkin"].Grand
-      }
-    ]);
-   })
+  public CompanyCheckin(id: string) {
+
+    this._masterservice.GetCompanyTariffDetail("105", this.Branch, id)
+      .subscribe(result => {
+        this.checkinform = result;
+        this.other.patchValue([
+          {
+            RoomNo: this.checkinform["checkin"].RoomNo,
+            RoomCode: this.checkinform["checkin"].RoomCode,
+            Pax: this.checkinform["checkin"].Pax,
+            PlanName: this.checkinform["checkin"].PlanName,
+            Food: this.checkinform["checkin"].Food,
+            Tariff: this.checkinform["checkin"].Tariff,
+            Tax: this.checkinform["checkin"].Tax,
+            Grand: this.checkinform["checkin"].Grand
+          }
+        ]);
+      })
 
 
   }
@@ -549,7 +554,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       });
 
 
-      fromEvent(this.searchTermdriver.nativeElement, 'keyup')
+    fromEvent(this.searchTermdriver.nativeElement, 'keyup')
       .pipe(
         filter(text => this.searchTermdriver.nativeElement.value.length > 2),
         debounceTime(1000),
@@ -562,8 +567,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
         })
       ).subscribe(res => {
         this.driverlist = res;
-        console.log( 'this.driverlist');
-        console.log( this.driverlist);
+        console.log('this.driverlist');
+        console.log(this.driverlist);
       });
 
 
@@ -609,7 +614,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
   getImage(url) {
-    
+
     // Base64 url of image trimmed one without data:image/png;base64
     this.base64DefaultURL = url;
     // Naming the image
@@ -685,6 +690,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
     return this.form.get("other") as FormArray;
   }
 
+  get PayArray(): FormArray {
+    return this.form.get("PayArray") as FormArray;
+  }
+
   openMyPincodeModalData(SelectedData: any, event: any) {
     this.form.patchValue({
       pincode: SelectedData.Pincode,
@@ -701,8 +710,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
       gstno: SelectedData.GSTNO,
       companycode: SelectedData.CompanyCode
     })
-    this.IsWalkinCheckin=false;
-    this.IsCompanyCheckin=true;
+    this.IsWalkinCheckin = false;
+    this.IsCompanyCheckin = true;
     this.CompanyCheckin(SelectedData.CompanyCode);
   }
 
@@ -713,11 +722,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
       drivername: SelectedData.DriverName,
       drivermobile: SelectedData.MobileNo,
       vehicleno: SelectedData.VechileNo,
-      charge:SelectedData.ChargeAmount,
+      charge: SelectedData.ChargeAmount,
     })
   }
 
- 
+
 
   PatchRefenceDetail(SelectedData: any, event: any) {
     this.form.patchValue({
@@ -786,6 +795,53 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
+  FilterPaymentMode(index: number) {
+
+  
+    let mode = this.PayArray.controls[index].get("Paymode").value;
+
+    switch (mode) {
+      case "Cash":
+        this.subpaymodelist = [];
+        this.subpaymodelist.push("Cash")
+        //this.GetsubModepayment("Cash")
+        break;
+      case "Card":
+        this.GetsubModepayment("Card", index)
+        break;
+      case "Online":
+        this.GetsubModepayment("Online", index)
+        break;
+      case "Cheque":
+        this.subpaymodelist = [];
+        //this.GetsubModepayment("Cheque")
+        this.subpaymodelist.push("DD", index)
+        break;
+      case "Walet":
+        this.GetsubModepayment("Walet", index)
+        break;
+    }
+
+  }
+
+
+  PatchSubModeName(index: number) {
+    let DescriptionMode = this.PayArray.controls[index].get("Paysubmode").value;
+    this.PayArray.controls[index].patchValue({
+      modeselected: DescriptionMode
+    })
+
+    this.PayArray.controls[index].get("modeselected").disable({ onlySelf: true });
+  }
+
+  GetsubModepayment(Name: string, index: number) {
+
+    this._masterservice.GetAllSubPaymendModeViaMode(this.Branch, Name).subscribe(res => {
+      this.subpaymodelist = res
+    })
+
+  }
+
   RoomTypeChanged(index: number, Changed: string) {
     //let dd = this.form.controls[index].get("RoomCode").value;
     this.Formcheckin = {
@@ -798,7 +854,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       Tax: this.other.controls[index].get("Tax").value,
       Grand: this.other.controls[index].get("Grand").value,
       ChangeId: Changed,
-      BranchCode:this.Branch
+      BranchCode: this.Branch
     };
 
     this._masterservice.GetBookingData(this.Formcheckin).subscribe(data => {
@@ -834,7 +890,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   fileProgressIdfback(fileInput: any) {
-    
+
     this.fileDataIdBack = <File>fileInput.target.files[0];
     this.preview3();
   }
@@ -853,21 +909,18 @@ export class CheckinComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
   Submit() {
-<<<<<<< HEAD
     debugger;
-=======
 
-    
-
->>>>>>> 86c6d6addc0567d057c5664a420e9f944d00d381
-    const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
       text1 += randomCheckinNo.charAt(Math.floor(Math.random() * randomCheckinNo.length));
     }
 
-    this.form.value.randomCheckinNo=text1;
+    this.form.value.randomCheckinNo = text1;
     this.form.value.BranchCode = localStorage.getItem("BranchCode")
     this.form.value.CreatedBy = localStorage.getItem("id")
     this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
@@ -881,34 +934,34 @@ export class CheckinComponent implements OnInit, OnDestroy {
     //   return;
     // }
 
-    
+
     this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
       .then((confirmed) => {
         console.log('User confirmed:', confirmed)
         if (confirmed === true) {
           const formData = new FormData();
 
-        console.log(this.GuestDoucmentFrontpathurl);
-        let Idfront="";
-        let Idback="";
-          if (this.GuestDoucmentFrontpathurl=="0") {
-            
+          console.log(this.GuestDoucmentFrontpathurl);
+          let Idfront = "";
+          let Idback = "";
+          if (this.GuestDoucmentFrontpathurl == "0") {
+
             if (this.fileDataIdfront != null) {
               var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
               var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-               Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
+              Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
               formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
             }
-          }      
-          if (this.GuestDoucmentBackpathurl =="0") {
-           
+          }
+          if (this.GuestDoucmentBackpathurl == "0") {
+
             if (this.fileDataIdBack != null) {
               var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
               var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-               Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
+              Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
               formData.append('GuestIdBack', this.fileDataIdBack, Idback);
             }
-          }      
+          }
           this._masterservice.SavaImsData(formData)
             .subscribe(res => {
               console.log(res);
@@ -916,9 +969,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
               this.GuestDoucmentBackpathurl = Idback;
               var checkoutDate = '';
               let cku = this.form.value.checkoutdate;
-              this.form.value.GuestIdFront=this.GuestDoucmentFrontpathurl;
-              this.form.value.GuestIdBack=this.GuestDoucmentBackpathurl;
-              this.form.value.GuestPhotoPath=this.Guestphotopathurl;          
+              this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
+              this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;
+              this.form.value.GuestPhotoPath = this.Guestphotopathurl;
               if (cku.length == 10) {
               }
               else {
@@ -928,51 +981,50 @@ export class CheckinComponent implements OnInit, OnDestroy {
               this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "dd/MM/yyyy");
               this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
               this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
-          
+
               if (this.form.value.DOB != "") {
                 this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "dd/MM/yyyy");
               }
-             
+
               if (this.form.value.DOA != "") {
                 this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "dd/MM/yyyy");
               }
               this.savecheckin.SaveCheckinData(this.form.value)
-              .subscribe(res => {
-                console.log(res);             
-              },
-                error => {            
-                   this.error = "Checkin Data Not Save";                     
-                    this.addToast("Cogwave Software😃", this.error + "👊", "error");
-                   return;
+                .subscribe(res => {
+                  console.log(res);
                 },
-                () => {
-                  this.addToast("Cogwave Software","Checkin Saved Sucessfully","success");
-                });
+                  error => {
+                    this.error = "Checkin Data Not Save";
+                    this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                    return;
+                  },
+                  () => {
+                    this.addToast("Cogwave Software", "Checkin Saved Sucessfully", "success");
+                  });
 
             },
-              error => {                    
-                  this.error = "Image Guest Not Saved";                   
-                  this.addToast("Cogwave Software😃", this.error + "👊", "error");
-                 return;
+              error => {
+                this.error = "Image Guest Not Saved";
+                this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                return;
               },
-              ()=>{
+              () => {
                 this.router.navigate(["/Master/dashboard"]);
               });
-            
-            // -----------------------End Save Image----        
+
+          // -----------------------End Save Image----        
 
         }  //confoirmtrue end  
         else {
         }
       })
-    .catch(() => 
-    {
-      alert('cach')
-      console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
-    });
-    
-    
-   
+      .catch(() => {
+        alert('cach')
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
+
+
+
   }
 
   AddbokingGrid(): FormGroup {
@@ -989,17 +1041,34 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
-    onSubmit(fm) {
-      this.searchresultsdiv =true;
-      this.addcompanydiv = false;
-      this.addcompanybtn = true;
-      console.log(fm.value);
-    }
+
+
+  AddpaymentGrid(): FormGroup {
+    return this.formBuilder.group({
+      bankAccountIDs: ["0"],
+      Paymode: ["select"],
+      Paysubmode: ["select", [Validators.required]],
+      payAmount: [, [Validators.required]],
+      Descriptions: [, [Validators.required]],
+      modeselected: [, [Validators.required]]
+    });
+  }
+
+
+
+
+
+  onSubmit(fm) {
+    this.searchresultsdiv = true;
+    this.addcompanydiv = false;
+    this.addcompanybtn = true;
+    console.log(fm.value);
+  }
 
 
 
   addToast(title, Message, theme) {
-     
+
     this.toastyService.clearAll();
     const toastOptions: ToastOptions = {
       title: title,
@@ -1024,7 +1093,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         this.toastyService.info(toastOptions);
         break;
       case "success":
-         
+
         this.toastyService.success(toastOptions);
         break;
       case "wait":
@@ -1044,19 +1113,29 @@ export class CheckinComponent implements OnInit, OnDestroy {
     if (i != 0) (<FormArray>this.form.get("other")).removeAt(i);
   }
 
+  onDeletePayment(bankAccountID, i) {
+    (<FormArray>this.form.get("PayArray")).removeAt(i);
+  }
+
   AddBokingButtonClick(): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
-  addcompanyinmodel(){
+
+
+  AddPaymentButtonClick(): void {
+    (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
+  }
+
+  addcompanyinmodel() {
     this.addcompanydiv = true;
-    this.searchresultsdiv =false;
-    this.addcompanybtn =false;
+    this.searchresultsdiv = false;
+    this.addcompanybtn = false;
     console.log("clock");
   }
-  backtosearch(){
-    this.searchresultsdiv =true;
+  backtosearch() {
+    this.searchresultsdiv = true;
     this.addcompanydiv = false;
-    this.addcompanybtn =true;
+    this.addcompanybtn = true;
   }
 
   closeMyModalPin(event) {
@@ -1069,7 +1148,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-close");
     document.querySelector("#" + event).classList.remove("md-show");
   }
- 
+
 
 
   // runTimer() {
@@ -1087,6 +1166,19 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
+function isNameDup() {
+  debugger
+  const validator: ValidatorFn = (PayArray: FormArray) => {  
+    const totalSelected = PayArray.controls
+      .map(control => control.value);
+      const names = totalSelected.map(value=> value.Paymode)
+       const hasDuplicate = names.some(
+    (name, index) => names.indexOf(name, index + 1) != -1
+  );  
+     return  hasDuplicate ? { duplicate: true } : null;
+  }
+  return validator;
+}
 
 
 

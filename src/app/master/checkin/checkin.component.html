@@ -431,9 +431,6 @@
                                         </div>
 
 
-
-
-
                                       </div>
                                     </div>
                                   </ng-template>
@@ -499,14 +496,16 @@
                                     </div>
                                   </ng-template>
                                 </ngb-panel>
-                                <ngb-panel id="ngb-close-p1" title="Advance Payment">
+
+
+                               <!-- <ngb-panel id="ngb-close-p1" title="Advance Payment">
                                   <ng-template ngbPanelContent>
                                     <div class="row paymentrow userlist">
 
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="selmode "> Select mode </label>
-                                          <select class="custom-select" name="selmode" formControlName="selmode"
+                                          <select  (change)="FilterPaymentMode()"  class="custom-select" name="selmode" formControlName="selmode"
                                             id="selmode" [ngClass]="{ 'is-invalid': submitted && form.selmode.errors }">
                                             <option value="select">Select</option>
                                             <option *ngFor="let sour of paymentmode" [value]="sour">
@@ -516,8 +515,24 @@
                                             <div *ngIf="form.selmode.errors.required">selmode is required</div>
                                           </div>
                                         </div>
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      </div> 
+
+                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="subpaymode "> Select Detail </label>
+                                          <select class="custom-select" name="subpaymode" formControlName="subpaymode"
+                                            id="subpaymode" [ngClass]="{ 'is-invalid': submitted && form.subpaymode.errors }">
+                                            <option value="select">Select</option>
+                                            <option *ngFor="let subpaymode of  subpaymodelist" [value]="subpaymode">
+                                              {{ subpaymode  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.subpaymode.errors" class="invalid-feedback">
+                                            <div *ngIf="form.subpaymode.errors.required">selmode is required</div>
+                                          </div>
+                                        </div>
+                                      </div>  
+
+                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="payamount">Payment </label>
                                           <input type="text" class="form-control tooltip-form" id="payamount"
@@ -527,7 +542,8 @@
                                           <div class="invalid-feedback"
                                             *ngIf="form.controls.payamount.errors?.required">payamount is required</div>
                                         </div>
-                                      </div>
+                                      </div> 
+
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="paymntdesc">Description </label>
@@ -537,12 +553,120 @@
                                             *ngIf="form.controls.paymntdesc.errors?.required">paymntdesc is required
                                           </div>
                                         </div>
-                                      </div>
+                                      </div> 
 
 
                                     </div>
                                   </ng-template>
+                                </ngb-panel> -->
+
+                                <span *ngIf="PayArray.errors">
+                                  please choose some other name
+                                </span>
+
+
+                                <ngb-panel id="ngb-close-p1" title="Payment Array ">
+                                  <ng-template ngbPanelContent>
+                                    <div class="test123 userlist " style="padding: 2px;">
+                                      <div class="grid-table" style="width: 100%;">
+                                        <div class="thead">
+                                          <div class="">
+                                            <div class="td">Select Mode</div>
+                                            <div class="td">Delect Detail</div>
+                                            <div class="td">Amount</div>
+                                            <div class="td">Description</div>
+                                            <div class="td">Selected Mode</div>
+                                            
+                                            <div class="td">
+                                              <button class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
+                                                <i class="fa fa-plus">Add</i> 
+                                              </button>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                        <div class="tbody">
+
+                                          <div formArrayName="PayArray"
+                                            *ngFor="let other of form.get('PayArray').controls; let k = index">
+                                            <div [formGroupName]="k">
+                                              <div class="tr">
+                                                <div class="td">
+                                                  <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                    (change)="RoomTypeChanged(i,'RoomCode')">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                      {{items.RoomCode}}</option>
+                                                  </select> -->
+
+                                                  <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
+                                                  id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let sour of paymentmode" [value]="sour">
+                                                    {{ sour  }}</option>
+                                                </select>
+
+
+                                                </div>
+
+                                                <div class="td">
+                                                  <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                                                  id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                                    {{ Paysubmode  }}</option>
+                                                </select> 
+
+
+                                                </div>
+
+                                            <div class="td">
+                                             <input type="number"  id="payAmount"
+                                              formControlName="payAmount" name="payAmount" autocomplete="off" required />
+                                            
+                              
+                                                </div>
+
+
+                                                <div class="td">
+                                                  <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                  
+                                                </div>
+
+                                                <div class="td">
+                                                  <input type="text" class="" id="modeselected" formControlName="modeselected">
+                                                  
+                                                </div>
+
+
+
+
+                                                <div class="td">                                      
+                                                  <button (click)="onDeletePayment(0,k)">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+                                        </div>
+
+
+                                      </div>
+                                    </div>
+                                  </ng-template>
                                 </ngb-panel>
+
+
+
+
+
+
+
+
+
 
                                 <ngb-panel id="ngb-close-p1" title="Discount /Grace Period">
                                   <ng-template ngbPanelContent>
