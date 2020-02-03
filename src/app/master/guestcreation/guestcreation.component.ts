@@ -15,12 +15,16 @@ import { environment } from 'src/environments/environment';
 })
 export class GuestcreationComponent implements OnInit {
   public data: Observable<any>;
+  public data1: Observable<any>;
+  public roomsdetail:Observable<any>;
   public rowsOnPage = 12;
   public filterQuery = "";
   public sortBy = "";
   public sortOrder = "desc";
   public isShown: boolean = false;
   model: any = {};
+  model1:any ={};
+  model2:any={};
   btitle: string = "Add";
   isValid: boolean;
   IsExistdata:boolean
@@ -58,20 +62,46 @@ export class GuestcreationComponent implements OnInit {
   previewUrl3:any = null;
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
+  showloader: boolean;
+  isShowLinksPop:boolean;
+  roomname:any;
+  floorname:any;
+
+  
 
   constructor(private _masterformservice: MasterformService,private http: HttpClient,
     private _ipservice: IpserviceService,private toastyService: ToastyService, private datePipe: DatePipe,
-     ) { this.Branch= localStorage.getItem("BranchCode");
-     
-
+     ) { 
+       this.Branch= localStorage.getItem("BranchCode");
+    //  setTimeout(()=>{
+      
+    //    this.data1 = this._masterformservice.GetPinAddress();
+    //    this.roomsdetail = this._masterformservice.GetSwardDetail(this.Branch);
+    //       console.log(this.data);   
+    //  },1);
     }
-
+   
   ngOnInit() {
+    this.data1 = this._masterformservice.GetPinAddress();  
+    // setTimeout(()=>{    
+      
+          
+    //   this.roomsdetail = this._masterformservice.displayRooms();
+    //   //this.data1 = this._masterformservice.GetPinAddress();
+     
+    // },1);
+    //console.log(JSON.stringify("pinvalue"+ this.data1));
     this.resetForm();
     this.btitle = "Add Item";
     this.mode = "(List)";
     // this.isroomc="CW_1001_36296769926386front.png";
-    this.imagePath1=environment.GuestimagePath+ this.isroomc;
+    this.isroomc="CW_1001_148857913375854GuestPhoto.png";
+    
+    this.imagePath1=environment.GuestimagePath+"/"+this.isroomc;
+    console.log("image name with path"+ this.imagePath1);
+
+   
+
     this._masterformservice.Getmiscellaneous('Gender').subscribe(data=>{
       this.gendertypes=data;
     })
@@ -89,13 +119,14 @@ export class GuestcreationComponent implements OnInit {
       this.data = this._masterformservice.GetGuestDetails(this.Branch);
     }
   
-    // this._masterformservice.GetBankdetails(this.Branch).subscribe((data: any) => {
-    //   this.filterdata = data;
-    // });
+    
   }
 
- 
+//   changestatus( items ){ 
+//     console.log(items);
 
+// }
+ 
 onSubmit() {
   debugger;
   this.form.BranchCode = localStorage.getItem("BranchCode");
@@ -122,7 +153,11 @@ onSubmit() {
   var Idback=this.Branch +'_'+ Rans.toString()+"GuestPhoto" + '.png'
   console.log(Idback)
 
-  if(this.fileData!=null)
+  console.log('this.fileData');
+  console.log(this.fileData)
+
+
+return;  if(this.fileData!=null)
   {
     formData.append('GuestPohto', this.fileData, Guest);
   }
@@ -137,16 +172,11 @@ onSubmit() {
     formData.append('GuestIdBack', this.fileDataIdBack, Idback);
   }
 
+    debugger;
   
   this._masterformservice.SavaImsData(formData)
     .subscribe(res => {
       console.log('res');
-
-    //   console.log(res);
-
-    //  this.GuestPhotpath=res["GuestPohto"];
-    //  this.GuestIdFrontpath=res["GuestIdFront"];
-    //  this.GuestIdBackpath=res["GuestIdBack"];
      this.form.GuestPhotoPath=Guest;
      this.form.GuestIdFront=Idfront;
      this.form.GuestIdBack=Idback;
@@ -157,8 +187,10 @@ onSubmit() {
       this.error=error.message;  
       this.addToast("Cogwave Software😃", this.error + "👊", "error");
     }); 
+ 
+ console.log(this.form.value);
+return;
 
-    return; 
   if (this.form.valid)
     {
       console.log(this.form.value);
@@ -260,6 +292,8 @@ onSubmit() {
 
   openMyModalData(event) {
    
+   
+
     this.btitle = "Hide Form";
     this.isShown = true;
     this.data.subscribe(response => {
@@ -280,12 +314,27 @@ onSubmit() {
       this.model.ModifyBy = response[event]["ModifyBy"];
       this.model.GdProof = response[event]["GdProof"];
       this.model.IdNo = response[event]["IdNo"];
-    
+      // this.model.previewUrl = this.previewUrl ;
+      this.previewUrl = this.imagePath1;
       this.mode = "(Edit)"+  this.model.GuestName;
     });
   }
 
 
+  openMyPincodeModalData(SelectedData:any,event:any){ 
+    this.model.City=SelectedData.AreaData;
+    this.model.PINCode=SelectedData.Pincode;
+    this.model.State=SelectedData.State;
+    this.model.Nation="India";
+    this.model.GuestAddress =SelectedData.City;
+    this.closeMyModal(event);
+
+  }
+  customclose(){   
+  document.querySelector(".md-modal").classList.add("customclosepopup");
+   document.querySelector(".md-modal").classList.remove("md-show");
+   document.querySelector(".md-modal").classList.remove("customclosepopup");
+}
   Closeform() {
     this.isShown = false;
     this.btitle = "Add Item";
@@ -317,7 +366,30 @@ onSubmit() {
     document.querySelector("#" + event).classList.add("md-show");
   }
 
+  openMyModalPincode(event, data){
+    this.model1 = {      
+      Id: data.Id,
+      City: data.City,
+      Pincode: data.Pincode,
+      State: data.State,
+      AreaData:data.AreaData
+    };
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
+  
+  // openRoomsPopup(event, roomname ) {
+  //     this.model2 = {       
+  //         roomname: roomname,        
+  //     };
+  //   console.log("roomname"+ roomname  );
+  //   document.querySelector("#" + event).classList.add("md-show");
+  // }
+
+
+
   closeMyModal(event) {
+    
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"
     );
@@ -387,6 +459,7 @@ preview1() {
     this.previewUrl = reader.result; 
   }
 }
+
 
 
 fileProgressIdfFront(fileInput: any) {

@@ -140,6 +140,7 @@ export class BookingReferenceComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.getreferencedetail(this.Branch);
         } else {
           this.addToast(
             "Cogwave Software",
@@ -150,6 +151,7 @@ export class BookingReferenceComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.getreferencedetail(this.Branch);
         }
       } else {
         this.addToast("Cogwave Software", "Referance Data Not Saved", "error");
@@ -162,7 +164,7 @@ export class BookingReferenceComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.getreferencedetail(this.Branch);
+  
   }
 
   addToast(title, Message, theme) {

@@ -82,25 +82,21 @@ export class CompanycreationComponent implements OnInit {
     this.btitle = "Add Item";
     
     console.log(this.rowData)
-    this.data = this._masterformservice.GetRoomcomany('CW_1001');
+    this.data = this._masterformservice.GetRoomcomany(this.Branch);
     this._masterformservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });
   }
 
-
   
   /* ag grid code starting */
   onSelectionChanged() {
-    
     var selectedRows = this.gridApi.getSelectedRows();
     var selectedRowsString = "";
     this.str = JSON.stringify(selectedRows);
   }
   onGridReady(params) {
-    alert('f')
-    console.log("f");
-    this.rowData = this._roomtypeservice.GetRoomType('CW_1001');
+    this.rowData = this._roomtypeservice.GetRoomType(this.Branch);
     console.log(params);
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -172,8 +168,6 @@ export class CompanycreationComponent implements OnInit {
   }
 
 
-
-
   onSubmit(form?: NgForm) {
 
     form.value.BranchCode = localStorage.getItem("BranchCode")
@@ -181,12 +175,10 @@ export class CompanycreationComponent implements OnInit {
     form.value.ModifyBy = localStorage.getItem("id")
     form.value.IpAdd = localStorage.getItem("LOCAL_IP")
     this.form.value.companytariff = JSON.parse(this.str);
-    console.log(1)
-    console.log(this.form.value.companytariff)
-
-    console.log("JSON")
+   
     var sdata = JSON.parse(this.str);
-    console.log(sdata)
+   
+   
 
     if (form.invalid) {
       console.log(form.value);
@@ -238,10 +230,8 @@ export class CompanycreationComponent implements OnInit {
       }
     });
 
-    this.rowData = this._roomtypeservice.GetRoomType('CW_1001');
-
-    this.data = this._masterformservice.GetRoomcomany('CW_1001');
-
+    this.rowData = this._roomtypeservice.GetRoomType(this.Branch);
+    this.data = this._masterformservice.GetRoomcomany(this.Branch);
     this._masterformservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });

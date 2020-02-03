@@ -225,7 +225,9 @@ export class RevenuComponent implements OnInit {
             BranchCode: localStorage.getItem("BranchCode"),
             Id: "0"
           });
+          this.emailFormArray = [];
           this.isShown = true;
+          this.data = this._masterformservice.getrevenudata(this.Branch);
         } else {
           this.addToast(
             "Cogwave Software",
@@ -236,6 +238,8 @@ export class RevenuComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.emailFormArray = [];
+          this.data = this._masterformservice.getrevenudata(this.Branch);
         }
       } else {
         this.addToast("Cogwave Software", "RevenuName Data Not Saved", "error");
@@ -247,7 +251,11 @@ export class RevenuComponent implements OnInit {
         this.isShown = true;
       }
     });
-    this.data = this._masterformservice.getrevenudata(this.Branch);
+
+    setTimeout(() => {
+     
+    }, 0);
+    
   
   }
 

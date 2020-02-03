@@ -20,7 +20,7 @@ export class WaletComponent implements OnInit {
   btitle: string = "Add";
 
   isValid: boolean;
-
+  position = 'top-right';
   dtat: string;
   title: string;
   msg: string;
@@ -137,7 +137,10 @@ export class WaletComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.getwalet();
+    setTimeout(()=>{  
+      this.data = this._masterformservice.getwalet();
+          }, 1000);
+   
     console.log(this.data)
     this._masterformservice.getwalet().subscribe((data: any) => {
       this.filterdata = data;

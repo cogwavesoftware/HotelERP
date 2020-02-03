@@ -1,6 +1,7 @@
 
 <div class="outerdiv">
 
+<<<<<<< HEAD
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
               <div class="col-md-11">
@@ -170,42 +171,213 @@
                   </table>
                 </div>
               </div>
+=======
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+      <div class="row">
+          <div class="col-md-11">
+              <h5 class="ng-tns-c6-1">Miscellaneous Creation</h5>         
+              <span class="ng-tns-c6-1 ng-star-inserted">Miscellaneous details </span>
+>>>>>>> 2de86ea4fe2b9311f760b6bed0c717bc456c844a
             </div>
-          </div>
-         
+            <div class="col-xs-12 col-sm-12 col-md-1"> 
+                <button type="button" class="btn btn-sm btn-success text-white" (click)="Showhide()" > <i class="icofont icofont-plus m-r-5"></i> {{btitle}}
+              </button>
+            </div>
+      </div>
     </div>
-    </div>
-        <!-- -----------table End Here------------ -->
-    
-    
-    
-    
-    </div>
-    
-    
-    
-    <app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
-        <h3 class="f-15">View Financial Details</h3>
-        
-          <div class="app-modal-body text-center"> 
-              <table class="table table-striped text-left m-t-10">
-                  
-                  <tr>
-                    <td>ShortDescription :</td>
-                    <td>{{ model.ShortDescription }}</td>
-                  </tr>
-                  <tr>
-                    <td>Description :</td>
-                    <td>{{ model.Description }}</td>
-                  </tr>
-                  <tr>
-                    <td>Activeyn :</td>
-                    <td>{{ model.Activeyn }}</td>
-                  </tr>
+
+
+
+    <div class="formdesign aqua-gradient" *ngIf="isShown">
+        <div class="formouter rotate" >
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">      
+          <input type="hidden" name="Code" class="form-control" [(ngModel)]="model.Code" #Id="ngModel" value="{{Code}}"  >
+             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+             
+             <div class="auth-box card">
+                   <div class="card-block">
+                     <div class="frmdata" >              
+                        <div class="containar">
+                            <div class="row">
+                                <div class="col-md-12">                                             
+                                  <div class="row">
+                                    <div class="col-md-4" [class.has-error]="Description.errors?.defaultSelected && Description.touched">
+                                      <label> Miscellaneous Type *</label>
+                                          <select class="custom-select" appSelectValidator="-1" id="TypeId"  #Description ="ngModel"  name="TypeId" [(ngModel)]="model.TypeId">
+                                            <option value="-1">Please Select</option>
+                                            <option *ngFor="let roomty of mischeader" [value]="roomty.TypeId" >{{ roomty.Description }}</option>
+                                          </select>
+                                          <span class="help-block" *ngIf="Description.touched && Description.errors?.defaultSelected">
+                                            MiscellaneousType is required
+                                          </span>                   
+                                  </div>
+                                        <div class='col-md-4'>                                                 
+                                            <label class="required">Short Description</label>
+                                              <input type="text" name="ShortDescription" class="form-control" [(ngModel)]="model.ShortDescription"  value="{{ShortDescription}}"  />                
+                                       
+                                            </div>    
+                                            <div class='col-md-4'>
+                                              <div class="form-group">
+                                                  <label>Active </label>
+                                                  <input style="width: 20px;" type="checkbox" name="Activeyn" class="form-control" [(ngModel)]="model.Activeyn" #Activeyn="ngModel" value="{{Activeyn}}"  [ngClass]="{'is-invalid': Activeyn.touched && Activeyn.invalid}"  required autocomplete="off">
+                                                  <div *ngIf="Activeyn.touched && Activeyn.invalid" class="invalid-feedback">
+                                                    <div *ngIf="Activeyn.errors.required">Active  can't be Blank</div>
+                                                  </div> 
+                                                </div>
+                                                </div>             
+  
+                                  </div>
+                                  </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row m-t-30">
+                            <div class="col-md-12 text-center" >
+                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">close</button>
+                            </div>
+                          </div>
+                     </div>
                    
+
+                    </div>
                   
-                 </table>      
-                 <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+          </form>
+       </div> 
+     </div>
+
+
+<!-- -----------table start Here------------ -->
+
+
+
+     <div class="productlist">
+        <div class="shadow p-3 mb-5 bg-white rounded" >
+      <div class="table-content crm-table">
+        <div class="project-table">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Filter Type</label>
+                  <select class="custom-select" (change)="LoadTypeData(TypeId1.value)" id="TypeId1" appSelectValidator="-1"  #TypeId1="ngModel"  name="TypeId1" [(ngModel)]="model.TypeId1">
+                    <option value="-1">All</option>
+                    <option *ngFor="let revs of mischeader"  [value]="revs.TypeId">{{ revs.Description }}</option>
+                  </select>                       
+            </div> 
+          </div>
+            <br>
+          <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+            <div class="row">      
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Miscellaneous Data List</div>
+                    </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div style="text-align: right;">
+                      <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                        <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                      </label>
+                    </div>
+                  </div>  
+
             </div>
              
-          </app-modal-animation>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+                <thead>
+                <tr class="blueorange-gradient">
+                  <!-- <th>
+                    <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+                  </th> -->
+                  <th>
+                    <mfDefaultSorter  by="Code"> Code </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="ShortDescription">Short Description</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="TypeId">Type Id</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="Activeyn">Active Status</mfDefaultSorter>
+                  </th>                          
+                  <th>
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;">
+                  <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
+                  <td>{{item.Code}}</td>
+                  <td>{{item.ShortDescription}}</td>
+                  <td>{{item.TypeId}}</td>
+                  <td>{{item.Activeyn}}</td>                      
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>                  
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="blueorange-gradient">
+                  <!-- <th>Profile</th> -->
+                  <th>Code</th>
+                  <th>ShortDescription</th>
+                  <th>TypeId</th>
+                  <th>Active Status</th>                     
+                   <th>Action</th>                     
+                </tr>
+                <tr>
+                  <td colspan="10">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+</div>
+</div>
+    <!-- -----------table End Here------------ -->
+
+
+
+
+</div>
+
+
+
+<app-modal-animation [modalID]="'effect-13'" [modalClass]="'md-effect-13'">
+    <h3 class="f-15">View Financial Details</h3>
+    
+      <div class="app-modal-body text-center"> 
+          <table class="table table-striped text-left m-t-10">
+              
+              <tr>
+                <td>ShortDescription :</td>
+                <td>{{ model.ShortDescription }}</td>
+              </tr>
+              <tr>
+                <td>Description :</td>
+                <td>{{ model.Description }}</td>
+              </tr>
+              <tr>
+                <td>Activeyn :</td>
+                <td>{{ model.Activeyn }}</td>
+              </tr>
+               
+              
+             </table>      
+             <button (click)="closeMyModal($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>    
+        </div>
+         
+      </app-modal-animation>

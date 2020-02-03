@@ -112,6 +112,7 @@ export class VisitpurposeComponent implements OnInit {
           form.reset({
             Id: "0"
           });
+          this.data = this._masterformservice.getpurpose();
           this.isShown = true;
         } else {
           this.addToast(
@@ -123,6 +124,7 @@ export class VisitpurposeComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.getpurpose();
         }
       } else {
         this.addToast("Cogwave Software", "Data Not Saved", "error");
@@ -132,8 +134,8 @@ export class VisitpurposeComponent implements OnInit {
         this.isShown = true;
       }
     });
-
-    this.data = this._masterformservice.getpurpose();
+   
+   
     console.log(this.data);
   }
 

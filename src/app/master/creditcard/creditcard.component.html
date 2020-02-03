@@ -3,7 +3,7 @@
     <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
       <div class="row">
           <div class="col-md-11">
-              <h5 class="ng-tns-c6-1">Credit Card Details Creation</h5>         
+              <h5 class="ng-tns-c6-1">Credit Card Details Creation{{mode}} </h5>         
               <span class="ng-tns-c6-1 ng-star-inserted">Details about credit card  </span>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-1"> 
@@ -18,7 +18,7 @@
     <!-- <div class="formdesign aqua-gradient" *ngIf="isShown"> -->
         <div class="formdesign aqua-gradient"  *ngIf="isShown" >
         <div class="formouter rotate" >
-         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"> 
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm"> 
             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
@@ -28,37 +28,35 @@
                    <div class="card-block">
                      <div class="frmdata" >              
                         <div class="containar">
-                            <div class="row">
-                                <div class="col-md-12">                       
-
-
-                                  <div class="row">
-                                    <div class="col-md-4 divcenter form-group mx-auto"  >    
+                           
+                                  <div class="row"> 
+                                    <div class="col-md-6">
+                                                                     
                                         <label class="required">Name*</label>
-                                            <input type="text" name="Name" class="form-control" [(ngModel)]="model.Name" #Name="ngModel" value="{{Name}}"  [ngClass]="{'is-invalid': Name.touched && Name.invalid}"  required autocomplete="off">
+                                            <input type="text" name="Name" class="form-control" [(ngModel)]="model.Name" #Name="ngModel" value="{{Name}}"  [ngClass]="{'is-invalid': Name.touched && Name.invalid}"  required autocomplete="off" style="height:1.50rem">
                                             <div *ngIf="Name.touched && Name.invalid" class="invalid-feedback">
                                                 <div *ngIf="Name.errors.required">Name is invalid</div>
                                             </div>
-                                            <div class="form-group">
-                                              <label class="form-control-label" for="IsActive"  >IsActive  </label>     
-                                               <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }">
-                                          </div>
-                                    </div> 
- 
+                                          
+                                  
+                                    </div>
+                                   <div class="col-md-6"> 
+                                      <div class="form-group">
+                                    <label class="form-control-label" for="IsActive"  >IsActive  </label>     
+                                     <input type="checkbox" name="IsActive" id="IsActive" class="form-control chkboxwidth20" [(ngModel)]="model.IsActive" #IsActive="ngModel" [ngClass]="{ 'is-invalid': IsActive.touched && IsActive.invalid }" style="height:20px">
+                                </div></div>
                                   </div>
+                                 
 
-                               
+                                 
                                      
-                              </div>
-               
-                          
-                            </div>
+                            
                           </div>
                      </div>
-                     <div class="row m-t-30">
+                     <div class=" ">
                         <div class="col-md-12 text-center" >
-                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                          <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center   ripple m-r-10">Save</button>
+                          <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center   ripple">Close</button>
                         </div>
                       </div>
                     </div>
@@ -82,7 +80,7 @@
                   <div class="col-xs-12 col-sm-12 col-md-6">
                     <div style="text-align: right;">
                       <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
-                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name" style="height:2.2em">
                       </label>
                     </div>
                   </div>  

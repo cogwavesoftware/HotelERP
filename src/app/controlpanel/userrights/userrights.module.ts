@@ -14,7 +14,8 @@ import { ToastyModule } from 'ng2-toasty';
 @NgModule({
   declarations: [UserrightsComponent],
   imports: [
-    CommonModule,UserrightsRoutingModule,SharedModule,DataTableModule,FormsModule, ReactiveFormsModule,HttpClientModule,TreeviewModule.forRoot(),
+    CommonModule,UserrightsRoutingModule,SharedModule,DataTableModule,FormsModule, ReactiveFormsModule,HttpClientModule,
+    TreeviewModule.forRoot(),
     ToastyModule.forRoot()
   ]
 })

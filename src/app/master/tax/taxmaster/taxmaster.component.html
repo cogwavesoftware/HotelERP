@@ -29,12 +29,12 @@
                          <div class="frmdata" >              
                             <div class="containar">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6 mx-auto">
                                              
                                       <div class="row">
                                         
     
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <label>TaxName*</label>
                                             <input type="text" name="TaxName" class="form-control" [(ngModel)]="model.TaxName" #TaxName="ngModel" value="{{TaxName}}"  [ngClass]="{'is-invalid': TaxName.touched && TaxName.invalid}"  required autocomplete="off">
                                             <div *ngIf="TaxName.touched && TaxName.invalid" class="invalid-feedback">
@@ -48,32 +48,37 @@
                                       </div>
     
                                       <div class="row">
-                                            <div class='col-md-6'>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="EffectiveDate">Effective  Date</label>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                              <input class="form-control" placeholder="EffectiveDate" name="EffectiveDate" [(ngModel)]="model.EffectiveDate" value="{{model.EffectiveDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
-                                                              <div class="input-group-append bg-default" (click)="d.toggle()" >
-                                                                <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                              </div>
-                                                            </div>
-                                                          </div>                                                         
+                                        <div class='col-md-12'>
+                                         <div class="row">
+                                          <div class='col-md-6'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="EffectiveDate">Effective  Date</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                      <input class="form-control" placeholder="EffectiveDate" name="EffectiveDate" [(ngModel)]="model.EffectiveDate" value="{{model.EffectiveDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #d="ngbDatepicker">
+                                                      <div class="input-group-append bg-default" (click)="d.toggle()" >
+                                                        <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                      </div>
                                                     </div>
-                                                </div> 
-                                                <div class='col-md-6'>
-                                                        <div class="form-group">
-                                                            <label class="form-control-label" for="ToDate">To Date</label>
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                  <input class="form-control" placeholder="ToDate" name="ToDate" [(ngModel)]="model.ToDate" value="{{model.ToDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
-                                                                  <div class="input-group-append bg-default" (click)="dd.toggle()" >
-                                                                    <span class="icofont icofont-ui-calendar input-group-text"></span>
-                                                                  </div>
-                                                                </div>
-                                                              </div>                                                         
+                                                  </div>                                                         
+                                            </div>
+                                        </div> 
+                                        <div class='col-md-6'>
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="ToDate">To Date</label>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                          <input class="form-control" placeholder="ToDate" name="ToDate" [(ngModel)]="model.ToDate" value="{{model.ToDate | date: 'dd-MM-yyyy'}}" ngbDatepicker #dd="ngbDatepicker">
+                                                          <div class="input-group-append bg-default" (click)="dd.toggle()" >
+                                                            <span class="icofont icofont-ui-calendar input-group-text"></span>
+                                                          </div>
                                                         </div>
-                                                    </div>    
+                                                      </div>                                                         
+                                                </div>
+                                            </div> 
+                                         </div> 
+                                        </div>
+                                              
                                       </div>
                                          
                                   </div>
@@ -82,10 +87,10 @@
                                 </div>
                               </div>
                          </div>
-                         <div class="row m-t-30">
+                         <div class=" ">
                             <div class="col-md-12 text-center" >
-                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center m-b-20 ripple m-r-10">Save</button>
-                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center m-b-20  ripple">Close</button>
+                              <button type="submit" [class.green]="f.form.valid" [disabled]="f.form.invalid" class="btn btn-secondary  btn-md btn-sml waves-light text-center   ripple m-r-10">Save</button>
+                              <button type="button" (click)="Closeform()" class="btn btn-primary btn-md btn-sml waves-light text-center   ripple">Close</button>
                             </div>
                           </div>
                         </div>

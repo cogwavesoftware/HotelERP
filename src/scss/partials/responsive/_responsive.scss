@@ -703,6 +703,25 @@
             }
         }
     }
+       .outerdiv .checkinforms .tabouter .tab-content #ngb-close-p2 .tbody .td select {         
+          width: 100%!important;
+      }
+      .outerdiv .checkinforms .tabouter .tab-content #ngb-close-p2 .tbody .td input
+        {         
+          width: 75%!important;
+         
+      }
+      .maindashboard .roomsrow{    
+        padding-bottom: 30px;         
+    }
+    .maindashboard .stickytab{ 
+        position: unset;
+    }
+      .roomcodep-l-25{
+        padding-left: 25px;
+      }
+      
+
 }
 @media only screen and (max-width: 767px) {
     .signup-card {
@@ -788,6 +807,17 @@
                 margin-bottom: 0;
             }
         }
+    }
+
+    .grid-table .thead .td{  
+        width: 62px!important;
+        text-align: left; 
+    }
+     
+    .grid-table .tbody .td input,
+    .grid-table .tbody .td select{         
+        width: 62px!important;   
+        height: 23px;
     }
 }
 @media only screen and (max-width: 991px) {
@@ -1176,6 +1206,17 @@
             margin: 10px auto;
         }
     }
+    .grid-table .thead .td{  
+        width: 34px!important;
+        text-align: left;   
+    }
+     
+    .grid-table .tbody .td input,
+    .grid-table .tbody .td select{         
+        width: 34px!important;   
+        height: 23px;
+    }
+
 }
 @media only screen and (max-width: 420px) {
     #msform {

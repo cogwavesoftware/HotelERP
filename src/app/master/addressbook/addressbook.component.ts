@@ -136,6 +136,7 @@ export class AddressbookComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.GetAddressBook(this.Branch);
         } else {
           this.addToast(
             "Cogwave Software",
@@ -146,6 +147,7 @@ export class AddressbookComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.GetAddressBook(this.Branch);
         }
       } else {
         this.addToast("Cogwave Software", "Address Book Not Saved", "error");
@@ -158,7 +160,7 @@ export class AddressbookComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.GetAddressBook(this.Branch);
+   
   }
 
 

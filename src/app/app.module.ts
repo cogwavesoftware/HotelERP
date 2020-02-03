@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './layout/admin/admin.component';
 import { AppComponent } from './app.component';
 
+
 import { AuthComponent } from './layout/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
@@ -19,9 +20,9 @@ import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
 
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+//import { ConfirmationDialogService } from './_services/confirmation-dialog.service';
+//import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
 
-
-// import { MasterComponent } from './master/master.component';
 // import { FloorcreationComponent } from './master/floorcreation/floorcreation.component';
 // import { RoomtypecreationComponent } from './master/roomtypecreation/roomtypecreation.component';
 // import { RoomorganizerComponent } from './master/roomorganizer/roomorganizer.component';
@@ -44,8 +45,6 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent,
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -64,7 +63,7 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
     // })
    
   ],
-  //entryComponents: [CommonpageComponent],
+ // entryComponents: [],
   providers: [
     
       MenuItems,
@@ -72,13 +71,13 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
         provide: NgbDateAdapter,
         useClass: NgbDateNativeAdapter
       },
-    //{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-    //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     //fakeBackendProvider
-  
   ],
+
 
   
   bootstrap: [AppComponent]

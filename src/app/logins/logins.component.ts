@@ -87,7 +87,8 @@ export class LoginsComponent implements OnInit {
           localStorage.setItem("IsRole", data.IsRole.toString());
           localStorage.setItem("BranchCode", data.BranchCode.toString());
           this.addToast("Cogwave Software", "Login Sucessfully", "success");
-           this.router.navigate(['/dashboard/default']);
+          // this.router.navigate(['/dashboard/default']);
+           this.router.navigate(["/Master/dashboard"]);
         },error => {        
           this.error = error;
           this.error=error.message;  
@@ -178,16 +179,17 @@ export class LoginsComponent implements OnInit {
             localStorage.setItem("BranchCode", data.BranchCode.toString());
             sessionStorage.setItem("UserName", data.UserName);    
             this.addToast("Cogwave Software", "Login Sucessfully", "success");
-            this.router.navigate(["/dashboard/default"]);
+            this.router.navigate(["/Master/dashboard"]);
+
           });
       },
       error => {
-        console.log(error.status)
-        let currenterror = JSON.stringify(error.error.error_description);
-        console.log(currenterror);
-           alert(currenterror);
-        console.log(this.error);
-        this.addToast("Cogwave Software😃", currenterror + "👊", "error");       
+        console.log(error)
+       //let currenterror = JSON.stringify(error);
+       // console.log(currenterror);
+         //  alert(currenterror);
+       // console.log(this.error);
+        this.addToast("Cogwave Software😃", error + "👊", "error");       
         this.loading = false;
       }
     );
@@ -216,7 +218,7 @@ export class LoginsComponent implements OnInit {
               },
                 error=>{
                   this.loading = false;
-                  this.error=error.message;
+                  this.error=error;
                   this.addToast("Cogwave Software",  this.error + "👊", "warning");
                 });
           }

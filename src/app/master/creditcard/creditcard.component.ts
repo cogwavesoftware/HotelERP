@@ -5,7 +5,6 @@ import { MasterformService } from "./../../_services/masterform.service";
 import { IpserviceService } from "src/app/_services/ipservice.service";
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
-
 @Component({
   selector: "app-creditcard",
   templateUrl: "./creditcard.component.html",
@@ -32,6 +31,7 @@ export class CreditcardComponent implements OnInit {
   isroomt: string;
   isroomc: string;
   ipAddress: string;
+  position = 'top-right';
   mode: string;
   Branch: string;
   filterdata: any;
@@ -89,13 +89,10 @@ export class CreditcardComponent implements OnInit {
   }
  
   onSubmit(form?: NgForm) {
-  
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy = localStorage.getItem("id")
     form.value.ModifyBy = localStorage.getItem("id")
     form.value.IpAddress = localStorage.getItem("LOCAL_IP")
-
-
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
@@ -106,7 +103,7 @@ export class CreditcardComponent implements OnInit {
       this.addToast("Cogwave Software", "Credit Card  already Exist ", "warning");
       return;
     }
-
+    debugger;
     this._masterformservice.SaveCreditCard(form.value).subscribe(data => {
       if (data == true) {
         if (form.value.Id == "0") {
@@ -121,6 +118,7 @@ export class CreditcardComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.GetCreditCard(this.Branch); 
         } else {
           this.addToast(
             "Cogwave Software",
@@ -131,6 +129,7 @@ export class CreditcardComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.GetCreditCard(this.Branch);
         }
       } else {
         this.addToast("Cogwave Software", "Credit Card  Data Not Saved", "error");
@@ -143,8 +142,7 @@ export class CreditcardComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.GetCreditCard(this.Branch);
-
+ 
    
   }
 

@@ -7,6 +7,7 @@ import { BanknameComponent } from './bankname.component';
 
 import { Routes,RouterModule } from '@angular/router';
 
+
 const routes:Routes = [{
   path:'',
   component:BanknameComponent,

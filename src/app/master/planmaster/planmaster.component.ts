@@ -24,7 +24,7 @@ export class PlanmasterComponent implements OnInit {
   model: any = {};
   btitle: string = "Add";
   isValid: boolean;
-
+  position = 'top-right';
   dtat: string;
   title: string;
   msg: string;
@@ -131,10 +131,11 @@ export class PlanmasterComponent implements OnInit {
           );
           this.form.reset({
             IsActive: "true",
-
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.getplan();
+
         } else {
           this.addToast(
             "Cogwave Software",
@@ -145,6 +146,8 @@ export class PlanmasterComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.getplan();
+
         }
       } else {
         this.addToast("Cogwave Software", "Plan Data Not Saved", "error");
@@ -157,8 +160,7 @@ export class PlanmasterComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.getplan();
-
+   
     this._masterformservice.getplan().subscribe((data: any) => {
       this.filterdata = data;
     });

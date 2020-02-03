@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 
 @Component({
@@ -7,11 +7,10 @@ import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent {
+  
   tempState = [];
   breadcrumbs: Array<Object>;
   constructor(private router: Router, private route: ActivatedRoute) {
-
-    
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {

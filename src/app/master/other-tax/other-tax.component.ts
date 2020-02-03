@@ -126,6 +126,8 @@ export class OtherTaxComponent implements OnInit {
             Id: "0"
           });
           this.isShown = true;
+          this.data = this._masterformservice.getothertaxAll(this.Branch);
+
         } else {
           this.addToast(
             "Cogwave Software",
@@ -136,6 +138,8 @@ export class OtherTaxComponent implements OnInit {
           this.mode = "(List)";
           this.isShown = false;
           this.btitle = "Add Item";
+          this.data = this._masterformservice.getothertaxAll(this.Branch);
+
         }
       } else {
         this.addToast("Cogwave Software", "OtherTax Data Not Saved", "error");
@@ -148,8 +152,7 @@ export class OtherTaxComponent implements OnInit {
       }
     });
 
-    this.data = this._masterformservice.getothertaxAll(this.Branch);
-
+  
     this._masterformservice
       .getothertaxAll(this.Branch)
       .subscribe((data: any) => {

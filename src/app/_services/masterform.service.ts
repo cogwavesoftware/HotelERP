@@ -23,6 +23,12 @@ export class MasterformService {
   getreferencedetail(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Getreference?BranchCode=' + branchcode);
   }
+    
+  SearchReferance(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/RefSearch?BranchCode=' + branchcode + '&search=' + search);
+  }
+
+
   getplan() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Plan');
   }
@@ -92,6 +98,12 @@ export class MasterformService {
   GetPinAddress() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/pincode');
   }
+
+  
+  SearchGuestAddress(search:any) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/pincodesearch?search=' + search);
+  }
+
 
   getclientproduct(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/cproduct?BranchCode=' + branchcode);
@@ -165,6 +177,9 @@ export class MasterformService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/SaveTaxmaster',taxmaster,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
 
+  SaveTaxdetail(taxdetail:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savetaxdetail',taxdetail,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
 
   GetRoomTaxDetail(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/taxdetail?BranchCode=' + branchcode);
@@ -179,6 +194,14 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/roomcompany?BranchCode=' + branchcode);
   }
 
+  SearchComanyDate(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/CompanySearch?BranchCode=' + branchcode + '&search=' + search);
+  }
+
+
+  SearchDriverData(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/DriverSearch?BranchCode=' + branchcode + '&search=' + search);
+  }
 
   GetAllRoomCompanyType() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/roomcompanytype');
@@ -234,10 +257,21 @@ export class MasterformService {
   Getmiscellaneous(HeadersDesc: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Miscell?HeaderDescription=' + HeadersDesc);
   }
+  GetMiscHeaders() {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/MiscHeader');
+  }
+
+  SaveMisc(misc:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveMiscDetails',misc,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
 
 
   GetGuestDetails(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/guest?Branchcode=' + branchcode);
+  }
+
+  GuetDataSearch(branchcode: string,search:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GuetDataSearch?Branchcode=' + branchcode + '&search=' + search);
   }
 
   SaveGuestData(GuestData:any){
@@ -260,6 +294,12 @@ export class MasterformService {
      return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Userrightlist?UserId=' + UserId + '&ProductId=' + ProductId);
   }
 
+  GetAllNation() 
+  {
+     
+         return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Nation');
+  }
+
   SaveuserCreation(usermodel:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/Saveusercreation',usermodel,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
@@ -272,6 +312,7 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+<<<<<<< HEAD
   GetMiscHeaders() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/MiscHeader');
   }
@@ -280,8 +321,25 @@ export class MasterformService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/saveMiscDetails',misc,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
+=======
+  GetPindata(){
+    return this.http.get<any>(`assets/data/floors.json`);
+  }
+  GetCheckinDetail(RoomNo:string,Branchcode:string) {   
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
+    
+  }
+>>>>>>> 2de86ea4fe2b9311f760b6bed0c717bc456c844a
 
+  GetCompanyTariffDetail(RoomNo:string,Branchcode:string,Id:string) {   
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/CompanyTariffDetail?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo + '&Id=' + Id);
+    
+  }
 
+  GetBookingData(formData:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/GetBookingData',formData);
+  }
 
   // registerUser(user: User,roles : string[]) {
   //   const body = {

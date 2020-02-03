@@ -43,7 +43,7 @@
                                             </div> 
 
 
-                                            <div class="col-md-2" [class.has-error]="RoomCode.errors?.defaultSelected && RoomCode.touched">
+                                            <!-- <div class="col-md-2" [class.has-error]="RoomCode.errors?.defaultSelected && RoomCode.touched">
                                               <label> Room Code*</label>
                                                   <select class="custom-select" appSelectValidator="-1" id="RoomCode"  #RoomCode="ngModel"  name="RoomCode" [(ngModel)]="model.RoomCode">
                                                     <option value="-1">Please Select</option>
@@ -52,7 +52,19 @@
                                                   <small class="text-danger" *ngIf="RoomCode.touched && RoomCode.errors?.defaultSelected">
                                                       RoomCode is required
                                                     </small>                   
-                                          </div>
+                                          </div> -->
+                                          <div class="col-md-2" >
+                                            <label> Room Code*</label>
+                                            <ng-select [items]="roomtypelist"
+                                            bindLabel="RoomCode" name="RoomCode"
+                                            placeholder="Select Roomcode"  
+                                            [(ngModel)]="selectedRoomcode">
+                                          </ng-select>
+                                                               
+                                        </div>
+
+                                          
+
                                           <div class="col-md-2">
                                             <label>Select Catagery*</label>
                                                 <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
