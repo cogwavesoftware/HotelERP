@@ -248,10 +248,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
     this._bankservice.changeMessage("collapsed")
     this.Branch = localStorage.getItem("BranchCode");
+    this.Branch ="CW_1001"
     this.IsShowloader = false;
     //this.data = this._masterservice.GetPindata();
     // this.data = this._masterservice.GetPinAddress();
-    //this.data1 = this._masterservice.GetGuestDetails("CW_1001");
+    //this.data1 = this._masterservice.GetGuestDetails("CW_1");
     //this.data2 = this._masterservice.GetRoomcomany('CW_1001');
     setTimeout(() => {
       this.IsShowloader = false;
@@ -904,7 +905,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
                Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
               formData.append('GuestIdBack', this.fileDataIdBack, Idback);
             }
-          }      
+          }    
+            debugger;
           this._masterservice.SavaImsData(formData)
             .subscribe(res => {
               console.log(res);
@@ -914,7 +916,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
               let cku = this.form.value.checkoutdate;
               this.form.value.GuestIdFront=this.GuestDoucmentFrontpathurl;
               this.form.value.GuestIdBack=this.GuestDoucmentBackpathurl;
-              this.form.value.GuestPhotoPath=this.Guestphotopathurl;          
+              this.form.value.GuestPhotoPath=this.Guestphotopathurl; 
+
               if (cku.length == 10) {
               }
               else {
