@@ -12,32 +12,30 @@
             <div class="col-md-11">
               <ul>
                 <li>
-                  <i class="icon-comments"></i> <span>Reservation</span>
+                  <a href="#" > <i class="icon-comments"></i> <span>Reservation</span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i><span>Refresh</span>
+                  <a href="#"><i class="icon-comments"></i><span>Group Checkin </span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i><span>Checkin</span>
+                  <a href="#"> <i class="icon-comments"></i><span>Block Rooms</span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i><span>Checkin</span>
+                  <a href="#"> <i class="icon-comments"></i><span>Release Rooms</span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i> <span>Checkin</span>
+                  <a href="#"> <i class="icon-comments"></i> <span>Night Audit</span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i><span>Group</span>
+                  <a href="#"> <i class="icon-comments"></i><span>Reservation Chart</span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i><span>Checkin</span>
+                  <a href="#"> <i class="icon-comments"></i><span>Guest Search</span></a>
                 </li>
                 <li>
-                  <i class="icon-comments"></i><span>Checkin</span>
-                </li>
-             
-               
-              </ul>
+                  <a href="#"> <i class="icon-comments"></i><span>Reservation List</span></a>
+                </li> 
+               </ul>
              </div>
             <div class="col-md-1">
               <button class="btn dbutton" (click)="openMyModal('effect-2',item)">Click</button>
@@ -251,9 +249,9 @@
         </div> <!-- col md 9  end -->
       
         
-        <div class="col-md-3 maindashboardrightside">          
+        <div class="col-md-3 maindashboardrightside" style="padding-left: 0; padding-right: 0;">          
       
-            <div class="logo">             
+            <div class="dashboardlogo">             
               <img src="assets/images/logo_2.png" alt="Cogwave">
             </div>
 
@@ -590,7 +588,8 @@
 
 
     <!-- Block -->
-    <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+    <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">     
+         
       <div class="app-modal-body">
         <button type="button" class="close basic-close-light-box" (click)="modalBlock.hide()">
           <span aria-hidden="true">&times;</span>
@@ -610,14 +609,11 @@
                 <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Power on Cleaning</a></li>
                 
               </ul> 
-            </div>
-           
+            </div>        
                     
           </div>
-           </div>
         </perfect-scrollbar>
-         
-      </div>
+           </div>
     </app-modal-basic>
 
 

@@ -854,13 +854,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   Submit() {
-<<<<<<< HEAD
     debugger;
-=======
 
     
 
->>>>>>> 86c6d6addc0567d057c5664a420e9f944d00d381
     const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {

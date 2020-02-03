@@ -6183,7 +6183,7 @@ outerdiv{
         padding: 5px;         
         margin-top:10px;
       }
-    .logo{
+    .dashboardlogo{
         img{
            display: block;
             margin:0 auto;
@@ -6269,6 +6269,8 @@ outerdiv{
 .maindashboard .productheader ul li span{
     display:block;
     text-align:center;
+    font-size:75%;
+    color:#585858;
 }
 .maindashboard .md-content .table-responsive .table tr th,
 .maindashboard .md-content .table-responsive .table tr td{
