@@ -317,7 +317,6 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
-
   GetCheckinDetail(RoomNo:string,Branchcode:string) {   
     return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
     

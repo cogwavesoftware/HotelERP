@@ -6222,10 +6222,34 @@ outerdiv{
     position: fixed;      
     padding: 10px 0;   
     bottom: 0; /* Position the navbar at the top of the page */
-    position:fixed;
-    
-       
- 
+    position:fixed; 
+}
+.outerdiv .gstprint{
+    font-family: Poppins-Regular;
+}
+.outerdiv .gstprint .headertext{
+    font-weight: bold;
+    font-size: 140%;
+    text-align: center;
+}
+.outerdiv .gstprint .headertext span{
+    font-weight: normal;
+    font-size: 75%;
+}
+.outerdiv .gstprint .secheader{
+    font-weight: bold;
+    font-size: 110%;
+}
+.outerdiv .gstprint .table th, .table td{
+    border:0 none;
+}
+.outerdiv   .gstprint .table td{
+    text-align:left;
+    width:50%;    
+}
+.outerdiv .gstprint .para p{
+    font-size: 90%;
+    margin-left:20px;
 }
 .maindashboard .modelgradiant{
     background-color: #0cbaba;
