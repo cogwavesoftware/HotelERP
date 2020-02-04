@@ -309,15 +309,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
       checkouttime: [this.myTime, [Validators.required]],
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
-<<<<<<< HEAD
       // selmode: ["select", [Validators.required]],
       // payamount: ["", [Validators.required]],
       // paymntdesc: ["", [Validators.required]],
-=======
-      selmode: ["Cash", [Validators.required]],
-      payamount: ["", [Validators.required]],
-      paymntdesc: ["", [Validators.required]],
->>>>>>> 14a27a1e7fb96ba3aa51a9a1230d02ce5d5df08c
       disctype: ["select", [Validators.required]],
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
