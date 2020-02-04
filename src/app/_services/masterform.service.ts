@@ -312,9 +312,6 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
-  GetPindata(){
-    return this.http.get<any>(`assets/data/floors.json`);
-  }
   GetCheckinDetail(RoomNo:string,Branchcode:string) {   
     return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
     
@@ -330,6 +327,12 @@ export class MasterformService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/GetBookingData',formData);
   }
 
+
+  GetAllSubPaymendModeViaMode(BranchCode:string,ModeName:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetAllSubPaymend?BranchCode=' + BranchCode + '&ModeName=' + ModeName);
+    
+  }
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,
