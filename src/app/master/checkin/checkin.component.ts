@@ -737,6 +737,7 @@ alert('co')
     console.log('SelectedData')
     console.log(SelectedData)
     this.form.patchValue({
+      Guestcode: SelectedData.GuestCode,
       guestname: SelectedData.GuestName,
       title: SelectedData.GuestTittle,
       gender: SelectedData.Gender,
