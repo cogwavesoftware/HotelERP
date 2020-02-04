@@ -1,5 +1,15 @@
-<div class="outerdiv">
-    <div class="table-responsive gstprint">
+<div class="outerdiv">   
+        <div class="float-right">
+        <input type="button" class="btn btn-success" value="Print to PDF" (click)="convetToPDF()"/>
+        </div>
+      
+        <div class="container" style="background: #ffffff;">
+            <div class="" *ngIf="IsShowloader">
+                <svg id="loader2" viewBox="0 0 100 100">
+                    <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+                  </svg>
+              </div>
+    <div class="table-responsive gstprint" id="contentToConvert">
         <table class="table table-striped   full-data-table"> 
             <tr>
                 <td>
@@ -218,6 +228,9 @@
                 <p>7.The GST (goods and services tax) rate on hotel rooms with tariffs of up to Rs 7,500 per night has been cut to 12 per cent from the existing 18 per cent. Similarly,  </p>
         </div>
         </div> <!--table-responsive -->
+</div>
+
+
 </div><!-- outer div -->
     
 
