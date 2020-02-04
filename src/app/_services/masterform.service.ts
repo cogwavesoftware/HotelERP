@@ -211,6 +211,11 @@ export class MasterformService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savecompany',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
+  SaveCompanyMinData(company:any){
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/SaveCompanyMinData',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+
 
   GetAlluserDetails(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/getAlluser?BranchCode=' + branchcode);

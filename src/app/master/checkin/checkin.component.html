@@ -629,12 +629,12 @@
 
 
                                                 <div class="td">
-                                                  <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                  <input type="text" class="" id="Descriptions"  name="Descriptions" formControlName="Descriptions">
                                                   
                                                 </div>
 
                                                 <div class="td">
-                                                  <input type="text" class="" id="modeselected" formControlName="modeselected">
+                                                  <input type="text" class="" id="modeselected" name="modeselected" formControlName="modeselected">
                                                   
                                                 </div>
 
@@ -1053,7 +1053,11 @@
                <div class="col-md-12">
                   
                  <div class="row">                
-   
+                  <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+                  <input type="hidden" name="CompanyCode" class="form-control" [(ngModel)]="model.CompanyCode" #CompanyCode="ngModel" value="{{CompanyCode}}"  >
+                  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+                  <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
+          
                    <div class="col-md-4">
                        <label>Company Name*</label>
                        <input type="text" name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"  [ngClass]="{'is-invalid': CompanyName.touched && CompanyName.invalid}"  required autocomplete="off">
@@ -1103,8 +1107,8 @@
                         </div>
                   </div>
                   <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px">Save</button>
-                  
-                  
+                  <br/>
+                  <hr>
    
                </div>
          
