@@ -210,6 +210,12 @@ export class MasterformService {
   SaveCompany(company:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savecompany',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+  // /s/
+  SaveCompanyMinData(company:any){
+
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/SaveCompanyMinData',company,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
 
 
   GetAlluserDetails(branchcode: string) {

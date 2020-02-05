@@ -1,3 +1,49 @@
+#section-to-print{    
+   display:none;
+   width:100%;
+    
+
+}
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    #section-to-print, #section-to-print * {
+      visibility: visible;
+      display: inline-block;       
+      margin:0;
+      padding:0;
+    }
+    #section-to-print {
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;      
+    //   display:block; 
+    }
+    .testrow{         
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width:100%;
+        display: block;                 
+    }
+    .testrow b{
+        width:170px;
+    }
+    .testrow tr td{
+        
+        margin:0;
+        padding:0;
+    }
+    .boldtext{
+        font-weight: bold;
+        font-size: 200%;
+        
+    }
+    .boldtext span{
+        font-weight: normal;
+         
+    }
+  }
 @media only screen and (min-width: 1367px) and (max-width: 1700px) {
     .timeline-dot {
         &:after,
