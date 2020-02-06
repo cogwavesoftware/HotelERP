@@ -1007,7 +1007,7 @@ alert('co')
               },
                 error => {            
                    this.error = "Checkin Data Not Save";                     
-                    this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                    this.addToast("Cogwave Software??", this.error + "??", "error");
                    return;
                 },
                 () => {
@@ -1017,7 +1017,7 @@ alert('co')
             },
               error => {                    
                   this.error = "Image Guest Not Saved";                   
-                  this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                  this.addToast("Cogwave Software??", this.error + "??", "error");
                  return;
               },
               ()=>{
@@ -1126,7 +1126,7 @@ alert('co')
               },
                 error => {
                   this.error = "Checkin Data Not Save";
-                  this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                  this.addToast("Cogwave Software??", this.error + "??", "error");
                   return;
                 },
                 () => {
@@ -1135,7 +1135,7 @@ alert('co')
             },
             error => {
               this.error = "Image Guest Not Saved";
-              this.addToast("Cogwave Software😃", this.error + "👊", "error");
+              this.addToast("Cogwave Software??", this.error + "??", "error");
               return;
             },
             () => {
@@ -1151,7 +1151,7 @@ alert('co')
             },
               error => {
                 this.error = "Checkin Data Not Save";
-                this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                this.addToast("Cogwave Software??", this.error + "??", "error");
                 return;
               },
               () => {
@@ -1312,7 +1312,9 @@ alert('co')
     console.log("clock");
 
   }
-
+  printPage(){
+    window.print();
+  }
   backtosearch() {
   
     //this.searchresultsdiv = true;
