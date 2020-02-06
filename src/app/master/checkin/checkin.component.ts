@@ -69,6 +69,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   addcompanybtn:boolean=true;
   selectedRoomcode: any;
   ReferanceList:any;
+  subpaymodelist:any;
   //web camara data 
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
@@ -128,7 +129,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
-  paymentmode: string[] = ["Online", "Credit Card", "Cash"];
+  paymentmode: string[] = [ "Cash","Card","Online","Walet"];
   public noofdays: number[] = [];
   foriegnguest: string[] = ["Yes", "No"];
   discounttypes = ["Amount", "%"];
@@ -316,6 +317,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
+      PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
+      
       // thumbverification: ["", [Validators.required]],
       GuestPhotoPath: ["", [Validators.required]],
       GuestIdFront: ["", [Validators.required]],
@@ -492,7 +495,34 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
+  FilterPaymentMode(index: number) {
 
+  
+    let mode = this.PayArray.controls[index].get("Paymode").value;
+
+    switch (mode) {
+      case "Cash":
+        this.subpaymodelist = [];
+        this.subpaymodelist.push("Cash")
+        //this.GetsubModepayment("Cash")
+        break;
+      case "Card":
+        this.GetsubModepayment("Card", index)
+        break;
+      case "Online":
+        this.GetsubModepayment("Online", index)
+        break;
+      case "Cheque":
+        this.subpaymodelist = [];
+        //this.GetsubModepayment("Cheque")
+        this.subpaymodelist.push("DD", index)
+        break;
+      case "Walet":
+        this.GetsubModepayment("Walet", index)
+        break;
+    }
+
+  }
 
   ngAfterViewInit() {
     // server-side search
@@ -693,6 +723,11 @@ alert('co')
     return this.form.get("other") as FormArray;
   }
 
+
+  get PayArray(): FormArray {
+    return this.form.get("PayArray") as FormArray;
+  }
+
   openMyPincodeModalData(SelectedData: any, event: any) {
     this.form.patchValue({
       pincode: SelectedData.Pincode,
@@ -702,6 +737,22 @@ alert('co')
     })
   }
 
+  PatchSubModeName(index: number) {
+    let DescriptionMode = this.PayArray.controls[index].get("Paysubmode").value;
+    this.PayArray.controls[index].patchValue({
+      modeselected: DescriptionMode
+    })
+
+    this.PayArray.controls[index].get("modeselected").disable({ onlySelf: true });
+  }
+
+  GetsubModepayment(Name: string, index: number) {
+
+    this._masterservice.GetAllSubPaymendModeViaMode(this.Branch, Name).subscribe(res => {
+      this.subpaymodelist = res
+    })
+
+  }
 
   OpencompanymodelsDetail(SelectedData: any, event: any) {
     this.form.patchValue({
@@ -761,9 +812,16 @@ alert('co')
     this.previewUrl = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
     this.previewUrl2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
     this.previewUrl3 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+
+
+    var dd="CW_1001_3353150797462front.png";
+    
+    this.previewUrl2=environment.GuestimagePath+"/"+dd;
+    //console.log("image name with path"+ this.imagePath1);
+    
   }
 
-
+  
   openMyModalPincode(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
@@ -984,7 +1042,7 @@ alert('co')
 
   Submit()
   {
-    
+    alert('d')
     const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -1143,8 +1201,7 @@ alert('co')
 
 
   AddpaymentGrid(): FormGroup {
-    return this.formBuilder.group({
-     
+    return this.formBuilder.group({ 
       Paymode: ["select"],
       Paysubmode: ["select", [Validators.required]],
       payAmount: [0, [Validators.required]],
@@ -1156,7 +1213,8 @@ alert('co')
 
   
 
-  onSubmit(form?: NgForm) {
+  onSubmitcompany(form?: NgForm) {
+
     debugger;
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy=1;
@@ -1242,6 +1300,7 @@ alert('co')
 
 
   AddPaymentButtonClick(): void {
+   
     (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
   }
 

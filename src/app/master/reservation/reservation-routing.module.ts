@@ -1,20 +1,18 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes,RouterModule } from '@angular/router';
-import { CheckinComponent } from './checkin.component';
+import { ReservationComponent } from './reservation.component';
+
 
 const routes:Routes = [{
   path:'',
-  component:CheckinComponent,  
+  component:ReservationComponent,
   }];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,RouterModule.forChild(routes)
-  ],
-  exports:[RouterModule]
-
+  ]
 })
-export class CheckinRoutingModule { }
+export class ReservationRoutingModule { }

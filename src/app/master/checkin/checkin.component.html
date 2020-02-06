@@ -336,7 +336,7 @@
                                             <div class="td">Net Amt</div>
 
                                             <div class="td">
-                                              <button class="btn btn-outline-success" (click)="AddBokingButtonClick()">
+                                              <button type="button"  class="btn btn-outline-success" (click)="AddBokingButtonClick()">
                                                 <i class="fa fa-plus"></i> Add
                                               </button>
                                             </div>
@@ -560,10 +560,8 @@
                                   </ng-template>
                                 </ngb-panel> -->
 
-                                <span *ngIf="PayArray.errors">
-                                  please choose some other name
-                                </span>
-
+                               
+                                
 
                                 <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                   <ng-template ngbPanelContent>
@@ -578,7 +576,7 @@
                                             <div class="td">Selected Mode</div>
                                             
                                             <div class="td">
-                                              <button class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
+                                              <button type="button" class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
                                                 <i class="fa fa-plus">Add</i> 
                                               </button>
                                             </div>
@@ -629,12 +627,12 @@
 
 
                                                 <div class="td">
-                                                  <input type="text" class="" id="Descriptions"  name="Descriptions" formControlName="Descriptions">
+                                                  <input type="text" class="" id="Descriptions" formControlName="Descriptions">
                                                   
                                                 </div>
 
                                                 <div class="td">
-                                                  <input type="text" class="" id="modeselected" name="modeselected" formControlName="modeselected">
+                                                  <input type="text" class="" id="modeselected" formControlName="modeselected">
                                                   
                                                 </div>
 
@@ -658,7 +656,6 @@
                                     </div>
                                   </ng-template>
                                 </ngb-panel>
-
 
 
 
@@ -1046,7 +1043,7 @@
         <div class="col-md-12 userlist ">
           <div class="row ">
             <a style="cursor: pointer; display:block; text-align: left; color:blue"*ngIf="addcompanybtn" (click)="addcompanyinmodel()"><i class="fa  fa-plus-circle"></i> Add Company  </a>
-            <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)" class="">
+            <form #myform = "ngForm" (ngSubmit) = "onSubmitcompany(myform)" class="">
               <div class="app-modal-body text-center addcompany " *ngIf="addcompanydiv" > 
    
                <a style="cursor: pointer; display:block; text-align: left; color:blue"  (click)="backtosearch()"><i class="fa fa-backward"></i> Back to Search  </a>

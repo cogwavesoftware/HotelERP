@@ -229,9 +229,13 @@ const routes: Routes = [
         loadChildren: './master/maindashboard/maindashboard.module#MaindashboardModule'
        },
        {
-       path:'printgrc',
-        loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'
+        path:'reservation',
+        loadChildren: './master/reservation/reservation.module#ReservationModule'
        },
+      //  {
+      //  path:'printgrc',
+      //   loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'
+      //  },
     ]
   },
 
