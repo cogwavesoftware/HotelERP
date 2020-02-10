@@ -33,4 +33,8 @@ export class ReservationService {
     return this.http.post<HMSReservationFormmodel>(environment.apiURL + '/api/CloudHMS/reservation/Editbookings',ReservationModel,{ headers:environment.BASE_CONTENTTYPE_HEADER })
    }
 
+   SaveReservationData(ResData: any) {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/Savecheckin', ResData, { headers: environment.BASE_CONTENTTYPE_HEADER })
+  }
+
 }

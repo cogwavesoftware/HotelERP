@@ -350,6 +350,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.previewUrl = environment.GuestimagePath +'/imagenot.png';   
+    this.previewUrl2 = environment.GuestimagePath +'/imagenot.png';
+    this.previewUrl3 = environment.GuestimagePath +'/imagenot.png';
     this.model.Id=0;
     this.model.CompanyCode=0;
     this.model.BranchCode="0";
@@ -360,7 +364,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     },
       error => { },
       () => { });
-
     this.camarabuttonDisabled = false;
     this.SnapshotbuttonDisabled = true;
   
@@ -440,6 +443,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       });
     }
     this.CreateNoofDays(31)
+ 
   }
 
 
@@ -1042,7 +1046,7 @@ alert('co')
 
   Submit()
   {
-    alert('d')
+   
     const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -1081,7 +1085,6 @@ alert('co')
               formData.append('GuestIdBack', this.fileDataIdBack, Idback);
             }
           }
-
           this.form.value.RefName="0";
           var checkoutDate = '';
           let cku = this.form.value.checkoutdate;
@@ -1094,20 +1097,15 @@ alert('co')
           this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "dd/MM/yyyy");
           this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
           this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
-
           if (this.form.value.DOB != "") {
             this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "dd/MM/yyyy");
           }
-
           if (this.form.value.DOA != "") {
             this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "dd/MM/yyyy");
           }
-
             this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
             this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;          
             this.form.value.GuestPhotoPath = this.Guestphotopathurl;
-
-
           if(FileUploaded>0)
           {
             this._masterservice.SavaImsData(formData)
@@ -1173,22 +1171,11 @@ alert('co')
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   AddbokingGrid(): FormGroup {
     return this.formBuilder.group({
       bankAccountID: ["0"],
-      RoomCode: ["0"],
-      RoomNo: ["", [Validators.required]],
+      RoomCode: ["DLX"],
+      RoomNo: ["105", [Validators.required]],
       Pax: ["2", [Validators.required]],
       PlanName: ["EP", [Validators.required]],
       Food: ["0", [Validators.required]],
@@ -1210,11 +1197,7 @@ alert('co')
     });
   }
 
-
-  
-
   onSubmitcompany(form?: NgForm) {
-
     debugger;
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy=1;

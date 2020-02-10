@@ -48,7 +48,8 @@
                                           <label class="form-control-label" for="ArivalDate">ArivalDate </label>
                                           <div class="form-group">
                                             <div class="input-group" style="margin-bottom:0;">
-                                              <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                              <input id="checkindate" readonly name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                             
                                             </div>
                                           </div>
                                         </div>
@@ -62,7 +63,7 @@
                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
                                           <div class="form-group">
                                             <label class="form-control-label" for="nofdays ">Days</label>
-                                            <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
+                                            <select class="custom-select" #Days name="nofdays"  formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
                                               id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
                                               <option value="0">Select</option>
                                               <option  *ngFor="let Day of noofdays" [value]="Day">
@@ -404,8 +405,21 @@
                                                     <input class="bookingRoomTable_textalign"  readonly  formControlName="Available">
                                                   </div>
 
-                                                  <div class="td" >
+                                                  <!-- <div class="td" >
                                                     <input type="number"   class="bookingRoomTable_textalign" (keyup)="RoomTypeChanged(i,'Required')" formControlName="Required">
+                                                  </div> -->
+
+                                                
+
+                                                  <div class="td">
+                                                    <select class="bookingRoomTable_textalign" formControlName="Required"
+                                                      (change)="RoomTypeChanged(i,'Required')">
+                                                      <option value="0">Select</option>
+                                                      <option  *ngFor="let Requiredday of requiredRoomlist" [value]="Requiredday">
+                                                        {{ Requiredday  }}</option>
+                                                    </select>
+  
+                                                   
                                                   </div>
   
                                                   <div class="td">
@@ -653,7 +667,11 @@
                                               </div>
                                             </div>
   
-  
+                                            <div class="td">
+                                              <input type="number" readonly class="" id="BillAmount" formControlName="BillAmount">
+                                              
+                                            </div>
+
                                           </div>
   
   
