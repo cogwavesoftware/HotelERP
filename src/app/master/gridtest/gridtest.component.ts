@@ -1,13 +1,6 @@
 
 import { Component, OnInit,Input } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { MasterformService } from "./../../_services/masterform.service";
-
-import { IpserviceService } from "src/app/_services/ipservice.service";
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
-
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-gridtest',
@@ -17,34 +10,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 export class GridtestComponent implements OnInit {
-  public OnCamera: string = "OnCamera"
-  public Iscamaraon: boolean = false;
-  // toggle webcam on/off
-  public showWebcam = false;
-  public allowCameraSwitch = true;
-  public multipleWebcamsAvailable = false;
-  public deviceId: string;
+  
 
-  @Input() title: string;
-  @Input() message: string;
-  @Input() btnOkText: string;
-  @Input() btnCancelText: string;
-
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  public decline() {
-    this.activeModal.close(false);
-  }
-
-  public accept() {
-    this.activeModal.close(true);
-  }
-
-  public dismiss() {
-    this.activeModal.dismiss();
   }
 
 }

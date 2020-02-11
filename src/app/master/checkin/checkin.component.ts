@@ -69,6 +69,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   addcompanybtn:boolean=true;
   selectedRoomcode: any;
   ReferanceList:any;
+  subpaymodelist:any;
   //web camara data 
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
@@ -124,10 +125,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
   selectedCharacter = "3";
   timeLeft = 5;
   roomtype = [];
+  companytype:any;
   // private dataSub: Subscription = null;
   checkinform: any;
   public navRight: string;
-  paymentmode: string[] = ["Online", "Credit Card", "Cash"];
+  paymentmode: string[] = [ "Cash","Card","Online","Walet"];
   public noofdays: number[] = [];
   foriegnguest: string[] = ["Yes", "No"];
   discounttypes = ["Amount", "%"];
@@ -289,7 +291,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       arivalmode: ["Walk-IN", [Validators.required]],
       title: ["Mr", [Validators.required]],
       booking: ["", [Validators.required]],
-      convenience: ["", [Validators.required]],
+      convenience: [0, [Validators.required]],
       guestname: ["", [Validators.required]],
       gender: ["Male", [Validators.required]],
       mobile: ["", [Validators.required]],
@@ -308,14 +310,16 @@ export class CheckinComponent implements OnInit, OnDestroy {
       checkouttime: [this.myTime, [Validators.required]],
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
-      selmode: ["Cash", [Validators.required]],
-      payamount: ["", [Validators.required]],
-      paymntdesc: ["", [Validators.required]],
+      // selmode: ["select", [Validators.required]],
+      // payamount: ["", [Validators.required]],
+      // paymntdesc: ["", [Validators.required]],
       disctype: ["select", [Validators.required]],
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
-      thumbverification: ["", [Validators.required]],
+      PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
+      
+      // thumbverification: ["", [Validators.required]],
       GuestPhotoPath: ["", [Validators.required]],
       GuestIdFront: ["", [Validators.required]],
       GuestIdBack: ["", [Validators.required]],
@@ -337,23 +341,29 @@ export class CheckinComponent implements OnInit, OnDestroy {
       idproof: [""],
       idproofno: [""],
       RefName: ["0"],
-      BranchCode:[this.Branch,[Validators.required]],
-      randomCheckinNo:['0',[Validators.required]],
-      IpAdd:[localStorage.getItem("LOCAL_IP")],
-      CreatedBy:[localStorage.getItem("id"),[Validators.required]]
+     // subpaymode: ["select"],
+      BranchCode: [this.Branch, [Validators.required]],
+      randomCheckinNo: ['0', [Validators.required]],
+      IpAdd: [localStorage.getItem("LOCAL_IP")],
+      CreatedBy: [localStorage.getItem("id"), [Validators.required]]
     });
   }
 
   ngOnInit() {
-    this.searchresultsdiv =true;
-     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
-     this.ReferanceList=res;
-     },
-     error =>{},
-     ()=>{});
 
-     
-       
+    this.previewUrl = environment.GuestimagePath +'/imagenot.png';   
+    this.previewUrl2 = environment.GuestimagePath +'/imagenot.png';
+    this.previewUrl3 = environment.GuestimagePath +'/imagenot.png';
+    this.model.Id=0;
+    this.model.CompanyCode=0;
+    this.model.BranchCode="0";
+    this.model.CreatedBy= localStorage.getItem("Id");
+    this.searchresultsdiv = true;
+    this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
+      this.ReferanceList = res;
+    },
+      error => { },
+      () => { });
     this.camarabuttonDisabled = false;
     this.SnapshotbuttonDisabled = true;
   
@@ -398,6 +408,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
     //     this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
     //   });
 
+    this._masterservice.GetAllRoomCompanyType().subscribe(res => {
+      this.companytype = res
+    });
 
     this._masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
@@ -430,6 +443,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       });
     }
     this.CreateNoofDays(31)
+ 
   }
 
 
@@ -485,7 +499,34 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
+  FilterPaymentMode(index: number) {
 
+  
+    let mode = this.PayArray.controls[index].get("Paymode").value;
+
+    switch (mode) {
+      case "Cash":
+        this.subpaymodelist = [];
+        this.subpaymodelist.push("Cash")
+        //this.GetsubModepayment("Cash")
+        break;
+      case "Card":
+        this.GetsubModepayment("Card", index)
+        break;
+      case "Online":
+        this.GetsubModepayment("Online", index)
+        break;
+      case "Cheque":
+        this.subpaymodelist = [];
+        //this.GetsubModepayment("Cheque")
+        this.subpaymodelist.push("DD", index)
+        break;
+      case "Walet":
+        this.GetsubModepayment("Walet", index)
+        break;
+    }
+
+  }
 
   ngAfterViewInit() {
     // server-side search
@@ -541,7 +582,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         // tap(x=>console.log('from tap' + x)),
         switchMap(id => {
           //console.log(id)
-
+alert('co')
           return this._masterservice.SearchComanyDate(this.Branch, this.searchTermcompany.nativeElement.value);
         })
       ).subscribe(res => {
@@ -686,6 +727,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
     return this.form.get("other") as FormArray;
   }
 
+
+  get PayArray(): FormArray {
+    return this.form.get("PayArray") as FormArray;
+  }
+
   openMyPincodeModalData(SelectedData: any, event: any) {
     this.form.patchValue({
       pincode: SelectedData.Pincode,
@@ -695,6 +741,22 @@ export class CheckinComponent implements OnInit, OnDestroy {
     })
   }
 
+  PatchSubModeName(index: number) {
+    let DescriptionMode = this.PayArray.controls[index].get("Paysubmode").value;
+    this.PayArray.controls[index].patchValue({
+      modeselected: DescriptionMode
+    })
+
+    this.PayArray.controls[index].get("modeselected").disable({ onlySelf: true });
+  }
+
+  GetsubModepayment(Name: string, index: number) {
+
+    this._masterservice.GetAllSubPaymendModeViaMode(this.Branch, Name).subscribe(res => {
+      this.subpaymodelist = res
+    })
+
+  }
 
   OpencompanymodelsDetail(SelectedData: any, event: any) {
     this.form.patchValue({
@@ -730,6 +792,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     console.log('SelectedData')
     console.log(SelectedData)
     this.form.patchValue({
+      Guestcode: SelectedData.GuestCode,
       guestname: SelectedData.GuestName,
       title: SelectedData.GuestTittle,
       gender: SelectedData.Gender,
@@ -753,9 +816,16 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.previewUrl = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
     this.previewUrl2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
     this.previewUrl3 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+
+
+    var dd="CW_1001_3353150797462front.png";
+    
+    this.previewUrl2=environment.GuestimagePath+"/"+dd;
+    //console.log("image name with path"+ this.imagePath1);
+    
   }
 
-
+  
   openMyModalPincode(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
@@ -854,11 +924,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
     }
   }
 
-  Submit() {
+
+  Submitdddd() {
     debugger;
-
-    
-
     const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -871,26 +939,24 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
 
     console.log(this.form.value)
-    
-    // if (form.invalid) {
-    //   console.log(form.value);
-    //   this.addToast("Cogwave Software", "invalid Data", "warning");
-    //   return;
-    // }
+ 
 
-    
     this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
       .then((confirmed) => {
         console.log('User confirmed:', confirmed)
         if (confirmed === true) {
-          const formData = new FormData();
 
-        console.log(this.GuestDoucmentFrontpathurl);
-        let Idfront="";
-        let Idback="";
-          if (this.GuestDoucmentFrontpathurl=="0") {
-            
+          const formData = new FormData();
+          console.log(this.GuestDoucmentFrontpathurl);
+          let Idfront = "";
+          let Idback = "";
+
+          let FileUploaded=0;
+
+          if (this.GuestDoucmentFrontpathurl == "0") {
+
             if (this.fileDataIdfront != null) {
+              FileUploaded=1;
               var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
               var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
                Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
@@ -900,13 +966,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
           if (this.GuestDoucmentBackpathurl =="0") {
            
             if (this.fileDataIdBack != null) {
+              FileUploaded=2;
               var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
               var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
                Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
               formData.append('GuestIdBack', this.fileDataIdBack, Idback);
             }
-          }    
-            debugger;
+          }
+       
+        debugger;
+
+          
           this._masterservice.SavaImsData(formData)
             .subscribe(res => {
               console.log(res);
@@ -914,10 +984,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
               this.GuestDoucmentBackpathurl = Idback;
               var checkoutDate = '';
               let cku = this.form.value.checkoutdate;
-              this.form.value.GuestIdFront=this.GuestDoucmentFrontpathurl;
-              this.form.value.GuestIdBack=this.GuestDoucmentBackpathurl;
-              this.form.value.GuestPhotoPath=this.Guestphotopathurl; 
-
+              this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
+              this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;          
+              this.form.value.GuestPhotoPath = this.Guestphotopathurl;
+              this.form.value.RefName="0";
               if (cku.length == 10) {
               }
               else {
@@ -941,7 +1011,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
               },
                 error => {            
                    this.error = "Checkin Data Not Save";                     
-                    this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                    this.addToast("Cogwave Software??", this.error + "??", "error");
                    return;
                 },
                 () => {
@@ -951,7 +1021,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
             },
               error => {                    
                   this.error = "Image Guest Not Saved";                   
-                  this.addToast("Cogwave Software😃", this.error + "👊", "error");
+                  this.addToast("Cogwave Software??", this.error + "??", "error");
                  return;
               },
               ()=>{
@@ -974,11 +1044,138 @@ export class CheckinComponent implements OnInit, OnDestroy {
    
   }
 
+  Submit()
+  {
+   
+    const randomCheckinNo  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let text1 = '';
+    for (let i = 0; i < 5; i++) {
+      text1 += randomCheckinNo.charAt(Math.floor(Math.random() * randomCheckinNo.length));
+    }
+    this.form.value.randomCheckinNo = text1;
+    this.form.value.BranchCode = localStorage.getItem("BranchCode")
+    this.form.value.CreatedBy = localStorage.getItem("id")
+    this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
+    console.log(this.form.value)   
+
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {  
+          const formData = new FormData();
+          console.log(this.GuestDoucmentFrontpathurl);
+          let Idfront = "";
+          let Idback = "";
+          let FileUploaded=0;
+          if (this.GuestDoucmentFrontpathurl == "0") {
+            if (this.fileDataIdfront != null) {
+              FileUploaded=1;
+              var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
+              var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+              Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
+              formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
+            }
+          }
+          if (this.GuestDoucmentBackpathurl == "0") {
+            if (this.fileDataIdBack != null) {
+              FileUploaded=2;
+              var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+              var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+              Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
+              formData.append('GuestIdBack', this.fileDataIdBack, Idback);
+            }
+          }
+          this.form.value.RefName="0";
+          var checkoutDate = '';
+          let cku = this.form.value.checkoutdate;
+          if (cku.length == 10) {
+          }
+          else {
+            checkoutDate = this.datePipe.transform(this.form.value.checkoutdate, "dd/MM/yyyy");
+            this.form.value.checkoutdate = checkoutDate;
+          }
+          this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "dd/MM/yyyy");
+          this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
+          this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
+          if (this.form.value.DOB != "") {
+            this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "dd/MM/yyyy");
+          }
+          if (this.form.value.DOA != "") {
+            this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "dd/MM/yyyy");
+          }
+            this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
+            this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;          
+            this.form.value.GuestPhotoPath = this.Guestphotopathurl;
+          if(FileUploaded>0)
+          {
+            this._masterservice.SavaImsData(formData)
+            .subscribe(res => {
+              console.log(res);
+              this.GuestDoucmentFrontpathurl = Idfront;
+              this.GuestDoucmentBackpathurl = Idback;
+             
+              this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
+              this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;          
+              this.form.value.GuestPhotoPath = this.Guestphotopathurl;
+            
+              this.savecheckin.SaveCheckinData(this.form.value)
+              .subscribe(res => {
+                console.log(res);
+              },
+                error => {
+                  this.error = "Checkin Data Not Save";
+                  this.addToast("Cogwave Software??", this.error + "??", "error");
+                  return;
+                },
+                () => {
+                  this.addToast("Cogwave Software", "Checkin Saved Sucessfully", "success");
+                });
+            },
+            error => {
+              this.error = "Image Guest Not Saved";
+              this.addToast("Cogwave Software??", this.error + "??", "error");
+              return;
+            },
+            () => {
+              this.router.navigate(["/Master/dashboard"]);
+            });
+  
+          }
+          else // no doucment selected while checkin
+          {
+            this.savecheckin.SaveCheckinData(this.form.value)
+            .subscribe(res => {
+              console.log(res);
+            },
+              error => {
+                this.error = "Checkin Data Not Save";
+                this.addToast("Cogwave Software??", this.error + "??", "error");
+                return;
+              },
+              () => {
+                this.addToast("Cogwave Software", "Checkin Saved Sucessfully", "success");
+                this.router.navigate(["/Master/dashboard"]);
+              }); 
+          }
+          
+        }//confoirmtrue end  
+        else {
+        }
+      })
+      .catch(() => {
+        alert('cach')
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
+ 
+  }
+
+
+
   AddbokingGrid(): FormGroup {
     return this.formBuilder.group({
       bankAccountID: ["0"],
-      RoomCode: ["0"],
-      RoomNo: ["", [Validators.required]],
+      RoomCode: ["DLX"],
+      RoomNo: ["105", [Validators.required]],
       Pax: ["2", [Validators.required]],
       PlanName: ["EP", [Validators.required]],
       Food: ["0", [Validators.required]],
@@ -988,12 +1185,49 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
-    onSubmit(fm) {
-      this.searchresultsdiv =true;
-      this.addcompanydiv = false;
-      this.addcompanybtn = true;
-      console.log(fm.value);
+
+
+  AddpaymentGrid(): FormGroup {
+    return this.formBuilder.group({ 
+      Paymode: ["select"],
+      Paysubmode: ["select", [Validators.required]],
+      payAmount: [0, [Validators.required]],
+      Descriptions: ["0"],
+      modeselected: ["0"]
+    });
+  }
+
+  onSubmitcompany(form?: NgForm) {
+    debugger;
+    form.value.BranchCode = localStorage.getItem("BranchCode")
+    form.value.CreatedBy=1;
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
     }
+    this._masterservice.SaveCompanyMinData(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "Company Data Saved Sucessfully",
+            "success"
+          );   
+          this.searchresultsdiv = true;
+          this.addcompanydiv = false;
+          this.addcompanybtn = true;    
+          
+          this.Opencompanymodel('effect-7',data)
+        }
+       
+      } 
+      else {
+        this.addToast("Cogwave Software", "Company Data Not Saved", "error");       
+      }
+    });
+    console.log(form.value);
+  }
 
 
 
@@ -1046,14 +1280,27 @@ export class CheckinComponent implements OnInit, OnDestroy {
   AddBokingButtonClick(): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
-  addcompanyinmodel(){
-    this.addcompanydiv = true;
-    this.searchresultsdiv =false;
-    this.addcompanybtn =false;
-    console.log("clock");
+
+
+  AddPaymentButtonClick(): void {
+   
+    (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
   }
-  backtosearch(){
-    this.searchresultsdiv =true;
+
+  addcompanyinmodel() {
+    this.companylist=[];
+    this.addcompanydiv = true;
+    //this.searchresultsdiv = false;
+    this.addcompanybtn = false;
+    console.log("clock");
+
+  }
+  printPage(){
+    window.print();
+  }
+  backtosearch() {
+  
+    //this.searchresultsdiv = true;
     this.addcompanydiv = false;
     this.addcompanybtn =true;
   }

@@ -15,7 +15,7 @@
 }
 .thead .td{
   
-    width: 115px;
+    width: 65px;
     text-align: left;
 }
 .tbody
@@ -25,7 +25,7 @@
 .tbody .td input,
 .tbody .td select{
      
-    width: 115px;
+    width: 65px;
     height: 23px;
 }
 .thead .td .btn.btn-outline-success{
@@ -72,6 +72,11 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     opacity: 0;
 }
 
+
+.td.bookingRoomTable_textalign{
+
+    text-align:center;
+}
 @-webkit-keyframes fadeinout {
   50% { opacity: 1; }
 }
@@ -96,4 +101,3 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
         border:2px solid blue!important;
     }
   }
-

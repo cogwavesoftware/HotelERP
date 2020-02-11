@@ -6222,10 +6222,34 @@ outerdiv{
     position: fixed;      
     padding: 10px 0;   
     bottom: 0; /* Position the navbar at the top of the page */
-    position:fixed;
-    
-       
- 
+    position:fixed; 
+}
+.printouterdiv .gstprint{
+    font-family: Poppins-Regular;
+}
+.printouterdiv .gstprint .headertext{
+    font-weight: bold;
+    font-size: 140%;
+    text-align: center;
+}
+.printouterdiv .gstprint .headertext span{
+    font-weight: normal;
+    font-size: 75%;
+}
+.printouterdiv .gstprint .secheader{
+    font-weight: bold;
+    font-size: 110%;
+}
+.printouterdiv .gstprint .table th, .table td{
+    border:0 none;
+}
+.printouterdiv   .gstprint .table td{
+    text-align:left;
+    width:50%;    
+}
+.printouterdiv .gstprint .para p{
+    // font-size: 90%;
+    // margin-left:20px;
 }
 .maindashboard .modelgradiant{
     background-color: #0cbaba;
@@ -6571,3 +6595,5 @@ outerdiv{
 //         width: 70px;
 //     }
 // }
+
+ 

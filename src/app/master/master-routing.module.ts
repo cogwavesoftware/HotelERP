@@ -118,6 +118,10 @@ const routes: Routes = [
         path: 'roomcheckin',
         loadChildren: './checkin/checkin.module#CheckinModule'
       },
+      {
+        path: 'resevation',
+        loadChildren: './resevation/resevation.module#ResevationModule'
+      },
 
     ]
   }

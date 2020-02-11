@@ -228,6 +228,14 @@ const routes: Routes = [
         path:'dashboard',
         loadChildren: './master/maindashboard/maindashboard.module#MaindashboardModule'
        },
+       {
+        path:'reservation',
+        loadChildren: './master/reservation/reservation.module#ReservationModule'
+       },
+      //  {
+      //  path:'printgrc',
+      //   loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'
+      //  },
     ]
   },
 
