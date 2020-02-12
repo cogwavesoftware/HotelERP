@@ -221,7 +221,8 @@ const routes: Routes = [
         loadChildren: './master/financialmaster/financialmaster.module#FinancialmasterModule'
        },
        {
-        path:'roomcheckin',
+      
+        path:'roomcheckin/:RoomNo',
         loadChildren: './master/checkin/checkin.module#CheckinModule'
        },
        {

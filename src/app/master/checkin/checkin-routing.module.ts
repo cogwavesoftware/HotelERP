@@ -6,7 +6,13 @@ import { CheckinComponent } from './checkin.component';
 
 const routes:Routes = [{
   path:'',
-  component:CheckinComponent,  
+  component:CheckinComponent, 
+  // data:{
+  //   title:'Bank Name',
+  //   icon:'icon-home',
+  //   caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+  //   status: true
+  // } 
   }];
 
 @NgModule({
