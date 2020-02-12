@@ -766,8 +766,18 @@
       .roomcodep-l-25{
         padding-left: 25px;
       }
-      
-
+    //   .reservationmaster .gueststayinfo table {
+    //     width:30%;
+    //     border:1px solid red;
+    // }
+    .rov{
+        width:100%;
+        display: inline-block; 
+    }
+    .tdwidth{         
+        width:100%;
+        margin-bottom: 10px; 
+    }
 }
 @media only screen and (max-width: 767px) {
     .signup-card {
@@ -856,13 +866,13 @@
     }
 
     .grid-table .thead .td{  
-        width: 62px!important;
+         
         text-align: left; 
     }
      
     .grid-table .tbody .td input,
     .grid-table .tbody .td select{         
-        width: 62px!important;   
+       
         height: 23px;
     }
 }
@@ -1253,13 +1263,13 @@
         }
     }
     .grid-table .thead .td{  
-        width: 34px!important;
+       // width: 34px!important;
         text-align: left;   
     }
      
     .grid-table .tbody .td input,
     .grid-table .tbody .td select{         
-        width: 34px!important;   
+        // width: 34px!important;   
         height: 23px;
     }
 

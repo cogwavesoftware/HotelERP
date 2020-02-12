@@ -1,12 +1,11 @@
 <!-- new for design-->
-<div *ngIf="reservloader" class="text-center loader-block" style=" border:2px solid red">
+<div *ngIf="reservloader" class="text-center loader-block" >
   <svg id="loader2" viewBox="0 0 100 100">
     <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
   </svg>
   </div>
 
-
- 
+  
   
   <div class="col-sm-12 col-xl-4">  
     </div>
@@ -18,81 +17,73 @@
   
         <div class="container-fluid">
    
-          <div class='row tabouter' style="margin-bottom: 0;">
-  
+          <div class='row tabouter' style="margin-bottom: 0;">  
+
+            <div class="col-md-12">
+              <div class="row">
+                <button type="button" id="chkeck" (click)="Availability('effect-1')" class="btn btn-success m-r-5 m-l-5 topbtn" style="padding: 6px;">Check</button> 
+              </div>
+            </div><!-- top icon-->
+
             <div class="col-md-12" style="padding-left: 0;">
               <div class="row" style="margin-bottom: 0;">
                 <div class="col-md-12 taboutercreatebtn">
-                  <!-- tab starting -->
-                  <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 topbtn" style="padding: 6px;">Save</button> 
-                  <!-- <button type="button" id="chkeck" (click)="Availability('effect-1')" class="btn btn-success m-r-5 m-l-5 topbtn" style="padding: 6px;">Check</button>  -->
-                  <ngb-tabset>
+                  <!-- tab starting -->                  
+                  
                 
   
-                    <ngb-tab title="Room Booking"  style="align-items: center;" >
-                      <ng-template ngbTabContent>
+                    <div class="reservationmaster">                     
                         <div [@fadeInOutTranslate] class="m-t-15">
                           <div class="row" >
                             <div class="col-md-12" style="  padding-right:0">
                               <div class="accouter" style="width: 100%;">
                                 <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
-                                  class="ngb-accordion">
-
-
-                                  
+                                  class="ngb-accordion"> 
                                   <ngb-panel id="ngb-close-p1" title="Staying Information">
                                     <ng-template ngbPanelContent>
-                                      <div class="  gueststayinfo userlist">
-                                      <div class="row" style="margin-bottom: 0;">
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <label class="form-control-label" for="ArivalDate">ArivalDate </label>
-                                          <div class="form-group">
-                                            <div class="input-group" style="margin-bottom:0;">
-                                              <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                      <div class="stayinginfo  gueststayinfo userlist guestinfolastrow">                                       
+                                        <div class="col-md-12" style="padding-left: 0px;">
+
+                                          <div class="tbl">
+                                         
+                                            <div class="rov">
+                                              
+                                              <div class="tdwidth">
+                                                <div class="tdwidthlbl">Arival Date</div>
+                                                <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                                
+                                              </div>
+                                              <div class="tdwidth">
+                                                <div class="tdwidthlbl">Arival Time</div>
+                                                <timepicker id="checkintime" name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
+                                              </div>
+                                              <div class="tdwidth">
+                                                <div class="tdwidthlbl">Days</div>
+                                                <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
+                                                id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
+                                                <option value="0">Select</option>
+                                                <option  *ngFor="let Day of noofdays" [value]="Day">
+                                                  {{ Day  }}</option>
+                                              </select>
+                                              </div>
+                                              <div class="tdwidth">
+                                                <div class="tdwidthlbl">Departure Date</div>
+                                                <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
+                                              </div>
+                                              <div class="tdwidth">
+                                                <div class="tdwidthlbl">Departure Time</div>
+                                                <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker> 
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="city">Arival Time </label>
-                                             <timepicker id="checkintime" name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
-                                            <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
-                                          </div>
-                                        </div> 
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="nofdays ">Days</label>
-                                            <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
-                                              id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
-                                              <option value="0">Select</option>
-                                              <option  *ngFor="let Day of noofdays" [value]="Day">
-                                                {{ Day  }}</option>
-                                            </select>
-                                            <div *ngIf="submitted && form.nofdays.errors" class="invalid-feedback">
-                                              <div *ngIf="form.nofdays.errors.required">nofdays is required</div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <label class="form-control-label" for="pincode">DepartureDate </label>
-  
-                                          <div class="form-group">
-                                            <div class="input-group" style="margin-bottom:0;">
-                                              <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
-                                            </div>
-                                          </div>
-                                        </div>
-  
-  
+                                          
+
+
                                         
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="checkouttime">Departure Time </label>
-                                            <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker>                                        
-                                                    <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>                                     -->
-                                          </div>
-                                        </div>
-                                      </div> 
+                                         
+                                      
+
+                                      </div>
+                                      
    
                                       </div>
                                     </ng-template>
@@ -105,34 +96,12 @@
                                     <ng-template ngbPanelContent >
                                   
                                        <div class="col-md-12" style="padding-left:0; padding-right:0">
-                                         <div class="row">
-                                           <div class="col-sm-12"> 
+                                         
+                                         
       
                                              <!--  test row 1-->
-                                             <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
-                                               <div class="row" style="margin-bottom:0">
-                                            
-  
-                                                <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;  ">
-                                                  <!-- <div class="form-group" >
-                                                    <ng-select [items]="ReferanceList"
-                                                  bindLabel="RefName" name="RefName"
-                                                  placeholder="Select Referance"  
-                                                  [(ngModel)]="selectedRoomcode" formControlName="RefName"  >
-                                                </ng-select>
-  
-                                                   
-                                                  </div> -->
-                                                 
-                                                 </div>  
-                                                 <!-- <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;">
-                                                  <a  (click)="OpenReferanceModel('effect-6',item)" ><i style="font-size: 110%;
-                                                    padding-top: 2px;
-                                                    display: inline-block;
-                                                    padding-left: 10px" class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                                                </div>  -->
-  
-                                               </div>
+                                             <div class="guestinfofirstrow userlist " >
+                                                
                                             <div class="row guestinfofirstrow" >
                                              
                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
@@ -148,10 +117,8 @@
                                                   <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
                                                     <div *ngIf="form.title.errors.required">title </div>
                                                   </div>
+                                                </div>     
                                                 </div>
-                                                
-                                
-                                              </div>
                                               
                                                
                                       
@@ -179,7 +146,7 @@
 
                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
-                                                  <label class="form-control-label" for="Referance">Referance </label>
+                                                  <label class="form-control-label" for="Reference">Reference </label>
                                                  
                                                     <input type="text" class="form-control tooltip-form searchiconrelative" id="RefName" formControlName="RefName" name="RefName" autocomplete="off"  required  />   
                                                     <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenReferanceModel('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
@@ -323,29 +290,100 @@
                                               </div>
                                                 </div>  
                                             </div>
-
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="firstname">Source </label>
+                                               <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
+                                                 <option value="select">Select</option> 
+                                                 <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
+                                               </select>
+                                               
+                                                </div>  
+                                                </div>
+                                              
+                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Booking">Booking Id </label>
+                                                    <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="bookingid" name="bookingid" autocomplete="off"  />  
+                                                    
+                                                    </div>  
+                                                </div>
                                            </div> <!-- end of row-->
-                                          
+                                           <div class="row guestinfofirstrow guestinfolastrow">
+                                            
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Booking">Convenience fees </label>
+                                                    <input type="text" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off"   />  
+                                                    <!-- <div class="invalid-feedback" *ngIf="form.controls.convenience.errors?.required" >convenience fees is required</div> -->
+                                                    </div>  
+                                                </div>
+    
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="visit ">Purposse of Visit</label>
+                                                    <select class="custom-select" name="visit" formControlName="visit" id="visit">
+                                                      
+                                                     
+                                                      <option value="select">Select</option>
+                                                      <option  *ngFor="let sour of purposeofvisit"
+                                                        [value]="sour.Description">{{ sour.Description  }}</option>
+                                                    </select>
+                                                    
+                                                  </div>
+                                                </div>
+                                               
+         
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Billing ">Billing Instruction</label>
+                                                    <select class="custom-select" name="Billing" formControlName="Billing"
+                                                      id="Billing"
+                                                      [ngClass]="{ 'is-invalid': submitted && form.Billing.errors }">
+                                                      <option value="select">Select</option>
+                                                      <option  *ngFor="let sour of billinginstruction"
+                                                        [value]="sour.Description">{{ sour.Description  }}</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && form.Billing.errors" class="invalid-feedback">
+                                                      <div *ngIf="form.Billing.errors.required">Billing Type</div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="cometoknow ">How D U c to Know?</label>
+                                                    <select class="custom-select" name="cometoknow" formControlName="cometoknow"
+                                                      id="cometoknow">
+                                                    
+                                                      <option value="select">Select</option>
+                                                      <option  *ngFor="let sour of howuknow"
+                                                        [value]="sour.Description">{{ sour.Description  }}</option>
+                                                    </select>
+                                                    
+                                                  </div>
+                                                </div>
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="cometoknow ">Confirm</label>                                                  
+                                                    <input type="checkbox" name="confirm" id="confirmid" class="form-control" >
+                                                  </div>
+                                                </div>
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="WaitingList ">Waiting List</label>                                                  
+                                                    <input type="checkbox" name="confirm" id="waitingid" class="form-control" >
+                                                  </div>
+                                                </div>
+                                      
+      
+                                          </div><!-- end 1 row -->
 
                                         </div>
                                             
                                           
-                                           </div> <!-- col-10 end-->
-                                           <!-- <div class="col-sm-2" style="border: 1px solid yellow;">
                                             
-                                              <div class=" ">
-                                                <label style="font-size: 90%;">Thumb Verification *</label>
-                                                <input type="checkbox" class="form-control tooltip-form" id="refid" formControlName="thumbverification" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> 
-      
-                                                 <img src="../../../assets/images/avatar-7.jpg" width="100%; height:auto">
-                                                <div class="text-center m-t-10">
-                                                <button type="button" class="btn btn-primary btn-xs m-r-10">OK</button>
-                                                 </div>
-                                                
-                                             </div>
                                            
-                                           </div> -->
-                                         </div>
+                                         
                                        </div>
                                     </ng-template>
                                   </ngb-panel>
@@ -354,23 +392,23 @@
                                   <ngb-panel id="ngb-close-p1" title="Booking RoomTypes">
                                     
                                     <ng-template ngbPanelContent>
-                                      <div class="test123 userlist " style="padding: 2px;">
+                                      <div class="test123 userlist guestinfofirstrow bookingroomtype" style="padding-left: 5px;">
                                         <div class="grid-table" style="width: 100%;">
                                           <div class="thead">
                                             <div class="">
-                                              <div class="td bookingRoomTable_textalign">RoomType</div>
-                                              <div class="td bookingRoomTable_textalign">Available</div>
-                                              <div class="td bookingRoomTable_textalign">NoofRooms</div>
-                                              <div class="td bookingRoomTable_textalign">Pax</div>
-                                              <div class="td bookingRoomTable_textalign">Plan</div>
-                                              <div class="td bookingRoomTable_textalign">Food</div>
-                                              <div class="td bookingRoomTable_textalign">Tariff</div>
-                                              <div class="td bookingRoomTable_textalign">Tax</div>
-                                              <div class="td bookingRoomTable_textalign">Grand</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Room Type</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-user-md"></i> Available</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-building"></i> Req. Rooms</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Pax</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-indent"></i> Plan</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-cutlery"></i> Food</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Tariff</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-star"></i>Tax</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Grand</div>
                                              
-                                              <div class="td bookingRoomTable_textalign">DisType</div>
-                                              <div class="td bookingRoomTable_textalign">DisAmt</div>
-                                              <div class="td bookingRoomTable_textalign">Net</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-square"></i> DisType</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-truck"></i> DisAmt</div>
+                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-paypal"></i> Net</div>
                                               <!-- <div class="td">
                                                 <button type="button"  class="btn btn-outline-success" (click)="AddBokingButtonClick()">
                                                   <i class="fa fa-plus">Add</i> 
@@ -570,18 +608,19 @@
   
                                   <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                     <ng-template ngbPanelContent>
-                                      <div class="test123 userlist " style="padding: 2px;">
+                                      <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
+                                    
                                         <div class="grid-table" style="width: 100%;">
                                           <div class="thead">
                                             <div class="">
-                                              <div class="td">Payment Mode</div>
-                                              <div class="td">Payment SubMode</div>
-                                              <div class="td">Amount</div>
-                                              <div class="td">Description</div>
-                                              <div class="td">Selected SubMode</div>
+                                              <div class="td"><i class="fa fa-cc-visa"></i> Payment Mode</div>
+                                              <div class="td"><i class="fa fa-credit-card-alt"></i> Payment SubMode</div>
+                                              <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
+                                              <div class="td"><i class="fa fa-server"></i> Description</div>
+                                              <div class="td"><i class="fa fa-retweet"></i> Selected SubMode</div>
                                               
                                               <div class="td">
-                                                <button type="button" class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
+                                                <button type="button"   class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
                                                   <i class="fa fa-plus">Add</i> 
                                                 </button>
                                               </div>
@@ -644,7 +683,7 @@
   
   
   
-                                                  <div class="td">                                      
+                                                  <div class="td" style="text-align: center;">                                      
                                                     <button type="button" (click)="onDeletePayment(0,k)">
                                                       <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
@@ -660,169 +699,18 @@
                                         </div>
                                       </div>
                                     </ng-template>
-                                  </ngb-panel>
-  
-  
-  
-  
-                                  <!-- <ngb-panel id="ngb-close-p1" title="Discount /Grace Period">
-                                    <ng-template ngbPanelContent>
-                                      <div class="row discountouter userlist">
-  
-                                        
-                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="discvalue">Discount Value </label>
-                                            <input type="text" class="form-control tooltip-form" id="discvalue"
-                                              formControlName="discvalue" name="discvalue" autocomplete="off"
-                                              [ngClass]="{'is-invalid' : submitted && form.controls.discvalue.errors || form.controls.discvalue.touched || form.controls.discvalue.dirty}"
-                                              required />
-                                            <div class="invalid-feedback"
-                                              *ngIf="form.controls.discvalue.errors?.required">discvalue is required</div>
-                                          </div>
-                                        </div> 
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="discvalue">Grace Period </label>
-                                            <input type="text" class="form-control tooltip-form" id="graceperiod"
-                                              formControlName="graceperiod" name="graceperiod" autocomplete="off"
-                                              [ngClass]="{'is-invalid' : submitted && form.controls.graceperiod.errors || form.controls.graceperiod.touched || form.controls.graceperiod.dirty}"
-                                              required />
-                                            <div class="invalid-feedback"
-                                              *ngIf="form.controls.graceperiod.errors?.required">graceperiod is required
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label style="color: orange; padding-top: 20px;">Discount Type: </label>
-                                            <label class="p-l-20">0 </label>
-                                          </div>
-                                        </div>
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label style="color: orange;padding-top: 20px;">Last Discount: </label>
-                                            <label class="p-l-20">0</label>
-  
-                                          </div>
-                                        </div>
-  
-                                      </div> 
-                                     
-                                    </ng-template>
-  
-                                  </ngb-panel> -->
-  
-  
-                                  <ngb-panel id="ngb-close-p1" title="Other Details">
-                                    <ng-template ngbPanelContent>
-                                      <div class="otherrow userlist">
-                                      <div class="row">
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="firstname">Source </label>
-                                           <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
-                                             <option value="select">Select</option> 
-                                             <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
-                                           </select>
-                                           
-                                            </div>  
-                                            </div>
-                                          
-                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Booking">Booking Id </label>
-                                                <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="bookingid" name="bookingid" autocomplete="off"  />  
-                                                
-                                                </div>  
-                                            </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Booking">Convenience fees </label>
-                                                <input type="text" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off"   />  
-                                                <!-- <div class="invalid-feedback" *ngIf="form.controls.convenience.errors?.required" >convenience fees is required</div> -->
-                                                </div>  
-                                            </div>
-
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="visit ">Purposse of Visit</label>
-                                                <select class="custom-select" name="visit" formControlName="visit" id="visit">
-                                                  
-                                                 
-                                                  <option value="select">Select</option>
-                                                  <option  *ngFor="let sour of purposeofvisit"
-                                                    [value]="sour.Description">{{ sour.Description  }}</option>
-                                                </select>
-                                                
-                                              </div>
-                                            </div>
-                                           
-     
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Billing ">Billing Instruction</label>
-                                                <select class="custom-select" name="Billing" formControlName="Billing"
-                                                  id="Billing"
-                                                  [ngClass]="{ 'is-invalid': submitted && form.Billing.errors }">
-                                                  <option value="select">Select</option>
-                                                  <option  *ngFor="let sour of billinginstruction"
-                                                    [value]="sour.Description">{{ sour.Description  }}</option>
-                                                </select>
-                                                <div *ngIf="submitted && form.Billing.errors" class="invalid-feedback">
-                                                  <div *ngIf="form.Billing.errors.required">Billing Type</div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="cometoknow ">How D U c to Know?</label>
-                                                <select class="custom-select" name="cometoknow" formControlName="cometoknow"
-                                                  id="cometoknow">
-                                                
-                                                  <option value="select">Select</option>
-                                                  <option  *ngFor="let sour of howuknow"
-                                                    [value]="sour.Description">{{ sour.Description  }}</option>
-                                                </select>
-                                                
-                                              </div>
-                                            </div>
-                                            
-                                           
-                                  
-  
-                                      </div><!-- end 1 row -->
-  
-                                      <!-- <div class="row">
-
-                                          <div class="col-12 col-lg-2 col-md-4 col-sm-4">
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="arivalmode">Arrival Mode </label>
-                                               <select class="custom-select"  name="arivalmode" formControlName="arivalmode"  id="arivalmodeid"> 
-                                                 <option value="select">Select</option> 
-                                                 <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
-                                               </select>
-                                              
-                                                </div> 
-                                            </div> 
-                                       
-                                      </div>  -->
-  
-                                 
-                                         <div class="row" style="margin-bottom:0;">
-                                            <!-- button start  -->
-                                          <div class="col-md-12   voilet-gradient " style="border:2px solid #ccc; text-align: center; ">
-                                            <button type="button" id="printgrcbtn" class="btn btn-primary ">PRINT GRC</button>
-                                             <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">Save</button>                                                                                 
-                                            <button type="button" id="closebtn" class="btn btn-danger">CLOSE</button>
-                                          </div> <!-- button end -->
-                                         </div>
-                                    </div><!-- user list row -->
-                                    
-                                    </ng-template>
-  
-                                  </ngb-panel> 
+                                  </ngb-panel>        
                                 </ngb-accordion> 
+                                <div class="otherrow  "> 
+                                         
+                                  <!-- button start  -->
+                                <div class="col-md-12" style="text-align: center; ">
+                                  <button type="button" id="printgrcbtn" class="btn btn-primary btn-sm">PRINT GRC</button>
+                                   <button type="submit" id="checkinbtn" class="btn btn-success btn-sm m-r-5 m-l-5 ">Save</button>                                                                                 
+                                  <button type="button" id="closebtn" class="btn btn-danger btn-sm">CLOSE</button>
+                                </div> <!-- button end -->
+                                
+                          </div><!-- user list row -->
                               </div>
                             </div>
   
@@ -831,13 +719,13 @@
   
   
                         </div>
-                      </ng-template>
-                    </ngb-tab>
-                  
+                      
+                   
+                      </div> <!-- end reser master -->
                    
   
               
-                  </ngb-tabset>
+                   
                   <!-- tab ending -->
   
                   
@@ -945,7 +833,7 @@
                               </div>
                           </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px">Save</button>
+                    <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px; border:1px solid red">Save</button>
                     <br/>
                     <hr>
      
@@ -1215,7 +1103,7 @@
         
         <h3 class="f-15" style="position: relative;">Referance Details
           <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
-                       -
+                        
        </h3>
   
           <div class="app-modal-body text-center" style="position: relative;"> 
@@ -1292,18 +1180,17 @@
                         <table class="table table-striped table-bordered full-data-table"> 
                           <thead>
                             <tr> 
-                              <th style="text-align:left;">Date</th>
-                              <th *ngFor="let list of  Availabilitylist.Rooms">
+                              <th style="text-align:left;">Date</th>        
+                              <th *ngFor="let list of  roomstype">
                                   {{ list.RoomType}}
-                              </th>
-                              <th>Total</th>
+                              </th>       
                             </tr>
                                         
                           </thead>
                           <tbody>                    
                            <tr *ngFor="let item of Availabilitylist; let i = index;">  
                            
-                            <th style="text-align:left;">{{item.Date}}</th>                   
+                            <td style="text-align:left;">{{item.Date}}</td>                   
                             
                             <td *ngFor="let subarray of  item.Rooms" >
                               {{ subarray.Rooms}}
@@ -1314,6 +1201,7 @@
                           </tbody>
                          
                         </table>
+                       
                       </div> 
                     </div>
                   </div>

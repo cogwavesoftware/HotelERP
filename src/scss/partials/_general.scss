@@ -6021,11 +6021,11 @@ outerdiv{
     }
     .userlist{
         // box-shadow: 0px 5px 5px rgb(223, 223, 223);
-        padding: 20px;
-  box-shadow: 
-       inset 0 -3em 3em rgba(0,0,0,0.1), 
-             0 0  0 2px rgb(255,255,255),
-             0.3em 0.3em 1em rgba(0,0,0,0.3);
+        padding: 10px 20px 10px 20px;
+//   box-shadow: 
+//        inset 0 -3em 3em rgba(0,0,0,0.1), 
+//              0 0  0 2px rgb(255,255,255),
+//              0.3em 0.3em 1em rgba(0,0,0,0.3);
 
             }
     .pdctst{
@@ -6089,11 +6089,11 @@ outerdiv{
 }
 .userlist{
     // box-shadow: 0px 5px 5px rgb(223, 223, 223);
-    padding: 20px;
-    box-shadow: 
-   inset 0 -3em 3em rgba(0,0,0,0.1), 
-         0 0  0 2px rgb(255,255,255),
-         0.3em 0.3em 1em rgba(0,0,0,0.3);
+    padding: 10px 20px 10px 20px;
+  //  box-shadow: 
+//    inset 0 -3em 3em rgba(0,0,0,0.1), 
+//          0 0  0 2px rgb(255,255,255),
+//          0.3em 0.3em 1em rgba(0,0,0,0.3);
         }
         .userlistbox{
             -webkit-box-shadow: 0px 1px 2px 2px rgba(222,222,222,1);
@@ -6455,10 +6455,10 @@ outerdiv{
             }
             .userlist{
                 padding: 20px;
-        box-shadow: 
-       inset 0 -3em 3em rgba(0,0,0,0.1), 
-             0 0  0 2px rgb(255,255,255),
-             0.3em 0.3em 1em rgba(0,0,0,0.3);
+    //     box-shadow: 
+    //    inset 0 -3em 3em rgba(0,0,0,0.1), 
+    //          0 0  0 2px rgb(255,255,255),
+    //          0.3em 0.3em 1em rgba(0,0,0,0.3);
             }
             .row{
                 margin-bottom: 0px;
@@ -6519,10 +6519,10 @@ outerdiv{
         }
          
          .addressmodeleffect   .table > tbody > tr:nth-child(odd){
-            background: #b8d1f3;
+            background: rgba(0,0,0,.05);
         }
         .addressmodeleffect   .table > tbody > tr:nth-child(even){
-            background: #dae5f4;
+            background: #fff;
         }
 
 
@@ -6573,13 +6573,85 @@ outerdiv{
     margin-bottom: 5px;
     border-bottom: 3px solid orange;
  }
+ .reservationmaster .accouter .ngb-accordion .card .card-header{
+    margin-bottom:0px;
+ }
+ .reservationmaster .accouter .ngb-accordion .guestinfolastrow{
+     margin-bottom: 0;;
+ }
+ .reservationmaster{
+
+  .gueststayinfo {
+     padding:5px;
+     .table tr td     {
+         padding:0px; 
+        }
+    
+  } 
+ }
+ .reservationmaster .gueststayinfo .table {
+     width:80%;
+ }
+ .reservationmaster .gueststayinfo .table   tr th.fifteenpercent {
+    width: 5%;
+ }
+ .reservationmaster .gueststayinfo .table   tr th.onepercent {
+    width: 1%;
+ }
+ .reservationmaster .gueststayinfo .table   tr td.fifteenpercent {
+    width: 5%;
+ }
+ .reservationmaster .gueststayinfo .table   tr td.onepercent {
+    width: 1%;
+ }
+ .reservationmaster .accouter .test123.bookingroomtype .grid-table .thead .td {
+    width: 100px;
+    border:1px solid #dadada;     
+    background-color: #448aff;
+    color:#000;
+ }
+ .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td{
+    width: 100px;   
+     
+ }
+ .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td select,
+ .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td input{
+    width: 99px;  
+ }
+
+ .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td {
+    width: 171px; 
+    border:1px solid #dadada;
+    text-align: center;
+    background-color: #448aff;
+    color:#000;
+}
+ .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td {
+    width: 171px;    
+    border:1px solid #dadada; 
+ }
+ .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td select,
+ .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td input{
+    width: 165px;  
+ }
+.tbl{
+    width:100%;
+}
+.rov{
+    width:100%;
+    display: inline-block; 
+}
+.tdwidth{
+    float:left;
+    width:125px; 
+}
  
 // .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
       
 //     width:70px!important;
 //  }
  
-// .pcoded[theme-layout="vertical"][vertical-nav-type="collapsed"] .main-menu{
+// .pcoded[theme-layout="vertical"][vertical-nav-typ~e="collapsed"] .main-menu{
 //     border:2px solid green!important;
 //     width:70px!important;
 // }
