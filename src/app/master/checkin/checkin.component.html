@@ -366,7 +366,7 @@
                                                  <input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdFront.errors || form.controls.GuestIdFront.touched || form.controls.GuestIdFront.dirty}" required  />  
                                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdFront.errors?.required" >GuestIdFront   is required</div>                                   
                                                    <div class="row" style="margin-left:0;margin-right:0">
-                                                     <img [src]="previewUrl2"  style="width:100%;max-width:300px">
+                                                     <img [src]="previewUrl2"  style="width:100%;max-width:100px">
                                                                                
                                                    </div>
                                                  </div>
@@ -380,7 +380,7 @@
                                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdBack.errors?.required" >GuestIdBack   is required</div>
                
                                                    <div class="row" style="margin-left:0;margin-right:0">
-                                                    <img [src]="previewUrl3"  style="width:100%;max-width:300px">                          
+                                                    <img [src]="previewUrl3"  style="width:100%;max-width:100px">                          
                                                     </div>
                                               </div>                                    
                                                </div>
@@ -539,15 +539,15 @@
                                         <label class="form-control-label" for="pincode">Checkin Date </label>
                                         <div class="form-group">
                                           <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                            <input id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                           </div>
                                         </div>
                                       </div>
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
                                         <div class="form-group">
                                           <label class="form-control-label" for="city">Checkin Time </label>
-                                           <timepicker id="checkintime" name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
-                                          <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>       
+                                           <timepicker id="checkintime" readonly name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
+                                          <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
                                         </div>
                                       </div> 
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
@@ -569,7 +569,7 @@
 
                                         <div class="form-group">
                                           <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
+                                            <input id="checkoutdate" readonly name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
                                           </div>
                                         </div>
                                       </div>
@@ -580,7 +580,8 @@
                                         <div class="form-group">
                                           <label class="form-control-label" for="checkouttime">Checkout Time </label>
                                           <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker>                                        
-                                                  <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>                                    
+                                               
+                                                  <div *ngIf="!valid">Invalid time </div>                                  
                                         </div>
                                       </div>
                                     </div> 
@@ -693,7 +694,7 @@
                                                   id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
                                                   <option value="select">Select</option>
                                                   <option *ngFor="let sour of paymentmode" [value]="sour">
-                                                    {{ sour  }}</option>
+                                                    {{ sour }}</option>
                                                 </select>
 
 

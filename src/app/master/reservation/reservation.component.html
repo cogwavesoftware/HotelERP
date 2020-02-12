@@ -442,8 +442,21 @@
                                                     <input class="bookingRoomTable_textalign"  readonly  formControlName="Available">
                                                   </div>
 
-                                                  <div class="td" >
+                                                  <!-- <div class="td" >
                                                     <input type="number"   class="bookingRoomTable_textalign" (keyup)="RoomTypeChanged(i,'Required')" formControlName="Required">
+                                                  </div> -->
+
+                                                
+
+                                                  <div class="td">
+                                                    <select class="bookingRoomTable_textalign" formControlName="Required"
+                                                      (change)="RoomTypeChanged(i,'Required')">
+                                                      <option value="0">Select</option>
+                                                      <option  *ngFor="let Requiredday of requiredRoomlist" [value]="Requiredday">
+                                                        {{ Requiredday  }}</option>
+                                                    </select>
+  
+                                                   
                                                   </div>
   
                                                   <div class="td">
@@ -692,7 +705,11 @@
                                               </div>
                                             </div>
   
-  
+                                            <div class="td">
+                                              <input type="number" readonly class="" id="BillAmount" formControlName="BillAmount">
+                                              
+                                            </div>
+
                                           </div>
   
   
