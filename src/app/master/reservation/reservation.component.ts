@@ -46,7 +46,12 @@ import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
     ])
   ]
 })
-export class ReservationComponent implements OnInit, OnDestroy {
+ 
+export class ReservationComponent  implements OnInit, OnDestroy {
+  roomstype:any;
+ 
+ 
+ 
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
   addcompanybtn: boolean = true;
@@ -266,6 +271,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
         console.log("Product fetched sucssesfully.");
         this.Availabilitylist = this.golbalresponse;
         console.log(this.Availabilitylist)
+        
+        this.roomstype= this.Availabilitylist[0].Rooms;
+
       }
     )
     let reservation = new HMSReservationFormmodel()
@@ -636,7 +644,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       referenceid: SelectedData.Id
     })
-    this.referanceName = SelectedData.RefName
+    this.referanceName = SelectedData.RefName;
+    document.querySelector("#" + event).classList.add("md-hide");
   }
 
   openMyGuestNameModalData(SelectedData: any, event: any) {

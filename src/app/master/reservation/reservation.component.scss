@@ -6,16 +6,13 @@
 	display:table;
 }
 .thead
-{
-	display:table-header-group;
-	font-weight:bold;
-	border-bottom: 1px solid black;
+{ 	 
     text-align: center;
-    background-color: #f0f8ff;
+   
 }
 .thead .td{
   
-    width: 65px;
+    // width: 85px;
     text-align: left;
 }
 .tbody
@@ -23,9 +20,7 @@
 	display:table-row-group;
 }
 .tbody .td input,
-.tbody .td select{
-     
-    width: 65px;
+.tbody .td select{   
     height: 23px;
 }
 .thead .td .btn.btn-outline-success{
@@ -44,6 +39,8 @@
     color: #fff;
     font-size: 115%;
 }
+
+ 
 .tr
 {
 	display:table-row;
@@ -73,7 +70,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
 
 
-.td.bookingRoomTable_textalign{
+.test123 .td.bookingRoomTable_textalign{
 
     text-align:center;
 }
@@ -85,19 +82,64 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
   50% { opacity: 1; }
 }
 }
+// .outerdiv .paymentarray .tbody .td input,
+// .outerdiv .paymentarray .tbody .td select{
+//     width:205px ;    
+// }
+// .outerdiv .paymentarray .grid-table .thead .td{  
+//     width:205px ;     
+//  }
+.outerdiv .stayinginfo .tbody .td input,
+.outerdiv .stayinginfo .tbody .td select{
+    
+}
+
+.outerdiv .stayinginfo .table thead .td,
+.outerdiv .stayinginfo .table tbody .td{  
+     border:1px solid #ccc;
+     padding: 1px;
+ }
+ 
 
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
     .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
-        border:2px solid yellow!important;
+        
     }
 
 }
  @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
-        border:2px solid blue!important;
+        
     }
+  
+    .reservationmaster .accouter .test123.bookingroomtype{
+        overflow-x: auto;
+    }
+    .reservationmaster .accouter .test123.bookingroomtype .grid-table .thead .td {
+        width: 87px;         
+     }
+    .reservationmaster .accouter .test123.bookingroomtype .thead .td,
+    .reservationmaster .accouter .test123.bookingroomtype .tbody .td{
+        font-size: 80%;
+    }
+    .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td {
+        font-size: 92%;
+    }
+    .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td  ,
+    .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td  {
+       width: 35px;  
+    }
+    .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td select,
+    .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td input{
+       width: 39px;  
+    }
+    .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td select,
+    .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td input{
+       width: 35px;  
+    }
+
   }
