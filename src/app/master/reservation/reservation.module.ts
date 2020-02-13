@@ -15,6 +15,7 @@ import { ReservationRoutingModule } from './reservation-routing.module';
 
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AutofocusDirective } from './autofocus.directive';
 @NgModule({
   declarations: [ReservationComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
