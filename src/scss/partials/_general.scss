@@ -6496,8 +6496,8 @@ outerdiv{
     font-family: Poppins-Medium;
     font-size:120%;
     padding:5px;
-    background-color: #2a2a72;
-    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    background-color: #0062cc;
+     
 }
 .addressmodeleffect  .table-responsive .table thead tr {
     background-color: #585858;     
@@ -6606,8 +6606,8 @@ outerdiv{
  }
  .reservationmaster .accouter .test123.bookingroomtype .grid-table .thead .td {
     width: 100px;
-    border:1px solid #dadada;     
-    background-color: #448aff;
+    border:1px solid #ccc;     
+    background-color: #f3f3f3;
     color:#000;
  }
  .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td{
@@ -6621,9 +6621,9 @@ outerdiv{
 
  .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td {
     width: 171px; 
-    border:1px solid #dadada;
-    text-align: center;
-    background-color: #448aff;
+    border:1px solid #ccc;     
+    background-color: #f3f3f3;
+    text-align: center;     
     color:#000;
 }
  .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td {
@@ -6634,6 +6634,25 @@ outerdiv{
  .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td input{
     width: 165px;  
  }
+ .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td.lasttd,
+ .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td.lasttd{
+     width:auto
+ }
+ .reservationmaster .accouter .test123.paymentarray  .width100 label{
+    border:1px solid #f3f3f3;
+    width:160px;
+ }
+ 
+ .reservationmaster .accouter .test123.paymentarray  .width100 label span{   
+     
+    
+ }
+ .reservationmaster .accouter .test123.paymentarray  .width100 label b  {
+    font-weight: bold;
+    text-align:right;
+    float:right;
+   
+}
 .tbl{
     width:100%;
 }
@@ -6645,7 +6664,22 @@ outerdiv{
     float:left;
     width:125px; 
 }
- 
+#loader2{
+    
+    width: 300px;
+   height: 300px;
+   position: absolute;
+   left: 50%;
+   top: 50%; 
+   margin-left: -150px;
+   margin-top: -150px;  
+   z-index:9999;
+      
+}
+.mytest{
+   
+    border:10px solid red;
+}
 // .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
       
 //     width:70px!important;

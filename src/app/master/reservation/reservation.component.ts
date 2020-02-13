@@ -48,6 +48,8 @@ import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
 })
  
 export class ReservationComponent  implements OnInit, OnDestroy {
+   
+
   roomstype:any;
  
  
@@ -152,7 +154,9 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   public golbalresponse: any;
 
   @ViewChild('f', { static: false }) newcompanyform: any;
-  constructor(private datePipe: DatePipe,
+  @ViewChild('draggable', { static: false }) public draggableElement: ElementRef;
+
+  constructor(private datePipe: DatePipe,elementRef: ElementRef,
     public router: Router, private toastyService: ToastyService,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
@@ -645,7 +649,15 @@ export class ReservationComponent  implements OnInit, OnDestroy {
       referenceid: SelectedData.Id
     })
     this.referanceName = SelectedData.RefName;
-    document.querySelector("#" + event).classList.add("md-hide");
+    console.log("event"+ event);
+    debugger;
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.add("mytest");
+    //document.querySelector('#' + event).classList.remove("md-show");
+   // this.draggableElement.nativeElement.remove();
+    //this.elementRef.nativeElement.classList.add('md-' + this.color_);
+    //this.draggableElement.nativeElement.classList.add("mytest");
   }
 
   openMyGuestNameModalData(SelectedData: any, event: any) {
