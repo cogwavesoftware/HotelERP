@@ -1,3 +1,5 @@
+
+ 
 .test123{
      
     /* You can add global styles to this file, and also import other style files */
@@ -24,20 +26,14 @@
     height: 23px;
 }
 .thead .td .btn.btn-outline-success{
-    border-radius: 5px;
-    width: 38px;
-    padding: 0;
-    background: green;
-    color: #fff;
-    font-size: 90%;
+    border: 0 none;
+    color: #000;
+    font-size: 120%;
 }
 .tbody .td button.ng-tns-c5-1{   
-    border-radius: 5px;
-    width: 30px;
-    padding: 0;
-    background: red;
-    color: #fff;
-    font-size: 115%;
+    border: 0 none;
+    color: #000;
+    font-size: 120%;
 }
 
  
@@ -131,7 +127,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     }
     .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td  ,
     .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td  {
-       width: 35px;  
+       width: 46px;  
     }
     .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td select,
     .reservationmaster .accouter .test123.paymentarray .grid-table .tbody .td input{
@@ -141,5 +137,11 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     .reservationmaster .accouter .test123.bookingroomtype .grid-table .tbody .td input{
        width: 35px;  
     }
-
+    .reservationmaster .accouter .test123.paymentarray  .width100{
+        width:100%;        
+    }
+    .reservationmaster .accouter .test123.paymentarray .width100 label{
+        padding:10px;
+    }
+    
   }

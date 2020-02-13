@@ -914,7 +914,10 @@
     .navbar .navbar-logo {
         width: 100% !important;
     }
-
+    .width100{
+        width:100%;        
+        border:1px solid green;
+    }
 }
 @media only screen and (max-width: 573px) {
     .author-details .header-right li {

@@ -49,15 +49,15 @@
                                             <div class="rov">
                                               
                                               <div class="tdwidth">
-                                                <div class="tdwidthlbl">Arival Date</div>
+                                                <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Arival Date</div>
                                                 <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                                
                                               </div>
                                               <div class="tdwidth">
-                                                <div class="tdwidthlbl">Arival Time</div>
+                                                <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Arival Time</div>
                                                 <timepicker id="checkintime" name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
                                               </div>
                                               <div class="tdwidth">
-                                                <div class="tdwidthlbl">Days</div>
+                                                <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Days</div>
                                                 <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
                                                 id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
                                                 <option value="0">Select</option>
@@ -66,11 +66,11 @@
                                               </select>
                                               </div>
                                               <div class="tdwidth">
-                                                <div class="tdwidthlbl">Departure Date</div>
+                                                <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Departure Date</div>
                                                 <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
                                               </div>
                                               <div class="tdwidth">
-                                                <div class="tdwidthlbl">Departure Time</div>
+                                                <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Departure Time</div>
                                                 <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker> 
                                               </div>
                                             </div>
@@ -365,13 +365,13 @@
                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                   <div class="form-group">
                                                     <label class="form-control-label" for="cometoknow ">Confirm</label>                                                  
-                                                    <input type="checkbox" name="confirm" id="confirmid" class="form-control" >
+                                                    <input type="checkbox" name="confirm" id="confirmid" class="form-control" style="width: 15px;" >
                                                   </div>
                                                 </div>
                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                   <div class="form-group">
                                                     <label class="form-control-label" for="WaitingList ">Waiting List</label>                                                  
-                                                    <input type="checkbox" name="confirm" id="waitingid" class="form-control" >
+                                                    <input type="checkbox" name="confirm" id="waitingid" class="form-control" style="width: 15px;"  >
                                                   </div>
                                                 </div>
                                       
@@ -622,98 +622,106 @@
                                   <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                     <ng-template ngbPanelContent>
                                       <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
-                                    
-                                        <div class="grid-table" style="width: 100%;">
-                                          <div class="thead">
-                                            <div class="">
-                                              <div class="td"><i class="fa fa-cc-visa"></i> Payment Mode</div>
-                                              <div class="td"><i class="fa fa-credit-card-alt"></i> Payment SubMode</div>
-                                              <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
-                                              <div class="td"><i class="fa fa-server"></i> Description</div>
-                                              <div class="td"><i class="fa fa-retweet"></i> Selected SubMode</div>
-                                              
-                                              <div class="td">
-                                                <button type="button"   class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
-                                                  <i class="fa fa-plus">Add</i> 
-                                                </button>
-                                              </div>
-                                            
-                                            </div>
-                                          </div>
-                                          <div class="tbody">
-  
-                                            <div formArrayName="PayArray"
-                                              *ngFor="let other of form.get('PayArray').controls; let k = index">
-                                              <div [formGroupName]="k">
-                                                <div class="tr">
-                                                  <div class="td">
-                                                    <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
-                                                      (change)="RoomTypeChanged(i,'RoomCode')">
-                                                      <option value="0">Select</option>
-                                                      <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
-                                                        {{items.RoomCode}}</option>
-                                                    </select> -->
-  
-                                                    <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
-                                                    id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
-                                                    <option value="select">Select</option>
-                                                    <option *ngFor="let sour of paymentmode" [value]="sour">
-                                                      {{ sour  }}</option>
-                                                  </select>
-  
-  
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
-                                                    id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
-                                                    <option value="select">Select</option>
-                                                    <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
-                                                      {{ Paysubmode  }}</option>
-                                                  </select> 
-  
-  
-                                                  </div>
-  
-                                              <div class="td">
-                                               <input type="number"  id="payAmount"
-                                                formControlName="payAmount" name="payAmount" autocomplete="off" required />
-                                              
-                                
-                                                  </div>
-  
-  
-                                                  <div class="td">
-                                                    <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                        <div class="">
+                                          
+                                            <div class="row">
+                                            <div class="col-lg-10 col-md-10 col-xs-12">
+                                              <div class="grid-table" style="width: 100%;">
+                                                <div class="thead">
+                                                  <div class="">
+                                                    <div class="td"><i class="fa fa-cc-visa"></i> Pay Header</div>
+                                                    <div class="td"><i class="fa fa-credit-card-alt"></i> Select PayType</div>
+                                                    <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
+                                                    <div class="td"><i class="fa fa-server"></i> Description</div>
+                                                    <div class="td"><i class="fa fa-retweet"></i>Selected Mode</div>
                                                     
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <input type="text" class="" id="modeselected" formControlName="modeselected">
-                                                    
-                                                  </div>
-  
-  
-  
-  
-                                                  <div class="td" style="text-align: center;">                                      
-                                                    <button type="button" (click)="onDeletePayment(0,k)">
-                                                      <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
+                                                    <div class="td lasttd">
+                                                      <button type="button"   class=" " (click)="AddPaymentButtonClick()">
+                                                        <i class="fa fa-plus"> </i> 
+                                                      </button>
+                                                    </div>
+                                                  
                                                   </div>
                                                 </div>
+                                                <div class="tbody">
+        
+                                                  <div formArrayName="PayArray"
+                                                    *ngFor="let other of form.get('PayArray').controls; let k = index">
+                                                    <div [formGroupName]="k">
+                                                      <div class="tr">
+                                                        <div class="td">
+                                                          <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                            (change)="RoomTypeChanged(i,'RoomCode')">
+                                                            <option value="0">Select</option>
+                                                            <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                              {{items.RoomCode}}</option>
+                                                          </select> -->
+        
+                                                          <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
+                                                          id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                                                          <option value="select">Select</option>
+                                                          <option *ngFor="let sour of paymentmode" [value]="sour">
+                                                            {{ sour  }}</option>
+                                                        </select>
+        
+        
+                                                        </div>
+        
+                                                        <div class="td">
+                                                          <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                                                          id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                                                          <option value="select">Select</option>
+                                                          <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                                            {{ Paysubmode  }}</option>
+                                                        </select> 
+        
+        
+                                                        </div>
+        
+                                                    <div class="td">
+                                                     <input type="number"  id="payAmount"
+                                                      formControlName="payAmount" name="payAmount" autocomplete="off" required />
+                                                    
+                                      
+                                                        </div>
+        
+        
+                                                        <div class="td">
+                                                          <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                          
+                                                        </div>
+        
+                                                        <div class="td  ">
+                                                          <input type="text" class="" id="modeselected" formControlName="modeselected">
+                                                          
+                                                        </div> 
+                                                        <div class="td lasttd" style="text-align: center;">                                      
+                                                          <button type="button" (click)="onDeletePayment(0,k)">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                          </button>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+        
+                                                 
+      
+                                                </div>
+        
+        
                                               </div>
                                             </div>
-  
-                                            <div class="td">
-                                              <input type="number" readonly class="" id="BillAmount" formControlName="BillAmount">
-                                              
+                                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 width100" >
+                                              <div class=" ">
+                                                <label  id="BillAmount1"  ><span>Total Amount : </span> <b>10999.00</b> </label>   
+                                                <label  id="BillAmount2" ><span>Paid Amount : </span> <b>1399.00</b> </label>   
+                                                <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>900.99</b> </label>                                                                              
+                                              </div>
                                             </div>
-
                                           </div>
-  
-  
                                         </div>
+                                        
+                                      
                                       </div>
                                     </ng-template>
                                   </ngb-panel>        
@@ -722,9 +730,8 @@
                                          
                                   <!-- button start  -->
                                 <div class="col-md-12" style="text-align: center; ">
-                                  <button type="button" id="printgrcbtn" class="btn btn-primary btn-sm">PRINT GRC</button>
-                                   <button type="submit" id="checkinbtn" class="btn btn-success btn-sm m-r-5 m-l-5 ">Save</button>                                                                                 
-                                  <button type="button" id="closebtn" class="btn btn-danger btn-sm">CLOSE</button>
+                                    <button type="submit" id="checkinbtn" class="btn btn-primary btn-sm m-r-5 m-l-5 ">Save</button>                                                                                 
+                                  <button type="button" id="closebtn" class="btn btn-primary btn-sm">CLOSE</button>
                                 </div> <!-- button end -->
                                 
                           </div><!-- user list row -->
@@ -1116,7 +1123,7 @@
   <!-- 
      Referance Model -->
   
-      <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6 addressmodeleffect'">
+      <app-modal-animation #draggable [modalID]="'effect-6'" [modalClass]="'md-effect-6  addressmodeleffect'">
         
         <h3 class="f-15" style="position: relative;">Referance Details
           <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
@@ -1155,7 +1162,7 @@
                          <td>{{item.RefName}}</td>   
                          <td>{{item.RefMobileNo}}</td>     
                         <td class="action-icon">
-                            <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="PatchRefenceDetail(item,$event)">Get Details</a>                          
+                            <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"    (click)="PatchRefenceDetail(item,$event)">Get Details</a>                          
                         </td>
                       </tr>  
                       </tbody>
