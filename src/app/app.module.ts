@@ -18,7 +18,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS,HttpClient } from '@angular/common/h
 import { NgMarqueeModule } from "ng-marquee";
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
-
+import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
  // import { PrintgrcComponent } from './printgrc/printgrc.component';
 //import { ConfirmationDialogService } from './_services/confirmation-dialog.service';
@@ -45,8 +45,8 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
     AppComponent, 
     AuthComponent,
     AdminComponent,
-    BreadcrumbsComponent 
-    
+    BreadcrumbsComponent, 
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +65,7 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
     // })
    
   ],
- // entryComponents: [],
+  entryComponents:[ConfirmationDialogComponent],
   providers: [
     
       MenuItems,

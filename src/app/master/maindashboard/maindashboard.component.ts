@@ -33,8 +33,8 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
    
     this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
       this.finalMenu=res;
-
-
+       alert('d')
+     
       setInterval(()=>{
         this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
           this.finalMenu=res;
@@ -48,10 +48,7 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
 
   }
 
-  Datamouseover()
-  {
-    alert('s')
-  }
+
 
   openMyModal(event,name){
     console.log("roomname"  );

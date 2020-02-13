@@ -17,12 +17,13 @@ import { SelectOptionService } from 'src/app/shared/elements/select-option.servi
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
-import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
+//import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
 // import {SelectModule} from 'ng-select';
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
-  declarations: [CheckinComponent, CheckoutComponent,ConfirmationDialogComponent],
+  declarations: [CheckinComponent, CheckoutComponent],
+  // declarations: [CheckinComponent, CheckoutComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
@@ -34,7 +35,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-   entryComponents:[ConfirmationDialogComponent]
+  // entryComponents:[ConfirmationDialogComponent]
 
 })
 export class CheckinModule { }
