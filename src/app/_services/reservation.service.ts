@@ -34,7 +34,7 @@ export class ReservationService {
    }
 
    SaveReservationData(ResData: any) {
-    return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/Savecheckin', ResData, { headers: environment.BASE_CONTENTTYPE_HEADER })
+    return this.http.post(environment.apiURL + '/api/CloudHMS/reservation/savebookings', ResData, { headers: environment.BASE_CONTENTTYPE_HEADER })
   }
 
 }
