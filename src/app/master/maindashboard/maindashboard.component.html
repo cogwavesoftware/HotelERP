@@ -9,7 +9,7 @@
              
           <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;"> 
           <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-12">
               <ul>
                 <li>
                   <a [routerLink]="['/Master/reservation/']" routerLinkActive="active" > <i class="icon-comments"></i> <span>Reservation</span></a>
@@ -36,11 +36,10 @@
                 <li>
                   <a href="#"> <i class="icon-comments"></i><span>Reservation List</span></a>
                 </li> 
+                <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Click</button></li>
                </ul>
              </div>
-            <div class="col-md-1">
-              <button class="btn dbutton" (click)="openMyModal('effect-2',item)">Click</button>
-            </div>
+             
           </div>
           </div>
         </div>
