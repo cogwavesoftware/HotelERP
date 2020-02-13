@@ -8,14 +8,20 @@ import { NgForm } from "@angular/forms";
   styleUrls: ['./gridtest.component.scss'],
 })
 
-
 export class GridtestComponent implements OnInit {
-  
+
+  toggle:boolean=true;
 
   constructor() { }
 
   ngOnInit() {
+
+
   }
+enableDisableRule(job)
+{
+  this.toggle = !this.toggle;
+}
 
 }
 

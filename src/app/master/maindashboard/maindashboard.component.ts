@@ -23,13 +23,14 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   roomname1:string;
   finalMenu = new Array();
   floor=new Array<any>();
-
+  model:any;
   constructor(private _masterformservice: MasterformService,private http: HttpClient,
     private _ipservice: IpserviceService,private _hmsdashboard:HmsdashboardService,private _bankservice:BankService  ) {     
       this._bankservice.changeMessage("collapsed")
     }
 
   ngOnInit() {
+   
     this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
       this.finalMenu=res;
 

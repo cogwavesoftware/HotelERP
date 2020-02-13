@@ -36,6 +36,11 @@ export class MasterformService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/roomdetails?BranchCode=' + branchcode);
   }
 
+  GetAllRoomNoViaMode(branchcode: string,Status:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetRoomNoViaStatus?BranchCode=' + branchcode + '&Status=' + Status);
+  }
+
   getwalet() {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/walet');
   }
@@ -318,11 +323,7 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
-  GetCheckinDetail(RoomNo:string,Branchcode:string) {   
-    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
-    
-  }
-
+ 
   GetCompanyTariffDetail(RoomNo:string,Branchcode:string,Id:string) {   
     return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/CompanyTariffDetail?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo + '&Id=' + Id);
     
@@ -339,6 +340,17 @@ export class MasterformService {
     return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetAllSubPaymend?BranchCode=' + BranchCode + '&ModeName=' + ModeName);
     
   }
+
+  CheckDiscountValue(UserId:number,DiscType:string,DisValue:number,BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/CheckDiscount?UserId=' + UserId + '&DiscType=' + DiscType + '&DisValue=' + DisValue + '&BranchCode=' + BranchCode);
+  }
+
+  CheckGrace(UserId:number,GracePeriod:number,BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/CheckGrace?UserId=' + UserId + '&GracePeriod=' + GracePeriod + '&BranchCode=' + BranchCode);
+  }
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

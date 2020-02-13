@@ -19,4 +19,13 @@ export class CheckinService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/checkin/Savecheckin', checkin, { headers: environment.BASE_CONTENTTYPE_HEADER })
   }
 
+ GetCheckinDetail(RoomNo:string,Branchcode:string) {   
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetails?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo);
+    
+  }
+  GetCheckinDetailList(RoomNo:any,Branchcode:string) {   
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetCheckinDetailsList?RoomNo=' + RoomNo + '&Branchcode=' + Branchcode);
+    
+  }
+
 }

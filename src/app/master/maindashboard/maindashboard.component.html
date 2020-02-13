@@ -12,10 +12,11 @@
             <div class="col-md-11">
               <ul>
                 <li>
-                  <a href="#" > <i class="icon-comments"></i> <span>Reservation</span></a>
+                  <a [routerLink]="['/Master/reservation/']" routerLinkActive="active" > <i class="icon-comments"></i> <span>Reservation</span></a>
                 </li>
                 <li>
-                  <a href="#"><i class="icon-comments"></i><span>Group Checkin </span></a>
+              
+                <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i class="icon-comments"></i><span>Group Checkin </span></a>
                 </li>
                 <li>
                   <a href="#"> <i class="icon-comments"></i><span>Block Rooms</span></a>
@@ -559,18 +560,16 @@
         <button type="button" class="close basic-close-light-box" (click)="modalVacent.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <label class="font-header" style="background-color: red;
-        color: #ffffff;
-        padding: 10px;
-        width: 100%;">Room {{rmno}} ({{roomname1}})
+        <label class="font-header"  style="background-color: red;  color: #ffffff;   padding: 10px;   width: 100%;">Room {{rmno}} ({{roomname1}})
+          
         </label>       
-        
+        <!-- <input type="hidden" name="SelectedRoom" class="form-control" [(ngModel)]="model.SelectedRoom" #SelectedRoom="ngModel" value="{{rmno}}"> -->
         <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
           <div class="row">
             <div class="col-sm-12">
               <ul>
-                 
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
+               
+                <li><a [routerLink]="['/Master/roomcheckin/',rmno]" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
                 <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Block</a></li>
                 <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Management</a></li>
                 <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Power on Visit</a></li>

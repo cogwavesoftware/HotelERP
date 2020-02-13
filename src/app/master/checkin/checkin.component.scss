@@ -97,3 +97,17 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     }
   }
 
+ 
+  .roomselect {
+    text-align: center;
+    color: white;
+    margin: 1px;
+}
+
+.freeroom {
+    background-color: green;
+}
+
+.occroom {
+    background-color: red;
+}

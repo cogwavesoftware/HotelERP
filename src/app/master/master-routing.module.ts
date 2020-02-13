@@ -115,7 +115,7 @@ const routes: Routes = [
       },
      
       {
-        path: 'roomcheckin',
+        path: 'roomcheckin/:RoomNo',
         loadChildren: './checkin/checkin.module#CheckinModule'
       },
       {
