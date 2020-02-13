@@ -359,6 +359,7 @@ export class ReservationComponent  implements OnInit, OnDestroy {
 
   handleFormChanges() {
 
+    alert('f')
     this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
       let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
@@ -421,6 +422,7 @@ export class ReservationComponent  implements OnInit, OnDestroy {
 
   Submit() {
 
+
     const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -437,27 +439,30 @@ export class ReservationComponent  implements OnInit, OnDestroy {
         console.log('User confirmed:', confirmed)
         if (confirmed === true) {
 
-          var checkoutDate = '';
+          
+          var checkoutDates = '';
           let cku = this.form.value.checkoutdate;
 
 
-          var checkinDate = '';
+          var checkinDates = '';
           let chkin = this.form.value.checkindate;
 
-
+          debugger
           if (chkin.length == 10) {
           }
           else {
-            checkinDate = this.datePipe.transform(this.form.value.checkinDate, "dd/MM/yyyy");
-            this.form.value.checkinDate = checkinDate;
+            checkinDates = this.datePipe.transform(this.form.value.checkindate, "MM/dd/yyyy");
+            this.form.value.checkindate = checkinDates;
           }
+
 
           if (cku.length == 10) {
           }
           else {
-            checkoutDate = this.datePipe.transform(this.form.value.checkoutdate, "dd/MM/yyyy");
-            this.form.value.checkoutdate = checkoutDate;
+            checkoutDates = this.datePipe.transform(this.form.value.checkoutdate, "MM/dd/yyyy");
+            this.form.value.checkoutdate = checkoutDates;
           }
+
           this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
           this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
 
@@ -489,8 +494,6 @@ export class ReservationComponent  implements OnInit, OnDestroy {
 
   ngAfterViewInit() {
     // server-side search
-
-
 
 
     // fromEvent(this.checkoutdatechange.nativeElement, 'keyup')

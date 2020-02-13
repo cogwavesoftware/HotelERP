@@ -340,6 +340,17 @@ export class MasterformService {
     return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetAllSubPaymend?BranchCode=' + BranchCode + '&ModeName=' + ModeName);
     
   }
+
+  CheckDiscountValue(UserId:number,DiscType:string,DisValue:number,BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/CheckDiscount?UserId=' + UserId + '&DiscType=' + DiscType + '&DisValue=' + DisValue + '&BranchCode=' + BranchCode);
+  }
+
+  CheckGrace(UserId:number,GracePeriod:number,BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/CheckGrace?UserId=' + UserId + '&GracePeriod=' + GracePeriod + '&BranchCode=' + BranchCode);
+  }
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

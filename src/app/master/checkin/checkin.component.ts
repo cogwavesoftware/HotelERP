@@ -1227,23 +1227,31 @@ export class CheckinComponent implements OnInit, OnDestroy {
             }
           }
           this.form.value.RefName = "0";
-          var checkoutDate = '';
-          let cku = this.form.value.checkoutdate;
-          if (cku.length == 10) {
-          }
-          else {
-            checkoutDate = this.datePipe.transform(this.form.value.checkoutdate, "dd/MM/yyyy");
-            this.form.value.checkoutdate = checkoutDate;
-          }
-          this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "dd/MM/yyyy");
-          this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
-          this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
+
           if (this.form.value.DOB != "") {
-            this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "dd/MM/yyyy");
+            this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "MM/dd/yyyy");
           }
           if (this.form.value.DOA != "") {
-            this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "dd/MM/yyyy");
+            this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "MM/dd/yyyy");
           }
+
+          var checkoutDates = '';
+          let cku = this.form.value.checkoutdate;
+          console.log(cku)
+          debugger;
+
+          if (cku.length == 10) {
+              this.form.value.checkoutdate=cku;
+              console.log(this.form.value.checkoutdate)
+          }
+          else {
+            checkoutDates = this.datePipe.transform(this.form.value.checkoutdate, "MM/dd/yyyy");
+            this.form.value.checkoutdate = checkoutDates;
+          }
+
+          this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "MM/dd/yyyy");
+          this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
+          this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");         
           this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
           this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;
           this.form.value.GuestPhotoPath = this.Guestphotopathurl;
@@ -1253,11 +1261,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
                 console.log(res);
                 this.GuestDoucmentFrontpathurl = Idfront;
                 this.GuestDoucmentBackpathurl = Idback;
-
                 this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
                 this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;
                 this.form.value.GuestPhotoPath = this.Guestphotopathurl;
-
                 this.savecheckin.SaveCheckinData(this.form.value)
                   .subscribe(res => {
                     console.log(res);
