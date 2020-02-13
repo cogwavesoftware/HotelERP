@@ -1,4 +1,3 @@
-import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Observable, Observer, empty } from "rxjs";
@@ -27,6 +26,7 @@ import { ReservationService } from './../../_services/reservation.service';
 import { HMSReservationFormmodel, HMSReservationBookingmodel } from './../../_models/HMSReservationFormmodel'
 import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
 
+import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 
 @Component({
