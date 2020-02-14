@@ -108,7 +108,7 @@
   </div>
  
 <div class="outerdiv">
-  <div class="formdesign checkinforms" style="padding: 0;">
+  <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
 
     <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
 
@@ -132,6 +132,65 @@
                             <div class="accouter" style="width: 100%;">
                               <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
                                 class="ngb-accordion">
+                                <ngb-panel id="ngb-close-p1" title="Guest Stay Information">
+                                  <ng-template ngbPanelContent>
+                                    <div class="  gueststayinfo userlist">
+                                    <div class="row" style="margin-bottom: 0;">
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Checkin Date </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                              
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
+                                           <timepicker id="checkintime" readonly name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
+                                          <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
+                                        </div>
+                                      </div> 
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="nofdays "><i  class="fa fa-calendar" aria-hidden="true"  ></i>  No of Days </label>
+                                          <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
+                                            id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
+                                            <option value="0">Select</option>
+                                            <option  *ngFor="let Day of noofdays" [value]="Day">
+                                              {{ Day  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.nofdays.errors" class="invalid-feedback">
+                                            <div *ngIf="form.nofdays.errors.required">nofdays is required</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Checkout Date </label>
+
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0;">
+                                            <input id="checkoutdate" readonly name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                      
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="checkouttime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkout Time </label>
+                                          <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker>                                        
+                                               
+                                                  <div *ngIf="!valid">Invalid time </div>                                  
+                                        </div>
+                                      </div>
+                                    </div> 
+ 
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel>
                                 <ngb-panel id="ngb-close-p1"  title="Guest Information">
                                   <ng-template ngbPanelContent >
                                 
@@ -456,8 +515,8 @@
                                             <div class="td">DisValuet</div>
 
                                             <div class="td" *ngIf="isGorupCheckin">
-                                              <button type="button"  class="btn btn-outline-success" (click)="modalselectvacent.show()">
-                                                <i class="fa fa-plus"></i> Add
+                                              <button type="button"  class=" " (click)="modalselectvacent.show()">
+                                                <i class="fa fa-plus"></i> 
                                               </button>
                                             </div>
                                             <!-- <div class="td">
@@ -580,64 +639,7 @@
 
 
 
-                                <ngb-panel id="ngb-close-p1" title="Guest Stay Information">
-                                  <ng-template ngbPanelContent>
-                                    <div class="  gueststayinfo userlist">
-                                    <div class="row" style="margin-bottom: 0;">
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <label class="form-control-label" for="pincode">Checkin Date </label>
-                                        <div class="form-group">
-                                          <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="city">Checkin Time </label>
-                                           <timepicker id="checkintime" readonly name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
-                                          <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
-                                        </div>
-                                      </div> 
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="nofdays "> No of Days </label>
-                                          <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
-                                            id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
-                                            <option value="0">Select</option>
-                                            <option  *ngFor="let Day of noofdays" [value]="Day">
-                                              {{ Day  }}</option>
-                                          </select>
-                                          <div *ngIf="submitted && form.nofdays.errors" class="invalid-feedback">
-                                            <div *ngIf="form.nofdays.errors.required">nofdays is required</div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <label class="form-control-label" for="pincode">Checkout Date </label>
-
-                                        <div class="form-group">
-                                          <div class="input-group" style="margin-bottom:0;">
-                                            <input id="checkoutdate" readonly name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
-                                          </div>
-                                        </div>
-                                      </div>
-
-
-                                      
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="checkouttime">Checkout Time </label>
-                                          <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker>                                        
-                                               
-                                                  <div *ngIf="!valid">Invalid time </div>                                  
-                                        </div>
-                                      </div>
-                                    </div> 
- 
-                                    </div>
-                                  </ng-template>
-                                </ngb-panel>
+                               
 
 
                                <!-- <ngb-panel id="ngb-close-p1" title="Advance Payment">
@@ -718,8 +720,8 @@
                                             <div class="td">Selected Mode</div>
                                             
                                             <div class="td">
-                                              <button type="button" class="btn btn-outline-success" (click)="AddPaymentButtonClick()">
-                                                <i class="fa fa-plus">Add</i> 
+                                              <button type="button" class=" " (click)="AddPaymentButtonClick()">
+                                                <i class="fa fa-plus"></i> 
                                               </button>
                                             </div>
                                           
@@ -1078,10 +1080,14 @@
                                        </div><!-- end 3rd row-->
                                        <div class="row" style="margin-bottom:0;">
                                           <!-- button start  -->
-                                        <div class="col-md-12   voilet-gradient " style="border:2px solid #ccc; text-align: center; ">
-                                          <button type="button" id="printgrcbtn" (click)="printPage()" class="btn btn-primary ">PRINT GRC</button>
-                                           <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 ">Save</button>                                                                                 
-                                          <button type="button" id="closebtn" class="btn btn-danger">Close</button>
+                                        <div class="col-md-12" style="  text-align: right; ">
+                                          <button type="button" id="printgrcbtn" (click)="printPage()" class="btn btn-sm btn-primary ">PRINT GRC</button>
+                                           <button type="submit" id="checkinbtn" class="btn btn-sm btn-primary m-r-5 m-l-5 ">Save</button>                                                                                 
+                                          <button type="button" id="closebtn" class="btn btn-sm btn-primary">Close</button>
+
+                                           
+
+
                                         </div> <!-- button end -->
                                        </div>
                                   </div><!-- user list row -->
@@ -1585,32 +1591,38 @@
 
 
 
-    <app-modal-basic #modalselectvacent [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+    <app-modal-basic #modalselectvacent [dialogClass]="'modal-lg grpcheckin'" [hideHeader]="true" [hideFooter]="true">
       <div class="app-modal-body">
         <button type="button" class="close basic-close-light-box" (click)="modalselectvacent.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <label class="font-header" style="background-color: red;
+        <label class="font-header" style="background-color: #0062cc;
         color: #ffffff;
         padding: 10px;
-        width: 100%;">Group Checkin Please Select Room
+        width: 100%;"><i class="fa fa-users" aria-hidden="true"></i> Group Checkin Please Select Room
         </label>       
    
         <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
           <div class="row">
             
             <div id="availrooms">
-            
-                <ul style="display: inline-block" *ngFor="let room of roomNoList">
-                  <li style="float: left; margin-left: 0px ">
-                    <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
-                      {{room.RoomNo}}
-                      <br>
-                      {{room.RoomCode}}
-                  </div>
-                  </li>
-                 
-                </ul>
+            <div class="container">
+              <div class="col-md-12">
+                <div class="row">
+                  <ul style="display: inline-block" *ngFor="let room of roomNoList">
+                    <li style="float: left; margin-left: 0px ">
+                      <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                        {{room.RoomNo}}
+                        <br>
+                        {{room.RoomCode}}
+                    </div>
+                    </li>
+                   
+                  </ul>
+                </div>
+              </div>
+            </div>
+               
                   
              
           </div>

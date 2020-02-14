@@ -6258,11 +6258,12 @@ outerdiv{
 }
 .maindashboard .dbutton{
     background : url("/assets/images/3dbutton.png") no-repeat;
-    width: 50px;
-    height: 50px;    
+    width: 33px;
+    height: 35px;  
     background-size: 100%;
     padding: 0;
     color: #fff;
+    font-size:10px;
 }
 .maindashboard #modelleftNavBar  ul{
     padding-left:0;
@@ -6279,10 +6280,11 @@ outerdiv{
     border-top-right-radius: 0px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    color:#ccc;
-    border:5px solid #ccc;
-    width:100px;
+    color:#585858;
+    border:3px solid #ccc;
+    width:97px;
     display: inline-block;
+    vertical-align: top;
 }
 .maindashboard .productheader ul li img,
 .maindashboard .productheader ul li{
@@ -6549,6 +6551,13 @@ outerdiv{
     // min-height:700px;
     max-height: 100%;
 }
+.grpcheckin .modal-body{
+    padding:0px;
+}
+.grpcheckin .modal-body button.basic-close-light-box{
+    top: -3px!important;
+    right: 6px!important;
+}
  .customclosepopup{
      display: none;
      background: none!important;
@@ -6662,7 +6671,11 @@ outerdiv{
 }
 .tdwidth{
     float:left;
-    width:125px; 
+    width:20%;
+    // width:125px; 
+}
+.tdwidthspcl{
+    width:10%;
 }
 #loader2{
     
@@ -6679,6 +6692,12 @@ outerdiv{
 .mytest{
   display: none;
   
+}
+.uppercase{
+    text-transform: uppercase;
+}
+.checkinformsgrops .bs-timepicker-field{
+    width:95px!important;
 }
 // .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
       

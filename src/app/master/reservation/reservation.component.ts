@@ -26,9 +26,13 @@ import { ReservationService } from './../../_services/reservation.service';
 import { HMSReservationFormmodel, HMSReservationBookingmodel } from './../../_models/HMSReservationFormmodel'
 import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
 
+ 
+ 
+ 
 import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 
+ 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
@@ -363,7 +367,7 @@ export class ReservationComponent  implements OnInit, OnDestroy {
 
   handleFormChanges() {
 
-    alert('f')
+    //alert('f')
     this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
       let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
@@ -619,6 +623,9 @@ export class ReservationComponent  implements OnInit, OnDestroy {
       state: SelectedData.City,
       nation: "India",
     })
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
   PatchSubModeName(index: number) {
@@ -639,12 +646,16 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   }
 
   OpencompanymodelsDetail(SelectedData: any, event: any) {
+    console.log("ttest");
     this.form.patchValue({
       company: SelectedData.CompanyName,
       gstno: SelectedData.GSTNO,
       companycode: SelectedData.CompanyCode
     })
     // this.CompanyCheckin(SelectedData.CompanyCode);
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
   PatchRefenceDetail(SelectedData: any, event: any) {
@@ -656,11 +667,14 @@ export class ReservationComponent  implements OnInit, OnDestroy {
     debugger;
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
-    allbtn.classList.add("mytest");
+    //allbtn.classList.remove("md-show");
     //document.querySelector('#' + event).classList.remove("md-show");
    // this.draggableElement.nativeElement.remove();
     //this.elementRef.nativeElement.classList.add('md-' + this.color_);
     //this.draggableElement.nativeElement.classList.add("mytest");
+     
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
   openMyGuestNameModalData(SelectedData: any, event: any) {
@@ -684,7 +698,9 @@ export class ReservationComponent  implements OnInit, OnDestroy {
     });
     this.form.get('guestname').disable({ onlySelf: true });
 
-
+var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
 

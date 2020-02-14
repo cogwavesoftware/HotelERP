@@ -15,7 +15,7 @@ import { ReservationRoutingModule } from './reservation-routing.module';
 
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
-@NgModule({
+ @NgModule({
   declarations: [ReservationComponent],
   //declarations: [ReservationComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],

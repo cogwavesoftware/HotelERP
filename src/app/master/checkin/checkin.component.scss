@@ -29,20 +29,23 @@
     height: 23px;
 }
 .thead .td .btn.btn-outline-success{
-    border-radius: 5px;
-    width: 38px;
+    
+    width: 30px;
+    height: 28px;
     padding: 0;
-    background: green;
-    color: #fff;
+    background: none;
+    color: #000;
     font-size: 90%;
+    text-align: center;
+    border:1px solid #585858;
 }
 .tbody .td button.ng-tns-c5-1{   
-    border-radius: 5px;
-    width: 30px;
-    padding: 0;
-    background: red;
-    color: #fff;
-    font-size: 115%;
+    // border-radius: 5px;
+    // width: 30px;
+    // padding: 0;
+    // background: red;
+    // color: #fff;
+    // font-size: 115%;
 }
 .tr
 {
@@ -105,9 +108,19 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
 
 .freeroom {
-    background-color: green;
+    background-color: green;    
+    padding: 0px;
+    width: 75px;
+    height: 50px;   
+    display: inline-table;
+    margin: 2px 1px 2px 3px;
 }
 
 .occroom {
     background-color: red;
+    padding: 0px;
+    width: 75px;
+    height: 50px;    
+    display: inline-table;
+    margin: 2px 1px 2px 3px;
 }
