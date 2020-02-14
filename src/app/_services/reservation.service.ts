@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { Observable } from "rxjs/observable";
 import { Availabilitymodel } from './../_models/Availabilitymodel';
 import { HMSReservationFormmodel } from './../_models/HMSReservationFormmodel';
+import {  BookingListmodel } from './../_models/BookingListmodel';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,5 +38,22 @@ export class ReservationService {
    SaveReservationData(ResData: any) {
     return this.http.post(environment.apiURL + '/api/CloudHMS/reservation/savebookings', ResData, { headers: environment.BASE_CONTENTTYPE_HEADER })
   }
+
+  
+  GetBookingList(BranchCode:string)
+  {
+   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/bookingslist?BranchCode=' + BranchCode)
+  }
+
+  FilterBookingListViaCompanyName(BranchCode:string,CompanyName:string)
+  {
+   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/bookingslistviacompany?BranchCode=' + BranchCode + '&CompanyName=' + CompanyName);
+  }
+
+  FilterBookingListAllsearch(BranchCode:string,search:string)
+  {
+   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/bookingslistallsearch?BranchCode=' + BranchCode + '&search=' + search);
+  }
+
 
 }

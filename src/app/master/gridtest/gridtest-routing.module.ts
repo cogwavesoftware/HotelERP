@@ -8,12 +8,12 @@ import {  Routes,RouterModule } from "@angular/router";
 const routes:Routes = [{
   path:'',
   component:GridtestComponent,
-  data:{
-    title:'Gridtest',
-    icon:'icon-home',
-    caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
-    status: true
-  }
+  // data:{
+  //   title:'Gridtest',
+  //   icon:'icon-home',
+  //   caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+  //   status: true
+  // }
   }];
 
 

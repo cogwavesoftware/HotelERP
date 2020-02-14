@@ -44,11 +44,7 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
      
     })
 
-
-
   }
-
-
 
   openMyModal(event,name){
     console.log("roomname"  );
