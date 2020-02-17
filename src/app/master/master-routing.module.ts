@@ -119,8 +119,16 @@ const routes: Routes = [
         loadChildren: './checkin/checkin.module#CheckinModule'
       },
       {
-        path: 'resevation',
+        path: 'resevation/:ResNo',
         loadChildren: './resevation/resevation.module#ResevationModule'
+      },
+      {
+        path: 'reservationlist',
+        loadChildren: './reservationlist/reservationlist.module#ReservationlistModule'
+      },
+      {
+        path: 'arivallist',
+        loadChildren: './todayarivallist/todayarivallist.module#TodayarivallistModule'
       },
 
     ]

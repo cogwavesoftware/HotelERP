@@ -267,8 +267,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.Branch = "CW_1001"
     this.IsShowloader = false;
 
-    // this.Id$=this.route.snapshot.paramMap.pipe(map(paramMap=>paramMap.get('id')));
 
+    // this.Id$=this.route.snapshot.paramMap.pipe(map(paramMap=>paramMap.get('id')));
     //let RoomNo=this.route.snapshot.paramMap.get('RoomNo');
 
     this.route.paramMap.subscribe(params => {

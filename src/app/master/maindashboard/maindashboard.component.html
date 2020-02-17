@@ -12,10 +12,11 @@
             <div class="col-md-12">
               <ul>
                 <li>
-                  <a [routerLink]="['/Master/reservation/']" routerLinkActive="active" > <i class="icon-comments"></i> <span>Reservation</span></a>
+               
+
+                  <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active" > <i class="icon-comments"></i> <span>Reservation</span></a>
                 </li>
                 <li>
-              
                 <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i class="icon-comments"></i><span>Group Checkin </span></a>
                 </li>
                 <li>
@@ -33,9 +34,16 @@
                 <li>
                   <a href="#"> <i class="icon-comments"></i><span>Guest Search</span></a>
                 </li>
-                <li>
-                  <a href="#"> <i class="icon-comments"></i><span>Reservation List</span></a>
-                </li> 
+                  <li>
+                  <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i class="icon-comments"></i><span>Reservation List</span></a>
+                  </li>
+
+                  
+                  <li>
+                    <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i class="icon-comments"></i><span>Today Arival</span></a>
+                    </li>
+
+             
                 <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Click</button></li>
                </ul>
              </div>

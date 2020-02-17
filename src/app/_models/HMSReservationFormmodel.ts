@@ -15,8 +15,13 @@ export class HMSReservationFormmodel{
     DepartureTime:string;
     NoDays:number;
     booking:HMSReservationBookingmodel[];
+    BookedRoomCodelist:string;
+    TypeBook:string;
    
 }
+
+
+
 
 export class HMSReservationBookingmodel{
 

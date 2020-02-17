@@ -1,0 +1,165 @@
+<div class="page-body">
+    <div class="row">
+      <!-- Right column start -->
+      <div class="col-xl-3 col-lg-12 push-xl-9">
+        
+      </div>
+      <!-- Right column end -->
+      <!-- Left column start -->
+      <div class="col-xl-9 col-lg-12 pull-xl-3 filter-bar">
+        <!-- Nav Filter tab start -->
+        <nav class="navbar navbar-light bg-faded m-b-30 p-10">
+          <ul class="nav navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="javascript:;">Filter: <span class="sr-only">(current)</span></a>
+            </li>
+            <li ngbDropdown="" class="nav-item dropdown">
+              <a ngbDropdownToggle="" class="nav-link dropdown-toggle ripple" href="javascript:;" id="bydate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-clock-time"></i> By Date</a>
+              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bydate">
+                <a class="dropdown-item ripple" href="javascript:;">Show all</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item ripple" href="javascript:;">Today</a>
+                <a class="dropdown-item ripple" href="javascript:;">Yesterday</a>
+                <a class="dropdown-item ripple" href="javascript:;">This week</a>
+                <a class="dropdown-item ripple" href="javascript:;">This month</a>
+                <a class="dropdown-item ripple" href="javascript:;">This year</a>
+              </div>
+            </li>
+            <!-- end of by date dropdown -->
+            <li ngbDropdown class="nav-item dropdown">
+              <a ngbDropdownToggle class="nav-link dropdown-toggle ripple" href="javascript:;" id="bystatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-chart-histogram-alt"></i> By Status</a>
+              <div  ngbDropdownMenu class="dropdown-menu" aria-labelledby="bystatus">
+                <a class="dropdown-item ripple" href="javascript:;">Show all</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item ripple" href="javascript:;">Conform</a>
+                <a class="dropdown-item ripple" href="javascript:;">Waiting List</a>
+                <a class="dropdown-item ripple" href="javascript:;">Canceled</a>
+                <a class="dropdown-item ripple" href="javascript:;">Closed</a>              
+              </div>
+            </li>
+            <!-- end of by status dropdown -->
+            <li ngbDropdown class="nav-item dropdown">
+              <a ngbDropdownToggle class="nav-link dropdown-toggle ripple" href="javascript:;" id="bypriority" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-sub-listing"></i> By Company</a>
+              <div  ngbDropdownMenu class="dropdown-menu" aria-labelledby="bypriority">
+                <a class="dropdown-item ripple"  (click)="ShowAllCompany()" >Show all</a>
+                <div class="dropdown-divider"></div>
+                
+                <a class="dropdown-item ripple" (click)="FilterDataViaCompany(company.CompanyName)" *ngFor="let company of companyList">{{company.CompanyName}}</a>
+
+                <!-- <a class="dropdown-item ripple" href="javascript:;">High</a>
+                <a class="dropdown-item ripple" href="javascript:;">Normal</a>
+                <a class="dropdown-item ripple" href="javascript:;">Low</a> -->
+              </div>
+            </li>
+          </ul>
+          <div class="nav-item nav-grid">
+            <span class="m-r-15">Show All: </span>
+            <button type="button" (click)="ShowAllReservationList()" class="btn btn-sm btn-primary waves-light m-r-10 ripple" data-toggle="tooltip" data-placement="top" title="list view">
+              <i class="icofont icofont-listine-dots"></i>
+            </button>
+            <!-- <button type="button" class="btn btn-sm btn-primary ripple light" data-toggle="tooltip" data-placement="top" title="grid view">
+              <i class="icofont icofont-table"></i>
+            </button> -->
+          </div>
+          <!-- end of by priority dropdown -->
+        </nav>
+        <!-- Nav Filter tab end -->
+        <!-- Task board design block start-->
+
+            <div class="input-group">
+                <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
+                <span class="input-group-append ripple light" id="basic-addon1"><i class="icofont icofont-search input-group-text"></i></span>
+              </div>
+       
+            
+        
+
+        <div class="row" >
+
+          <div class="col-sm-6" *ngFor="let data of BookingList" >
+            <!-- Invoice list card start -->
+            <div class="card card-border-primary">
+              <div class="card-header">
+                <h5> {{data.GuestName | uppercase}}</h5>                              
+                 <div ngbDropdown class="dropdown-secondary dropdown f-right">
+                  <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button>
+                  <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown9" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                    <a class="dropdown-item ripple" href="javascript:;"><span class="point-marker bg-danger"></span>Make Advance</a>
+                    <a class="dropdown-item ripple" href="javascript:;"><span class="point-marker bg-warning"></span>Extra Charge</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item active" href="javascript:;"><span class="point-marker bg-success"></span>Print Receipt</a>
+                    <a class="dropdown-item ripple" href="javascript:;"><span class="point-marker bg-info"></span>Download Receipt</a>
+                  </div>
+                
+                  <span class="f-left m-r-5 text-inverse">Advance : </span>
+                </div> 
+                <br>
+                <strong *ngIf="data.CompanyName !='0'"  class="label label-primary">Company: {{data.CompanyName}}</strong>
+               
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <ul class="list list-unstyled">
+                      <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
+                      <li>Arrival Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
+                      
+                    </ul>
+                  </div>
+                  <div class="col-sm-6">
+                    <ul class="list list-unstyled text-right">
+                      <li>Total: &nbsp;{{'₹'+ data.BillAmount}}</li>
+                      <li>Advance Paid: <span class="text-semibold">{{'₹'+data.AdvancePaidAmount}}</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="task-list-table">
+
+                  <p class="task-due"><strong> Current Status : </strong>
+
+                  
+                    <strong *ngIf="data.Status=='CNF'" class="label label-success">{{data.Status}}</strong>
+                    
+                    <strong *ngIf="data.Status=='WL'" class="label label-warning">{{data.Status}}</strong>
+                    
+                    <strong *ngIf="data.Status=='CAN'" class="label label-danger">{{data.Status}}</strong>
+
+
+                  </p>
+                </div>
+                <div class="task-board m-0">
+                  <a href="javasript:;" title="View" class="btn btn-info btn-mini b-none ripple light"><i class="icofont icofont-eye-alt m-0"></i></a>
+                  <!-- end of dropdown-secondary -->
+                  <div ngbDropdown class="dropdown-secondary dropdown">
+                    <button ngbDropdownToggle class="btn btn-info btn-mini dropdown-toggle waves-light b-none txt-muted ripple"  type="button" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-navigation-menu"></i></button>
+                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                      <a class="dropdown-item ripple" title="Edit Reservation" (click)="Edit(data.BookingNo)" ><i class="icofont icofont-ui-alarm"></i>Edit</a>
+                      <a class="dropdown-item ripple" title="Cancel Reservation" href="javascript:;"><i class="icofont icofont-ui-edit"></i>Cancel</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item ripple" title="Print Acknowledgement" href="javascript:;"><i class="icofont icofont-spinner-alt-5"></i>Print Ack</a>
+                      <a class="dropdown-item ripple" title="Download Acknowledgement" href="javascript:;"><i class="icofont icofont-attachment"></i>Download Ack</a>
+                    </div>
+                    <!-- end of dropdown menu -->
+                  </div>
+                  <!-- end of seconadary -->
+                </div>
+                <!-- end of pull-right class -->
+              </div>
+              <!-- end of card-footer -->
+            </div>
+            <!-- Invoice list card end -->
+          </div>
+
+   
+
+
+        </div>
+        <!-- Task board design block end -->
+      </div>
+      <!-- Left column end -->
+    </div>
+  
+  </div>
+  

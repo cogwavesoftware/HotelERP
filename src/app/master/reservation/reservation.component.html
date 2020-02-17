@@ -35,7 +35,7 @@
                               <div class="accouter" style="width: 100%;">
                                 <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
                                   class="ngb-accordion"> 
-                                  <ngb-panel id="ngb-close-p1" title="Staying Information">
+                                  <ngb-panel id="ngb-close-p1" title="Staying Information" >
                                     <ng-template ngbPanelContent>
                                       <div class="stayinginfo  gueststayinfo userlist guestinfolastrow">                                       
                                         <div class="col-md-12" style="padding-left: 0px;">
@@ -505,7 +505,7 @@
                                                    
                                                   <div class="td">
                                                     <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
-                                                    <option value="select">Select</option>
+                                                    <option value="0">Select</option>
                                                     <option *ngFor="let sour of discounttypes"
                                                       [value]="sour">{{ sour  }}</option>
                                                   </select>

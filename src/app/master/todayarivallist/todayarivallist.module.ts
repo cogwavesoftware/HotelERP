@@ -1,20 +1,24 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridtestRoutingModule } from './gridtest-routing.module';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { GridtestComponent } from './gridtest.component';
+
 import { SharedModule } from './../../shared/shared.module';
 import { CompareValidatorDirective } from 'src/app/shared/compare-validator.directive';
 import {DatePipe} from '@angular/common';
 
 import { ToastyModule } from 'ng2-toasty';
 import {DataTableModule} from 'angular2-datatable';
+import { TodayarivallistRoutingModule } from './todayarivallist-routing.module';
+import { TodayarivallistComponent } from './todayarivallist.component';
+
 import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
-  declarations: [GridtestComponent],
+  declarations: [TodayarivallistComponent],
   imports: [
-    CommonModule,GridtestRoutingModule,
+    CommonModule,TodayarivallistRoutingModule,
     SharedModule,
     HttpClientModule,
     DataTableModule,
@@ -23,4 +27,8 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers:[DatePipe]
 })
-export class GridtestModule { }
+export class TodayarivallistModule { }
+
+
+
+
