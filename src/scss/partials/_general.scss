@@ -6079,8 +6079,7 @@ outerdiv{
     font-family: Poppins-Medium;
     font-size: 120%;
     padding: 5px;
-    background-color: #2a2a72;
-    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    background-color: #448aff;     
 }
 
 
@@ -6282,7 +6281,7 @@ outerdiv{
     border-bottom-right-radius: 10px;
     color:#585858;
     border:3px solid #ccc;
-    width:97px;
+    width:91px;
     display: inline-block;
     vertical-align: top;
 }
@@ -6628,6 +6627,7 @@ outerdiv{
     width: 99px;  
  }
 
+ 
  .reservationmaster .accouter .test123.paymentarray .grid-table .thead .td {
     width: 171px; 
     border:1px solid #ccc;     
@@ -6699,6 +6699,50 @@ outerdiv{
 .checkinformsgrops .bs-timepicker-field{
     width:95px!important;
 }
+
+/* this code fot box model type*/
+.contentboxmodel1{
+    font-family: Poppins-Regular;
+}
+.contentboxmodel1 .card-body{
+    padding:10px;
+}
+.contentboxmodel .md-content > div{
+    padding:0px 0px 0px 0px; 
+    font-family: Poppins-Regular;
+    font-size:95%;
+}
+.contentboxmodel .card-body{
+    padding: 10px 10px 10px 0px;
+    font-size: 80%;
+}
+.contentboxmodel .card{
+    text-align: left;
+}
+.contentboxmodel .card .card-header{
+    padding:10px 10px 10px 20px;
+}
+.contentboxmodel  .card .card-header h5{
+    font-weight: bold;
+    font-size: 90%;
+    color: #37474f;
+}
+.contentboxmodel  .md-content{
+    font-weight:normal;
+}
+.contentboxmodel  .md-content > div ul{
+    padding:0 0 10px 20px;
+}
+.contentboxmodel .md-content > div ul li{
+    padding:0px 0px 0px 0px;
+}
+.contentboxmodel .card.card-border-primary{
+    margin-bottom:10px;
+}
+.contentboxmodel  .md-modal{
+    top:40%;
+}
+ 
 // .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
       
 //     width:70px!important;

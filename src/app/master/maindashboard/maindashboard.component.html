@@ -406,24 +406,21 @@
         </div>
             
 
- <app-modal-animation class="modellg" [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">   
-  <h3 class="f-15" style="position: relative;">Guest Details
+ <app-modal-animation class="modellg contentboxmodel" [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">   
+  <h3 class="f-15" style="position: relative;">Today Arrival List
     <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModal($event)">Close</button>             
                  
  </h3>
     <div class="app-modal-body text-center"> 
-      <perfect-scrollbar class="overflow-container modal-lg"  [style.width]="'100%'" [style.height]="'365px'" [config]="config">
+      <perfect-scrollbar class="overflow-container modal-lg"  [style.width]="'100%'" [style.height]="'510px'" [config]="config">
        
 
-        <div class="col-xl-9 col-lg-12 pull-xl-3 filter-bar">
-      
-          <div class="input-group">
-              <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
-              <span class="input-group-append ripple light" id="basic-addon1"><i (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
-            </div>
-
+        <div class="col-sm-12 filter-bar"> 
       <div class="row" >
-
+        <div class="input-group" style="padding:10px; margin-bottom: 0;">
+          <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
+          <span class="input-group-append ripple light" id="basic-addon1"><i (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
+        </div>
         <div class="col-sm-6" *ngFor="let data of BookingList" >
           <!-- Invoice list card start -->
           <div class="card card-border-primary">
@@ -445,7 +442,7 @@
                 <div class="col-sm-6">
                   <ul class="list list-unstyled">
                     <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
-                    <li>Arrival Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
+                    <li>Arr Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
                     
                   </ul>
                 </div>
@@ -609,7 +606,7 @@
         width: 100%;">Room {{rmno}} ({{roomname1}})
         </label>       
         
-        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'665px'" [config]="config">
           <div class="row">
             <div class="col-sm-12">
               <ul>

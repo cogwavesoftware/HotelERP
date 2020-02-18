@@ -3,7 +3,7 @@
     /* You can add global styles to this file, and also import other style files */
 .grid-table
 {
-	display:table;
+	// display:table;
 }
 .thead
 {
@@ -91,6 +91,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
         border:2px solid yellow!important;
     }
+  
 
 }
  @media only screen and (max-width: 768px) {
@@ -123,4 +124,39 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     height: 50px;    
     display: inline-table;
     margin: 2px 1px 2px 3px;
+}
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .thead .td {
+    width: 115px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+}
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td input{
+    width:114px;
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
+    width: 230px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+     
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
+    width:229px;
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td.lasttd{
+    width:auto;
+}
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td.lasttd{
+    width:auto;
 }

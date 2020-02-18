@@ -196,10 +196,11 @@
                                 
                                      <div class="col-md-12" style="padding-left:0; padding-right:0">
                                        <div class="row">
+                                        
                                          <div class="col-sm-12"> 
     
                                            <!--  test row 1-->
-                                           <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
+                                           <div class="userlist " style="margin-bottom: 0px; position: relative; padding-top:0">
                                             <div class="row" style="margin-bottom:0">
                                               <div class='col-12 col-sm-2' style="padding-left: 0;">
                                                 <div class="form-group" style="padding-top:10px;">                                
@@ -291,10 +292,8 @@
                                               <div class="form-group">
                                                 <label class="form-control-label" for="pincode">Pincode </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
-                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>
-                                             
-  
-                                                <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
+                                                 <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
                                                 </div>  
                                             </div>
                                         </div> <!-- end row -->
@@ -407,7 +406,7 @@
 
 
                                            <div class='col-12 col-lg-6'>
-                                             <div class="row">
+                                             <div class="row" style="margin-bottom: 0;">
                                                <div class="col-sm-4">
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="address">Guest Photo </label>
@@ -448,7 +447,7 @@
                                                   <label  >Id Proof Front</label>
                                                  <input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdFront.errors || form.controls.GuestIdFront.touched || form.controls.GuestIdFront.dirty}" required  />  
                                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdFront.errors?.required" >GuestIdFront   is required</div>                                   
-                                                   <div class="row" style="margin-left:0;margin-right:0">
+                                                   <div class="row1111" style="margin-left:0;margin-right:0;margin-bottom:0">
                                                      <img [src]="previewUrl2"  style="width:100%;max-width:100px">
                                                                                
                                                    </div>
@@ -462,7 +461,7 @@
                                                   <input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfback($event)" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdBack.errors || form.controls.GuestIdBack.touched || form.controls.GuestIdBack.dirty}" required  />  
                                                    <div class="invalid-feedback" *ngIf="form.controls.GuestIdBack.errors?.required" >GuestIdBack   is required</div>
                
-                                                   <div class="row" style="margin-left:0;margin-right:0">
+                                                   <div class="row1111" style="margin-left:0;margin-right:0;margin-bottom:0">
                                                     <img [src]="previewUrl3"  style="width:100%;max-width:100px">                          
                                                     </div>
                                               </div>                                    
@@ -497,24 +496,24 @@
 
                                 <ngb-panel id="ngb-close-p1" title="Booking Table ">
                                   <ng-template ngbPanelContent>
-                                    <div class="test123 userlist " style="padding: 2px;">
+                                    <div class="test123 userlist grpcheckinbookingtbl" style="padding: 2px 2px 2px 4px;">
                                       <div class="grid-table" style="width: 100%;">
                                         <div class="thead">
                                           <div class="">
-                                            <div class="td">Room No</div>
-                                            <div class="td">Room Type</div>
+                                            <div class="td"><i class="fa fa-building"></i> Room No</div>
+                                            <div class="td"><i class="fa  fa-bed"></i> Room Type</div>
                                            
-                                            <div class="td">Pax</div>
-                                            <div class="td">Plan</div>
-                                            <div class="td">Food</div>
-                                            <div class="td">Tariff</div>
-                                            <div class="td">Tax</div>
-                                            <div class="td">Net Amt</div>
+                                            <div class="td"><i class="fa fa-area-chart" aria-hidden="true"></i> Pax</div>
+                                            <div class="td"><i class="fa fa-indent"></i> Plan</div>
+                                            <div class="td"><i class="fa fa-cutlery"></i> Food</div>
+                                            <div class="td"><i class="fa  fa-bed"></i> Tariff</div>
+                                            <div class="td"><i class="fa  fa-star"></i> Tax</div>
+                                            <div class="td"><i class="fa  fa-paypal"></i> Net Amt</div>
 
-                                            <div class="td">DiscountType</div>
-                                            <div class="td">DisValuet</div>
-
-                                            <div class="td" *ngIf="isGorupCheckin">
+                                            <div class="td"><i class="fa fa-percent" aria-hidden="true"></i> Discount Type</div>
+                                            <div class="td "><i class="fa  fa-paypal"></i> DisValuet</div>
+ 
+                                            <div class="td lasttd" *ngIf="isGorupCheckin">
                                               <button type="button"  class=" " (click)="modalselectvacent.show()">
                                                 <i class="fa fa-plus"></i> 
                                               </button>
@@ -614,7 +613,7 @@
                                                   <input class="bookingRoomTable_textalign" formControlName="discvalue">
                                                 </div>
 
-                                                <div class="td" *ngIf="isGorupCheckin">
+                                                <div class="td lasttd" *ngIf="isGorupCheckin">
                                                   <!-- <button type="submit" class="btn" [disabled]="fg.invalid"
                                                      [ngClass]="(form.get('bankAccountID').value==0)?'btn-success':'btn-outline-dark'"><i class="far fa-save fa-lg"></i>
                                                     
@@ -709,17 +708,19 @@
 
                                 <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                   <ng-template ngbPanelContent>
-                                    <div class="test123 userlist " style="padding: 2px;">
+                                    <div class="test123 userlist grpcheckingpayntarry" style="padding: 2px 2px 2px 4px">
                                       <div class="grid-table" style="width: 100%;">
                                         <div class="thead">
                                           <div class="">
-                                            <div class="td">Select Mode</div>
-                                            <div class="td">Delect Detail</div>
-                                            <div class="td">Amount</div>
-                                            <div class="td">Description</div>
-                                            <div class="td">Selected Mode</div>
+                                            <div class="td"><i class="fa fa-money" aria-hidden="true"></i> Select Mode</div>
+                                            <div class="td"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                               Delect Detail</div>
+                                            <div class="td"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Amount</div>
+                                            <div class="td"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                               Description</div>
+                                            <div class="td"><i class="fa fa-money" aria-hidden="true"></i>  Selected Mode</div>
                                             
-                                            <div class="td">
+                                            <div class="td lasttd">
                                               <button type="button" class=" " (click)="AddPaymentButtonClick()">
                                                 <i class="fa fa-plus"></i> 
                                               </button>
@@ -783,7 +784,7 @@
 
 
 
-                                                <div class="td">                                      
+                                                <div class="td lasttd">                                      
                                                   <button (click)="onDeletePayment(0,k)">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                   </button>
@@ -1196,10 +1197,9 @@
 
 <!-- ////companymodel --> 
 
-    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">      
+    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-5 addressmodeleffect'">      
       <h3 class="f-15" style="position: relative;">Company Details
-        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
-     </h3>
+      </h3>
       <div class="container">
         <div class="col-md-12 userlist ">
           <div class="row ">
@@ -1299,7 +1299,7 @@
                            <td>{{item.CompanyName}}</td>   
                            <td>{{item.GSTNO}}</td>                              
                           <td class="action-icon">
-                              <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)"><i class="fa fa-download"></i> Get Details</a>                     
+                              <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)">   <i class="fa fa-download" aria-hidden="true"></i></a>                     
                           </td>
                         </tr>  
                         </tbody>
@@ -1365,7 +1365,7 @@
                        <td>{{item.MobileNo}}</td>  
                        <td>{{item.VechileNo}}</td>                             
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpenDrivermodelsDetail(item,$event)">Get Details</a>                     
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpenDrivermodelsDetail(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                     
                       </td>
                     </tr>  
                     </tbody>
@@ -1391,7 +1391,7 @@
 ////guestname -->
 <app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5 addressmodeleffect'">   
   <h3 class="f-15" style="position: relative;">Guest Details
-    <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+    <!-- <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>              -->
  </h3>
     <div class="app-modal-body text-center" style="position: relative;"> 
       <div class="table-content crm-table">
@@ -1427,7 +1427,7 @@
                    <td>{{item.PINCode}}</td>                   
                    <td>{{item.MobileNo}}</td>        
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)">Get Details</a>                     
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                     
                   </td>
                 </tr>  
                 </tbody>
@@ -1457,7 +1457,7 @@
 
     <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">
       <h3 class="f-15" style="position: relative;">Pincode Details 
-        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+       <!-- <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button> -->
      </h3>
         <div class="app-modal-body text-center" style="position: relative;"> 
           <div class="table-content crm-table">
@@ -1494,7 +1494,7 @@
                        <td>{{item.Pincode}}</td>                      
                        <td>{{item.State}}</td>        
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)">Get Details</a>                          
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                          
                       </td>
                     </tr>  
                     </tbody>
@@ -1529,8 +1529,8 @@
     <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6 addressmodeleffect'">
       
       <h3 class="f-15" style="position: relative;">Referance Details
-        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
-                     -
+        <!-- <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>              -->
+                   
      </h3>
 
         <div class="app-modal-body text-center" style="position: relative;"> 
@@ -1565,7 +1565,7 @@
                        <td>{{item.RefName}}</td>   
                        <td>{{item.RefMobileNo}}</td>     
                       <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="PatchRefenceDetail(item,$event)">Get Details</a>                          
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="PatchRefenceDetail(item,$event)"><i class="fa fa-download" aria-hidden="true"></i></a>                          
                       </td>
                     </tr>  
                     </tbody>
