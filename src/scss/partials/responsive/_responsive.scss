@@ -1101,6 +1101,13 @@
     .task-sale-card {
         text-align: center;
     }
+    .checkinformsgrops .accouter .test123.grpcheckinbookingtbl{
+        padding:1px 0px 0px 1px;
+    }
+     
+    .checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table {
+        overflow-x: scroll;
+    }
 }
 @media only screen and (max-width: 460px) {
     .fc-toolbar .fc-right .fc-button-group {
@@ -1275,7 +1282,13 @@
         // width: 34px!important;   
         height: 23px;
     }
-
+    .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
+        width: 54px!important;        
+    }
+    .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
+    .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
+        width:53px!important;        
+    }
 }
 @media only screen and (max-width: 420px) {
     #msform {

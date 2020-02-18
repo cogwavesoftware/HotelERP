@@ -881,6 +881,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
       state: SelectedData.City,
       nation: "India",
     })
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
   PatchSubModeName(index: number) {
@@ -909,6 +912,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.IsWalkinCheckin = false;
     this.IsCompanyCheckin = true;
     this.CompanyCheckin(SelectedData.CompanyCode);
+
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
 
@@ -920,6 +927,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
       vehicleno: SelectedData.VechileNo,
       charge: SelectedData.ChargeAmount,
     })
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
 
@@ -928,7 +938,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       referenceid: SelectedData.Id
     })
-    this.referanceName = SelectedData.RefName
+    this.referanceName = SelectedData.RefName;
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
   openMyGuestNameModalData(SelectedData: any, event: any) {
     console.log('SelectedData')
@@ -964,7 +977,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
     this.previewUrl2 = environment.GuestimagePath + "/" + dd;
     //console.log("image name with path"+ this.imagePath1);
-
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
   }
 
 
