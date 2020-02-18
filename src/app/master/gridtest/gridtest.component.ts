@@ -437,41 +437,33 @@ export class GridtestComponent implements OnInit, OnDestroy {
     this._bankservice.changeMessage("expanded")
   }
 
-  enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
-
-
-
-
-
-
-    const classNameS = event.target.className;
-
-    if (classNameS.indexOf('freeroom') >= 0) {
-      let relen = this.reservedlist.length;
-      for (let j = 0; j < relen; j++) {
-        if (RoomCodes === this.reservedlist[j].RoomCode) {
-          var req = this.reservedlist[j].TotalBookedRoom;
-          var selected = 0;
-          for (var i = 0; i < this.other.length; i++) {
-            var rcode = this.other[i].RoomCode;
-            if (rcode === this.reservedlist[j].RoomCode) {
-              selected += 1;
-            }
+  CheckRoom(RoomCodes: string): number {
+    debugger;
+    let relen = this.reservedlist.length;
+    for (let j = 0; j < relen; j++) {
+      if (RoomCodes === this.reservedlist[j].RoomCode) {
+        var req = this.reservedlist[j].TotalBookedRoom;
+        var selected = 0;
+        for (var i = 0; i < this.other.length; i++) {
+          let rcode = this.other.controls[i].get("RoomCode").value;
+          if (rcode === this.reservedlist[j].RoomCode) {
+            selected += 1;
           }
-          if (selected >= req) {
-            // return req;
-          }
-          else {
-           alert('Not Allowed')
-           return;
-          }
-
-
+        }
+        if (selected <= req) {
+          return 1;
+        }
+        else {
+          return 0;
         }
       }
+    }
+  }
 
+  enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
 
-
+    const classNameS = event.target.className;
+    if (classNameS.indexOf('freeroom') >= 0) {
       document.querySelector("#" + RoomNos).classList.remove('freeroom');
       document.querySelector("#" + RoomNos).classList.add('occroom');
       this.selectedRoomNoArray.push(RoomNo)
@@ -496,10 +488,22 @@ export class GridtestComponent implements OnInit, OnDestroy {
           for (let groupdata of this.Groupcheckin) {
             this.AddBokingButtonviaForeach(groupdata)
           }
+          let Count = this.CheckRoom(RoomCodes);
+          if (Count == 0) {
+            var Warning="Not Allowed to book! Already you Selected"
+
+            this.addToast("Cogwave Software", Warning, "warning");
+           
+
+            document.querySelector("#" + RoomNos).classList.remove('occroom');
+            document.querySelector("#" + RoomNos).classList.add('freeroom');
+            let index = this.selectedRoomNoArray.indexOf(RoomNo);
+            this.selectedRoomNoArray.splice(index);
+            this.onDelete(0, index);
+          }
+
+
         });
-
-
-
     }
     else {
       document.querySelector("#" + RoomNos).classList.remove('occroom');
@@ -1227,7 +1231,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
       title: title,
       msg: Message,
       showClose: false,
-      timeout: 3000,
+      timeout: 5000,
       theme: theme,
       onAdd: (toast: ToastData) => {
         //console.log('Toast ' + toast.id + ' has been added!');
@@ -1246,7 +1250,6 @@ export class GridtestComponent implements OnInit, OnDestroy {
         this.toastyService.info(toastOptions);
         break;
       case "success":
-
         this.toastyService.success(toastOptions);
         break;
       case "wait":
