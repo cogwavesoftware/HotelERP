@@ -24,15 +24,8 @@ import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs
 import { Availabilitymodel } from './../../_models/Availabilitymodel';
 import { ReservationService } from './../../_services/reservation.service';
 import { HMSReservationFormmodel, HMSReservationBookingmodel } from './../../_models/HMSReservationFormmodel'
-import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
-
- 
- 
- 
-import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 
- 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
@@ -50,25 +43,19 @@ import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
     ])
   ]
 })
- 
-export class ReservationComponent  implements OnInit, OnDestroy {
-   
 
-  roomstype:any;
- 
- 
- 
+export class ReservationComponent implements OnInit, OnDestroy {
+
+  IsCompanyReservation: boolean;
+  OrgCompanycode: string;
+  roomstype: any;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
   addcompanybtn: boolean = true;
   selectedRoomcode: any;
   ReferanceList: any;
   subpaymodelist: any;
-
   error: string;
-  base64TrimmedURL: any;
-  base64DefaultURL: any;
-  generatedImage: any;
   guest: any;
   picodelist: any;
   referencelist: any;
@@ -77,9 +64,7 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   theme = "bootstrap";
   type = "default";
   closeOther = false;
-
   position = 'top-right';
-
   NodaysChanged: number = 0;
   form: FormGroup;
   datePickerConfig: Partial<BsDatepickerConfig>;
@@ -138,13 +123,16 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   howuknow = [];
   Nationlist = [];
   Titlelist = [];
-
-
+  ResLabel: string;
+  IsReservation: boolean;
+  IsAmendReservation: boolean;
+  OrgReservationNo: string;
   Branch: string;
   todate = new Date();
   fromdate = new Date();
   Availabilitylist: Availabilitymodel[] = [];
   Reservationform: HMSReservationFormmodel;
+  ReservationAmendform: any;
 
   hintColor: string = "red";
   private _searchTerm: string;
@@ -160,7 +148,7 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) newcompanyform: any;
   @ViewChild('draggable', { static: false }) public draggableElement: ElementRef;
 
-  constructor(private datePipe: DatePipe,elementRef: ElementRef,
+  constructor(private datePipe: DatePipe, elementRef: ElementRef,
     public router: Router, private toastyService: ToastyService,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
@@ -171,6 +159,25 @@ export class ReservationComponent  implements OnInit, OnDestroy {
     this._bankservice.changeMessage("collapsed")
     this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
+
+    let ReservationNo;
+    // this.Id$=this.route.snapshot.paramMap.pipe(map(paramMap=>paramMap.get('id')));
+    //let RoomNo=this.route.snapshot.paramMap.get('RoomNo');
+    this.route.paramMap.subscribe(param => {
+      this.OrgReservationNo = param.get("ResNo");
+    })
+
+    if (this.OrgReservationNo == "NewRes") {
+      this.IsReservation = true;
+      this.IsAmendReservation = false;
+      this.ResLabel = "New Reservation";
+    }
+    else {
+      this.IsReservation = false;
+      this.IsAmendReservation = true;
+      this.ResLabel = "Ammend Reservation / " + this.OrgReservationNo;
+    }
+
 
     this.minDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate() + 1);
@@ -187,6 +194,9 @@ export class ReservationComponent  implements OnInit, OnDestroy {
         showSeconds: false,
         // arrowkeys:true
       });
+
+
+
 
     this.form = this.formBuilder.group({
       companycode: ["0", [Validators.required]],
@@ -238,29 +248,47 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   AddBokingButtonviaForeach(resdata: any): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGridviaForeach(resdata));
   }
+
   AddbokingGridviaForeach(resdata): FormGroup {
+    let Required, DiscountType, Disvalue, Plans;
+    if (resdata.IsSelect == true) {
+      Required = resdata.Required;
+      DiscountType = resdata.Distype;
+      Disvalue = resdata.Disvalue;
+      Plans = resdata.PlanName;
+    }
+    else {
+      Required = "0";
+      DiscountType = "0";
+      Disvalue = "0";
+      Plans = "EP";
+    }
     return this.formBuilder.group({
       bankAccountID: ["0"],
       RoomCode: [resdata.RoomCode],
       Available: [resdata.Available, [Validators.required]],
-      Required: ["0", [Validators.required]],
+      Required: [Required, [Validators.required]],
       Pax: [resdata.Pax, [Validators.required]],
-      PlanName: ["EP", [Validators.required]],
+      PlanName: [Plans, [Validators.required]],
       Food: [resdata.Food, [Validators.required]],
       Tariff: [resdata.Tariff, [Validators.required]],
       Tax: [resdata.Tax, [Validators.required]],
       Grand: [resdata.Grand, [Validators.required]],
       Net: [resdata.Net, [Validators.required]],
-      disctype: ["select"],
-      discvalue: ["0"]
+      disctype: [DiscountType, [Validators.required]],
+      discvalue: [Disvalue, [Validators.required]]
     });
   }
 
 
 
+
+
+
+
   ngOnInit() {
 
-    this.CreateRequiredRoom(30);
+    this.CreateRequiredRoom(20);
     setTimeout(() => {
       this.reservloader = false;
     }, 7000)
@@ -279,40 +307,151 @@ export class ReservationComponent  implements OnInit, OnDestroy {
         console.log("Product fetched sucssesfully.");
         this.Availabilitylist = this.golbalresponse;
         console.log(this.Availabilitylist)
-        
-        this.roomstype= this.Availabilitylist[0].Rooms;
-
+        this.roomstype = this.Availabilitylist[0].Rooms;
       }
     )
-    let reservation = new HMSReservationFormmodel()
-    {
-      reservation.CheckInDate = fromdates;
-      reservation.CheckOutDate = todates;
-      reservation.ArrivalTime = this.datePipe.transform(this.form.get('checkintime').value, "HH:mm");
-      reservation.DepartureTime = this.datePipe.transform(this.form.get('checkouttime').value, "HH:mm")
-      reservation.NoDays = 1;
-      reservation.BranchCode = this.Branch;
-    }
-    this._reservationservice.GetBookingData(reservation).subscribe((data) => {
-      this.golbalresponse = data;
-    },
-      error => {
-        console.log(error.message);
+
+    if (this.IsReservation == true) {
+      let reservation = new HMSReservationFormmodel()
+      {
+        reservation.CheckInDate = fromdates;
+        reservation.CheckOutDate = todates;
+        reservation.ArrivalTime = this.datePipe.transform(this.form.get('checkintime').value, "HH:mm");
+        reservation.DepartureTime = this.datePipe.transform(this.form.get('checkouttime').value, "HH:mm")
+        reservation.NoDays = 1;
+        reservation.BranchCode = this.Branch;
+      }
+
+      this._reservationservice.GetBookingData(reservation).subscribe((data) => {
+        this.golbalresponse = data;
       },
-      () => {
-        console.log("Product fetched sucssesfully.");
-        this.Reservationform = this.golbalresponse;
-        console.log(this.Reservationform)
-        for (let resdata of this.Reservationform.booking) {
-          this.AddBokingButtonviaForeach(resdata)
+        error => {
+          console.log(error.message);
+        },
+        () => {
+          console.log("Product fetched sucssesfully.");
+          this.Reservationform = this.golbalresponse;
+          console.log(this.Reservationform)
+          for (let resdata of this.Reservationform.booking) {
+            this.AddBokingButtonviaForeach(resdata)
+          }
+        });
+    }
+    else {
+      this.OrgCompanycode = "0";
+      this.IsCompanyReservation = false;
+      this._reservationservice.GetBookingDetailViaRes(this.Branch, this.OrgReservationNo).subscribe((res: any) => {
+        console.log(res)
+        this.ReservationAmendform = res;
+        let Guestmodel = this.ReservationAmendform.Guest
+        let companymodel = this.ReservationAmendform.company
+        let ResMastermodel = this.ReservationAmendform.ResMaster
+
+
+        let ReservationBookedSlaveArray = [];
+        var AllreadyBookedType = [];
+        let Checkintime, checkoutTime, checkindate, checkoutdate;
+        ReservationBookedSlaveArray = this.ReservationAmendform.ResSlave;
+        ReservationBookedSlaveArray.forEach(Slave => {
+          AllreadyBookedType.push(Slave.RoomCode)
+          // Checkintime="12:30";
+          //checkoutTime=this.datePipe.transform(Slave.CheckoutTime, "HH:mm");
+          checkindate = this.datePipe.transform(Slave.CheckinDate, "dd/MM/yyyy"); //correct dont change
+          checkoutdate = this.datePipe.transform(Slave.CheckoutDate, "dd/MM/yyyy");  //correct dont change      
+        });
+
+        // console.log(Checkintime)
+        // console.log(checkoutTime)
+        console.log(checkindate)
+        console.log(checkoutdate)
+
+        this.form.patchValue({
+          Guestcode: Guestmodel.GuestCode,
+          title: Guestmodel.GuestTittle,
+          guestname: Guestmodel.GuestName,
+          gender: Guestmodel.Gender,
+          mobile: Guestmodel.MobileNo,
+          email: Guestmodel.Email,
+          pincode: Guestmodel.PINCode,
+          city: Guestmodel.City,
+          state: Guestmodel.State,
+          nation: Guestmodel.Nation,
+          Address1: Guestmodel.Address1,
+          Address2: Guestmodel.Address2,
+          Address3: Guestmodel.Address3,
+          gstno: Guestmodel.GSTNO,
+          foriegnguest: Guestmodel.ForeignGuest,
+          Billing: ResMastermodel.BillingMode,
+          visit: ResMastermodel.PurposeofVisit,
+          source: ResMastermodel.BookingSource,
+          arivalmode: "Reservation",
+          bookingid: ResMastermodel.BookingId,
+          referenceid: ResMastermodel.RefId,
+          // checkintime:Checkintime,
+          // checkouttime:checkoutTime,
+          nofdays: ResMastermodel.NoOfDays,
+          checkindate: checkindate,
+          checkoutdate: checkoutdate
+        })
+        if (companymodel != null) {
+          this.form.patchValue({
+            companycode: companymodel.CompanyCode,
+            gstno: companymodel.GSTNO,
+          })
+          this.OrgCompanycode = companymodel.CompanyCode;
+          this.IsCompanyReservation = true;
         }
+
+        let reservation = new HMSReservationFormmodel()
+        {
+          reservation.CheckInDate = checkindate;
+          reservation.CheckOutDate = checkindate;
+          reservation.ArrivalTime = this.datePipe.transform(this.form.get('checkintime').value, "HH:mm");
+          reservation.DepartureTime = this.datePipe.transform(this.form.get('checkouttime').value, "HH:mm")
+          reservation.NoDays = ResMastermodel.NoOfDays;
+          reservation.BranchCode = this.Branch;
+          reservation.BookedRoomCodelist = JSON.stringify(AllreadyBookedType);
+          reservation.TypeBook = "A";
+          reservation.ReservNo = this.OrgReservationNo;
+        }
+        console.log(reservation)
+        this._reservationservice.GetBookingData(reservation).subscribe((data) => {
+          this.golbalresponse = data;
+        },
+          error => {
+            console.log(error.message);
+          },
+          () => {
+            console.log("Booking fetched sucssesfully.");
+            this.Reservationform = this.golbalresponse;
+            console.log(this.Reservationform)
+
+            // let BooikngLength=this.Reservationform.booking.length;
+            // for(let i = 0; i < BooikngLength; i++ )
+            // {// }
+
+
+            for (let resdata of this.Reservationform.booking) {
+              this.AddBokingButtonviaForeach(resdata)
+            }
+          });
+
+
       });
+    }
+
+
+    // for (let i = 0; i < this.other.length; i++) {
+    //   //     this.onDelete(0, i)
+    //   //     // let index = (<FormArray>this.form.get('Other')).controls.findIndex(x => x.value === i);
+    //   //   }
+
+
     this.model.Id = 0;
     this.model.CompanyCode = 0;
     this.model.BranchCode = "0";
     this.model.CreatedBy = localStorage.getItem("Id");
     this.searchresultsdiv = true;
-
     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
       this.ReferanceList = res;
     })
@@ -361,12 +500,11 @@ export class ReservationComponent  implements OnInit, OnDestroy {
       console.log(this.roomtype);
     });
     this.CreateNoofDays(31)
-
     this.handleFormChanges();
+
   }
 
   handleFormChanges() {
-
     //alert('f')
     this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
@@ -374,9 +512,8 @@ export class ReservationComponent  implements OnInit, OnDestroy {
       let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
       console.log(CheckinDate)
       console.log(checkoutdate)
-
       if (CheckinDate < checkoutdate) {
-        alert('corresct')
+
         let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
         alert(numberofdays)
         this.form.patchValue({
@@ -395,12 +532,12 @@ export class ReservationComponent  implements OnInit, OnDestroy {
     // });
   }
 
-  ngOnDestroy() {
 
+
+
+  ngOnDestroy() {
     this._bankservice.changeMessage("expanded")
   }
-
-
   FilterPaymentMode(index: number) {
     let mode = this.PayArray.controls[index].get("Paymode").value;
 
@@ -446,15 +583,10 @@ export class ReservationComponent  implements OnInit, OnDestroy {
       .then((confirmed) => {
         console.log('User confirmed:', confirmed)
         if (confirmed === true) {
-
-          
           var checkoutDates = '';
           let cku = this.form.value.checkoutdate;
-
-
           var checkinDates = '';
           let chkin = this.form.value.checkindate;
-
           debugger
           if (chkin.length == 10) {
           }
@@ -462,18 +594,14 @@ export class ReservationComponent  implements OnInit, OnDestroy {
             checkinDates = this.datePipe.transform(this.form.value.checkindate, "MM/dd/yyyy");
             this.form.value.checkindate = checkinDates;
           }
-
-
           if (cku.length == 10) {
           }
           else {
             checkoutDates = this.datePipe.transform(this.form.value.checkoutdate, "MM/dd/yyyy");
             this.form.value.checkoutdate = checkoutDates;
           }
-
           this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
           this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
-
           this._reservationservice.SaveReservationData(this.form.value)
             .subscribe(res => {
               console.log(res);
@@ -488,7 +616,6 @@ export class ReservationComponent  implements OnInit, OnDestroy {
                 this.router.navigate(["/Master/dashboard"]);
               });
 
-
         }//confoirmtrue end  
         else {
         }
@@ -501,18 +628,6 @@ export class ReservationComponent  implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // server-side search
-
-
-    // fromEvent(this.checkoutdatechange.nativeElement, 'keyup')
-    // .pipe( filter(text => this.checkoutdatechange.nativeElement.value.length > 2),
-    // tap(x=>
-    //   alert('sss') )
-
-    // );
-
-
-
 
     fromEvent(this.searchTermguest.nativeElement, 'keyup')
       .pipe(
@@ -526,7 +641,6 @@ export class ReservationComponent  implements OnInit, OnDestroy {
           return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguest.nativeElement.value);
         })
       ).subscribe(res => this.guest = res);
-
 
     fromEvent(this.searchTerm.nativeElement, 'keyup')
       .pipe(
@@ -555,8 +669,6 @@ export class ReservationComponent  implements OnInit, OnDestroy {
         })
       ).subscribe(res => this.referencelist = res);
 
-
-
     fromEvent(this.searchTermcompany.nativeElement, 'keyup')
       .pipe(
         filter(text => this.searchTermcompany.nativeElement.value.length > 2),
@@ -573,23 +685,16 @@ export class ReservationComponent  implements OnInit, OnDestroy {
         console.log(this.companylist)
       });
   }
-
-
-
-
-
   CreateRequiredRoom(number) {
     for (var i = 1; i <= number; i++) {
       this.requiredRoomlist.push(i);
     }
   }
-
   CreateNoofDays(number) {
     for (var i = 1; i <= number; i++) {
       this.noofdays.push(i);
     }
   }
-
   ChangeCheckoutDate(NoOfDays) {
     //this.NodaysChanged = NoOfDays;
     // var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
@@ -663,16 +768,16 @@ export class ReservationComponent  implements OnInit, OnDestroy {
       referenceid: SelectedData.Id
     })
     this.referanceName = SelectedData.RefName;
-    console.log("event"+ event);
+    console.log("event" + event);
     debugger;
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
     //allbtn.classList.remove("md-show");
     //document.querySelector('#' + event).classList.remove("md-show");
-   // this.draggableElement.nativeElement.remove();
+    // this.draggableElement.nativeElement.remove();
     //this.elementRef.nativeElement.classList.add('md-' + this.color_);
     //this.draggableElement.nativeElement.classList.add("mytest");
-     
+
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
@@ -698,7 +803,7 @@ export class ReservationComponent  implements OnInit, OnDestroy {
     });
     this.form.get('guestname').disable({ onlySelf: true });
 
-var allbtn = document.querySelector('.md-show');
+    var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
@@ -806,7 +911,8 @@ var allbtn = document.querySelector('.md-show');
       DepartureTime: this.datePipe.transform(this.form.get('checkouttime').value, "HH:mm"),
       NoDays: this.form.value.nofdays,
       booking: this.golbalresponse,
-
+      TypeBook: "R",
+      BookedRoomCodelist: "0"
     }
 
 

@@ -55,5 +55,20 @@ export class ReservationService {
    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/bookingslistallsearch?BranchCode=' + BranchCode + '&search=' + search);
   }
 
+  GetBookingDetailViaRes(BranchCode:string,BookingNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/GetBookingViaResNo?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
+  }
+
+  GetReservationslaveDetail(BranchCode:string,BookingNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/BookedRoomcode?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
+  }
+
+  GetReservationCheckin(BranchCode:string,BookingNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/ReservedDetail?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
+  }
+
 
 }

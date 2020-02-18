@@ -1,13 +1,11 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridtestComponent } from './gridtest.component';
 import {  Routes,RouterModule } from "@angular/router";
+import { TodayarivallistComponent } from './todayarivallist.component';
  
-
 const routes:Routes = [{
   path:'',
-  component:GridtestComponent,
+  component:TodayarivallistComponent,
   // data:{
   //   title:'Gridtest',
   //   icon:'icon-home',
@@ -15,8 +13,6 @@ const routes:Routes = [{
   //   status: true
   // }
   }];
-  
-
 
 @NgModule({
   declarations: [],
@@ -25,4 +21,7 @@ const routes:Routes = [{
   ],
   exports:[RouterModule]
 })
-export class GridtestRoutingModule { }
+export class TodayarivallistRoutingModule { }
+
+
+

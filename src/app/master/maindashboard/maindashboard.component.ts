@@ -1,3 +1,4 @@
+import { ReservationService } from './../../_services/reservation.service';
 import { Component, OnInit,ViewChild ,OnDestroy} from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Observable } from 'rxjs';
@@ -9,7 +10,8 @@ import { IpserviceService } from 'src/app/_services/ipservice.service';
  @Component({
   selector: 'app-maindashboard',
   templateUrl: './maindashboard.component.html',
-  styleUrls: ['./maindashboard.component.scss'],  
+  styleUrls: ['./maindashboard.component.scss',
+'../../../assets/icon/icofont/css/icofont.scss'],  
 })
 export class MaindashboardComponent implements OnInit,OnDestroy {
   
@@ -24,16 +26,25 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   finalMenu = new Array();
   floor=new Array<any>();
   model:any;
-  constructor(private _masterformservice: MasterformService,private http: HttpClient,
+  Branch:string;
+  BookingList:any;
+  constructor(private _masterformservice: MasterformService,private http: HttpClient,private _reservationservice:ReservationService,
     private _ipservice: IpserviceService,private _hmsdashboard:HmsdashboardService,private _bankservice:BankService  ) {     
       this._bankservice.changeMessage("collapsed")
+      this.Branch="CW_1001";
     }
 
   ngOnInit() {
    
+
+    this._reservationservice.GetBookingList(this.Branch).subscribe(data=>{
+      this.BookingList=data;
+      console.log(this.BookingList)
+       
+     });
+
     this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
       this.finalMenu=res;
-       alert('d')
      
       setInterval(()=>{
         this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
