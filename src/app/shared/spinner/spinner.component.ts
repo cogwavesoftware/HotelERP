@@ -21,6 +21,7 @@ export class SpinnerComponent implements OnDestroy {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
                 this.isSpinnerVisible = true;
+               
             } else if ( event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
                 this.isSpinnerVisible = false;
             }

@@ -1,165 +1,1754 @@
-<div class="page-body">
-    <div class="row">
-      <!-- Right column start -->
-      <div class="col-xl-3 col-lg-12 push-xl-9">
-        
-      </div>
-      <!-- Right column end -->
-      <!-- Left column start -->
-      <div class="col-xl-9 col-lg-12 pull-xl-3 filter-bar">
-        <!-- Nav Filter tab start -->
-        <nav class="navbar navbar-light bg-faded m-b-30 p-10">
-          <ul class="nav navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="javascript:;">Filter: <span class="sr-only">(current)</span></a>
-            </li>
-            <li ngbDropdown="" class="nav-item dropdown">
-              <a ngbDropdownToggle="" class="nav-link dropdown-toggle ripple" href="javascript:;" id="bydate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-clock-time"></i> By Date</a>
-              <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bydate">
-                <a class="dropdown-item ripple" href="javascript:;">Show all</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item ripple" href="javascript:;">Today</a>
-                <a class="dropdown-item ripple" href="javascript:;">Yesterday</a>
-                <a class="dropdown-item ripple" href="javascript:;">This week</a>
-                <a class="dropdown-item ripple" href="javascript:;">This month</a>
-                <a class="dropdown-item ripple" href="javascript:;">This year</a>
-              </div>
-            </li>
-            <!-- end of by date dropdown -->
-            <li ngbDropdown class="nav-item dropdown">
-              <a ngbDropdownToggle class="nav-link dropdown-toggle ripple" href="javascript:;" id="bystatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-chart-histogram-alt"></i> By Status</a>
-              <div  ngbDropdownMenu class="dropdown-menu" aria-labelledby="bystatus">
-                <a class="dropdown-item ripple" href="javascript:;">Show all</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item ripple" href="javascript:;">Conform</a>
-                <a class="dropdown-item ripple" href="javascript:;">Waiting List</a>
-                <a class="dropdown-item ripple" href="javascript:;">Canceled</a>
-                <a class="dropdown-item ripple" href="javascript:;">Closed</a>              
-              </div>
-            </li>
-            <!-- end of by status dropdown -->
-            <li ngbDropdown class="nav-item dropdown">
-              <a ngbDropdownToggle class="nav-link dropdown-toggle ripple" href="javascript:;" id="bypriority" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-sub-listing"></i> By Company</a>
-              <div  ngbDropdownMenu class="dropdown-menu" aria-labelledby="bypriority">
-                <a class="dropdown-item ripple"  (click)="ShowAllCompany()" >Show all</a>
-                <div class="dropdown-divider"></div>
-                
-                <a class="dropdown-item ripple" (click)="FilterDataViaCompany(company.CompanyName)" *ngFor="let company of companyList">{{company.CompanyName}}</a>
 
-                <!-- <a class="dropdown-item ripple" href="javascript:;">High</a>
-                <a class="dropdown-item ripple" href="javascript:;">Normal</a>
-                <a class="dropdown-item ripple" href="javascript:;">Low</a> -->
-              </div>
-            </li>
-          </ul>
-          <div class="nav-item nav-grid">
-            <span class="m-r-15">Show All: </span>
-            <button type="button" (click)="ShowAllReservationList()" class="btn btn-sm btn-primary waves-light m-r-10 ripple" data-toggle="tooltip" data-placement="top" title="list view">
-              <i class="icofont icofont-listine-dots"></i>
-            </button>
-            <!-- <button type="button" class="btn btn-sm btn-primary ripple light" data-toggle="tooltip" data-placement="top" title="grid view">
-              <i class="icofont icofont-table"></i>
-            </button> -->
-          </div>
-          <!-- end of by priority dropdown -->
-        </nav>
-        <!-- Nav Filter tab end -->
-        <!-- Task board design block start-->
-
-            <div class="input-group">
-                <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
-                <span class="input-group-append ripple light" id="basic-addon1"><i class="icofont icofont-search input-group-text"></i></span>
-              </div>
+     <div id="section-to-print" class="printouterdiv" >   
+     
+      <div class="container-fluid" >
+        <div class="testrow"> 
+        <div style="width: 40%; float:left;"><img src="../../../assets/images/logo_2.png"></div>
+        <div style="width: 60%; float:right; " class="boldtext">ATHIDHEE RESIDENCY <br> <span style="font-size: 70%; ">40-1-164/1, Mohideen Street,Deside PVR Mall,M.G.Road,Vijaywada- 520010.<br/>
+          Land line:0866-2481888 mob:7382481888 Email: athidheeresidency@gmail.com</span></div>
+        </div>
        
-            
-        
-
-        <div class="row" >
-
-          <div class="col-sm-6" *ngFor="let data of BookingList" >
-            <!-- Invoice list card start -->
-            <div class="card card-border-primary">
-              <div class="card-header">
-                <h5> {{data.GuestName | uppercase}}</h5>                              
-                 <div ngbDropdown class="dropdown-secondary dropdown f-right">
-                  <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button>
-                  <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown9" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                    <a class="dropdown-item ripple" href="javascript:;"><span class="point-marker bg-danger"></span>Make Advance</a>
-                    <a class="dropdown-item ripple" href="javascript:;"><span class="point-marker bg-warning"></span>Extra Charge</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item active" href="javascript:;"><span class="point-marker bg-success"></span>Print Receipt</a>
-                    <a class="dropdown-item ripple" href="javascript:;"><span class="point-marker bg-info"></span>Download Receipt</a>
-                  </div>
+         <div class="testrow">          
+          <div style="width: 40%; float:left;">GUEST REGISTRATION CARD</div>
+          <div style="width: 60%; float:right; text-align: right;"> BID : 1122</div>
+        </div>   
+        <div class="testrow" style="border:2px solid #585858; padding-bottom:10px; padding-top:10px">     
+          <div style=" width:33%; text-align: left; display:inline-block; "> <b>Sl No :</b>  2019GRC0000000038</div>
+          <div style=" width:33%; text-align: center; display:inline-block; "> <b>Reg No :</b>  99993939999333</div>
+          <div style=" width:33%; text-align: right; display:inline-block; "> <b>Room No :</b> 101</div>
+        </div>
+        <div class="testrow">     
+          <div style="width: 40%; text-align: left; float:left"> 
                 
-                  <span class="f-left m-r-5 text-inverse">Advance : </span>
-                </div> 
-                <br>
-                <strong *ngIf="data.CompanyName !='0'"  class="label label-primary">Company: {{data.CompanyName}}</strong>
-               
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <ul class="list list-unstyled">
-                      <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
-                      <li>Arrival Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
-                      
-                    </ul>
-                  </div>
-                  <div class="col-sm-6">
-                    <ul class="list list-unstyled text-right">
-                      <li>Total: &nbsp;{{'₹'+ data.BillAmount}}</li>
-                      <li>Advance Paid: <span class="text-semibold">{{'₹'+data.AdvancePaidAmount}}</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="task-list-table">
+            <div style=" width:100%; text-align: left; display:inline-block; padding-bottom: 10px; "> <b>Name :</b>  Mr .Francis</div>
+            <div style=" width:100%; text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b>Address :</b>  40-1-164/1, Mohideen Street,Deside PVR Mall,M.G.Road,Vijaywada- 520010.</div>
+            <div style=" width:100%; text-align: left; display:inline-block; padding-bottom: 10px;"> <b>Pincode :</b>  5684123</div>
+            <div style="  width:100%;text-align: left ;display:inline-block; padding-bottom: 10px; "> <b>City :</b>  Bangalore</div>
+            <div style="  width:100%;text-align: left; display:inline-block; padding-bottom: 10px;"> <b>State :</b>  Karanataka</div>
+            <div style="  width:100%;text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b>Nation :</b>  India</div>
+            <div style="  width:100%;text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b> Checkin Date : </b> 03/02/2020</div>
+            <div style="  width:100%;text-align: left ;display:inline-block; padding-bottom: 10px; "> <b> Checkin Time :  </b>  11.2</div>
+            <div style="  width:100%;text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b> Checkout Date : </b>    03/02/2020</div>
+            <div style="  width:100%;text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b> Checkout Time :  </b> 11.4</div>
+            <div style="  width:100%;text-align: left ;display:inline-block; padding-bottom: 10px; "> <b> No of Days :  </b>  2</div>
 
-                  <p class="task-due"><strong> Current Status : </strong>
+            <div style="  width:100%;text-align: left ;display:inline-block; padding-bottom: 10px; "> <b> Vehicle No:  </b>  KA-03-HK-8765</div>
+            <div style="  width:100%;text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b> How D U c to Know? : </b>   Friends</div>
+            <div style="  width:100%;text-align: left ;display:inline-block; padding-bottom: 10px; "> <b> Source :  </b> HOTEL</div>
+            <div style="  width:100%;text-align: left ;display:inline-block;  padding-bottom: 10px;"> <b>  Arrivalfrom From :  </b> Bangalore</div>
+            
+            
+                
+          </div>
+          <div style="width: 40%;   float:left; text-align: center; "> 
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Company :</b> ADITHI RESIDENCY</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Gender :</b> Male</div>
+            <div style=" width:100%; text-align: left; display:inline-block; padding-bottom: 10px;"> <b>Date of Birth :</b> 12/12/12</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Date of Anniversary :</b> 12/12/12</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Mobile :</b> 9980841154</div>
 
-                  
-                    <strong *ngIf="data.Status=='CNF'" class="label label-success">{{data.Status}}</strong>
-                    
-                    <strong *ngIf="data.Status=='WL'" class="label label-warning">{{data.Status}}</strong>
-                    
-                    <strong *ngIf="data.Status=='CAN'" class="label label-danger">{{data.Status}}</strong>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Email :</b> ADITHI@gmail.com</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>GSTNO :</b> GST15421</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Foreign Guest :</b> Yes</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>No Of Bags :</b> 2</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>News Paper :</b> TAMIL/ENGLISH</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Billing Instruction :</b> Test Instruction</div>
+
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Booking Id :</b> 111</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Convenience fees :</b> 2222</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Arrival Mode :</b> BUS</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Proceeding From :</b> Bangalore</div>
+            
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Pax :</b> 2222</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Tariff :</b> AC</div>
+            <div style=" width:100%; text-align: left; display:inline-block;padding-bottom: 10px; "> <b>Net Amt :</b> 15422</div> 
 
 
-                  </p>
-                </div>
-                <div class="task-board m-0">
-                  <a href="javasript:;" title="View" class="btn btn-info btn-mini b-none ripple light"><i class="icofont icofont-eye-alt m-0"></i></a>
-                  <!-- end of dropdown-secondary -->
-                  <div ngbDropdown class="dropdown-secondary dropdown">
-                    <button ngbDropdownToggle class="btn btn-info btn-mini dropdown-toggle waves-light b-none txt-muted ripple"  type="button" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-navigation-menu"></i></button>
-                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                      <a class="dropdown-item ripple" title="Edit Reservation" (click)="Edit()" ><i class="icofont icofont-ui-alarm"></i>Edit</a>
-                      <a class="dropdown-item ripple" title="Cancel Reservation" href="javascript:;"><i class="icofont icofont-ui-edit"></i>Cancel</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item ripple" title="Print Acknowledgement" href="javascript:;"><i class="icofont icofont-spinner-alt-5"></i>Print Ack</a>
-                      <a class="dropdown-item ripple" title="Download Acknowledgement" href="javascript:;"><i class="icofont icofont-attachment"></i>Download Ack</a>
-                    </div>
-                    <!-- end of dropdown menu -->
-                  </div>
-                  <!-- end of seconadary -->
-                </div>
-                <!-- end of pull-right class -->
-              </div>
-              <!-- end of card-footer -->
+          </div>
+          
+          
+          
+          <div style="width: 20%;   float:right;text-align: center;   "> 
+            <p>Guest Image</p> <br/><br/>
+            <img src="../../../assets/images/avatar-7.jpg" /> <br/> <br/>
+            <img src="../../../assets/images/avatar-7.jpg" /></div>
+        </div>
+        <div class="testrow"> 
+         <p><b>How did you hear about us ?</b>  <br>
+          ONLINE /AGENT / TRIP ADVISOR / HOTEL WEBSITE / FRIENDS / IF OTHER SPECIFY ___________________________  </p>
+          </div>
+          <div class="testrow"> 
+            <p>Any changes in tax structure due to Government policies or changes in rules are applicable at the time of billing. All confirmed booking are non-amendable & non-refundable. In case of cancellation less than 48 hours prior to arrival or in case of no-show, one night-stay per room will be charged on your credit card</p>
+            <p>Any changes in tax structure due to Government policies or changes in rules are applicable at the time of billing.  </p>
+            <p> All confirmed booking are non-amendable & non-refundable. In case of cancellation less than 48 hours prior to arrival or in case of no-show, one night-stay per room will be charged on your credit card</p>
+            <p>Any changes in tax structure due to Government policies or changes in rules are applicable at the time of billing. All confirmed booking are non-amendable & non-refundable. In case of cancellation less than 48 hours prior to arrival or in case of no-show, one night-stay per room will be charged on your credit card</p>
+            <p>Any changes in tax structure due to Government policies or changes in rules are applicable at the time of billing.  </p>
+            <p> All confirmed booking are non-amendable & non-refundable. In case of cancellation less than 48 hours prior to arrival or in case of no-show, one night-stay per room will be charged on your credit card</p>
             </div>
-            <!-- Invoice list card end -->
+
+     
+         
+      </div> <!-- container-fluid -->
+</div><!-- outer div -->
+<!-- new for design-->
+<div *ngIf="IsShowloader" class="text-center loader-block" style="position: absolute; z-index: 9999; left:42%; top:20%">
+  <div class="loader animation-start">
+    <span class="circle delay-1 size-2"></span>
+    <span class="circle delay-2 size-4"></span>
+    <span class="circle delay-3 size-6"></span>
+    <span class="circle delay-4 size-7"></span>
+    <span class="circle delay-5 size-7"></span>
+    <span class="circle delay-6 size-6"></span>
+    <span class="circle delay-7 size-4"></span>
+    <span class="circle delay-8 size-2"></span>
+  </div>
+</div>
+
+<div class="col-sm-12 col-xl-4">  
+  </div>
+ 
+<div class="outerdiv">
+  <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
+
+    <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
+
+      <div class="container-fluid">
+ 
+        <div class='row tabouter' style="margin-bottom: 0;">
+
+          <div class="col-md-12" style="padding-left: 0;">
+            <div class="row" style="margin-bottom: 0;">
+              <div class="col-md-12 taboutercreatebtn">
+
+                <ngb-tabset>
+                  <ngb-tab title="Home">
+                    <ng-template ngbTabContent>
+                      <div [@fadeInOutTranslate] class="m-t-15">
+                        <p class="m-4">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab title="Profile">
+                    <ng-template ngbTabContent>
+                      <div [@fadeInOutTranslate] class="m-t-15">
+                        <p class="m-4">2. Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab title="Messages">
+                    <ng-template ngbTabContent>
+                      <div [@fadeInOutTranslate] class="m-t-15">
+                        <p class="m-4">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+               
+                </ngb-tabset>
+
+                <!-- tab starting -->
+                <button type="submit" id="checkinbtn" class="btn btn-success m-r-5 m-l-5 topbtn" style="padding: 6px;">Save</button> 
+                <ngb-tabset>
+                 
+
+                  <ngb-tab title="Check-in Information"  >
+                    <ng-template ngbTabContent>
+                      <div [@fadeInOutTranslate] class="m-t-15">
+                        <div class="row" >
+                          <div class="col-md-12" style="  padding-right:0">
+                            <div class="accouter" style="width: 100%;">
+                              <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
+                                class="ngb-accordion">
+                                <ngb-panel id="ngb-close-p1" title="Guest Stay Information">
+                                  <ng-template ngbPanelContent>
+                                    <div class="  gueststayinfo userlist">
+                                    <div class="row" style="margin-bottom: 0;">
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Checkin Date </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                              
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
+                                           <timepicker id="checkintime" readonly name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
+                                          <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
+                                        </div>
+                                      </div> 
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="nofdays "><i  class="fa fa-calendar" aria-hidden="true"  ></i>  No of Days </label>
+                                          <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
+                                            id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
+                                            <option value="0">Select</option>
+                                            <option  *ngFor="let Day of noofdays" [value]="Day">
+                                              {{ Day  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.nofdays.errors" class="invalid-feedback">
+                                            <div *ngIf="form.nofdays.errors.required">nofdays is required</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Checkout Date </label>
+
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0;">
+                                            <input id="checkoutdate" readonly name="checkoutdate"  formControlName="checkoutdate" placement="right" type="text"   bsDatepicker   [minDate]="minDate" placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                      
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="checkouttime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkout Time </label>
+                                          <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker>                                        
+                                               
+                                                  <div *ngIf="!valid">Invalid time </div>                                  
+                                        </div>
+                                      </div>
+                                    </div> 
+ 
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel>
+                                <ngb-panel id="ngb-close-p1"  title="Guest Information">
+                                  <ng-template ngbPanelContent >
+                                
+                                     <div class="col-md-12" style="padding-left:0; padding-right:0">
+                                       <div class="row">
+                                         <div class="col-sm-12"> 
+    
+                                           <!--  test row 1-->
+                                           <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
+                                            <div class="row" style="margin-bottom:0">
+                                              <div class='col-12 col-sm-2' style="padding-left: 0;">
+                                                <div class="form-group" style="padding-top:10px;">                                
+                                                  <label class="form-control-label" for="firstname">   </label>                                                                                                                  
+                                                      <label >Room No -</label>
+                                                       <label style="padding-left: 3px; font-weight: bold;" >{{CheckinRoom}}</label>                                                     
+                                                 </div>       
+                                              </div> 
+
+                                              <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;  ">
+                                                <div class="form-group" >
+                                                  <ng-select [items]="ReferanceList"
+                                                bindLabel="RefName" name="RefName"
+                                                placeholder="Select Referance"  
+                                                [(ngModel)]="selectedRoomcode" formControlName="RefName"  >
+                                              </ng-select>
+
+                                                  <!-- <input type="checkbox"  (click)="OpenReferanceModel('effect-6',item)" class="form-control tooltip-form" id="refid" formControlName="referenceid" name="referenceid" autocomplete="off"  required style="width: 15px; float: left;" /> Ref : {{referanceName}} -->
+                                                 
+                                                </div>
+                                               
+                                               </div>  
+                                               <div class="col-sm-4" style="padding-left: 0; padding-top: 10px;">
+                                                <a  (click)="OpenReferanceModel('effect-6',item)" ><i style="font-size: 110%;
+                                                  padding-top: 2px;
+                                                  display: inline-block;
+                                                  padding-left: 10px" class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                              </div>
+
+                                             </div>
+                                          <div class="row guestinfofirstrow" >
+                                           
+                                            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="title ">Title</label>
+                                                <select class="custom-select" name="title" formControlName="title"
+                                                  id="title"
+                                                  [ngClass]="{ 'is-invalid': submitted && form.title.errors }">
+                                                  <option value="select">Select</option> 
+                                                  <option  *ngFor="let Title of Titlelist"
+                                                    [value]="Title.Description">{{ Title.Description  }}</option>
+                                                </select>
+                                                <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
+                                                  <div *ngIf="form.title.errors.required">title </div>
+                                                </div>
+                                              </div>
+                                              
+                              
+                                            </div>
+                                            
+                                             
+                                    
+                                            <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="Guest Name">Guest Name </label>
+                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                              
+                                                <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
+                                                </div>  
+                                            </div>
+                                            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="gender">  Gender </label>
+                                               <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
+                                                 <option value="select">Select</option> 
+                                                 <option *ngFor="let sour of gendertypes" [value]="sour.Description">{{ sour.Description  }}</option>
+                                               </select>
+                                               <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
+                                                <div *ngIf="form.gender.errors.required">gender is required</div>
+                                              </div>
+                                                </div>  
+                                            </div>
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="mobile">Mobile </label>
+                                                <input type="text" class="form-control tooltip-form" id="mobileid" formControlName="mobile" name="mobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobile.errors || form.controls.mobile.touched || form.controls.mobile.dirty}" required  />  
+                                                <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >mobile   is required</div>
+                                                </div>  
+                                            </div>
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="email">Email </label>
+                                                <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
+                                                <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
+                                                </div>  
+                                            </div>
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="pincode">Pincode </label>
+                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>
+                                             
+  
+                                                <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
+                                                </div>  
+                                            </div>
+                                        </div> <!-- end row -->
+    
+    
+                                        <div class="row  guestinfofirstrow"  >
+                                          
+                                          
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="city">City </label>
+                                              <input type="text" class="form-control tooltip-form searchiconrelative" id="city" formControlName="city" name="city" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.city.errors || form.controls.city.touched || form.controls.city.dirty}" required  />  
+                                               <div class="invalid-feedback" *ngIf="form.controls.city.errors?.required" >city   is required</div>
+                                              </div>  
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="state">State </label>
+                                              <input type="text" class="form-control tooltip-form" id="state" formControlName="state" name="state" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.state.errors || form.controls.state.touched || form.controls.state.dirty}" required  />  
+                                              <div class="invalid-feedback" *ngIf="form.controls.state.errors?.required" >state   is required</div>
+                                              </div>  
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <!-- <div class="form-group">
+                                              <label class="form-control-label" for="nation">Nation </label>
+                                              <input type="text" class="form-control tooltip-form" id="nation" formControlName="nation" name="nation" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.nation.errors || form.controls.nation.touched || form.controls.nation.dirty}" required  />  
+                                              <div class="invalid-feedback" *ngIf="form.controls.nation.errors?.required" >nation   is required</div>
+                                              </div>   -->
+
+                                              <div class="form-group">
+                                                  <label class="form-control-label" for="nation ">Nation</label>
+                                                  <select class="custom-select" name="nation" formControlName="nation"
+                                                    id="nation"
+                                                    [ngClass]="{ 'is-invalid': submitted && form.nation.errors }">
+                                                    <option value="select">Select</option> 
+                                                    <option  *ngFor="let Nationd of Nationlist"
+                                                      [value]="Nationd">{{ Nationd  }}</option>
+                                                  </select>
+                                                  <div *ngIf="submitted && form.nation.errors" class="invalid-feedback">
+                                                    <div *ngIf="form.nation.errors.required">Nation </div>
+                                                  </div>
+                                                </div>
+
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="company">Company </label>
+                                             
+                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="company" formControlName="company" name="company" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.company.errors || form.controls.company.touched || form.controls.company.dirty}" required  />   
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="Opencompanymodel('effect-7',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                              
+                                              <div class="invalid-feedback" *ngIf="form.controls.company.errors?.required" >company   is required</div>
+                                              </div>  
+
+                                          </div>
+
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="gstno">GSTNO </label>
+                                              <input type="text" class="form-control tooltip-form" id="gstno" formControlName="gstno" name="gstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.gstno.errors || form.controls.gstno.touched || form.controls.gstno.dirty}" required  />  
+                                              <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
+                                              </div>  
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="Foreign Guest ">  Foreign Guest  </label>
+                                             <select class="custom-select"  name="foriegnguest" formControlName="foriegnguest"  id="foriegnguest" [ngClass]="{ 'is-invalid': submitted && form.foriegnguest.errors }"> 
+                                               <option value="select">Select</option> 
+                                               <option [ngValue]="sour.Id" *ngFor="let sour of foriegnguest" [value]="sour">{{ sour  }}</option>
+                                             </select>
+                                             <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
+                                              <div *ngIf="form.gender.errors.required">foriegnguest is required</div>
+                                            </div>
+                                              </div>  
+                                          </div>
+                                         </div> <!-- end of row-->
+                                        
+                                           
+    
+                                           <div class="row guestinfofirstrow" > 
+                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                               <label class="form-control-label" for="address1"> Address1</label>       
+                                               <input type="text" class="form-control tooltip-form" id="address1" formControlName="address1">
+                                               
+                                               </div>  
+
+               
+                                           </div> 
+
+                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                             <label class="form-control-label" for="address2"> Address2 </label>       
+                                             <input type="text" class="form-control tooltip-form" id="address2" formControlName="address2">
+                                            
+                                             </div>  
+
+             
+                                         </div> 
+
+                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                          <div class="form-group">
+                                           <label class="form-control-label" for="address3"> Address 3 </label>       
+                                           <input type="text" class="form-control tooltip-form" id="address3" formControlName="address3">
+                                          
+                                           </div>  
+
+           
+                                       </div> 
+
+
+                                           <div class='col-12 col-lg-6'>
+                                             <div class="row">
+                                               <div class="col-sm-4">
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="address">Guest Photo </label>
+                                                  <div >
+
+                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabled" (click)="triggerSnapshot();"  >Take A Snapshot</button>
+                                                    <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabled" (click)="SwitchOnCamara()"  >Switch On</button>
+
+                                                   <webcam [height]="100" [width]="250" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                                                           [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                                                           [videoOptions]="videoOptions"
+                                                           [imageQuality]="1"
+                                                           (cameraSwitched)="cameraWasSwitched($event)"
+                                                           (initError)="handleInitError($event)"
+                                                   ></webcam>
+                                                   
+                                                   <div class="snapshot ">
+                                                                    <div *ngIf="snapshotshow">                               
+                                                        <img  [height]="100" [width]="150" [src]="previewUrl" style="border:2px solid #000000; border-radius:3px"/>
+                                                      </div>   
+                                                      </div> 
+                                                 
+                                                   
+                                                 
+                                               </div> 
+                                               <h4 *ngIf="errors.length > 0">Messages:</h4>
+                                               <ul *ngFor="let error of errors">
+                                                 <li>{{error | json}}</li>
+                                               </ul>
+     
+     
+                                                   <!-- <div class="invalid-feedback" *ngIf="form.controls.address.errors?.required" >address   is required</div> -->
+                                                  </div> 
+                                               </div>
+
+                                               <div class="col-sm-4">
+                                                <div class='col-12 col-lg-12 '>
+                                                  <label  >Id Proof Front</label>
+                                                 <input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdFront.errors || form.controls.GuestIdFront.touched || form.controls.GuestIdFront.dirty}" required  />  
+                                                   <div class="invalid-feedback" *ngIf="form.controls.GuestIdFront.errors?.required" >GuestIdFront   is required</div>                                   
+                                                   <div class="row" style="margin-left:0;margin-right:0">
+                                                     <img [src]="previewUrl2"  style="width:100%;max-width:100px">
+                                                                               
+                                                   </div>
+                                                 </div>
+                                                 
+                                               </div>
+
+                                               <div class="col-sm-4">
+                                                <div class="col-12 col-lg-12    ">
+                                                  <label  >Id Proof Back</label>
+                                                  <input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfback($event)" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.GuestIdBack.errors || form.controls.GuestIdBack.touched || form.controls.GuestIdBack.dirty}" required  />  
+                                                   <div class="invalid-feedback" *ngIf="form.controls.GuestIdBack.errors?.required" >GuestIdBack   is required</div>
+               
+                                                   <div class="row" style="margin-left:0;margin-right:0">
+                                                    <img [src]="previewUrl3"  style="width:100%;max-width:100px">                          
+                                                    </div>
+                                              </div>                                    
+                                               </div>
+
+                                             </div>
+                                         </div> 
+                                           </div> <!-- row end -->
+    </div>
+                                          
+                                        
+                                         </div> <!-- col-10 end-->
+                                         <!-- <div class="col-sm-2" style="border: 1px solid yellow;">
+                                          
+                                            <div class=" ">
+                                              <label style="font-size: 90%;">Thumb Verification *</label>
+                                              <input type="checkbox" class="form-control tooltip-form" id="refid" formControlName="thumbverification" name="referenceid" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.referenceid.errors || form.controls.referenceid.touched || form.controls.referenceid.dirty}" required style="width: 15px; float: left;" /> 
+    
+                                               <img src="../../../assets/images/avatar-7.jpg" width="100%; height:auto">
+                                              <div class="text-center m-t-10">
+                                              <button type="button" class="btn btn-primary btn-xs m-r-10">OK</button>
+                                               </div>
+                                              
+                                           </div>
+                                         
+                                         </div> -->
+                                       </div>
+                                     </div>
+                                  </ng-template>
+                                </ngb-panel>
+
+
+                                <ngb-panel id="ngb-close-p1" title="Booked Room">
+                                  <ng-template ngbPanelContent>
+                                    <div class="test123 userlist " style="padding: 2px;">
+                                      
+                                        
+                                      <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'100px'" [config]="config">
+                                        <div class="row">
+                                          <div class="row  ">
+                                            <div class="searchresults"  style="width: 100%;">
+                                              <div class="table-content crm-table">
+                                                <div class="project-table addressproject-table">
+                                                  <div id="crm-contact" class="dt-responsive">
+                                                             
+                                                     <div class="table-responsive">
+                                                      <table class="table table-striped table-bordered full-data-table"> 
+                                                            <thead>
+                                                            <tr class="blueorange-gradient">        
+                                                            <th>RoomCode</th>             
+                                                            <th>No of Rooms </th>                                                
+                                                        </tr>
+                                                        <tr> </tr>               
+                                                        </thead>
+                                                        <tbody>                    
+                                                         <tr *ngFor="let item of reservedlist; let i = index;">                     
+                                                           <td>{{item.RoomCode}}</td>   
+                                                           <td>{{item.TotalBookedRoom}}</td>                                                     
+                                                        </tr>  
+                                                        </tbody>                    
+                                                      </table>
+                                                    </div> 
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>    <!-- search results  div --> 
+                                          </div><!-- end serach results-->
+                                                   
+                                        </div>
+                              
+                                      </perfect-scrollbar>
+                                      
+
+
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel>
+
+                                 
+
+                                <ngb-panel id="ngb-close-p1" title="Select Room">
+                                  <ng-template ngbPanelContent>
+                                    <div class="test123 userlist " style="padding: 2px;">
+                                      
+                                        
+                                      <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'100px'" [config]="config">
+                                        <div class="row">
+                                          
+                                          <div id="availrooms">
+                                          <div class="container">
+                                            <div class="col-md-12">
+                                              <div class="row">
+                                                <ul style="display: inline-block" *ngFor="let room of roomNoList">
+                                                  <li style="float: left; margin-left: 0px ">
+                                                    <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                                                      {{room.RoomNo}}
+                                                      <br>
+                                                      {{room.RoomCode}}
+                                                  </div>
+                                                  </li>
+                                                 
+                                                </ul>
+                                              </div>
+                                            </div>
+                                          </div>                                          
+                                        </div>            
+                                        </div>
+                              
+                                      </perfect-scrollbar>
+                                      
+
+
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel>
+
+
+                                <ngb-panel id="ngb-close-p1" title="Booking Table ">
+                                  <ng-template ngbPanelContent>
+                                    <div class="test123 userlist " style="padding: 2px;">
+                                      <div class="grid-table" style="width: 100%;">
+                                        <div class="thead">
+                                          <div class="">
+                                            <div class="td">Room No</div>
+                                            <div class="td">Room Type</div>
+                                           
+                                            <div class="td">Pax</div>
+                                            <div class="td">Plan</div>
+                                            <div class="td">Food</div>
+                                            <div class="td">Tariff</div>
+                                            <div class="td">Tax</div>
+                                            <div class="td">Net Amt</div>
+
+                                            <div class="td">DiscountType</div>
+                                            <div class="td">DisValuet</div>
+
+                                            <div class="td" *ngIf="isGorupCheckin">
+                                              <button type="button"  class=" " (click)="modalselectvacent.show()">
+                                                <i class="fa fa-plus"></i> 
+                                              </button>
+                                            </div>
+                                            <!-- <div class="td">
+                                                <span *ngIf="notification" class="elementToFadeInAndOut">
+                                                  <i class="fas fa-check-circle {{notification.class}}"></i>
+                                                  {{notification.message}}
+                                                </span>
+                                              </div> -->
+                                          </div>
+                                        </div>
+                                        <div class="tbody" >
+
+                                          <div formArrayName="other"
+                                            *ngFor="let other of form.get('other').controls; let i = index">
+                                            <div [formGroupName]="i">
+                                              <div class="tr">
+
+                                                
+                                                <div class="td">
+                                                  <input type="hidden" value="i" readonly formControlName="bankAccountID">
+                                                </div>
+
+                                                <div class="td">
+                                                  <input class="" readonly formControlName="RoomNo">
+                                                </div>
+
+                                                <div class="td">
+                                                  <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                    (change)="RoomTypeChanged(i,'RoomCode')">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                      {{items.RoomCode}}</option>
+                                                  </select>
+                                                </div>
+
+                                             
+
+                                                <div class="td">
+                                                  <select class="" formControlName="Pax"
+                                                    (change)="RoomTypeChanged(i,'Pax')">
+                                                    <option value="0">Select</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+
+                                                  </select>
+                                                </div>
+
+
+                                                <div class="td">
+                                                  <select class="" formControlName="PlanName"
+                                                    (change)="RoomTypeChanged(i,'PlanName')">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of planlist" value="{{item.PlanName}}">
+                                                      {{item.PlanName}}</option>
+                                                  </select>
+                                                </div>
+
+
+
+
+                                                <div class="td">
+
+                                                  <input type="text" class="" id="Food" formControlName="Food">
+                                                </div>
+
+                                                <div class="td">
+                                                  <input class="" formControlName="Tariff"
+                                                    (change)="RoomTypeChanged(i,'Tariff')">
+                                                </div>
+
+                                                <div class="td">
+                                                  <input class="" formControlName="Tax">
+                                                </div>
+
+                                                <div class="td">
+                                                  <input class="" formControlName="Grand"
+                                                    (change)="RoomTypeChanged(i,'Grand')">
+                                                </div>
+
+                                                <div class="td">
+                                                  <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let sour of discounttypes"
+                                                    [value]="sour">{{ sour  }}</option>
+                                                </select>
+                                                
+                                                </div>
+
+                                                <div class="td">
+                                                  <input class="bookingRoomTable_textalign" formControlName="discvalue">
+                                                </div>
+
+                                                <div class="td" *ngIf="isGorupCheckin">
+                                                  <!-- <button type="submit" class="btn" [disabled]="fg.invalid"
+                                                     [ngClass]="(form.get('bankAccountID').value==0)?'btn-success':'btn-outline-dark'"><i class="far fa-save fa-lg"></i>
+                                                    
+                                                 </button>  -->
+                                                  <button (click)="onDelete(0,i)" >
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+                                        </div>
+
+
+                                      </div>
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel>
+
+
+
+
+                               
+
+
+                               <!-- <ngb-panel id="ngb-close-p1" title="Advance Payment">
+                                  <ng-template ngbPanelContent>
+                                    <div class="row paymentrow userlist">
+
+                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="selmode "> Select mode </label>
+                                          <select  (change)="FilterPaymentMode()"  class="custom-select" name="selmode" formControlName="selmode"
+                                            id="selmode" [ngClass]="{ 'is-invalid': submitted && form.selmode.errors }">
+                                            <option value="select">Select</option>
+                                            <option *ngFor="let sour of paymentmode" [value]="sour">
+                                              {{ sour  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.selmode.errors" class="invalid-feedback">
+                                            <div *ngIf="form.selmode.errors.required">selmode is required</div>
+                                          </div>
+                                        </div>
+                                      </div> 
+
+                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="subpaymode "> Select Detail </label>
+                                          <select class="custom-select" name="subpaymode" formControlName="subpaymode"
+                                            id="subpaymode" [ngClass]="{ 'is-invalid': submitted && form.subpaymode.errors }">
+                                            <option value="select">Select</option>
+                                            <option *ngFor="let subpaymode of  subpaymodelist" [value]="subpaymode">
+                                              {{ subpaymode  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.subpaymode.errors" class="invalid-feedback">
+                                            <div *ngIf="form.subpaymode.errors.required">selmode is required</div>
+                                          </div>
+                                        </div>
+                                      </div>  
+
+                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="payamount">Payment </label>
+                                          <input type="text" class="form-control tooltip-form" id="payamount"
+                                            formControlName="payamount" name="payamount" autocomplete="off"
+                                            [ngClass]="{'is-invalid' : submitted && form.controls.payamount.errors || form.controls.payamount.touched || form.controls.payamount.dirty}"
+                                            required />
+                                          <div class="invalid-feedback"
+                                            *ngIf="form.controls.payamount.errors?.required">payamount is required</div>
+                                        </div>
+                                      </div> 
+
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="paymntdesc">Description </label>
+                                          <textarea formControlName="paymntdesc" class="form-control " id="paymntdesc"
+                                            style="height: 1.50rem;"></textarea>
+                                          <div class="invalid-feedback"
+                                            *ngIf="form.controls.paymntdesc.errors?.required">paymntdesc is required
+                                          </div>
+                                        </div>
+                                      </div> 
+
+
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel> -->
+
+                               
+                                
+
+                                <ngb-panel id="ngb-close-p1" title="Payment Array ">
+                                  <ng-template ngbPanelContent>
+                                    <div class="test123 userlist " style="padding: 2px;">
+                                      <div class="grid-table" style="width: 100%;">
+                                        <div class="thead">
+                                          <div class="">
+                                            <div class="td">Select Mode</div>
+                                            <div class="td">Delect Detail</div>
+                                            <div class="td">Amount</div>
+                                            <div class="td">Description</div>
+                                            <div class="td">Selected Mode</div>
+                                            
+                                            <div class="td">
+                                              <button type="button" class=" " (click)="AddPaymentButtonClick()">
+                                                <i class="fa fa-plus"></i> 
+                                              </button>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                        <div class="tbody">
+
+                                          <div formArrayName="PayArray"
+                                            *ngFor="let other of form.get('PayArray').controls; let k = index">
+                                            <div [formGroupName]="k">
+                                              <div class="tr">
+                                                <div class="td">
+                                                  <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                    (change)="RoomTypeChanged(i,'RoomCode')">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                      {{items.RoomCode}}</option>
+                                                  </select> -->
+
+                                                  <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
+                                                  id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let sour of paymentmode" [value]="sour">
+                                                    {{ sour }}</option>
+                                                </select>
+
+
+                                                </div>
+
+                                                <div class="td">
+                                                  <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                                                  id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                                                  <option value="select">Select</option>
+                                                  <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                                    {{ Paysubmode  }}</option>
+                                                </select> 
+
+
+                                                </div>
+
+                                            <div class="td">
+                                             <input type="number"  id="payAmount"
+                                              formControlName="payAmount" name="payAmount" autocomplete="off" required />
+                                            
+                              
+                                                </div>
+
+
+                                                <div class="td">
+                                                  <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                  
+                                                </div>
+
+                                                <div class="td">
+                                                  <input type="text" class="" id="modeselected" formControlName="modeselected">
+                                                  
+                                                </div>
+
+
+
+
+                                                <div class="td">                                      
+                                                  <button (click)="onDeletePayment(0,k)">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+                                        </div>
+
+
+                                      </div>
+                                    </div>
+                                  </ng-template>
+                                </ngb-panel>
+
+
+
+
+
+
+
+
+
+                               <!--  <ngb-panel id="ngb-close-p1" title="Discount /Grace Period">
+                                  <ng-template ngbPanelContent>
+                                    <div class="row discountouter userlist">
+
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4 '>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="DiscountType "> Discount Type </label>
+                                          <select class="custom-select" name="disctype" formControlName="disctype"
+                                            id="disctype"
+                                            [ngClass]="{ 'is-invalid': submitted && form.disctype.errors }">
+                                            <option value="select">Select</option>
+                                            <option *ngFor="let sour of discounttypes"
+                                              [value]="sour">{{ sour  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.disctype.errors" class="invalid-feedback">
+                                            <div *ngIf="form.disctype.errors.required">Discount Type</div>
+                                          </div>
+                                        </div>
+                                      </div> 
+                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="discvalue">Discount Value </label>
+                                          <input type="text" class="form-control tooltip-form" id="discvalue"
+                                            formControlName="discvalue" name="discvalue" autocomplete="off"
+                                            [ngClass]="{'is-invalid' : submitted && form.controls.discvalue.errors || form.controls.discvalue.touched || form.controls.discvalue.dirty}"
+                                            required />
+                                          <div class="invalid-feedback"
+                                            *ngIf="form.controls.discvalue.errors?.required">discvalue is required</div>
+                                        </div>
+                                      </div> 
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="discvalue">Grace Period </label>
+                                          <input type="text" class="form-control tooltip-form" id="graceperiod"
+                                            formControlName="graceperiod" name="graceperiod" autocomplete="off"
+                                            [ngClass]="{'is-invalid' : submitted && form.controls.graceperiod.errors || form.controls.graceperiod.touched || form.controls.graceperiod.dirty}"
+                                            required />
+                                          <div class="invalid-feedback"
+                                            *ngIf="form.controls.graceperiod.errors?.required">graceperiod is required
+                                          </div>
+                                        </div>
+                                      </div> 
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label style="color: orange; padding-top: 20px;">Discount Type: </label>
+                                          <label class="p-l-20">0 </label>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label style="color: orange;padding-top: 20px;">Last Discount: </label>
+                                          <label class="p-l-20">0</label>
+
+                                        </div>
+                                      </div>
+
+                                    </div> 
+                                   
+                                  </ng-template>
+
+                                </ngb-panel>-->
+
+
+                                <ngb-panel id="ngb-close-p1" title="Other Details">
+                                  <ng-template ngbPanelContent>
+                                    <div class="otherrow userlist">
+                                    <div class="row">
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="firstname">Source </label>
+                                         <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
+                                           <option value="select">Select</option> 
+                                           <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
+                                         </select>
+                                         
+                                          </div>  
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="Arrivalfrom">Arrivalfrom From</label>
+                                                <input type="text" class="form-control tooltip-form" id="Arrivalfrom"
+                                                  formControlName="Arrivalfrom" name="Arrivalfrom" autocomplete="off"/>
+                                                  </div> 
+                                           </div>
+                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="Booking">Booking Id </label>
+                                              <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="booking" name="booking" autocomplete="off"  />  
+                                              
+                                              </div>  
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="Booking">Convenience fees </label>
+                                              <input type="text" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off"   />  
+                                              <!-- <div class="invalid-feedback" *ngIf="form.controls.convenience.errors?.required" >convenience fees is required</div> -->
+                                              </div>  
+                                          </div>
+                                          <div class="col-12 col-lg-2 col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="arivalmode">Arrival Mode </label>
+                                             <select class="custom-select"  name="arivalmode" formControlName="arivalmode"  id="arivalmodeid"> 
+                                               <option value="select">Select</option> 
+                                               <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
+                                             </select>
+                                             <!-- <div *ngIf="submitted && form.arivalmode.errors" class="invalid-feedback">
+                                              <div *ngIf="form.arivalmode.errors.required">arivalmode is required</div>
+                                            </div> -->
+                                              </div> 
+                                          </div>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
+                                                <div class="form-group">
+                                                <label class="form-control-label" for="Proceeding">Proceeding From</label>
+                                                <input type="text" class="form-control tooltip-form" id="Proceeding"
+                                                  formControlName="Proceeding" name="Proceeding" autocomplete="off" />
+                                                    </div> 
+                                                 </div>
+
+                                    </div><!-- end 1 row -->
+
+                                    <div class="row">
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="visit ">Purposse of Visit</label>
+                                          <select class="custom-select" name="visit" formControlName="visit" id="visit">
+                                            
+                                           
+                                            <option value="select">Select</option>
+                                            <option  *ngFor="let sour of purposeofvisit"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="Vehicle">Vehicle No</label>
+                                              <input type="text" class="form-control tooltip-form" id="Vehicle"
+                                                formControlName="Vehicle" name="Vehicle" autocomplete="off" />
+                                                
+                                        
+                                            </div> 
+                                         </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Bags ">No Of Bags</label>
+                                          <select class="custom-select" name="Bags" formControlName="Bags"
+                                            id="Bags"
+                                            [ngClass]="{ 'is-invalid': submitted && form.Bags.errors }">
+                                            <option value="select">Select</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                           
+                                          </select>
+                                          <div *ngIf="submitted && form.Bags.errors" class="invalid-feedback">
+                                            <div *ngIf="form.Bags.errors.required">Bags Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="news ">News Paper</label>
+                                          <select class="custom-select" name="news" formControlName="news"
+                                            id="news"
+                                            [ngClass]="{ 'is-invalid': submitted && form.news.errors }">
+                                            <option value="select">Select</option>
+                                            <option *ngFor="let sour of newspaper"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.news.errors" class="invalid-feedback">
+                                            <div *ngIf="form.news.errors.required">news Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Billing ">Billing Instruction</label>
+                                          <select class="custom-select" name="Billing" formControlName="Billing"
+                                            id="Billing"
+                                            [ngClass]="{ 'is-invalid': submitted && form.Billing.errors }">
+                                            <option value="select">Select</option>
+                                            <option  *ngFor="let sour of billinginstruction"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          <div *ngIf="submitted && form.Billing.errors" class="invalid-feedback">
+                                            <div *ngIf="form.Billing.errors.required">Billing Type</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="cometoknow ">How D U c to Know?</label>
+                                          <select class="custom-select" name="cometoknow" formControlName="cometoknow"
+                                            id="cometoknow">
+                                          
+                                            <option value="select">Select</option>
+                                            <option  *ngFor="let sour of howuknow"
+                                              [value]="sour.Description">{{ sour.Description  }}</option>
+                                          </select>
+                                          
+                                        </div>
+                                      </div>
+                                    </div> <!-- end 2nd row -->
+
+                                    <div class="row">
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="DOB">Date of Birth</label>
+                                        <div class="form-group">
+                                          <div class="input-group">
+                                                
+                                            <input id="DOB" name="DOB"  formControlName="DOB"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                               
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                          <label class="form-control-label" for="DOA">Date of Anniversary</label>
+                                          <div class="form-group">
+                                            <div class="input-group">
+                                              
+                                              <input id="DOA" name="DOA"  formControlName="DOA"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                  
+                                            </div>
+                                          </div>
+                                        </div>  
+
+                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                          <div class="form-group">
+                                            <label class="form-control-label" for="idproof">ID Proof</label>
+                                            <select class="custom-select" name="idproof" formControlName="idproof"
+                                              id="idproof">
+                                            
+                                              <option value="select">Select</option>
+                                              <option  *ngFor="let sour of howuknow"
+                                                [value]="sour.Description">{{ sour.Description  }}</option>
+                                            </select>
+                                            
+                                          </div>
+                                        </div>
+                                        <div class="col-12 col-lg-2 col-md-4 col-sm-4 ">
+                                          <label >Id No</label>  
+                                          <input type="text" class="form-control tooltip-form" id="idproofno" formControlName="idproofno" name="idproofno" autocomplete="off" />  
+                                                       
+                                      </div> 
+
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="discvalue">Grace Period </label>
+                                          <input type="text" class="form-control tooltip-form" id="graceperiod"
+                                            formControlName="graceperiod" name="graceperiod" autocomplete="off"
+                                            [ngClass]="{'is-invalid' : submitted && form.controls.graceperiod.errors || form.controls.graceperiod.touched || form.controls.graceperiod.dirty}"
+                                            required />
+                                          <div class="invalid-feedback"
+                                            *ngIf="form.controls.graceperiod.errors?.required">graceperiod is required
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                
+                                      
+
+                                       </div><!-- end 3rd row-->
+                                       <div class="row" style="margin-bottom:0;">
+                                          <!-- button start  -->
+                                        <div class="col-md-12" style="  text-align: right; ">
+                                          <button type="button" id="printgrcbtn" (click)="printPage()" class="btn btn-sm btn-primary ">PRINT GRC</button>
+                                           <button type="submit" id="checkinbtn" class="btn btn-sm btn-primary m-r-5 m-l-5 ">Save</button>                                                                                 
+                                          <button type="button" id="closebtn" class="btn btn-sm btn-primary">Close</button>
+
+                                           
+
+
+                                        </div> <!-- button end -->
+                                       </div>
+                                  </div><!-- user list row -->
+                                  
+                                  </ng-template>
+
+                                </ngb-panel> 
+                              </ngb-accordion> 
+                            </div>
+                          </div>
+
+                        </div>
+
+
+
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                
+                  <ngb-tab title="Other Details">
+                    <ng-template ngbTabContent>
+                      <div [@fadeInOutTranslate] class="m-t-15">
+                        <div class="col-md-12" >
+                          <div class="row  ">
+                            <div class="col-sm-12">  
+                                <div class="row " style="margin-bottom:0"> 
+                               <div class='col-12 col-sm-2'>
+                                 <div class="form-group">
+                                   <label class="form-control-label" for="DriverName">  Name </label>
+                                   <input type="text" class="form-control tooltip-form searchiconrelative" id="drivername" formControlName="drivername" name="drivername" autocomplete="off"  />                                   
+                                   
+                                   </div>  
+                               </div> 
+                                 <div class='col-12 col-sm-2'>
+                                 <div class="form-group">
+                                   <label class="form-control-label" for="drivermobile">Mobile </label>
+                                   <input type="text" class="form-control tooltip-form searchiconrelative" id="drivermobile" formControlName="drivermobile" name="drivermobile" autocomplete="off"  style="position: relative;"  />  
+                                   <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="Opendrivermodel('effect-9',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>   
+                                 
+                                   </div>  
+                               </div>
+                               <div class='col-12 col-sm-2'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="vehicleno">Vehicle No </label>
+                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="vehicleno" formControlName="vehicleno" name="vehicleno" autocomplete="off" />  
+                                   <!-- <div class="invalid-feedback" *ngIf="form.controls.vehicleno.errors?.required" >vehicleno   is required</div> -->
+                                  </div>  
+                              </div>
+                              <div class='col-12 col-sm-2'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="charge">Charge </label>
+                                  <input type="text" class="form-control tooltip-form" id="charge" formControlName="charge" name="charge" autocomplete="off"  />  
+                              
+                                  </div>  
+                              </div> 
+                             
+                           </div> 
+
+
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                
+
+            
+                </ngb-tabset>
+                <!-- tab ending -->
+
+                
+
+              </div>
+
+            </div>
           </div>
 
-   
+
+
+
+
 
 
         </div>
-        <!-- Task board design block end -->
-      </div>
-      <!-- Left column end -->
-    </div>
-  
+      </div><!-- container -->
+     
+    </form>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<!-- ////companymodel --> 
+
+    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7 addressmodeleffect'">      
+      <h3 class="f-15" style="position: relative;">Company Details
+        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+     </h3>
+      <div class="container">
+        <div class="col-md-12 userlist ">
+          <div class="row ">
+            <a style="cursor: pointer; display:block; text-align: left; color:blue"*ngIf="addcompanybtn" (click)="addcompanyinmodel()"><i class="fa  fa-plus-circle"></i> Add Company  </a>
+            <form #myform = "ngForm" (ngSubmit) = "onSubmitcompany(myform)" class="">
+              <div class="app-modal-body text-center addcompany " *ngIf="addcompanydiv" > 
+   
+               <a style="cursor: pointer; display:block; text-align: left; color:blue"  (click)="backtosearch()"><i class="fa fa-backward"></i> Back to Search  </a>
+               <div class="col-md-12">
+                  
+                 <div class="row">                
+   
+                   <div class="col-md-4">
+                       <label>Company Name*</label>
+                       <input type="text" name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"  [ngClass]="{'is-invalid': CompanyName.touched && CompanyName.invalid}"  required autocomplete="off">
+                       <div *ngIf="CompanyName.touched && CompanyName.invalid" class="invalid-feedback">
+                           <div *ngIf="CompanyName.errors.required">CompanyName is invalid</div>
+                       </div>
+                   </div>
+                   <div class="col-md-4">
+                       <label>GSTNO*</label>
+                       <input type="text" name="GSTNO" class="form-control" [(ngModel)]="model.GSTNO" #GSTNO="ngModel" value="{{GSTNO}}"  [ngClass]="{'is-invalid': GSTNO.touched && GSTNO.invalid}"  required autocomplete="off">
+                       <div *ngIf="GSTNO.touched && GSTNO.invalid" class="invalid-feedback">
+                         <div *ngIf="GSTNO.errors.required">GSTNO is invalid</div>
+                       </div>
+                   </div>
+                   <div class="col-md-4" [class.has-error]="CompanyType.errors?.defaultSelected && CompanyType.touched">
+                     <label>Select Type*</label>
+                         <select id="CompanyType" appSelectValidator="-1" class="custom-select"  #CompanyType="ngModel"  name="CompanyType" [(ngModel)]="model.CompanyType">
+                           <option value="-1">Select Type</option>
+                           <option [value]="cty.Name" *ngFor="let cty of companytype">{{ cty.Name }}</option>
+                         </select>
+                         <span class="help-block" *ngIf="CompanyType.touched && CompanyType.errors?.defaultSelected">
+                           CompanyType is required
+                           </span>  
+                 </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-md-4">
+                        <label>ContactName*</label>
+                        <input type="text" name="ContactName" class="form-control" [(ngModel)]="model.ContactName" #ContactName="ngModel" value="{{ContactName}}"  [ngClass]="{'is-invalid': ContactName.touched && ContactName.invalid}"  required autocomplete="off">
+                        <div *ngIf="ContactName.touched && ContactName.invalid" class="invalid-feedback">
+                            <div *ngIf="ContactName.errors.required">ContactName is invalid</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>MobileNo*</label>
+                        <input type="number" name="MobileNo" class="form-control" [(ngModel)]="model.MobileNo"  maxlength="10" #MobileNo="ngModel" value="{{MobileNo}}"  [ngClass]="{'is-invalid': MobileNo.touched && MobileNo.invalid}"  required autocomplete="off">
+                        <div *ngIf="MobileNo.touched && MobileNo.invalid" class="invalid-feedback">
+                          <div *ngIf="MobileNo.errors.required">MobileNo is invalid</div>
+                        </div> 
+                        </div>
+                    <div class="col-md-4">
+                            <label>Email*</label>
+                            <input type="email" name="Email" class="form-control" [(ngModel)]="model.Email" #Email="ngModel" value="{{Email}}"  [ngClass]="{'is-invalid': Email.touched && Email.invalid}"  required autocomplete="off">
+                            <div *ngIf="Email.touched && Email.invalid" class="invalid-feedback">
+                              <div *ngIf="Email.errors.required">Email is invalid</div>
+                            </div>
+                        </div>
+                  </div>
+                  <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px">Save</button>
+                  
+                  
+   
+               </div>
+         
+             </div> <!-- company div -->
+         </form>
+          </div> <!-- form end -->
+          <div class="row  ">
+            <div class="searchresults" *ngIf="searchresultsdiv" style="width: 100%;">
+              <div class="table-content crm-table">
+                <div class="project-table addressproject-table">
+                  <div id="crm-contact" class="dt-responsive">
+                    <div class="row">         
+                          <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="input-group">
+                              <input type="text" #searchTermcompany class="form-control input-lg full-data-search" placeholder="Search here...">
+                              <span class="input-group-append ripple light" id="basic-addon1">
+                                <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                              </span>
+                            </div> 
+                          </div>      
+                    </div>             
+                     <div class="table-responsive">
+                      <table class="table table-striped table-bordered full-data-table"> 
+                            <thead>
+                            <tr class="blueorange-gradient">        
+                            <th>CompanyName</th>             
+                            <th>GSTNO </th>                       
+                            <th>Action</th>
+                        </tr>
+                        <tr> </tr>               
+                        </thead>
+                        <tbody>                    
+                         <tr *ngFor="let item of companylist; let i = index;">                     
+                           <td>{{item.CompanyName}}</td>   
+                           <td>{{item.GSTNO}}</td>                              
+                          <td class="action-icon">
+                              <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpencompanymodelsDetail(item,$event)"><i class="fa fa-download"></i> Get Details</a>                     
+                          </td>
+                        </tr>  
+                        </tbody>
+                      
+                      </table>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>    <!-- search results  div --> 
+          </div><!-- end serach results-->
+        </div>
+      </div>
+     
+      
+
+      
+
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          
+
+               <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>  -->
+          </div>  
+
+        </app-modal-animation>
+
+
+
+
+        
+<!-- ////drivermodel --> 
+    <app-modal-animation [modalID]="'effect-9'" [modalClass]="'md-effect-9 addressmodeleffect'">
+      <h3 class="f-15">Driver Details</h3>
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          <div class="table-content crm-table">
+            <div class="project-table addressproject-table">
+              <div id="crm-contact" class="dt-responsive">
+                             
+                <div class="row">         
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTermdriver class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>   
+                 <div class="table-responsive">
+                  <table class="table table-striped table-bordered full-data-table"> 
+                        <thead>
+                        <tr class="blueorange-gradient">        
+                        <th>DriverName</th>             
+                        <th> MobileNo </th>
+                        <th> VechileNo </th>                       
+                        <th>Action</th>
+                    </tr>
+                    <tr> </tr>               
+                    </thead>
+                    <tbody>                    
+                     <tr *ngFor="let item of driverlist; let i = index;">                     
+                       <td>{{item.DriverName}}</td>   
+                       <td>{{item.MobileNo}}</td>  
+                       <td>{{item.VechileNo}}</td>                             
+                      <td class="action-icon">
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpenDrivermodelsDetail(item,$event)">Get Details</a>                     
+                      </td>
+                    </tr>  
+                    </tbody>
+                    <!-- <tfoot>
+                    <tr class="blueorange-gradient">     
+                    <th>DriverName</th>            
+                    <th>MobileNo</th>                          
+                    <th>VehicleNo</th>    
+                    <th>Action</th>      
+                    </tr>              
+                    </tfoot> -->
+                  </table>
+                </div> 
+              </div>
+            </div>
+          </div>     
+               <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+          </div>      
+        </app-modal-animation>
+
+
+<!-- 
+////guestname -->
+<app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5 addressmodeleffect'">   
+  <h3 class="f-15" style="position: relative;">Guest Details
+    <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+ </h3>
+    <div class="app-modal-body text-center" style="position: relative;"> 
+      <div class="table-content crm-table">
+        <div class="project-table addressproject-table">
+          <div id="crm-contact" class="dt-responsive">           
+            <div class="row">         
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <input type="text" #searchTermguest class="form-control input-lg full-data-search" placeholder="Search here...">
+                  <span class="input-group-append ripple light" id="basic-addon1">
+                    <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                  </span>
+                </div> 
+              </div>      
+        </div>  
+
+             <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table"> 
+                    <thead>
+                    <tr class="blueorange-gradient">        
+                    <th> GuestName</th>             
+                    <th> City </th>
+                    <th>Pincode </th>
+                    <th> MobileNo </th> 
+                    <th>Action</th>
+                </tr>
+                <tr> </tr>               
+                </thead>
+                <tbody>                    
+                 <tr *ngFor="let item of guest; let i = index;">                     
+                   <td>{{item.GuestName}}</td>   
+                   <td>{{item.City}}</td>   
+                   <td>{{item.PINCode}}</td>                   
+                   <td>{{item.MobileNo}}</td>        
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)">Get Details</a>                     
+                  </td>
+                </tr>  
+                </tbody>
+                <!-- <tfoot>
+                <tr class="blueorange-gradient">     
+                <th>GuestName</th>            
+                <th>City</th>    
+                <th>Pincode</th> 
+                <th>MobileNo</th>     
+                <th>Action</th>      
+                </tr>              
+                </tfoot> -->
+              </table>
+            </div> 
+          </div>
+        </div>
+      </div>     
+           <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>              -->
+      </div>      
+    </app-modal-animation>
+
+
+ 
+
+<!--//pincode model -->
+ 
+
+    <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">
+      <h3 class="f-15" style="position: relative;">Pincode Details 
+        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+     </h3>
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          <div class="table-content crm-table">
+            <div class="project-table addressproject-table">
+              <div id="crm-contact" class="dt-responsive">                 
+                <div class="row">         
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTerm class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>  
+            <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'365px'" [config]="config">
+                 <div class="table-responsive">
+                  <table class="table table-striped table-bordered full-data-table"> 
+                        <thead>
+                        <tr class="blueorange-gradient">        
+                        <th> AreaData</th>
+                        <th>City</th>
+                        <th> Pincode</th>
+                        <th> State</th>
+                        <th>Action</th>                                               
+                    </tr>
+                    <tr>
+                    </tr>
+                    </thead>
+                    <tbody>                        
+                     <tr *ngFor="let item of picodelist; let i = index;">                     
+                       <td>{{item.AreaData}}</td>   
+                       <td>{{item.City}}</td>   
+                       <td>{{item.Pincode}}</td>                      
+                       <td>{{item.State}}</td>        
+                      <td class="action-icon">
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)">Get Details</a>                          
+                      </td>
+                    </tr>  
+                    </tbody>
+                    <!-- <tfoot>
+                    <tr class="blueorange-gradient">     
+                    <th>AreaData</th>            
+                    <th>City</th>    
+                    <th>Pincode</th> 
+                    <th>State</th>     
+                    <th>Action</th>      
+                    </tr>                  
+                    </tfoot> -->
+                  </table>
+                </div> 
+                
+              </perfect-scrollbar>
+             
+              </div>
+              
+            </div>
+          </div>        
+          <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>               -->
+          </div>          
+        </app-modal-animation>
+
+
+
+
+<!-- 
+   Referance Model -->
+
+    <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-6 addressmodeleffect'">
+      
+      <h3 class="f-15" style="position: relative;">Referance Details
+        <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+                     -
+     </h3>
+
+        <div class="app-modal-body text-center" style="position: relative;"> 
+          <div class="table-content crm-table">
+            <div class="project-table addressproject-table">
+              <div id="crm-contact" class="dt-responsive">
+                <div class="row">         
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="input-group">
+                      <input type="text" #searchTermref class="form-control input-lg full-data-search" placeholder="Search here...">
+                      <span class="input-group-append ripple light" id="basic-addon1">
+                        <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                      </span>
+                    </div> 
+                  </div>      
+            </div>  
+     
+                 <div class="table-responsive">
+                  <table class="table table-striped table-bordered full-data-table"> 
+                        <thead>
+                        <tr class="blueorange-gradient">        
+                        <th>Id</th>                                                             
+                        <th>RefName</th>                                                
+                        <th>RefMobileNo</th> 
+                         <th> Action</th>
+                    </tr>
+                    <tr> </tr>                  
+                    </thead>
+                    <tbody>                      
+                     <tr *ngFor="let item of referencelist; let i = index;">                     
+                       <td>{{item.Id}}</td>   
+                       <td>{{item.RefName}}</td>   
+                       <td>{{item.RefMobileNo}}</td>     
+                      <td class="action-icon">
+                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="PatchRefenceDetail(item,$event)">Get Details</a>                          
+                      </td>
+                    </tr>  
+                    </tbody>
+                    <!-- <tfoot>
+                    <tr class="blueorange-gradient">     
+                    <th>Id</th>            
+                    <th>RefName</th>    
+                    <th>RefMobileNo</th>                       
+                    <th>Action</th>      
+                    </tr>                   
+                    </tfoot> -->
+                  </table>
+                </div> 
+              </div>
+            </div>
+          </div>         
+               <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                   -->
+          </div>
+           
+        </app-modal-animation>
+
+
+
+
+
+    <app-modal-basic #modalselectvacent [dialogClass]="'modal-lg grpcheckin'" [hideHeader]="true" [hideFooter]="true">
+      <div class="app-modal-body">
+        <button type="button" class="close basic-close-light-box" (click)="modalselectvacent.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <label class="font-header" style="background-color: #0062cc;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;"><i class="fa fa-users" aria-hidden="true"></i> Group Checkin Please Select Room
+        </label>       
+   
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+          <div class="row">
+            
+            <div id="availrooms">
+            <div class="container">
+              <div class="col-md-12">
+                <div class="row">
+                  <ul style="display: inline-block" *ngFor="let room of roomNoList">
+                    <li style="float: left; margin-left: 0px ">
+                      <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                        {{room.RoomNo}}
+                        <br>
+                        {{room.RoomCode}}
+                    </div>
+                    </li>
+                   
+                  </ul>
+                </div>
+              </div>
+            </div>                                          
+          </div>            
+          </div>
+
+        </perfect-scrollbar>
+
+      
+       
+         
+      </div>
+    </app-modal-basic>
+
+
+        <ng2-toasty [position]="position"></ng2-toasty>
+
+
+   
+      
+  
   

@@ -1,1 +1,63 @@
-<p>todayarivallist works!</p>
+<div class="page-body">
+    <div class="row">
+      <!-- Right column start -->
+      <div class="col-xl-3 col-lg-12 push-xl-9">        
+      </div>  
+      <div class="col-xl-9 col-lg-12 pull-xl-3 filter-bar">
+      
+            <div class="input-group">
+                <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
+                <span class="input-group-append ripple light" id="basic-addon1"><i (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
+              </div>
+
+        <div class="row" >
+
+          <div class="col-sm-6" *ngFor="let data of BookingList" >
+            <!-- Invoice list card start -->
+            <div class="card card-border-primary">
+              <div class="card-header">
+                <h5> {{data.GuestName | uppercase}}</h5>        
+                                 
+               <div ngbDropdown class="dropdown-secondary dropdown f-right">
+                  <!-- <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button> -->
+                  <a [routerLink]="['/Master/gridtest']" title="Checkin" class="btn btn-info btn-mini b-none ripple light"><i class="icofont icofont-eye-alt m-0"></i></a>
+                
+                  <span class="f-left m-r-5 text-inverse">Checkin : </span>
+                </div>  
+                <br>
+                <strong *ngIf="data.CompanyName !='0'"  class="label label-primary">Company: {{data.CompanyName}}</strong>
+               
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <ul class="list list-unstyled">
+                      <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
+                      <li>Arrival Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
+                      
+                    </ul>
+                  </div>
+                  <div class="col-sm-6">
+                    <ul class="list list-unstyled text-right">
+                      <li>Total: &nbsp;{{data.BillAmount| currency:'INR'}}</li>
+                      <li>Paid: <span class="text-semibold">{{data.AdvancePaidAmount| currency:'INR'}}</span></li>
+                      <!-- <li>Advance Paid: <span class="text-semibold">{{'₹'+data.AdvancePaidAmount| currency}}</span></li> -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- end of card-footer -->
+            </div>
+            <!-- Invoice list card end -->
+          </div>
+
+  
+        </div>
+        <!-- Task board design block end -->
+      </div>
+      <!-- Left column end -->
+    </div>
+  
+  </div>
+

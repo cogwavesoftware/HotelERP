@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
+
+import { RescheckinComponent } from './rescheckin/rescheckin.component';
 // import { ReservationComponent } from './reservation/reservation.component';
 // import { ReservationlistComponent } from './reservationlist/reservationlist.component';
 // import { TodayarivallistComponent } from './todayarivallist/todayarivallist.component';

@@ -136,7 +136,7 @@
                     <button ngbDropdownToggle class="btn btn-info btn-mini dropdown-toggle waves-light b-none txt-muted ripple"  type="button" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icofont icofont-navigation-menu"></i></button>
                     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                       <a class="dropdown-item ripple" title="Edit Reservation" (click)="Edit(data.BookingNo)" ><i class="icofont icofont-ui-alarm"></i>Edit</a>
-                      <a class="dropdown-item ripple" title="Cancel Reservation" href="javascript:;"><i class="icofont icofont-ui-edit"></i>Cancel</a>
+                      <a class="dropdown-item ripple" title="Cancel Reservation" (click)="CancelReservation('effect-4',data)"><i class="icofont icofont-ui-edit"></i>Cancel</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item ripple" title="Print Acknowledgement" href="javascript:;"><i class="icofont icofont-spinner-alt-5"></i>Print Ack</a>
                       <a class="dropdown-item ripple" title="Download Acknowledgement" href="javascript:;"><i class="icofont icofont-attachment"></i>Download Ack</a>
@@ -162,4 +162,145 @@
     </div>
   
   </div>
+
+
+
   
+
+  
+
+
+
+
+  <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">      
+    <h3 class="f-15" style="position: relative;">Booking Details
+      <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+   </h3>
+    <div class="container">
+      <div class="col-md-12 userlist ">
+        <div class="row ">
+         
+          <form #myform = "ngForm" (ngSubmit) = "onSubmitReservationCancel(myform)" class="">
+            <div class="app-modal-body text-center addcompany "> 
+ 
+             <div class="col-md-12">
+                
+               <div class="row">                
+ 
+                 <div class="col-md-4">
+                     <label>Guest Name*</label>
+                     <input type="text" name="GuestName" class="form-control" [(ngModel)]="model.GuestName" #GuestName="ngModel" value="{{GuestName}}"    required autocomplete="off">
+                    
+                 </div>
+                 <div class="col-md-4">
+                     <label>BookingNo*</label>
+                     <input type="text" name="BookingNo" class="form-control" [(ngModel)]="model.BookingNo" #BookingNo="ngModel" value="{{BookingNo}}"    required autocomplete="off">
+                     
+                 </div>
+                 <div class="col-md-4">
+                
+                   <label>CompanyName</label>
+                   <input type="text" name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"    required autocomplete="off">
+                  </div>
+              
+               </div>
+               <div class="row">
+                 <div class="col-md-4">
+                      <label>Status</label>
+                      <input type="text" name="Status" class="form-control" [(ngModel)]="model.Status" #Status="ngModel" value="{{Status}}"   required autocomplete="off">
+                    
+                  </div>
+                  <div class="col-md-4">
+                      <label>BillAmount *</label>
+                      <input type="number" name="BillAmount" class="form-control" [(ngModel)]="model.BillAmount"  #BillAmount="ngModel" value="{{BillAmount}}"   required autocomplete="off">
+                     
+                      </div>
+                  <div class="col-md-4">
+                          <label>Advance Amount*</label>
+                          <input type="number" name="AdvancePaidAmount" class="form-control" [(ngModel)]="model.AdvancePaidAmount" #AdvancePaidAmount="ngModel" value="{{AdvancePaidAmount}}"  required autocomplete="off">
+                         
+                      </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-4">
+                       <label>RefundType</label>
+                       <!-- <select id="RefundType" appSelectValidator="-1" class="custom-select"  #RefundType="ngModel"  name="RefundType" [(ngModel)]="model.RefundType">
+                        <option value="-1">Select Type</option>
+                        <option value="Amount">Amount</option>
+                        <option value="%">%</option>                       
+                      </select> -->
+                      
+                      <select  (change)="FilterPaymentMode(Paymode.value)"  class="custom-select"  name="Paymode" #Paymode="ngModel" [(ngModel)]="model.Paymode">
+                      <option value="select">Select</option>
+                      <option *ngFor="let sour of paymentmode" [value]="sour">
+                        {{ sour }}</option>
+                    </select>
+
+                    
+                   </div>
+                   <div class="col-md-4">
+                       <label>Value *</label>
+
+                       <select class="custom-select"  [(ngModel)]="model.Paysubmode" name="Paysubmode" #Paysubmode="ngModel">
+                       <option value="select">Select</option>
+                       <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                         {{ Paysubmode  }}</option>
+                     </select> 
+                       
+                       </div>
+                   <div class="col-md-4">
+                           <label>Refund Amount</label>
+                           <input type="number" name="RefundAmount" class="form-control" [(ngModel)]="model.RefundAmount" #RefundAmount="ngModel" value="{{RefundAmount}}"  required autocomplete="off">
+                          
+                       </div>
+                 </div>
+               
+                <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px">Cancel Reservation</button>
+                              
+             </div>
+       
+           </div> <!-- company div -->
+       </form>
+        </div> <!-- form end -->
+
+        <hr>
+        <div class="row  ">
+          <div class="searchresults"  style="width: 100%;">
+            <div class="table-content crm-table">
+              <div class="project-table addressproject-table">
+                <div id="crm-contact" class="dt-responsive">
+                           
+                   <div class="table-responsive">
+                    <table class="table table-striped table-bordered full-data-table"> 
+                          <thead>
+                          <tr class="blueorange-gradient">        
+                          <th>RoomCode</th>             
+                          <th>No of Rooms </th>                                                
+                      </tr>
+                      <tr> </tr>               
+                      </thead>
+                      <tbody>                    
+                       <tr *ngFor="let item of Reslavelist; let i = index;">                     
+                         <td>{{item.RoomCode}}</td>   
+                         <td>{{item.TotalBookedRoom}}</td>                                                     
+                      </tr>  
+                      </tbody>                    
+                    </table>
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>    <!-- search results  div --> 
+        </div><!-- end serach results-->
+      </div>
+    </div>
+   
+      <div class="app-modal-body text-center" style="position: relative;"> 
+    
+             <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>  -->
+        </div>  
+      </app-modal-animation>
+
+      <ng2-toasty [position]="position"></ng2-toasty>

@@ -1,0 +1,126 @@
+.test123{
+     
+    /* You can add global styles to this file, and also import other style files */
+.grid-table
+{
+	display:table;
+}
+.thead
+{
+	display:table-header-group;
+	font-weight:bold;
+	border-bottom: 1px solid black;
+    text-align: center;
+    background-color: #f0f8ff;
+}
+.thead .td{
+  
+    width: 115px;
+    text-align: left;
+}
+.tbody
+{
+	display:table-row-group;
+}
+.tbody .td input,
+.tbody .td select{
+     
+    width: 115px;
+    height: 23px;
+}
+.thead .td .btn.btn-outline-success{
+    
+    width: 30px;
+    height: 28px;
+    padding: 0;
+    background: none;
+    color: #000;
+    font-size: 90%;
+    text-align: center;
+    border:1px solid #585858;
+}
+.tbody .td button.ng-tns-c5-1{   
+    // border-radius: 5px;
+    // width: 30px;
+    // padding: 0;
+    // background: red;
+    // color: #fff;
+    // font-size: 115%;
+}
+.tr
+{
+	display:table-row;
+	
+}
+.td
+{
+	display:table-cell;
+	padding:  0px 1px 0px 0px;
+}
+.thead div.tr div.td:last-child{
+    background-color: #fff;
+}
+i:hover{
+	cursor: pointer;
+}
+
+input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+	border-color: #dc3545;
+}
+
+
+.elementToFadeInAndOut {
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  50% { opacity: 1; }
+}
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid yellow!important;
+    }
+
+}
+ @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid blue!important;
+    }
+  }
+
+ 
+  .roomselect {
+    text-align: center;
+    color: white;
+    margin: 1px;
+}
+
+.freeroom {
+    background-color: green;    
+    padding: 0px;
+    width: 75px;
+    height: 50px;   
+    display: inline-table;
+    margin: 2px 1px 2px 3px;
+}
+
+.occroom {
+    background-color: red;
+    padding: 0px;
+    width: 75px;
+    height: 50px;    
+    display: inline-table;
+    margin: 2px 1px 2px 3px;
+}
