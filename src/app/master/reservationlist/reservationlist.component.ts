@@ -40,6 +40,10 @@ export class ReservationlistComponent implements OnInit,AfterViewInit {
         console.log(this.BookingList)
          
        });
+
+       
+      
+
     }
   
     SearchBookingList(search:string)
