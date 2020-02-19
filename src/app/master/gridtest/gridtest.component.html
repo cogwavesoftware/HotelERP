@@ -527,7 +527,7 @@
                                                                 </thead>
                                                                 <tbody>                    
                                                                  <tr *ngFor="let item of reservedlist; let i = index;">                     
-                                                                   <td>10002</td>   
+                                                                   <td>{{item.RoomCode}}</td>   
                                                                    <td>TEST12</td>                                                     
                                                                 </tr>  
                                                                 </tbody>                    
@@ -546,7 +546,7 @@
                                           </div>
                                         </ng-template>
                                       </ngb-tab>
-                                      <ngb-tab title="Select Room">
+                                      <!-- <ngb-tab title="Select Room">
                                         <ng-template ngbTabContent>
                                           <div [@fadeInOutTranslate] class="m-t-15">
                                             <div class="test123 userlist " style="padding: 2px;">
@@ -561,7 +561,7 @@
                                                       <div class="row">
                                                         <ul style="display: inline-block" *ngFor="let room of roomNoList">
                                                           <li style="float: left; margin-left: 0px ">
-                                                            <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                                                            <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom1" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
                                                               {{room.RoomNo}}
                                                               <br>
                                                               {{room.RoomCode}}
@@ -579,7 +579,7 @@
                                             </div>
                                           </div>
                                         </ng-template>
-                                      </ngb-tab>
+                                      </ngb-tab> -->
                                       <ngb-tab title="Booking Table">
                                         <ng-template ngbTabContent>
                                           <div [@fadeInOutTranslate] class="m-t-15">
