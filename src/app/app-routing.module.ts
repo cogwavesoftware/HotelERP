@@ -242,6 +242,11 @@ const routes: Routes = [
         path: 'arivallist',
         loadChildren: './master/todayarivallist/todayarivallist.module#TodayarivallistModule'
       },
+    
+      {
+        path: 'reschk',
+        loadChildren: './master/rescheckin/rescheckin.module#RescheckinModule'
+      },
       //  {
       //  path:'printgrc',
       //   loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'

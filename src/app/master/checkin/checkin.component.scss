@@ -160,3 +160,22 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 .checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td.lasttd{
     width:auto;
 }
+.dynamicphotoarray .grid-table .thead,
+.dynamicphotoarray .grid-table .tbody{
+    width: 100%;
+    float: left;
+}
+.dynamicphotoarray .grid-table .thead .td {
+    width:100px;
+    float: left;
+    border:1px solid #ccc;
+}
+.dynamicphotoarray .grid-table .tbody .td input,
+.dynamicphotoarray .grid-table .tbody .td select,
+.dynamicphotoarray .grid-table .tbody .td input
+{
+    width:100px;
+    float: left;
+    border:1px solid #ccc;
+    
+}

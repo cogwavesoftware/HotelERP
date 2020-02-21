@@ -1487,12 +1487,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
-
-
-
-
-
-
     // this.form.get('nofdays').valueChanges.subscribe(
     //   data => {
     //   this.NodaysChanged=data;

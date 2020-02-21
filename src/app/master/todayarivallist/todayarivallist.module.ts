@@ -1,19 +1,17 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { SharedModule } from './../../shared/shared.module';
-import { CompareValidatorDirective } from 'src/app/shared/compare-validator.directive';
 import {DatePipe} from '@angular/common';
-
 import { ToastyModule } from 'ng2-toasty';
 import {DataTableModule} from 'angular2-datatable';
 import { TodayarivallistRoutingModule } from './todayarivallist-routing.module';
 import { TodayarivallistComponent } from './todayarivallist.component';
-
+import { ChartsModule } from 'ng2-charts';
 import {HttpClientModule} from '@angular/common/http';
+//import {ChartModule} from 'angular2-chartjs';
+
 
 @NgModule({
   declarations: [TodayarivallistComponent],
@@ -22,10 +20,11 @@ import {HttpClientModule} from '@angular/common/http';
     SharedModule,
     HttpClientModule,
     DataTableModule,
-    FormsModule,
+    FormsModule,ChartsModule,
+    
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  providers:[DatePipe]
+ 
 })
 export class TodayarivallistModule { }
 

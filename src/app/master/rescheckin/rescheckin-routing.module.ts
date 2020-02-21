@@ -1,12 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import { RescheckinComponent } from './rescheckin.component';
+
+const routes:Routes = [{
+  path:'',
+  component:RescheckinComponent,
+  }];
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  //exports: [RouterModule]
 })
 export class RescheckinRoutingModule { }
+
