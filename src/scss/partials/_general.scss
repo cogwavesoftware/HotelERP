@@ -6742,7 +6742,33 @@ outerdiv{
 .contentboxmodel  .md-modal{
     top:40%;
 }
- 
+.contentboxmodel .card-border-primary{
+    border-top:4px solid #cccccc;
+}
+.pcoded-content .pcoded-inner-content .main-body .page-wrapper .additionalguest  {
+    width:100%!important;
+    max-width:90%;     
+}
+.addaddinalguest .card-border-primary .ng-select.ng-select-single .ng-select-container{
+    height:1.50rem!important;
+    min-height:1.50rem!important; 
+}
+.addaddinalguest .card-border-primary .col-lg-2, 
+.addaddinalguest .card-border-primary .col-12.col-lg-6,
+.addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-1,
+.addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-3,
+.addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-4{
+    padding-right:1px;
+    padding-left:0;
+}
+.addaddinalguest .card-border-primary .col-12.col-sm-2 .custom-select,
+.addaddinalguest .card-border-primary .col-12.col-sm-2 .custom-select{
+    border-radius: 0;
+}
+
+.addaddinalguest .card-border-primary .guestinfofirstrow .form-group{
+    margin-bottom: 0;
+}
 // .pcoded  .pcoded-navbar[vertical-nav-type="collapsed"] {
       
 //     width:70px!important;

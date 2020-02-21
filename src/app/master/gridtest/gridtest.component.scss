@@ -125,7 +125,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     margin: 2px 1px 2px 3px;
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
-    width: 101px;
+    width: 105px;
     border: 1px solid #ccc;
     background-color: #f3f3f3;
     color: #000;
@@ -136,29 +136,30 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
-    width:100px;
+    width:104px;
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td.lasttd,
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td.lasttd{
     width:auto;
 }
-.selectedroomsh2 h2{
-    width:100%;
-    font-size: 120%;
-    color: #fff;
-    padding: 0px 0px 0px 10px;
-    margin: 0;
+.outerdiv .reservedright thead tr th ,
+.outerdiv .reservedright tbody tr td {
+    border:1px solid #ccc;
+    padding:2px;
+     
 }
-.outerdiv .showedcolorbg{
-    border: 1px solid #ccc;
+.outerdiv .reservedright thead tr th{     
     background-color: #f3f3f3;
     color: #000;
-    text-align: center;
-    padding: 2px 0px 2px 0px;
+    text-align: center;     
     font-weight: normal;
     font-size: 75%;
 }
-.outerdiv .showedcolorbg th{
-    color:#000;
-    padding:0px;
+.outerdiv .reservedright .rowclass{
+    border:1px solid #ccc;
 }
+.brdrclass{
+    width: 100%;    
+    border:1px solid #ccc;
+}
+ 

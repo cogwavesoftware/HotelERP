@@ -520,174 +520,171 @@
                                                         </div>
                                                         </li> 
                                                         </ul> 
-                                                       </div>            
+                                                       </div>    
+                                                      <div class="brdrclass">
+                                                       <div class="float-left">
+                                                        <div class="test123 userlist grpcheckingpayntarry" style="padding: 2px;">
+                                                          <div class="grid-table" style="width: 100%;">
+                                                            <div class="thead">
+                                                              <div class="">
+                                                                <div class="td">Room No</div>
+                                                                <div class="td"> Type</div>                                                               
+                                                                <div class="td">Pax</div>
+                                                                <div class="td">Plan</div>
+                                                                <div class="td">Food</div>
+                                                                <div class="td">Tariff</div>
+                                                                <div class="td">Tax</div>
+                                                                <div class="td">Net Amt</div>
+                    
+                                                                <div class="td">Disc.Type</div>
+                                                                <div class="td">Disc.Value</div>
+                    
+                                                                <!--<div class="td" *ngIf="isGorupCheckin">
+                                                                  <button type="button"  class=" " (click)="modalselectvacent.show()">
+                                                                    <i class="fa fa-plus"></i> 
+                                                                  </button>
+                                                                </div>-->
+                                                                <!-- <div class="td">
+                                                                    <span *ngIf="notification" class="elementToFadeInAndOut">
+                                                                      <i class="fas fa-check-circle {{notification.class}}"></i>
+                                                                      {{notification.message}}
+                                                                    </span>
+                                                                  </div> -->
+                                                              </div>
+                                                            </div>
+                                                            <div class="tbody" >
+                    
+                                                              <div formArrayName="other"
+                                                                *ngFor="let other of form.get('other').controls; let i = index">
+                                                                <div [formGroupName]="i">
+                                                                  <div class="tr">
+                    
+                                                                    
+                                                                    <div class="td">
+                                                                      <input type="hidden" value="i" readonly formControlName="bankAccountID">
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <input class="" readonly formControlName="RoomNo">
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                                        (change)="RoomTypeChanged(i,'RoomCode')">
+                                                                        <option value="0">Select</option>
+                                                                        <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                                          {{items.RoomCode}}</option>
+                                                                      </select>
+                                                                    </div>
+                    
+                                                                 
+                    
+                                                                    <div class="td">
+                                                                      <select class="" formControlName="Pax"
+                                                                        (change)="RoomTypeChanged(i,'Pax')">
+                                                                        <option value="0">Select</option>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                        <option value="6">6</option>
+                                                                        <option value="7">7</option>
+                    
+                                                                      </select>
+                                                                    </div>
+                    
+                    
+                                                                    <div class="td">
+                                                                      <select class="" formControlName="PlanName"
+                                                                        (change)="RoomTypeChanged(i,'PlanName')">
+                                                                        <option value="0">Select</option>
+                                                                        <option *ngFor="let item of planlist" value="{{item.PlanName}}">
+                                                                          {{item.PlanName}}</option>
+                                                                      </select>
+                                                                    </div>
+                    
+                    
+                    
+                    
+                                                                    <div class="td">
+                    
+                                                                      <input type="text" class="" id="Food" formControlName="Food">
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <input class="" formControlName="Tariff"
+                                                                        (change)="RoomTypeChanged(i,'Tariff')">
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <input class="" formControlName="Tax">
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <input class="" formControlName="Grand"
+                                                                        (change)="RoomTypeChanged(i,'Grand')">
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
+                                                                      <option value="select">Select</option>
+                                                                      <option *ngFor="let sour of discounttypes"
+                                                                        [value]="sour">{{ sour  }}</option>
+                                                                    </select>
+                                                                    
+                                                                    </div>
+                    
+                                                                    <div class="td">
+                                                                      <input class="bookingRoomTable_textalign" formControlName="discvalue">
+                                                                    </div>
+                     
+                                                                  </div>
+                                                                </div>
+                                                              </div> 
+                                                             </div> 
+                                                          </div>
+                                                        </div>                                          
+                                                      </div>
+                                                      <div class="float-right" style="
+                                                      padding-top:2px">
+                                                        <div class="searchresults reservedright"  style="width: 100%;">
+                                                          <div class="table-content crm-table">
+                                                            <div class="project-table addressproject-table">
+                                                              <div id="crm-contact" class="dt-responsive">
+                                                                         
+                                                                 <div class="table-responsive">
+                                                                  <table class="table table-striped table-bordered full-data-table"> 
+                                                                        <thead>
+                                                                        <tr class="showedcolorbg ">        
+                                                                        <th>RoomCode</th>             
+                                                                        <th>Booked </th>                                                
+                                                                    </tr>
+                                                                    <tr> </tr>               
+                                                                    </thead>
+                                                                    <tbody>                    
+                                                                     <tr *ngFor="let item of reservedlist; let i = index;">                     
+                                                                       <td>{{item.RoomCode}}</td>   
+                                                                       <td>{{item.TotalBookedRoom}}</td>                                                     
+                                                                    </tr>  
+                                                                    </tbody>                    
+                                                                  </table>
+                                                                </div> 
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>  
+                                                      </div>
+                                                    </div>
                                               </div>
                                     
                                            
                                           </div>
                                         </div>
                                       </div>
-                                        <div class="row selectedroomsh2" style="border-top:3px solid #000">
+                                        <div class="row selectedroomsh2" style="border-top:1px solid #ccc"> 
                                           
-                                          <div class="col-md-10" style="padding-left: 4px;">
-                                            <div class="test123 userlist grpcheckingpayntarry" style="padding: 2px;">
-                                              <div class="grid-table" style="width: 100%;">
-                                                <div class="thead">
-                                                  <div class="">
-                                                    <div class="td">Room No</div>
-                                                    <div class="td"> Type</div>
-                                                   
-                                                    <div class="td">Pax</div>
-                                                    <div class="td">Plan</div>
-                                                    <div class="td">Food</div>
-                                                    <div class="td">Tariff</div>
-                                                    <div class="td">Tax</div>
-                                                    <div class="td">Net Amt</div>
-        
-                                                    <div class="td">Disc.Type</div>
-                                                    <div class="td">Disc.Value</div>
-        
-                                                    <!--<div class="td" *ngIf="isGorupCheckin">
-                                                      <button type="button"  class=" " (click)="modalselectvacent.show()">
-                                                        <i class="fa fa-plus"></i> 
-                                                      </button>
-                                                    </div>-->
-                                                    <!-- <div class="td">
-                                                        <span *ngIf="notification" class="elementToFadeInAndOut">
-                                                          <i class="fas fa-check-circle {{notification.class}}"></i>
-                                                          {{notification.message}}
-                                                        </span>
-                                                      </div> -->
-                                                  </div>
-                                                </div>
-                                                <div class="tbody" >
-        
-                                                  <div formArrayName="other"
-                                                    *ngFor="let other of form.get('other').controls; let i = index">
-                                                    <div [formGroupName]="i">
-                                                      <div class="tr">
-        
-                                                        
-                                                        <div class="td">
-                                                          <input type="hidden" value="i" readonly formControlName="bankAccountID">
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <input class="" readonly formControlName="RoomNo">
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <select   class="roomcodep-l-25" formControlName="RoomCode"
-                                                            (change)="RoomTypeChanged(i,'RoomCode')">
-                                                            <option value="0">Select</option>
-                                                            <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
-                                                              {{items.RoomCode}}</option>
-                                                          </select>
-                                                        </div>
-        
-                                                     
-        
-                                                        <div class="td">
-                                                          <select class="" formControlName="Pax"
-                                                            (change)="RoomTypeChanged(i,'Pax')">
-                                                            <option value="0">Select</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-        
-                                                          </select>
-                                                        </div>
-        
-        
-                                                        <div class="td">
-                                                          <select class="" formControlName="PlanName"
-                                                            (change)="RoomTypeChanged(i,'PlanName')">
-                                                            <option value="0">Select</option>
-                                                            <option *ngFor="let item of planlist" value="{{item.PlanName}}">
-                                                              {{item.PlanName}}</option>
-                                                          </select>
-                                                        </div>
-        
-        
-        
-        
-                                                        <div class="td">
-        
-                                                          <input type="text" class="" id="Food" formControlName="Food">
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <input class="" formControlName="Tariff"
-                                                            (change)="RoomTypeChanged(i,'Tariff')">
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <input class="" formControlName="Tax">
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <input class="" formControlName="Grand"
-                                                            (change)="RoomTypeChanged(i,'Grand')">
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
-                                                          <option value="select">Select</option>
-                                                          <option *ngFor="let sour of discounttypes"
-                                                            [value]="sour">{{ sour  }}</option>
-                                                        </select>
-                                                        
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <input class="bookingRoomTable_textalign" formControlName="discvalue">
-                                                        </div>
-        
-                                                        <!--<div class="td" *ngIf="isGorupCheckin">
-                                                         
-                                                          <button (click)="onDelete(0,i)" >
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                                          </button>
-                                                        </div> -->
-                                                      </div>
-                                                    </div>
-                                                  </div> 
-                                                 </div> 
-                                              </div>
-                                            </div>                                          
-                                          </div>
-                                          <div class="col-md-2">
-                                            <div class="searchresults"  style="width: 100%;">
-                                              <div class="table-content crm-table">
-                                                <div class="project-table addressproject-table">
-                                                  <div id="crm-contact" class="dt-responsive">
-                                                             
-                                                     <div class="table-responsive">
-                                                      <table class="table table-striped table-bordered full-data-table"> 
-                                                            <thead>
-                                                            <tr class="showedcolorbg ">        
-                                                            <th>RoomCode</th>             
-                                                            <th>Booked </th>                                                
-                                                        </tr>
-                                                        <tr> </tr>               
-                                                        </thead>
-                                                        <tbody>                    
-                                                         <tr *ngFor="let item of reservedlist; let i = index;">                     
-                                                           <td>{{item.RoomCode}}</td>   
-                                                           <td>{{item.TotalBookedRoom}}</td>                                                     
-                                                        </tr>  
-                                                        </tbody>                    
-                                                      </table>
-                                                    </div> 
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>  
-                                          </div>
+                                         
                                         </div>
                                       
                                        
