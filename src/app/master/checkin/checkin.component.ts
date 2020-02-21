@@ -45,7 +45,9 @@ export interface Checkinss {
   ChangeId: string;
   BranchCode: string;
 }
-
+export interface addcheckins{
+  guestname:string;
+}
 @Component({
   selector: "app-checkin",
   templateUrl: "./checkin.component.html",
@@ -64,6 +66,9 @@ export interface Checkinss {
   ]
 })
 export class CheckinComponent implements OnInit, OnDestroy {
+  bankAccountForms: FormArray = this.fb.array([]);
+  FormAddcheckin :addcheckins;
+
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
@@ -251,7 +256,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   back = false;
   Id$: Observable<string>;
   @ViewChild('f', { static: false }) newcompanyform: any;
-  constructor(private datePipe: DatePipe,
+  constructor(private datePipe: DatePipe,private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
@@ -388,10 +393,15 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.addBankAccountForm();
+
+    
+
 
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
-    this.previewUrl2 = environment.GuestimagePath + '/imagenot.png';
-    this.previewUrl3 = environment.GuestimagePath + '/imagenot.png';
+    this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
+    this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
+    
     this.model.Id = 0;
     this.model.CompanyCode = 0;
     this.model.BranchCode = "0";
@@ -497,6 +507,30 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
+  addBankAccountForm() {
+    this.bankAccountForms.push(this.fb.group({       
+      guestname:['', ""],
+      RefName:["", ""] ,
+      title:["",  ""] ,
+      gender:["", ""],    
+      mobile:["",""],
+      email:["",""],
+      pincode:["",""],
+      city:["",""],
+      state:["",""],
+      nation:["",""],
+      gstno:["",""],
+      address1:["",""],
+      address2:["",""],
+      address3:["",""],
+      GuestIdFront:["",""],
+      GuestIdBack:["",""],
+      
+    }));
+  }
+
+  
+
   removeRoomNo(RoomNo: string): void {
     debugger;
     for (let order of this.selectedRoomNoArray) {
@@ -511,7 +545,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.showWebcam = false;
     this._bankservice.changeMessage("expanded")
   }
-
+  OpenAdditionalGuest(event){
+    document.querySelector("#" + event).classList.add("md-show");
+  }
   enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
     const classNameS = event.target.className;
 
