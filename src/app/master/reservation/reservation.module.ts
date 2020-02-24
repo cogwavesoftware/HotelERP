@@ -9,7 +9,6 @@ import { ToastyModule } from 'ng2-toasty';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
-//import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
 import { ReservationComponent } from './reservation.component';
 import { ReservationRoutingModule } from './reservation-routing.module';
 
@@ -32,3 +31,4 @@ import { NgSelectModule } from '@ng-select/ng-select';
  //  entryComponents:[ConfirmationDialogComponent]
 })
 export class ReservationModule { }
+

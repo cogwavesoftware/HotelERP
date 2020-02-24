@@ -70,5 +70,13 @@ export class ReservationService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/ReservedDetail?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
   }
 
+  Chart()
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/chart');
+  }
 
+  Chartlist(BranchCode:string,RoomCode:string,date:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/chartlist?BranchCode=' + BranchCode + '&RoomCode=' + RoomCode + '&date=' + date);
+  }
 }

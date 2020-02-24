@@ -77,7 +77,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   selectedOption = "3";
   isDisabled = true;
-
+  TotalBillAmount: number;
+  TotalPaidAmount: number;
+  TotalBalanceAmount: number;
   selectedCharacter = "3";
   timeLeft = 5;
   roomtype = [];
@@ -196,8 +198,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
       });
 
 
-
-
     this.form = this.formBuilder.group({
       companycode: ["0", [Validators.required]],
       Guestcode: ["0", [Validators.required]],
@@ -206,7 +206,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
       arivalmode: ["Reservation", [Validators.required]],
       title: ["Mr", [Validators.required]],
       bookingid: ["", [Validators.required]],
-      convenience: [0, [Validators.required]],
+      convenience: ["", [Validators.required]],
       guestname: ["", [Validators.required]],
       gender: ["Male", [Validators.required]],
       mobile: ["", [Validators.required]],
@@ -235,12 +235,36 @@ export class ReservationComponent implements OnInit, OnDestroy {
       visit: ["select", [Validators.required]],
       cometoknow: ["select", [Validators.required]],
       Billing: ["select", [Validators.required]],
-      RefName: ["0"],
+      RefName: [""],
       BranchCode: [this.Branch, [Validators.required]],
       randomCheckinNo: ['0', [Validators.required]],
       IpAdd: [localStorage.getItem("LOCAL_IP")],
       CreatedBy: [localStorage.getItem("id"), [Validators.required]]
     });
+
+    
+    this.form.get('checkoutdate').valueChanges.subscribe(() => {
+     
+
+      // console.log('Cnstructor Changed')
+      // let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
+      // let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
+      // console.log(CheckinDate)
+      // console.log(checkoutdate)
+      // if (CheckinDate < checkoutdate) {
+
+      //   let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
+      //   alert(numberofdays)
+      //   this.form.patchValue({
+      //     nofdays: numberofdays
+      //   });
+      // }
+      // else {
+      //   this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
+      // }
+
+    });
+
 
   }
 
@@ -288,13 +312,18 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.TotalBillAmount = 0;
+    this.TotalBalanceAmount = 0;
+    this.TotalPaidAmount = 0;
+
     this.CreateRequiredRoom(20);
     setTimeout(() => {
       this.reservloader = false;
     }, 7000)
 
+    this.model.frmdate=new Date();
     this.fromdate = new Date();
-    this.todate.setDate(this.fromdate.getDate() + 7);
+    this.todate.setDate(this.fromdate.getDate() + 15);
     let fromdates = this.datePipe.transform(this.fromdate, "MM/dd/yyyy");
     let todates = this.datePipe.transform(this.todate, "MM/dd/yyyy");
     this._reservationservice.GetAvailability(fromdates, todates).subscribe((res) => {
@@ -346,8 +375,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
         let Guestmodel = this.ReservationAmendform.Guest
         let companymodel = this.ReservationAmendform.company
         let ResMastermodel = this.ReservationAmendform.ResMaster
-
-
         let ReservationBookedSlaveArray = [];
         var AllreadyBookedType = [];
         let Checkintime, checkoutTime, checkindate, checkoutdate;
@@ -505,7 +532,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
   handleFormChanges() {
-    //alert('f')
+    console.log('handleFormChanges checkoutdate value change')
     this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
       let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
@@ -538,9 +565,11 @@ export class ReservationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._bankservice.changeMessage("expanded")
   }
+
+
+
   FilterPaymentMode(index: number) {
     let mode = this.PayArray.controls[index].get("Paymode").value;
-
     switch (mode) {
       case "Cash":
         this.subpaymodelist = [];
@@ -565,8 +594,41 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   }
 
+  CalculateAdvanceAmount(index: number, AdvanceAmount: number) {
+    let paymode = this.PayArray.controls[index].get('Paymode').value;
+    let Paysubmode = this.PayArray.controls[index].get('Paysubmode').value;
+    if (paymode == "select" || Paysubmode == "select") {
+      this.PayArray.controls[index].patchValue({
+        payAmount: 0
+      })
+      this.addToast("Cogwave Software", "Invalid Mode Selected", "error");
+      return;
+    }
+
+
+    this.TotalPaidAmount = 0;
+    this.TotalBalanceAmount = 0;
+    if (AdvanceAmount > 0) {
+      for (let Payarray of this.PayArray.controls) {
+        this.TotalPaidAmount += Payarray.get("payAmount").value;
+      }
+      this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+    }
+    else {
+      this.PayArray.controls[index].patchValue({
+        payAmount: 0
+      })
+      this.addToast("Cogwave Software", "Invalid Advance Amount", "error");
+    }
+  }
+
+
   Submit() {
 
+    if (this.TotalBillAmount <= 0) {
+      this.addToast("Cogwave Software??", "Booking Not Selected Please Select Booking", "error");
+      return;
+    }
 
     const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
@@ -628,6 +690,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+
+
+   
 
     fromEvent(this.searchTermguest.nativeElement, 'keyup')
       .pipe(
@@ -712,6 +777,32 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
 
+
+  onDelete(bankAccountID, i) {
+    if (i != 0) (<FormArray>this.form.get("other")).removeAt(i);
+  }
+
+
+  AddpaymentGrid(): FormGroup {
+    return this.formBuilder.group({
+      Paymode: ["select"],
+      Paysubmode: ["select", [Validators.required]],
+      payAmount: [0, [Validators.required]],
+      Descriptions: ["0"],
+      modeselected: ["0"]
+    });
+  }
+
+
+  AddPaymentButtonClick(): void {
+    (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
+  }
+
+
+  onDeletePayment(bankAccountID, k) {
+    if (k != 0) (<FormArray>this.form.get("PayArray")).removeAt(k);
+  }
+
   get other(): FormArray {
     return this.form.get("other") as FormArray;
   }
@@ -721,17 +812,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     return this.form.get("PayArray") as FormArray;
   }
 
-  openMyPincodeModalData(SelectedData: any, event: any) {
-    this.form.patchValue({
-      pincode: SelectedData.Pincode,
-      city: SelectedData.AreaData,
-      state: SelectedData.City,
-      nation: "India",
-    })
-    var allbtn = document.querySelector('.md-show');
-    console.log(allbtn);
-    allbtn.classList.remove("md-show");
-  }
+
 
   PatchSubModeName(index: number) {
     let DescriptionMode = this.PayArray.controls[index].get("Paysubmode").value;
@@ -750,39 +831,19 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   }
 
-  OpencompanymodelsDetail(SelectedData: any, event: any) {
-    console.log("ttest");
-    this.form.patchValue({
-      company: SelectedData.CompanyName,
-      gstno: SelectedData.GSTNO,
-      companycode: SelectedData.CompanyCode
-    })
-    // this.CompanyCheckin(SelectedData.CompanyCode);
-    var allbtn = document.querySelector('.md-show');
-    console.log(allbtn);
-    allbtn.classList.remove("md-show");
+
+
+
+
+
+
+  //  Openmodel
+
+  GuestModelOpen(event, data) {
+    this.filterQuery = "";
+    document.querySelector("#" + event).classList.add("md-show");
   }
-
-  PatchRefenceDetail(SelectedData: any, event: any) {
-    this.form.patchValue({
-      referenceid: SelectedData.Id
-    })
-    this.referanceName = SelectedData.RefName;
-    console.log("event" + event);
-    debugger;
-    var allbtn = document.querySelector('.md-show');
-    console.log(allbtn);
-    //allbtn.classList.remove("md-show");
-    //document.querySelector('#' + event).classList.remove("md-show");
-    // this.draggableElement.nativeElement.remove();
-    //this.elementRef.nativeElement.classList.add('md-' + this.color_);
-    //this.draggableElement.nativeElement.classList.add("mytest");
-
-    console.log(allbtn);
-    allbtn.classList.remove("md-show");
-  }
-
-  openMyGuestNameModalData(SelectedData: any, event: any) {
+  PatchGuest(SelectedData: any, event: any) {
     console.log('SelectedData')
     console.log(SelectedData)
     this.form.patchValue({
@@ -802,55 +863,146 @@ export class ReservationComponent implements OnInit, OnDestroy {
       DOA: SelectedData.GDOA,
     });
     this.form.get('guestname').disable({ onlySelf: true });
-
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
 
 
-  openMyModalPincode(event, data) {
+  ReferanceModelOpen(event, data) {
+    this.referanceName = '';
+    
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
+  PatchReferance(SelectedData: any, event: any) {
+    this.form.patchValue({
+      referenceid: SelectedData.Id,
+      RefName: SelectedData.RefName
+    })
+    this.form.get('RefName').disable({ onlySelf: true });
+    this.referanceName = SelectedData.RefName;
+    var allbtn = document.querySelector('.md-show');
+    allbtn.classList.remove("md-show");
+  }
+   
+  ReferanceSave(form?: NgForm)
+  {
+    form.value.BranchCode = localStorage.getItem("BranchCode")
+    form.value.CreatedBy = localStorage.getItem("id");
+    form.value.IsActive = true;
+    form.value.RefAdress = "0";
+    form.value.RefPoints =0;
+    console.log(form.value);
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+    this._masterservice.SaveReferance(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            " Referance Saved Sucessfully",
+            "success"
+          );
+          this.searchresultsdiv = true;
+          this.addcompanydiv = false;
+          this.addcompanybtn = true;
+          this.ReferanceModelOpen('effect-6', data)
+        }
+
+      }
+      else {
+        this.addToast("Cogwave Software", "Company Data Not Saved", "error");
+      }
+    });
+    console.log(form.value);
+  }
+
+
+  PinCodeModelOpen(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
-  OpenGuestMosel(event, data) {
+  PatchPincode(SelectedData: any, event: any) {
+    this.form.patchValue({
+      pincode: SelectedData.Pincode,
+      city: SelectedData.AreaData,
+      state: SelectedData.City,
+      nation: "India",
+    })
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
+  }
+
+
+
+  CompanyModelOpen(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
+
+  PatchCompany(SelectedData: any, event: any) {
+    console.log("ttest");
+    this.form.patchValue({
+      company: SelectedData.CompanyName,
+      gstno: SelectedData.GSTNO,
+      companycode: SelectedData.CompanyCode
+    })
+    // this.CompanyCheckin(SelectedData.CompanyCode);
+    this.form.get('company').disable({ onlySelf: true });
+    this.form.get('gstno').disable({ onlySelf: true });
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
+  }
+
+  CompanySave(form?: NgForm) {
+    debugger;
+    form.value.BranchCode = localStorage.getItem("BranchCode")
+    form.value.CreatedBy =  localStorage.getItem("id");
+    form.value.CompanyCode="0";
+    form.value.Id="0";
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+    this._masterservice.SaveCompanyMinData(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.CompanyCode == "0") {
+          this.addToast(
+            "Cogwave Software",
+            "Company Data Saved Sucessfully",
+            "success"
+          );
+          this.searchresultsdiv = true;
+          this.addcompanydiv = false;
+          this.addcompanybtn = true;
+          this.CompanyModelOpen('effect-7', data)
+        }
+
+      }
+      else {
+        this.addToast("Cogwave Software", "Company Data Not Saved", "error");
+      }
+    });
+    console.log(form.value);
+  }
+
+
 
   Availability(event) {
     document.querySelector("#" + event).classList.add("md-show");
   }
 
-
-  OpenReferanceModel(event, data) {
-    this.filterQuery = "";
-    this.referanceName = '';
-    this.form.patchValue({
-      referenceid: '0'
-    })
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-
-
-
-  Opencompanymodel(event, data) {
-    this.filterQuery = "";
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-
-  Opendrivermodel(event, data) {
-    this.filterQuery = "";
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-
-
-  RoomTypeChanged(index: number, Changed: string) {
-
+  BookingGrid(index: number, Changed: string) {
     debugger;
     let avaliableRoom = this.other.controls[index].get("Available").value
     let RequiredRoom = this.other.controls[index].get("Required").value
-
 
     if (RequiredRoom == null) {
       return;
@@ -944,6 +1096,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
           BillAmount += otherarray.Net;
         }
       }
+      this.TotalBillAmount = BillAmount;
+      this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+
       this.form.patchValue({
         BillAmount: BillAmount
       });
@@ -952,62 +1107,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
 
-  // let array = [1,2,3];
-  // for (let i = 0; i < array.length; i++) {
-  //   console.log(array[i]);
-  // }
-  // let array = [1,2,3];
-  // array.forEach(function (value) {
-  //   console.log(value);
-  // });
-
-
-
-
-  AddpaymentGrid(): FormGroup {
-    return this.formBuilder.group({
-      Paymode: ["select"],
-      Paysubmode: ["select", [Validators.required]],
-      payAmount: [0, [Validators.required]],
-      Descriptions: ["0"],
-      modeselected: ["0"]
-    });
-  }
-
-
-
-
-  onSubmitcompany(form?: NgForm) {
-
-    debugger;
-    form.value.BranchCode = localStorage.getItem("BranchCode")
-    form.value.CreatedBy = 1;
-    if (form.invalid) {
-      console.log(form.value);
-      this.addToast("Cogwave Software", "invalid Data", "warning");
-      return;
-    }
-    this._masterservice.SaveCompanyMinData(form.value).subscribe(data => {
-      if (data == true) {
-        if (form.value.Id == "0") {
-          this.addToast(
-            "Cogwave Software",
-            "Company Data Saved Sucessfully",
-            "success"
-          );
-          this.searchresultsdiv = true;
-          this.addcompanydiv = false;
-          this.addcompanybtn = true;
-          this.Opencompanymodel('effect-7', data)
-        }
-
-      }
-      else {
-        this.addToast("Cogwave Software", "Company Data Not Saved", "error");
-      }
-    });
-    console.log(form.value);
-  }
 
 
 
@@ -1053,15 +1152,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
 
-  onDelete(bankAccountID, i) {
-    if (i != 0) (<FormArray>this.form.get("other")).removeAt(i);
-  }
-
-
-  AddPaymentButtonClick(): void {
-
-    (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
-  }
 
   addcompanyinmodel() {
     this.companylist = [];
@@ -1069,11 +1159,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
     //this.searchresultsdiv = false;
     this.addcompanybtn = false;
     console.log("clock");
-
   }
 
   backtosearch() {
-
     //this.searchresultsdiv = true;
     this.addcompanydiv = false;
     this.addcompanybtn = true;
@@ -1085,10 +1173,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
     );
   }
 
-  closeMyModal(event) {
-    document.querySelector("#" + event).classList.add("md-close");
-    document.querySelector("#" + event).classList.remove("md-show");
-  }
 
 
 }

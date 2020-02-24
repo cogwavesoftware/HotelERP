@@ -130,6 +130,10 @@ const routes: Routes = [
         path: 'arivallist',
         loadChildren: './todayarivallist/todayarivallist.module#TodayarivallistModule'
       },
+      {
+        path: 'reschk',
+        loadChildren: './rescheckin/rescheckin.module#RescheckinModule'
+      },
 
     ]
   }

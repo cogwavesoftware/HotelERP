@@ -1564,14 +1564,8 @@
             </div>
           </div>         
                <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>                   -->
-          </div>
-           
-        </app-modal-animation>
-
-
-
-
-
+          </div>           
+      </app-modal-animation>
     <app-modal-basic #modalselectvacent [dialogClass]="'modal-lg grpcheckin'" [hideHeader]="true" [hideFooter]="true">
       <div class="app-modal-body">
         <button type="button" class="close basic-close-light-box" (click)="modalselectvacent.hide()">
@@ -1581,11 +1575,9 @@
         color: #ffffff;
         padding: 10px;
         width: 100%;"><i class="fa fa-users" aria-hidden="true"></i> Group Checkin Please Select Room
-        </label>       
-   
+        </label>          
         <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
-          <div class="row">
-            
+          <div class="row">            
             <div id="availrooms">
             <div class="container">
               <div class="col-md-12">
@@ -1597,30 +1589,17 @@
                         <br>
                         {{room.RoomCode}}
                     </div>
-                    </li>
-                   
+                    </li>                   
                   </ul>
                 </div>
               </div>
-            </div>
-               
-                  
-             
+            </div>  
           </div>
-
-            
-            
           </div>
         </perfect-scrollbar>
-
-      
-       
-         
       </div>
     </app-modal-basic>
-
-
-        <ng2-toasty [position]="position"></ng2-toasty>
+    <ng2-toasty [position]="position"></ng2-toasty>
 
       <div class="addGuestouter">
         <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
