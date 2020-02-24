@@ -1622,7 +1622,7 @@
 
         <ng2-toasty [position]="position"></ng2-toasty>
 
-
+      <div class="addGuestouter">
         <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
           <h3 class="f-15" style="position: relative;">Additional Guest Details 
             <button style="position: absolute;
@@ -1651,7 +1651,14 @@
                                                                  
                                   <h1>{{i}}</h1>
                                   <div class="tbody" [formGroup]="fg" *ngFor="let fg of bankAccountForms.controls; let i=index;">
-                                    <div class="card card-border-primary" style="width: 100%; display:inline-block;">                                
+                                    <div class="card card-border-primary" style="width: 100%; display:inline-block; position: relative;">
+                                      <button class=" "  style="position: absolute;
+                                      top: -11px;
+                                      z-index: 99;
+                                      right: 0;" >
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button> 
+
                                         <div class="row" style="margin-left: 0;">
                                           <div class="col-md-8">
                                             <div class="row guestinfofirstrow" style="padding-top:5px;" >
@@ -1861,7 +1868,7 @@
                                               </tbody>
                                             </table>
                                           </div>
-                                                    
+                                             
                                         </div>                    
                                     </div>
                                      </div>
@@ -1887,5 +1894,5 @@
                </div>          
             </app-modal-animation>
       
-  
+          </div>
   
