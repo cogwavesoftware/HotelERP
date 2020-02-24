@@ -124,6 +124,33 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     display: inline-table;
     margin: 2px 1px 2px 3px;
 }
+
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td.lasttd{
+    width: 31px!important;
+}
+ 
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td  {
+    width: 202px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+    font-size: 75%;
+}
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td input{
+    width:202px;
+ 
+}
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td.lasttd{
+    width:auto;
+}
+
+
+
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
     width: 105px;
     border: 1px solid #ccc;

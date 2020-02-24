@@ -198,11 +198,11 @@
                                   <ng-template ngbPanelContent >
                                 
                                      <div class="col-md-12" style="padding-left:0; padding-right:0">
-                                       <div class="row">
+                                       <div class="row" style="margin-bottom:0">
                                          <div class="col-sm-12"> 
     
                                            <!--  test row 1-->
-                                           <div class="userlist " style="margin-bottom: 30px; position: relative; padding-top:0">
+                                           <div class="userlist " style="  position: relative; padding-top:0; padding-bottom: 0;">
                                             <div class="row" style="margin-bottom:0">
                                               <div class='col-12 col-sm-2' style="padding-left: 0;">
                                                 <div class="form-group" style="padding-top:10px;">                                
@@ -519,7 +519,7 @@
 
                                 <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                   <ng-template ngbPanelContent>
-                                    <div class="test123 userlist " style="padding: 2px;">
+                                    <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
                                       <div class="grid-table" style="width: 100%;">
                                         <div class="thead">
                                           <div class="">
@@ -527,9 +527,9 @@
                                             <div class="td">Delect Detail</div>
                                             <div class="td">Amount</div>
                                             <div class="td">Description</div>
-                                            <div class="td">Selected Mode</div>
+                                            <div class="td ">Selected Mode</div>
                                             
-                                            <div class="td">
+                                            <div class="td lasttd">
                                               <button type="button" class=" " (click)="AddPaymentButtonClick()">
                                                 <i class="fa fa-plus"></i> 
                                               </button>

@@ -81,10 +81,21 @@ export class CheckinComponent implements OnInit, OnDestroy {
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
   public snapshotshow = false;
+
+
+  //web camara for SecGuest data
+  SnapshotbuttonDisabledSecGuest: boolean;
+  camarabuttonDisabledSecGuest: boolean;
+  public snapshotshowSecGuest = false;
+  public showWebcamSecGuest = false;
+
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
+
   // toggle webcam on/off
   public showWebcam = false;
+
+
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
@@ -181,6 +192,12 @@ export class CheckinComponent implements OnInit, OnDestroy {
   previewUrl: any = null;
   previewUrl2: any = null;
   previewUrl3: any = null;
+
+  GuetImg0;GuetImg1;GuetImg2;GuetImg3;GuetImg4;GuetImg5;GuetImg6;GuetImg7;GuetImg8: any = null;
+  GuetIdFront0;GuetIdFront1;GuetIdFront2;GuetIdFront3;GuetIdFront4;GuetIdFront5;GuetIdFront6;GuetIdFront7;GuetIdFront8: any = null;
+  GuetIdBack0;GuetIdBack1;GuetIdBack2;GuetIdBack3;GuetIdBack4;GuetIdBack5;GuetIdBack6;GuetIdBack7;GuetIdBack8: any = null;
+
+
   filterguest: any[];
   filterpin: any[];
   fileDataIdfront: File = null;
@@ -509,10 +526,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   addBankAccountForm() {
     this.bankAccountForms.push(this.fb.group({       
-      guestname:['', ""],
-      RefName:["", ""] ,
-      title:["",  ""] ,
-      gender:["", ""],    
+      guestname:['F', ""],
+      SGuestCode:['0'],
+      title:["select",  ""] ,
+      gender:["select", ""],    
       mobile:["",""],
       email:["",""],
       pincode:["",""],
@@ -524,13 +541,16 @@ export class CheckinComponent implements OnInit, OnDestroy {
       address2:["",""],
       address3:["",""],
       GuestIdFront:["",""],
-      GuestIdBack:["",""],
-      
+      GuestIdBack:["",""],   
     }));
   }
 
   
-
+  changeStatus(D:any)
+  {
+    console.log(D)
+    alert(D)
+  }
   removeRoomNo(RoomNo: string): void {
     debugger;
     for (let order of this.selectedRoomNoArray) {
@@ -661,6 +681,15 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.camarabuttonDisabled = false;
   }
 
+  public triggerSnapshotForSecGuest(index :number): void {
+    this.trigger.next();
+    this.toggleWebcam();
+    //this.Iscamaraon = true;
+    this.SnapshotbuttonDisabled = true;
+    this.camarabuttonDisabled = false;
+  }
+
+
   public SwitchOnCamara() {
     this.SnapshotbuttonDisabled = false;
     this.camarabuttonDisabled = true;
@@ -672,8 +701,21 @@ export class CheckinComponent implements OnInit, OnDestroy {
       this.snapshotshow = false;
     }
     this.showWebcam = !this.showWebcam;
-
   }
+
+  public SwitchOnCamaraSecGuest(index:number ) {
+    this.SnapshotbuttonDisabledSecGuest = false;
+    this.camarabuttonDisabledSecGuest = true;
+
+    if (this.showWebcamSecGuest) {
+      this.snapshotshowSecGuest = true;
+    }
+    else {
+      this.snapshotshowSecGuest = false;
+    }
+    this.showWebcamSecGuest = !this.showWebcamSecGuest;
+  }
+
 
   FilterPaymentMode(index: number) {
 
@@ -807,6 +849,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   public handleImage(webcamImage: WebcamImage): void {
+    console.info('received webcam image', webcamImage);
+    this.webcamImage = webcamImage;
+    this.previewUrl = webcamImage.imageAsDataUrl
+    this.getImage(webcamImage.imageAsBase64)
+
+  }
+
+  public handleImageSecGuest(webcamImage: WebcamImage,index:number): void {
     console.info('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
     this.previewUrl = webcamImage.imageAsDataUrl
@@ -1238,6 +1288,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   Submit() {
 
+    console.log(this.bankAccountForms.value)
+    return;
     const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {

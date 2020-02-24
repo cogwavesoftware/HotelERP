@@ -1603,13 +1603,22 @@
 
       <div class="addGuestouter">
         <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
-          <h3 class="f-15" style="position: relative;">Additional Guest Details 
+         
+
+          <label>
+          <input type="checkbox"  (change)="changeStatus($event.target.checked)">
+         cccccc
+      </label>
+
+
+          <h3 class="f-15" style="position: relative;">Additional Guest Details
+          
             <button style="position: absolute;
             right: 0;
             padding: 6px;
             font-size: 80%;
             top: 0;" class="btn btn-success btn-sm " (click)="addBankAccountForm()">
-              <i class="fa fa-plus"></i> Add
+             <i class="fa fa-plus"></i> Add
           </button>
           </h3>
             <div class="app-modal-body text-center" style="position: relative;"> 
@@ -1641,21 +1650,7 @@
                                         <div class="row" style="margin-left: 0;">
                                           <div class="col-md-8">
                                             <div class="row guestinfofirstrow" style="padding-top:5px;" >
-                                              <div class="col-12 col-lg-3 col-md-4 col-sm-4">
-                                                <div class="form-group" >
-                                                  <label class="form-control-label" for="title ">Search Referance 
-                                                    <a  (click)="OpenReferanceModel('effect-6',item)" ><i style="font-size: 110%;
-                                                    padding-top: 2px;
-                                                    display: inline-block;
-                                                    padding-left: 10px; " class="fa fa-plus-circle" aria-hidden="true"></i></a> </label>
-                                                  <ng-select [items]="ReferanceList"
-                                                bindLabel="RefName" name="RefName"
-                                                placeholder="Select Referance"  
-                                                [(ngModel)]="selectedRoomcode" formControlName="RefName"  >
-                                              </ng-select>                                                  
-                                                </div>       
-                                                                                        
-                                               </div>  
+                                            
                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="title ">Title</label>
@@ -1802,7 +1797,7 @@
                                           </div> <!-- row end -->
                                           </div>
                                           <div class="col-md-4">
-                                            <table class="table table-responsive" style=" ">
+                                            <table class="table table-responsive">
                                               <thead>
                                                 <tr>
                                                   <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
@@ -1813,7 +1808,7 @@
                                               <tbody>
                                                 <tr>
                                                   <td>
-                                                    <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                                                    <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImageSecGuest($event,i)" *ngIf="showWebcamSecGuest"
                                                     [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
                                                     [videoOptions]="videoOptions"
                                                     [imageQuality]="1"
@@ -1821,9 +1816,11 @@
                                                     (initError)="handleInitError($event)"
                                                    ></webcam>
                                             
-                                            <div class="snapshot ">
-                                                             <div *ngIf="snapshotshow">                               
-                                                 <img  [height]="75" [width]="100" [src]="previewUrl"  />
+                                                  <div class="snapshot ">
+                                                             <div>                 
+                                                 <!-- <img  [height]="75" [width]="100" [src]="previewUrl"  /> -->
+
+                                                 <img  [height]="75" [width]="100"  [src]="'GuetImg'+i" />
                                                </div>  
                                                
                                                <h4 *ngIf="errors.length > 0">Messages:</h4>
@@ -1831,13 +1828,14 @@
                                                  <li>{{error | json}}</li>
                                                </ul>
                                                </div> </td>
-                                                  <td><img [src]="previewUrl2"  style="width:100px;height:75px">   </td>
-                                                  <td><img [src]="previewUrl3"  style="width:100px;height:75px">     </td>
+                                                  <td><img [src]=""'GuetIdFront'+i""  style="width:100px;height:75px">   </td>
+                                                  
+                                                  <td><img [src]=""'GuetIdBack'+i""  style="width:100px;height:75px">     </td>
                                                 </tr>
                                                 <tr>
                                                   <td>
-                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabled" (click)="triggerSnapshot();"  >Capture</button>
-                                                  <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabled" (click)="SwitchOnCamara()"  >  On</button>
+                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(i);"  >Capture</button>
+                                                  <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(i)"  >  On</button>
                                                   </td>
                                                   <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
                                                   <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfback($event)" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
