@@ -160,71 +160,22 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 .checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td.lasttd{
     width:auto;
 }
-.guestphotoscreen .table tr th{
-    border: 1px solid #ccc;
-    background-color: #f3f3f3;
-    color: #000;
-    text-align: center;
-    padding: 2px 0px 2px 0px;
-    font-weight: normal;
+.dynamicphotoarray .grid-table .thead,
+.dynamicphotoarray .grid-table .tbody{
+    width: 100%;
+    float: left;
 }
-
-.guestphotoscreen .table tr td,
-.guestphotoscreen .table tr th{
+.dynamicphotoarray .grid-table .thead .td {
+    width:100px;
+    float: left;
     border:1px solid #ccc;
 }
-.guestphotoscreen .table tr th .fa{
-    color:#585858;
-}
-.guestphotoscreen .table tr td img{
-    border:1px solid #000000;
-    border-radius:3px;
-}
-.guestphotoscreen .table tr td  {
-    margin: 0 auto;    
-    text-align: center;
-    background: #ececec;
-}
-
-.addguestcolor{
-    margin: 0 auto;    
-    margin-bottom: 4px;
-    border: 1px solid aquamarine;
-    padding: 5px;
-    border-radius: 5px;
-    color: #fff!important;
-    background: darkblue
-}
-.guestphotoscreen a:hover{
-    background: #cccccc;
-    color: #000!important;
-}
-
-.addaddinalguest .card-border-primary{    
-    margin-bottom: 10px;
-}
-
-.addaddinalguest .card-border-primary select,
-.addaddinalguest .card-border-primary .ng-input input{
-    height: 1.50rem;
-}
-.addaddinalguest .card-border-primary .table thead tr th,
-.addaddinalguest .card-border-primary .table tbody tr td{
+.dynamicphotoarray .grid-table .tbody .td input,
+.dynamicphotoarray .grid-table .tbody .td select,
+.dynamicphotoarray .grid-table .tbody .td input
+{
+    width:100px;
+    float: left;
     border:1px solid #ccc;
+    
 }
-.addaddinalguest .table tbody tr td button{
-        display:inline; 
-    }
-    .addaddinalguest .table tbody tr td img{
-        border:1px solid #000;
-        border-radius: 2px;
-    }
-.addaddinalguest .card-border-primary .table thead tr th{
-    text-transform: uppercase;
-    background-color: #f3f3f3;
-    color: #000;
-    text-align: center;
-    padding: 2px 0px 2px 0px;
-    font-weight: normal;
-}
-
