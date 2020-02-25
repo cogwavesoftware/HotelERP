@@ -186,6 +186,11 @@
                                                   <div *ngIf="!valid">Invalid time </div>                                  
                                         </div>
                                       </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                                       
+                                      </div> 
+
+
                                     </div> 
  
                                     </div>
@@ -212,9 +217,9 @@
                                                </div>
 
                                                <div class="row guestinfofirstrow" style="padding-top:5px;" >
-                                                <div class="col-12 col-lg-4 col-md-4 col-sm-4">
+                                                <div class="col-12 col-lg-2 col-md-4 col-sm-4">
                                                   <div class="form-group" >
-                                                    <label class="form-control-label" for="title ">Search Referance 
+                                                    <label class="form-control-label" for="title ">Referance 
                                                       <a  (click)="OpenReferanceModel('effect-6',item)" ><i style="font-size: 110%;
                                                       padding-top: 2px;
                                                       display: inline-block;
@@ -268,24 +273,35 @@
                                                   </div>
                                                     </div>  
                                                 </div>
+
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="TaxHeader ">Tax Header</label>
+                                                    <select class="custom-select" name="TaxHeader" formControlName="TaxHeader" id="TaxHeader">                                                                                                    
+                                                      <option value="select">Select</option>
+                                                      <option  *ngFor="let sour of TaxHeader"
+                                                        [value]="sour.Description">{{ sour.Description  }}</option>
+                                                    </select>
+                                                  </div>
+                                                </div>
                                                 
                                             </div> <!-- end row -->
                                             <div class="row guestinfofirstrow">
-                                              <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="mobile">Mobile </label>
                                                   <input type="text" class="form-control tooltip-form" id="mobileid" formControlName="mobile" name="mobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobile.errors || form.controls.mobile.touched || form.controls.mobile.dirty}" required  />  
                                                   <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >mobile   is required</div>
                                                   </div>  
                                               </div>
-                                              <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="email">Email </label>
                                                   <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
                                                   <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
                                                   </div>  
                                               </div>
-                                              <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="pincode">Pincode </label>
                                                   <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
@@ -293,24 +309,58 @@
                                                    <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
                                                   </div>  
                                               </div>
+
+
+
+
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="Area">Area </label>
+                                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="Area" formControlName="Area" name="Area" autocomplete="off"  required  />  
+                                                  
+                                                  </div>  
+                                              </div>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="city">City </label>
+                                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="city" formControlName="city" name="city" autocomplete="off" required  />  
+                                                  
+                                                  </div>  
+                                              </div>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+
+ 
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="State ">State</label>
+                                                  <select class="custom-select" name="state" formControlName="state"
+                                                    id="state" >
+                                                 
+                                                    <option value="select">Select</option> 
+                                                    <option  *ngFor="let Nationd of Nationlist"
+                                                      [value]="Nationd">{{ Nationd  }}</option>
+                                                  </select>
+                                                  
+                                                </div>
+
+
+                                              </div>
+                                           
                                             </div>
                                             <div class="row  guestinfofirstrow"  >
                                           
                                           
                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                               
+
                                                 <div class="form-group">
-                                                  <label class="form-control-label" for="city">City </label>
-                                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="city" formControlName="city" name="city" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.city.errors || form.controls.city.touched || form.controls.city.dirty}" required  />  
-                                                   <div class="invalid-feedback" *ngIf="form.controls.city.errors?.required" >city   is required</div>
-                                                  </div>  
+
+
+                                                  <label class="form-control-label" for="state">StateCode </label>
+                                                  <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off" required  />  
+                                                  
+                                                  </div> 
                                               </div>
-                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="state">State </label>
-                                                  <input type="text" class="form-control tooltip-form" id="state" formControlName="state" name="state" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.state.errors || form.controls.state.touched || form.controls.state.dirty}" required  />  
-                                                  <div class="invalid-feedback" *ngIf="form.controls.state.errors?.required" >state   is required</div>
-                                                  </div>  
-                                              </div>
+                                              
                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           
     
@@ -329,6 +379,14 @@
                                                     </div>
     
                                               </div>
+
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="Booking">Booking Id </label>
+                                                  <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="booking" name="booking" autocomplete="off"  />  
+                                                  
+                                                  </div>  
+                                              </div>
                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="company">Company </label>
@@ -343,7 +401,7 @@
     
                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
-                                                  <label class="form-control-label" for="gstno">GSTNO </label>
+                                                  <label class="form-control-label" for="gstno">GSTNO/LUTNO </label>
                                                   <input type="text" class="form-control tooltip-form" id="gstno" formControlName="gstno" name="gstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.gstno.errors || form.controls.gstno.touched || form.controls.gstno.dirty}" required  />  
                                                   <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
                                                   </div>  
@@ -411,7 +469,7 @@
                                                 <tbody>
                                                   <tr>
                                                     <td>
-                                                      <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                                                      <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImage($event,j)" *ngIf="showWebcam"
                                                       [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
                                                       [videoOptions]="videoOptions"
                                                       [imageQuality]="1"
@@ -876,11 +934,7 @@
                                                   </div> 
                                            </div>
                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                            <div class="form-group">
-                                              <label class="form-control-label" for="Booking">Booking Id </label>
-                                              <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="booking" name="booking" autocomplete="off"  />  
-                                              
-                                              </div>  
+                                            
                                           </div>
                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                             <div class="form-group">
@@ -1605,10 +1659,6 @@
         <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
          
 
-          <label>
-          <input type="checkbox"  (change)="changeStatus($event.target.checked)">
-         cccccc
-      </label>
 
 
           <h3 class="f-15" style="position: relative;">Additional Guest Details
@@ -1617,7 +1667,7 @@
             right: 0;
             padding: 6px;
             font-size: 80%;
-            top: 0;" class="btn btn-success btn-sm " (click)="addBankAccountForm()">
+            top: 0;" class="btn btn-success btn-sm " (click)="addBankAccountForm(j)">
              <i class="fa fa-plus"></i> Add
           </button>
           </h3>
@@ -1637,8 +1687,15 @@
                             <form   >                     
                                                                                     
                                                                  
-                                  <h1>{{i}}</h1>
-                                  <div class="tbody" [formGroup]="fg" *ngFor="let fg of bankAccountForms.controls; let i=index;">
+                                
+
+                                  
+                                  <!-- <div formArrayName="other"  *ngFor="let other of form.get('other').controls; let i = index">
+                                            -->
+                                           
+                                  <div class="tbody" [formGroup]="fg" *ngFor="let fg of bankAccountForms.controls; let j=index;">
+                                   
+                                    
                                     <div class="card card-border-primary" style="width: 100%; display:inline-block; position: relative;">
                                       <button class=" "  style="position: absolute;
                                       top: -11px;
@@ -1650,7 +1707,9 @@
                                         <div class="row" style="margin-left: 0;">
                                           <div class="col-md-8">
                                             <div class="row guestinfofirstrow" style="padding-top:5px;" >
-                                            
+                                              <label>Swipe Information </label>
+                                              <!-- <input type="checkbox" [(ngModel)]="isChecked" (change)="checkValue(isChecked?'A':'B')" formControlName="state"/> -->
+                                              <input type="checkbox" (change)="checkValue($event,j)"> 
                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="title ">Title</label>
@@ -1808,48 +1867,92 @@
                                               <tbody>
                                                 <tr>
                                                   <td>
-                                                    <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImageSecGuest($event,i)" *ngIf="showWebcamSecGuest"
-                                                    [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                                                    <webcam [height]="100" [width]="150" [trigger]="triggerObservableSecGuest" (imageCapture)="handleImageSecGuest($event,i)" *ngIf="showWebcamSecGuest"
+                                                    [allowCameraSwitch]="allowCameraSwitchSecGuest" [switchCamera]="nextWebcamObservableSecGuest"
                                                     [videoOptions]="videoOptions"
                                                     [imageQuality]="1"
-                                                    (cameraSwitched)="cameraWasSwitched($event)"
+                                                    (cameraSwitched)="cameraWasSwitchedSecGuest($event)"
                                                     (initError)="handleInitError($event)"
                                                    ></webcam>
-                                            
+                                                 
                                                   <div class="snapshot ">
-                                                             <div>                 
-                                                 <!-- <img  [height]="75" [width]="100" [src]="previewUrl"  /> -->
+                                                <div *ngIf="j==0">              
+                                                
+                                                 <img  [height]="75" [width]="100"  [src]="GuetImg0" />
+                                                </div> 
+                                                <div *ngIf="j==1">           
+                                                
+                                                  <img  [height]="75" [width]="100"  [src]="GuetImg1" />
+                                                
+                                                </div> 
+                                              </div> 
+                                              </td>
 
-                                                 <img  [height]="75" [width]="100"  [src]="'GuetImg'+i" />
-                                               </div>  
-                                               
-                                               <h4 *ngIf="errors.length > 0">Messages:</h4>
-                                               <ul *ngFor="let error of errors">
-                                                 <li>{{error | json}}</li>
-                                               </ul>
-                                               </div> </td>
-                                                  <td><img [src]=""'GuetIdFront'+i""  style="width:100px;height:75px">   </td>
+                                               <div *ngIf="j==0">
+                                                                                                    
+                                                     <td><img   [src]="GuetIdFront0" style="width:100px;height:75px">   </td>
                                                   
-                                                  <td><img [src]=""'GuetIdBack'+i""  style="width:100px;height:75px">     </td>
+                                                      <td><img [src]="GuetIdBack0"  style="width:100px;height:75px">     </td>
+                                              </div> 
+
+                                              <div *ngIf="j==1">
+                                                                                                    
+                                                <td><img   [src]="GuetIdFront1" style="width:100px;height:75px">   </td>
+                                             
+                                                 <td><img [src]="GuetIdBack1"  style="width:100px;height:75px">     </td>
+                                              </div> 
+
+                                              <div *ngIf="j==2">
+                                                                                                    
+                                                <td><img   [src]="GuetIdFront2" style="width:100px;height:75px">   </td>
+                                             
+                                                 <td><img [src]="GuetIdBack2"  style="width:100px;height:75px">     </td>
+                                              </div> 
+
+
+
+
+                                            
+                                          <!-- <div [ngSwitch]="j">
+
+                                            <div *ngSwitchCase="'0'">
+                                              <td><img   [src]="GuetIdFront0" style="width:100px;height:75px">  </td>
+                                              <td ><img   [src]="GuetIdBack0" style="width:100px;height:75px">  </td>
+                                            </div>
+
+                                            <div *ngSwitchCase="'1'" >
+                                              <td><img   [src]="GuetIdFront1" style="width:100px;height:75px">  </td>
+                                              <td ><img   [src]="GuetIdBack1" style="width:100px;height:75px">  </td>
+                                            </div>
+                                          
+                                            <div *ngSwitchDefault>
+                                            <td><img   [src]="GuetIdFront2" style="width:100px;height:75px">  </td>
+                                            <td ><img   [src]="GuetIdBack2" style="width:100px;height:75px">  </td>
+                                           
+                                          </div>                                                                                      
+                                          </div> -->
+                                           
+                                                
                                                 </tr>
                                                 <tr>
                                                   <td>
-                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(i);"  >Capture</button>
-                                                  <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(i)"  >  On</button>
+                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(j);"  >Capture</button>
+                                                  <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(j)"  >  On</button>
                                                   </td>
-                                                  <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
-                                                  <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfback($event)" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
+                                                  <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFrontSecGuest($event,j,'Front')" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
+                                                  <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfFrontSecGuest($event,j,'Back')" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
                                                   </td>
                                                 </tr>
                                                
                                               </tbody>
                                             </table>
+                                            <h6>{{Process}}</h6>
                                           </div>
                                              
                                         </div>                    
                                     </div>
                                      </div>
-                              
+                                   
 
                                
                               

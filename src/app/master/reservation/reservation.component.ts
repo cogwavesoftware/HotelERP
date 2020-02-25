@@ -389,9 +389,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
         // console.log(Checkintime)
         // console.log(checkoutTime)
-        console.log(checkindate)
-        console.log(checkoutdate)
-
+    
+        console.log('Guestmodel')
+        console.log(Guestmodel)
         this.form.patchValue({
           Guestcode: Guestmodel.GuestCode,
           title: Guestmodel.GuestTittle,
@@ -424,6 +424,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
           this.form.patchValue({
             companycode: companymodel.CompanyCode,
             gstno: companymodel.GSTNO,
+            company:companymodel.CompanyName
+
           })
           this.OrgCompanycode = companymodel.CompanyCode;
           this.IsCompanyReservation = true;

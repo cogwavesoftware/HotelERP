@@ -9,7 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 export class BankService {
 
   private messagesource=new BehaviorSubject('expanded');
+
+  private Indexsoucre=new BehaviorSubject(0);
+
   currentMessage =this.messagesource.asObservable();
+  currentindex=this.Indexsoucre.asObservable();
+
   constructor(private http: HttpClient) { }
   //GetBankdetails("CW_1001");
   getBankList() {
@@ -19,5 +24,9 @@ export class BankService {
 
   changeMessage(message: string) {
     this.messagesource.next(message)
+  }
+
+  changeindexvalue(currentindex: number) {
+    this.Indexsoucre.next(currentindex)
   }
 }

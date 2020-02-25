@@ -1,3 +1,4 @@
+import { ESentComponent } from './../../theme/email/email-inbox/e-sent/e-sent.component';
 
 import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Observable, Observer, empty, fromEvent } from "rxjs";
@@ -32,6 +33,8 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { IfStmt } from '@angular/compiler';
+import { StartEditingCellParams } from 'ag-grid-community';
 
 export interface Checkinss {
   RoomCode: string;
@@ -45,8 +48,8 @@ export interface Checkinss {
   ChangeId: string;
   BranchCode: string;
 }
-export interface addcheckins{
-  guestname:string;
+export interface addcheckins {
+  guestname: string;
 }
 @Component({
   selector: "app-checkin",
@@ -67,8 +70,8 @@ export interface addcheckins{
 })
 export class CheckinComponent implements OnInit, OnDestroy {
   bankAccountForms: FormArray = this.fb.array([]);
-  FormAddcheckin :addcheckins;
-
+  FormAddcheckin: addcheckins;
+  Process:string;
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
@@ -77,6 +80,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   ReferanceList: any;
   subpaymodelist: any;
   golbalresponse: any;
+  TaxHeader:any;
   //web camara data
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
@@ -97,6 +101,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
   public allowCameraSwitch = true;
+  
+  public allowCameraSwitchSecGuest = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   error: string;
@@ -125,6 +131,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+
+  private nextWebcamSecGuest: Subject<boolean | string> = new Subject<boolean | string>();
+  private triggerSecGuest: Subject<void> = new Subject<void>();
+  public webcamImageSecGuest: WebcamImage = null;
   //web camara data end
   RoomNoArray: string[] = [];
   OriginalArray: string[] = [];
@@ -192,16 +202,21 @@ export class CheckinComponent implements OnInit, OnDestroy {
   previewUrl: any = null;
   previewUrl2: any = null;
   previewUrl3: any = null;
-
-  GuetImg0;GuetImg1;GuetImg2;GuetImg3;GuetImg4;GuetImg5;GuetImg6;GuetImg7;GuetImg8: any = null;
-  GuetIdFront0;GuetIdFront1;GuetIdFront2;GuetIdFront3;GuetIdFront4;GuetIdFront5;GuetIdFront6;GuetIdFront7;GuetIdFront8: any = null;
-  GuetIdBack0;GuetIdBack1;GuetIdBack2;GuetIdBack3;GuetIdBack4;GuetIdBack5;GuetIdBack6;GuetIdBack7;GuetIdBack8: any = null;
+  GuetIdFront0: any=null;
+  GuetImg0; GuetImg1; GuetImg2; GuetImg3; GuetImg4; GuetImg5; GuetImg6; GuetImg7; GuetImg8: any = null;
+   GuetIdFront1; GuetIdFront2; GuetIdFront3; GuetIdFront4; GuetIdFront5; GuetIdFront6; GuetIdFront7; GuetIdFront8: any = null;
+  GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3; GuetIdBack4; GuetIdBack5; GuetIdBack6; GuetIdBack7; GuetIdBack8: any = null;
 
 
   filterguest: any[];
   filterpin: any[];
   fileDataIdfront: File = null;
   fileDataIdBack: File = null;
+
+  fileDataIdfrontSecGuest: File = null;
+  fileDataIdBackSecGuest: File = null;
+
+
   Branch: string;
   private _searchTerm: string;
   private isGorupCheckin: boolean = false;
@@ -273,7 +288,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   back = false;
   Id$: Observable<string>;
   @ViewChild('f', { static: false }) newcompanyform: any;
-  constructor(private datePipe: DatePipe,private fb: FormBuilder,
+  constructor(private datePipe: DatePipe, private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
@@ -360,6 +375,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       address3: ["", [Validators.required]],
       pincode: ["", [Validators.required]],
       city: ["", [Validators.required]],
+      Area: ["", [Validators.required]],
       state: ["", [Validators.required]],
       nation: ["India", [Validators.required]],
       company: ["", [Validators.required]],
@@ -405,20 +421,24 @@ export class CheckinComponent implements OnInit, OnDestroy {
       BranchCode: [this.Branch, [Validators.required]],
       randomCheckinNo: ['0', [Validators.required]],
       IpAdd: [localStorage.getItem("LOCAL_IP")],
-      CreatedBy: [localStorage.getItem("id"), [Validators.required]]
+      CreatedBy: [localStorage.getItem("id"), [Validators.required]],
+      TaxHeader: ["GST"],
+      StateCode:[""]
     });
   }
-
+  StateCode
+  State
+  Area
   ngOnInit() {
-    this.addBankAccountForm();
+    //this.addBankAccountForm();
+
+   
 
     
-
-
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
     this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
     this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
-    
+
     this.model.Id = 0;
     this.model.CompanyCode = 0;
     this.model.BranchCode = "0";
@@ -431,6 +451,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
       () => { });
     this.camarabuttonDisabled = false;
     this.SnapshotbuttonDisabled = true;
+
+    this._masterservice.Getmiscellaneous('TaxHeader').subscribe(data => {
+      this.TaxHeader = data;
+    })
+
 
     this._masterservice.Getmiscellaneous('Gender').subscribe(data => {
       this.gendertypes = data;
@@ -524,33 +549,96 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-  addBankAccountForm() {
-    this.bankAccountForms.push(this.fb.group({       
-      guestname:['F', ""],
-      SGuestCode:['0'],
-      title:["select",  ""] ,
-      gender:["select", ""],    
-      mobile:["",""],
-      email:["",""],
-      pincode:["",""],
-      city:["",""],
-      state:["",""],
-      nation:["",""],
-      gstno:["",""],
-      address1:["",""],
-      address2:["",""],
-      address3:["",""],
-      GuestIdFront:["",""],
-      GuestIdBack:["",""],   
-    }));
+  addBankAccountForm(index :number) {
+     let index1=this.bankAccountForms.length;
+    
+    if(index1 <=3)
+    {
+      this.bankAccountForms.push(this.fb.group({
+        guestname: ['', ""],
+        SGuestCode: ['0'],
+        title: ["select", ""],
+        gender: ["select", ""],
+        mobile: ["", ""],
+        email: ["", ""],
+        pincode: ["", ""],
+        city: ["", ""],
+        state: ["", ""],
+        nation: ["", ""],
+        gstno: ["", ""],
+        address1: ["", ""],
+        address2: ["", ""],
+        address3: ["", ""],
+        GuestIdFront: ["", ""],
+        GuestIdBack: ["", ""],
+        GuestImage: ["", ""],
+        GuestIdFronturl: ["", ""],
+        GuestIdBackurl: ["", ""],
+      }));
+    }
+    else{
+      alert('NOT ALLOWED')
+    }
+    
   }
 
-  
-  changeStatus(D:any)
-  {
-    console.log(D)
-    alert(D)
-  }
+  checkValue(event: any,index:number){
+    alert(event.target.checked)
+    
+    if(event.target.checked==true)
+     {
+      this.SwipeDataFromPrimaryGuest(index)
+     }
+     else
+     {
+
+     }
+ }
+
+ SwipeDataFromPrimaryGuest(index)
+ {
+  let address1=this.form.get("address1").value;
+  let address2=this.form.get("address2").value;
+  let address3=this.form.get("address3").value;
+  let pincode=this.form.get("pincode").value;
+  let city=this.form.get("city").value;
+  let state=this.form.get("state").value;
+  let nation=this.form.get("nation").value;
+  let company=this.form.get("company").value;
+  let gstno=this.form.get("gstno").value;
+
+  this.bankAccountForms.controls[index].patchValue({
+   address1:address1,
+   address2:address2,
+   address3:address3,
+   pincode:pincode,
+   city:city,
+   state:state,
+   nation:nation,
+   gstno:gstno,
+   company:company
+  })
+ }
+
+ RemoveDataFromPrimaryGuest(index)
+ {
+
+  this.bankAccountForms.controls[index].patchValue({
+   address1:"",
+   address2:"",
+   address3:"",
+   pincode:"",
+   city:"",
+   state:"",
+   nation:"",
+   gstno:"",
+   company:""
+  })
+
+ 
+ }
+
+
   removeRoomNo(RoomNo: string): void {
     debugger;
     for (let order of this.selectedRoomNoArray) {
@@ -565,7 +653,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.showWebcam = false;
     this._bankservice.changeMessage("expanded")
   }
-  OpenAdditionalGuest(event){
+  OpenAdditionalGuest(event) {
     document.querySelector("#" + event).classList.add("md-show");
   }
   enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
@@ -606,8 +694,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
       document.querySelector("#" + RoomNos).classList.add('freeroom');
       let index = this.selectedRoomNoArray.indexOf(RoomNo);
       this.selectedRoomNoArray.splice(index);
-      this.onDelete(0,index);
-      
+      this.onDelete(0, index);
+
 
     }
 
@@ -645,8 +733,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
       Tax: [groupdata.Tax, [Validators.required]],
       Grand: [groupdata.Grand, [Validators.required]],
       // Net: [groupdata.Net, [Validators.required]],
-       disctype: ["select"],
-       discvalue: ["0"]
+      disctype: ["select"],
+      discvalue: ["0"]
     });
   }
 
@@ -681,12 +769,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.camarabuttonDisabled = false;
   }
 
-  public triggerSnapshotForSecGuest(index :number): void {
-    this.trigger.next();
-    this.toggleWebcam();
+  public triggerSnapshotForSecGuest(index: number): void {
+
+    this._bankservice.changeindexvalue(index);
+    this.triggerSecGuest.next();
+    this.toggleWebcamSecGuest();
     //this.Iscamaraon = true;
-    this.SnapshotbuttonDisabled = true;
-    this.camarabuttonDisabled = false;
+    this.SnapshotbuttonDisabledSecGuest = true;
+    this.camarabuttonDisabledSecGuest = false;
   }
 
 
@@ -703,7 +793,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.showWebcam = !this.showWebcam;
   }
 
-  public SwitchOnCamaraSecGuest(index:number ) {
+  public SwitchOnCamaraSecGuest(index: number) {
+
+
     this.SnapshotbuttonDisabledSecGuest = false;
     this.camarabuttonDisabledSecGuest = true;
 
@@ -837,6 +929,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.snapshotshow = true;
   }
 
+
   public handleInitError(error: WebcamInitError): void {
     this.errors.push(error);
   }
@@ -856,14 +949,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-  public handleImageSecGuest(webcamImage: WebcamImage,index:number): void {
-    console.info('received webcam image', webcamImage);
-    this.webcamImage = webcamImage;
-    this.previewUrl = webcamImage.imageAsDataUrl
-    this.getImage(webcamImage.imageAsBase64)
-
-  }
-
   public cameraWasSwitched(deviceId: string): void {
     console.log('active device: ' + deviceId);
     this.deviceId = deviceId;
@@ -875,6 +960,68 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   public get nextWebcamObservable(): Observable<boolean | string> {
     return this.nextWebcam.asObservable();
+  }
+
+
+
+
+
+  public showNextWebcamSecGuest(directionOrDeviceId: boolean | string): void {
+    // true => move forward through devices
+    // false => move backwards through devices
+    // string => move to device with given deviceId
+    this.nextWebcamSecGuest.next(directionOrDeviceId);
+  }
+ 
+  public toggleWebcamSecGuest(): void {
+    this.showWebcamSecGuest = !this.showWebcamSecGuest;
+    this.snapshotshowSecGuest = true;
+  }
+  public handleImageSecGuest(webcamImageSecGuest: WebcamImage, index: number): void {
+   debugger;
+  
+   console.info('received webcam image', webcamImageSecGuest);
+   this.webcamImageSecGuest = webcamImageSecGuest;
+  this._bankservice.currentindex.subscribe(res => 
+  {
+    let indxsubcribe=res;
+    if(indxsubcribe==0)
+    {
+       this.webcamImageSecGuest = webcamImageSecGuest;
+       this.GuetImg0 = webcamImageSecGuest.imageAsDataUrl
+    }
+    if(indxsubcribe==1)
+    {
+       this.webcamImageSecGuest = webcamImageSecGuest;
+       this.GuetImg1 = webcamImageSecGuest.imageAsDataUrl
+    }
+    if(indxsubcribe==2)
+    {
+       this.webcamImageSecGuest = webcamImageSecGuest;
+       this.GuetImg3 = webcamImageSecGuest.imageAsDataUrl
+    }
+    if(indxsubcribe==3)
+    {
+       this.webcamImageSecGuest = webcamImageSecGuest;
+       this.GuetImg3 = webcamImageSecGuest.imageAsDataUrl
+    }
+    this.getImageSecGuest(webcamImageSecGuest.imageAsBase64,indxsubcribe)
+  })
+ 
+    //this.getImage(webcamImage.imageAsBase64)
+
+
+  }
+  public cameraWasSwitchedSecGuest(deviceId: string): void {
+    console.log('active device: ' + deviceId);
+    this.deviceId = deviceId;
+  }
+  public get triggerObservableSecGuest(): Observable<void> {
+    return this.triggerSecGuest.asObservable();
+  }
+
+  public get nextWebcamObservableSecGuest(): Observable<boolean | string> {
+    return this.nextWebcamSecGuest.asObservable();
   }
 
 
@@ -915,6 +1062,51 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
         });
   }
+
+
+
+  getImageSecGuest(url,index) {
+    this.Process="Please Wait"
+    // Base64 url of image trimmed one without data:image/png;base64
+    this.base64DefaultURL = url;
+    // Naming the image
+    const date = new Date().valueOf();
+    let text = '';
+    const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(Math.floor(Math.random() * possibleText.length));
+    }
+    // Replace extension according to your media type
+    const imageName = date + '_' + text + '.png';
+    // call method that creates a blob from dataUri
+    //const imageBlob = this.dataURItoBlob(this.base64DefaultURL);
+    const formData = new FormData();
+    let imageBlob;
+    this.dataURItoBlob(this.base64DefaultURL).subscribe(data => {
+      imageBlob = data;
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      formData.append('GuestPohto', imageFile, imageName);
+    });
+    this.Process="Upload Procee 10%"
+    this._masterservice.SavaImsData(formData)
+      .subscribe(res => {
+        this.Process="Upload Procee 50%"
+      },
+        error => {
+          // alert('e')
+          console.log(error);
+          this.Process="Upload Image Failed Due to Slow Network"
+        },
+        () => {
+          this.bankAccountForms.controls[index].patchValue({
+            GuestImage:imageName
+          })
+          this.Process="Upload Compleated"
+        });
+  }
+
+
+
 
   dataURItoBlob(dataURI): Observable<Blob> {
     return Observable.create((observer: Observer<Blob>) => {
@@ -1059,9 +1251,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.previewUrl3 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
 
 
-    var dd = "CW_1001_3353150797462front.png";
-
-    this.previewUrl2 = environment.GuestimagePath + "/" + dd;
     //console.log("image name with path"+ this.imagePath1);
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
@@ -1135,6 +1324,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
+
+
+
   preview2() {
     var mimeType = this.fileDataIdfront.type;
     if (mimeType.match(/image\/*/) == null) {
@@ -1166,6 +1358,125 @@ export class CheckinComponent implements OnInit, OnDestroy {
       this.previewUrl3 = reader.result;
     }
   }
+
+  fileProgressIdfFrontSecGuest(fileInput: any, index: number, Pic: string) {
+    this.Process="";
+    debugger
+    if(Pic=="Front")
+    {
+      this.fileDataIdfrontSecGuest = <File>fileInput.target.files[0];
+
+    }
+    else
+    {
+      this.fileDataIdBackSecGuest = <File>fileInput.target.files[0];
+    }
+    this.Process="Please Wait..";
+    this.previewSecGuest(index, Pic);
+    this.UplodaImageData(index);
+  }
+
+  previewSecGuest(index: number, Pic: string) {
+   
+    if (Pic == "Front")
+     {
+      var mimeType = this.fileDataIdfrontSecGuest.type;
+      if (mimeType.match(/image\/*/) == null) {
+        return;
+      }
+      var reader = new FileReader();
+      reader.readAsDataURL(this.fileDataIdfrontSecGuest);
+      //const canvas=document.getElementById('canvas');
+     // const context=canvas.getContext("2d");
+      reader.onload = (_event) => {
+       
+      if(index==0)
+      {
+        this.GuetIdFront0 = reader.result;
+      }
+      else if(index==1)
+      {
+        this.GuetIdFront1 = reader.result;
+      }
+      else if(index==2)
+      {
+        this.GuetIdFront2 = reader.result;
+      }     
+      
+      }
+    }
+    else {
+      alert(Pic)
+      var mimeType = this.fileDataIdBackSecGuest.type;
+      if (mimeType.match(/image\/*/) == null) {
+        return;
+      }
+      var reader = new FileReader();
+      reader.readAsDataURL(this.fileDataIdBackSecGuest);
+      reader.onload = (_event) => {
+      if(index==0)
+      {
+        this.GuetIdBack0 = reader.result;
+      }
+      else if(index==1)
+      {
+        this.GuetIdBack1 = reader.result;
+      }
+      else if(index==2)
+      {
+        this.GuetIdBack2 = reader.result;
+      }       
+      }
+    }
+    
+      
+  }
+
+
+
+  UplodaImageData(index) {
+    debugger;
+    this.Process="Wait Image Uploading..."
+    const formData = new FormData();
+    let Idfront = "";
+    let Idback = "";
+      if (this.fileDataIdfrontSecGuest != null) {
+     
+        var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
+        var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+        Idfront = 'CW_1001' + '_' + Rans1.toString() + "Front" + '.png'
+        formData.append('GuestIdFront', this.fileDataIdfrontSecGuest, Idfront);
+      }
+    
+  
+      if (this.fileDataIdBackSecGuest != null) {
+       
+        var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+        var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+        Idback = 'CW_1001' + '_' + Rans.toString() + "Back" + '.png'
+        formData.append('GuestIdBack', this.fileDataIdBackSecGuest, Idback);
+      }
+
+      this._masterservice.SavaImsData(formData)
+      .subscribe(res => {
+        this.Process="Wait Image Uploading 50%..."
+       
+      },
+      error=>{
+        this.Process="Upload Failed Please Try again"
+      },
+      ()=>{
+        debugger;
+        this.bankAccountForms.controls[index].patchValue({
+          GuestIdFronturl:Idfront,
+          GuestIdBackurl:Idback
+         });
+         this.Process="Image Uploaded Successfully"
+      });
+      
+    
+  }
+
 
 
   Submitdddd() {
@@ -1343,8 +1654,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
           debugger;
 
           if (cku.length == 10) {
-              this.form.value.checkoutdate=cku;
-              console.log(this.form.value.checkoutdate)
+            this.form.value.checkoutdate = cku;
+            console.log(this.form.value.checkoutdate)
           }
           else {
             checkoutDates = this.datePipe.transform(this.form.value.checkoutdate, "MM/dd/yyyy");
@@ -1353,7 +1664,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
           this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "MM/dd/yyyy");
           this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
-          this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");         
+          this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
           this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
           this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;
           this.form.value.GuestPhotoPath = this.Guestphotopathurl;
@@ -1484,6 +1795,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
+
+
+  
 
   addToast(title, Message, theme) {
 
