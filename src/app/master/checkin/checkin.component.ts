@@ -1,4 +1,3 @@
-import { ESentComponent } from './../../theme/email/email-inbox/e-sent/e-sent.component';
 
 import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Observable, Observer, empty, fromEvent } from "rxjs";
@@ -86,12 +85,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   camarabuttonDisabled: boolean;
   public snapshotshow = false;
 
-
-  //web camara for SecGuest data
-  SnapshotbuttonDisabledSecGuest: boolean;
-  camarabuttonDisabledSecGuest: boolean;
-  public snapshotshowSecGuest = false;
-  public showWebcamSecGuest = false;
+  ChildimageName:string;
 
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
@@ -102,7 +96,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   public allowCameraSwitch = true;
   
-  public allowCameraSwitchSecGuest = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   error: string;
@@ -133,9 +126,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
-  private nextWebcamSecGuest: Subject<boolean | string> = new Subject<boolean | string>();
-  private triggerSecGuest: Subject<void> = new Subject<void>();
-  public webcamImageSecGuest: WebcamImage = null;
   //web camara data end
   RoomNoArray: string[] = [];
   OriginalArray: string[] = [];
@@ -217,7 +207,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   fileDataIdfrontSecGuest: File = null;
   fileDataIdBackSecGuest: File = null;
 
-
+  SendIndexToChild:number;
   Branch: string;
   private _searchTerm: string;
   private isGorupCheckin: boolean = false;
@@ -427,9 +417,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       StateCode:[""]
     });
   }
-  StateCode
-  State
-  Area
+
   ngOnInit() {
     //this.addBankAccountForm();
 
@@ -776,16 +764,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.camarabuttonDisabled = false;
   }
 
-  public triggerSnapshotForSecGuest(index: number): void {
-
-    this._bankservice.changeindexvalue(index);
-    this.triggerSecGuest.next();
-    this.toggleWebcamSecGuest();
-    //this.Iscamaraon = true;
-    this.SnapshotbuttonDisabledSecGuest = true;
-    this.camarabuttonDisabledSecGuest = false;
-  }
-
+  
 
   public SwitchOnCamara() {
     this.SnapshotbuttonDisabled = false;
@@ -800,20 +779,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.showWebcam = !this.showWebcam;
   }
 
-  public SwitchOnCamaraSecGuest(index: number) {
-
-
-    this.SnapshotbuttonDisabledSecGuest = false;
-    this.camarabuttonDisabledSecGuest = true;
-
-    if (this.showWebcamSecGuest) {
-      this.snapshotshowSecGuest = true;
-    }
-    else {
-      this.snapshotshowSecGuest = false;
-    }
-    this.showWebcamSecGuest = !this.showWebcamSecGuest;
-  }
+  
 
 
   FilterPaymentMode(index: number) {
@@ -973,63 +939,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
-  public showNextWebcamSecGuest(directionOrDeviceId: boolean | string): void {
-    // true => move forward through devices
-    // false => move backwards through devices
-    // string => move to device with given deviceId
-    this.nextWebcamSecGuest.next(directionOrDeviceId);
-  }
- 
-  public toggleWebcamSecGuest(): void {
-    this.showWebcamSecGuest = !this.showWebcamSecGuest;
-    this.snapshotshowSecGuest = true;
-  }
-  public handleImageSecGuest(webcamImageSecGuest: WebcamImage, index: number): void {
-   debugger;
-  
-   console.info('received webcam image', webcamImageSecGuest);
-   this.webcamImageSecGuest = webcamImageSecGuest;
-  this._bankservice.currentindex.subscribe(res => 
-  {
-    let indxsubcribe=res;
-    if(indxsubcribe==0)
-    {
-       this.webcamImageSecGuest = webcamImageSecGuest;
-       this.GuetImg0 = webcamImageSecGuest.imageAsDataUrl
-    }
-    if(indxsubcribe==1)
-    {
-       this.webcamImageSecGuest = webcamImageSecGuest;
-       this.GuetImg1 = webcamImageSecGuest.imageAsDataUrl
-    }
-    if(indxsubcribe==2)
-    {
-       this.webcamImageSecGuest = webcamImageSecGuest;
-       this.GuetImg3 = webcamImageSecGuest.imageAsDataUrl
-    }
-    if(indxsubcribe==3)
-    {
-       this.webcamImageSecGuest = webcamImageSecGuest;
-       this.GuetImg3 = webcamImageSecGuest.imageAsDataUrl
-    }
-    this.getImageSecGuest(webcamImageSecGuest.imageAsBase64,indxsubcribe)
-  })
- 
-    //this.getImage(webcamImage.imageAsBase64)
 
-
-  }
-  public cameraWasSwitchedSecGuest(deviceId: string): void {
-    console.log('active device: ' + deviceId);
-    this.deviceId = deviceId;
-  }
-  public get triggerObservableSecGuest(): Observable<void> {
-    return this.triggerSecGuest.asObservable();
-  }
-
-  public get nextWebcamObservableSecGuest(): Observable<boolean | string> {
-    return this.nextWebcamSecGuest.asObservable();
-  }
 
 
   getImage(url) {
@@ -1058,6 +968,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         console.log(imageName);
         this.Guestphotopathurl = imageName;
+       
         console.log(res);
 
       },
@@ -1264,7 +1175,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
     allbtn.classList.remove("md-show");
   }
 
-  OpenCameraDetails(event){
+  OpenCameraDetails(event,index){
+
+    this.SendIndexToChild=index;
+    this._bankservice.changeindexvalue(index);
     document.querySelector("#" + event).classList.add("md-show");
   }
   openMyModalPincode(event, data) {
@@ -1763,9 +1677,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-  onRatingClicked(imgsrc: any): void {
-    this.imgsrc = imgsrc
-    console.log( this.imgsrc);
+  onRatingClicked(event:any): void {
+   
+  this.imgsrc = environment.GuestimagePath+"/"+event;
+    
+    
 }
 
   AddpaymentGrid(): FormGroup {

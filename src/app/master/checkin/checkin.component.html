@@ -1975,7 +1975,7 @@
                                                 </tr>
                                                 <tr>
                                                   <td>
-                                                    <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenCameraDetails ('adguesteffectcamara')"   ><i class="fa fa-user" aria-hidden="true"></i>  Take Photo </a>
+                                                    <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenCameraDetails ('addressmodeleffect',j)"   ><i class="fa fa-user" aria-hidden="true"></i>  Take Photo </a>
                                                   <!-- <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(j);"  >Capture</button>
                                                   <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(j)"  >  On</button>--> 
                                                   </td>
@@ -2016,7 +2016,7 @@
       
           </div>
           <div class="addGuestouter1" >
-            <app-modal-animation [modalID]="'adguesteffectcamara'" [modalClass]="'md-effect-4 addressmodeleffect  '" >
+            <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect  '" >
              
               <perfect-scrollbar class="overflow-container model-sm"   [style.height]="'465px'" style="border:2px solid #ccc" [config]="config">
                 <h3 class="f-15" style="position: relative; ">Camera Window - Guest Photo
@@ -2025,11 +2025,9 @@
                   <div class="app-modal-body text-center" style="position: relative;"> 
                     <div class="table-content crm-table">
                       <div class="project-table addaddinalguest">
-                        <div id="crm-contact" class="dt-responsive">                 
+                        <div id="crm-contact" class="dt-responsive">                                         
                          
-
-                         
-                      <app-camarawindow [camImg]='imgname' (ratingClicked)='onRatingClicked($event)'></app-camarawindow>
+                        <app-camarawindow  (ratingClicked)='onRatingClicked($event)'></app-camarawindow>
                        
                         </div>
                         
