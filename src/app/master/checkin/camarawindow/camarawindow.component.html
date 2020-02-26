@@ -1,0 +1,53 @@
+ 
+
+  <div class="col-md-4" style="margin: 0 auto; ">
+    <table class="table table-responsive" style=" border: 1px solid #ccc;
+    padding: 10px">
+     
+      <thead>
+        <tr>
+          <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>           
+
+            <webcam [height]="100" [width]="150" [trigger]="triggerObservableSecGuest" (imageCapture)="handleImageSecGuest($event,i)" *ngIf="showWebcamSecGuest"
+            [allowCameraSwitch]="allowCameraSwitchSecGuest" [switchCamera]="nextWebcamObservableSecGuest"
+            [videoOptions]="videoOptions"
+            [imageQuality]="1"
+            (cameraSwitched)="cameraWasSwitchedSecGuest($event)"
+            (initError)="handleInitError($event)"
+           ></webcam>
+                
+          <div class="snapshot " >
+        <div *ngIf="j==0">               
+        
+         <img  [height]="75" [width]="100"  [src]="GuetImg0" />
+        </div> 
+        <div *ngIf="j==1">           
+        
+          <img  [height]="75" [width]="100"  [src]="GuetImg1" />
+        
+        </div> 
+      </div> 
+      </td> 
+        </tr>
+
+        <tr>
+          <td>
+            <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(j);"  >Capture</button>
+          <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(j)"  >  On</button>
+          </td>
+          
+          
+        </tr>
+       
+      </tbody>
+    </table>
+    <h6>{{Process}}</h6>
+  </div>
+
+<button (click)="sendMessageToParent(imgname)" style="margin: 0 auto;">Submit</button>

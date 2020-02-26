@@ -6749,9 +6749,20 @@ outerdiv{
     width:100%!important;
     max-width:90%;     
 }
-.addaddinalguest .card-border-primary .ng-select.ng-select-single .ng-select-container{
+.addGuestouter .addaddinalguest
+{
+    
+}
+.addGuestouter .addaddinalguest select{
     height:1.50rem!important;
     min-height:1.50rem!important; 
+    font-size:100%;
+    border-radius:0;
+}
+  .addaddinalguest .card-border-primary .ng-select.ng-select-single .ng-select-container{
+    height:1.50rem!important;
+    min-height:1.50rem!important; 
+    
 }
 .addaddinalguest .card-border-primary .col-lg-2, 
 .addaddinalguest .card-border-primary .col-12.col-lg-6,
@@ -6766,7 +6777,7 @@ outerdiv{
     border-radius: 0;
 }
 .addGuestouter  .md-modal{
-    top:35%; 
+    top:40%; 
 }
 .addaddinalguest .card-border-primary .guestinfofirstrow .form-group{
     margin-bottom: 0;

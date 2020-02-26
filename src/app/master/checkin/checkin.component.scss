@@ -176,6 +176,31 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 {
     width:100px;
     float: left;
-    border:1px solid #ccc;
-    
+    border:1px solid #ccc;    
+}
+.guestphotoscreen .table thead tr th,
+.additionalguest .table thead tr th,
+.addGuestouter .table thead tr th{
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+}
+.guestphotoscreen .table tbody tr td,
+.additionalguest .table tbody tr td,
+.addGuestouter .table tbody tr td{
+    border: 1px solid #ccc;
+    text-align: center; 
+    margin: 0 auto;
+}
+.guestphotoscreen .table tbody tr td img,
+.additionalguest .table tbody tr td img,
+.addGuestouter .table tbody tr td img{
+    border-radius: 5px;
+    border:1px solid #000;    
+}
+.addGuestouter {
+    border:1px solid red;
 }

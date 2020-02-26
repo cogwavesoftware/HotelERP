@@ -119,6 +119,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   closeOther = false;
 
   position = 'top-right';
+  imgsrc :any;
   //public videoOptions: MediaTrackConstraints = {
   // width: {ideal: 1024},
   // height: {ideal: 576}
@@ -439,6 +440,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
     this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
 
+    this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
+
     this.model.Id = 0;
     this.model.CompanyCode = 0;
     this.model.BranchCode = "0";
@@ -574,6 +578,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
         GuestImage: ["", ""],
         GuestIdFronturl: ["", ""],
         GuestIdBackurl: ["", ""],
+        Area:["",""],
+        StateCode:["",""]
+
       }));
     }
     else{
@@ -1257,8 +1264,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
     allbtn.classList.remove("md-show");
   }
 
-
+  OpenCameraDetails(event){
+    document.querySelector("#" + event).classList.add("md-show");
+  }
   openMyModalPincode(event, data) {
+    this.filterQuery = "";
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  openMyModalPincodePopup(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
@@ -1750,7 +1763,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-
+  onRatingClicked(imgsrc: any): void {
+    this.imgsrc = imgsrc
+    console.log( this.imgsrc);
+}
 
   AddpaymentGrid(): FormGroup {
     return this.formBuilder.group({

@@ -21,8 +21,9 @@ import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog
 // import {SelectModule} from 'ng-select';
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CamarawindowComponent } from './camarawindow/camarawindow.component';
 @NgModule({
-  declarations: [CheckinComponent, CheckoutComponent],
+  declarations: [CheckinComponent, CheckoutComponent, CamarawindowComponent],
   // declarations: [CheckinComponent, CheckoutComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
   imports: [

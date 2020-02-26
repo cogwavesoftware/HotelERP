@@ -106,6 +106,7 @@
 
 <div class="col-sm-12 col-xl-4">  
   </div>
+
  
 <div class="outerdiv">
   <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
@@ -456,7 +457,7 @@
                                           </div>
                                           <div class="col-md-4" style="padding-top: 5px;">
                                             <div class="row guestinfofirstrow guestphotoscreen" >  
-                                              <a href="javascript:;" class="m-r-15 crm-action-view text-info  addguestcolor" (click)="OpenAdditionalGuest ('adguesteffect')"   ><i class="fa fa-user" aria-hidden="true"></i> Add Additional Guest Detsils </a>
+                                              <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenAdditionalGuest ('adguesteffect')"   ><i class="fa fa-user" aria-hidden="true"></i> Add Additional Guest Detsils </a>
 
                                                <table class="table table-responsive" style="padding-left:6px; width:95%">
                                                 <thead>
@@ -933,15 +934,12 @@
                                                   formControlName="Arrivalfrom" name="Arrivalfrom" autocomplete="off"/>
                                                   </div> 
                                            </div>
-                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                             
-                                          </div>
                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                             <div class="form-group">
                                               <label class="form-control-label" for="Booking">Convenience fees </label>
                                               <input type="text" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off"   />  
-                                              <!-- <div class="invalid-feedback" *ngIf="form.controls.convenience.errors?.required" >convenience fees is required</div> -->
-                                              </div>  
+                                               </div>  
                                           </div>
                                           <div class="col-12 col-lg-2 col-md-4 col-sm-4">
                                             <div class="form-group">
@@ -950,9 +948,7 @@
                                                <option value="select">Select</option> 
                                                <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
                                              </select>
-                                             <!-- <div *ngIf="submitted && form.arivalmode.errors" class="invalid-feedback">
-                                              <div *ngIf="form.arivalmode.errors.required">arivalmode is required</div>
-                                            </div> -->
+                                             
                                               </div> 
                                           </div>
                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
@@ -962,23 +958,24 @@
                                                   formControlName="Proceeding" name="Proceeding" autocomplete="off" />
                                                     </div> 
                                                  </div>
+                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="visit ">Purposse of Visit</label>
+                                                    <select class="custom-select" name="visit" formControlName="visit" id="visit">
+                                                      
+                                                     
+                                                      <option value="select">Select</option>
+                                                      <option  *ngFor="let sour of purposeofvisit"
+                                                        [value]="sour.Description">{{ sour.Description  }}</option>
+                                                    </select>
+                                                    
+                                                  </div>
+                                                </div>
 
                                     </div><!-- end 1 row -->
 
                                     <div class="row">
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="visit ">Purposse of Visit</label>
-                                          <select class="custom-select" name="visit" formControlName="visit" id="visit">
-                                            
-                                           
-                                            <option value="select">Select</option>
-                                            <option  *ngFor="let sour of purposeofvisit"
-                                              [value]="sour.Description">{{ sour.Description  }}</option>
-                                          </select>
-                                          
-                                        </div>
-                                      </div>
+                                      
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <div class="form-group">
                                               <label class="form-control-label" for="Vehicle">Vehicle No</label>
@@ -1055,9 +1052,6 @@
                                           
                                         </div>
                                       </div>
-                                    </div> <!-- end 2nd row -->
-
-                                    <div class="row">
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <label class="form-control-label" for="DOB">Date of Birth</label>
                                         <div class="form-group">
@@ -1067,6 +1061,10 @@
                                           </div>
                                         </div>
                                       </div>
+                                    </div> <!-- end 2nd row -->
+
+                                    <div class="row">
+                                     
 
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <label class="form-control-label" for="DOA">Date of Anniversary</label>
@@ -1557,7 +1555,63 @@
 
 
 
-
+<!-- picnde popup for popup inside popup-->
+<app-modal-animation [modalID]="'popinsidepopforpincode'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect'">
+  <h3 class="f-15" style="position: relative;">Pincode Details - Popup inside popup
+   <!-- <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button> -->
+ </h3>
+    <div class="app-modal-body text-center" style="position: relative;"> 
+      <div class="table-content crm-table">
+        <div class="project-table addressproject-table">
+          <div id="crm-contact" class="dt-responsive">                 
+            <div class="row">         
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <input type="text" #searchTerm class="form-control input-lg full-data-search" placeholder="Search here...">
+                  <span class="input-group-append ripple light" id="basic-addon1">
+                    <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                  </span>
+                </div> 
+              </div>      
+        </div>  
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'365px'" [config]="config">
+             <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table"> 
+                    <thead>
+                    <tr class="blueorange-gradient">        
+                    <th> AreaData</th>
+                    <th>City</th>
+                    <th> Pincode</th>
+                    <th> State</th>
+                    <th>Action</th>                                               
+                </tr>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>                        
+                 <tr *ngFor="let item of picodelist; let i = index;">                     
+                   <td>{{item.AreaData}}</td>   
+                   <td>{{item.City}}</td>   
+                   <td>{{item.Pincode}}</td>                      
+                   <td>{{item.State}}</td>        
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                          
+                  </td>
+                </tr>  
+                </tbody>
+                 
+              </table>
+            </div> 
+            
+          </perfect-scrollbar>
+         
+          </div>
+          
+        </div>
+      </div>        
+       </div>          
+    </app-modal-animation>
+<!-- end pin popup insde popup-->
 <!-- 
    Referance Model -->
 
@@ -1604,14 +1658,7 @@
                       </td>
                     </tr>  
                     </tbody>
-                    <!-- <tfoot>
-                    <tr class="blueorange-gradient">     
-                    <th>Id</th>            
-                    <th>RefName</th>    
-                    <th>RefMobileNo</th>                       
-                    <th>Action</th>      
-                    </tr>                   
-                    </tfoot> -->
+                    
                   </table>
                 </div> 
               </div>
@@ -1657,10 +1704,7 @@
 
       <div class="addGuestouter">
         <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
-         
-
-
-
+          
           <h3 class="f-15" style="position: relative;">Additional Guest Details
           
             <button style="position: absolute;
@@ -1685,13 +1729,7 @@
                         <div class="row" >
                           <div class="col-sm-12"  >          
                             <form   >                     
-                                                                                    
-                                                                 
-                                
-
-                                  
-                                  <!-- <div formArrayName="other"  *ngFor="let other of form.get('other').controls; let i = index">
-                                            -->
+                                              
                                            
                                   <div class="tbody" [formGroup]="fg" *ngFor="let fg of bankAccountForms.controls; let j=index;">
                                    
@@ -1707,10 +1745,14 @@
                                         <div class="row" style="margin-left: 0;">
                                           <div class="col-md-8">
                                             <div class="row guestinfofirstrow" style="padding-top:5px;" >
-                                              <label>Swipe Information </label>
-                                              <!-- <input type="checkbox" [(ngModel)]="isChecked" (change)="checkValue(isChecked?'A':'B')" formControlName="state"/> -->
-                                              <input type="checkbox" (change)="checkValue($event,j)"> 
                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                <div class="form-group">
+                                                <label class="form-control-label">Swipe Info.  </label>
+                                                <input type="checkbox" (change)="checkValue($event,j)"> 
+                                                </div>
+                                              </div>
+                                              
+                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="title ">Title</label>
                                                   <select class="custom-select" name="title" formControlName="title"
@@ -1730,16 +1772,16 @@
                                               
                                                
                                       
-                                              <div class='col-12 col-lg-3 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="Guest Name">Guest Name </label>
-                                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
-                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                                  <input style="position: relative" type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
+                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute; right:0; top:22px"><i class="fa fa-search"></i></a>
                                                 
                                                   <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                   </div>  
                                               </div>
-                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-3 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="gender">  Gender </label>
                                                  <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
@@ -1772,7 +1814,7 @@
                                               <div class="form-group">
                                                 <label class="form-control-label" for="pincode">Pincode </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
-                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincode('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincodePopup('popinsidepopforpincode',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
                                                  <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
                                                 </div>  
                                             </div>
@@ -1833,7 +1875,7 @@
               
                                           </div> 
   
-                                          <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                            <div class="form-group">
                                             <label class="form-control-label" for="address2"> Address2 </label>       
                                             <input type="text" class="form-control tooltip-form" id="address2" formControlName="address2">
@@ -1843,20 +1885,32 @@
             
                                         </div> 
   
-                                        <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                          <div class="form-group">
                                           <label class="form-control-label" for="address3"> Address 3 </label>       
                                           <input type="text" class="form-control tooltip-form" id="address3" formControlName="address3">
                                          
-                                          </div>  
-  
-          
+                                          </div>   
                                       </div>  
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Area">Area </label>
+                                          <input type="text" class="form-control tooltip-form searchiconrelative" id="Area" formControlName="Area" name="Area" autocomplete="off"  required  />  
+                                             </div>  
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>  
+                                        <div class="form-group"> 
+                                          <label class="form-control-label" for="state">StateCode </label>
+                                          <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off" required  />  
+                                        </div> 
+                                      </div>
+
                                           
                                           </div> <!-- row end -->
                                           </div>
                                           <div class="col-md-4">
                                             <table class="table table-responsive">
+                                               
                                               <thead>
                                                 <tr>
                                                   <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
@@ -1867,16 +1921,17 @@
                                               <tbody>
                                                 <tr>
                                                   <td>
-                                                    <webcam [height]="100" [width]="150" [trigger]="triggerObservableSecGuest" (imageCapture)="handleImageSecGuest($event,i)" *ngIf="showWebcamSecGuest"
+                                                    <img [src]="imgsrc"  style="width:100px;height:75px">
+                                                   <!--  <webcam [height]="100" [width]="150" [trigger]="triggerObservableSecGuest" (imageCapture)="handleImageSecGuest($event,i)" *ngIf="showWebcamSecGuest"
                                                     [allowCameraSwitch]="allowCameraSwitchSecGuest" [switchCamera]="nextWebcamObservableSecGuest"
                                                     [videoOptions]="videoOptions"
                                                     [imageQuality]="1"
                                                     (cameraSwitched)="cameraWasSwitchedSecGuest($event)"
                                                     (initError)="handleInitError($event)"
-                                                   ></webcam>
-                                                 
-                                                  <div class="snapshot ">
-                                                <div *ngIf="j==0">              
+                                                   ></webcam>-->
+                                                        
+                                                  <!-- <div class="snapshot " >
+                                                <div *ngIf="j==0">               
                                                 
                                                  <img  [height]="75" [width]="100"  [src]="GuetImg0" />
                                                 </div> 
@@ -1885,59 +1940,44 @@
                                                   <img  [height]="75" [width]="100"  [src]="GuetImg1" />
                                                 
                                                 </div> 
-                                              </div> 
+                                              </div>  -->
+
                                               </td>
+                                              <td>
+                                                <div *ngIf="j==0">
+                                                <img   [src]="GuetIdFront0" style="width:100px;height:75px">                                                    
+                                                </div> 
 
-                                               <div *ngIf="j==0">
-                                                                                                    
-                                                     <td><img   [src]="GuetIdFront0" style="width:100px;height:75px">   </td>
-                                                  
-                                                      <td><img [src]="GuetIdBack0"  style="width:100px;height:75px">     </td>
-                                              </div> 
+                                                <div *ngIf="j==1">
+                                                <img   [src]="GuetIdFront1" style="width:100px;height:75px">
+                                                </div> 
 
-                                              <div *ngIf="j==1">
-                                                                                                    
-                                                <td><img   [src]="GuetIdFront1" style="width:100px;height:75px">   </td>
-                                             
-                                                 <td><img [src]="GuetIdBack1"  style="width:100px;height:75px">     </td>
-                                              </div> 
+                                                <div *ngIf="j==2">
+                                                <img   [src]="GuetIdFront2" style="width:100px;height:75px">                                                 
+                                                </div>  
 
-                                              <div *ngIf="j==2">
-                                                                                                    
-                                                <td><img   [src]="GuetIdFront2" style="width:100px;height:75px">   </td>
-                                             
-                                                 <td><img [src]="GuetIdBack2"  style="width:100px;height:75px">     </td>
-                                              </div> 
-
-
-
-
-                                            
-                                          <!-- <div [ngSwitch]="j">
-
-                                            <div *ngSwitchCase="'0'">
-                                              <td><img   [src]="GuetIdFront0" style="width:100px;height:75px">  </td>
-                                              <td ><img   [src]="GuetIdBack0" style="width:100px;height:75px">  </td>
-                                            </div>
-
-                                            <div *ngSwitchCase="'1'" >
-                                              <td><img   [src]="GuetIdFront1" style="width:100px;height:75px">  </td>
-                                              <td ><img   [src]="GuetIdBack1" style="width:100px;height:75px">  </td>
-                                            </div>
-                                          
-                                            <div *ngSwitchDefault>
-                                            <td><img   [src]="GuetIdFront2" style="width:100px;height:75px">  </td>
-                                            <td ><img   [src]="GuetIdBack2" style="width:100px;height:75px">  </td>
-                                           
-                                          </div>                                                                                      
-                                          </div> -->
-                                           
+                                                
+                                              </td>
+                                              <td>
+                                                <div *ngIf="j==0">
+                                                  <img [src]="GuetIdBack0"  style="width:100px;height:75px">     
+                                                  </div> 
+  
+                                                  <div *ngIf="j==1">
+                                                  <img [src]="GuetIdBack1"  style="width:100px;height:75px">     
+                                                  </div> 
+  
+                                                  <div *ngIf="j==2">
+                                                  <img [src]="GuetIdBack2"  style="width:100px;height:75px">      
+                                                  </div>
+                                              </td>
                                                 
                                                 </tr>
                                                 <tr>
                                                   <td>
-                                                    <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(j);"  >Capture</button>
-                                                  <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(j)"  >  On</button>
+                                                    <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenCameraDetails ('adguesteffectcamara')"   ><i class="fa fa-user" aria-hidden="true"></i>  Take Photo </a>
+                                                  <!-- <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest(j);"  >Capture</button>
+                                                  <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest(j)"  >  On</button>--> 
                                                   </td>
                                                   <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFrontSecGuest($event,j,'Front')" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
                                                   <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfFrontSecGuest($event,j,'Back')" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
@@ -1975,4 +2015,32 @@
             </app-modal-animation>
       
           </div>
-  
+          <div class="addGuestouter1" >
+            <app-modal-animation [modalID]="'adguesteffectcamara'" [modalClass]="'md-effect-4 addressmodeleffect  '" >
+             
+              <perfect-scrollbar class="overflow-container model-sm"   [style.height]="'465px'" style="border:2px solid #ccc" [config]="config">
+                <h3 class="f-15" style="position: relative; ">Camera Window - Guest Photo
+              
+                </h3>
+                  <div class="app-modal-body text-center" style="position: relative;"> 
+                    <div class="table-content crm-table">
+                      <div class="project-table addaddinalguest">
+                        <div id="crm-contact" class="dt-responsive">                 
+                         
+
+                         
+                      <app-camarawindow [camImg]='imgname' (ratingClicked)='onRatingClicked($event)'></app-camarawindow>
+                       
+                        </div>
+                        
+                      </div>
+                    </div>        
+                     </div>    
+                </perfect-scrollbar>
+
+    
+    
+                    
+                </app-modal-animation>
+          
+              </div>
