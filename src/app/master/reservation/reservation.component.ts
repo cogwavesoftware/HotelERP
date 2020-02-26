@@ -59,6 +59,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   guest: any;
   picodelist: any;
   referencelist: any;
+  Revenulist: any;
   companylist: any;
   driverlist: any;
   theme = "bootstrap";
@@ -94,7 +95,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   genderitems: any;
   gender: any;
   pincode: any;
-
+  StateList:any;
   booking: HMSReservationBookingmodel;
 
   bookings: HMSReservationBookingmodel[];
@@ -211,13 +212,15 @@ export class ReservationComponent implements OnInit, OnDestroy {
       gender: ["Male", [Validators.required]],
       mobile: ["", [Validators.required]],
       email: ["", [Validators.required]],
-      foriegnguest: ["No", [Validators.required]],
+      //foriegnguest: ["No", [Validators.required]],
       Address1: ["", [Validators.required]],
       Address2: ["", [Validators.required]],
       Address3: ["", [Validators.required]],
       pincode: ["", [Validators.required]],
+      Area: ["", [Validators.required]],
       city: ["", [Validators.required]],
-      state: ["", [Validators.required]],
+      state: ["select", [Validators.required]],
+      StateCode: ["", [Validators.required]],
       nation: ["India", [Validators.required]],
       gstno: ["", [Validators.required]],
       other: this.formBuilder.array([]),
@@ -229,22 +232,45 @@ export class ReservationComponent implements OnInit, OnDestroy {
       company: ["", [Validators.required]],
       //disctype: ["select", [Validators.required]],
       BillAmount: ["", [Validators.required]],
-      // discvalue: ["", [Validators.required]],
+      BookingStatus: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
-      PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
+      // PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
+      PayArray: this.formBuilder.array([]),
+      PayExtra: this.formBuilder.array([]),
       visit: ["select", [Validators.required]],
       cometoknow: ["select", [Validators.required]],
       Billing: ["select", [Validators.required]],
       RefName: [""],
+      special: [""],
+      Pickup: [""],
+      Pickuptime: [""],
+      Drop: [""],
+      PickupDriverName: [""],
+      PickupDriverNo: [""],
+      Pickupvechileno: [""],
+      Remarks: [""],
+      GContactname: [""],
+      GContactno: [""],
+      GEmailId: [""],
       BranchCode: [this.Branch, [Validators.required]],
       randomCheckinNo: ['0', [Validators.required]],
       IpAdd: [localStorage.getItem("LOCAL_IP")],
       CreatedBy: [localStorage.getItem("id"), [Validators.required]]
     });
 
-    
+
+    this.form.get('state').valueChanges.subscribe(val => {
+      console.log(val)
+      let Cons= this.StateList.find(x=>x.State==val);
+
+      this.form.patchValue({
+        StateCode:Cons.StateCode
+      })
+
+    });
+
     this.form.get('checkoutdate').valueChanges.subscribe(() => {
-     
+
 
       // console.log('Cnstructor Changed')
       // let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
@@ -304,10 +330,16 @@ export class ReservationComponent implements OnInit, OnDestroy {
     });
   }
 
+  // FilterStateCode(name:string)
+  // {
+     
+  //    let d=this.StateList.find(x=>x.State===name);
+  //    console.log(d)
 
-
-
-
+  //    let d1=this.StateList.filter(x=>x.State===name);
+  //    console.log(d1)
+     
+  // }
 
 
   ngOnInit() {
@@ -321,7 +353,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
       this.reservloader = false;
     }, 7000)
 
-    this.model.frmdate=new Date();
+    this.model.frmdate = new Date();
     this.fromdate = new Date();
     this.todate.setDate(this.fromdate.getDate() + 15);
     let fromdates = this.datePipe.transform(this.fromdate, "MM/dd/yyyy");
@@ -375,6 +407,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
         let Guestmodel = this.ReservationAmendform.Guest
         let companymodel = this.ReservationAmendform.company
         let ResMastermodel = this.ReservationAmendform.ResMaster
+        let ResAdvance = this.ReservationAmendform.Advance
+
         let ReservationBookedSlaveArray = [];
         var AllreadyBookedType = [];
         let Checkintime, checkoutTime, checkindate, checkoutdate;
@@ -389,7 +423,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
         // console.log(Checkintime)
         // console.log(checkoutTime)
-    
+
         console.log('Guestmodel')
         console.log(Guestmodel)
         this.form.patchValue({
@@ -424,12 +458,41 @@ export class ReservationComponent implements OnInit, OnDestroy {
           this.form.patchValue({
             companycode: companymodel.CompanyCode,
             gstno: companymodel.GSTNO,
-            company:companymodel.CompanyName
+            company: companymodel.CompanyName
 
           })
           this.OrgCompanycode = companymodel.CompanyCode;
           this.IsCompanyReservation = true;
         }
+
+        if (ResAdvance != null) {
+          console.log('ResAdvance')
+          console.log(ResAdvance)
+          ResAdvance.forEach(res => {
+            if (res.CashAmount > 0) {
+              this.GetPaymentDetails(res.CashMode, res.CashSubMode, res.CashDescription, res.CashAmount)
+            }
+            if (res.CardAmount > 0) {
+              this.GetPaymentDetails(res.CardMode, res.CardSubMode, res.CardDescription, res.CardAmount)
+            }
+            if (res.ChequeAmount > 0) {
+              this.GetPaymentDetails(res.ChequeMode, res.ChequeSubMode, res.ChequeDescription, res.ChequeAmount)
+            }
+            if (res.OnlineAmount > 0) {
+              this.GetPaymentDetails(res.OnlineMode, res.OnlineSubMode, res.OnlineDescription, res.OnlineAmount)
+            }
+            if (res.WaletAmount > 0) {
+              this.GetPaymentDetails(res.WaletMode, res.WaletSubMode, res.WaletDescription, res.WaletAmount)
+            }
+
+
+          });
+
+
+        }
+
+
+
 
         let reservation = new HMSReservationFormmodel()
         {
@@ -463,10 +526,11 @@ export class ReservationComponent implements OnInit, OnDestroy {
             for (let resdata of this.Reservationform.booking) {
               this.AddBokingButtonviaForeach(resdata)
             }
+            this.CalculateSummaryAmount();
           });
 
-
       });
+
     }
 
 
@@ -518,6 +582,18 @@ export class ReservationComponent implements OnInit, OnDestroy {
     this._masterservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });
+    console.log('this.Revenulist')
+    this._masterservice.getrevenudata(this.Branch).subscribe(data => {
+      this.Revenulist = data;
+      console.log(this.Revenulist)
+    });
+
+
+    this._masterservice.GetStateCode().subscribe(res => {
+      this.StateList = res
+      console.log('this.StateList')
+      console.log(this.StateList)
+    });
 
     this._masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
@@ -561,9 +637,27 @@ export class ReservationComponent implements OnInit, OnDestroy {
     // });
   }
 
+  GetPaymentDetails(Mode, Submode, Description, Amount) {
+    (<FormArray>this.form.get("PayArray")).push(
+      this.formBuilder.group({
+        Paymode: [Mode],
+        Paysubmode: ["select", [Validators.required]],
+        payAmount: [Amount, [Validators.required]],
+        Descriptions: [Description],
+        modeselected: [Submode]
+      })
+    );
+  }
 
-
-
+  // AddpaymentGricffd(): FormGroup {
+  //   return this.formBuilder.group({
+  //     Paymode: ["select"],
+  //     Paysubmode: ["select", [Validators.required]],
+  //     payAmount: [0, [Validators.required]],
+  //     Descriptions: ["0"],
+  //     modeselected: ["0"]
+  //   });
+  // }
   ngOnDestroy() {
     this._bankservice.changeMessage("expanded")
   }
@@ -625,8 +719,51 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
 
+  CalculateExtrachargeAmount(index: number, EAmount: number, ) {
+    let Revenue = this.PayExtra.controls[index].get('Revenu').value;
+    let Amount = this.PayExtra.controls[index].get('Amount').value;
+    if (Revenue == "select" || Amount < 0) {
+
+      this.addToast("Cogwave Software", "Invalid Mode Selected", "error");
+      return;
+    }
+
+    this._masterservice.GetRevenueTaxAmount(Revenue, Amount, this.Branch).subscribe(res => {
+      let NetAmount = Amount + res;
+      this.PayExtra.controls[index].patchValue({
+        TaxAmount: res,
+        NetAmount: NetAmount
+      });
+
+    })
+
+    this.CalculateSummaryAmount();
+  }
+
+  CalculateSummaryAmount() {
+
+    for (let Payarray of this.PayArray.controls) {
+      this.TotalPaidAmount += Payarray.get("payAmount").value;
+    }
+
+    for (let other of this.other.controls) {
+      let req = other.get('Required').value;
+      if (req > 0) {
+        this.TotalBillAmount += other.get("Net").value;
+      }
+    }
+    for (let Extrach of this.PayExtra.controls) {
+      this.TotalBillAmount += Extrach.get("NetAmount").value;
+    }
+    this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+
+  }
+
   Submit() {
 
+    console.log(this.form.value)
+
+     
     if (this.TotalBillAmount <= 0) {
       this.addToast("Cogwave Software??", "Booking Not Selected Please Select Booking", "error");
       return;
@@ -694,7 +831,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   ngAfterViewInit() {
 
 
-   
+
 
     fromEvent(this.searchTermguest.nativeElement, 'keyup')
       .pipe(
@@ -795,11 +932,29 @@ export class ReservationComponent implements OnInit, OnDestroy {
     });
   }
 
+  AddExtraChargeGrid(): FormGroup {
+    return this.formBuilder.group({
+      Revenu: ["-1"],
+      Description: [],
+      Amount: [],
+      TaxAmount: [],
+      TotalAmount: []
+    });
+  }
+
+  AddExtrachargeButtonClick(): void {
+    (<FormArray>this.form.get("PayExtra")).push(this.AddExtraChargeGrid());
+  }
+
 
   AddPaymentButtonClick(): void {
     (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
   }
 
+
+  onDeleteExtracharge(k) {
+    (<FormArray>this.form.get("PayExtra")).removeAt(k);
+  }
 
   onDeletePayment(bankAccountID, k) {
     if (k != 0) (<FormArray>this.form.get("PayArray")).removeAt(k);
@@ -810,9 +965,14 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
 
+  get PayExtra(): FormArray {
+    return this.form.get("PayExtra") as FormArray;
+  }
+
   get PayArray(): FormArray {
     return this.form.get("PayArray") as FormArray;
   }
+
 
 
 
@@ -873,7 +1033,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   ReferanceModelOpen(event, data) {
     this.referanceName = '';
-    
+
     document.querySelector("#" + event).classList.add("md-show");
   }
 
@@ -887,14 +1047,13 @@ export class ReservationComponent implements OnInit, OnDestroy {
     var allbtn = document.querySelector('.md-show');
     allbtn.classList.remove("md-show");
   }
-   
-  ReferanceSave(form?: NgForm)
-  {
+
+  ReferanceSave(form?: NgForm) {
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy = localStorage.getItem("id");
     form.value.IsActive = true;
     form.value.RefAdress = "0";
-    form.value.RefPoints =0;
+    form.value.RefPoints = 0;
     console.log(form.value);
     if (form.invalid) {
       console.log(form.value);
@@ -929,10 +1088,13 @@ export class ReservationComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-show");
   }
   PatchPincode(SelectedData: any, event: any) {
+    console.log(SelectedData)
     this.form.patchValue({
       pincode: SelectedData.Pincode,
-      city: SelectedData.AreaData,
-      state: SelectedData.City,
+      city: SelectedData.City,
+      state: SelectedData.State,
+      Area: SelectedData.AreaData,
+     
       nation: "India",
     })
     var allbtn = document.querySelector('.md-show');
@@ -965,9 +1127,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
   CompanySave(form?: NgForm) {
     debugger;
     form.value.BranchCode = localStorage.getItem("BranchCode")
-    form.value.CreatedBy =  localStorage.getItem("id");
-    form.value.CompanyCode="0";
-    form.value.Id="0";
+    form.value.CreatedBy = localStorage.getItem("id");
+    form.value.CompanyCode = "0";
+    form.value.Id = "0";
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");

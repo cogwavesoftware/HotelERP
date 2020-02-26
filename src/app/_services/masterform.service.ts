@@ -351,6 +351,18 @@ export class MasterformService {
     return this.http.get(environment.apiURL + '/api/CloudHMS/Master/CheckGrace?UserId=' + UserId + '&GracePeriod=' + GracePeriod + '&BranchCode=' + BranchCode);
   }
 
+  GetRevenueTaxAmount(RevId:number,Amount:number,BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetRevTaxAmount?RevId=' + RevId + '&Amount=' + Amount + '&BranchCode=' + BranchCode);
+  }
+
+  
+  GetStateCode()
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetStateCode');
+  }
+
+
   // registerUser(user: User,roles : string[]) {
   //   const body = {
   //     UserName: user.UserName,

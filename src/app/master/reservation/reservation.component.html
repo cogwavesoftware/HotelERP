@@ -24,726 +24,984 @@
             <div class="col-md-12" style="padding-left: 0;">
               <div class="row" style="margin-bottom: 0;">
                 <div class="col-md-12 taboutercreatebtn">
-                  <!-- tab starting -->                  
-                  
-                
-  
-                    <div class="reservationmaster">                     
-                        <div [@fadeInOutTranslate] class=" ">
-                          <div class="row" >
-                            <div class="col-md-12" style="  padding-right:0">
-                              <div class="accouter" style="width: 100%;">
-                                <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
-                                  class="ngb-accordion"> 
-                                  <ngb-panel id="ngb-close-p1" title="Staying Information- {{ResLabel}}  " >
-                                    <ng-template ngbPanelContent>
-                                      <div class="stayinginfo  gueststayinfo userlist guestinfolastrow">                                       
-                                        <div class="col-md-12" style="padding-left: 0px;">
+                  <!-- tab starting -->     
+                  <ngb-tabset>
+                 
 
-                                          <div class="tbl">
-                                         
-                                            <div class="rov">
-                                              
-                                              <div class="tdwidth">
-                                                <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Arival Date</div>
-                                                <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue',isAnimated: true, adaptivePosition: true}" class="form-control">                                                
-                                              </div>
-                                              <div class="tdwidth tdwidthspcl">
-                                                <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Arival Time</div>
-                                                <timepicker id="checkintime" name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
-                                              </div>
-                                              <div class="tdwidth">
-                                                <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Days</div>
-                                                <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
-                                                id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
-                                                <option value="0">Select</option>
-                                                <option  *ngFor="let Day of noofdays" [value]="Day">
-                                                  {{ Day  }}</option>
-                                              </select>
-                                              </div>
-                                              <div class="tdwidth">
-                                                <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Departure Date</div>
-                                                <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate"  type="text"   bsDatepicker   [minDate]="minDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true ,isAnimated: true, adaptivePosition: true }" class="form-control">
-                                              </div>
-                                              <div class="tdwidth">
-                                                <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Departure Time</div>
-                                                <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker> 
-                                              </div>
-                                              
-                                              <button type="button" id="closebtn" (click)="Availability('effect-1')" class="btn btn-primary btn-sm">Availability</button>
-                                            </div>
-                                          </div>
-                                          
-
-
-                                        
-                                         
-                                      
-
-                                      </div>
-                                      
-   
-                                      </div>
-                                    </ng-template>
-                                  </ngb-panel>
-
-
-
-
-                                  <ngb-panel id="ngb-close-p1"  title="Guest Information">
-                                    <ng-template ngbPanelContent >
-                                  
-                                       <div class="col-md-12" style="padding-left:0; padding-right:0">
-                                         
-                                         
-      
-                                             <!--  test row 1-->
-                                             <div class="guestinfofirstrow userlist " >
-                                                
-                                            <div class="row guestinfofirstrow" >
-                                             
-                                              <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="title ">Title</label>
-                                                  <select class="custom-select" name="title" formControlName="title"
-                                                    id="title"
-                                                    [ngClass]="{ 'is-invalid': submitted && form.title.errors }">
-                                                    <option value="select">Select</option> 
-                                                    <option  *ngFor="let Title of Titlelist"
-                                                      [value]="Title.Description">{{ Title.Description  }}</option>
-                                                  </select>
-                                                  <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
-                                                    <div *ngIf="form.title.errors.required">title </div>
-                                                  </div>
-                                                </div>     
-                                                </div>
-                                              
-                                               
-                                      
-                                              <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="Guest Name">Guest Name </label>
-                                                  <input type="text" class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
-                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="GuestModelOpen('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
-                                                
-                                                  <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
-                                                  </div>  
-                                              </div>
-                                              <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="gender">  Gender </label>
-                                                 <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
-                                                   <option value="select">Select</option> 
-                                                   <option *ngFor="let sour of gendertypes" [value]="sour.Description">{{ sour.Description  }}</option>
-                                                 </select>
-                                                 <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
-                                                  <div *ngIf="form.gender.errors.required">gender is required</div>
-                                                </div>
-                                                  </div>  
-                                              </div>
-
-                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="Reference">Reference </label>
-                                                 
-                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="RefName" formControlName="RefName" name="RefName" autocomplete="off"  required  />   
-                                                    <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="ReferanceModelOpen('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
-                                                  
-                                                  
-                                                  </div>  
+                    <ngb-tab title="Reservation Info"  >
+                      <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                          <div class="reservationmaster">                     
+                            <div [@fadeInOutTranslate] class=" ">
+                              <div class="row" >
+                                <div class="col-md-12" style="  padding-right:0">
+                                  <div class="accouter" style="width: 100%;">
+                                    <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
+                                      class="ngb-accordion"> 
+                                      <ngb-panel id="ngb-close-p1" title="Staying Information- {{ResLabel}}  " >
+                                        <ng-template ngbPanelContent>
+                                          <div class="stayinginfo  gueststayinfo userlist guestinfolastrow">                                       
+                                            <div class="col-md-12" style="padding-left: 0px;">
     
-                                              </div>
-
-                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="mobile">Mobile </label>
-                                                  <input type="text" class="form-control tooltip-form" id="mobileid" formControlName="mobile" name="mobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobile.errors || form.controls.mobile.touched || form.controls.mobile.dirty}" required  />  
-                                                  <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >mobile   is required</div>
-                                                  </div>  
-                                              </div>
-                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="email">Email </label>
-                                                  <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
-                                                  <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
-                                                  </div>  
-                                              </div>
+                                              <div class="tbl">
                                              
-                                          </div> <!-- end row -->
-      
-      
-                                          <div class="row  guestinfofirstrow" >
-
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="pincode">Pincode </label>
-                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
-                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="PinCodeModelOpen('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>
-                                             
-  
-                                                <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
-                                                </div>  
-                                            </div>
-                                            
-                                            
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="city">City </label>
-                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="city" formControlName="city" name="city" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.city.errors || form.controls.city.touched || form.controls.city.dirty}" required  />  
-                                                 <div class="invalid-feedback" *ngIf="form.controls.city.errors?.required" >city   is required</div>
-                                                </div>  
-                                            </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="state">State </label>
-                                                <input type="text" class="form-control tooltip-form" id="state" formControlName="state" name="state" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.state.errors || form.controls.state.touched || form.controls.state.dirty}" required  />  
-                                                <div class="invalid-feedback" *ngIf="form.controls.state.errors?.required" >state   is required</div>
-                                                </div>  
-                                            </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <!-- <div class="form-group">
-                                                <label class="form-control-label" for="nation">Nation </label>
-                                                <input type="text" class="form-control tooltip-form" id="nation" formControlName="nation" name="nation" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.nation.errors || form.controls.nation.touched || form.controls.nation.dirty}" required  />  
-                                                <div class="invalid-feedback" *ngIf="form.controls.nation.errors?.required" >nation   is required</div>
-                                                </div>   -->
-  
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="nation ">Nation</label>
-                                                    <select class="custom-select" name="nation" formControlName="nation"
-                                                      id="nation"
-                                                      [ngClass]="{ 'is-invalid': submitted && form.nation.errors }">
-                                                      <option value="select">Select</option> 
-                                                      <option  *ngFor="let Nationd of Nationlist"
-                                                        [value]="Nationd">{{ Nationd  }}</option>
-                                                    </select>
-                                                    <div *ngIf="submitted && form.nation.errors" class="invalid-feedback">
-                                                      <div *ngIf="form.nation.errors.required">Nation </div>
-                                                    </div>
+                                                <div class="rov">
+                                                  
+                                                  <div class="tdwidth">
+                                                    <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Arival Date</div>
+                                                    <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue',isAnimated: true, adaptivePosition: true}" class="form-control">                                                
                                                   </div>
-  
-                                            </div>
-                                         
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="company">Company </label>
-                                               
-                                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="company" formControlName="company" name="company" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.company.errors || form.controls.company.touched || form.controls.company.dirty}" required  />   
-                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="CompanyModelOpen('effect-100',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
-                                                
-                                                <div class="invalid-feedback" *ngIf="form.controls.company.errors?.required" >company   is required</div>
-                                                </div>  
-  
-                                            </div>
-  
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="gstno">GSTNO </label>
-                                                <input type="text" class="form-control tooltip-form" id="gstno" formControlName="gstno" name="gstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.gstno.errors || form.controls.gstno.touched || form.controls.gstno.dirty}" required  />  
-                                                <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
-                                                </div>  
-                                            </div>
-                                           
-
-                                           </div> <!-- end of row-->
-                                          
-
-
-
-                                           <div class="row  guestinfofirstrow"  >
-                                            
-                                            
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Address1">Address1</label>
-                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="Address1" formControlName="Address1" name="Address1" autocomplete="off"  required  />  
-                                                 
-                                                </div>  
-                                            </div>
-
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Address1">Address2</label>
-                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="Address2" formControlName="Address2" name="Address2" autocomplete="off"  required  />  
-                                                 
-                                                </div>  
-                                            </div>
-
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Address3">Address3</label>
-                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="Address3" formControlName="Address3" name="Address3" autocomplete="off"  required  />  
-                                                 
-                                                </div>  
-                                            </div>
-
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="Foreign Guest ">  Foreign Guest  </label>
-                                               <select class="custom-select"  name="foriegnguest" formControlName="foriegnguest"  id="foriegnguest" [ngClass]="{ 'is-invalid': submitted && form.foriegnguest.errors }"> 
-                                                 <option value="select">Select</option> 
-                                                 <option [ngValue]="sour.Id" *ngFor="let sour of foriegnguest" [value]="sour">{{ sour  }}</option>
-                                               </select>
-                                               <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
-                                                <div *ngIf="form.gender.errors.required">foriegnguest is required</div>
-                                              </div>
-                                                </div>  
-                                            </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="firstname">Source </label>
-                                               <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
-                                                 <option value="select">Select</option> 
-                                                 <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
-                                               </select>
-                                               
-                                                </div>  
-                                                </div>
-                                              
-                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="Booking">Booking Id </label>
-                                                    <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="bookingid" name="bookingid" autocomplete="off"  />  
-                                                    
-                                                    </div>  
-                                                </div>
-                                           </div> <!-- end of row-->
-                                           <div class="row guestinfofirstrow guestinfolastrow">
-                                            
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="Booking">Convenience fees </label>
-                                                    <input type="number" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off"   />  
-                                                    <!-- <div class="invalid-feedback" *ngIf="form.controls.convenience.errors?.required" >convenience fees is required</div> -->
-                                                    </div>  
-                                                </div>
-    
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="visit ">Purposse of Visit</label>
-                                                    <select class="custom-select" name="visit" formControlName="visit" id="visit">
-                                                      
-                                                     
-                                                      <option value="select">Select</option>
-                                                      <option  *ngFor="let sour of purposeofvisit"
-                                                        [value]="sour.Description">{{ sour.Description  }}</option>
-                                                    </select>
-                                                    
+                                                  <div class="tdwidth tdwidthspcl">
+                                                    <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Arival Time</div>
+                                                    <timepicker id="checkintime" name="checkintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="checkintime" [showMeridian]="ismeridian"></timepicker>
                                                   </div>
-                                                </div>
-                                               
-         
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="Billing ">Billing Instruction</label>
-                                                    <select class="custom-select" name="Billing" formControlName="Billing"
-                                                      id="Billing"
-                                                      [ngClass]="{ 'is-invalid': submitted && form.Billing.errors }">
-                                                      <option value="select">Select</option>
-                                                      <option  *ngFor="let sour of billinginstruction"
-                                                        [value]="sour.Description">{{ sour.Description  }}</option>
-                                                    </select>
-                                                    <div *ngIf="submitted && form.Billing.errors" class="invalid-feedback">
-                                                      <div *ngIf="form.Billing.errors.required">Billing Type</div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="cometoknow ">How D U c to Know?</label>
-                                                    <select class="custom-select" name="cometoknow" formControlName="cometoknow"
-                                                      id="cometoknow">
-                                                    
-                                                      <option value="select">Select</option>
-                                                      <option  *ngFor="let sour of howuknow"
-                                                        [value]="sour.Description">{{ sour.Description  }}</option>
-                                                    </select>
-                                                    
-                                                  </div>
-                                                </div>
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="cometoknow ">Confirm</label>                                                  
-                                                    <input type="checkbox" name="confirm" id="confirmid" class="form-control" style="width: 15px;" >
-                                                  </div>
-                                                </div>
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="WaitingList ">Waiting List</label>                                                  
-                                                    <input type="checkbox" name="confirm" id="waitingid" class="form-control" style="width: 15px;"  >
-                                                  </div>
-                                                </div>
-                                      
-      
-                                          </div><!-- end 1 row -->
-
-                                        </div>
-                                            
-                                          
-                                            
-                                           
-                                         
-                                       </div>
-                                    </ng-template>
-                                  </ngb-panel>
-  
-  
-                                  <ngb-panel id="ngb-close-p1" title="Booking RoomTypes">
-                                    
-                                    <ng-template ngbPanelContent>
-                                      <div class="test123 userlist guestinfofirstrow bookingroomtype" style="padding-left: 5px;">
-                                        <div class="grid-table" style="width: 100%;">
-                                          <div class="thead">
-                                            <div class="">
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Room Type</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-user-md"></i> Available</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-building"></i> Req. Rooms</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Pax</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-indent"></i> Plan</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-cutlery"></i> Food</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Tariff</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-star"></i>Tax</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Grand</div>
-                                             
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-square"></i> DisType</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-truck"></i> DisAmt</div>
-                                              <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-paypal"></i> Net</div>
-                                              <!-- <div class="td">
-                                                <button type="button"  class="btn btn-outline-success" (click)="AddBokingButtonClick()">
-                                                  <i class="fa fa-plus">Add</i> 
-                                                </button>
-                                              </div> -->
-                                              <!-- <div class="td">
-                                                  <span *ngIf="notification" class="elementToFadeInAndOut">
-                                                    <i class="fas fa-check-circle {{notification.class}}"></i>
-                                                    {{notification.message}}
-                                                  </span>
-                                                </div> -->
-                                            </div>
-                                          </div>
-                                          <div class="tbody">
-  
-                                            <div formArrayName="other"
-                                              *ngFor="let other of form.get('other').controls; let i = index">
-                                              <div [formGroupName]="i">
-                                                <div class="tr">
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign"  readonly formControlName="RoomCode">
-                                                    <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
-                                                      (change)="BookingGrid(i,'RoomCode')">
-                                                      <option value="0">Select</option>
-                                                      <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
-                                                        {{items.RoomCode}}</option>
-                                                    </select> -->
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign"  readonly  formControlName="Available">
-                                                  </div>
-
-                                                  <!-- <div class="td" >
-                                                    <input type="number"   class="bookingRoomTable_textalign" (keyup)="BookingGrid(i,'Required')" formControlName="Required">
-                                                  </div> -->
-
-                                                
-
-                                                  <div class="td">
-                                                    <select class="bookingRoomTable_textalign" formControlName="Required"
-                                                      (change)="BookingGrid(i,'Required')">
-                                                      <option value="0">Select</option>
-                                                      <option  *ngFor="let Requiredday of requiredRoomlist" [value]="Requiredday">
-                                                        {{ Requiredday  }}</option>
-                                                    </select>
-  
-                                                   
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <select class="bookingRoomTable_textalign" formControlName="Pax"
-                                                      (change)="BookingGrid(i,'Pax')">
-                                                      <option value="0">Select</option>
-                                                      <option value="1">1</option>
-                                                      <option value="2">2</option>
-                                                      <option value="3">3</option>
-                                                      <option value="4">4</option>
-                                                      <option value="5">5</option>
-                                                      <option value="6">6</option>
-                                                      <option value="7">7</option>
-  
-                                                    </select>
-                                                  </div>
-  
-  
-                                                  <div class="td">
-                                                    <select class="bookingRoomTable_textalign" formControlName="PlanName"
-                                                      (change)="BookingGrid(i,'PlanName')">
-                                                      <option value="0">Select</option>
-                                                      <option *ngFor="let item of planlist" value="{{item.PlanName}}">
-                                                        {{item.PlanName}}</option>
-                                                    </select>
-                                                  </div>
-  
-  
-  
-  
-                                                  <div class="td">
-  
-                                                    <input class="bookingRoomTable_textalign" type="text" class="bookingRoomTable_textalign" id="Food" readonly  formControlName="Food">
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign" formControlName="Tariff"
-                                                      (change)="BookingGrid(i,'TARIFF')">
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign" readonly formControlName="Tax">
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign" formControlName="Grand"
-                                                      (change)="BookingGrid(i,'GRAND')">
-                                                  </div>
-                                                 
-                                                   
-                                                  <div class="td">
-                                                    <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
+                                                  <div class="tdwidth">
+                                                    <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Days</div>
+                                                    <select class="custom-select" #Days name="nofdays" formControlName="nofdays" (change)="ChangeCheckoutDate(Days.value)"
+                                                    id="nofdays" [ngClass]="{ 'is-invalid': submitted && form.nofdays.errors }">
                                                     <option value="0">Select</option>
-                                                    <option *ngFor="let sour of discounttypes"
-                                                      [value]="sour">{{ sour  }}</option>
+                                                    <option  *ngFor="let Day of noofdays" [value]="Day">
+                                                      {{ Day  }}</option>
                                                   </select>
+                                                  </div>
+                                                  <div class="tdwidth">
+                                                    <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Departure Date</div>
+                                                    <input id="checkoutdate" name="checkoutdate"  formControlName="checkoutdate"  type="text"   bsDatepicker   [minDate]="minDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true ,isAnimated: true, adaptivePosition: true }" class="form-control">
+                                                  </div>
+                                                  <div class="tdwidth">
+                                                    <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Departure Time</div>
+                                                    <timepicker id="checkouttime" name="checkouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="checkouttime" [showMeridian]="ismeridian"></timepicker> 
+                                                  </div>
                                                   
-                                                  </div>
-
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign" formControlName="discvalue">
-                                                  </div>
-                                                  <div class="td">
-                                                    <input class="bookingRoomTable_textalign" formControlName="Net">
-                                                  </div>
-                                                   
-                                                  
-
-
-  
-                                                  <!-- <div class="td">
-                                                    <button type="submit" class="btn" [disabled]="fg.invalid"
-                                                       [ngClass]="(form.get('bankAccountID').value==0)?'btn-success':'btn-outline-dark'"><i class="far fa-save fa-lg"></i>
-                                                      
-                                                   </button>  
-                                                    <button (click)="onDelete(0,i)">
-                                                      <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                  </div>-->
+                                                  <button type="button" id="closebtn" (click)="Availability('effect-1')" class="btn btn-primary btn-sm">Availability</button>
                                                 </div>
                                               </div>
-                                            </div>
-  
-  
-                                          </div>
-  
-  
-                                        </div>
-                                      </div>
-                                    </ng-template>
-                                  </ngb-panel>
-  
-  
-  
-  
-  
-  
-                                 <!-- <ngb-panel id="ngb-close-p1" title="Advance Payment">
-                                    <ng-template ngbPanelContent>
-                                      <div class="row paymentrow userlist">
-  
-                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="selmode "> Select mode </label>
-                                            <select  (change)="FilterPaymentMode()"  class="custom-select" name="selmode" formControlName="selmode"
-                                              id="selmode" [ngClass]="{ 'is-invalid': submitted && form.selmode.errors }">
-                                              <option value="select">Select</option>
-                                              <option *ngFor="let sour of paymentmode" [value]="sour">
-                                                {{ sour  }}</option>
-                                            </select>
-                                            <div *ngIf="submitted && form.selmode.errors" class="invalid-feedback">
-                                              <div *ngIf="form.selmode.errors.required">selmode is required</div>
-                                            </div>
-                                          </div>
-                                        </div> 
-  
-                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="subpaymode "> Select Detail </label>
-                                            <select class="custom-select" name="subpaymode" formControlName="subpaymode"
-                                              id="subpaymode" [ngClass]="{ 'is-invalid': submitted && form.subpaymode.errors }">
-                                              <option value="select">Select</option>
-                                              <option *ngFor="let subpaymode of  subpaymodelist" [value]="subpaymode">
-                                                {{ subpaymode  }}</option>
-                                            </select>
-                                            <div *ngIf="submitted && form.subpaymode.errors" class="invalid-feedback">
-                                              <div *ngIf="form.subpaymode.errors.required">selmode is required</div>
-                                            </div>
-                                          </div>
-                                        </div>  
-  
-                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="payamount">Payment </label>
-                                            <input type="text" class="form-control tooltip-form" id="payamount"
-                                              formControlName="payamount" name="payamount" autocomplete="off"
-                                              [ngClass]="{'is-invalid' : submitted && form.controls.payamount.errors || form.controls.payamount.touched || form.controls.payamount.dirty}"
-                                              required />
-                                            <div class="invalid-feedback"
-                                              *ngIf="form.controls.payamount.errors?.required">payamount is required</div>
-                                          </div>
-                                        </div> 
-  
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="paymntdesc">Description </label>
-                                            <textarea formControlName="paymntdesc" class="form-control " id="paymntdesc"
-                                              style="height: 1.50rem;"></textarea>
-                                            <div class="invalid-feedback"
-                                              *ngIf="form.controls.paymntdesc.errors?.required">paymntdesc is required
-                                            </div>
-                                          </div>
-                                        </div> 
-  
-  
-                                      </div>
-                                    </ng-template>
-                                  </ngb-panel> -->
-  
-                                 
-                                  
-  
-                                  <ngb-panel id="ngb-close-p1" title="Payment Array ">
-                                    <ng-template ngbPanelContent>
-                                      <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
-                                        <div class="">
+                                              
+    
+    
+                                            
+                                             
                                           
-                                            <div class="row">
-                                            <div class="col-lg-10 col-md-10 col-xs-12">
-                                              <div class="grid-table" style="width: 100%;">
-                                                <div class="thead">
-                                                  <div class="">
-                                                    <div class="td"><i class="fa fa-cc-visa"></i> Pay Header</div>
-                                                    <div class="td"><i class="fa fa-credit-card-alt"></i> Select PayType</div>
-                                                    <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
-                                                    <div class="td"><i class="fa fa-server"></i> Description</div>
-                                                    <div class="td"><i class="fa fa-retweet"></i>Selected Mode</div>
+    
+                                          </div>
+                                          
+       
+                                          </div>
+                                        </ng-template>
+                                      </ngb-panel>
+    
+    
+    
+    
+                                      <ngb-panel id="ngb-close-p1"  title="Guest Information">
+                                        <ng-template ngbPanelContent >
+                                      
+                                           <div class="col-md-12" style="padding-left:0; padding-right:0">
+                                             
+                                             
+          
+                                                 <!--  test row 1-->
+                                                 <div class="guestinfofirstrow userlist " >
                                                     
-                                                    <div class="td lasttd">
-                                                      <button type="button"   class=" " (click)="AddPaymentButtonClick()">
-                                                        <i class="fa fa-plus"> </i> 
-                                                      </button>
+                                                <div class="row guestinfofirstrow" >
+                                                 
+                                                  <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="title ">Title</label>
+                                                      <select class="custom-select" name="title" formControlName="title"
+                                                        id="title"
+                                                        [ngClass]="{ 'is-invalid': submitted && form.title.errors }">
+                                                        <option value="select">Select</option> 
+                                                        <option  *ngFor="let Title of Titlelist"
+                                                          [value]="Title.Description">{{ Title.Description  }}</option>
+                                                      </select>
+                                                      <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
+                                                        <div *ngIf="form.title.errors.required">title </div>
+                                                      </div>
+                                                    </div>     
                                                     </div>
                                                   
-                                                  </div>
-                                                </div>
-                                                <div class="tbody">
-        
-                                                  <div formArrayName="PayArray"
-                                                    *ngFor="let other of form.get('PayArray').controls; let k = index">
-                                                    <div [formGroupName]="k">
-                                                      <div class="tr">
-                                                        <div class="td">
-                                                          <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
-                                                            (change)="BookingGrid(i,'RoomCode')">
-                                                            <option value="0">Select</option>
-                                                            <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
-                                                              {{items.RoomCode}}</option>
-                                                          </select> -->
-        
-                                                          <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
-                                                          id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
-                                                          <option value="select">Select</option>
-                                                          <option *ngFor="let sour of paymentmode" [value]="sour">
-                                                            {{ sour  }}</option>
-                                                        </select>
-        
-        
-                                                        </div>
-        
-                                                        <div class="td">
-                                                          <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
-                                                          id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
-                                                          <option value="select">Select</option>
-                                                          <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
-                                                            {{ Paysubmode  }}</option>
-                                                        </select> 
-        
-        
-                                                        </div>
-        
-                                                    <div class="td">
-                                                     <input type="number"  id="payAmount"
-                                                      formControlName="payAmount" name="payAmount" #payAmount (keyup)="CalculateAdvanceAmount(k,payAmount.value)" autocomplete="off" required />
+                                                   
+                                          
+                                                  <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="Guest Name">Guest Name </label>
+                                                      <input type="text" class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
+                                                      <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="GuestModelOpen('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
                                                     
-                                      
+                                                      <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
+                                                      </div>  
+                                                  </div>
+                                                  <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="gender">  Gender </label>
+                                                     <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
+                                                       <option value="select">Select</option> 
+                                                       <option *ngFor="let sour of gendertypes" [value]="sour.Description">{{ sour.Description  }}</option>
+                                                     </select>
+                                                     <div *ngIf="submitted && form.gender.errors" class="invalid-feedback">
+                                                      <div *ngIf="form.gender.errors.required">gender is required</div>
+                                                    </div>
+                                                      </div>  
+                                                  </div>
+    
+                                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="Reference">Reference </label>
+                                                     
+                                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="RefName" formControlName="RefName" name="RefName" autocomplete="off"  required  />   
+                                                        <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="ReferanceModelOpen('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                                      
+                                                      
+                                                      </div>  
+        
+                                                  </div>
+    
+                                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="mobile">Mobile </label>
+                                                      <input type="text" class="form-control tooltip-form" id="mobileid" formControlName="mobile" name="mobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobile.errors || form.controls.mobile.touched || form.controls.mobile.dirty}" required  />  
+                                                      <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >mobile   is required</div>
+                                                      </div>  
+                                                  </div>
+                                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="email">Email </label>
+                                                      <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
+                                                      <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
+                                                      </div>  
+                                                  </div>
+                                                 
+                                              </div> <!-- end row -->
+          
+          
+                                              <div class="row  guestinfofirstrow" >
+    
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="pincode">Pincode </label>
+                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
+                                                    <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="PinCodeModelOpen('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>
+                                                 
+      
+                                                    <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
+                                                    </div>  
+                                                </div>
+                                                
+    
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Area">Area </label>
+                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="Area" formControlName="Area" name="Area" autocomplete="off"  required  />  
+                                                     
+                                                    </div>  
+                                                </div>
+                                                
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="city">City </label>
+                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="city" formControlName="city" name="city" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.city.errors || form.controls.city.touched || form.controls.city.dirty}" required  />  
+                                                     <div class="invalid-feedback" *ngIf="form.controls.city.errors?.required" >city   is required</div>
+                                                    </div>  
+                                                </div>
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+    
+    
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="state ">State</label>
+                                                    <select class="custom-select" #statename  name="state" formControlName="state"
+                                                      id="state">
+                                                     
+                                                      <option value="select">Select</option> 
+                                                      <option  *ngFor="let state of StateList"
+                                                        [value]=" state.State">{{ state.State  }}</option>
+                                                    </select>
+                                                    
+                                                  </div>
+    
+    
+    
+                                            
+                                                </div>
+    
+    
+                                                <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                
+      
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="StateCode">StateCode </label>
+                                                    <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off"  required  />  
+                                                    
+                                                    </div> 
+      
+                                                </div>
+    
+    
+                                                <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                  <!-- <div class="form-group">
+                                                    <label class="form-control-label" for="nation">Nation </label>
+                                                    <input type="text" class="form-control tooltip-form" id="nation" formControlName="nation" name="nation" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.nation.errors || form.controls.nation.touched || form.controls.nation.dirty}" required  />  
+                                                    <div class="invalid-feedback" *ngIf="form.controls.nation.errors?.required" >nation   is required</div>
+                                                    </div>   -->
+      
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="nation ">Nation</label>
+                                                        <select class="custom-select" name="nation" formControlName="nation"
+                                                          id="nation"
+                                                          [ngClass]="{ 'is-invalid': submitted && form.nation.errors }">
+                                                          <option value="select">Select</option> 
+                                                          <option  *ngFor="let Nationd of Nationlist"
+                                                            [value]="Nationd">{{ Nationd  }}</option>
+                                                        </select>
+                                                        <div *ngIf="submitted && form.nation.errors" class="invalid-feedback">
+                                                          <div *ngIf="form.nation.errors.required">Nation </div>
                                                         </div>
+                                                      </div>
+      
+                                                </div>
+                                             
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="company">Company </label>
+                                                   
+                                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="company" formControlName="company" name="company" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.company.errors || form.controls.company.touched || form.controls.company.dirty}" required  />   
+                                                      <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="CompanyModelOpen('effect-100',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                                    
+                                                    <div class="invalid-feedback" *ngIf="form.controls.company.errors?.required" >company   is required</div>
+                                                    </div>  
+      
+                                                </div>
+      
+                                               
+    
+                                               </div> <!-- end of row-->
+                                              
+    
+    
+    
+                                               <div class="row  guestinfofirstrow"  >
+                                                
+                                                
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="gstno">GSTNO </label>
+                                                    <input type="text" class="form-control tooltip-form" id="gstno" formControlName="gstno" name="gstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.gstno.errors || form.controls.gstno.touched || form.controls.gstno.dirty}" required  />  
+                                                    <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
+                                                    </div>  
+                                                </div>
+                                                
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Address1">Address1</label>
+                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="Address1" formControlName="Address1" name="Address1" autocomplete="off"  required  />  
+                                                     
+                                                    </div>  
+                                                </div>
+    
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Address1">Address2</label>
+                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="Address2" formControlName="Address2" name="Address2" autocomplete="off"  required  />  
+                                                     
+                                                    </div>  
+                                                </div>
+    
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="Address3">Address3</label>
+                                                    <input type="text" class="form-control tooltip-form searchiconrelative" id="Address3" formControlName="Address3" name="Address3" autocomplete="off"  required  />  
+                                                     
+                                                    </div>  
+                                                </div>
+    
+                                             
+                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                  <div class="form-group">
+                                                    <label class="form-control-label" for="firstname">Source </label>
+                                                   <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
+                                                     <option value="select">Select</option> 
+                                                     <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
+                                                   </select>
+                                                   
+                                                    </div>  
+                                                    </div>
+                                                  
+                                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="Booking">Booking Id </label>
+                                                        <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="bookingid" name="bookingid" autocomplete="off"  />  
+                                                        
+                                                        </div>  
+                                                    </div>
+                                               </div> <!-- end of row-->
+                                               <div class="row guestinfofirstrow guestinfolastrow">
+                                                
+                                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="Booking">Convenience fees </label>
+                                                        <input type="number" class="form-control tooltip-form" id="convenienceid" formControlName="convenience" name="convenience" autocomplete="off"   />  
+                                                        <!-- <div class="invalid-feedback" *ngIf="form.controls.convenience.errors?.required" >convenience fees is required</div> -->
+                                                        </div>  
+                                                    </div>
         
-        
-                                                        <div class="td">
-                                                          <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="visit ">Purposse of Visit</label>
+                                                        <select class="custom-select" name="visit" formControlName="visit" id="visit">
                                                           
-                                                        </div>
-        
-                                                        <div class="td  ">
-                                                          <input type="text" class="" id="modeselected" formControlName="modeselected">
-                                                          
-                                                        </div> 
-                                                        <div class="td lasttd" style="text-align: center;">                                      
-                                                          <button type="button" (click)="onDeletePayment(0,k)">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                                          </button>
+                                                         
+                                                          <option value="select">Select</option>
+                                                          <option  *ngFor="let sour of purposeofvisit"
+                                                            [value]="sour.Description">{{ sour.Description  }}</option>
+                                                        </select>
+                                                        
+                                                      </div>
+                                                    </div>
+                                                   
+             
+                                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="Billing ">Billing Instruction</label>
+                                                        <select class="custom-select" name="Billing" formControlName="Billing"
+                                                          id="Billing"
+                                                          [ngClass]="{ 'is-invalid': submitted && form.Billing.errors }">
+                                                          <option value="select">Select</option>
+                                                          <option  *ngFor="let sour of billinginstruction"
+                                                            [value]="sour.Description">{{ sour.Description  }}</option>
+                                                        </select>
+                                                        <div *ngIf="submitted && form.Billing.errors" class="invalid-feedback">
+                                                          <div *ngIf="form.Billing.errors.required">Billing Type</div>
                                                         </div>
                                                       </div>
                                                     </div>
-                                                  </div>
-        
-                                                 
-      
+                                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="cometoknow ">How D U c to Know?</label>
+                                                        <select class="custom-select" name="cometoknow" formControlName="cometoknow"
+                                                          id="cometoknow">
+                                                        
+                                                          <option value="select">Select</option>
+                                                          <option  *ngFor="let sour of howuknow"
+                                                            [value]="sour.Description">{{ sour.Description  }}</option>
+                                                        </select>
+                                                        
+                                                      </div>
+                                                    </div>
+                                                    <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="cometoknow ">Confirm</label>                                                  
+                                                        <!-- <input type="checkbox" [checked]="currentlyChecked" formControlName="BookingStatus" (change)="OnCheckBoxChange('CNF', $event.target.checked)"  name="BookingStatus"  id="BookingStatus" class="form-control" style="width: 15px;" >
+                                                        <input type="checkbox" name="test" [checked]="currentlyChecked === check_box_type.APPLY_FOR_JOB" (click)="selectCheckBox(check_box_type.APPLY_FOR_JOB)"> -->
+                                                        <input type="radio"  class="form-control" style="width: 15px" value="male" formControlName="BookingStatus">  
+              
+                                                      </div>
+                                                    </div>
+                                                    <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                      <div class="form-group">
+                                                        <label class="form-control-label" for="WaitingList ">Waiting </label>
+                                                        <input type="radio" value="female" class="form-control" style="width: 15px" formControlName="BookingStatus"> 
+                                                      
+                                                        <!-- <input type="checkbox" formControlName="BookingStatus" (change)="OnCheckBoxChange('WL', $event.target.checked)" name="BookingStatus"  id="BookingStatus" class="form-control" style="width: 15px;"  > -->
+                                                      </div>
+                                                    </div>
+                                                   
+          
+                                              </div><!-- end 1 row -->
+
+                                              <div class="row guestinfofirstrow guestinfolastrow">
+                                                <div class='col-12 col-lg-12 col-md-4 col-sm-4'>
+                                                  <label class="form-control-label" for="WaitingList ">Special Instruction </label>
+                                                  <tag-input class="tag-chips" formControlName="special"  [maxItems]="5"  placeholder="Insert a new item"  [editable]="true"></tag-input>
+                                                  
                                                 </div>
-        
-        
                                               </div>
+    
                                             </div>
-                                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 width100" >
-                                              <div class=" ">
-                                                <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
-                                                <label  id="BillAmount2" ><span>Paid Amount : </span> <b>{{TotalPaidAmount | currency:'INR'}}</b> </label>   
-                                                <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                              
+                                                
+                                              
+                                                
+                                               
+                                             
+                                           </div>
+                                        </ng-template>
+                                      </ngb-panel>
+      
+      
+                                      <ngb-panel id="ngb-close-p1" title="Booking RoomTypes">
+                                        
+                                        <ng-template ngbPanelContent>
+                                          <div class="test123 userlist guestinfofirstrow bookingroomtype" style="padding-left: 5px;">
+                                            <div class="grid-table" style="width: 100%;">
+                                              <div class="thead">
+                                                <div class="">
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Room Type</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-user-md"></i> Available</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-building"></i> Req. Rooms</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Pax</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-indent"></i> Plan</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa fa-cutlery"></i> Food</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Tariff</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-star"></i>Tax</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-bed"></i> Grand</div>
+                                                 
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-square"></i> DisType</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-truck"></i> DisAmt</div>
+                                                  <div class="td bookingRoomTable_textalign" style="text-align: center;"><i class="fa  fa-paypal"></i> Net</div>
+                                                  <!-- <div class="td">
+                                                    <button type="button"  class="btn btn-outline-success" (click)="AddBokingButtonClick()">
+                                                      <i class="fa fa-plus">Add</i> 
+                                                    </button>
+                                                  </div> -->
+                                                  <!-- <div class="td">
+                                                      <span *ngIf="notification" class="elementToFadeInAndOut">
+                                                        <i class="fas fa-check-circle {{notification.class}}"></i>
+                                                        {{notification.message}}
+                                                      </span>
+                                                    </div> -->
+                                                </div>
                                               </div>
+                                              <div class="tbody">
+      
+                                                <div formArrayName="other"
+                                                  *ngFor="let other of form.get('other').controls; let i = index">
+                                                  <div [formGroupName]="i">
+                                                    <div class="tr">
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign"  readonly formControlName="RoomCode">
+                                                        <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                          (change)="BookingGrid(i,'RoomCode')">
+                                                          <option value="0">Select</option>
+                                                          <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                            {{items.RoomCode}}</option>
+                                                        </select> -->
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign"  readonly  formControlName="Available">
+                                                      </div>
+    
+                                                      <!-- <div class="td" >
+                                                        <input type="number"   class="bookingRoomTable_textalign" (keyup)="BookingGrid(i,'Required')" formControlName="Required">
+                                                      </div> -->
+    
+                                                    
+    
+                                                      <div class="td">
+                                                        <select class="bookingRoomTable_textalign" formControlName="Required"
+                                                          (change)="BookingGrid(i,'Required')">
+                                                          <option value="0">Select</option>
+                                                          <option  *ngFor="let Requiredday of requiredRoomlist" [value]="Requiredday">
+                                                            {{ Requiredday  }}</option>
+                                                        </select>
+      
+                                                       
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <select class="bookingRoomTable_textalign" formControlName="Pax"
+                                                          (change)="BookingGrid(i,'Pax')">
+                                                          <option value="0">Select</option>
+                                                          <option value="1">1</option>
+                                                          <option value="2">2</option>
+                                                          <option value="3">3</option>
+                                                          <option value="4">4</option>
+                                                          <option value="5">5</option>
+                                                          <option value="6">6</option>
+                                                          <option value="7">7</option>
+      
+                                                        </select>
+                                                      </div>
+      
+      
+                                                      <div class="td">
+                                                        <select class="bookingRoomTable_textalign" formControlName="PlanName"
+                                                          (change)="BookingGrid(i,'PlanName')">
+                                                          <option value="0">Select</option>
+                                                          <option *ngFor="let item of planlist" value="{{item.PlanName}}">
+                                                            {{item.PlanName}}</option>
+                                                        </select>
+                                                      </div>
+      
+      
+      
+      
+                                                      <div class="td">
+      
+                                                        <input class="bookingRoomTable_textalign" type="text" class="bookingRoomTable_textalign" id="Food" readonly  formControlName="Food">
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign" formControlName="Tariff"
+                                                          (change)="BookingGrid(i,'TARIFF')">
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign" readonly formControlName="Tax">
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign" formControlName="Grand"
+                                                          (change)="BookingGrid(i,'GRAND')">
+                                                      </div>
+                                                     
+                                                       
+                                                      <div class="td">
+                                                        <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
+                                                        <option value="0">Select</option>
+                                                        <option *ngFor="let sour of discounttypes"
+                                                          [value]="sour">{{ sour  }}</option>
+                                                      </select>
+                                                      
+                                                      </div>
+    
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign" formControlName="discvalue">
+                                                      </div>
+                                                      <div class="td">
+                                                        <input class="bookingRoomTable_textalign" formControlName="Net">
+                                                      </div>
+                                                       
+                                                      
+    
+    
+      
+                                                      <!-- <div class="td">
+                                                        <button type="submit" class="btn" [disabled]="fg.invalid"
+                                                           [ngClass]="(form.get('bankAccountID').value==0)?'btn-success':'btn-outline-dark'"><i class="far fa-save fa-lg"></i>
+                                                          
+                                                       </button>  
+                                                        <button (click)="onDelete(0,i)">
+                                                          <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                      </div>-->
+                                                    </div>
+                                                  </div>
+                                                </div>
+      
+      
+                                              </div>
+      
+      
                                             </div>
                                           </div>
-                                        </div>
-                                        
+                                        </ng-template>
+                                      </ngb-panel>
+      
+      
+      
+      
+    
+    
+    
+                                      <ngb-panel id="ngb-close-p1" title="Extra Charge ">
+                                        <ng-template ngbPanelContent>
+                                          <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
+                                            <div class="">
+                                              
+                                                <div class="row">
+                                                <div class="col-lg-10 col-md-10 col-xs-12">
+                                                  <div class="grid-table" style="width: 100%;">
+                                                    <div class="thead">
+                                                      <div class="">
+                                                        <div class="td"><i class="fa fa-cc-visa"></i> Revenu Header</div>
+                                                        <div class="td"><i class="fa fa-credit-card-alt"></i> Description</div>
+                                                        <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
+                                                        <div class="td"><i class="fa fa-server"></i> Tax</div>
+                                                        <div class="td"><i class="fa fa-retweet"></i> Total</div>
+                                                        
+                                                        <div class="td lasttd">
+                                                          <button type="button"   class=" " (click)="AddExtrachargeButtonClick()">
+                                                            <i class="fa fa-plus"> </i> 
+                                                          </button>
+                                                        </div>
+                                                      
+                                                      </div>
+                                                    </div>
+                                                    <div class="tbody">
+            
+                                                      <div formArrayName="PayExtra"
+                                                        *ngFor="let otherExtra of form.get('PayExtra').controls; let e = index">
+                                                        <div [formGroupName]="e">
+                                                          <div class="tr">
+                                                            <div class="td">
+                                                             
+                                                              <select   class="custom-select" appSelectValidator="-1" name="Revenu" formControlName="Revenu"
+                                                              id="Revenu">
+                                                              <option value="-1">Select</option>
+                                                              <option *ngFor="let sour of Revenulist" [value]="sour.Id">{{ sour.RevName }}
+                                                              </option>
+                                                            </select>
+            
+            
+                                                            </div>
+            
+                                                            <div class="td">
+                                                              <input type="text" class="" id="Description" formControlName="Description">
+                                                              
+            
+                                                            </div>
+            
+                                                        <div class="td">
+                                                         <input type="number"  id="Amount"
+                                                          formControlName="Amount" name="Amount" #Amount (keyup)="CalculateExtrachargeAmount(k,Amount.value)" autocomplete="off" required />
+                                                        
+                                          
+                                                            </div>
+            
+            
+                                                            <div class="td">
+                                                              <input type="text" class="" id="TaxAmount" formControlName="TaxAmount">
+                                                              
+                                                            </div>
+            
+                                                            <div class="td  ">
+                                                              <input type="text" class="" id="TotalAmount" formControlName="TotalAmount">
+                                                              
+                                                            </div> 
+                                                            <div class="td lasttd" style="text-align: center;">                                      
+                                                              <button type="button" (click)="onDeleteExtracharge(0,e)">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                              </button>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+            
+                                                     
+          
+                                                    </div>
+            
+            
+                                                  </div>
+                                                </div>
+                                               
+                                              </div>
+                                            </div>
+                                            
+                                          
+                                          </div>
+                                        </ng-template>
+                                      </ngb-panel>  
+      
+                                     
                                       
-                                      </div>
-                                    </ng-template>
-                                  </ngb-panel>        
-                                </ngb-accordion> 
-                                <div class="otherrow  "> 
-                                         
-                                  <!-- button start  -->
-                                <div class="col-md-12" style="text-align: center; ">
-                                    <button type="submit" id="checkinbtn" class="btn btn-primary btn-sm m-r-5 m-l-5 ">Save</button>                                                                                 
-                                  <button type="button" id="closebtn" class="btn btn-primary btn-sm">Close</button>
-                                </div> <!-- button end -->
-                                
-                          </div><!-- user list row -->
+      
+                                      <ngb-panel id="ngb-close-p1" title="Reservation Advance">
+                                        <ng-template ngbPanelContent>
+                                          <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
+                                            <div class="">
+                                              
+                                                <div class="row">
+                                                <div class="col-lg-10 col-md-10 col-xs-12">
+                                                  <div class="grid-table" style="width: 100%;">
+                                                    <div class="thead">
+                                                      <div class="">
+                                                        <div class="td"><i class="fa fa-cc-visa"></i> Pay Header</div>
+                                                        <div class="td"><i class="fa fa-credit-card-alt"></i> Select PayType</div>
+                                                        <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
+                                                        <div class="td"><i class="fa fa-server"></i> Description</div>
+                                                        <div class="td"><i class="fa fa-retweet"></i>Selected Mode</div>
+                                                        
+                                                        <div class="td lasttd">
+                                                          <button type="button"   class=" " (click)="AddPaymentButtonClick()">
+                                                            <i class="fa fa-plus"> </i> 
+                                                          </button>
+                                                        </div>
+                                                      
+                                                      </div>
+                                                    </div>
+                                                    <div class="tbody">
+            
+                                                      <div formArrayName="PayArray"
+                                                        *ngFor="let other of form.get('PayArray').controls; let k = index">
+                                                        <div [formGroupName]="k">
+                                                          <div class="tr">
+                                                            <div class="td">
+                                                              <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                                (change)="BookingGrid(i,'RoomCode')">
+                                                                <option value="0">Select</option>
+                                                                <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                                  {{items.RoomCode}}</option>
+                                                              </select> -->
+            
+                                                              <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
+                                                              id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                                                              <option value="select">Select</option>
+                                                              <option *ngFor="let sour of paymentmode" [value]="sour">
+                                                                {{ sour  }}</option>
+                                                            </select>
+            
+            
+                                                            </div>
+            
+                                                            <div class="td">
+                                                              <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                                                              id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                                                              <option value="select">Select</option>
+                                                              <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                                                {{ Paysubmode  }}</option>
+                                                            </select> 
+            
+            
+                                                            </div>
+            
+                                                        <div class="td">
+                                                         <input type="number"  id="payAmount"
+                                                          formControlName="payAmount" name="payAmount" #payAmount (keyup)="CalculateAdvanceAmount(k,payAmount.value)" autocomplete="off" required />
+                                                        
+                                          
+                                                            </div>
+            
+            
+                                                            <div class="td">
+                                                              <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                              
+                                                            </div>
+            
+                                                            <div class="td  ">
+                                                              <input type="text" class="" id="modeselected" formControlName="modeselected">
+                                                              
+                                                            </div> 
+                                                            <div class="td lasttd" style="text-align: center;">                                      
+                                                              <button type="button" (click)="onDeletePayment(0,k)">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                              </button>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+            
+                                                     
+          
+                                                    </div>
+            
+            
+                                                  </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 width100" >
+                                                  <div class=" ">
+                                                    <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
+                                                    <label  id="BillAmount2" ><span>Paid Amount : </span> <b>{{TotalPaidAmount | currency:'INR'}}</b> </label>   
+                                                    <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                              
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            
+                                          
+                                          </div>
+                                        </ng-template>
+                                      </ngb-panel>   
+                                      
+                                      
+    
+                                    </ngb-accordion> 
+                                    <div class="otherrow  "> 
+                                             
+                                      <!-- button start  -->
+                                    <div class="col-md-12" style="text-align: center; ">
+                                        <button type="submit" id="checkinbtn" class="btn btn-primary btn-sm m-r-5 m-l-5 ">Save</button>                                                                                 
+                                      <button type="button" id="closebtn" class="btn btn-primary btn-sm">Close</button>
+                                    </div> <!-- button end -->
+                                    
+                              </div><!-- user list row -->
+                                  </div>
+                                </div>
+      
                               </div>
+      
+      
+      
                             </div>
-  
+                          
+                       
+                          </div> <!-- end reser master -->
                           </div>
+                          </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Other Info"  >
+                      <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                          <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
+                          class="ngb-accordion">  
+
+                          <ngb-panel id="ngb-close-p1"  title="Pickup Details">
+                            <ng-template ngbPanelContent >
+                          
+                               <div class="col-md-12" style="padding-left:0; padding-right:0">
+                                 
+                                 
+
+                                     <!--  test row 1-->
+                                     <div class="guestinfofirstrow userlist " >
+                                        
+
+
+                                  <div class="row  guestinfofirstrow" >
+
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="Pickup">Pickup Location </label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickup" formControlName="Pickup" name="Pickup" autocomplete="off"  required style="position: relative;"  />  
+                                       
+                                        </div>  
+                                    </div>
+                                    
+
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="Area">Pickup Time </label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickuptime" formControlName="Pickuptime" name="Pickuptime" autocomplete="off"  required  />  
+                                         
+                                        </div>  
+                                    </div>
+                                    
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="city">Drop Location</label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Drop" formControlName="Drop" name="Drop" autocomplete="off"  required  />  
+                                       
+                                        </div>  
+                                    </div>
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+
+
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="state ">Driver Name</label>
+                                        <input type="text" class="form-control tooltip-form" id="PickupDriverName" formControlName="PickupDriverName" name="PickupDriverName" autocomplete="off"  required  />  
+                                       
+                                   
+                                      </div>
+
+
+
+                                
+                                    </div>
+
+
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                    
+
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="StateCode">Driver MobileNo</label>
+                                        <input type="text" class="form-control tooltip-form" id="PickupDriverNo" formControlName="PickupDriverNo" name="PickupDriverNo" autocomplete="off"  required  />  
+                                        
+                                        </div> 
+
+                                    </div>
+
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="company">Vechile No </label>
+                                  
+                                          <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickupvechileno" formControlName="Pickupvechileno" name="Pickupvechileno" autocomplete="off" required  />   
+                                         
+                                        </div>  
+
+                                    </div>                                
+                                   </div> <!-- end of row-->
+                                  
+                                   <div class="row  guestinfofirstrow"  >
+ 
+                                    <div class='col-12 col-lg-12 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="Address1">Remarks</label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Remarks" formControlName="Remarks" name="Remarks" autocomplete="off"  required  />  
+                                         
+                                        </div>  
+                                    </div>
+
+                                   </div> <!-- end of row-->
+
+                                </div>
+
+                               </div>
+                            </ng-template>
+                          </ngb-panel>
+
+
+                          <ngb-panel id="ngb-close-p1"  title="Guest Contact Details">
+                            <ng-template ngbPanelContent >
+                          
+                               <div class="col-md-12" style="padding-left:0; padding-right:0">
+                                 
+                                 
+
+                                     <!--  test row 1-->
+                                     <div class="guestinfofirstrow userlist " >
+                                        
+
+
+                                  <div class="row  guestinfofirstrow" >
+
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="GContactname">Contact Name</label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="GContactname" formControlName="GContactname" name="GContactname" autocomplete="off"  required style="position: relative;"  />  
+                                       
+                                        </div>  
+                                    </div>
+                                    
+
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="GContactno">ContactNo </label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="GContactno" formControlName="GContactno" name="GContactno" autocomplete="off"  required  />  
+                                         
+                                        </div>  
+                                    </div>
+                                    
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="EmailId">EmailId</label>
+                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="GEmailId" formControlName="GEmailId" name="GEmailId" autocomplete="off"  required  />  
+                                         
+                                        </div>  
+                                    </div>
+                                    
+
+
+                                
+                                   </div> <!-- end of row-->
+                                  
+                                   
+
+                                </div>
+
+                               </div>
+                            </ng-template>
+                          </ngb-panel>
+
+
+ 
+
+
+
+
+
+
+ 
+
+                         
+                          
+
+                        
+                          
+                          
+
+                        </ngb-accordion> 
+                          
+   
+                          </div>
+                          </ng-template>
+                    </ngb-tab>
+                  </ngb-tabset>
+
+                 
+                  
+                
   
-  
-  
-                        </div>
-                      
-                   
-                      </div> <!-- end reser master -->
+                    
                    
   
               
