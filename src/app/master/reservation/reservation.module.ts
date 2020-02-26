@@ -11,7 +11,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 import { ReservationComponent } from './reservation.component';
 import { ReservationRoutingModule } from './reservation-routing.module';
-
+import {TagInputModule} from 'ngx-chips';
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
  @NgModule({
@@ -24,7 +24,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
      HttpClientModule,
      DataTableModule,
      FormsModule,
-     NgSelectModule,
+     NgSelectModule,TagInputModule,
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
      ReactiveFormsModule,ToastyModule.forRoot()
   ],
