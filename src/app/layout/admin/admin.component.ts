@@ -275,6 +275,7 @@ public test="fra";
 
   }
   
+  
   ngOnInit() {
    this._bankservice.currentMessage.subscribe(message => this.verticalNavType = message)
     this.setBackgroundPattern('theme1');
