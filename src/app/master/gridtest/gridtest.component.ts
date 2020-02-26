@@ -327,11 +327,10 @@ export class GridtestComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-
+  ngOnInit() { 
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
-    this.previewUrl2 = environment.GuestimagePath + '/imagenot.png';
-    this.previewUrl3 = environment.GuestimagePath + '/imagenot.png';
+    this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
+    this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
     this.model.Id = 0;
     this.model.CompanyCode = 0;
     this.model.BranchCode = "0";

@@ -130,18 +130,18 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
  
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td  {
-    width: 202px;
+    width: 242px;
     border: 1px solid #ccc;
     background-color: #f3f3f3;
     color: #000;
     text-align: center;
     padding:2px 0px 2px 0px;
     font-weight: normal;
-    font-size: 75%;
+    font-size: 90%;
 }
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td select,
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td input{
-    width:202px;
+    width:242px;
  
 }
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td.lasttd,
@@ -149,21 +149,23 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     width:auto;
 }
 
-
+.brdrclass{ 
+    border:1px solid #ccc;
+}
 
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
-    width: 105px;
+    width: 113px;
     border: 1px solid #ccc;
     background-color: #f3f3f3;
     color: #000;
     text-align: center;
     padding:2px 0px 2px 0px;
     font-weight: normal;
-    font-size: 75%;
+    font-size: 90%;
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
-    width:104px;
+    width:112px;
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td.lasttd,
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td.lasttd{
@@ -185,4 +187,27 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 .outerdiv .showedcolorbg th{
     color:#000;
     padding:0px;
+}
+.guestphotoscreen .table thead tr th,
+.additionalguest .table thead tr th,
+.addGuestouter .table thead tr th{
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+}
+.guestphotoscreen .table tbody tr td,
+.additionalguest .table tbody tr td,
+.addGuestouter .table tbody tr td{
+    border: 1px solid #ccc;
+    text-align: center; 
+    margin: 0 auto;
+}
+.guestphotoscreen .table tbody tr td img,
+.additionalguest .table tbody tr td img,
+.addGuestouter .table tbody tr td img{
+    border-radius: 5px;
+    border:1px solid #000;    
 }
