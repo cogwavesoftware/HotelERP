@@ -6789,4 +6789,16 @@ outerdiv{
     font-weight: normal;
     font-size: 90%;    
     }
-    
+    .addGuestouter .guestinfofirstrow select.custom-select{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+.addGuestouter1 .addressmodeleffect.md-modal{
+   width:21%; 
+}
+.addGuestouter1 .addressmodeleffect .md-content{
+    border:1px solid #ccc;
+}
+.addGuestouter1 .addressmodeleffect .md-content h3{
+    font-size: 90%;
+}
