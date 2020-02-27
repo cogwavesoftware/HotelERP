@@ -67,6 +67,7 @@ export interface Checkinss {
 
 
 export class GridtestComponent implements OnInit, OnDestroy {
+  bankAccountForms: FormArray = this.fb.array([]);
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
@@ -205,7 +206,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
   back = false;
   Id$: Observable<string>;
   @ViewChild('f', { static: false }) newcompanyform: any;
-  constructor(private datePipe: DatePipe,
+  constructor(private datePipe: DatePipe,private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
@@ -422,7 +423,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
   }
 
   removeRoomNo(RoomNo: string): void {
-    debugger;
+    
     for (let order of this.selectedRoomNoArray) {
       let match = this.selectedRoomNoArray.filter((order) => order == RoomNo);
       match ? this.selectedRoomNoArray.splice(this.selectedRoomNoArray.indexOf(order), 1) : null;
@@ -437,7 +438,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
   }
 
   CheckRoom(RoomCodes: string): number {
-    debugger;
+    
     let relen = this.reservedlist.length;
     for (let j = 0; j < relen; j++) {
       if (RoomCodes === this.reservedlist[j].RoomCode) {
@@ -481,7 +482,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
         },
         () => {
           console.log("BookingData fetched sucssesfully.");
-          debugger;
+          
           this.Groupcheckin = this.golbalresponse.checkinlist;
           console.log(this.Groupcheckin)
           for (let groupdata of this.Groupcheckin) {
@@ -520,7 +521,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
 
 
   // removeItem() {
-  //   debugger;
+  //   
   //   console.log(this.other.length);
   //   // this.arrayItems.pop();
   //   for (let i = 0; i < this.other.length; i++) {
@@ -1078,7 +1079,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
           var checkoutDates = '';
           let cku = this.form.value.checkoutdate;
           console.log(cku)
-          debugger;
+          
 
           if (cku.length == 10) {
             this.form.value.checkoutdate = cku;
@@ -1190,7 +1191,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
   }
 
   onSubmitcompany(form?: NgForm) {
-    debugger;
+    
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy = 1;
     if (form.invalid) {
@@ -1306,7 +1307,76 @@ export class GridtestComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-close");
     document.querySelector("#" + event).classList.remove("md-show");
   }
+  addBankAccountForm(index :number) {
+    let index1=this.bankAccountForms.length;
+   
+   if(index1 <=3)
+   {
+     this.bankAccountForms.push(this.fb.group({
+       guestname: ['', ""],
+       SGuestCode: ['0'],
+       title: ["select", ""],
+       gender: ["select", ""],
+       mobile: ["", ""],
+       email: ["", ""],
+       pincode: ["", ""],
+       city: ["", ""],
+       state: ["", ""],
+       nation: ["", ""],
+       gstno: ["", ""],
+       address1: ["", ""],
+       address2: ["", ""],
+       address3: ["", ""],
+       GuestIdFront: ["", ""],
+       GuestIdBack: ["", ""],
+       GuestImage: ["", ""],
+       GuestIdFronturl: ["", ""],
+       GuestIdBackurl: ["", ""],
+       Area:["",""],
+       StateCode:["",""] 
 
+     }));
+   }
+   else{
+     alert('NOT ALLOWED')
+   }
+   
+ }
+ checkValue(event: any,index:number){
+  alert(event.target.checked)
+  
+  if(event.target.checked==true)
+   {
+    //this.SwipeDataFromPrimaryGuest(index)
+   }
+   else
+   {
+
+   }
+}
+  OpenAdditionalGuest(event) {
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  closemodel($event){
+    var allbtn = document.querySelector('.camwindow');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
+  }
+  onRatingClicked(event:any): void {   
+    //this.imgsrc = environment.GuestimagePath+"/"+event;
+  }
+  OpenCameraDetails(event,index){
+   // this.SendIndexToChild=index;
+   // this._bankservice.changeindexvalue(index);
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  openMyModalPincodePopup(event, data) {
+    this.filterQuery = "";
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  popinsidepopforguestnamefunc(event, data){
+    document.querySelector("#" + event).classList.add("md-show");
+  }
 }
 
 

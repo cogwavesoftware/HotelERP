@@ -459,7 +459,7 @@
                                             <div class="row guestinfofirstrow guestphotoscreen" >  
                                               <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenAdditionalGuest ('adguesteffect')"   ><i class="fa fa-user" aria-hidden="true"></i> Add Additional Guest Detsils </a>
 
-                                               <table class="table table-responsive" style="padding-left:6px; width:95%">
+                                               <table class="table table-responsive" style="padding-left:6px; width:95%; margin-bottom: 0;">
                                                 <thead>
                                                   <tr>
                                                     <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
@@ -748,7 +748,7 @@
 
                                 <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                   <ng-template ngbPanelContent>
-                                    <div class="test123 userlist grpcheckingpayntarry" style="padding: 2px 2px 2px 4px">
+                                    <div class="test123 userlist grpcheckingpayntarry gridtestpayarray" style="padding: 2px 2px 2px 4px">
                                       <div class="grid-table" style="width: 100%;">
                                         <div class="thead">
                                           <div class="">
@@ -1055,17 +1055,14 @@
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <label class="form-control-label" for="DOB">Date of Birth</label>
                                         <div class="form-group">
-                                          <div class="input-group">
-                                                
+                                          <div class="input-group" style="margin-bottom: 0;">                                                
                                             <input id="DOB" name="DOB"  formControlName="DOB"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                               
                                           </div>
                                         </div>
                                       </div>
                                     </div> <!-- end 2nd row -->
 
-                                    <div class="row">
-                                     
-
+                                    <div class="row" style="margin-bottom:0;"> 
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <label class="form-control-label" for="DOA">Date of Anniversary</label>
                                           <div class="form-group">
@@ -1747,7 +1744,7 @@
                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                 <label class="form-control-label">Swipe Info.  </label>
-                                                <input type="checkbox" (change)="checkValue($event,j)"> 
+                                                <input type="checkbox"  (change)="checkValue($event,j)"> 
                                                 </div>
                                               </div>
                                               
@@ -2015,9 +2012,7 @@
       
           </div>
           <div class="addGuestouter1" >
-            <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >
-             
-               
+            <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
                 <h3 class="f-15" style="position: relative; font-size: 90%; ">Camera Window - Guest Photo
  
                   <a href="javascript:;" (click)="closemodel($event)"><i class="fa fa-times-circle"
