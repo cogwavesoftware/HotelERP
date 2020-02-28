@@ -407,21 +407,15 @@ export class GridtestComponent implements OnInit, OnDestroy {
         console.log(this.roomNoList)
       });
 
-
       this._reservationservice.GetReservationCheckin(this.Branch, this.orgReservationNo)
         .subscribe(data => {
           this.reservedlist = data.ReservedRooms;
           console.log(this.reservedlist)
         })
-
-
     }
-
-
     this.CreateNoofDays(31)
 
   }
-
   removeRoomNo(RoomNo: string): void {
     
     for (let order of this.selectedRoomNoArray) {

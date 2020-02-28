@@ -70,22 +70,23 @@ export interface addcheckins {
 export class CheckinComponent implements OnInit, OnDestroy {
   bankAccountForms: FormArray = this.fb.array([]);
   FormAddcheckin: addcheckins;
-  Process:string;
+  Process: string;
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
   addcompanybtn: boolean = true;
   selectedRoomcode: any;
   ReferanceList: any;
+  UserId: number;
   subpaymodelist: any;
   golbalresponse: any;
-  TaxHeader:any;
+  TaxHeader: any;
   //web camara data
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
   public snapshotshow = false;
 
-  ChildimageName:string;
+  ChildimageName: string;
 
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
@@ -95,7 +96,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
   public allowCameraSwitch = true;
-  
+
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   error: string;
@@ -112,7 +113,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   closeOther = false;
 
   position = 'top-right';
-  imgsrc :any;
+  imgsrc: any;
   //public videoOptions: MediaTrackConstraints = {
   // width: {ideal: 1024},
   // height: {ideal: 576}
@@ -189,14 +190,15 @@ export class CheckinComponent implements OnInit, OnDestroy {
   howuknow = [];
   Nationlist = [];
   Titlelist = [];
+  liveindex: number;
 
   previewUrl: any = null;
   previewUrl2: any = null;
   previewUrl3: any = null;
-  GuetIdFront0: any=null;
-  GuetImg0; GuetImg1; GuetImg2; GuetImg3; GuetImg4; GuetImg5; GuetImg6; GuetImg7; GuetImg8: any = null;
-   GuetIdFront1; GuetIdFront2; GuetIdFront3; GuetIdFront4; GuetIdFront5; GuetIdFront6; GuetIdFront7; GuetIdFront8: any = null;
-  GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3; GuetIdBack4; GuetIdBack5; GuetIdBack6; GuetIdBack7; GuetIdBack8: any = null;
+  GuetIdFront0: any = null;
+  GuetImg0; GuetImg1; GuetImg2; GuetImg3: any = null;
+  GuetIdFront1; GuetIdFront2; GuetIdFront3: any = null;
+  GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3: any = null;
 
 
   filterguest: any[];
@@ -207,7 +209,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   fileDataIdfrontSecGuest: File = null;
   fileDataIdBackSecGuest: File = null;
 
-  SendIndexToChild:number;
+  SendIndexToChild: number;
   Branch: string;
   private _searchTerm: string;
   private isGorupCheckin: boolean = false;
@@ -219,7 +221,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
   @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
   @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
-
+  @ViewChild('f', { static: false }) newcompanyform: ElementRef;
 
   public Guestphotopathurl: string;
   public GuestDoucmentFrontpathurl: string = "0";
@@ -278,7 +280,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // }
   back = false;
   Id$: Observable<string>;
-  @ViewChild('f', { static: false }) newcompanyform: any;
+
   constructor(private datePipe: DatePipe, private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _bankservice: BankService,
@@ -291,8 +293,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
     this._bankservice.changeMessage("collapsed")
-    this.Branch = localStorage.getItem("BranchCode");
+    //this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
+    this.UserId = 1;
     this.IsShowloader = false;
 
 
@@ -314,12 +317,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
       this.IsDisableBookindGrid = false;
     }
 
-
-
-    //this.data = this._masterservice.GetPindata();
-    // this.data = this._masterservice.GetPinAddress();
-    //this.data1 = this._masterservice.GetGuestDetails("CW_1");
-    //this.data2 = this._masterservice.GetRoomcomany('CW_1001');
     setTimeout(() => {
       this.IsShowloader = false;
     }, 2000)
@@ -407,23 +404,23 @@ export class CheckinComponent implements OnInit, OnDestroy {
       charge: ["", [Validators.required]],
       idproof: [""],
       idproofno: [""],
-      RefName: ["0"],
+      RefName: [""],
       // subpaymode: ["select"],
       BranchCode: [this.Branch, [Validators.required]],
       randomCheckinNo: ['0', [Validators.required]],
       IpAdd: [localStorage.getItem("LOCAL_IP")],
       CreatedBy: [localStorage.getItem("id"), [Validators.required]],
       TaxHeader: ["GST"],
-      StateCode:[""]
+      StateCode: [""]
     });
   }
 
   ngOnInit() {
     //this.addBankAccountForm();
 
-   
 
-    
+
+
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
     this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
     this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
@@ -547,11 +544,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-  addBankAccountForm(index :number) {
-     let index1=this.bankAccountForms.length;
-    
-    if(index1 <=3)
-    {
+  addBankAccountForm(index: number) {
+    let index1 = this.bankAccountForms.length;
+
+    if (index1 <= 3) {
       this.bankAccountForms.push(this.fb.group({
         guestname: ['', ""],
         SGuestCode: ['0'],
@@ -572,72 +568,68 @@ export class CheckinComponent implements OnInit, OnDestroy {
         GuestImage: ["", ""],
         GuestIdFronturl: ["", ""],
         GuestIdBackurl: ["", ""],
-        Area:["",""],
-        StateCode:["",""]
+        Area: ["", ""],
+        StateCode: ["", ""]
 
       }));
     }
-    else{
+    else {
       alert('NOT ALLOWED')
     }
-    
+
   }
 
-  checkValue(event: any,index:number){
+  checkValue(event: any, index: number) {
     alert(event.target.checked)
-    
-    if(event.target.checked==true)
-     {
+
+    if (event.target.checked == true) {
       this.SwipeDataFromPrimaryGuest(index)
-     }
-     else
-     {
+    }
+    else {
 
-     }
- }
+    }
+  }
 
- SwipeDataFromPrimaryGuest(index)
- {
-  let address1=this.form.get("address1").value;
-  let address2=this.form.get("address2").value;
-  let address3=this.form.get("address3").value;
-  let pincode=this.form.get("pincode").value;
-  let city=this.form.get("city").value;
-  let state=this.form.get("state").value;
-  let nation=this.form.get("nation").value;
-  let company=this.form.get("company").value;
-  let gstno=this.form.get("gstno").value;
+  SwipeDataFromPrimaryGuest(index) {
+    let address1 = this.form.get("address1").value;
+    let address2 = this.form.get("address2").value;
+    let address3 = this.form.get("address3").value;
+    let pincode = this.form.get("pincode").value;
+    let city = this.form.get("city").value;
+    let state = this.form.get("state").value;
+    let nation = this.form.get("nation").value;
+    let company = this.form.get("company").value;
+    let gstno = this.form.get("gstno").value;
 
-  this.bankAccountForms.controls[index].patchValue({
-   address1:address1,
-   address2:address2,
-   address3:address3,
-   pincode:pincode,
-   city:city,
-   state:state,
-   nation:nation,
-   gstno:gstno,
-   company:company
-  })
- }
+    this.bankAccountForms.controls[index].patchValue({
+      address1: address1,
+      address2: address2,
+      address3: address3,
+      pincode: pincode,
+      city: city,
+      state: state,
+      nation: nation,
+      gstno: gstno,
+      company: company
+    })
+  }
 
- RemoveDataFromPrimaryGuest(index)
- {
+  RemoveDataFromPrimaryGuest(index) {
 
-  this.bankAccountForms.controls[index].patchValue({
-   address1:"",
-   address2:"",
-   address3:"",
-   pincode:"",
-   city:"",
-   state:"",
-   nation:"",
-   gstno:"",
-   company:""
-  })
+    this.bankAccountForms.controls[index].patchValue({
+      address1: "",
+      address2: "",
+      address3: "",
+      pincode: "",
+      city: "",
+      state: "",
+      nation: "",
+      gstno: "",
+      company: ""
+    })
 
- 
- }
+
+  }
 
 
   removeRoomNo(RoomNo: string): void {
@@ -770,7 +762,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.camarabuttonDisabled = false;
   }
 
-  
+
 
   public SwitchOnCamara() {
     this.SnapshotbuttonDisabled = false;
@@ -785,7 +777,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.showWebcam = !this.showWebcam;
   }
 
-  
+
 
 
   FilterPaymentMode(index: number) {
@@ -974,7 +966,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         console.log(imageName);
         this.Guestphotopathurl = imageName;
-       
+
         console.log(res);
 
       },
@@ -989,8 +981,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
-  getImageSecGuest(url,index) {
-    this.Process="Please Wait"
+  getImageSecGuest(url, index) {
+    this.Process = "Please Wait"
     // Base64 url of image trimmed one without data:image/png;base64
     this.base64DefaultURL = url;
     // Naming the image
@@ -1011,21 +1003,21 @@ export class CheckinComponent implements OnInit, OnDestroy {
       const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
       formData.append('GuestPohto', imageFile, imageName);
     });
-    this.Process="Upload Procee 10%"
+    this.Process = "Upload Procee 10%"
     this._masterservice.SavaImsData(formData)
       .subscribe(res => {
-        this.Process="Upload Procee 50%"
+        this.Process = "Upload Procee 50%"
       },
         error => {
           // alert('e')
           console.log(error);
-          this.Process="Upload Image Failed Due to Slow Network"
+          this.Process = "Upload Image Failed Due to Slow Network"
         },
         () => {
           this.bankAccountForms.controls[index].patchValue({
-            GuestImage:imageName
+            GuestImage: imageName
           })
-          this.Process="Upload Compleated"
+          this.Process = "Upload Compleated"
         });
   }
 
@@ -1087,11 +1079,13 @@ export class CheckinComponent implements OnInit, OnDestroy {
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
-  closemodel($event){
+
+  closemodel($event) {
     var allbtn = document.querySelector('.camwindow');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
+
   PatchSubModeName(index: number) {
     let DescriptionMode = this.PayArray.controls[index].get("Paysubmode").value;
     this.PayArray.controls[index].patchValue({
@@ -1108,6 +1102,12 @@ export class CheckinComponent implements OnInit, OnDestroy {
     })
 
   }
+
+
+
+
+
+
 
   OpencompanymodelsDetail(SelectedData: any, event: any) {
     this.form.patchValue({
@@ -1140,15 +1140,71 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
-  PatchRefenceDetail(SelectedData: any, event: any) {
+  // PatchRefenceDetail(SelectedData: any, event: any) {
+  //   this.form.patchValue({
+  //     referenceid: SelectedData.Id
+  //   })
+  //   this.referanceName = SelectedData.RefName;
+  //   var allbtn = document.querySelector('.md-show');
+  //   console.log(allbtn);
+  //   allbtn.classList.remove("md-show");
+  // }
+
+
+
+  ReferanceModelOpen(event, data) {
+    this.referanceName = '';
+
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
+  PatchReferance(SelectedData: any, event: any) {
     this.form.patchValue({
-      referenceid: SelectedData.Id
+      referenceid: SelectedData.Id,
+      RefName: SelectedData.RefName
     })
+    this.form.get('RefName').disable({ onlySelf: true });
     this.referanceName = SelectedData.RefName;
     var allbtn = document.querySelector('.md-show');
-    console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
+
+  ReferanceSave(form?: NgForm) {
+    debugger
+    form.value.BranchCode = this.Branch;
+    form.value.CreatedBy = this.UserId;
+    form.value.IsActive = true;
+    form.value.RefAdress = "0";
+    form.value.RefPoints = 0;
+    console.log(form.value);
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+    this._masterservice.SaveReferance(form.value).subscribe(data => {
+      if (data == true) {
+        if (form.value.Id == "0") {
+          this.addToast(
+            "Cogwave Software",
+            " Referance Saved Sucessfully",
+            "success"
+          );
+          this.searchresultsdiv = true;
+          this.addcompanydiv = false;
+          this.addcompanybtn = true;
+          this.ReferanceModelOpen('effect-6', data)
+        }
+
+      }
+      else {
+        this.addToast("Cogwave Software", "Company Data Not Saved", "error");
+      }
+    });
+    console.log(form.value);
+  }
+
+
   openMyGuestNameModalData(SelectedData: any, event: any) {
     console.log('SelectedData')
     console.log(SelectedData)
@@ -1185,13 +1241,13 @@ export class CheckinComponent implements OnInit, OnDestroy {
     allbtn.classList.remove("md-show");
   }
 
-  OpenCameraDetails(event,index){
+  OpenCameraDetails(event, index) {
 
-    this.SendIndexToChild=index;
+    this.SendIndexToChild = index;
     this._bankservice.changeindexvalue(index);
     document.querySelector("#" + event).classList.add("md-show");
   }
-  popinsidepopforguestnamefunc(event, data){
+  popinsidepopforguestnamefunc(event, data) {
     document.querySelector("#" + event).classList.add("md-show");
   }
   openMyModalPincode(event, data) {
@@ -1300,26 +1356,23 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   fileProgressIdfFrontSecGuest(fileInput: any, index: number, Pic: string) {
-    this.Process="";
+    this.Process = "";
     debugger
-    if(Pic=="Front")
-    {
+    if (Pic == "Front") {
       this.fileDataIdfrontSecGuest = <File>fileInput.target.files[0];
 
     }
-    else
-    {
+    else {
       this.fileDataIdBackSecGuest = <File>fileInput.target.files[0];
     }
-    this.Process="Please Wait..";
+    this.Process = "Please Wait..";
     this.previewSecGuest(index, Pic);
     this.UplodaImageData(index);
   }
 
   previewSecGuest(index: number, Pic: string) {
-   
-    if (Pic == "Front")
-     {
+
+    if (Pic == "Front") {
       var mimeType = this.fileDataIdfrontSecGuest.type;
       if (mimeType.match(/image\/*/) == null) {
         return;
@@ -1327,22 +1380,19 @@ export class CheckinComponent implements OnInit, OnDestroy {
       var reader = new FileReader();
       reader.readAsDataURL(this.fileDataIdfrontSecGuest);
       //const canvas=document.getElementById('canvas');
-     // const context=canvas.getContext("2d");
+      // const context=canvas.getContext("2d");
       reader.onload = (_event) => {
-       
-      if(index==0)
-      {
-        this.GuetIdFront0 = reader.result;
-      }
-      else if(index==1)
-      {
-        this.GuetIdFront1 = reader.result;
-      }
-      else if(index==2)
-      {
-        this.GuetIdFront2 = reader.result;
-      }     
-      
+
+        if (index == 0) {
+          this.GuetIdFront0 = reader.result;
+        }
+        else if (index == 1) {
+          this.GuetIdFront1 = reader.result;
+        }
+        else if (index == 2) {
+          this.GuetIdFront2 = reader.result;
+        }
+
       }
     }
     else {
@@ -1354,67 +1404,64 @@ export class CheckinComponent implements OnInit, OnDestroy {
       var reader = new FileReader();
       reader.readAsDataURL(this.fileDataIdBackSecGuest);
       reader.onload = (_event) => {
-      if(index==0)
-      {
-        this.GuetIdBack0 = reader.result;
-      }
-      else if(index==1)
-      {
-        this.GuetIdBack1 = reader.result;
-      }
-      else if(index==2)
-      {
-        this.GuetIdBack2 = reader.result;
-      }       
+        if (index == 0) {
+          this.GuetIdBack0 = reader.result;
+        }
+        else if (index == 1) {
+          this.GuetIdBack1 = reader.result;
+        }
+        else if (index == 2) {
+          this.GuetIdBack2 = reader.result;
+        }
       }
     }
-    
-      
+
+
   }
 
 
 
   UplodaImageData(index) {
     debugger;
-    this.Process="Wait Image Uploading..."
+    this.Process = "Wait Image Uploading..."
     const formData = new FormData();
     let Idfront = "";
     let Idback = "";
-      if (this.fileDataIdfrontSecGuest != null) {
-     
-        var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
-        var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-        Idfront = 'CW_1001' + '_' + Rans1.toString() + "Front" + '.png'
-        formData.append('GuestIdFront', this.fileDataIdfrontSecGuest, Idfront);
-      }
-    
-  
-      if (this.fileDataIdBackSecGuest != null) {
-       
-        var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
-        var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-        Idback = 'CW_1001' + '_' + Rans.toString() + "Back" + '.png'
-        formData.append('GuestIdBack', this.fileDataIdBackSecGuest, Idback);
-      }
+    if (this.fileDataIdfrontSecGuest != null) {
 
-      this._masterservice.SavaImsData(formData)
+      var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
+      var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+      Idfront = 'CW_1001' + '_' + Rans1.toString() + "Front" + '.png'
+      formData.append('GuestIdFront', this.fileDataIdfrontSecGuest, Idfront);
+    }
+
+
+    if (this.fileDataIdBackSecGuest != null) {
+
+      var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+      var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+      Idback = 'CW_1001' + '_' + Rans.toString() + "Back" + '.png'
+      formData.append('GuestIdBack', this.fileDataIdBackSecGuest, Idback);
+    }
+
+    this._masterservice.SavaImsData(formData)
       .subscribe(res => {
-        this.Process="Wait Image Uploading 50%..."
-       
+        this.Process = "Wait Image Uploading 50%..."
+
       },
-      error=>{
-        this.Process="Upload Failed Please Try again"
-      },
-      ()=>{
-        debugger;
-        this.bankAccountForms.controls[index].patchValue({
-          GuestIdFronturl:Idfront,
-          GuestIdBackurl:Idback
-         });
-         this.Process="Image Uploaded Successfully"
-      });
-      
-    
+        error => {
+          this.Process = "Upload Failed Please Try again"
+        },
+        () => {
+          debugger;
+          this.bankAccountForms.controls[index].patchValue({
+            GuestIdFronturl: Idfront,
+            GuestIdBackurl: Idback
+          });
+          this.Process = "Image Uploaded Successfully"
+        });
+
+
   }
 
 
@@ -1540,7 +1587,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   Submit() {
 
     console.log(this.bankAccountForms.value)
-    return;
+    
     const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -1690,12 +1737,30 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-  onRatingClicked(event:any): void {
-   
-  this.imgsrc = environment.GuestimagePath+"/"+event;
-    
-    
-}
+  onRatingClicked(event: any): void {
+
+    this._bankservice.currentindex.subscribe(re => {
+      this.liveindex = re;
+
+      switch (this.liveindex) {
+        case 0:
+          this.GuetImg0 = environment.GuestimagePath + "/" + event;
+          break;
+        case 1:
+          this.GuetImg1 = environment.GuestimagePath + "/" + event;
+          break;
+        case 2:
+          this.GuetImg2 = environment.GuestimagePath + "/" + event;
+          break;
+        case 3:
+          this.GuetImg3 = environment.GuestimagePath + "/" + event;
+          break;
+       
+      }
+
+    })
+
+  }
 
   AddpaymentGrid(): FormGroup {
     return this.formBuilder.group({
@@ -1707,18 +1772,23 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmitcompany(form?: NgForm) {
+  onSubmitcompany(f?: NgForm) {
     debugger;
-    form.value.BranchCode = localStorage.getItem("BranchCode")
-    form.value.CreatedBy = 1;
-    if (form.invalid) {
-      console.log(form.value);
+    f.value.BranchCode = this.Branch;
+    f.value.CreatedBy = 1;
+    f.value.BranchCode = this.Branch;
+    f.value.CreatedBy = this.UserId;
+    f.value.Id = 0;
+    f.value.IpAdd = "0"
+    f.value.IsActive = true;
+    if (f.invalid) {
+      console.log(f.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-    this._masterservice.SaveCompanyMinData(form.value).subscribe(data => {
+    this._masterservice.SaveCompanyMinData(f.value).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
+        if (f.value.Id == "0") {
           this.addToast(
             "Cogwave Software",
             "Company Data Saved Sucessfully",
@@ -1736,13 +1806,13 @@ export class CheckinComponent implements OnInit, OnDestroy {
         this.addToast("Cogwave Software", "Company Data Not Saved", "error");
       }
     });
-    console.log(form.value);
+    console.log(f.value);
   }
 
 
 
 
-  
+
 
   addToast(title, Message, theme) {
 
