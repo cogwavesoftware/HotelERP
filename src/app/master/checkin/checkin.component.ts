@@ -490,6 +490,12 @@ export class CheckinComponent implements OnInit, OnDestroy {
     //     this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
     //   });
 
+
+    WebcamUtil.getAvailableVideoInputs()
+      .then((mediaDevices: MediaDeviceInfo[]) => {
+        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+      });
+
     this._masterservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });

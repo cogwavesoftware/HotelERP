@@ -588,16 +588,12 @@
                                       </ngb-panel>
       
       
-      
-      
-    
-    
     
                                       <ngb-panel id="ngb-close-p1" title="Extra Charge ">
                                         <ng-template ngbPanelContent>
                                           <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
                                             <div class="">
-                                              
+                                              <button type="button" id="closebtn" (click)="calculator.show()" class="btn btn-primary btn-sm">Calculator</button>
                                                 <div class="row">
                                                 <div class="col-lg-10 col-md-10 col-xs-12">
                                                   <div class="grid-table" style="width: 100%;">
@@ -1494,5 +1490,36 @@
                      <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
                 </div>      
               </app-modal-animation>
+
+
+        
+                  <app-modal-basic #calculator [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+                    <div class="app-modal-body">
+                      <button type="button" class="close basic-close-light-box" (click)="calculator.hide()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                            
+                      
+                      <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <app-calculator></app-calculator>
+                          </div>
+                         
+                                  
+                        </div>
+                      </perfect-scrollbar>
+                       
+                    </div>
+                  </app-modal-basic>
+
+
+
+
+
+
+
+
+
 
           <ng2-toasty [position]="position"></ng2-toasty>

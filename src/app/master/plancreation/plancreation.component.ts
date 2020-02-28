@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild,ElementRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 import { MasterformService } from "./../../_services/masterform.service";
@@ -11,6 +11,23 @@ import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty';
   styleUrls: ["./plancreation.component.scss"]
 })
 export class PlancreationComponent implements OnInit {
+
+
+
+  
+  @ViewChild("video", { static: false })
+  public video: ElementRef;
+
+ 
+  @ViewChild("canvas", { static: false })
+  public canvas: ElementRef;
+
+  public captures: Array<any>;
+
+
+
+
+
   public data: Observable<any>;
   public rowsOnPage = 10;
   public filterQuery = "";
@@ -48,6 +65,7 @@ export class PlancreationComponent implements OnInit {
     private toastyService: ToastyService
   ) { 
     this.Branch= localStorage.getItem("BranchCode");
+    this.captures = [];
   }
 
   ngOnInit() {
@@ -97,7 +115,15 @@ export class PlancreationComponent implements OnInit {
       console.log(this.categories);
     });
   }
-
+  public ngAfterViewInit() {
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+          this.video.nativeElement.srcObject = stream;
+            // this.video.nativeElement.src = window.URL.createObjectURL(stream);
+            this.video.nativeElement.play();
+        });
+    }
+}
   resetForm(form?: NgForm) {
     this.emailFormArray = [];
     this.model = {
@@ -113,6 +139,11 @@ export class PlancreationComponent implements OnInit {
     //delete
    
   }
+
+  public capture() {
+    var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
+    this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+}
 
   openMyModalData(event) {
     this.btitle = "Hide Form";

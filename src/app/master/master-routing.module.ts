@@ -134,6 +134,10 @@ const routes: Routes = [
         path: 'reschk',
         loadChildren: './rescheckin/rescheckin.module#RescheckinModule'
       },
+      {
+        path: 'monthchart',
+        loadChildren: './monthchart/monthchart.module#MonthchartModule'
+      },
 
     ]
   }

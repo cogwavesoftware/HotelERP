@@ -59,6 +59,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   guest: any;
   picodelist: any;
   referencelist: any;
+
   Revenulist: any;
   companylist: any;
   driverlist: any;
@@ -271,7 +272,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
-
       // console.log('Cnstructor Changed')
       // let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
       // let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
@@ -343,6 +343,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
 
     this.TotalBillAmount = 0;
     this.TotalBalanceAmount = 0;
@@ -914,7 +915,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
     })
 
   }
-
 
 
   onDelete(bankAccountID, i) {

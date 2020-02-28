@@ -1,4 +1,29 @@
+
+
+
+
+
+
+
 <div class="outerdiv">
+
+
+  <div id="app">
+    <div><video #video id="video" width="640" height="480" autoplay></video></div>
+    <div><button id="snap" (click)="capture()">Snap Photo</button></div>
+    <canvas #canvas id="canvas" width="640" height="480"></canvas>
+    <ul>
+        <li *ngFor="let c of captures">
+            <img src="{{ c }}" height="50" />
+        </li>
+    </ul>
+  </div>
+
+
+
+
+
+
 
         <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
           <div class="row">
@@ -86,19 +111,6 @@
                                      
                                        
 
-
-                                        
-
-
-<!-- 
-                                        <div class="col-md-6">
-                                          <label>Select Catagery*</label>
-                                              <select class="custom-select" (blur)="validateroom(catagery.value)" (change)="validateroom(catagery.value)" #catagery="ngModel" [class.is-invalid]="catageryhasError && catagery.touched" name="catagery" [(ngModel)]="model.catagery">
-                                                <option value="default">Please Select</option>
-                                                <option *ngFor="let catagery of catagerys">{{ catagery }}</option>
-                                              </select>
-                                              <small class="text-danger" [class.d-none]="!catageryhasError || catagery.untouched">Please choose a catagery</small>                
-                                      </div>  -->
 
                                      
                                     

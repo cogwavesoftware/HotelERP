@@ -247,6 +247,12 @@ const routes: Routes = [
         path: 'reschk',
         loadChildren: './master/rescheckin/rescheckin.module#RescheckinModule'
       },
+
+      {
+        path: 'monthchart',
+        loadChildren: './master/monthchart/monthchart.module#MonthchartModule'
+      },
+
       //  {
       //  path:'printgrc',
       //   loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'

@@ -79,4 +79,8 @@ export class ReservationService {
   {
     return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/chartlist?BranchCode=' + BranchCode + '&RoomCode=' + RoomCode + '&date=' + date);
   }
+  ReservatiomMonthlyChart(BranchCode:string,StarDate:string,NoofDays:number)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/ResMonthlychart?BranchCode=' + BranchCode + '&StarDate=' + StarDate + '&NoofDays=' + NoofDays);
+  }
 }

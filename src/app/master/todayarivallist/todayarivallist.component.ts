@@ -1,6 +1,7 @@
+
 import { RoomtypeService } from 'src/app/_services/roomtype.service';
 import { ReservationService } from './../../_services/reservation.service';
-
+import {DatePipe}  from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -41,12 +42,29 @@ export class TodayarivallistComponent implements OnInit {
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] =[];
   roomtypelist:any;
-  constructor( private _Res:ReservationService,private _roomtypeservice:RoomtypeService) { 
+
+
+
+   roomtype= [];
+   HeadeDate=[];
+   minDate: Date;
+   maxDate:Date;
+   golbalresponse:any;
+   Day:number=0;
+   
+   InitalDate:Date;
+  
+
+  constructor( private _Res:ReservationService,private _roomtypeservice:RoomtypeService,
+    private datePipe: DatePipe) { 
     this.Branch="CW_1001";
   }
   ngOnInit() {
   
-  this._Res.Chart().subscribe(res=>{   
+  this._Res.Chart().subscribe(res=>{  
+    
+    console.log('res')
+    console.log(res)
     this.barChartLabels=res['Date'];
     this.barChartType='bar'
     this.barChartLegend=true;
@@ -54,13 +72,46 @@ export class TodayarivallistComponent implements OnInit {
     console.log(res)
     this.Apidata=res['data'];
     this.barChartData= this.Apidata;
+    console.log('this.barChartData')
     console.log(this.barChartData)
+    
     this.Show=true;
   })
 
   this._roomtypeservice.GetRoomType(this.Branch).subscribe((data: any) => {
     this.roomtypelist = data;
+    console.log('data')
+    console.log(data)
   });
+
+ 
+
+
+
+//   this.minDate = new Date();
+
+//   let Days=this.minDate.getDay();
+//   alert(Days)
+//  // this.maxDate.setDate(this.maxDate.getDate() + 1);
+//   for(let  k=1; k<=29; k++)
+//   {
+//     let CDate=this.minDate;
+//     let fromdates = this.datePipe.transform(CDate, "MM/dd/yyyy");
+//     this.HeadeDate.push(fromdates)
+//     this.Day=k;
+//     this.minDate.setDate(this.minDate.getDate() +  this.Day);
+//   }   
+//   console.log(this.HeadeDate)
+//   this._reservationService.GetMonthChart().subscribe(res=>{
+//     this.golbalresponse = res;
+//       this.Availabilitylist = this.golbalresponse;
+//       console.log(this.Availabilitylist)
+//       this.roomtype = this.Availabilitylist[0].Rooms;
+//     console.log(this.roomtype)
+//   })
+
+
+
 
 
   }
@@ -101,3 +152,18 @@ export class TodayarivallistComponent implements OnInit {
 
 
 
+function GFG_Fun() { 
+  var date = new Date(); 
+  var month = date.getMonth() + 1; 
+  alert(month)
+ 
+  var year = date.getFullYear(); 
+  alert(year)
+
+  var day = date.getUTCDay(); 
+  alert(day)
+
+  // down.innerHTML = "Number of days in " + month 
+  //             + "th month of the year " + year  
+  //             +" is "+ daysInMonth(month, year); 
+}
