@@ -778,6 +778,10 @@
         width:100%;
         margin-bottom: 10px; 
     }
+    .gridtestbookedrm,
+    .gridtestpayarray{
+        overflow-x: scroll;
+    }
 }
 @media only screen and (max-width: 767px) {
     .signup-card {

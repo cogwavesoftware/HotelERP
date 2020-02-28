@@ -13,8 +13,10 @@ import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GridtestRoutingModule } from './gridtest-routing.module';
 import { GridtestComponent } from './gridtest.component';
+import { CamarawindowComponent } from '../checkin/camarawindow/camarawindow.component';
+
 @NgModule({
-  declarations: [GridtestComponent],
+  declarations: [GridtestComponent,CamarawindowComponent],
   
   providers: [DatePipe,ConfirmationDialogService],
   imports: [
@@ -27,7 +29,7 @@ import { GridtestComponent } from './gridtest.component';
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  // entryComponents:[ConfirmationDialogComponent]
+   entryComponents:[CamarawindowComponent]
 
 })
 export class GridtestModule { }

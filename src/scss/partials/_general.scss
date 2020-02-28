@@ -5801,7 +5801,8 @@ outerdiv{
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-2,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-12.col-lg-6,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-1,
-.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-4{
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-4,
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-5{
     padding-right:1px;
     padding-left:0;
 }
@@ -6768,7 +6769,8 @@ outerdiv{
 .addaddinalguest .card-border-primary .col-12.col-lg-6,
 .addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-1,
 .addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-3,
-.addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-4{
+.addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-4,
+.addaddinalguest .card-border-primary .guestinfofirstrow .col-lg-5{
     padding-right:1px;
     padding-left:0;
 }
@@ -6788,4 +6790,16 @@ outerdiv{
     font-weight: normal;
     font-size: 90%;    
     }
-    
+    .addGuestouter .guestinfofirstrow select.custom-select{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+.addGuestouter1 .addressmodeleffect.md-modal{
+   width:21%; 
+}
+.addGuestouter1 .addressmodeleffect .md-content{
+    border:1px solid #ccc;
+}
+.addGuestouter1 .addressmodeleffect .md-content h3{
+    font-size: 90%;
+}

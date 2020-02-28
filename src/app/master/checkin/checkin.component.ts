@@ -1087,7 +1087,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
-
+  closemodel($event){
+    var allbtn = document.querySelector('.camwindow');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
+  }
   PatchSubModeName(index: number) {
     let DescriptionMode = this.PayArray.controls[index].get("Paysubmode").value;
     this.PayArray.controls[index].patchValue({
@@ -1185,6 +1189,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
     this.SendIndexToChild=index;
     this._bankservice.changeindexvalue(index);
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+  popinsidepopforguestnamefunc(event, data){
     document.querySelector("#" + event).classList.add("md-show");
   }
   openMyModalPincode(event, data) {

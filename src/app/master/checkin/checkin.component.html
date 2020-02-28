@@ -459,7 +459,7 @@
                                             <div class="row guestinfofirstrow guestphotoscreen" >  
                                               <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenAdditionalGuest ('adguesteffect')"   ><i class="fa fa-user" aria-hidden="true"></i> Add Additional Guest Detsils </a>
 
-                                               <table class="table table-responsive" style="padding-left:6px; width:95%">
+                                               <table class="table table-responsive" style="padding-left:6px; width:95%; margin-bottom: 0;">
                                                 <thead>
                                                   <tr>
                                                     <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
@@ -748,7 +748,7 @@
 
                                 <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                   <ng-template ngbPanelContent>
-                                    <div class="test123 userlist grpcheckingpayntarry" style="padding: 2px 2px 2px 4px">
+                                    <div class="test123 userlist grpcheckingpayntarry gridtestpayarray" style="padding: 2px 2px 2px 4px">
                                       <div class="grid-table" style="width: 100%;">
                                         <div class="thead">
                                           <div class="">
@@ -1055,17 +1055,14 @@
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         <label class="form-control-label" for="DOB">Date of Birth</label>
                                         <div class="form-group">
-                                          <div class="input-group">
-                                                
+                                          <div class="input-group" style="margin-bottom: 0;">                                                
                                             <input id="DOB" name="DOB"  formControlName="DOB"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                               
                                           </div>
                                         </div>
                                       </div>
                                     </div> <!-- end 2nd row -->
 
-                                    <div class="row">
-                                     
-
+                                    <div class="row" style="margin-bottom:0;"> 
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <label class="form-control-label" for="DOA">Date of Anniversary</label>
                                           <div class="form-group">
@@ -1424,8 +1421,7 @@
 ////guestname -->
 <app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-5 addressmodeleffect'">   
   <h3 class="f-15" style="position: relative;">Guest Details
-    <!-- <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>              -->
- </h3>
+  </h3>
     <div class="app-modal-body text-center" style="position: relative;"> 
       <div class="table-content crm-table">
         <div class="project-table addressproject-table">
@@ -1720,7 +1716,7 @@
                 <div class="project-table addaddinalguest">
                   <div id="crm-contact" class="dt-responsive">                 
                    
-                <perfect-scrollbar class="overflow-container model-lg"   [style.height]="'665px'" [config]="config">
+                <perfect-scrollbar class="overflow-container model-lg"   [style.height]="'500px'" [config]="config">
                   <div class="col-md-12" style="padding-left:0; padding-right:0">
                     <div class="row" style="margin-bottom: 0px;">
                     
@@ -1748,7 +1744,7 @@
                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                 <label class="form-control-label">Swipe Info.  </label>
-                                                <input type="checkbox" (change)="checkValue($event,j)"> 
+                                                <input type="checkbox"  (change)="checkValue($event,j)"> 
                                                 </div>
                                               </div>
                                               
@@ -1776,7 +1772,7 @@
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                   <input style="position: relative" type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
-                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute; right:0; top:22px"><i class="fa fa-search"></i></a>
+                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="popinsidepopforguestnamefunc('popinsidepopforguestname',data)" style="position: absolute; right:0; top:22px"><i class="fa fa-search"></i></a>
                                                 
                                                   <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                   </div>  
@@ -2016,11 +2012,11 @@
       
           </div>
           <div class="addGuestouter1" >
-            <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect  '" >
-             
-              <perfect-scrollbar class="overflow-container model-sm"   [style.height]="'465px'" style="border:2px solid #ccc" [config]="config">
-                <h3 class="f-15" style="position: relative; ">Camera Window - Guest Photo
-              
+            <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
+                <h3 class="f-15" style="position: relative; font-size: 90%; ">Camera Window - Guest Photo
+ 
+                  <a href="javascript:;" (click)="closemodel($event)"><i class="fa fa-times-circle"
+                   style="position: absolute; right: 10px; font-size: 110%;color: #fff; "></i></a>
                 </h3>
                   <div class="app-modal-body text-center" style="position: relative;"> 
                     <div class="table-content crm-table">
@@ -2034,11 +2030,64 @@
                       </div>
                     </div>        
                      </div>    
-                </perfect-scrollbar>
-
+               
     
     
                     
                 </app-modal-animation>
           
               </div>
+              <div class="addGuestouter2" >
+                 <!-- picnde popup for popup inside popup-->
+<app-modal-animation [modalID]="'popinsidepopforguestname'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect'">
+  
+  <h3 class="f-15" style="position: relative;">Guest Details1  </h3>
+    <div class="app-modal-body text-center" style="position: relative;"> 
+      <div class="table-content crm-table">
+        <div class="project-table addressproject-table">
+          <div id="crm-contact" class="dt-responsive">           
+            <div class="row">         
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <input type="text" #searchTermguestInsidePopup class="form-control input-lg full-data-search" placeholder="Search here...">
+                  <span class="input-group-append ripple light" id="basic-addon1">
+                    <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                  </span>
+                </div> 
+              </div>      
+        </div>  
+
+             <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table"> 
+                    <thead>
+                    <tr class="blueorange-gradient">        
+                    <th> GuestName</th>             
+                    <th> City </th>
+                    <th>Pincode </th>
+                    <th> MobileNo </th> 
+                    <th>Action</th>
+                </tr>
+                <tr> </tr>               
+                </thead>
+                <tbody>                    
+                 <tr *ngFor="let item of guest; let i = index;">                     
+                   <td>{{item.GuestName}}</td>   
+                   <td>{{item.City}}</td>   
+                   <td>{{item.PINCode}}</td>                   
+                   <td>{{item.MobileNo}}</td>        
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                     
+                  </td>
+                </tr>  
+                </tbody>
+                 
+              </table>
+            </div> 
+          </div>
+        </div>
+      </div>     
+           <!-- <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>              -->
+      </div>         
+    </app-modal-animation>
+<!-- end pin popup insde popup-->
+                  </div>
