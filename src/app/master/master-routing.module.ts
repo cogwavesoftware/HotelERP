@@ -131,7 +131,7 @@ const routes: Routes = [
         loadChildren: './todayarivallist/todayarivallist.module#TodayarivallistModule'
       },
       {
-        path: 'reschk',
+        path: 'reschk/:ResNo',
         loadChildren: './rescheckin/rescheckin.module#RescheckinModule'
       },
       {

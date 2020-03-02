@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ReservationService } from './../../_services/reservation.service';
 import { Component, OnInit,ViewChild ,OnDestroy} from '@angular/core';
 import { NgForm } from "@angular/forms";
@@ -28,7 +29,8 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   model:any;
   Branch:string;
   BookingList:any;
-  constructor(private _masterformservice: MasterformService,private http: HttpClient,private _reservationservice:ReservationService,
+  constructor(private _masterformservice: MasterformService,private router:Router,
+    private http: HttpClient,private _reservationservice:ReservationService,
     private _ipservice: IpserviceService,private _hmsdashboard:HmsdashboardService,private _bankservice:BankService  ) {     
       this._bankservice.changeMessage("collapsed")
       this.Branch="CW_1001";
@@ -56,6 +58,12 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
     })
 
   }
+  
+  LoadReservationCheckinpage(ResNo:string)
+  {
+    this.router.navigate(['/Master/reschk',ResNo])
+  }
+
 
   openMyModal(event,name){
     console.log("roomname"  );

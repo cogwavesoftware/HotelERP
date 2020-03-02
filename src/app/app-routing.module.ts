@@ -244,7 +244,7 @@ const routes: Routes = [
       },
     
       {
-        path: 'reschk',
+        path: 'reschk/:ResNo',
         loadChildren: './master/rescheckin/rescheckin.module#RescheckinModule'
       },
 

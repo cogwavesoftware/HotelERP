@@ -83,4 +83,11 @@ export class ReservationService {
   {
     return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/ResMonthlychart?BranchCode=' + BranchCode + '&StarDate=' + StarDate + '&NoofDays=' + NoofDays);
   }
+   
+  GetReservedVacenRoomType(ResNo:string,BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/ReservationRooms?ReservationNo=' + ResNo + '&BranchCode=' + BranchCode);
+  }
+
+
 }

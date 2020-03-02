@@ -96,7 +96,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   genderitems: any;
   gender: any;
   pincode: any;
-  StateList:any;
+  StateList: any;
   booking: HMSReservationBookingmodel;
 
   bookings: HMSReservationBookingmodel[];
@@ -171,10 +171,13 @@ export class ReservationComponent implements OnInit, OnDestroy {
       this.OrgReservationNo = param.get("ResNo");
     })
 
+
+
     if (this.OrgReservationNo == "NewRes") {
       this.IsReservation = true;
       this.IsAmendReservation = false;
       this.ResLabel = "New Reservation";
+
     }
     else {
       this.IsReservation = false;
@@ -182,10 +185,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
       this.ResLabel = "Ammend Reservation / " + this.OrgReservationNo;
     }
 
-
     this.minDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate() + 1);
-
     this.navRight = "nav-off";
     this.timepicker = Object.assign({},
       {
@@ -213,7 +214,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
       gender: ["Male", [Validators.required]],
       mobile: ["", [Validators.required]],
       email: ["", [Validators.required]],
-      //foriegnguest: ["No", [Validators.required]],
       Address1: ["", [Validators.required]],
       Address2: ["", [Validators.required]],
       Address3: ["", [Validators.required]],
@@ -231,11 +231,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
       company: ["", [Validators.required]],
-      //disctype: ["select", [Validators.required]],
       BillAmount: ["", [Validators.required]],
       BookingStatus: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
-      // PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
       PayArray: this.formBuilder.array([]),
       PayExtra: this.formBuilder.array([]),
       visit: ["select", [Validators.required]],
@@ -262,10 +260,10 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     this.form.get('state').valueChanges.subscribe(val => {
       console.log(val)
-      let Cons= this.StateList.find(x=>x.State==val);
+      let Cons = this.StateList.find(x => x.State == val);
 
       this.form.patchValue({
-        StateCode:Cons.StateCode
+        StateCode: Cons.StateCode
       })
 
     });
@@ -330,19 +328,28 @@ export class ReservationComponent implements OnInit, OnDestroy {
     });
   }
 
-  // FilterStateCode(name:string)
-  // {
-     
-  //    let d=this.StateList.find(x=>x.State===name);
-  //    console.log(d)
-
-  //    let d1=this.StateList.filter(x=>x.State===name);
-  //    console.log(d1)
-     
-  // }
 
 
   ngOnInit() {
+
+
+
+
+    if (this.OrgReservationNo == "NewRes") {
+      this.form.patchValue({
+        ReservationNo: '0',
+        companycode: '0',
+        Guestcode: '0',
+        referenceid: '0',
+        BranchCode: this.Branch
+      })
+    }
+    else {
+      this.form.patchValue({
+        ReservationNo: this.OrgReservationNo
+      })
+
+    }
 
 
     this.TotalBillAmount = 0;
@@ -409,6 +416,10 @@ export class ReservationComponent implements OnInit, OnDestroy {
         let companymodel = this.ReservationAmendform.company
         let ResMastermodel = this.ReservationAmendform.ResMaster
         let ResAdvance = this.ReservationAmendform.Advance
+        let ResPickup = this.ReservationAmendform.PickUp
+        let ResInstruction = this.ReservationAmendform.Special
+        let ResExtraCharges = this.ReservationAmendform.ExtraCharges
+        let ResContact = this.ReservationAmendform.Contact
 
         let ReservationBookedSlaveArray = [];
         var AllreadyBookedType = [];
@@ -424,6 +435,33 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
         // console.log(Checkintime)
         // console.log(checkoutTime)
+
+
+        if (ResExtraCharges != null) {
+          ResExtraCharges.forEach(res => {
+            this.GetExtraChargesDetails(res.RevenueId, res.Description, res.Amount, res.Tax, res.NetAmount)
+          })
+        }
+
+        if (ResContact != null) {
+          this.form.patchValue({
+            GContactname: ResContact.ContactPerson,
+            GContactno: ResContact.ContactNo,
+            GEmailId: ResContact.EmailId
+          })
+        }
+
+        if (ResPickup != null) {
+          this.form.patchValue({
+            PickupDriverName: ResPickup.DriverName,
+            PickupDriverNo: ResPickup.ContactNo,
+            Pickup: ResPickup.PickUpLocation,
+            Drop: ResPickup.DropLocation,
+            Pickuptime: ResPickup.PickUpTime,
+            Pickupvechileno: ResPickup.VechileNo,
+            Remarks: ResPickup.Remarks
+          })
+        }
 
         console.log('Guestmodel')
         console.log(Guestmodel)
@@ -453,7 +491,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
           // checkouttime:checkoutTime,
           nofdays: ResMastermodel.NoOfDays,
           checkindate: checkindate,
-          checkoutdate: checkoutdate
+          checkoutdate: checkoutdate,
+          Area: Guestmodel.Area,
+          StateCode: Guestmodel.StateCode
         })
         if (companymodel != null) {
           this.form.patchValue({
@@ -592,8 +632,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     this._masterservice.GetStateCode().subscribe(res => {
       this.StateList = res
-      console.log('this.StateList')
-      console.log(this.StateList)
+
     });
 
     this._masterservice.getplan().subscribe(res => {
@@ -637,7 +676,17 @@ export class ReservationComponent implements OnInit, OnDestroy {
     //   alert('s') 
     // });
   }
-
+  GetExtraChargesDetails(Header, Description, Amount, Tax, Total) {
+    (<FormArray>this.form.get("PayExtra")).push(
+      this.formBuilder.group({
+        Revenu: [Header],
+        Description: [Description],
+        Amount: [Amount, [Validators.required]],
+        TaxAmount: [Tax],
+        TotalAmount: [Total],
+      })
+    );
+  }
   GetPaymentDetails(Mode, Submode, Description, Amount) {
     (<FormArray>this.form.get("PayArray")).push(
       this.formBuilder.group({
@@ -764,7 +813,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     console.log(this.form.value)
 
-     
+    debugger;
     if (this.TotalBillAmount <= 0) {
       this.addToast("Cogwave Software??", "Booking Not Selected Please Select Booking", "error");
       return;
@@ -1082,6 +1131,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     console.log(form.value);
   }
 
+  
 
   PinCodeModelOpen(event, data) {
     this.filterQuery = "";
@@ -1094,11 +1144,10 @@ export class ReservationComponent implements OnInit, OnDestroy {
       city: SelectedData.City,
       state: SelectedData.State,
       Area: SelectedData.AreaData,
-     
+
       nation: "India",
     })
     var allbtn = document.querySelector('.md-show');
-    console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
 
