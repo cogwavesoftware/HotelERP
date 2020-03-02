@@ -810,6 +810,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
+  ngOnChanges(sss:string)
+  {
+    
+  }
+
 
   ngAfterViewInit() {
     // server-side search
@@ -1045,15 +1050,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   ChangeCheckoutDate(NoOfDays) {
+    debugger;
     //this.NodaysChanged = NoOfDays;
     // var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     //var result = this.datePipe.transform(new Date().getDay() + 2, "dd/MM/yyyy");
 
-    this.minDate = new Date();
-    this.maxDate.setDate(this.minDate.getDate() + parseInt(NoOfDays));
-    var result = this.datePipe.transform(this.maxDate, "dd/MM/yyyy");
+    this.minDate = new Date(Date.now());
+    this.maxDate = new Date(Date.now());
+    this.maxDate.setDate(this.maxDate.getDate() + parseInt(NoOfDays));
+    //var result = this.datePipe.transform(this.maxDate, "MM/dd/yyyy");
     this.form.patchValue({
-      checkoutdate: result
+      checkoutdate: this.maxDate
     })
 
   }
@@ -1463,6 +1470,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
   }
+
+
 
 
 
