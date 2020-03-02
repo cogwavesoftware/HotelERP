@@ -1,17 +1,19 @@
 .base {
-    background: darkslategray;
-    margin-top: 5vh;
-    border: 3px solid black;
+    background: #e9ecef;
+    margin-top: 16px;
+    border: 1px solid #007bff;
+    margin-bottom: 16px;
     width: 100%;
 }
 
 .maindisplay {
-    background: lightgrey;
-    height: 25vh;
-    padding: 5% !important;
+    background: #ddd;
+    height: 24vh;
+    padding: 3% !important;
     font-size: 4rem;
     text-align: right;
-    font-family: Courier, monospace;
+    font-family: Poppins-Regular !important;
+    //font-family: Courier, monospace;
     overflow: auto;
 }
 
@@ -31,11 +33,12 @@
     height: 20%;
     background: whitesmoke;
     color: black;
-    padding: 5%;
-    font-size: 2rem;
+    padding: 10px 0px 10px 0px;
+    font-size: 1.5rem;
     text-align: center;
     cursor: pointer;
     opacity: 0.9;
+    border:1px solid #f3f3f3;
 }
 
 .keys:hover {
@@ -44,20 +47,20 @@
 
 .ackey {
     color: red;
-    background: black;
+    background: #cccccc;
 }
 
 .equalkey {
-    color: white;
-    background-color: orangered; 
+    color: #000;
+    background-color: #cccccc; 
 }
 
 .numkey {
-    color: skyblue;
-    background-color: black; 
+    color: #000;
+    background-color: #cccccc; 
 }
 
 .opkey {
-    color: white;
-    background-color: black; 
+    color: #000;
+    background-color: #ccc; 
 }

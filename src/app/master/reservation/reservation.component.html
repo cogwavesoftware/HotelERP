@@ -427,9 +427,14 @@
                                       </ngb-panel>
       
       
-                                      <ngb-panel id="ngb-close-p1" title="Booking RoomTypes">
-                                        
-                                        <ng-template ngbPanelContent>
+                                      <ngb-panel id="ngb-close-p1" title="Booking RoomTypes" style="position: relative;">                                        
+                                        <ng-template ngbPanelContent>                                         
+                                          <i (click)="calculator.show()" style="position: absolute;
+                                          top: 7px;
+                                          right: 10px;
+                                          font-size: 148%;
+                                          color: #fff;" class="fa fa-calculator" aria-hidden="true"></i>      
+
                                           <div class="test123 userlist guestinfofirstrow bookingroomtype" style="padding-left: 5px;">
                                             <div class="grid-table" style="width: 100%;">
                                               <div class="thead">
@@ -593,7 +598,7 @@
                                         <ng-template ngbPanelContent>
                                           <div class="test123 userlist guestinfofirstrow paymentarray" style="padding-left: 5px;">
                                             <div class="">
-                                              <button type="button" id="closebtn" (click)="calculator.show()" class="btn btn-primary btn-sm">Calculator</button>
+                                             
                                                 <div class="row">
                                                 <div class="col-lg-10 col-md-10 col-xs-12">
                                                   <div class="grid-table" style="width: 100%;">
@@ -816,179 +821,112 @@
                           </ng-template>
                     </ngb-tab>
                     <ngb-tab title="Other Info"  >
-                      <ng-template ngbTabContent>
-                        <div [@fadeInOutTranslate] class="m-t-15">
-                          <ngb-accordion [closeOthers]="true" activeIds="ngb-close-p1" #acc="ngbAccordion"
-                          class="ngb-accordion">  
-
-                          <ngb-panel id="ngb-close-p1"  title="Pickup Details">
-                            <ng-template ngbPanelContent >
-                          
-                               <div class="col-md-12" style="padding-left:0; padding-right:0">
-                                 
-                                 
-
-                                     <!--  test row 1-->
-                                     <div class="guestinfofirstrow userlist " >
-                                        
-
-
-                                  <div class="row  guestinfofirstrow" >
-
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="Pickup">Pickup Location </label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickup" formControlName="Pickup" name="Pickup" autocomplete="off"  required style="position: relative;"  />  
-                                       
-                                        </div>  
-                                    </div>
-                                    
-
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="Area">Pickup Time </label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickuptime" formControlName="Pickuptime" name="Pickuptime" autocomplete="off"  required  />  
-                                         
-                                        </div>  
-                                    </div>
-                                    
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="city">Drop Location</label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Drop" formControlName="Drop" name="Drop" autocomplete="off"  required  />  
-                                       
-                                        </div>  
-                                    </div>
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-
-
-                                      <div class="form-group">
+                    <ng-template ngbTabContent>
+                      <div class="userlist reservotherinfo" style="background-color: #fff;">
+                      
+                        <div class="row">
+                          <div class="fltleftouter">
+                            <h5>Pickup Details</h5>
+                            <div class="fltleft">
+                              
+                              <div class="col-md-12">
+                                
+                                <div class="row  guestinfofirstrow" >
+                                  <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="Pickup">Pickup Location </label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickup" formControlName="Pickup" name="Pickup" autocomplete="off"  required style="position: relative;"  />  
+                                     </div>  
+                                  </div>     
+                                  <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="Area">Pickup Time </label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickuptime" formControlName="Pickuptime" name="Pickuptime" autocomplete="off"  required  /> 
+                                     </div>  
+                                  </div> 
+                                   <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="city">Drop Location</label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="Drop" formControlName="Drop" name="Drop" autocomplete="off"  required  />  
+                                      </div>  
+                                  </div>
+                                  </div>
+                                  <div class="row  guestinfofirstrow" > 
+                                     <div class='col-12 col-lg-4 col-md-4 col-sm-4'> 
+                                       <div class="form-group">
                                         <label class="form-control-label" for="state ">Driver Name</label>
                                         <input type="text" class="form-control tooltip-form" id="PickupDriverName" formControlName="PickupDriverName" name="PickupDriverName" autocomplete="off"  required  />  
-                                       
-                                   
+                                       </div> 
+                                       </div>
+                                       <div class='col-12 col-lg-4 col-md-4 col-sm-4'> 
+                                          <div class="form-group">
+                                          <label class="form-control-label" for="state ">Driver Name</label>
+                                          <input type="text" class="form-control tooltip-form" id="PickupDriverName" formControlName="PickupDriverName" name="PickupDriverName" autocomplete="off"  required  />  
+                                         </div> 
+                                        </div>
+                                        <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                          <div class="form-group">
+                                            <label class="form-control-label" for="company">Vechile No </label>                                  
+                                              <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickupvechileno" formControlName="Pickupvechileno" name="Pickupvechileno" autocomplete="off" required  />   
+                                           </div>  
+                                       </div>
+                                    </div>
+                                    <div class="row  guestinfofirstrow"  > 
+                                       <div class='col-12 col-lg-12 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Address1">Remarks</label>
+                                          <input type="text" class="form-control tooltip-form searchiconrelative" id="Remarks" formControlName="Remarks" name="Remarks" autocomplete="off"  required  />  
+                                        </div>  
                                       </div>
-
-
-
-                                
-                                    </div>
-
-
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                    
-
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="StateCode">Driver MobileNo</label>
-                                        <input type="text" class="form-control tooltip-form" id="PickupDriverNo" formControlName="PickupDriverNo" name="PickupDriverNo" autocomplete="off"  required  />  
-                                        
-                                        </div> 
-
-                                    </div>
-
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="company">Vechile No </label>
+    
+                                     </div> <!-- end of row-->
+                              </div>
+                            </div>
+                          </div>
+                          <div class="fltleftouter">
+                            <h5> Guest Contact Details</h5> 
+                            <div class="fltright">
                                   
-                                          <input type="text" class="form-control tooltip-form searchiconrelative" id="Pickupvechileno" formControlName="Pickupvechileno" name="Pickupvechileno" autocomplete="off" required  />   
-                                         
-                                        </div>  
-
-                                    </div>                                
-                                   </div> <!-- end of row-->
-                                  
-                                   <div class="row  guestinfofirstrow"  >
- 
-                                    <div class='col-12 col-lg-12 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="Address1">Remarks</label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="Remarks" formControlName="Remarks" name="Remarks" autocomplete="off"  required  />  
-                                         
-                                        </div>  
-                                    </div>
-
-                                   </div> <!-- end of row-->
-
-                                </div>
-
-                               </div>
-                            </ng-template>
-                          </ngb-panel>
-
-
-                          <ngb-panel id="ngb-close-p1"  title="Guest Contact Details">
-                            <ng-template ngbPanelContent >
-                          
-                               <div class="col-md-12" style="padding-left:0; padding-right:0">
+                              <div class="col-md-12">
+                                                     
+                                <div class="row  guestinfofirstrow" >
+                                  <div class='col-12 col-lg-12  '>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="GContactname">Contact Name</label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="GContactname" formControlName="GContactname" name="GContactname" autocomplete="off"  required style="position: relative;"  />  
+                                     </div>  
+                                  </div> 
                                  
-                                 
-
-                                     <!--  test row 1-->
-                                     <div class="guestinfofirstrow userlist " >
-                                        
-
-
-                                  <div class="row  guestinfofirstrow" >
-
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="GContactname">Contact Name</label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="GContactname" formControlName="GContactname" name="GContactname" autocomplete="off"  required style="position: relative;"  />  
+                                 </div> <!-- end of row-->
+                                 <div class="row  guestinfofirstrow" >
+                                  <div class='col-12 col-lg-12'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="GContactno">ContactNo </label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="GContactno" formControlName="GContactno" name="GContactno" autocomplete="off"  required  />  
+                                      </div>  
+                                  </div>
+                                 </div>
+                                <div class="row  guestinfofirstrow" >
+                                  <div class='col-12 col-lg-12'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="EmailId">EmailId</label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="GEmailId" formControlName="GEmailId" name="GEmailId" autocomplete="off"  required  />  
                                        
-                                        </div>  
-                                    </div>
-                                    
-
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="GContactno">ContactNo </label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="GContactno" formControlName="GContactno" name="GContactno" autocomplete="off"  required  />  
-                                         
-                                        </div>  
-                                    </div>
-                                    
-                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="EmailId">EmailId</label>
-                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="GEmailId" formControlName="GEmailId" name="GEmailId" autocomplete="off"  required  />  
-                                         
-                                        </div>  
-                                    </div>
-                                    
-
-
-                                
-                                   </div> <!-- end of row-->
-                                  
-                                   
-
+                                      </div>  
+                                  </div> 
                                 </div>
-
-                               </div>
-                            </ng-template>
-                          </ngb-panel>
-
-
- 
-
-
-
-
-
-
- 
-
+    
+    
+                              </div>
+                            </div>
+                          </div>
+                          
                          
                           
-
+                      </div>
                         
-                          
-                          
-
-                        </ngb-accordion> 
-                          
-   
-                          </div>
+                      </div>
+                       
                           </ng-template>
                     </ngb-tab>
                   </ngb-tabset>
@@ -1437,81 +1375,86 @@
 
 
 
-
-          <app-modal-animation [modalID]="'effect-1'" [modalClass]="'md-effect-4 addressmodeleffect'">
-            <h3 class="f-15"> Room Availability</h3>
-              <div class="app-modal-body text-center" style="position: relative;"> 
-                <div class="table-content crm-table">
-                  <div class="project-table addressproject-table">
-                    <div id="crm-contact" class="dt-responsive">
-                      <input id="frmdate" name="frmdate" class="form-control"  [(ngModel)]="model.frmdate" #frmdate="ngModel"   placement="right" type="text"   bsDaterangepicker   [minDate]="minDate"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
-                      <div class="row">         
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                          <div class="input-group">
-                            
-                                <!-- <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
-                              -->
-                        
-                          </div> 
-                        </div>      
-                      </div>      
-                                   
-  
-                       <div class="table-responsive">
-                        <table class="table table-striped table-bordered full-data-table"> 
-                          <thead>
-                            <tr> 
-                              <th style="text-align:left;">Date</th>        
-                              <th *ngFor="let list of  roomstype">
-                                  {{ list.RoomType}}
-                              </th>       
-                            </tr>
-                                        
-                          </thead>
-                          <tbody>                    
-                           <tr *ngFor="let item of Availabilitylist; let i = index;">  
-                           
-                            <td style="text-align:left;">{{item.Date | date}}</td>                   
-                            
-                            <td *ngFor="let subarray of  item.Rooms" >
-                              {{ subarray.Rooms}}
-                            </td>
-                            
-                            
-                          </tr>  
-                          </tbody>
-                         
-                        </table>
-                       
-                      </div> 
-                    </div>
-                  </div>
-                </div>     
-                     <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+<div class="newresroomavail">
+  <app-modal-animation [modalID]="'effect-1'" [modalClass]="'md-effect-4 addressmodeleffect'">
+    <h3 class="f-15"> Room Availability</h3>
+      <div class="app-modal-body text-center" style="position: relative;"> 
+        <div class="table-content crm-table">
+          <div class="project-table addressproject-table">
+            <div id="crm-contact" class="dt-responsive">
+              <label class="form-control-label" style="font-size: 100%;">  <i class="fa fa-calendar" ></i> Select date</label>
+              <input id="frmdate" name="frmdate" class="form-control"  [(ngModel)]="model.frmdate" #frmdate="ngModel"   placement="center" type="text"   bsDaterangepicker   [minDate]="minDate"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+              <div class="row">         
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    
+                        <!-- <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
+                      -->
+                
+                  </div> 
                 </div>      
-              </app-modal-animation>
+              </div>      
+                           
+
+               <div class="table-responsive">
+                <table class="table table-striped table-bordered full-data-table"> 
+                  <thead>
+                    <tr> 
+                      <th style="text-align:left;">Date</th>        
+                      <th *ngFor="let list of  roomstype">
+                          {{ list.RoomType}}
+                      </th>       
+                    </tr>
+                                
+                  </thead>
+                  <tbody>                    
+                   <tr *ngFor="let item of Availabilitylist; let i = index;">  
+                   
+                    <td style="text-align:left;">{{item.Date | date}}</td>                   
+                    
+                    <td *ngFor="let subarray of  item.Rooms" >
+                      {{ subarray.Rooms}}
+                    </td>
+                    
+                    
+                  </tr>  
+                  </tbody>
+                 
+                </table>
+               
+              </div> 
+            </div>
+          </div>
+        </div>     
+             <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+        </div>      
+      </app-modal-animation>
+</div>
+          
 
 
+  <div class="calcdiv">
+    <app-modal-basic #calculator [dialogClass]="'modal-sm'" [hideHeader]="true" [hideFooter]="true">
+      <div class="app-modal-body">
+        <button type="button" class="close basic-close-light-box" (click)="calculator.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+              
         
-                  <app-modal-basic #calculator [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
-                    <div class="app-modal-body">
-                      <button type="button" class="close basic-close-light-box" (click)="calculator.hide()">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                            
-                      
-                      <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <app-calculator></app-calculator>
-                          </div>
-                         
-                                  
-                        </div>
-                      </perfect-scrollbar>
-                       
-                    </div>
-                  </app-modal-basic>
+        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'auto'" [config]="config">
+          <div class="row">
+            <div class="col-sm-12">
+              <app-calculator></app-calculator>
+            </div>
+           
+                    
+          </div>
+        </perfect-scrollbar>
+         
+      </div>
+    </app-modal-basic>
+  </div>      
+                  
 
 
 

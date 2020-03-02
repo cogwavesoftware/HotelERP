@@ -5802,7 +5802,8 @@ outerdiv{
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-12.col-lg-6,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-1,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-4,
-.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-5{
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-5,
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-12{
     padding-right:1px;
     padding-left:0;
 }
@@ -6803,3 +6804,37 @@ outerdiv{
 .addGuestouter1 .addressmodeleffect .md-content h3{
     font-size: 90%;
 }
+ 
+.newresroomavail .md-overlay{    
+    z-index:1055!important;
+}
+.newresroomavail .md-modal{
+    z-index:1068!important;
+}
+.calcdiv .modal-body{
+    padding:0px; 
+}
+ 
+.fltright,
+.fltleft{
+    width: 100%;
+    border:1px solid #ccc;
+    padding:10px;
+}
+ 
+ .reservotherinfo .fltleftouter{
+     float:left;
+     width:50%;
+ }
+.fltleftouter h5{
+    color: #fff;
+    font-size: 110%;
+    border-top-right-radius: 5px;
+    padding: 5px;
+    margin: 0px 2px 0px 0px;
+    padding-left: 10px;
+    background: linear-gradient(-40deg, #360033 0%, #0b8793 51%, #360033 100%) !important;
+ }
+ .outerdiv .reservotherinfo .form-group{
+     margin-bottom: 0;
+ }
