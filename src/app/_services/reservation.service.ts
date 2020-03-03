@@ -88,6 +88,12 @@ export class ReservationService {
   {
     return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/ReservationRooms?ReservationNo=' + ResNo + '&BranchCode=' + BranchCode);
   }
+   
 
+  CancelReservation(cancelData:any)
+  { 
+    return this.http.post(environment.apiURL + '/api/CloudHMS/reservation/Cancelbookings', cancelData, { headers: environment.BASE_CONTENTTYPE_HEADER })
+    
+  }
 
 }

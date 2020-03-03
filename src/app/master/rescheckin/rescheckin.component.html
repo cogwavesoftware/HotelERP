@@ -226,16 +226,7 @@
                                                     </div>                                                  
                                                    </div>   -->
 
-                                                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                    <div class="form-group">
-                                                      <label class="form-control-label" for="Reference">Reference </label>
-                                                     
-                                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="RefName" formControlName="RefName" name="RefName" autocomplete="off"  required  />   
-                                                        <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="ReferanceModelOpen('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a>                                                      
-                                                      
-                                                      </div>  
-        
-                                                  </div>
+                                                
 
 
 
@@ -281,7 +272,16 @@
                                                       </div>  
                                                   </div>
 
-
+                                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="Reference">Reference </label>
+                                                     
+                                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="RefName" formControlName="RefName" name="RefName" autocomplete="off"  required  />   
+                                                        <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="ReferanceModelOpen('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a>                                                      
+                                                      
+                                                      </div>  
+        
+                                                  </div>
                                                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                     <div class="form-group">
                                                       <label class="form-control-label" for="TaxHeader ">Tax Header</label>
@@ -345,7 +345,7 @@
                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                   <div class="form-group">
                                                     <label class="form-control-label" for="state ">State</label>
-                                                    <select class="custom-select" #statename  name="state" formControlName="state"
+                                                    <select class="custom-select" #statename  (change)="GetStateCode(statename.value)"  name="state" formControlName="state"
                                                       id="state">
                                                      
                                                       <option value="0">Select</option> 
@@ -525,6 +525,8 @@
                                                                   
                                           
                                            </div> <!-- col-12 end-->
+
+                                       
                                            
                                          </div>
                                        </div>
@@ -1699,7 +1701,7 @@
                                     top: -11px;
                                     z-index: 99;
                                     right: 0;" >
-                                      <i class="fa fa-trash" aria-hidden="true"></i>
+                                      <i class="fa fa-trash" aria-hidden="true" (click)="onDeleteAccountForm(j)" ></i>
                                   </button> 
   
                                       <div class="row" style="margin-left: 0;">
@@ -1897,7 +1899,7 @@
                                             <tbody>
                                               <tr>
                                                 <td>
-                                                  <img [src]="imgsrc"  style="width:100px;height:75px">                                                
+                                                  <img [src]="GuetImg0"  style="width:100px;height:75px">                                                
   
                                             </td>
                                             <td>

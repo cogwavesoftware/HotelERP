@@ -1,3 +1,4 @@
+import { ConfirmationDialogService } from './../../_services/confirmation-dialog.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
@@ -11,64 +12,63 @@ import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
   selector: 'app-reservationlist',
   templateUrl: './reservationlist.component.html',
   styleUrls: ['./reservationlist.component.scss',
-              '../../../assets/icon/icofont/css/icofont.scss']
+    '../../../assets/icon/icofont/css/icofont.scss']
 })
 
-export class ReservationlistComponent implements OnInit,AfterViewInit {
-  companyList:any;
-  BookingList:any;
+export class ReservationlistComponent implements OnInit, AfterViewInit {
+  companyList: any;
+  BookingList: any;
   subpaymodelist: any;
-  toggle:boolean=true;
-  Branch:string;
+  toggle: boolean = true;
+  Branch: string;
   model: any = {};
-  Reslavelist:any;
+  Reslavelist: any;
+  CreatedBy:number;
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
   @ViewChild('searchdata', { static: false }) searchdata: ElementRef;
-  constructor( private _masterservice:MasterformService,public _router:Router,private toastyService: ToastyService,
-    private _reservationservice:ReservationService ) {
-      this.model.RefundType="-1"
-     }
+  constructor(private _masterservice: MasterformService, public _router: Router,
+    private toastyService: ToastyService, private confirmationDialogService: ConfirmationDialogService
+    , private _reservationservice: ReservationService) {
+    this.model.RefundType = "-1"
+  }
 
-     ngOnInit() {
-      this.Branch="CW_1001";
-       this._masterservice.GetRoomcomany(this.Branch).subscribe(data=>{
-       this.companyList=data;   
-      });
-  
-      this._reservationservice.GetBookingList(this.Branch).subscribe(data=>{
-        this.BookingList=data;
-        console.log(this.BookingList)
-         
-       });
+  ngOnInit() {
+    this.Branch = "CW_1001";
+    this.CreatedBy=1;
+    this._masterservice.GetRoomcomany(this.Branch).subscribe(data => {
+      this.companyList = data;
+    });
 
-       
-      
+    this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
+      this.BookingList = data;
+      console.log(this.BookingList)
 
-    }
-  
-    SearchBookingList(search:string)
-    {
-      this._reservationservice.FilterBookingListAllsearch(this.Branch,search).subscribe(data=>{
-        this.BookingList=data;
-        console.log(this.BookingList)
-         
-       });
-    }
+    });
 
-    GetsubModepayment(Name: string) {
+  }
 
-      this._masterservice.GetAllSubPaymendModeViaMode(this.Branch, Name).subscribe(res => {
-        this.subpaymodelist = res
-      })
-  
-    }
-    
+  SearchBookingList(search: string) {
+    this._reservationservice.FilterBookingListAllsearch(this.Branch, search).subscribe(data => {
+      this.BookingList = data;
+      console.log(this.BookingList)
+
+    });
+  }
+
+  GetsubModepayment(Name: string) {
+
+    this._masterservice.GetAllSubPaymendModeViaMode(this.Branch, Name).subscribe(res => {
+      this.subpaymodelist = res
+    })
+
+  }
+
   FilterPaymentMode(mode: string) {
     alert(mode)
     switch (mode) {
       case "Cash":
         this.subpaymodelist = [];
-        this.subpaymodelist.push("Cash")     
+        this.subpaymodelist.push("Cash")
         break;
       case "Card":
         this.GetsubModepayment("Card")
@@ -78,7 +78,7 @@ export class ReservationlistComponent implements OnInit,AfterViewInit {
         break;
       case "Cheque":
         this.subpaymodelist = [];
-       
+
         this.subpaymodelist.push("DD")
         break;
       case "Walet":
@@ -88,71 +88,103 @@ export class ReservationlistComponent implements OnInit,AfterViewInit {
 
   }
 
-  
-  ngAfterViewInit()
-  {
-    
+
+  ngAfterViewInit() {
+
     fromEvent(this.searchdata.nativeElement, 'keyup')
-    .pipe(
-      filter(text => this.searchdata.nativeElement.value.length > 2),
-      debounceTime(1000),
-      distinctUntilChanged(),
-      // tap(x=>console.log('from tap' + x)),
-      switchMap(id => {
-        //console.log(id)
-        return this._reservationservice.FilterBookingListAllsearch(this.Branch, this.searchdata.nativeElement.value);
-      })
-    ).subscribe(res => {
-      this.BookingList = res;   
-    });
-  
+      .pipe(
+        filter(text => this.searchdata.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          return this._reservationservice.FilterBookingListAllsearch(this.Branch, this.searchdata.nativeElement.value);
+        })
+      ).subscribe(res => {
+        this.BookingList = res;
+      });
+
   }
 
-  CancelReservation(event, data)
-  {
-
-    this.model.GuestName=data.GuestName;
-    this.model.BookingNo=data.BookingNo;
-    this.model.CompanyName=data.CompanyName;
-    this.model.Status=data.Status;
-    this.model.BillAmount=data.BillAmount;
-    this.model.AdvancePaidAmount=data.AdvancePaidAmount;
-    
-
-
-
+  CancelReservation(event, data) {
+    this.model.BranchCode=this.Branch;
+    this.model.CreatedBy=this.CreatedBy;
+    this.model.GuestName = data.GuestName;
+    this.model.BookingNo = data.BookingNo;
+    this.model.CompanyName = data.CompanyName;
+    this.model.Status = data.Status;
+    this.model.BillAmount = data.BillAmount;
+    this.model.AdvancePaidAmount = data.AdvancePaidAmount;
     document.querySelector("#" + event).classList.add("md-show");
-    this._reservationservice.GetReservationslaveDetail(this.Branch,data.BookingNo).subscribe(res=>{
-      this.Reslavelist=res;
+    this._reservationservice.GetReservationslaveDetail(this.Branch, data.BookingNo).subscribe(res => {
+      this.Reslavelist = res;
     })
   }
 
-  onSubmitReservationCancel(form?: NgForm)
-  {
-    debugger;
-    form.value.BranchCode = localStorage.getItem("BranchCode")
-    form.value.CreatedBy = 1;
-    
+
+
+
+
+
+  onSubmitReservationCancel(form?: NgForm) {
+
+
+
+    console.log(this.model)
+
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {
+
+          this._reservationservice.CancelReservation(this.model).subscribe(data => {
+            if (data == true) {
+              this.addToast(
+                "Cogwave Software",
+                "Reservation Canceled Succesfully",
+                "success"
+              );
+
+              var allbtn = document.querySelector('.md-show');
+              allbtn.classList.remove("md-show");
+              this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
+                this.BookingList = data;
+                console.log(this.BookingList)
+              });
+
+            } else {
+              this.addToast("Cogwave Software", "Reservation Canceled  Data Not Saved", "error");
+            }
+          });
+
+        }
+        else {
+        }
+      })
+      .catch(() => {
+        alert('cach')
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
   }
-  
-  ShowAllCompany()
-  {
-    this._reservationservice.GetBookingList(this.Branch).subscribe(data=>{
-      this.BookingList=data;
+
+
+  ShowAllCompany() {
+    this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
+      this.BookingList = data;
       console.log(this.BookingList)
-       
-     });
+
+    });
   }
-  
-  ShowAllReservationList()
-  {
-    this._reservationservice.GetBookingList(this.Branch).subscribe(data=>{
-      this.BookingList=data;
+
+  ShowAllReservationList() {
+    this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
+      this.BookingList = data;
       console.log(this.BookingList)
-       
-     }); 
+
+    });
   }
-  
+
 
 
   addToast(title, Message, theme) {
@@ -199,19 +231,16 @@ export class ReservationlistComponent implements OnInit,AfterViewInit {
 
 
 
-  FilterDataViaCompany(companyname:string)
-  {
-    this._reservationservice.FilterBookingListViaCompanyName(this.Branch,companyname).subscribe(data=>{
-      this.BookingList=data;
+  FilterDataViaCompany(companyname: string) {
+    this._reservationservice.FilterBookingListViaCompanyName(this.Branch, companyname).subscribe(data => {
+      this.BookingList = data;
       console.log(this.BookingList)
-       
-     });
+
+    });
   }
-  
-   Edit(ReservationNo:string)
-   {
-    this._router.navigate(['/Master/reservation',ReservationNo])
-   }
+
+  Edit(ReservationNo: string) {
+    this._router.navigate(['/Master/reservation', ReservationNo])
   }
-    
-  
+}
+

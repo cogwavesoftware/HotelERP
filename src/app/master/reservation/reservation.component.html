@@ -49,7 +49,7 @@
                                                   
                                                   <div class="tdwidth">
                                                     <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Arival Date</div>
-                                                    <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue',isAnimated: true, adaptivePosition: true}" class="form-control">                                                
+                                                    <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker   [minDate]="minDate"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue',isAnimated: true, adaptivePosition: true}" class="form-control">                                                
                                                   </div>
                                                   <div class="tdwidth tdwidthspcl">
                                                     <div class="tdwidthlbl"><i class="fa fa-clock-o" aria-hidden="true"></i> Arival Time</div>
@@ -210,7 +210,8 @@
     
                                                   <div class="form-group">
                                                     <label class="form-control-label" for="state ">State</label>
-                                                    <select class="custom-select" #statename  name="state" formControlName="state"
+                                                    
+                                                    <select class="custom-select" #statename (change)="GetStateCode(statename.value)"  name="state" formControlName="state"
                                                       id="state">
                                                      
                                                       <option value="select">Select</option> 
@@ -393,14 +394,14 @@
                                                         <label class="form-control-label" for="cometoknow ">Confirm</label>                                                  
                                                         <!-- <input type="checkbox" [checked]="currentlyChecked" formControlName="BookingStatus" (change)="OnCheckBoxChange('CNF', $event.target.checked)"  name="BookingStatus"  id="BookingStatus" class="form-control" style="width: 15px;" >
                                                         <input type="checkbox" name="test" [checked]="currentlyChecked === check_box_type.APPLY_FOR_JOB" (click)="selectCheckBox(check_box_type.APPLY_FOR_JOB)"> -->
-                                                        <input type="radio"  class="form-control" style="width: 15px" value="male" formControlName="BookingStatus">  
+                                                        <input type="radio"  class="form-control" style="width: 15px" value="CNF" formControlName="BookingStatus">  
               
                                                       </div>
                                                     </div>
                                                     <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
                                                       <div class="form-group">
                                                         <label class="form-control-label" for="WaitingList ">Waiting </label>
-                                                        <input type="radio" value="female" class="form-control" style="width: 15px" formControlName="BookingStatus"> 
+                                                        <input type="radio" value="WTL" class="form-control" style="width: 15px" formControlName="BookingStatus"> 
                                                       
                                                         <!-- <input type="checkbox" formControlName="BookingStatus" (change)="OnCheckBoxChange('WL', $event.target.checked)" name="BookingStatus"  id="BookingStatus" class="form-control" style="width: 15px;"  > -->
                                                       </div>

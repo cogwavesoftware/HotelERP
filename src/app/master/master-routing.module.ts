@@ -137,11 +137,15 @@ const routes: Routes = [
       {
         path: 'monthchart',
         loadChildren: './monthchart/monthchart.module#MonthchartModule'
+        
       },
-
+     
     ]
   }
 ];
+
+
+
 
 
 

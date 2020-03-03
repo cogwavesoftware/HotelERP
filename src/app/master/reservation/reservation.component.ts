@@ -93,12 +93,12 @@ export class ReservationComponent implements OnInit, OnDestroy {
   public requiredRoomlist: number[] = [];
   foriegnguest: string[] = ["Yes", "No"];
   discounttypes = ["Amount", "%"];
+  pushInstruction:[]=[];
   genderitems: any;
   gender: any;
   pincode: any;
   StateList: any;
   booking: HMSReservationBookingmodel;
-
   bookings: HMSReservationBookingmodel[];
   maxDate = new Date();
   myTime = new Date();
@@ -172,7 +172,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     })
 
 
-
+     debugger;
     if (this.OrgReservationNo == "NewRes") {
       this.IsReservation = true;
       this.IsAmendReservation = false;
@@ -187,6 +187,11 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     this.minDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate() + 1);
+
+    console.log('this.maxDate')
+    console.log('this.maxDate')
+    console.log(this.maxDate)
+
     this.navRight = "nav-off";
     this.timepicker = Object.assign({},
       {
@@ -258,17 +263,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     });
 
 
-    this.form.get('state').valueChanges.subscribe(val => {
-      console.log(val)
-      let Cons = this.StateList.find(x => x.State == val);
-
-      this.form.patchValue({
-        StateCode: Cons.StateCode
-      })
-
-    });
-
-    this.form.get('checkoutdate').valueChanges.subscribe(() => {
+    //this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
       // console.log('Cnstructor Changed')
       // let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
@@ -286,8 +281,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
       // else {
       //   this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
       // }
-
-    });
+    //});
 
 
   }
@@ -420,21 +414,26 @@ export class ReservationComponent implements OnInit, OnDestroy {
         let ResInstruction = this.ReservationAmendform.Special
         let ResExtraCharges = this.ReservationAmendform.ExtraCharges
         let ResContact = this.ReservationAmendform.Contact
+        this.pushInstruction=this.ReservationAmendform.Special;
+        let SpecialInstructionitems=[];
+        this.pushInstruction.forEach(x => {
+         let data=x;
+         SpecialInstructionitems.push(data['Description'])
+         console.log(data['Description'])
+         });
+
 
         let ReservationBookedSlaveArray = [];
         var AllreadyBookedType = [];
         let Checkintime, checkoutTime, checkindate, checkoutdate;
         ReservationBookedSlaveArray = this.ReservationAmendform.ResSlave;
         ReservationBookedSlaveArray.forEach(Slave => {
-          AllreadyBookedType.push(Slave.RoomCode)
-          // Checkintime="12:30";
-          //checkoutTime=this.datePipe.transform(Slave.CheckoutTime, "HH:mm");
-          checkindate = this.datePipe.transform(Slave.CheckinDate, "dd/MM/yyyy"); //correct dont change
-          checkoutdate = this.datePipe.transform(Slave.CheckoutDate, "dd/MM/yyyy");  //correct dont change      
+        AllreadyBookedType.push(Slave.RoomCode)
+   
+          checkindate=new Date(Slave.CheckinDate)
+          checkoutdate=new Date(Slave.CheckoutDate)
+  
         });
-
-        // console.log(Checkintime)
-        // console.log(checkoutTime)
 
 
         if (ResExtraCharges != null) {
@@ -462,8 +461,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
             Remarks: ResPickup.Remarks
           })
         }
-
-        console.log('Guestmodel')
+      
         console.log(Guestmodel)
         this.form.patchValue({
           Guestcode: Guestmodel.GuestCode,
@@ -493,7 +491,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
           checkindate: checkindate,
           checkoutdate: checkoutdate,
           Area: Guestmodel.Area,
-          StateCode: Guestmodel.StateCode
+          StateCode: Guestmodel.StateCode,
+          special:SpecialInstructionitems
+          
         })
         if (companymodel != null) {
           this.form.patchValue({
@@ -533,8 +533,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
         }
 
 
-
-
         let reservation = new HMSReservationFormmodel()
         {
           reservation.CheckInDate = checkindate;
@@ -558,12 +556,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
             console.log("Booking fetched sucssesfully.");
             this.Reservationform = this.golbalresponse;
             console.log(this.Reservationform)
-
-            // let BooikngLength=this.Reservationform.booking.length;
-            // for(let i = 0; i < BooikngLength; i++ )
-            // {// }
-
-
             for (let resdata of this.Reservationform.booking) {
               this.AddBokingButtonviaForeach(resdata)
             }
@@ -623,44 +615,44 @@ export class ReservationComponent implements OnInit, OnDestroy {
     this._masterservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });
-    console.log('this.Revenulist')
+   
     this._masterservice.getrevenudata(this.Branch).subscribe(data => {
       this.Revenulist = data;
-      console.log(this.Revenulist)
+     
     });
-
 
     this._masterservice.GetStateCode().subscribe(res => {
       this.StateList = res
 
     });
 
+
     this._masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
-      console.log(this.planlist);
+     
     });
 
     this.roomservice.GetRoomType("CW_1001").subscribe(data => {
       this.roomtype = data as [];
-      console.log(this.roomtype);
+     
     });
+
     this.CreateNoofDays(31)
     this.handleFormChanges();
 
   }
 
   handleFormChanges() {
-    console.log('handleFormChanges checkoutdate value change')
-    this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
+
+    this.form.get('checkoutdate').valueChanges.subscribe(() => {
       let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
       let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
       console.log(CheckinDate)
       console.log(checkoutdate)
       if (CheckinDate < checkoutdate) {
-
         let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
-        alert(numberofdays)
+        //alert(numberofdays)
         this.form.patchValue({
           nofdays: numberofdays
         });
@@ -670,12 +662,20 @@ export class ReservationComponent implements OnInit, OnDestroy {
       }
 
     });
-    // this.form.valueChanges.subscribe((user: any) => {
-    //   console.log('----Form Data---');
-    //   console.log('username: '+ user.checkoutdate);
-    //   alert('s') 
-    // });
+   
+
   }
+
+  GetStateCode(StateName:string)
+  {
+    let Cons = this.StateList.filter(x => x.State == StateName);  
+    this.form.patchValue({
+      StateCode: Cons[0].StateCode
+     })
+  
+  }
+
+
   GetExtraChargesDetails(Header, Description, Amount, Tax, Total) {
     (<FormArray>this.form.get("PayExtra")).push(
       this.formBuilder.group({
@@ -699,15 +699,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
     );
   }
 
-  // AddpaymentGricffd(): FormGroup {
-  //   return this.formBuilder.group({
-  //     Paymode: ["select"],
-  //     Paysubmode: ["select", [Validators.required]],
-  //     payAmount: [0, [Validators.required]],
-  //     Descriptions: ["0"],
-  //     modeselected: ["0"]
-  //   });
-  // }
   ngOnDestroy() {
     this._bankservice.changeMessage("expanded")
   }
@@ -803,7 +794,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
       }
     }
     for (let Extrach of this.PayExtra.controls) {
-      this.TotalBillAmount += Extrach.get("NetAmount").value;
+      this.TotalBillAmount += Extrach.get("TotalAmount").value;
     }
     this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
 
@@ -950,17 +941,31 @@ export class ReservationComponent implements OnInit, OnDestroy {
     }
   }
   ChangeCheckoutDate(NoOfDays) {
+ 
+    // let CheckinDatce = this.form.get('checkindate').value;
+
+    // this.maxDate.setDate(CheckinDatce.getDate() + parseInt(NoOfDays));
+    // var result = this.datePipe.transform(this.maxDate, "dd/MM/yyyy");
+    // this.form.patchValue({
+    //   checkoutdate: result
+    // })
+    
+
+    debugger;
     //this.NodaysChanged = NoOfDays;
     // var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     //var result = this.datePipe.transform(new Date().getDay() + 2, "dd/MM/yyyy");
-    //this.minDate = new Date();
-    // let CheckinDatce=this.datePipe.transform(this.form.get('checkindate').value,"MM/dd/yyyy");
-    let CheckinDatce = this.form.get('checkindate').value;
 
-    this.maxDate.setDate(CheckinDatce.getDate() + parseInt(NoOfDays));
-    var result = this.datePipe.transform(this.maxDate, "dd/MM/yyyy");
+    this.minDate = this.form.get('checkindate').value
+     
+    console.log(this.minDate)
+
+
+    this.maxDate = new Date(Date.now());
+    this.maxDate.setDate(this.minDate.getDate() + parseInt(NoOfDays));
+    //var result = this.datePipe.transform(this.maxDate, "MM/dd/yyyy");
     this.form.patchValue({
-      checkoutdate: result
+      checkoutdate: this.maxDate
     })
 
   }
@@ -1041,7 +1046,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
     })
 
   }
-
 
 
 

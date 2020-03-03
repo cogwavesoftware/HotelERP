@@ -172,7 +172,7 @@
 
 
   <app-modal-animation [modalID]="'effect-4'" [modalClass]="'md-effect-4 addressmodeleffect'">      
-    <h3 class="f-15" style="position: relative;">Booking Details
+    <h3 class="f-15" style="position: relative;">Cancel Booking Details
       <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
    </h3>
     <div class="container">
@@ -180,6 +180,11 @@
         <div class="row ">
          
           <form #myform = "ngForm" (ngSubmit) = "onSubmitReservationCancel(myform)" class="">
+            
+            <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+            <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+            <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">              
+          
             <div class="app-modal-body text-center addcompany "> 
  
              <div class="col-md-12">
@@ -254,6 +259,12 @@
                            <input type="number" name="RefundAmount" class="form-control" [(ngModel)]="model.RefundAmount" #RefundAmount="ngModel" value="{{RefundAmount}}"  required autocomplete="off">
                           
                        </div>
+                 </div>
+
+                 <div class="col-md-12">
+                
+                  <label>Reason</label>
+                  <input type="text" name="CancelReason" class="form-control" [(ngModel)]="model.CancelReason" #CancelReason="ngModel" value="{{CancelReason}}"    required autocomplete="off">
                  </div>
                
                 <button type="submit" class="btn btn-success btn-sm btn-block" style="margin-top:20px">Cancel Reservation</button>

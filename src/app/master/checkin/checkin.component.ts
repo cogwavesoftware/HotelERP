@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef,SimpleChanges, OnChanges } from "@angular/core";
 import { Observable, Observer, empty, fromEvent } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
@@ -541,8 +541,42 @@ export class CheckinComponent implements OnInit, OnDestroy {
       });
     }
     this.CreateNoofDays(31)
-
+    this.CalculateNoofDays();
   }
+
+
+ CalculateNoofDays()
+ {
+      this.form.get('checkoutdate').valueChanges.subscribe(
+      data => {   
+        console.log(data)
+
+      });
+
+
+      this.form.get('checkoutdate').valueChanges.subscribe(() => {
+
+        let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
+        let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
+        console.log(CheckinDate)
+        console.log(checkoutdate)
+        if (CheckinDate < checkoutdate) {
+  
+          let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
+          alert(numberofdays)
+          this.form.patchValue({
+            nofdays: numberofdays
+          });
+        }
+        else {
+          this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
+        }
+  
+      });
+
+ }
+
+
 
   addBankAccountForm(index: number) {
     let index1 = this.bankAccountForms.length;
@@ -694,7 +728,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-
+  
 
   // removeItem() {
   //   debugger;
@@ -810,14 +844,12 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnChanges(sss:string)
-  {
-    
-  }
-
 
   ngAfterViewInit() {
     // server-side search
+
+
+
 
     fromEvent(this.searchTermguest.nativeElement, 'keyup')
       .pipe(
@@ -922,7 +954,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.webcamImage = webcamImage;
     this.previewUrl = webcamImage.imageAsDataUrl
     this.getImage(webcamImage.imageAsBase64)
-
   }
 
   public cameraWasSwitched(deviceId: string): void {
@@ -1064,6 +1095,8 @@ export class CheckinComponent implements OnInit, OnDestroy {
     })
 
   }
+
+
 
 
   get other(): FormArray {
@@ -1911,6 +1944,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
 }
 
 
+
+function parseDate(str) {
+  var mdy = str.split('/');
+  return new Date(mdy[2], mdy[0] - 1, mdy[1]);
+}
+
+function datediff(first, second) {
+  // Take the difference between the dates and divide by milliseconds per day.
+  // Round to nearest whole number to deal with DST.
+  return Math.round((second - first) / (1000 * 60 * 60 * 24));
+}
 
 
     // this.form.get('nofdays').valueChanges.subscribe(

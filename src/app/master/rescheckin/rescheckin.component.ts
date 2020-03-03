@@ -1,6 +1,6 @@
 
 import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
-import { Observable, Observer, empty, fromEvent,pipe, } from "rxjs";
+import { Observable, Observer, empty, fromEvent, pipe, } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
@@ -12,6 +12,8 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
+import { HMSReservationFormmodel } from './../../_models/HMSReservationFormmodel';
+
 import { Router, ActivatedRoute } from "@angular/router";
 import { CheckinService } from './../../_services/checkin.service';
 import { ReservationService } from './../../_services/reservation.service';
@@ -73,13 +75,21 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
   addcompanybtn: boolean = true;
-  StateList:any;
+  StateList: any;
   selectedRoomcode: any;
   ReferanceList: any;
   subpaymodelist: any;
   golbalresponse: any;
   reservedlist: any;
-  TaxHeader:any;
+  TaxHeader: any;
+  Reservationform: HMSReservationFormmodel;
+  ReservationAmendform: any;
+  TotalBillAmount: number;
+  TotalPaidAmount: number;
+  TotalBalanceAmount: number;
+  OrgCompanycode:string;
+  IsCompanyReservation:boolean;
+  pushInstruction:[]=[];
   //web camara data
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
@@ -104,6 +114,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   type = "default";
   closeOther = false;
   orgReservationNo: string;
+  
   position = 'top-right';
   //public videoOptions: MediaTrackConstraints = {
   // width: {ideal: 1024},
@@ -157,7 +168,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   ismeridian: boolean = false;
   changecolor: boolean = true;
   minDate: Date;
-  UserId:number;
+  UserId: number;
   valid: boolean = true;
   IsShowloader: boolean = false;
   public rowsOnPage = 12;
@@ -195,77 +206,45 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   public CheckinRoom: string;
   roomNoList: any;
   toggle: boolean = true;
-  Process:string;
+  Process: string;
 
   fileDataIdfrontSecGuest: File = null;
   fileDataIdBackSecGuest: File = null;
 
-   GuetImg0; GuetImg1; GuetImg2; GuetImg3: any = null;
-   GuetIdFront0;GuetIdFront1; GuetIdFront2; GuetIdFront3: any = null;
+  GuetImg0; GuetImg1; GuetImg2; GuetImg3: any = null;
+  GuetIdFront0; GuetIdFront1; GuetIdFront2; GuetIdFront3: any = null;
   GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3: any = null;
-
-
-
 
   @ViewChild('searchTerm', { static: false }) searchTerm: ElementRef;
   @ViewChild('searchTermref', { static: false }) searchTermref: ElementRef;
   @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
   @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
   @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
-
-
   public Guestphotopathurl: string;
   public GuestDoucmentFrontpathurl: string = "0";
   public GuestDoucmentBackpathurl: string = "0";
-
-
-
-
-
   back = false;
   Id$: Observable<string>;
   @ViewChild('f', { static: false }) newcompanyform: any;
-
-  constructor(private datePipe: DatePipe,private fb: FormBuilder,
+  constructor(private datePipe: DatePipe, private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
-    private roomservice: RoomtypeService, private confirmationDialogService: ConfirmationDialogService,
+    private roomservice: RoomtypeService,
+    private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService, private _reservationservice: ReservationService,
   ) {
 
-
-
     this._bankservice.changeMessage("collapsed")
-    //this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
     this.IsShowloader = false;
-    this.UserId=1;
-
-   //this.Id$=this.route.snapshot.paramMap.pipe(map(paramMap=>paramMap.get('ResNo')));
-    let ResNo=this.route.snapshot.paramMap.get('ResNo');
-
+    this.UserId = 1;
+    let ResNo = this.route.snapshot.paramMap.get('ResNo');
     this.orgReservationNo = ResNo;
-
-
-    // this.route.paramMap.subscribe(params => {
-    //   this.CheckinRoom = params.get("RoomNo")
-    // })
-
-
     this.CheckinRoom = "GROUP";
-    if (this.CheckinRoom == "GROUP") {
-      this.isGorupCheckin = true;
-      this.IsWalkinCheckin = false;
-      this.IsDisableBookindGrid = true;
-    }
-    else {
-      this.isGorupCheckin = false;
-      this.IsWalkinCheckin = true;
-      this.IsDisableBookindGrid = false;
-    }
-
-
+    this.isGorupCheckin = true;
+    this.IsWalkinCheckin = false;
+    this.IsDisableBookindGrid = true;
     setTimeout(() => {
       this.IsShowloader = false;
     }, 2000)
@@ -322,7 +301,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
-      PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
+      PayArray: this.formBuilder.array([]),
 
       GuestPhotoPath: ["", [Validators.required]],
       GuestIdFront: ["", [Validators.required]],
@@ -349,23 +328,19 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       BranchCode: [this.Branch, [Validators.required]],
       randomCheckinNo: ['0', [Validators.required]],
       IpAdd: [localStorage.getItem("LOCAL_IP")],
-      CreatedBy: [localStorage.getItem("id"), [Validators.required]]
+      CreatedBy: [localStorage.getItem("id"), [Validators.required]],
+      special:[""],
     });
 
-    this.form.get('state').valueChanges.subscribe(val => {
-      let Cons= this.StateList.find(x=>x.State==val);
-      this.form.patchValue({
-        StateCode:Cons.StateCode
-      })
+   
+    
 
-    });
-
- 
 
 
   }
 
   ngOnInit() {
+
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
     this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
     this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
@@ -374,6 +349,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     this.model.BranchCode = "0";
     this.model.CreatedBy = localStorage.getItem("Id");
     this.searchresultsdiv = true;
+
     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
       this.ReferanceList = res;
     },
@@ -393,6 +369,11 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     this._masterservice.Getmiscellaneous('Title').subscribe(data => {
       this.Titlelist = data;
     })
+
+    this._masterservice.GetStateCode().subscribe(res => {
+      this.StateList = res
+
+    });
 
     this._masterservice.Getmiscellaneous('Arrival Mode').subscribe(data => {
       this.arrivalmode = data;
@@ -417,48 +398,171 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       this.howuknow = data;
     })
 
-    //'timeing i disabled'
-    // WebcamUtil.getAvailableVideoInputs()
-    //   .then((mediaDevices: MediaDeviceInfo[]) => {
-    //     this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-    //   });
-
+   
     this._masterservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });
 
     this._masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
-      console.log(this.planlist);
+     
     });
 
     this.roomservice.GetRoomType("CW_1001").subscribe(data => {
       this.roomtype = data as [];
-      console.log(this.roomtype);
+     
     });
 
-    if (this.isGorupCheckin === true) {
       this.onDelete(0, 0);
       this._reservationservice.GetReservedVacenRoomType(this.orgReservationNo, this.Branch).subscribe((data: any) => {
         this.roomNoList = data;
         console.log(this.roomNoList)
       });
-
-      // this._masterservice.GetAllRoomNoViaMode(this.Branch, "V").subscribe((data: any) => {
-      //   this.roomNoList = data;
-      //   console.log(this.roomNoList)
-      // });
-
-
       this._reservationservice.GetReservationCheckin(this.Branch, this.orgReservationNo)
         .subscribe(data => {
           this.reservedlist = data.ReservedRooms;
           console.log(this.reservedlist)
         })
-    }
+    
     this.CreateNoofDays(31)
 
+
+
+    this.OrgCompanycode = "0";
+    this.IsCompanyReservation = false;
+    this._reservationservice.GetBookingDetailViaRes(this.Branch, this.orgReservationNo).subscribe((res: any) => {
+      console.log(res)
+      this.ReservationAmendform = res;
+      let Guestmodel = this.ReservationAmendform.Guest
+      let companymodel = this.ReservationAmendform.company
+      let ResMastermodel = this.ReservationAmendform.ResMaster
+      let ResAdvance = this.ReservationAmendform.Advance
+      let ResExtraCharges = this.ReservationAmendform.ExtraCharges
+      this.pushInstruction=this.ReservationAmendform.Special;
+      let SpecialInstructionitems=[];
+      this.pushInstruction.forEach(x => {
+       let data=x;
+       SpecialInstructionitems.push(data['Description'])
+      
+       });
+
+      let ReservationBookedSlaveArray = [];
+      var AllreadyBookedType = [];
+      let Checkintime, checkoutTime, checkindate, checkoutdate;
+      ReservationBookedSlaveArray = this.ReservationAmendform.ResSlave;
+      ReservationBookedSlaveArray.forEach(Slave => {
+      AllreadyBookedType.push(Slave.RoomCode)
+        checkindate=new Date(Slave.CheckinDate)
+        checkoutdate=new Date(Slave.CheckoutDate)
+      });
+
+      // if (ResExtraCharges != null) {
+      //   ResExtraCharges.forEach(res => {
+      //     this.GetExtraChargesDetails(res.RevenueId, res.Description, res.Amount, res.Tax, res.NetAmount)
+      //   })
+      // }
+      console.log(Guestmodel)
+  
+      this.form.patchValue({
+        Guestcode: Guestmodel.GuestCode,
+        title: Guestmodel.GuestTittle,
+        guestname: Guestmodel.GuestName,
+        gender: Guestmodel.Gender,
+        mobile: Guestmodel.MobileNo,
+        email: Guestmodel.Email,
+        pincode: Guestmodel.PINCode,
+        city: Guestmodel.City,
+        state: Guestmodel.State,
+        nation: Guestmodel.Nation,
+        address1: Guestmodel.Address1,
+        address2: Guestmodel.Address2,
+        address3: Guestmodel.Address3,
+        gstno: Guestmodel.GSTNO,
+        Billing: ResMastermodel.BillingMode,
+        visit: ResMastermodel.PurposeofVisit,
+        source: ResMastermodel.BookingSource,
+        arivalmode: "Reservation",
+        bookingid: ResMastermodel.BookingId,
+        referenceid: ResMastermodel.RefId,
+        // checkintime:Checkintime,
+        // checkouttime:checkoutTime,
+        nofdays: ResMastermodel.NoOfDays,
+        checkindate: checkindate,
+        checkoutdate: checkoutdate,
+        Area: Guestmodel.Area,
+        StateCode: Guestmodel.StateCode,
+        special:SpecialInstructionitems
+        
+      })
+      if (companymodel != null) {
+        this.form.patchValue({
+          companycode: companymodel.CompanyCode,
+          gstno: companymodel.GSTNO,
+          company: companymodel.CompanyName
+
+        })
+        this.OrgCompanycode = companymodel.CompanyCode;
+        this.IsCompanyReservation = true;
+      }
+      if (ResAdvance != null) {
+        this.TotalPaidAmount=0;
+        console.log(ResAdvance)
+        console.log('ResAdvance')
+        ResAdvance.forEach(res => {
+        this.TotalPaidAmount+=res.PaidAmount       
+        });
+
+      }
+      let reservation = new HMSReservationFormmodel()
+      {
+        reservation.CheckInDate = checkindate;
+        reservation.CheckOutDate = checkindate;
+        reservation.ArrivalTime = this.datePipe.transform(this.form.get('checkintime').value, "HH:mm");
+        reservation.DepartureTime = this.datePipe.transform(this.form.get('checkouttime').value, "HH:mm")
+        reservation.NoDays = ResMastermodel.NoOfDays;
+        reservation.BranchCode = this.Branch;
+        reservation.BookedRoomCodelist = JSON.stringify(AllreadyBookedType);
+        reservation.TypeBook = "ResCheckin";
+        reservation.ReservNo = this.orgReservationNo;
+      }   
+    });
   }
+
+
+
+
+
+  GetStateCode(StateName:string)
+  {
+    let Cons = this.StateList.filter(x => x.State == StateName);  
+    this.form.patchValue({
+      StateCode: Cons[0].StateCode
+     })
+  
+  }
+
+  CalculateSummaryAmount() {
+
+    for (let Payarray of this.PayArray.controls) {
+      this.TotalPaidAmount += Payarray.get("payAmount").value;
+    }
+    for (let other of this.other.controls) {
+      let req = other.get('Required').value;
+      if (req > 0) {
+        this.TotalBillAmount += other.get("Net").value;
+      }
+    }
+
+    // for (let Extrach of this.PayExtra.controls) {
+    //   this.TotalBillAmount += Extrach.get("TotalAmount").value;
+    // }
+    // this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+
+  }
+
+
+
+
   removeRoomNo(RoomNo: string): void {
 
     for (let order of this.selectedRoomNoArray) {
@@ -527,7 +631,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
           }
           let Count = this.CheckRoom(RoomCodes);
           if (Count == 0) {
-            var Warning="Not Allowed to book! Already you Selected"
+            var Warning = "Not Allowed to book! Already you Selected"
             this.addToast("Cogwave Software", Warning, "warning");
             document.querySelector("#" + RoomNos).classList.remove('occroom');
             document.querySelector("#" + RoomNos).classList.add('freeroom');
@@ -553,17 +657,6 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   }
 
 
-
-  // removeItem() {
-  //
-  //   console.log(this.other.length);
-  //   // this.arrayItems.pop();
-  //   for (let i = 0; i < this.other.length; i++) {
-  //     this.onDelete(0, i)
-  //     // let index = (<FormArray>this.form.get('Other')).controls.findIndex(x => x.value === i);
-  //   }
-
-  // }
 
 
 
@@ -635,10 +728,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   }
 
   FilterPaymentMode(index: number) {
-
-
     let mode = this.PayArray.controls[index].get("Paymode").value;
-
     switch (mode) {
       case "Cash":
         this.subpaymodelist = [];
@@ -660,24 +750,13 @@ export class RescheckinComponent implements OnInit, OnDestroy {
         this.GetsubModepayment("Walet", index)
         break;
     }
-
   }
 
 
 
   ngAfterViewInit() {
     // server-side search
-
-    this._masterservice.Getmiscellaneous('TaxHeader').subscribe(data => {
-      this.TaxHeader = data;
-    })
-
-
-    this._masterservice.GetStateCode().subscribe(res => {
-      this.StateList = res
-
-    });
-
+   
 
     fromEvent(this.searchTermguest.nativeElement, 'keyup')
       .pipe(
@@ -953,7 +1032,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
 
   ReferanceSave(form?: NgForm) {
     debugger;
-    form.value.BranchCode =this.Branch;
+    form.value.BranchCode = this.Branch;
     form.value.CreatedBy = localStorage.getItem("id");
     form.value.IsActive = true;
     form.value.RefAdress = "0";
@@ -1281,13 +1360,13 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   }
 
   onSubmitcompany(f?: NgForm) {
-  debugger;
-  f.value.BranchCode =this.Branch;
-  f.value.CreatedBy = this.UserId;
-  f.value.Id =0;
-  f.value.IpAdd="0"
-  f.value.IsActive=true;
-  
+    debugger;
+    f.value.BranchCode = this.Branch;
+    f.value.CreatedBy = this.UserId;
+    f.value.Id = 0;
+    f.value.IpAdd = "0"
+    f.value.IsActive = true;
+
     if (f.invalid) {
       console.log(f.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
@@ -1400,90 +1479,140 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-close");
     document.querySelector("#" + event).classList.remove("md-show");
   }
-  addBankAccountForm(index :number) {
-    let index1=this.bankAccountForms.length;
 
-   if(index1 <=3)
-   {
-     this.bankAccountForms.push(this.fb.group({
-       guestname: ['', ""],
-       SGuestCode: ['0'],
-       title: ["select", ""],
-       gender: ["select", ""],
-       mobile: ["", ""],
-       email: ["", ""],
-       pincode: ["", ""],
-       city: ["", ""],
-       state: ["", ""],
-       nation: ["", ""],
-       gstno: ["", ""],
-       address1: ["", ""],
-       address2: ["", ""],
-       address3: ["", ""],
-       GuestIdFront: ["", ""],
-       GuestIdBack: ["", ""],
-       GuestImage: ["", ""],
-       GuestIdFronturl: ["", ""],
-       GuestIdBackurl: ["", ""],
-       Area:["",""],
-       StateCode:["",""]
 
-     }));
-   }
-   else{
-     alert('NOT ALLOWED')
-   }
+  
+  onDeleteAccountForm(i) {
+    (<FormArray>this.form.get("bankAccountForms")).removeAt(i);
+  }
 
- }
- checkValue(event: any,index:number){
-  alert(event.target.checked)
 
-  if(event.target.checked==true)
-   {
-    this.SwipeDataFromPrimaryGuest(index)
-   }
-   else
-   {
+  addBankAccountForm(index: number) {
+    
+    let index1 = this.bankAccountForms.length;
+    this.LoadDummyImage(index1)
+    if (index1 <= 3) {
+      this.bankAccountForms.push(this.fb.group({
+        guestname: ['', ""],
+        SGuestCode: ['0'],
+        title: ["select", ""],
+        gender: ["select", ""],
+        mobile: ["", ""],
+        email: ["", ""],
+        pincode: ["", ""],
+        city: ["", ""],
+        state: ["", ""],
+        nation: ["", ""],
+        gstno: ["", ""],
+        address1: ["", ""],
+        address2: ["", ""],
+        address3: ["", ""],
+        GuestIdFront: ["", ""],
+        GuestIdBack: ["", ""],
+        GuestImage: ["", ""],
+        GuestIdFronturl: ["", ""],
+        GuestIdBackurl: ["", ""],
+        Area: ["", ""],
+        StateCode: ["", ""]
+      }));
+    }
+    else {
+      
+    // this.previewUrl = environment.GuestimagePath + '/imagenot.png';
+    // this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
+    // this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
+      alert('NOT ALLOWED')
+    }
 
-   }
+  }
+ 
+  checkValue(event: any, index: number) {
+   
+    if (event.target.checked == true) {
+      this.SwipeDataFromPrimaryGuest(index)
+    }
+    else {
+         this.RemoveData(index)
+    }
+  }
+
+LoadDummyImage(index:number)
+{
+  
+  if(index==0)
+  {
+    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
+  }
+  if(index==1)
+  {
+    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront1 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack1 = environment.GuestimagePath + '/imagenot1.png';
+  }
+  if(index==2)
+  {
+    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront2 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack2 = environment.GuestimagePath + '/imagenot1.png';
+  }
+  
+
 }
 
+  RemoveData(index) {
 
-SwipeDataFromPrimaryGuest(index) {
-  let address1 = this.form.get("address1").value;
-  let address2 = this.form.get("address2").value;
-  let address3 = this.form.get("address3").value;
-  let pincode = this.form.get("pincode").value;
-  let city = this.form.get("city").value;
-  let state = this.form.get("state").value;
-  let nation = this.form.get("nation").value;
-  let company = this.form.get("company").value;
-  let gstno = this.form.get("gstno").value;
+    this.bankAccountForms.controls[index].patchValue({
+      address1: "",
+      address2: "",
+      address3: "",
+      pincode: "",
+      city: "",
+      state: "",
+      nation: "",
+      gstno: "",
+      company: ""
+    })
+  }
 
-  this.bankAccountForms.controls[index].patchValue({
-    address1: address1,
-    address2: address2,
-    address3: address3,
-    pincode: pincode,
-    city: city,
-    state: state,
-    nation: nation,
-    gstno: gstno,
-    company: company
-  })
-}
+
+
+  SwipeDataFromPrimaryGuest(index) {
+    let address1 = this.form.get("address1").value;
+    let address2 = this.form.get("address2").value;
+    let address3 = this.form.get("address3").value;
+    let pincode = this.form.get("pincode").value;
+    let city = this.form.get("city").value;
+    let state = this.form.get("state").value;
+    let nation = this.form.get("nation").value;
+    let company = this.form.get("company").value;
+    let gstno = this.form.get("gstno").value;
+
+    this.bankAccountForms.controls[index].patchValue({
+      address1: address1,
+      address2: address2,
+      address3: address3,
+      pincode: pincode,
+      city: city,
+      state: state,
+      nation: nation,
+      gstno: gstno,
+      company: company
+    })
+  }
 
 
 
   OpenAdditionalGuest(event) {
     document.querySelector("#" + event).classList.add("md-show");
   }
-  closemodel($event){
+  closemodel($event) {
     var allbtn = document.querySelector('.camwindow');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
-  onRatingClicked(event:any): void {
+  onRatingClicked(event: any): void {
     this._bankservice.currentindex.subscribe(re => {
       let liveindex = re;
 
@@ -1500,7 +1629,7 @@ SwipeDataFromPrimaryGuest(index) {
         case 3:
           this.GuetImg3 = environment.GuestimagePath + "/" + event;
           break;
-       
+
       }
 
     })
@@ -1619,16 +1748,16 @@ SwipeDataFromPrimaryGuest(index) {
   }
 
 
-  OpenCameraDetails(event,index){
-   // this.SendIndexToChild=index;
-   // this._bankservice.changeindexvalue(index);
+  OpenCameraDetails(event, index) {
+    // this.SendIndexToChild=index;
+    // this._bankservice.changeindexvalue(index);
     document.querySelector("#" + event).classList.add("md-show");
   }
   openMyModalPincodePopup(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
-  popinsidepopforguestnamefunc(event, data){
+  popinsidepopforguestnamefunc(event, data) {
     document.querySelector("#" + event).classList.add("md-show");
   }
 }

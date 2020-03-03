@@ -1,3 +1,4 @@
+import { ConfirmationDialogService } from './../../_services/confirmation-dialog.service';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,7 +24,7 @@ import { ReservationlistComponent } from './reservationlist.component';
     FormsModule,
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  providers:[DatePipe]
+  providers:[DatePipe,ConfirmationDialogService]
 })
 export class ReservationlistModule { }
 

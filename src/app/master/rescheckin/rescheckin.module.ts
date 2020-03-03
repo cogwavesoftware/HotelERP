@@ -10,7 +10,7 @@ import { CamarawindowComponent } from './../checkin/camarawindow/camarawindow.co
 
 import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import {TagInputModule} from 'ngx-chips';
 import { ToastyModule } from 'ng2-toasty';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -27,7 +27,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
      HttpClientModule,
      DataTableModule,
      FormsModule,
-      NgSelectModule,
+      NgSelectModule,TagInputModule,
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
