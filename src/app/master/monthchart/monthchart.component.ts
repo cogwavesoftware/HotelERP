@@ -48,6 +48,8 @@ export class MonthchartComponent implements OnInit {
   ngOnInit() {    
  
 
+    this.Availabilitylist=[];
+    this.HeadeDate=[];
     setTimeout(() => {
       this.reservloader = false;
     }, 15000)
@@ -70,6 +72,10 @@ export class MonthchartComponent implements OnInit {
 
 ChangeCheckoutDate()
 {
+  
+
+  this.Availabilitylist=[];
+  this.HeadeDate=[];
    let CheckinDatce = this.form.get('checkindate').value;
    console.log(CheckinDatce)
    alert(CheckinDatce.length)
@@ -90,7 +96,7 @@ LoadChartData()
   }, 15000)
 
 
-
+  this.Availabilitylist=[];
   this.HeadeDate=[];
   let nodays=this.form.get('nofdays').value;
   let CurrentDate=this.datePipe.transform(this.form.get('checkindate').value,"MM/dd/yyyy")

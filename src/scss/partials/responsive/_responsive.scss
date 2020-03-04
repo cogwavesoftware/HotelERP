@@ -782,6 +782,12 @@
     .gridtestpayarray{
         overflow-x: scroll;
     }
+    .outerbx{
+        width: 100%!important;
+    }
+     .taboutercreatebtn .table tr td{
+        width: 100%;
+    }
 }
 @media only screen and (max-width: 767px) {
     .signup-card {

@@ -1,25 +1,29 @@
-<div class="row">
+<div class="row rmcodeselect purple-gradient">
 
-
-  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-    <div class="form-group">
-      <label class="form-control-label" for="visit ">RoomCode</label>
-      <select class="custom-select" #Type name="visit" id="visit">        
-        <option value="select">Select</option>
+<div class="col-md-10 ">
+  <div class='col-12 col-lg-12 '>
+     <div class="form-group">
+       <select class="custom-select" #Type name="visit" id="visit">        
+        <option value="select">Select Room Code</option>
         <option  *ngFor="let sour of roomtypelist"
           [value]="sour.RoomCode">{{ sour.RoomCode  }}</option>
       </select>
       
     </div>
   </div>
-
 </div>
-<button mat-button mat-raised-button color="primary" (click)="randomize(Type.value)">Update</button>
+<div class="col-md-2">
+  <button mat-button mat-raised-button color="primary" class="tn btn-primary" (click)="randomize(Type.value)"><i class="fa fa-bar-chart" aria-hidden="true"></i> Update</button>
+</div> 
+</div>
+
 
 <div *ngIf="Show">
-  <div>
+  <div class="rmcodeselect rmcodeselect1 ">
     <div style="display: block">
-      <canvas baseChart
+
+      <div class="chart-container" style="position: relative; height:72vh!important; width:140vh!important">
+        <canvas baseChart
         [datasets]="barChartData"
         [labels]="barChartLabels"
         [options]="barChartOptions"
@@ -28,7 +32,9 @@
         [chartType]="barChartType">
       </canvas>
     </div>
-    <!-- <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button> -->
+    
+    </div>
+  
   </div>
 </div> 
 
