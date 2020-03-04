@@ -24,16 +24,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CamarawindowComponent } from './camarawindow/camarawindow.component';
 @NgModule({
   declarations: [CheckinComponent, CheckoutComponent, CamarawindowComponent],
-  // declarations: [CheckinComponent, CheckoutComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
     SharedModule,
-     HttpClientModule,
-     DataTableModule,
-     FormsModule,
-      NgSelectModule,
-     BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
+    HttpClientModule,
+    DataTableModule,
+    FormsModule,
+    NgSelectModule,
+    BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
   // entryComponents:[ConfirmationDialogComponent]

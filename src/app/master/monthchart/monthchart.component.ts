@@ -1,6 +1,7 @@
+import { LoaderService } from './../../_services/loader.service';
 
 import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
-import { Observable, Observer, empty } from "rxjs";
+import { Observable, Observer, empty,Subject } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -30,11 +31,10 @@ export class MonthchartComponent implements OnInit {
    InitalDate:Date;
    reservloader:boolean=true;
    Branch:string;
+   isLoading: Subject<boolean>;
   constructor(private _reservationService:ReservationService, public formBuilder: FormBuilder,
-    private datePipe: DatePipe) {
-
+    private datePipe: DatePipe,private loaderService: LoaderService) {
       this.Branch="CW_1001"
-     
       //let CurrentDate=this.datePipe.transform(this.InitalDate,"dd/MM/yyyy")   
       //console.log(CurrentDate)
       this.form = this.formBuilder.group({
@@ -42,19 +42,12 @@ export class MonthchartComponent implements OnInit {
         checkindate: [new Date(Date.now()), [Validators.required]],
         
       });
-
+      
      }
 
   ngOnInit() {    
- 
-
     this.Availabilitylist=[];
     this.HeadeDate=[];
-    setTimeout(() => {
-      this.reservloader = false;
-    }, 15000)
-
-   
     let CurrentDate=this.datePipe.transform(this.form.get('checkindate').value,"MM/dd/yyyy")
     this._reservationService.ReservatiomMonthlyChart(this.Branch,CurrentDate,0).subscribe(res=>{
       this.golbalresponse = res;
@@ -63,7 +56,8 @@ export class MonthchartComponent implements OnInit {
         this.roomtype.forEach(x=>{
          
           this.HeadeDate.push(x.date)
-        })      
+        })  
+             
     })
   }
 

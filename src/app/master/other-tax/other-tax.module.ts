@@ -8,10 +8,6 @@ import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'; 
 import {HttpClientModule} from '@angular/common/http';
 import {ToastyModule} from 'ng2-toasty';
- 
-
-
-
 @NgModule({
   declarations: [OtherTaxComponent],
   imports: [

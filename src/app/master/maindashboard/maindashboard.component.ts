@@ -21,6 +21,7 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   model2:any={};
   @ViewChild("f", { static: false }) form: any;
   roomname:any;
+  DasboardLoad:any;
   floorname:any;
   rmno:string = "1000";
   roomname1:string;
@@ -38,7 +39,7 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
    
-
+alert('das')
     this._reservationservice.GetBookingList(this.Branch).subscribe(data=>{
       this.BookingList=data;
       console.log(this.BookingList)
@@ -48,7 +49,8 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
     this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
       this.finalMenu=res;
      
-      setInterval(()=>{
+    this.DasboardLoad=  setInterval(()=>{
+       // alert('cal')
         this._hmsdashboard.GetHmsDashboard('CW_1001').subscribe(res=>{
           this.finalMenu=res;
           console.log(this.finalMenu);
@@ -58,7 +60,11 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
     })
 
   }
-  
+
+  ngOnDestroy() {   
+    this._bankservice.changeMessage("expanded")
+    clearInterval(this.DasboardLoad);
+  }
   LoadReservationCheckinpage(ResNo:string)
   {
     this.router.navigate(['/Master/reschk',ResNo])
@@ -77,9 +83,7 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   document.querySelector("#" + event).classList.add("md-show");
 }
 
- ngOnDestroy() {   
-   this._bankservice.changeMessage("expanded")
- }
+ 
 openspecial(event, roomname){
   console.log("openspecial"  );
   document.querySelector("#" + event).classList.add("md-show");

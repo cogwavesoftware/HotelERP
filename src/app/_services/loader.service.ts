@@ -8,6 +8,10 @@ import { Subject } from 'rxjs';
 export class LoaderService {
   isLoading=new Subject<boolean>();
 
+  CurrentLoadingFlag=this.isLoading.asObservable();
+
+
+  constructor() { }
   show()
   {
     
@@ -15,7 +19,7 @@ export class LoaderService {
   }
   hide()
   {
-    
+  
     this.isLoading.next(false);
   }
 

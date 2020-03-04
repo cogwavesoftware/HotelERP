@@ -93,7 +93,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   public requiredRoomlist: number[] = [];
   foriegnguest: string[] = ["Yes", "No"];
   discounttypes = ["Amount", "%"];
-  pushInstruction:[]=[];
+  pushInstruction: [] = [];
   genderitems: any;
   gender: any;
   pincode: any;
@@ -172,7 +172,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     })
 
 
-     debugger;
+    debugger;
     if (this.OrgReservationNo == "NewRes") {
       this.IsReservation = true;
       this.IsAmendReservation = false;
@@ -265,22 +265,22 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     //this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
-      // console.log('Cnstructor Changed')
-      // let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
-      // let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
-      // console.log(CheckinDate)
-      // console.log(checkoutdate)
-      // if (CheckinDate < checkoutdate) {
+    // console.log('Cnstructor Changed')
+    // let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
+    // let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
+    // console.log(CheckinDate)
+    // console.log(checkoutdate)
+    // if (CheckinDate < checkoutdate) {
 
-      //   let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
-      //   alert(numberofdays)
-      //   this.form.patchValue({
-      //     nofdays: numberofdays
-      //   });
-      // }
-      // else {
-      //   this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
-      // }
+    //   let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
+    //   alert(numberofdays)
+    //   this.form.patchValue({
+    //     nofdays: numberofdays
+    //   });
+    // }
+    // else {
+    //   this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
+    // }
     //});
 
 
@@ -414,13 +414,13 @@ export class ReservationComponent implements OnInit, OnDestroy {
         let ResInstruction = this.ReservationAmendform.Special
         let ResExtraCharges = this.ReservationAmendform.ExtraCharges
         let ResContact = this.ReservationAmendform.Contact
-        this.pushInstruction=this.ReservationAmendform.Special;
-        let SpecialInstructionitems=[];
+        this.pushInstruction = this.ReservationAmendform.Special;
+        let SpecialInstructionitems = [];
         this.pushInstruction.forEach(x => {
-         let data=x;
-         SpecialInstructionitems.push(data['Description'])
-         console.log(data['Description'])
-         });
+          let data = x;
+          SpecialInstructionitems.push(data['Description'])
+          console.log(data['Description'])
+        });
 
 
         let ReservationBookedSlaveArray = [];
@@ -428,11 +428,21 @@ export class ReservationComponent implements OnInit, OnDestroy {
         let Checkintime, checkoutTime, checkindate, checkoutdate;
         ReservationBookedSlaveArray = this.ReservationAmendform.ResSlave;
         ReservationBookedSlaveArray.forEach(Slave => {
-        AllreadyBookedType.push(Slave.RoomCode)
-   
-          checkindate=new Date(Slave.CheckinDate)
-          checkoutdate=new Date(Slave.CheckoutDate)
-  
+          AllreadyBookedType.push(Slave.RoomCode)
+
+          checkindate = new Date(Slave.CheckinDate)
+          checkoutdate = new Date(Slave.CheckoutDate)
+
+          Checkintime = new Date(Slave.CheckinDate);
+          checkoutTime = new Date(Slave.CheckinDate);
+
+          var cin = Slave.CheckinTime.split(':');
+          var cout = Slave.CheckoutTime.split(':');
+
+          Checkintime.setHours(cin[0], cin[1], cin[2]);
+          checkoutTime.setHours(cout[0], cout[1], cout[2]);
+
+
         });
 
 
@@ -461,7 +471,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
             Remarks: ResPickup.Remarks
           })
         }
-      
+
         console.log(Guestmodel)
         this.form.patchValue({
           Guestcode: Guestmodel.GuestCode,
@@ -485,15 +495,15 @@ export class ReservationComponent implements OnInit, OnDestroy {
           arivalmode: "Reservation",
           bookingid: ResMastermodel.BookingId,
           referenceid: ResMastermodel.RefId,
-          // checkintime:Checkintime,
-          // checkouttime:checkoutTime,
+           checkintime:Checkintime,
+           checkouttime:checkoutTime,
           nofdays: ResMastermodel.NoOfDays,
           checkindate: checkindate,
           checkoutdate: checkoutdate,
           Area: Guestmodel.Area,
           StateCode: Guestmodel.StateCode,
-          special:SpecialInstructionitems
-          
+          special: SpecialInstructionitems
+
         })
         if (companymodel != null) {
           this.form.patchValue({
@@ -615,10 +625,10 @@ export class ReservationComponent implements OnInit, OnDestroy {
     this._masterservice.GetAllRoomCompanyType().subscribe(res => {
       this.companytype = res
     });
-   
+
     this._masterservice.getrevenudata(this.Branch).subscribe(data => {
       this.Revenulist = data;
-     
+
     });
 
     this._masterservice.GetStateCode().subscribe(res => {
@@ -629,12 +639,12 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
     this._masterservice.getplan().subscribe(res => {
       this.planlist = res as [];
-     
+
     });
 
     this.roomservice.GetRoomType("CW_1001").subscribe(data => {
       this.roomtype = data as [];
-     
+
     });
 
     this.CreateNoofDays(31)
@@ -662,17 +672,16 @@ export class ReservationComponent implements OnInit, OnDestroy {
       }
 
     });
-   
+
 
   }
 
-  GetStateCode(StateName:string)
-  {
-    let Cons = this.StateList.filter(x => x.State == StateName);  
+  GetStateCode(StateName: string) {
+    let Cons = this.StateList.filter(x => x.State == StateName);
     this.form.patchValue({
       StateCode: Cons[0].StateCode
-     })
-  
+    })
+
   }
 
 
@@ -941,7 +950,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     }
   }
   ChangeCheckoutDate(NoOfDays) {
- 
+
     // let CheckinDatce = this.form.get('checkindate').value;
 
     // this.maxDate.setDate(CheckinDatce.getDate() + parseInt(NoOfDays));
@@ -949,7 +958,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     // this.form.patchValue({
     //   checkoutdate: result
     // })
-    
+
 
     debugger;
     //this.NodaysChanged = NoOfDays;
@@ -957,7 +966,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     //var result = this.datePipe.transform(new Date().getDay() + 2, "dd/MM/yyyy");
 
     this.minDate = this.form.get('checkindate').value
-     
+
     console.log(this.minDate)
 
 
@@ -1135,7 +1144,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     console.log(form.value);
   }
 
-  
+
 
   PinCodeModelOpen(event, data) {
     this.filterQuery = "";
