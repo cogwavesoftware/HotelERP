@@ -229,7 +229,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe, private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _bankservice: BankService,
-    private route: ActivatedRoute, private savecheckin: CheckinService,
+    private route: ActivatedRoute, private _Checkinservice: CheckinService,
     private roomservice: RoomtypeService,
     private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService, private _reservationservice: ReservationService,
@@ -349,6 +349,10 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     this.model.BranchCode = "0";
     this.model.CreatedBy = localStorage.getItem("Id");
     this.searchresultsdiv = true;
+
+    this._masterservice.Getmiscellaneous('TaxHeader').subscribe(data => {
+      this.TaxHeader = data;
+    })
 
     this._masterservice.getreferencedetail(this.Branch).subscribe(res => {
       this.ReferanceList = res;
@@ -579,7 +583,6 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   }
 
   CheckRoom(RoomCodes: string): number {
-    debugger;
     let relen = this.reservedlist.length;
     for (let j = 0; j < relen; j++) {
       if (RoomCodes === this.reservedlist[j].RoomCode) {
@@ -601,7 +604,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     }
   }
 
-  enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
+  ReservationButtonClick(event, RoomNos, RoomCodes, RoomNo) {
     debugger;
     const classNameS = event.target.className;
     if (classNameS.indexOf('freeroom') >= 0) {
@@ -614,8 +617,9 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       let convertlist = [];
       convertlist.push(bok)
       this.golbalresponse = convertlist;
-      this.savecheckin.GetCheckinDetailList(this.golbalresponse, this.Branch).subscribe((data) => {
+      this._Checkinservice.GetReservationBookingDetails(this.golbalresponse,RoomCodes, this.Branch,this.orgReservationNo).subscribe((data) => {
         this.golbalresponse = data;
+        console.log(this.golbalresponse)      
         this.IsDisableBookindGrid = false;
       },
         error => {
@@ -624,7 +628,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
         () => {
           console.log("BookingData fetched sucssesfully.");
 
-          this.Groupcheckin = this.golbalresponse.checkinlist;
+          this.Groupcheckin = this.golbalresponse.checkin;
           console.log(this.Groupcheckin)
           for (let groupdata of this.Groupcheckin) {
             this.AddBokingButtonviaForeach(groupdata)
@@ -639,8 +643,6 @@ export class RescheckinComponent implements OnInit, OnDestroy {
             this.selectedRoomNoArray.splice(index);
             this.onDelete(0, index);
           }
-
-
         });
     }
     else {
@@ -677,8 +679,8 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       Tax: [groupdata.Tax, [Validators.required]],
       Grand: [groupdata.Grand, [Validators.required]],
       // Net: [groupdata.Net, [Validators.required]],
-      disctype: ["select"],
-      discvalue: ["0"]
+      disctype: [groupdata.disType],
+      discvalue: [groupdata.disValue]
     });
   }
 
@@ -1274,7 +1276,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
                 this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
                 this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;
                 this.form.value.GuestPhotoPath = this.Guestphotopathurl;
-                this.savecheckin.SaveCheckinData(this.form.value)
+                this._Checkinservice.SaveCheckinData(this.form.value)
                   .subscribe(res => {
                     console.log(res);
                   },
@@ -1299,7 +1301,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
           }
           else // no doucment selected while checkin
           {
-            this.savecheckin.SaveCheckinData(this.form.value)
+            this._Checkinservice.SaveCheckinData(this.form.value)
               .subscribe(res => {
                 console.log(res);
               },

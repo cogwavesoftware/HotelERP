@@ -28,4 +28,9 @@ export class CheckinService {
     
   }
 
+  GetReservationBookingDetails(RoomNo:string,RoomCode:string,Branchcode:string,ReservationNo:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/GetResDetail?RoomNo=' + RoomNo + '&RoomCode=' + RoomCode + '&Branchcode=' + Branchcode + '&ReservationNo=' + ReservationNo);
+  }
+
 }

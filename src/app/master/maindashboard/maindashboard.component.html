@@ -124,10 +124,11 @@
                           <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalOverflow.show()" class="btn btn-danger ripple light" placement="right" ngbTooltip="{{child.RoomNo}}">
                           {{child.RoomNo}}  <br>
                           <span class="">{{child.RoomCode}}</span>
-                          </button></span>
-                          <span class="tooltip-content clearfix">
+                          </button>
+                        </span>
+                          <!--<span class="tooltip-content clearfix">
                           <img src="assets/images/GuestImage/1580366171214_mCx4C.png" width="150" alt="Ecluid.png">
-                          <span class="tooltip-text"> 
+                           <span class="tooltip-text"> 
                             <span>Name:Francis </span>  
                             <span>Pax :2 </span><br> 
                             <span>CheckinDate :27/01/2020 </span> 
@@ -136,8 +137,8 @@
                             <span>CheckoutTime:17:15 </span> <br>  
                             <span>PlanName:CP </span> 
                       
-                        </span>
-                          </span>
+                        </span> 
+                          </span>-->
                           </span> 
                           </div><!-- end of if condition -->
 
@@ -170,7 +171,14 @@
                           <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
                           </span>
                           </span> 
-                          </div><!-- end of if condition -->
+                          </div>
+
+
+
+
+
+
+
 
                           <div *ngIf = "child.Status == 'D'">                      
                             <span class="mytooltip tooltip-effect-1">

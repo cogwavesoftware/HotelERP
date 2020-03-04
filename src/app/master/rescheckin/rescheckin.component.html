@@ -572,7 +572,7 @@
                                                     <div id="availrooms"> 
                                                        <ul style="display: inline-block" *ngFor="let room of roomNoList">
                                                             <li style="float: left; margin-left: 0px ">
-                                                              <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                                                              <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="ReservationButtonClick($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
                                                                 {{room.RoomNo}}
                                                                 <br>
                                                                 {{room.RoomCode}}
@@ -837,8 +837,7 @@
                                            <select class="custom-select"  name="source" formControlName="source"  id="sourceid"> 
                                              <option value="select">Select</option> 
                                              <option  *ngFor="let itemsource of sourcemode" [value]="itemsource.Description">{{ itemsource.Description}}</option>
-                                           </select>
-                                           
+                                           </select>                                           
                                             </div>  
                                             </div>
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
@@ -848,13 +847,12 @@
                                                     formControlName="Arrivalfrom" name="Arrivalfrom" autocomplete="off"/>
                                                     </div> 
                                              </div>
-                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                             <!-- <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="Booking">Booking Id </label>
-                                                <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="booking" name="booking" autocomplete="off"  />  
-                                                
+                                                <input type="text" class="form-control tooltip-form" id="bookingid" formControlName="booking" name="booking" autocomplete="off"  />                                                  
                                                 </div>  
-                                            </div>
+                                            </div> -->
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="Booking">Convenience fees </label>
@@ -869,9 +867,7 @@
                                                  <option value="select">Select</option> 
                                                  <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
                                                </select>
-                                               <!-- <div *ngIf="submitted && form.arivalmode.errors" class="invalid-feedback">
-                                                <div *ngIf="form.arivalmode.errors.required">arivalmode is required</div>
-                                              </div> -->
+                                              
                                                 </div> 
                                             </div>
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
@@ -1634,7 +1630,7 @@
                   <div class="row">
                     <ul style="display: inline-block" *ngFor="let room of roomNoList">
                       <li style="float: left; margin-left: 0px ">
-                        <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                        <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="ReservationButtonClick($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
                           {{room.RoomNo}}
                           <br>
                           {{room.RoomCode}}
