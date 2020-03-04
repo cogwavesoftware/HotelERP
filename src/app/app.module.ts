@@ -1,3 +1,4 @@
+import { LoaderService } from './_services/loader.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { fakeBackendProvider } from './_helpers';
 import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { LoaderInterceptor } from './_helpers/loader.interceptor';
   // import { PrintgrcComponent } from './printgrc/printgrc.component';
 //import { ConfirmationDialogService } from './_services/confirmation-dialog.service';
 //import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
@@ -73,6 +75,8 @@ import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/n
         provide: NgbDateAdapter,
         useClass: NgbDateNativeAdapter
       },
+      { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+
     //{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
    //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
