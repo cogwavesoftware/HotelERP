@@ -1,46 +1,26 @@
  
 
-  <div class="col-md-12" style="margin: 0 auto; ">
-    <table class="table table-responsive" style=" border: 1px solid #ccc;
-    padding: 10px">
-     
-      <thead>
-        <tr>
-          <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>           
-
-            <webcam [height]="100" [width]="150" [trigger]="triggerObservableSecGuest" (imageCapture)="handleImageSecGuest($event)" *ngIf="showWebcamSecGuest"
+   
+    <div class="camputer" style=" margin:0 auto">
+      <div class="camwithsnapshot">
+        <webcam  [height]="160"  [trigger]="triggerObservableSecGuest" (imageCapture)="handleImageSecGuest($event)" *ngIf="showWebcamSecGuest"
             [allowCameraSwitch]="allowCameraSwitchSecGuest" [switchCamera]="nextWebcamObservableSecGuest"
             [videoOptions]="videoOptions"
             [imageQuality]="1"
             (cameraSwitched)="cameraWasSwitchedSecGuest($event)"
             (initError)="handleInitError($event)"
            ></webcam>
-                
-      <div class="snapshot " >
-        
-         <img  [height]="75" [width]="100"  [src]="GuetImg0" />
-        
-      </div> 
-      </td> 
-        </tr>
-
-        <tr>
-          <td>
-            <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest();"  >Capture</button>
+           <div class="snapshot" >        
+            <img *ngIf="notshow"     height="245"  [src]="GuetImg0" />           
+         </div> 
+        </div>
+        <div class="cambtns" style="  margin:0 auto">
+          <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabledSecGuest" (click)="triggerSnapshotForSecGuest();"  >Capture</button>
           <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabledSecGuest" (click)="SwitchOnCamaraSecGuest()"  >  On</button>
-          </td>
-          
-          
-        </tr>
-       
-      </tbody>
-    </table>
-    <h6>{{Process}}</h6>
-  </div>
+        </div>
+
+    </div>
+     
+    <h6 style="font-size: 75%;">{{Process}}</h6>
+   
 

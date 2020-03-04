@@ -6838,3 +6838,28 @@ outerdiv{
  .outerdiv .reservotherinfo .form-group{
      margin-bottom: 0;
  }
+ .addaddinalguest .table .webcam-wrapper {
+    width: 241px;
+ }
+ .addaddinalguest .table .webcam-wrapper video{    
+     width:241px;
+ }
+ .camwithsnapshot .snapshot img{
+     height:245px!important;
+ }
+ .camputer{
+      
+ }
+ .camwithsnapshot{     
+    
+    -webkit-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+ }
+ .cambtns{
+     
+    display:inline-block;
+ }
+ .cambtns button.camarabtn{
+     display: inline-block;
+ }
