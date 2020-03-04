@@ -1,11 +1,16 @@
 
+<div *ngIf="reservloader" class="text-center loader-block" >
+  <svg id="loader2" viewBox="0 0 100 100">
+    <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+  </svg>
+  </div> 
 
 <app-loading></app-loading>
 
 
 
  <div class="outerdiv">
-    <div class="formdesign checkinforms" style="padding: 0;">
+    <div class="formdesign checkinforms"  >
   
  <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
   
@@ -16,26 +21,42 @@
             <div class="col-md-12" style="padding-left: 0;">
               <div class="row" style="margin-bottom: 0;">
                 <div class="col-md-12 taboutercreatebtn">
-                  
+                 
                     <div class="rov">
-                                                  
-                         <div class="tdwidth">
-                          <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Arival Date</div>
-                          <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue',isAnimated: true, adaptivePosition: true}" class="form-control">                                                
-                        </div> 
-                        
-                        <div class="tdwidth">
-                          <div class="tdwidthlbl"><i class="fa fa-calendar" aria-hidden="true"></i> Days</div>
-                          <select class="custom-select" #Days name="nofdays" formControlName="nofdays" 
-                          id="nofdays">
-                          <option value="0">Select</option>
-                          <option value="10">1O Days</option>
-                          <option value="15">15 Days</option>
-                          <option value="20">20 Days</option>
-                          <option value="30">30 Days</option>
-                        </select>
-                        </div>
-                        <button (click)="LoadChartData()" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block">Check</button>           
+                          <div class="outerbx" >
+                            <table class="table  table-responsive">
+                              <tr>
+                                <td>
+                                  <div  ><i class="fa fa-calendar" aria-hidden="true"></i> Arival Date</div>
+                                </td>
+                                <td>
+                                  <div  ><i class="fa fa-calendar" aria-hidden="true"></i> Days</div>
+                                  </td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                 
+                                 <input id="checkindate" name="checkindate"  formControlName="checkindate"  type="text" bsDatepicker   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue',isAnimated: true, adaptivePosition: true}" class="form-control"> 
+                               </td>
+                                <td> 
+                                  <select class="custom-select" #Days name="nofdays" formControlName="nofdays" 
+                                  id="nofdays">
+                                  <option value="0">Select</option>
+                                  <option value="10">1O Days</option>
+                                  <option value="15">15 Days</option>
+                                  <option value="20">20 Days</option>
+                                  <option value="30">30 Days</option>
+                                </select> </td>
+                                <td> <button (click)="LoadChartData()" class="btn btn-primary btn-sm">Check</button> </td>
+                              </tr>
+                            </table>
+ 
+                            
+                             
+                                 
+                          </div>                   
+                              
                       </div>
                      
                 </div>
@@ -53,27 +74,20 @@
 
     </div>
   
-  </div>
+  
 
 
 
 
-   <h4> Room Availabilit</h4>
+  
 
        
-              <div class="app-modal-body text-center" style="position: relative;"> 
+              <div class="app-modal-body text-center"  > 
                 <div class="table-content crm-table">
                   <div class="project-table addressproject-table">
                     <div id="crm-contact" class="dt-responsive">
-                     
-                      <div class="row">         
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                          <div class="input-group">
-                            
-                          
-                          </div> 
-                        </div>      
-                      </div>      
+                      <h2> <i _ngcontent-llw-c5="" aria-hidden="true" class="fa fa-calendar"></i> Room Availability</h2>
+                       
                                    
   
                        <div class="table-responsive">
@@ -90,7 +104,14 @@
                           <tbody>                    
                            <tr *ngFor="let item of Availabilitylist; let i = index;">  
                            
-                            <td style="text-align:left;">{{item.RoomType}}</td>                   
+                            <div *ngIf = "item.RoomType == 'Total'">   
+                              <td class="sakthi" style="text-align:left;">{{item.RoomType}}                         
+                            
+                              </td> 
+                           </div>
+                           <td class="sakthivel" style="text-align:left;">{{item.RoomType}}                         
+                            
+                          </td>           
                             
                             <td *ngFor="let subarray of  item.Rooms" >
                               {{ subarray.Rooms}}
@@ -113,4 +134,4 @@
                 </div>     
                    
                 </div>      
-             
+              </div>

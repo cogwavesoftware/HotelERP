@@ -76,6 +76,8 @@ export class TodayarivallistComponent implements OnInit {
     console.log(this.barChartData)
     
     this.Show=true;
+
+    
   })
 
   this._roomtypeservice.GetRoomType(this.Branch).subscribe((data: any) => {
