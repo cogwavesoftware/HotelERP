@@ -98,24 +98,19 @@
                                         
                           </thead>
                           <tbody>                    
-                           <tr *ngFor="let item of Availabilitylist; let i = index;">  
-                           
-                            <div *ngIf = "item.RoomType == 'Total'">   
-                              <td class="sakthi" style="text-align:left;">{{item.RoomType}}                         
-                            
-                              </td> 
-                           </div>
-                           <td class="sakthivel" style="text-align:left;">{{item.RoomType}}                         
-                            
-                          </td>           
-                            
-                            <td *ngFor="let subarray of  item.Rooms" >
-                              {{ subarray.Rooms}}
-                            </td>
+                            <tr *ngFor="let item of Availabilitylist; let i = index;"> 
 
-                            
-                            
-                          </tr>  
+                              <div *ngIf = "item.RoomType == 'Total' || item.RoomType == 'Offline' || item.RoomType == 'Booked' || item.RoomType == 'Balance' || item.RoomType == 'Sale For Room'; else othethanblue" >   
+                                     <td class="bluetext" style="text-align:left;">{{item.RoomType}}</td> 
+                              </div> 
+                              <ng-template #othethanblue>
+                                <td  style="text-align:left;">{{item.RoomType}}</td> 
+                              </ng-template>
+      
+                                  <td *ngFor="let subarray of  item.Rooms" >
+                                    {{ subarray.Rooms}}
+                                  </td> 
+                                </tr>
 
  
 
