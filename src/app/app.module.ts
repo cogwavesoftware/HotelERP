@@ -1,3 +1,4 @@
+import { LoadingComponent } from './master/loading/loading.component';
 import { LoaderService } from './_services/loader.service';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -48,7 +49,8 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent, 
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -78,14 +80,11 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
       { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
 
     //{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-   //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+   // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     //fakeBackendProvider
   ],
-
-
-  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

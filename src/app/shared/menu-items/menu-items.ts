@@ -67,7 +67,7 @@ export class MenuItems {
     else
     {
       
-      return this.http.get(environment.apiURL + '/api/common/HMSAccount/GetMenuById?id=' + id);
+      return this.http.get(environment.apiURL + '/api/common/HMSAccount/GetMenuById?id=' + 1);
     }
    
   }

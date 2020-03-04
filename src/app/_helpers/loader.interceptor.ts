@@ -9,13 +9,28 @@ import { LoaderService } from './../_services/loader.service';
 export class LoaderInterceptor implements HttpInterceptor {
 
     constructor(public loaderService: LoaderService) { }
-
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
+        debugger;
+
         this.loaderService.show();
-        return next.handle(req).pipe(
-            finalize(() => this.loaderService.hide())
-        );
+             return next.handle(req).pipe(
+                 finalize(() => this.loaderService.hide())
+            );
+        // if (req.url.includes('/ResMonthlychart') || req.url.includes('/ResMonthlycharts')) {
+        //    alert('1')
+        //     this.loaderService.show();
+        //     return next.handle(req).pipe(
+        //         finalize(() => this.loaderService.hide())
+        //     );
+        // }
+        // else
+        // {
+        //     alert('2')
+        //     return next.handle(req).pipe(
+        //         finalize(() => this.loaderService.hide())
+        //     );
+        // }
+              
     }
 
 }

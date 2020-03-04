@@ -255,9 +255,31 @@ public test="fra";
     // sidebar img
     /*this.setLayoutType('img');*/
 
-
+    //we Shoule Enable i disable finding Loader  start---
+    //let IsRole = localStorage.getItem('IsRole');
+  //   if (IsRole=="SuperAdmin")
+  //   {
+  //      this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"SuperAdmin","short_label":"Co","main_state":"SuperAdmin","target":false,"name":"Control Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"company","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"branch","target":false,"name":"Branch Creation","type":"link","children":[]}, {"formId":3,"state":"tool","target":false,"name":"Software Setup","type":"link","children":[]}     ]}]}];
+  //   }
+  //   else
+  //   {    
+  //   this.menuItems.getmenu().subscribe((res:any[])=>
+  //   {
+  //     //var Menulistdd=JSON.stringify(res);
+  //     //console.log("francis")
+  //     this.finalMenu=res
+  //     //console.log(this.finalMenu)    
+  //   }); 
+  // } 
+//we Shoule Enable i disable finding Loader  End---
+  }
+  
+  
+  ngOnInit() {
+    alert('admincaled')
+   this._bankservice.currentMessage.subscribe(message => this.verticalNavType = message)
+    this.setBackgroundPattern('theme1');
     let IsRole = localStorage.getItem('IsRole');
-
     if (IsRole=="SuperAdmin")
     {
        this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"SuperAdmin","short_label":"Co","main_state":"SuperAdmin","target":false,"name":"Control Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"company","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"branch","target":false,"name":"Branch Creation","type":"link","children":[]}, {"formId":3,"state":"tool","target":false,"name":"Software Setup","type":"link","children":[]}     ]}]}];
@@ -273,27 +295,6 @@ public test="fra";
     }); 
   } 
 
-  }
-  
-  
-  ngOnInit() {
-   this._bankservice.currentMessage.subscribe(message => this.verticalNavType = message)
-    this.setBackgroundPattern('theme1');
-  //   let IsRole = localStorage.getItem('IsRole');
-  //   if (IsRole=="SuperAdmin")
-  //   {
-  //      this.finalMenu= [{"label":"Super Admin","main":[{"MainId":1,"state":"Create Panel","short_label":"Co","main_state":"Create Panel","target":false,"name":"Create Panel","type":"sub","icon":"icon-home","children":[{"formId":1,"state":"Company Creation","target":false,"name":"Company Creation","type":"link","children":[]},{"formId":2,"state":"Branch Creation","target":false,"name":"Branch Creation","type":"link","children":[]}]}]}];
-  //   }
-  //   else
-  //   {    
-  //   this.menuItems.getmenu().subscribe((res:any[])=>
-  //   {
-  //     //var Menulistdd=JSON.stringify(res);
-  //     //console.log("francis")
-  //     this.finalMenu=res
-  //     //console.log(this.finalMenu)    
-  //   }); 
-  // } 
   }
 
  

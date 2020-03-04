@@ -1,5 +1,5 @@
 import { LoaderService } from './../../_services/loader.service';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,12 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent implements OnInit {
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  isLoading:boolean;
   
-  constructor(private loaderService: LoaderService) { }
-
+  //isLoading: Subject<boolean> = this._loaderService.isLoading;
+ 
+  constructor(public _loaderService: LoaderService) { 
+    this._loaderService.isLoading.subscribe(res =>{
+      this.isLoading = res;
+      console.log(res)
+  })
+  }
+  
   ngOnInit() {
     
   }
 
+  
+
+      
+  
 }
