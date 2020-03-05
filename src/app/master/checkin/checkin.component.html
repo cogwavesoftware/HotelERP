@@ -944,6 +944,10 @@
 
                                 <ngb-panel id="ngb-close-p1" title="Other Details">
                                   <ng-template ngbPanelContent>
+                                   
+                       
+                                    
+                                    <!-- end of ref please-->
                                     <div class="otherrow userlist">
                                     <div class="row">
                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
@@ -1169,48 +1173,53 @@
                 
                   <ngb-tab title="Other Details">
                     <ng-template ngbTabContent>
-                      <div [@fadeInOutTranslate] class="m-t-15">
-                        <div class="col-md-12" >
-                          <div class="row  ">
-                            <div class="col-sm-12">  
-                                <div class="row " style="margin-bottom:0"> 
-                               <div class='col-12 col-sm-2'>
-                                 <div class="form-group">
-                                   <label class="form-control-label" for="DriverName">  Name </label>
-                                   <input type="text" class="form-control tooltip-form searchiconrelative" id="drivername" formControlName="drivername" name="drivername" autocomplete="off"  />                                   
-                                   
-                                   </div>  
-                               </div> 
-                                 <div class='col-12 col-sm-2'>
-                                 <div class="form-group">
-                                   <label class="form-control-label" for="drivermobile">Mobile </label>
-                                   <input type="text" class="form-control tooltip-form searchiconrelative" id="drivermobile" formControlName="drivermobile" name="drivermobile" autocomplete="off"  style="position: relative;"  />  
-                                   <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="Opendrivermodel('effect-9',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>   
-                                 
-                                   </div>  
-                               </div>
-                               <div class='col-12 col-sm-2'>
-                                <div class="form-group">
-                                  <label class="form-control-label" for="vehicleno">Vehicle No </label>
-                                  <input type="text" class="form-control tooltip-form searchiconrelative" id="vehicleno" formControlName="vehicleno" name="vehicleno" autocomplete="off" />  
-                                   <!-- <div class="invalid-feedback" *ngIf="form.controls.vehicleno.errors?.required" >vehicleno   is required</div> -->
-                                  </div>  
-                              </div>
-                              <div class='col-12 col-sm-2'>
-                                <div class="form-group">
-                                  <label class="form-control-label" for="charge">Charge </label>
-                                  <input type="text" class="form-control tooltip-form" id="charge" formControlName="charge" name="charge" autocomplete="off"  />  
+                      <div class="userlist reservotherinfo" style="background-color: #fff;">
+                      
+                        <div class="row">
+                          <div class="fltleftouter">
+                            <h5><i class="fa fa-street-view"></i> Driver Details</h5>
+                            <div class="fltleft">
                               
-                                  </div>  
-                              </div> 
-                             
-                           </div> 
+                              <div class="col-md-12">
+                                
+                                <div class="row  guestinfofirstrow" >
+                                  <div class='col-12 col-lg-3 col-md-3 col-sm-3'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="DriverName">  Name </label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="drivername" formControlName="drivername" name="drivername" autocomplete="off"  />     
+                                     </div>  
+                                  </div>     
+                                  <div class='col-12 col-lg-3 col-md-3 col-sm-3'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="drivermobile">Mobile </label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="drivermobile" formControlName="drivermobile" name="drivermobile" autocomplete="off"  style="position: relative;"  />  
+                                      <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="Opendrivermodel('effect-9',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>    
+                                     </div>  
+                                  </div> 
+                                   <div class='col-12 col-lg-3 col-md-3 col-sm-3'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="vehicleno">Vehicle No </label>
+                                      <input type="text" class="form-control tooltip-form searchiconrelative" id="vehicleno" formControlName="vehicleno" name="vehicleno" autocomplete="off" />  
+                                      </div>  
+                                  </div>
+                                  <div class='col-12 col-lg-3 col-md-3 col-sm-3'> 
+                                    <div class="form-group">
+                                     <label class="form-control-label" for="charge">Charge </label>
+                                     <input type="text" class="form-control tooltip-form" id="charge" formControlName="charge" name="charge" autocomplete="off"  />
+                                    </div> 
+                                    </div>
+                                  </div>
+                                  
+                                           
+                                     
+                                    
+                              </div>
+                            </div>
+                          </div> 
+                      </div> 
+                     </div>
 
-
-                            </div>  
-                          </div>
-                        </div>
-                      </div>
+                       
                     </ng-template>
                   </ngb-tab>
                 
