@@ -45,6 +45,11 @@
            
           </ul>
           <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
+            <li class="ripple light">
+              <a [routerLink]="['/Master/dashboard']" title="Back to Dashboard"> 
+                <i class="fa fa-home"></i>
+              </a>
+            </li>
             <li (clickOutside)="notificationOutsideClick('live')" class="header-notification ripple light"
               [ngClass]="liveNotificationClass" (click)="toggleLiveNotification()">
               <a href="javascript:">
@@ -91,12 +96,14 @@
                 </li>
               </ul>
             </li>
+            
             <li class="ripple light">
               <a href="javascript:" (click)="toggleChat()">
                 <i class="icon-comments"></i>
                 <span class="badge bg-c-green"></span>
               </a>
             </li>
+            
             <li (clickOutside)="notificationOutsideClick('profile')"
               class="user-profile header-notification ripple light" [ngClass]="profileNotificationClass"
               (click)="toggleProfileNotification()">
