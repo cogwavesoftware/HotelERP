@@ -4,6 +4,7 @@ import { Component, EventEmitter , OnDestroy, OnInit, Renderer2, ViewEncapsulati
 import { Observable, Observer, empty, fromEvent } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { environment } from 'src/environments/environment';
 //import { Subscription } from "rxjs/Subscription";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { BankService } from 'src/app/_services/bank.service';
@@ -17,7 +18,7 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
   styleUrls: ['./camarawindow.component.scss']
 })
 export class CamarawindowComponent implements OnInit { 
-  
+  notshow:boolean=true;
   thumbWidth: number;
   public deviceId: string;
   error: string;
@@ -59,7 +60,7 @@ public handleInitError(error: WebcamInitError): void {
     
    } 
   ngOnInit() {
-
+    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
    // console.log(this.SendIndexToChild)
   }
 
@@ -67,8 +68,8 @@ public handleInitError(error: WebcamInitError): void {
 
 
   public SwitchOnCamaraSecGuest(index: number) {
-
-
+    this.notshow = false;
+    //this.GuetImg0 = environment.GuestimagePath + '/imagenot11.png';
     this.SnapshotbuttonDisabledSecGuest = false;
     this.camarabuttonDisabledSecGuest = true;
 
@@ -84,7 +85,7 @@ public handleInitError(error: WebcamInitError): void {
 
 
 public triggerSnapshotForSecGuest(index: number): void {
-
+  this.notshow =true;
    // this._bankservice.changeindexvalue(index);
     this.triggerSecGuest.next();
     this.toggleWebcamSecGuest();
@@ -100,7 +101,7 @@ public toggleWebcamSecGuest(): void {
     this.snapshotshowSecGuest = true;
   }
   public handleImageSecGuest(webcamImageSecGuest: WebcamImage): void {
-   debugger;
+   
   
    console.info('received webcam image', webcamImageSecGuest);
    this.webcamImageSecGuest = webcamImageSecGuest;

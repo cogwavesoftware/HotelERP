@@ -1564,10 +1564,10 @@
                                 
                                 <div class="card card-border-primary" style="width: 100%; display:inline-block; position: relative;">
                                   <button class=" "  style="position: absolute;
-                                  top: -11px;
+                                  top: -4px;
                                   z-index: 99;
                                   right: 0;" >
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-trash" style="color: red;" aria-hidden="true"></i>
                                 </button> 
 
                                     <div class="row" style="margin-left: 0;">
@@ -1591,7 +1591,7 @@
                                                       </div>
                                                     
                                                     </div>  
-                                                   <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                      <div class="form-group">
                                                        <label class="form-control-label" for="title ">Title</label>
                                                        <select class="custom-select" name="title" formControlName="title"
@@ -1611,7 +1611,7 @@
                                                    
                                                     
                                            
-                                                   <div class='col-12 col-lg-5 col-md-4 col-sm-4'>
+                                                   <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                                      <div class="form-group">
                                                        <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                        <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required style="position:relative"    />  
@@ -1841,8 +1841,8 @@
       </div>
       <!-- Addtional guest end-->
       <div class="addGuestouter1" >
-        <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
-            <h3 class="f-15" style="position: relative; font-size: 90%; ">Camera Window - Guest Photo
+        <app-modal-animation [modalID]="'addressmodeleffect'" style="position: absolute; z-index: 99999;"  [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
+            <h3 class="f-15" style="position: relative; font-size: 90%; "><i class="fa fa-camera"></i> Camera Window - Guest Photo
 
               <a href="javascript:;" (click)="closemodel($event)"><i class="fa fa-times-circle"
                style="position: absolute; right: 10px; font-size: 110%;color: #fff; "></i></a>
@@ -1852,7 +1852,7 @@
                   <div class="project-table addaddinalguest">
                     <div id="crm-contact" class="dt-responsive">                                         
                      
-                      <app-camarawindow  (ratingClicked)='onRatingClicked($event)'></app-camarawindow>
+                     <app-camarawindow  (ratingClicked)='onRatingClicked($event)'></app-camarawindow>
                    
                     </div>
                     
