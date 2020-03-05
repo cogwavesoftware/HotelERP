@@ -139,7 +139,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     width:114px;
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
-    width: 230px;
+    width: 181px;
     border: 1px solid #ccc;
     background-color: #f3f3f3;
     color: #000;
@@ -150,7 +150,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
-    width:229px;
+    width:180px;
 }
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td.lasttd,
 .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td.lasttd{
@@ -200,4 +200,14 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 .addGuestouter .table tbody tr td img{
     border-radius: 5px;
     border:1px solid #000;    
+}
+.width100 label{
+    width: 218px;
+    display: block;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+.width100 label b{ 
+    float:right;
+    font-weight: bold;
 }

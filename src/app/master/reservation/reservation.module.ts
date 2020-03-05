@@ -15,9 +15,9 @@ import { ReservationRoutingModule } from './reservation-routing.module';
 import {TagInputModule} from 'ngx-chips';
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CalculatorComponent } from './calculator/calculator.component';
+ 
  @NgModule({
-  declarations: [ReservationComponent, CalculatorComponent,LoadingComponent],
+  declarations: [ReservationComponent ,LoadingComponent],
   //declarations: [ReservationComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
   imports: [

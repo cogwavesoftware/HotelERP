@@ -356,15 +356,17 @@
                                                   </div>
                                                 </div>
 
-                                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                
+                                              </div>
+                                                <div class="row guestinfofirstrow" >
+                                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="state">StateCode </label>
-                                                    <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off" required  />  
-                                                    
-                                                    </div> 
-                                                </div>
-
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="state">StateCode </label>
+                                                      <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off" required  />  
+                                                      
+                                                      </div> 
+                                                  </div>
                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>                                                
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="nation ">Nation</label>
@@ -558,8 +560,9 @@
   
   
   
-                                  <ngb-panel id="ngb-close-p1" title="Booked Room">
+                                  <ngb-panel id="ngb-close-p1" title="Booked Room" style="position: relative;">
                                     <ng-template ngbPanelContent>
+                                      <i (click)="calculator.show()"   class="fa fa-calculator poscalc" aria-hidden="true"></i>
                                       <div class="test123 userlist gridtestbookedrm" style="padding: 2px;">
                                   
                                         <div class="col-md-12">
@@ -737,93 +740,110 @@
                                   <ngb-panel id="ngb-close-p1" title="Payment Array ">
                                     <ng-template ngbPanelContent>
                                       <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
-                                        <div class="grid-table" style="width: 100%;">
-                                          <div class="thead">
-                                            <div class="">
-                                              <div class="td"><i  class="fa fa-building"></i> Select Mode</div>
-                                              <div class="td"><i  class="fa fa-bed"></i> elect Detail</div>
-                                              <div class="td"><i  class="fa fa-paypal"></i>Amount</div>
-                                              <div class="td"><i  class="fa fa-area-chart"  ></i> Description</div>
-                                              <div class="td "><i  class="fa fa-cutlery"></i> Selected Mode</div>
-                                              
-                                              <div class="td lasttd">
-                                                <button type="button" class=" " (click)="AddPaymentButtonClick()">
-                                                  <i class="fa fa-plus"></i> 
-                                                </button>
-                                              </div>
-                                            
-                                            </div>
-                                          </div>
-                                          <div class="tbody">
-  
-                                            <div formArrayName="PayArray"
-                                              *ngFor="let other of form.get('PayArray').controls; let k = index">
-                                              <div [formGroupName]="k">
-                                                <div class="tr">
-                                                  <div class="td">
-                                                    <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
-                                                      (change)="RoomTypeChanged(i,'RoomCode')">
-                                                      <option value="0">Select</option>
-                                                      <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
-                                                        {{items.RoomCode}}</option>
-                                                    </select> -->
-  
-                                                    <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
-                                                    id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
-                                                    <option value="select">Select</option>
-                                                    <option *ngFor="let sour of paymentmode" [value]="sour">
-                                                      {{ sour }}</option>
-                                                  </select>
-  
-  
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
-                                                    id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
-                                                    <option value="select">Select</option>
-                                                    <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
-                                                      {{ Paysubmode  }}</option>
-                                                  </select> 
-  
-  
-                                                  </div>
-  
-                                              <div class="td">
-                                               <input type="number"  id="payAmount"
-                                                formControlName="payAmount" name="payAmount" autocomplete="off" required />
-                                              
-                                
-                                                  </div>
-  
-  
-                                                  <div class="td">
-                                                    <input type="text" class="" id="Descriptions" formControlName="Descriptions">
-                                                    
-                                                  </div>
-  
-                                                  <div class="td">
-                                                    <input type="text" class="" id="modeselected" formControlName="modeselected">
-                                                    
-                                                  </div>
-  
-  
-  
-  
-                                                  <div class="td">                                      
-                                                    <button (click)="onDeletePayment(0,k)">
-                                                      <i class="fa fa-trash" aria-hidden="true"></i>
+                                       
+                                        <div class="row">
+                                          <div class="col-lg-9">
+                                            <div class="grid-table" style="width: 100%;">
+                                              <div class="thead">
+                                                <div class="">
+                                                  <div class="td"><i  class="fa fa-building"></i> Select Mode</div>
+                                                  <div class="td"><i  class="fa fa-bed"></i> elect Detail</div>
+                                                  <div class="td"><i  class="fa fa-paypal"></i>Amount</div>
+                                                  <div class="td"><i  class="fa fa-area-chart"  ></i> Description</div>
+                                                  <div class="td "><i  class="fa fa-cutlery"></i> Selected Mode</div>
+                                                  
+                                                  <div class="td lasttd">
+                                                    <button type="button" class=" " (click)="AddPaymentButtonClick()">
+                                                      <i class="fa fa-plus"></i> 
                                                     </button>
                                                   </div>
+                                                
+                                                </div>
+                                              </div>
+                                              <div class="tbody">
+      
+                                                <div formArrayName="PayArray"
+                                                  *ngFor="let other of form.get('PayArray').controls; let k = index">
+                                                  <div [formGroupName]="k">
+                                                    <div class="tr">
+                                                      <div class="td">
+                                                        <!-- <select   class="roomcodep-l-25" formControlName="RoomCode"
+                                                          (change)="RoomTypeChanged(i,'RoomCode')">
+                                                          <option value="0">Select</option>
+                                                          <option *ngFor="let items of roomtype" value="{{items.RoomCode}}">
+                                                            {{items.RoomCode}}</option>
+                                                        </select> -->
+      
+                                                        <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
+                                                        id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let sour of paymentmode" [value]="sour">
+                                                          {{ sour }}</option>
+                                                      </select>
+      
+      
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                                                        id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                                          {{ Paysubmode  }}</option>
+                                                      </select> 
+      
+      
+                                                      </div>
+      
+                                                  <div class="td">
+                                                   <input type="number"  id="payAmount"
+                                                    formControlName="payAmount" name="payAmount" autocomplete="off" required />
+                                                  
+                                    
+                                                      </div>
+      
+      
+                                                      <div class="td">
+                                                        <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                                                        
+                                                      </div>
+      
+                                                      <div class="td">
+                                                        <input type="text" class="" id="modeselected" formControlName="modeselected">
+                                                        
+                                                      </div>
+      
+      
+      
+      
+                                                      <div class="td">                                      
+                                                        <button (click)="onDeletePayment(0,k)">
+                                                          <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+      
+      
+                                              </div>
+      
+      
+                                            </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                              <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
+                                                <div class=" ">
+                                                  <label  id="BillAmount1"  ><span>Total Amount : </span> <b>5000.00{{TotalBillAmount | currency:'INR'}}</b> </label>   
+                                                  <label  id="BillAmount2" ><span>Paid Amount : </span> <b>5500.00{{TotalPaidAmount | currency:'INR'}}</b> </label>   
+                                                  <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>450.00{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                              
                                                 </div>
                                               </div>
                                             </div>
-  
-  
-                                          </div>
-  
-  
                                         </div>
+
+
+                                        
                                       </div>
                                     </ng-template>
                                   </ngb-panel>
@@ -877,23 +897,24 @@
                                                     formControlName="Proceeding" name="Proceeding" autocomplete="off" />
                                                       </div> 
                                                    </div>
+                                                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                    <div class="form-group">
+                                                      <label class="form-control-label" for="visit ">Purposse of Visit</label>
+                                                      <select class="custom-select" name="visit" formControlName="visit" id="visit">
+                                                        
+                                                       
+                                                        <option value="select">Select</option>
+                                                        <option  *ngFor="let sour of purposeofvisit"
+                                                          [value]="sour.Description">{{ sour.Description  }}</option>
+                                                      </select>
+                                                      
+                                                    </div>
+                                                  </div>
   
                                       </div><!-- end 1 row -->
   
                                       <div class="row">
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="visit ">Purposse of Visit</label>
-                                            <select class="custom-select" name="visit" formControlName="visit" id="visit">
-                                              
-                                             
-                                              <option value="select">Select</option>
-                                              <option  *ngFor="let sour of purposeofvisit"
-                                                [value]="sour.Description">{{ sour.Description  }}</option>
-                                            </select>
-                                            
-                                          </div>
-                                        </div>
+                                       
                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                             <div class="form-group">
                                                 <label class="form-control-label" for="Vehicle">Vehicle No</label>
@@ -970,9 +991,6 @@
                                             
                                           </div>
                                         </div>
-                                      </div> <!-- end 2nd row -->
-  
-                                      <div class="row">
                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <label class="form-control-label" for="DOB">Date of Birth</label>
                                           <div class="form-group">
@@ -982,6 +1000,10 @@
                                             </div>
                                           </div>
                                         </div>
+                                      </div> <!-- end 2nd row -->
+  
+                                      <div class="row">
+                                      
   
                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                             <label class="form-control-label" for="DOA">Date of Anniversary</label>
@@ -1693,10 +1715,7 @@
                                  
                                   
                                   <div class="card card-border-primary" style="width: 100%; display:inline-block; position: relative;">
-                                    <button class=" "  style="position: absolute;
-                                    top: -11px;
-                                    z-index: 99;
-                                    right: 0;" >
+                                    <button class="deletebtn"  >
                                       <i class="fa fa-trash" aria-hidden="true" (click)="onDeleteAccountForm(j)" ></i>
                                   </button> 
   
@@ -1721,7 +1740,7 @@
                                                         </div>
                                                       
                                                       </div>  
-                                                     <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                        <div class="form-group">
                                                          <label class="form-control-label" for="title ">Title</label>
                                                          <select class="custom-select" name="title" formControlName="title"
@@ -1741,7 +1760,7 @@
                                                      
                                                       
                                              
-                                                     <div class='col-12 col-lg-5 col-md-4 col-sm-4'>
+                                                     <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                                        <div class="form-group">
                                                          <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                          <input type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required style="position:relative"    />  
@@ -1971,7 +1990,7 @@
         </div>
         <!-- Addtional guest end-->
         <div class="addGuestouter1" >
-          <app-modal-animation [modalID]="'addressmodeleffect'" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
+          <app-modal-animation [modalID]="'addressmodeleffect'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
               <h3 class="f-15" style="position: relative; font-size: 90%; ">Camera Window - Guest Photo
   
                 <a href="javascript:;" (click)="closemodel($event)"><i class="fa fa-times-circle"
@@ -2109,3 +2128,19 @@
   
                 </app-modal-animation>
             </div>
+            <div class="calcdiv">
+              <app-modal-basic #calculator [dialogClass]="'modal-sm'" [hideHeader]="true" [hideFooter]="true">
+                <div class="app-modal-body">
+                  <button type="button" class="close basic-close-light-box" (click)="calculator.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button> 
+                  <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'auto'" [config]="config">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <app-calculator></app-calculator>
+                      </div> 
+                    </div>
+                  </perfect-scrollbar> 
+                </div>
+              </app-modal-basic>
+            </div> 

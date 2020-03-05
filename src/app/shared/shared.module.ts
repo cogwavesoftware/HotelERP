@@ -19,10 +19,12 @@ import {DataFilterPipe} from './elements/data-filter.pipe';
 import { CompareValidatorDirective } from './compare-validator.directive';
 import { SelectRequiredValidatorDirective } from './select-validator.directive';
 import { ConfirmValidatorDirective } from './confirm-validator.directive';
+import { CalculatorComponent } from '../master/reservation/calculator/calculator.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import {WebcamModule} from 'ngx-webcam';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import {WebcamModule} from 'ngx-webcam';
     ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
+    CalculatorComponent,
     ClickOutsideModule,WebcamModule,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
     
@@ -60,6 +63,7 @@ import {WebcamModule} from 'ngx-webcam';
     ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
+    CalculatorComponent,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
   
     
@@ -69,7 +73,7 @@ import {WebcamModule} from 'ngx-webcam';
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }
-  ],
+  ] ,
   schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class SharedModule { }
