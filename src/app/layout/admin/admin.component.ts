@@ -182,7 +182,7 @@ public test="fra";
     this.verticalPlacement = 'left';
     this.verticalLayout = 'wide';
     this.pcodedDeviceType = 'desktop';
-    this.verticalNavType = 'expanded';
+    this.verticalNavType = 'collapsed';
     this.verticalEffect = 'shrink';
     this.vnavigationView = 'view1';
     this.freamType = 'theme1';
@@ -276,8 +276,8 @@ public test="fra";
   
   
   ngOnInit() {
-    alert('admincaled')
-   this._bankservice.currentMessage.subscribe(message => this.verticalNavType = message)
+    
+  // this._bankservice.currentMessage.subscribe(message => this.verticalNavType = message)
     this.setBackgroundPattern('theme1');
     let IsRole = localStorage.getItem('IsRole');
     if (IsRole=="SuperAdmin")
@@ -339,8 +339,9 @@ public test="fra";
       this.headerFixedTop = 'auto';
       this.headerFixedMargin = '0';
     } else {
+    
       this.pcodedDeviceType = 'desktop';
-      this.verticalNavType = 'expanded';
+      this.verticalNavType = 'collapsed';
       this.verticalEffect = 'shrink';
       this.toggleIcon = 'icon-toggle-right';
       this.headerFixedMargin = '56px';

@@ -8,11 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BankService {
 
-  private messagesource=new BehaviorSubject('expanded');
+  //private messagesource=new BehaviorSubject('expanded');
 
   private Indexsoucre=new BehaviorSubject(0);
 
-  currentMessage =this.messagesource.asObservable();
+  //currentMessage =this.messagesource.asObservable();
   currentindex=this.Indexsoucre.asObservable();
 
   constructor(private http: HttpClient) { }
@@ -22,9 +22,9 @@ export class BankService {
     return this.http.get(environment.apiURL + 'api/CloudHMS/Master/GetBankdetails?BranchCode=' + 'CW_1001');
   }
 
-  changeMessage(message: string) {
-    this.messagesource.next(message)
-  }
+  // changeMessage(message: string) {
+  //   this.messagesource.next(message)
+  // }
 
   changeindexvalue(currentindex: number) {
     this.Indexsoucre.next(currentindex)

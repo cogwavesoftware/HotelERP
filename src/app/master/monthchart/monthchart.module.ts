@@ -27,6 +27,7 @@ import {DatePipe}  from '@angular/common';
   ],
   entryComponents:[LoadingComponent]
 })
+
 export class MonthchartModule { }
 
 

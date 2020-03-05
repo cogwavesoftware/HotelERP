@@ -85,9 +85,6 @@ LoadChartData()
 
   this.reservloader=true;
 
-  setTimeout(() => {
-    this.reservloader = false;
-  }, 15000)
 
 
   this.Availabilitylist=[];

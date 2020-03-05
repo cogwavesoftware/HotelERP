@@ -1,3 +1,4 @@
+import { CamarawindowComponent } from './master/checkin/camarawindow/camarawindow.component';
 import { LoadingComponent } from './master/loading/loading.component';
 import { LoaderService } from './_services/loader.service';
 

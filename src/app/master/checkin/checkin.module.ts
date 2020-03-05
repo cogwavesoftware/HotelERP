@@ -23,7 +23,7 @@ import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CamarawindowComponent } from './camarawindow/camarawindow.component';
 @NgModule({
-  declarations: [CheckinComponent, CheckoutComponent, CamarawindowComponent],
+  declarations: [CheckinComponent,CamarawindowComponent],
   providers: [DatePipe,ConfirmationDialogService],
   imports: [
     CommonModule,CheckinRoutingModule,CheckoutRoutingModule,
@@ -35,7 +35,7 @@ import { CamarawindowComponent } from './camarawindow/camarawindow.component';
     BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  // entryComponents:[ConfirmationDialogComponent]
+  // entryComponents:[CamarawindowComponent]
 
 })
 export class CheckinModule { }

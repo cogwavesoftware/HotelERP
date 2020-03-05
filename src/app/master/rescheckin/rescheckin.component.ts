@@ -235,7 +235,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     private _masterservice: MasterformService, public _addressservice: AddressService, private _reservationservice: ReservationService,
   ) {
 
-    this._bankservice.changeMessage("collapsed")
+    //this._bankservice.changeMessage("collapsed")
     this.Branch = "CW_1001"
     this.IsShowloader = false;
     this.UserId = 1;
@@ -579,7 +579,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.showWebcam = false;
-    this._bankservice.changeMessage("expanded")
+    //this._bankservice.changeMessage("expanded")
   }
 
   CheckRoom(RoomCodes: string): number {
@@ -629,10 +629,12 @@ export class RescheckinComponent implements OnInit, OnDestroy {
           console.log("BookingData fetched sucssesfully.");
 
           this.Groupcheckin = this.golbalresponse.checkin;
+          console.log('this.Groupcheckin')
           console.log(this.Groupcheckin)
-          for (let groupdata of this.Groupcheckin) {
-            this.AddBokingButtonviaForeach(groupdata)
-          }
+          this.AddBokingButtonviaForeach(this.Groupcheckin)
+          // for (let groupdata of this.Groupcheckin) {
+          //   this.AddBokingButtonviaForeach(groupdata)
+          // }
           let Count = this.CheckRoom(RoomCodes);
           if (Count == 0) {
             var Warning = "Not Allowed to book! Already you Selected"

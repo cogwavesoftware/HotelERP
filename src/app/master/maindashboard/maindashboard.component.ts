@@ -33,13 +33,12 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   constructor(private _masterformservice: MasterformService,private router:Router,
     private http: HttpClient,private _reservationservice:ReservationService,
     private _ipservice: IpserviceService,private _hmsdashboard:HmsdashboardService,private _bankservice:BankService  ) {     
-      this._bankservice.changeMessage("collapsed")
+     // this._bankservice.changeMessage("collapsed")
       this.Branch="CW_1001";
     }
 
   ngOnInit() {
    
-alert('das')
     this._reservationservice.GetBookingList(this.Branch).subscribe(data=>{
       this.BookingList=data;
       console.log(this.BookingList)
@@ -62,7 +61,7 @@ alert('das')
   }
 
   ngOnDestroy() {   
-    this._bankservice.changeMessage("expanded")
+   // this._bankservice.changeMessage("expanded")
     clearInterval(this.DasboardLoad);
   }
   LoadReservationCheckinpage(ResNo:string)

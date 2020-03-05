@@ -292,7 +292,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
-    this._bankservice.changeMessage("collapsed")
+    //this._bankservice.changeMessage("collapsed")
     //this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
     this.UserId = 1;
@@ -678,7 +678,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.showWebcam = false;
-    this._bankservice.changeMessage("expanded")
+    //this._bankservice.changeMessage("expanded")
   }
   OpenAdditionalGuest(event) {
     document.querySelector("#" + event).classList.add("md-show");

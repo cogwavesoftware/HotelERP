@@ -160,7 +160,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     private _masterservice: MasterformService, public _addressservice: AddressService, public _reservationservice: ReservationService
   ) {
 
-    this._bankservice.changeMessage("collapsed")
+    //this._bankservice.changeMessage("collapsed")
     this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
 
@@ -326,7 +326,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
+    
 
 
     if (this.OrgReservationNo == "NewRes") {
@@ -676,7 +676,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   }
 
-  GetStateCode(StateName: string) {
+  GetStateCodes(StateName: string) {
+    debugger;
+    alert(StateName)
     let Cons = this.StateList.filter(x => x.State == StateName);
     this.form.patchValue({
       StateCode: Cons[0].StateCode
@@ -709,7 +711,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._bankservice.changeMessage("expanded")
+    //this._bankservice.changeMessage("expanded")
   }
 
 
