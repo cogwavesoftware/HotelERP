@@ -216,7 +216,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
 
 
 
-    this._bankservice.changeMessage("collapsed")
+    //this._bankservice.changeMessage("collapsed")
     this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
     this.IsShowloader = false;
@@ -428,7 +428,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.showWebcam = false;
-    this._bankservice.changeMessage("expanded")
+   // this._bankservice.changeMessage("expanded")
   }
 
   CheckRoom(RoomCodes: string): number {

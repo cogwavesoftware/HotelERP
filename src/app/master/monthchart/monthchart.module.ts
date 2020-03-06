@@ -14,7 +14,7 @@ import {ToastyModule} from 'ng2-toasty';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {DatePipe}  from '@angular/common';
 @NgModule({
-  declarations: [MonthchartComponent,LoadingComponent],
+  declarations: [MonthchartComponent],
   providers:[DatePipe],
   imports: [
     CommonModule,MonthchartRoutingModule,
@@ -25,7 +25,7 @@ import {DatePipe}  from '@angular/common';
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  entryComponents:[LoadingComponent]
+  //entryComponents:[LoadingComponent]
 })
 
 export class MonthchartModule { }

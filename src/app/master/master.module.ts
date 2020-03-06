@@ -36,7 +36,7 @@ import { LoadingComponent } from './loading/loading.component';
 // import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
-  declarations: [LoadingComponent],
+  declarations: [],
   imports: [
     CommonModule,MasterRoutingModule
   ],

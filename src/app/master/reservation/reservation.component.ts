@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef,Inject, PLATFORM_ID, } from "@angular/core";
 import { Observable, Observer, empty } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators } from "@angular/forms";
@@ -25,6 +25,8 @@ import { Availabilitymodel } from './../../_models/Availabilitymodel';
 import { ReservationService } from './../../_services/reservation.service';
 import { HMSReservationFormmodel, HMSReservationBookingmodel } from './../../_models/HMSReservationFormmodel'
 
+import { isPlatformBrowser } from '@angular/common';
+ 
 
 @Component({
   selector: 'app-reservation',
@@ -153,6 +155,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   @ViewChild('draggable', { static: false }) public draggableElement: ElementRef;
 
   constructor(private datePipe: DatePipe, elementRef: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object,
     public router: Router, private toastyService: ToastyService,
     public formBuilder: FormBuilder, private _bankservice: BankService,
     private route: ActivatedRoute, private savecheckin: CheckinService,
@@ -1067,6 +1070,10 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   GuestModelOpen(event, data) {
     this.filterQuery = "";
+   
+    if (isPlatformBrowser(this.platformId)) {
+      this.searchTermguest.nativeElement.focus();
+    }
     document.querySelector("#" + event).classList.add("md-show");
   }
   PatchGuest(SelectedData: any, event: any) {

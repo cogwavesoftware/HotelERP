@@ -55,13 +55,13 @@ export class TodayarivallistComponent implements OnInit {
    InitalDate:Date;
   
 
-  constructor( private _Res:ReservationService,private _roomtypeservice:RoomtypeService,
+  constructor( private _Reservation:ReservationService,private _roomtypeservice:RoomtypeService,
     private datePipe: DatePipe) { 
     this.Branch="CW_1001";
   }
   ngOnInit() {
   
-  this._Res.Chart().subscribe(res=>{  
+  this._Reservation.AllRoomTypeChart(this.Branch).subscribe(res=>{  
     
     console.log('res')
     console.log(res)
@@ -88,34 +88,6 @@ export class TodayarivallistComponent implements OnInit {
 
  
 
-
-
-//   this.minDate = new Date();
-
-//   let Days=this.minDate.getDay();
-//   alert(Days)
-//  // this.maxDate.setDate(this.maxDate.getDate() + 1);
-//   for(let  k=1; k<=29; k++)
-//   {
-//     let CDate=this.minDate;
-//     let fromdates = this.datePipe.transform(CDate, "MM/dd/yyyy");
-//     this.HeadeDate.push(fromdates)
-//     this.Day=k;
-//     this.minDate.setDate(this.minDate.getDate() +  this.Day);
-//   }   
-//   console.log(this.HeadeDate)
-//   this._reservationService.GetMonthChart().subscribe(res=>{
-//     this.golbalresponse = res;
-//       this.Availabilitylist = this.golbalresponse;
-//       console.log(this.Availabilitylist)
-//       this.roomtype = this.Availabilitylist[0].Rooms;
-//     console.log(this.roomtype)
-//   })
-
-
-
-
-
   }
 
   // events
@@ -130,7 +102,27 @@ export class TodayarivallistComponent implements OnInit {
   }
 
   public randomize(name:string): void {
-    this._Res.Chartlist(this.Branch,name,'02/21/2020').subscribe(res=>{   
+
+   if(name=="0")
+   {
+    this._Reservation.AllRoomTypeChart(this.Branch).subscribe(res=>{  
+      this.barChartLabels=res['Date'];
+      this.barChartType='bar'
+      this.barChartLegend=true;
+      this.barChartPlugins=[pluginDataLabels]
+      
+      this.Apidata=res['data'];
+      this.barChartData= this.Apidata;
+      console.log('this.barChartData')
+      console.log(this.barChartData)  
+      this.Show=true;  
+    })
+   }
+   
+   else
+   {
+    let CurrentDate=this.datePipe.transform( new Date(Date.now()),"MM/dd/yyyy");
+    this._Reservation.Chartlist(this.Branch,name,CurrentDate).subscribe(res=>{   
       this.barChartLabels=res['Date'];
       this.barChartType='bar'
       this.barChartLegend=true;
@@ -141,6 +133,8 @@ export class TodayarivallistComponent implements OnInit {
       console.log(this.barChartData)
       this.Show=true;
     })
+   }
+   
   
   }
 

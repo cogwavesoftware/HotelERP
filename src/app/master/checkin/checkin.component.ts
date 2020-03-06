@@ -1,6 +1,7 @@
 
 import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef,SimpleChanges, OnChanges } from "@angular/core";
 import { Observable, Observer, empty, fromEvent } from "rxjs";
+
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
@@ -301,6 +302,12 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
     // this.Id$=this.route.snapshot.paramMap.pipe(map(paramMap=>paramMap.get('id')));
     //let RoomNo=this.route.snapshot.paramMap.get('RoomNo');
+    // this.route.paramMap.pipe(
+    //   switchMap(params => {
+    //     this.CheckinRoom = params.get("RoomNo")
+    //   })
+
+
 
     this.route.paramMap.subscribe(params => {
       this.CheckinRoom = params.get("RoomNo")

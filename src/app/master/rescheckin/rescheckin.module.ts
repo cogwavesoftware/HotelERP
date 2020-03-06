@@ -31,7 +31,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  entryComponents:[CamarawindowComponent]
+ // entryComponents:[CamarawindowComponent]
 })
 
 

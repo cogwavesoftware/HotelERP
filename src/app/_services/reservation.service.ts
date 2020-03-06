@@ -70,9 +70,9 @@ export class ReservationService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/reservation/ReservedDetail?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
   }
 
-  Chart()
+  AllRoomTypeChart(BranchCode:string)
   {
-    return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/chart');
+    return this.http.get(environment.apiURL + '/api/CloudHMS/reservation/AllRoomTypechart?BranchCode=' + BranchCode);
   }
 
   Chartlist(BranchCode:string,RoomCode:string,date:string)
