@@ -23,10 +23,11 @@
     <div style="display: block">
 
       <div class="chart-container"  >
-        <canvas baseChart width="600" height="200"
+        <canvas baseChart  width="600" height="200"
         [datasets]="barChartData"
         [labels]="barChartLabels"
         [options]="barChartOptions"
+        [colors]="barChartColors"
         [plugins]="barChartPlugins"
         [legend]="barChartLegend"
         [chartType]="barChartType">

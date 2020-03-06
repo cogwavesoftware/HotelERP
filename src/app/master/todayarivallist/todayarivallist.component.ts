@@ -5,7 +5,7 @@ import {DatePipe}  from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { Label,Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-todayarivallist',
@@ -59,6 +59,15 @@ export class TodayarivallistComponent implements OnInit {
     private datePipe: DatePipe) { 
     this.Branch="CW_1001";
   }
+  public barChartColors: Color[] = [
+    { backgroundColor: 'red' },
+    { backgroundColor: 'green' },
+    { backgroundColor: 'orange' },
+    { backgroundColor: 'blue' },
+    { backgroundColor: '#ccc' },
+    { backgroundColor: '#f2f2f3' }
+  ]
+
   ngOnInit() {
   
   this._Res.Chart().subscribe(res=>{  
