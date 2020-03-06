@@ -6850,16 +6850,28 @@ outerdiv{
  .camputer{
       
  }
- .camwithsnapshot{     
-    
+ .camwithsnapshot{   
     -webkit-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
     -moz-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
     box-shadow: 0 0 45px rgba(0, 0, 0, .2);
  }
- .cambtns{
-     
+ .cambtns{     
     display:inline-block;
  }
  .cambtns button.camarabtn{
      display: inline-block;
+ }
+ .deletebtn{
+    position: absolute;
+    top: -4px;
+    z-index: 99;
+    right: 0;
+    color:red;
+ }
+ .poscalc{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    font-size: 148%;
+    color: #000;
  }

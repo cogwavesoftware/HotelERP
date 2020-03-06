@@ -507,6 +507,8 @@
                 <li><a  class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i>ExtraBed</a></li>
                 <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Discount</a></li>
                 <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Grace Period</a></li>
+                <li> <a href="javascript:;" class="modelgradiant btn-lg btn-block"  (click)="OpenGraceModel ('adguesteffect')"><i class="fa fa-user" aria-hidden="true"></i> Grace </a></li>
+                
                 <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Set Complement</a></li>       
                 <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Guest</a></li> 
                 <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Keeping</a></li> 
@@ -633,4 +635,37 @@
       </div>
     </app-modal-basic>
  
+
+
+
+
+
+
+
+
+
+
+    
+
+    <div class="addGuestouter">
+      <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">      
+        <h3 class="f-15" style="position: relative;">Additional Guest Details
+        </h3>
+          <div class="app-modal-body text-center" style="position: relative;"> 
+            <div class="table-content crm-table">
+              <div class="project-table addaddinalguest">
+                <div id="crm-contact" class="dt-responsive">                 
+                 
+              <perfect-scrollbar class="overflow-container model-lg"   [style.height]="'500px'" [config]="config">
+              
+                </perfect-scrollbar>
+               
+                </div>
+                
+              </div>
+            </div>        
+             </div>          
+          </app-modal-animation>
+    
+    </div>
  

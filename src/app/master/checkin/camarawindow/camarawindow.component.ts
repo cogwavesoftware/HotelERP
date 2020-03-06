@@ -33,7 +33,9 @@ export class CamarawindowComponent implements OnInit {
   public Process:string;
   GuetImg0:any; 
   GuetImg1:any; 
- 
+  SnapshotbuttonDisabled: boolean;
+  camarabuttonDisabled: boolean;
+
   public OnCamera: string = "OnCamera"
   public Iscamaraon: boolean = false;
   public allowCameraSwitchSecGuest = true;
@@ -62,6 +64,8 @@ public handleInitError(error: WebcamInitError): void {
   ngOnInit() {
     this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
    // console.log(this.SendIndexToChild)
+    this.camarabuttonDisabledSecGuest = false;
+    this.SnapshotbuttonDisabledSecGuest = true;
   }
 
 
@@ -70,8 +74,11 @@ public handleInitError(error: WebcamInitError): void {
   public SwitchOnCamaraSecGuest(index: number) {
     this.notshow = false;
     //this.GuetImg0 = environment.GuestimagePath + '/imagenot11.png';
+     
+
     this.SnapshotbuttonDisabledSecGuest = false;
-    this.camarabuttonDisabledSecGuest = true;
+    this.camarabuttonDisabledSecGuest = true; 
+
 
     if (this.showWebcamSecGuest) {
       this.snapshotshowSecGuest = true;
@@ -90,8 +97,8 @@ public triggerSnapshotForSecGuest(index: number): void {
     this.triggerSecGuest.next();
     this.toggleWebcamSecGuest();
     //this.Iscamaraon = true;
-    this.SnapshotbuttonDisabledSecGuest = true;
     this.camarabuttonDisabledSecGuest = false;
+    this.SnapshotbuttonDisabledSecGuest = true;
   }
 
 

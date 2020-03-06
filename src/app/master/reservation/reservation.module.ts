@@ -14,14 +14,11 @@ import { ReservationRoutingModule } from './reservation-routing.module';
 import {TagInputModule} from 'ngx-chips';
 import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CalculatorComponent } from './calculator/calculator.component';
-import { LoaderService } from 'src/app/_services/loader.service';
-import { LoadingComponent } from './../loading/loading.component';
-
+ 
  @NgModule({
-  declarations: [ReservationComponent, CalculatorComponent],
+  declarations: [ReservationComponent ],
   //declarations: [ReservationComponent,ConfirmationDialogComponent],
-  providers: [DatePipe,ConfirmationDialogService,LoaderService],
+  providers: [DatePipe,ConfirmationDialogService],
   imports: [
      CommonModule,ReservationRoutingModule,
      SharedModule,

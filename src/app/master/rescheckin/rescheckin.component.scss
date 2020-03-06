@@ -130,7 +130,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
  
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td  {
-    width: 242px;
+    width: 181px;
     border: 1px solid #ccc;
     background-color: #f3f3f3;
     color: #000;
@@ -141,7 +141,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 }
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td select,
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td input{
-    width:242px;
+    width:181px;
  
 }
 .checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td.lasttd,
@@ -211,6 +211,25 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     border-radius: 5px;
     border:1px solid #000;    
 }
-.gridtestbookedrm {
-   
+.width100 label{
+    width: 218px;
+    display: block;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+.width100 label b{ 
+    float:right;
+    font-weight: bold;
+}
+.outerdiv .form-group .input-group{
+    margin-bottom: 0;
+}
+.outerdiv .form-group label, .outerdiv .formdesign label{
+    // border: 1px solid #ccc;
+    // background-color: #f3f3f3;
+    // color: #000;
+    // text-align: center;
+    // padding: 2px 0px 2px 0px;
+    // font-weight: normal;
+    // display: block;
 }

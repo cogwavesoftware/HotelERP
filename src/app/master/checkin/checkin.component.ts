@@ -69,9 +69,10 @@ export interface addcheckins {
   ]
 })
 export class CheckinComponent implements OnInit, OnDestroy {
-  bankAccountForms: FormArray = this.fb.array([]);
+  
   FormAddcheckin: addcheckins;
   Process: string;
+  StateList:any;
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
@@ -86,7 +87,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
   public snapshotshow = false;
-
+  TotalPaidAmount:number ;
+  TotalBillAmount:number ;
+  TotalBalanceAmount:number ;
   ChildimageName: string;
 
   public OnCamera: string = "OnCamera"
@@ -229,45 +232,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
   public GuestDoucmentBackpathurl: string = "0";
 
 
-  //   return this._searchTerm;
-  // }
-
-  // set searchTerm(value: string) {
-  //  alert(value)
-
-  //  fromEvent(this.input.nativeElement,'keyup').pipe(
-  //     filter(text=>value.length>2),
-  //     debounceTime(1000),
-  //     distinctUntilChanged(),
-  //     switchMap(id => {
-  //             console.log(id);
-  //             console.log('Francis');
-  //             return this._masterservice.GetPinAddress();
-  //          })
-  //          ).subscribe(res => this.picodelist = res);
-
-  //  this._searchTerm = value;
-  //  this.guest = this.filtereguestdata(value);
-
-  // }
-
-
-  // get searchpinTerm(): string {
-  //   return this._searchTerm;
-  // }
-
-  // set searchpinTerm(value: string) {
-  //   this._searchTerm = value;
-  //   this.picodelist = this.filterePincode(value);
-  // }
-
-  // filtereguestdata(searchString: string) {
-  //   this.guest = this.filterguest;
-  //   return this.guest.filter(function (item) {
-  //     return JSON.stringify(item).toLowerCase().indexOf(searchString.toLowerCase()) !== -1
-  //   });
-
-  // }
 
 
   // filterePincode(searchString: string) {
@@ -289,9 +253,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     private roomservice: RoomtypeService, private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService
   ) {
-
-
-
 
     //this._bankservice.changeMessage("collapsed")
     //this.Branch = localStorage.getItem("BranchCode");
@@ -381,16 +342,13 @@ export class CheckinComponent implements OnInit, OnDestroy {
       checkouttime: [this.myTime, [Validators.required]],
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
-      // selmode: ["select", [Validators.required]],
-      // payamount: ["", [Validators.required]],
-      // paymntdesc: ["", [Validators.required]],
+    
       disctype: ["select", [Validators.required]],
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
       PayArray: this.formBuilder.array([this.AddpaymentGrid()]),
 
-      // thumbverification: ["", [Validators.required]],
       GuestPhotoPath: ["", [Validators.required]],
       GuestIdFront: ["", [Validators.required]],
       GuestIdBack: ["", [Validators.required]],
@@ -418,23 +376,19 @@ export class CheckinComponent implements OnInit, OnDestroy {
       IpAdd: [localStorage.getItem("LOCAL_IP")],
       CreatedBy: [localStorage.getItem("id"), [Validators.required]],
       TaxHeader: ["GST"],
-      StateCode: [""]
+      StateCode: [""],
+      bankAccountForms:this.formBuilder.array([]),
     });
   }
 
   ngOnInit() {
     //this.addBankAccountForm();
 
-
-
-
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
     this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
     this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
-
     this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
-
     this.model.Id = 0;
     this.model.CompanyCode = 0;
     this.model.BranchCode = "0";
@@ -451,7 +405,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this._masterservice.Getmiscellaneous('TaxHeader').subscribe(data => {
       this.TaxHeader = data;
     })
-
 
     this._masterservice.Getmiscellaneous('Gender').subscribe(data => {
       this.gendertypes = data;
@@ -472,6 +425,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
       this.sourcemode = data;
     })
 
+    this._masterservice.GetStateCode().subscribe(res => {
+      this.StateList = res
+
+    });
     this._masterservice.Getmiscellaneous('Purpose of Visit').subscribe(data => {
       this.purposeofvisit = data;
     })
@@ -544,8 +501,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
             Tax: this.checkinform["checkin"].Tax,
             Grand: this.checkinform["checkin"].Grand
           }
-        ]);
+        ]);   
+        this.CalculateSummaryAmount(this.checkinform["checkin"].Grand)
       });
+     
     }
     this.CreateNoofDays(31)
     this.CalculateNoofDays();
@@ -584,49 +543,24 @@ export class CheckinComponent implements OnInit, OnDestroy {
  }
 
 
+ GetStateCodes(StateName: string) {
+ 
+  
+  let Cons = this.StateList.filter(x => x.State == StateName);
+  this.form.patchValue({
+    StateCode: Cons[0].StateCode
+  })
+}
 
-  addBankAccountForm(index: number) {
-    let index1 = this.bankAccountForms.length;
-
-    if (index1 <= 3) {
-      this.bankAccountForms.push(this.fb.group({
-        guestname: ['', ""],
-        SGuestCode: ['0'],
-        title: ["select", ""],
-        gender: ["select", ""],
-        mobile: ["", ""],
-        email: ["", ""],
-        pincode: ["", ""],
-        city: ["", ""],
-        state: ["", ""],
-        nation: ["", ""],
-        gstno: ["", ""],
-        address1: ["", ""],
-        address2: ["", ""],
-        address3: ["", ""],
-        GuestIdFront: ["", ""],
-        GuestIdBack: ["", ""],
-        GuestImage: ["", ""],
-        GuestIdFronturl: ["", ""],
-        GuestIdBackurl: ["", ""],
-        Area: ["", ""],
-        StateCode: ["", ""]
-
-      }));
-    }
-    else {
-      alert('NOT ALLOWED')
-    }
-
-  }
+ 
 
   checkValue(event: any, index: number) {
-    alert(event.target.checked)
-
+  
     if (event.target.checked == true) {
       this.SwipeDataFromPrimaryGuest(index)
     }
     else {
+      this.RemoveDataFromPrimaryGuest(index)
 
     }
   }
@@ -640,8 +574,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
     let state = this.form.get("state").value;
     let nation = this.form.get("nation").value;
     let company = this.form.get("company").value;
+    let Area = this.form.get("Area").value;
     let gstno = this.form.get("gstno").value;
-
+    let StateCode = this.form.get("StateCode").value;
     this.bankAccountForms.controls[index].patchValue({
       address1: address1,
       address2: address2,
@@ -651,7 +586,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
       state: state,
       nation: nation,
       gstno: gstno,
-      company: company
+      company: company,
+      StateCode:StateCode,
+      Area:Area
     })
   }
 
@@ -666,7 +603,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
       state: "",
       nation: "",
       gstno: "",
-      company: ""
+      company: "",
+      Area:"",
+      StateCode:""
+
     })
 
 
@@ -690,6 +630,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   OpenAdditionalGuest(event) {
     document.querySelector("#" + event).classList.add("md-show");
   }
+
   enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
     const classNameS = event.target.className;
 
@@ -732,7 +673,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
     }
-
+    this.CalculateSummaryAmount();
   }
 
   
@@ -749,7 +690,34 @@ export class CheckinComponent implements OnInit, OnDestroy {
   // }
 
 
+  CalculateAdvanceAmount(index: number, AdvanceAmount: number) {
+   
+    let paymode = this.PayArray.controls[index].get('Paymode').value;
+    let Paysubmode = this.PayArray.controls[index].get('Paysubmode').value;
+    if (paymode == "select" || Paysubmode == "select") {
+      this.PayArray.controls[index].patchValue({
+        payAmount: 0
+      })
+      this.addToast("Cogwave Software", "Invalid Mode Selected", "error");
+      return;
+    }
 
+
+    this.TotalPaidAmount = 0;
+    this.TotalBalanceAmount = 0;
+    if (AdvanceAmount > 0) {
+      for (let Payarray of this.PayArray.controls) {
+        this.TotalPaidAmount += Payarray.get("payAmount").value;
+      }
+      this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+    }
+    else {
+      this.PayArray.controls[index].patchValue({
+        payAmount: 0
+      })
+      this.addToast("Cogwave Software", "Invalid Advance Amount", "error");
+    }
+  }
 
   AddBokingButtonviaForeach(groupdata: any): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGridviaForeach(groupdata));
@@ -1113,15 +1081,33 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   get PayArray(): FormArray {
     return this.form.get("PayArray") as FormArray;
-  }
+  } 
+
+
+  get bankAccountForms(): FormArray {
+    return this.form.get("bankAccountForms") as FormArray;
+  } 
+
+
+
 
   openMyPincodeModalData(SelectedData: any, event: any) {
     this.form.patchValue({
       pincode: SelectedData.Pincode,
-      city: SelectedData.AreaData,
-      state: SelectedData.City,
+      city: SelectedData.City,
+      state: SelectedData.State,
+      Area:SelectedData.AreaData,
       nation: "India",
     })
+   
+   var statename=this.form.get("state").value;
+   let Cons = this.StateList.filter(x => x.State == statename);
+  this.form.patchValue({
+    StateCode: Cons[0].StateCode
+  })
+
+      
+
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
@@ -1184,19 +1170,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
-
-
-
-  // PatchRefenceDetail(SelectedData: any, event: any) {
-  //   this.form.patchValue({
-  //     referenceid: SelectedData.Id
-  //   })
-  //   this.referanceName = SelectedData.RefName;
-  //   var allbtn = document.querySelector('.md-show');
-  //   console.log(allbtn);
-  //   allbtn.classList.remove("md-show");
-  // }
-
 
 
   ReferanceModelOpen(event, data) {
@@ -1320,6 +1293,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
 
+  onDeletePayment(bankAccountID, k) {
+    if (k != 0) (<FormArray>this.form.get("PayArray")).removeAt(k);
+  }
+
 
   Opencompanymodel(event, data) {
     this.filterQuery = "";
@@ -1333,6 +1310,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
   RoomTypeChanged(index: number, Changed: string) {
+    alert('d')
     //let dd = this.form.controls[index].get("RoomCode").value;
     this.Formcheckin = {
       RoomCode: this.other.controls[index].get("RoomCode").value,
@@ -1348,6 +1326,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     };
 
     this._masterservice.GetBookingData(this.Formcheckin).subscribe(data => {
+      this.checkinform=data;
       this.other.controls[index].patchValue({
         RoomNo: data["RoomNo"],
         RoomCode: data["RoomCode"],
@@ -1358,49 +1337,56 @@ export class CheckinComponent implements OnInit, OnDestroy {
         Tax: data["Tax"],
         Grand: data["Grand"]
       });
+      console.log( this.checkinform)
+      console.log( 'this.checkinform')
+     this.CalculateSummaryAmount(this.checkinform["Grand"]);
     });
+     
   }
 
-  fileProgressIdfFront(fileInput: any) {
-    this.fileDataIdfront = <File>fileInput.target.files[0];
-    this.preview2();
-  }
-
-
-
-
-
-  preview2() {
-    var mimeType = this.fileDataIdfront.type;
-    if (mimeType.match(/image\/*/) == null) {
-      return;
+  fileProgressIdProof(fileInput: any,photoname:string) {
+    if(photoname=="Front")
+    {
+      this.fileDataIdfront = <File>fileInput.target.files[0];
+      this.previewImage(photoname);
     }
-    var reader = new FileReader();
-    reader.readAsDataURL(this.fileDataIdfront);
-    reader.onload = (_event) => {
-      this.previewUrl2 = reader.result;
-    }
+    else{
+      this.fileDataIdBack = <File>fileInput.target.files[0];
+      this.previewImage(photoname);
+    }   
   }
 
-  fileProgressIdfback(fileInput: any) {
 
-    this.fileDataIdBack = <File>fileInput.target.files[0];
-    this.preview3();
+  previewImage(photoname:string) {
+    if(photoname=="Front")
+    {
+      var mimeType = this.fileDataIdfront.type;
+      if (mimeType.match(/image\/*/) == null) {
+        return;
+      }
+      var reader = new FileReader();
+      reader.readAsDataURL(this.fileDataIdfront);
+      reader.onload = (_event) => {
+        this.previewUrl2 = reader.result;
+      }
+    }
+    else
+    {
+      var mimeType = this.fileDataIdBack.type;
+      if (mimeType.match(/image\/*/) == null) {
+        return;
+      }
+  
+      var reader = new FileReader();
+      reader.readAsDataURL(this.fileDataIdBack);
+      reader.onload = (_event) => {
+        this.previewUrl3 = reader.result;
+      }
+    }
+  
   }
 
-  preview3() {
 
-    var mimeType = this.fileDataIdBack.type;
-    if (mimeType.match(/image\/*/) == null) {
-      return;
-    }
-
-    var reader = new FileReader();
-    reader.readAsDataURL(this.fileDataIdBack);
-    reader.onload = (_event) => {
-      this.previewUrl3 = reader.result;
-    }
-  }
 
   fileProgressIdfFrontSecGuest(fileInput: any, index: number, Pic: string) {
     this.Process = "";
@@ -1514,125 +1500,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
 
 
-
-  Submitdddd() {
-    debugger;
-    const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let text1 = '';
-    for (let i = 0; i < 5; i++) {
-      text1 += randomCheckinNo.charAt(Math.floor(Math.random() * randomCheckinNo.length));
-    }
-
-    this.form.value.randomCheckinNo = text1;
-    this.form.value.BranchCode = localStorage.getItem("BranchCode")
-    this.form.value.CreatedBy = localStorage.getItem("id")
-    this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
-
-    console.log(this.form.value)
-
-
-    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
-      .then((confirmed) => {
-        console.log('User confirmed:', confirmed)
-        if (confirmed === true) {
-
-          const formData = new FormData();
-          console.log(this.GuestDoucmentFrontpathurl);
-          let Idfront = "";
-          let Idback = "";
-
-          let FileUploaded = 0;
-
-          if (this.GuestDoucmentFrontpathurl == "0") {
-
-            if (this.fileDataIdfront != null) {
-              FileUploaded = 1;
-              var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
-              var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-              Idfront = 'CW_1001' + '_' + Rans1.toString() + "front" + '.png'
-              formData.append('GuestIdFront', this.fileDataIdfront, Idfront);
-            }
-          }
-          if (this.GuestDoucmentBackpathurl == "0") {
-
-            if (this.fileDataIdBack != null) {
-              FileUploaded = 2;
-              var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
-              var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
-              Idback = 'CW_1001' + '_' + Rans.toString() + "GuestPhoto" + '.png'
-              formData.append('GuestIdBack', this.fileDataIdBack, Idback);
-            }
-          }
-
-          debugger;
-
-
-          this._masterservice.SavaImsData(formData)
-            .subscribe(res => {
-              console.log(res);
-              this.GuestDoucmentFrontpathurl = Idfront;
-              this.GuestDoucmentBackpathurl = Idback;
-              var checkoutDate = '';
-              let cku = this.form.value.checkoutdate;
-              this.form.value.GuestIdFront = this.GuestDoucmentFrontpathurl;
-              this.form.value.GuestIdBack = this.GuestDoucmentBackpathurl;
-              this.form.value.GuestPhotoPath = this.Guestphotopathurl;
-              this.form.value.RefName = "0";
-              if (cku.length == 10) {
-              }
-              else {
-                checkoutDate = this.datePipe.transform(this.form.value.checkoutdate, "dd/MM/yyyy");
-                this.form.value.checkoutdate = checkoutDate;
-              }
-              this.form.value.checkindate = this.datePipe.transform(this.form.value.checkindate, "dd/MM/yyyy");
-              this.form.value.checkintime = this.datePipe.transform(this.form.value.checkintime, "HH:mm");
-              this.form.value.checkouttime = this.datePipe.transform(this.form.value.checkouttime, "HH:mm");
-
-              if (this.form.value.DOB != "") {
-                this.form.value.DOB = this.datePipe.transform(this.form.value.DOB, "dd/MM/yyyy");
-              }
-
-              if (this.form.value.DOA != "") {
-                this.form.value.DOA = this.datePipe.transform(this.form.value.DOA, "dd/MM/yyyy");
-              }
-              this.savecheckin.SaveCheckinData(this.form.value)
-                .subscribe(res => {
-                  console.log(res);
-                },
-                  error => {
-                    this.error = "Checkin Data Not Save";
-                    this.addToast("Cogwave Software??", this.error + "??", "error");
-                    return;
-                  },
-                  () => {
-                    this.addToast("Cogwave Software", "Checkin Saved Sucessfully", "success");
-                  });
-
-            },
-              error => {
-                this.error = "Image Guest Not Saved";
-                this.addToast("Cogwave Software??", this.error + "??", "error");
-                return;
-              },
-              () => {
-                this.router.navigate(["/Master/dashboard"]);
-              });
-
-          // -----------------------End Save Image----
-
-        }  //confoirmtrue end
-        else {
-        }
-      })
-      .catch(() => {
-        alert('cach')
-        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
-      });
-
-
-
-  }
-
   Submit() {
 
     console.log(this.bankAccountForms.value)
@@ -1647,7 +1514,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.form.value.CreatedBy = localStorage.getItem("id")
     this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
     console.log(this.form.value)
-
+    return
     this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
       .then((confirmed) => {
         console.log('User confirmed:', confirmed)
@@ -1821,8 +1688,44 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
+  addBankAccountForm(index: number) 
+  {
+    let index1 = this.bankAccountForms.length;
+
+    if (index1 <= 3) {
+      this.bankAccountForms.push(this.fb.group({
+        guestname: ['', ""],
+        SGuestCode: ['0'],
+        title: ["select", ""],
+        gender: ["select", ""],
+        mobile: ["", ""],
+        email: ["", ""],
+        pincode: ["", ""],
+        city: ["", ""],
+        state: ["", ""],
+        nation: ["", ""],
+        gstno: ["", ""],
+        address1: ["", ""],
+        address2: ["", ""],
+        address3: ["", ""],
+        GuestIdFront: ["", ""],
+        GuestIdBack: ["", ""],
+        GuestImage: ["", ""],
+        GuestIdFronturl: ["", ""],
+        GuestIdBackurl: ["", ""],
+        Area: ["", ""],
+        StateCode: ["", ""]
+
+      }));
+    }
+    else {
+      alert('NOT ALLOWED')
+    }
+
+  }
+
   onSubmitcompany(f?: NgForm) {
-    debugger;
+    
     f.value.BranchCode = this.Branch;
     f.value.CreatedBy = 1;
     f.value.BranchCode = this.Branch;
@@ -1909,6 +1812,13 @@ export class CheckinComponent implements OnInit, OnDestroy {
     (<FormArray>this.form.get("other")).removeAt(i);
   }
 
+
+  DeleteSecoundaryGuest(i) {
+    
+    (<FormArray>this.form.get("bankAccountForms")).removeAt(i);
+   
+  }
+
   AddBokingButtonClick(): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
   }
@@ -1918,6 +1828,33 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
     (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
   }
+
+  CalculateSummaryAmount(Grand?:number) {
+    this.TotalBillAmount=0;
+    this.TotalPaidAmount=0; 
+    this.TotalBalanceAmount=0; 
+    if(this.isGorupCheckin==false)
+    {
+      for (let Payarray of this.PayArray.controls) { 
+        this.TotalPaidAmount += Payarray.get("payAmount").value;
+      }
+    this.TotalBillAmount= Grand;
+    this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+    }
+    else
+    {
+      for (let Payarray of this.PayArray.controls) {
+        this.TotalPaidAmount += Payarray.get("payAmount").value;
+      }
+      for (let other of this.other.controls) {       
+          this.TotalBillAmount += other.get("Grand").value;    
+      } 
+      this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+    }
+ 
+  }
+
+
 
   addcompanyinmodel() {
     this.companylist = [];
