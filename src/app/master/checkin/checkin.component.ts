@@ -227,6 +227,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
   @ViewChild('f', { static: false }) newcompanyform: ElementRef;
 
+  @ViewChild('searchTermPinSec', { static: false }) searchTermPinSec: ElementRef;
+  @ViewChild('searchTermguestInsidePopup', { static: false }) searchTermguestInsidePopup: ElementRef;
+
   public Guestphotopathurl: string;
   public GuestDoucmentFrontpathurl: string = "0";
   public GuestDoucmentBackpathurl: string = "0";
@@ -545,9 +548,16 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
  GetStateCodes(StateName: string) {
  
-  
   let Cons = this.StateList.filter(x => x.State == StateName);
   this.form.patchValue({
+    StateCode: Cons[0].StateCode
+  })
+}
+
+PatchStateCode(StateName: string,index:number) {
+ alert(index)
+  let Cons = this.StateList.filter(x => x.State == StateName);
+  this.bankAccountForms.controls[index].patchValue({
     StateCode: Cons[0].StateCode
   })
 }
@@ -903,6 +913,38 @@ export class CheckinComponent implements OnInit, OnDestroy {
         console.log(this.driverlist);
       });
 
+      
+      
+
+
+      fromEvent(this.searchTermPinSec.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermPinSec.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          console.log('switchMap')
+          return this._masterservice.SearchGuestAddress(this.searchTermPinSec.nativeElement.value);
+        })
+      ).subscribe(res => this.picodelist = res);
+
+
+
+      
+    fromEvent(this.searchTermguestInsidePopup.nativeElement, 'keyup')
+    .pipe(
+      filter(text => this.searchTermguestInsidePopup.nativeElement.value.length > 2),
+      debounceTime(1000),
+      distinctUntilChanged(),
+      // tap(x=>console.log('from tap' + x)),
+      switchMap(id => {
+        //console.log(id)
+        console.log('guestmap')
+        return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguestInsidePopup.nativeElement.value);
+      })
+    ).subscribe(res => this.guest = res);
 
 
   }
@@ -1071,9 +1113,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
-
-
-
   get other(): FormArray {
     return this.form.get("other") as FormArray;
   }
@@ -1106,12 +1145,31 @@ export class CheckinComponent implements OnInit, OnDestroy {
     StateCode: Cons[0].StateCode
   })
 
-      
-
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
+
+
+  
+  patchPincodeModalData(SelectedData: any, event: any) {
+    let IndexFormObs;
+    this._bankservice.currentindex.subscribe(res=>{
+      IndexFormObs=res;
+    })
+    let Cons = this.StateList.filter(x => x.State == SelectedData.State);
+    this.bankAccountForms.controls[IndexFormObs].patchValue({
+      pincode: SelectedData.Pincode,
+      city: SelectedData.City,
+      state: SelectedData.State,
+      Area:SelectedData.AreaData,
+      nation: "India",
+      StateCode: Cons[0].StateCode
+    })
+   
+  }
+
+
 
   closemodel($event) {
     var allbtn = document.querySelector('.camwindow');
@@ -1260,6 +1318,56 @@ export class CheckinComponent implements OnInit, OnDestroy {
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
+  
+
+  PatchGuestSecoundaryData(SelectedData: any, event: any) {
+    let IndexFromObs;
+    this._bankservice.currentindex.subscribe(res=>{
+     IndexFromObs=res;
+    })
+    this.bankAccountForms.controls[IndexFromObs].patchValue({
+      Guestcode: SelectedData.GuestCode,
+      guestname: SelectedData.GuestName,
+      title: SelectedData.GuestTittle,
+      gender: SelectedData.Gender,
+      address: SelectedData.GuestAddress,
+      city: SelectedData.City,
+      state: SelectedData.State,
+      nation: "India",
+      mobile: SelectedData.MobileNo,
+      email: SelectedData.Email,
+      pincode: SelectedData.PINCode,
+      gstno: SelectedData.GSTNO,
+      DOB: SelectedData.GDOB,
+      DOA: SelectedData.GDOA,
+      GuestImage: SelectedData.GuestPhotoPath,
+      GuestIdFronturl: SelectedData.GuestIdFront,
+      GuestIdBackurl: SelectedData.GuestIdBack,
+    }) 
+    this.bankAccountForms.controls[IndexFromObs].get('guestname').disable({ onlySelf: true });
+    //this.snapshotshow = true;
+    if(IndexFromObs==0)
+    {    
+    this.GuetImg0 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
+    this.GuetIdFront0 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
+    this.GuetIdBack0 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+    }
+    else if(IndexFromObs==1)
+    {
+      this.GuetImg1 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
+      this.GuetIdFront1 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
+      this.GuetIdBack1 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+    }
+  else if(IndexFromObs==2)
+  {
+    this.GuetImg2 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
+    this.GuetIdFront2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
+    this.GuetIdBack2 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+  }
+   // var allbtn = document.querySelector('.md-show');
+   // allbtn.classList.remove("md-show");
+  }
+
 
   OpenCameraDetails(event, index) {
 
@@ -1267,15 +1375,18 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this._bankservice.changeindexvalue(index);
     document.querySelector("#" + event).classList.add("md-show");
   }
-  popinsidepopforguestnamefunc(event, data) {
+  secondaryGuestModel(event, data,j) {
+    alert(j)
+    this._bankservice.changeindexvalue(j);
     document.querySelector("#" + event).classList.add("md-show");
   }
   openMyModalPincode(event, data) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
-  openMyModalPincodePopup(event, data) {
+  openMyModalPincodePopup(event, data,j) {
     this.filterQuery = "";
+    this._bankservice.changeindexvalue(j);
     document.querySelector("#" + event).classList.add("md-show");
   }
   OpenGuestMosel(event, data) {
@@ -1688,11 +1799,14 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
+
+
   addBankAccountForm(index: number) 
   {
+    
     let index1 = this.bankAccountForms.length;
-
-    if (index1 <= 3) {
+    this.LoadDummyImage(index1);
+    if (index1 <= 2) {
       this.bankAccountForms.push(this.fb.group({
         guestname: ['', ""],
         SGuestCode: ['0'],
@@ -1724,6 +1838,31 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   }
 
+LoadDummyImage(index:number)
+{
+  
+  if(index==0)
+  {
+    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
+  }
+  if(index==1)
+  {
+    this.GuetImg1 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront1 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack1 = environment.GuestimagePath + '/imagenot1.png';
+  }
+  if(index==2)
+  {
+    this.GuetImg2= environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront2 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack2 = environment.GuestimagePath + '/imagenot1.png';
+  }
+ 
+  
+
+}
   onSubmitcompany(f?: NgForm) {
     
     f.value.BranchCode = this.Branch;

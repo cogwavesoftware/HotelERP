@@ -1599,8 +1599,8 @@
 
 <!-- picnde popup for popup inside popup-->
 <app-modal-animation [modalID]="'popinsidepopforpincode'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect'">
-  <h3 class="f-15" style="position: relative;">Pincode Details - Popup inside popup
-   <!-- <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button> -->
+  <h3 class="f-15" style="position: relative;">Pincode Details-
+ <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>
  </h3>
     <div class="app-modal-body text-center" style="position: relative;"> 
       <div class="table-content crm-table">
@@ -1609,7 +1609,7 @@
             <div class="row">         
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="input-group">
-                  <input type="text" #searchTerm class="form-control input-lg full-data-search" placeholder="Search here...">
+                  <input type="text" #searchTermPinSec class="form-control input-lg full-data-search" placeholder="Search here...">
                   <span class="input-group-append ripple light" id="basic-addon1">
                     <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
                   </span>
@@ -1622,10 +1622,10 @@
                     <thead>
                     <tr class="blueorange-gradient">        
                     <th> AreaData</th>
-                    <th>City</th>
+                    <th> City</th>
                     <th> Pincode</th>
                     <th> State</th>
-                    <th>Action</th>                                               
+                    <th> Action</th>                                               
                 </tr>
                 <tr>
                 </tr>
@@ -1637,7 +1637,7 @@
                    <td>{{item.Pincode}}</td>                      
                    <td>{{item.State}}</td>        
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyPincodeModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                          
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="patchPincodeModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                          
                   </td>
                 </tr>  
                 </tbody>
@@ -1654,125 +1654,9 @@
        </div>          
     </app-modal-animation>
 <!-- end pin popup insde popup-->
-<!-- 
-   Referance Model -->
 
-   <app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-4 addressmodeleffect'">      
-    <h3 class="f-15" >Referance Details
-                 
-   </h3>
-    <div class="app-modal-body text-center" style="position: relative;"> 
-      <div class="container">
-        <div class="col-md-12 userlist ">
-          <div class="row ">
-            <a style="cursor: pointer; display:block; text-align: left; color:blue"*ngIf="addcompanybtn" (click)="addcompanyinmodel()"><i class="fa  fa-plus-circle"></i> Add Reference </a>
-            <form #myform = "ngForm" (ngSubmit) ="myform.form.valid && ReferanceSave(myform)" class="">
-            
-              <div class="app-modal-body text-center addcompany " *ngIf="addcompanydiv" > 
-               
-               <a style="cursor: pointer; display:block; text-align: left; color:blue"  (click)="backtosearch()"><i class="fa fa-backward"></i> Back to Search  </a>
-               <div class="col-md-12">
-                  
-                 <div class="row">                
-          
-                  <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
-                  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
-                  <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
-                  <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
-                  <input type="hidden" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}">
-                  
-                  <input type="hidden" name="RefAdress" class="form-control" [(ngModel)]="model.RefAdress" #RefAdress="ngModel" value="{{RefAdress}}">
-                  <input type="hidden" name="RefPoints" class="form-control" [(ngModel)]="model.RefPoints" #RefPoints="ngModel" value="{{RefPoints}}">
-                 
-                   <div class="col-md-4">
-                    <label class="required">Reference Name*</label>
-                    <input type="text" name="RefName" class="form-control" [(ngModel)]="model.RefName" #RefName="ngModel" value="{{RefName}}"  [ngClass]="{'is-invalid': RefName.touched && RefName.invalid}"  required autocomplete="off">
-                        <div *ngIf="RefName.touched && RefName.invalid" class="invalid-feedback">
-                           <div *ngIf="RefName.errors.required">RefName is invalid</div>
-                       </div>
-                   </div>
-                   <div class="col-md-4">
-                    <label>RefEmail*</label>
-                    <input type="text" name="RefEmail" class="form-control" [(ngModel)]="model.RefEmail" #RefEmail="ngModel" value="{{RefEmail}}"  [ngClass]="{'is-invalid': RefEmail.touched && RefEmail.invalid}"  required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" autocomplete="off">
-                    <div *ngIf="RefEmail.touched && RefEmail.invalid" class="invalid-feedback">
-                      <div *ngIf="RefEmail.errors.required">RefEmail is required</div>
-                      <div *ngIf="RefEmail.errors.pattern">RefEmail is invalid</div>
-                    </div>
-                   </div>
-                   <div class="col-md-4"  >
-                     
-                     <label>MobileNo*</label>
-                     <input type="number" min="10" max="10" name="RefMobileNo" class="form-control" [(ngModel)]="model.RefMobileNo" #RefMobileNo="ngModel" value="{{RefMobileNo}}"  [ngClass]="{'is-invalid': RefMobileNo.touched && RefMobileNo.invalid}"  required   autocomplete="off">
-                     <div *ngIf="RefMobileNo.touched && RefMobileNo.invalid" class="invalid-feedback">
-                       <div *ngIf="RefMobileNo.errors.required">RefMobileNo Cant'be Empty</div>
-                     </div>
-                 </div>
-                 </div>
-                 
-                  <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
-                  <br/>
-                  <hr>
-   
-               </div>
-         
-             </div> 
-         </form>
-          </div> <!-- form end -->
-          <div class="row  ">
-            <div class="searchresults" *ngIf="searchresultsdiv" style="width: 100%;">
-              <div class="table-content crm-table">
-                <div class="project-table addressproject-table">
-                  <div id="crm-contact" class="dt-responsive">
-                    <div class="row">         
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="input-group">
-                          <input type="text" autofocus="true" #searchTermref class="form-control input-lg full-data-search" placeholder="Search here...">
-                          <span class="input-group-append ripple light" id="basic-addon1">
-                            <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
-                          </span>
-                        </div> 
-                      </div>      
-                </div>             
-                <div class="table-responsive">
-                  <table class="table table-striped table-bordered full-data-table"> 
-                        <thead>
-                        <tr class="blueorange-gradient">        
-                        <th>Id</th>                                                             
-                        <th>RefName</th>                                                
-                        <th>RefMobileNo</th> 
-                         <th> Action</th>
-                    </tr>
-                    <tr> </tr>                  
-                    </thead>
-                    <tbody>                      
-                     <tr *ngFor="let item of referencelist; let i = index;">                     
-                       <td>{{item.Id}}</td>   
-                       <td>{{item.RefName}}</td>   
-                       <td>{{item.RefMobileNo}}</td>     
-                      <td class="action-icon">
-                          <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"    (click)="PatchReferance(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                          
-                      </td>
-                    </tr>  
-                    </tbody>
-                    
-                  </table>
-                </div> 
-                  </div>
-                </div>
-              </div>
-            </div>    <!-- search results  div --> 
-          </div><!-- end serach results-->
-        </div>
-      </div>
-    </div>
 
-    
 
-      <div class="app-modal-body text-center" style="position: relative;">  
-             <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>   
-        </div>  
-
-      </app-modal-animation>
 
 
 
@@ -1812,6 +1696,9 @@
     </app-modal-basic>
     <ng2-toasty [position]="position"></ng2-toasty>
 
+
+
+    <!-- Add Sec GuestDetails -->
       <div class="addGuestouter">
         <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
           
@@ -1852,14 +1739,15 @@
                                         <div class="row" style="margin-left: 0;">
                                           <div class="col-md-8">
                                             <div class="row guestinfofirstrow" style="padding-top:5px;" >
-                                              <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                               
                                                 <div class="form-group">
                                                 <label class="form-control-label">Swipe Info.  </label>
                                                 <input type="checkbox"  (change)="checkValue($event,j)"> 
                                                 </div>
                                               </div>
                                               
-                                               <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="title ">Title</label>
                                                   <select class="custom-select" name="title" formControlName="title"
@@ -1883,7 +1771,7 @@
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="Guest Name">Guest Name </label>
                                                   <input style="position: relative" type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
-                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="popinsidepopforguestnamefunc('popinsidepopforguestname',data)" style="position: absolute; right:0; top:22px"><i class="fa fa-search"></i></a>
+                                                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="secondaryGuestModel('popinsidepopforguestname',data,j)" style="position: absolute; right:0; top:22px"><i class="fa fa-search"></i></a>
                                                 
                                                   <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                   </div>  
@@ -1908,13 +1796,7 @@
                                                   </div>  
                                               </div>
                                              
-                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="email">Email </label>
-                                                  <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
-                                                  <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
-                                                  </div>  
-                                              </div>
+                                           
 
 
                                           </div> <!-- end row -->
@@ -1922,12 +1804,20 @@
                                            
 
 
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="email">Email </label>
+                                                <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
+                                                <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
+                                                </div>  
+                                            </div>
+
 
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="pincode">Pincode </label>
                                                 <input type="text" class="form-control tooltip-form searchiconrelative" id="pincode" formControlName="pincode" name="pincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.pincode.errors || form.controls.pincode.touched || form.controls.pincode.dirty}" required style="position: relative;"  />  
-                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincodePopup('popinsidepopforpincode',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
+                                                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalPincodePopup('popinsidepopforpincode',data,j)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
                                                  <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
                                                 </div>  
                                             </div>
@@ -1958,7 +1848,7 @@
 
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="state ">State</label>
-                                                  <select class="custom-select" #statename (change)="GetStateCodes(statename.value)"  name="state" formControlName="state"
+                                                  <select class="custom-select" #statename (change)="PatchStateCode(statename.value,j)"  name="state" formControlName="state"
                                                     id="state">
                                                    
                                                     <option value="select">Select</option> 
@@ -1971,24 +1861,7 @@
 
 
                                             </div>
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        
-  
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="nation ">Nation</label>
-                                                    <select class="custom-select" name="nation" formControlName="nation"
-                                                      id="nation"
-                                                      [ngClass]="{ 'is-invalid': submitted && form.nation.errors }">
-                                                      <option value="select">Select</option> 
-                                                      <option  *ngFor="let Nationd of Nationlist"
-                                                        [value]="Nationd">{{ Nationd  }}</option>
-                                                    </select>
-                                                    <div *ngIf="submitted && form.nation.errors" class="invalid-feedback">
-                                                      <div *ngIf="form.nation.errors.required">Nation </div>
-                                                    </div>
-                                                  </div>
-  
-                                            </div>
+                                            
                                             
   
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>  
@@ -2006,7 +1879,24 @@
                                           </div>
                                           <div class="row  guestinfofirstrow"  > 
                                             
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        
+  
+                                              <div class="form-group">
+                                                  <label class="form-control-label" for="nation ">Nation</label>
+                                                  <select class="custom-select" name="nation" formControlName="nation"
+                                                    id="nation"
+                                                    [ngClass]="{ 'is-invalid': submitted && form.nation.errors }">
+                                                    <option value="select">Select</option> 
+                                                    <option  *ngFor="let Nationd of Nationlist"
+                                                      [value]="Nationd">{{ Nationd  }}</option>
+                                                  </select>
+                                                  <div *ngIf="submitted && form.nation.errors" class="invalid-feedback">
+                                                    <div *ngIf="form.nation.errors.required">Nation </div>
+                                                  </div>
+                                                </div>
 
+                                          </div>
 
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
@@ -2170,11 +2060,145 @@
                 </app-modal-animation>
           
               </div>
-              <div class="addGuestouter2" >
+          <div class="addGuestouter2" >
                  <!-- picnde popup for popup inside popup-->
+
+
+
+
+
+
+
+
+<!--  Referance Model -->
+<app-modal-animation [modalID]="'effect-6'" [modalClass]="'md-effect-4 addressmodeleffect'">      
+  <h3 class="f-15" >Referance Details
+               
+ </h3>
+  <div class="app-modal-body text-center" style="position: relative;"> 
+    <div class="container">
+      <div class="col-md-12 userlist ">
+        <div class="row ">
+          <a style="cursor: pointer; display:block; text-align: left; color:blue"*ngIf="addcompanybtn" (click)="addcompanyinmodel()"><i class="fa  fa-plus-circle"></i> Add Reference </a>
+          <form #myform = "ngForm" (ngSubmit) ="myform.form.valid && ReferanceSave(myform)" class="">
+          
+            <div class="app-modal-body text-center addcompany " *ngIf="addcompanydiv" > 
+             
+             <a style="cursor: pointer; display:block; text-align: left; color:blue"  (click)="backtosearch()"><i class="fa fa-backward"></i> Back to Search  </a>
+             <div class="col-md-12">
+                
+               <div class="row">                
+        
+                <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+                <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+                <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+                <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+                <input type="hidden" name="IsActive" class="form-control" [(ngModel)]="model.IsActive" #IsActive="ngModel" value="{{IsActive}}">
+                
+                <input type="hidden" name="RefAdress" class="form-control" [(ngModel)]="model.RefAdress" #RefAdress="ngModel" value="{{RefAdress}}">
+                <input type="hidden" name="RefPoints" class="form-control" [(ngModel)]="model.RefPoints" #RefPoints="ngModel" value="{{RefPoints}}">
+               
+                 <div class="col-md-4">
+                  <label class="required">Reference Name*</label>
+                  <input type="text" name="RefName" class="form-control" [(ngModel)]="model.RefName" #RefName="ngModel" value="{{RefName}}"  [ngClass]="{'is-invalid': RefName.touched && RefName.invalid}"  required autocomplete="off">
+                      <div *ngIf="RefName.touched && RefName.invalid" class="invalid-feedback">
+                         <div *ngIf="RefName.errors.required">RefName is invalid</div>
+                     </div>
+                 </div>
+                 <div class="col-md-4">
+                  <label>RefEmail*</label>
+                  <input type="text" name="RefEmail" class="form-control" [(ngModel)]="model.RefEmail" #RefEmail="ngModel" value="{{RefEmail}}"  [ngClass]="{'is-invalid': RefEmail.touched && RefEmail.invalid}"  required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" autocomplete="off">
+                  <div *ngIf="RefEmail.touched && RefEmail.invalid" class="invalid-feedback">
+                    <div *ngIf="RefEmail.errors.required">RefEmail is required</div>
+                    <div *ngIf="RefEmail.errors.pattern">RefEmail is invalid</div>
+                  </div>
+                 </div>
+                 <div class="col-md-4"  >
+                   
+                   <label>MobileNo*</label>
+                   <input type="number" min="10" max="10" name="RefMobileNo" class="form-control" [(ngModel)]="model.RefMobileNo" #RefMobileNo="ngModel" value="{{RefMobileNo}}"  [ngClass]="{'is-invalid': RefMobileNo.touched && RefMobileNo.invalid}"  required   autocomplete="off">
+                   <div *ngIf="RefMobileNo.touched && RefMobileNo.invalid" class="invalid-feedback">
+                     <div *ngIf="RefMobileNo.errors.required">RefMobileNo Cant'be Empty</div>
+                   </div>
+               </div>
+               </div>
+               
+                <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
+                <br/>
+                <hr>
+ 
+             </div>
+       
+           </div> 
+       </form>
+        </div> <!-- form end -->
+        <div class="row  ">
+          <div class="searchresults" *ngIf="searchresultsdiv" style="width: 100%;">
+            <div class="table-content crm-table">
+              <div class="project-table addressproject-table">
+                <div id="crm-contact" class="dt-responsive">
+                  <div class="row">         
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                      <div class="input-group">
+                        <input type="text" autofocus="true" #searchTermref class="form-control input-lg full-data-search" placeholder="Search here...">
+                        <span class="input-group-append ripple light" id="basic-addon1">
+                          <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                        </span>
+                      </div> 
+                    </div>      
+              </div>             
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered full-data-table"> 
+                      <thead>
+                      <tr class="blueorange-gradient">        
+                      <th>Id</th>                                                             
+                      <th>RefName</th>                                                
+                      <th>RefMobileNo</th> 
+                       <th> Action</th>
+                  </tr>
+                  <tr> </tr>                  
+                  </thead>
+                  <tbody>                      
+                   <tr *ngFor="let item of referencelist; let i = index;">                     
+                     <td>{{item.Id}}</td>   
+                     <td>{{item.RefName}}</td>   
+                     <td>{{item.RefMobileNo}}</td>     
+                    <td class="action-icon">
+                        <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"    (click)="PatchReferance(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                          
+                    </td>
+                  </tr>  
+                  </tbody>
+                  
+                </table>
+              </div> 
+                </div>
+              </div>
+            </div>
+          </div>    <!-- search results  div --> 
+        </div><!-- end serach results-->
+      </div>
+    </div>
+  </div>
+
+    <div class="app-modal-body text-center" style="position: relative;">  
+           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>   
+      </div>  
+
+    </app-modal-animation>
+
+
+
+
+
+
+ <!-- Sec GuestDetail-->
+
 <app-modal-animation [modalID]="'popinsidepopforguestname'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect'">
   
-  <h3 class="f-15" style="position: relative;">Guest Details  </h3>
+  <h3 class="f-15" style="position: relative;">Guest Details
+    <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
+ </h3>
+  
     <div class="app-modal-body text-center" style="position: relative;"> 
       <div class="table-content crm-table">
         <div class="project-table addressproject-table">
@@ -2196,7 +2220,7 @@
                     <tr class="blueorange-gradient">        
                     <th> GuestName</th>             
                     <th> City </th>
-                    <th>Pincode </th>
+                    <th> Pincode </th>
                     <th> MobileNo </th> 
                     <th>Action</th>
                 </tr>
@@ -2209,7 +2233,7 @@
                    <td>{{item.PINCode}}</td>                   
                    <td>{{item.MobileNo}}</td>        
                   <td class="action-icon">
-                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="openMyGuestNameModalData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                     
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="PatchGuestSecoundaryData(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                     
                   </td>
                 </tr>  
                 </tbody>

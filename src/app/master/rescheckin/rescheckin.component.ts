@@ -70,7 +70,7 @@ export interface Checkinss {
 
 
 export class RescheckinComponent implements OnInit, OnDestroy {
-  bankAccountForms: FormArray = this.fb.array([]);
+  //bankAccountForms: FormArray = this.fb.array([]);
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
@@ -220,6 +220,10 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
   @ViewChild('searchTermcompany', { static: false }) searchTermcompany: ElementRef;
   @ViewChild('searchTermdriver', { static: false }) searchTermdriver: ElementRef;
+
+  @ViewChild('searchTermPinSec', { static: false }) searchTermPinSec: ElementRef;
+  @ViewChild('searchTermguestInsidePopup', { static: false }) searchTermguestInsidePopup: ElementRef;
+
   public Guestphotopathurl: string;
   public GuestDoucmentFrontpathurl: string = "0";
   public GuestDoucmentBackpathurl: string = "0";
@@ -330,6 +334,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       IpAdd: [localStorage.getItem("LOCAL_IP")],
       CreatedBy: [localStorage.getItem("id"), [Validators.required]],
       special:[""],
+      bankAccountForms:this.formBuilder.array([]),
     });
 
    
@@ -840,6 +845,36 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       });
 
 
+      fromEvent(this.searchTermPinSec.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchTermPinSec.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          console.log('switchMap')
+          return this._masterservice.SearchGuestAddress(this.searchTermPinSec.nativeElement.value);
+        })
+      ).subscribe(res => this.picodelist = res);
+
+
+
+      
+    fromEvent(this.searchTermguestInsidePopup.nativeElement, 'keyup')
+    .pipe(
+      filter(text => this.searchTermguestInsidePopup.nativeElement.value.length > 2),
+      debounceTime(1000),
+      distinctUntilChanged(),
+      // tap(x=>console.log('from tap' + x)),
+      switchMap(id => {
+        //console.log(id)
+        console.log('guestmap')
+        return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguestInsidePopup.nativeElement.value);
+      })
+    ).subscribe(res => this.guest = res);
+
+
 
   }
 
@@ -963,6 +998,10 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     return this.form.get("PayArray") as FormArray;
   }
 
+  get bankAccountForms(): FormArray {
+    return this.form.get("bankAccountForms") as FormArray;
+  } 
+
   openMyPincodeModalData(SelectedData: any, event: any) {
     this.form.patchValue({
       pincode: SelectedData.Pincode,
@@ -974,6 +1013,23 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
     allbtn.classList.remove("md-show");
+  }
+
+  patchPincodeModalData(SelectedData: any, event: any) {
+    let IndexFormObs;
+    this._bankservice.currentindex.subscribe(res=>{
+      IndexFormObs=res;
+    })
+    let Cons = this.StateList.filter(x => x.State == SelectedData.State);
+    this.bankAccountForms.controls[IndexFormObs].patchValue({
+      pincode: SelectedData.Pincode,
+      city: SelectedData.City,
+      state: SelectedData.State,
+      Area:SelectedData.AreaData,
+      nation: "India",
+      StateCode: Cons[0].StateCode
+    })
+   
   }
 
   PatchSubModeName(index: number) {
@@ -1441,12 +1497,19 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   }
 
 
+
   onDelete(bankAccountID, i) {
     (<FormArray>this.form.get("other")).removeAt(i);
   }
 
   AddBokingButtonClick(): void {
     (<FormArray>this.form.get("other")).push(this.AddbokingGrid());
+  }
+
+  DeleteSecoundaryGuest(i) {
+    
+    (<FormArray>this.form.get("bankAccountForms")).removeAt(i);
+   
   }
 
 
@@ -1484,6 +1547,13 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.remove("md-show");
   }
 
+PatchStateCode(StateName: string,index:number) {
+ alert(index)
+  let Cons = this.StateList.filter(x => x.State == StateName);
+  this.bankAccountForms.controls[index].patchValue({
+    StateCode: Cons[0].StateCode
+  })
+}
 
   
   onDeleteAccountForm(i) {
@@ -1495,7 +1565,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
     
     let index1 = this.bankAccountForms.length;
     this.LoadDummyImage(index1)
-    if (index1 <= 3) {
+    if (index1 <= 2) {
       this.bankAccountForms.push(this.fb.group({
         guestname: ['', ""],
         SGuestCode: ['0'],
@@ -1551,16 +1621,18 @@ LoadDummyImage(index:number)
   }
   if(index==1)
   {
-    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetImg1 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdFront1 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdBack1 = environment.GuestimagePath + '/imagenot1.png';
   }
   if(index==2)
   {
-    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetImg2 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdFront2 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdBack2 = environment.GuestimagePath + '/imagenot1.png';
   }
+
+ 
   
 
 }
@@ -1757,7 +1829,8 @@ LoadDummyImage(index:number)
     // this._bankservice.changeindexvalue(index);
     document.querySelector("#" + event).classList.add("md-show");
   }
-  openMyModalPincodePopup(event, data) {
+  openMyModalPincodePopup(event, data,j) {
+    this._bankservice.changeindexvalue(j);
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
