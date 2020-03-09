@@ -216,7 +216,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
 
 
 
-   // this._bankservice.changeMessage("collapsed")
+    //this._bankservice.changeMessage("collapsed")
     this.Branch = localStorage.getItem("BranchCode");
     this.Branch = "CW_1001"
     this.IsShowloader = false;

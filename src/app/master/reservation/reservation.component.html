@@ -130,7 +130,7 @@
                                                   <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                                     <div class="form-group">
                                                       <label class="form-control-label" for="Guest Name">Guest Name </label>
-                                                      <input type="text" class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
+                                                      <input type="text" autofocus class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
                                                       <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="GuestModelOpen('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
                                                     
                                                       <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
@@ -1002,7 +1002,7 @@
               
                        <div class="col-md-4">
                            <label>Company Name*</label>
-                           <input type="text" name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"  [ngClass]="{'is-invalid': CompanyName.touched && CompanyName.invalid}"  required autocomplete="off">
+                           <input type="text"  name="CompanyName" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel" value="{{CompanyName}}"  [ngClass]="{'is-invalid': CompanyName.touched && CompanyName.invalid}"  required autocomplete="off">
                            <div *ngIf="CompanyName.touched && CompanyName.invalid" class="invalid-feedback">
                                <div *ngIf="CompanyName.errors.required">CompanyName is invalid</div>
                            </div>
@@ -1129,7 +1129,7 @@
               <div class="row">         
                 <div class="col-xs-12 col-sm-12 col-md-12">
                   <div class="input-group">
-                    <input type="text" #searchTermguest class="form-control input-lg full-data-search" placeholder="Search here...">
+                    <input type="text"  #searchTermguest class="form-control input-lg full-data-search" placeholder="Search here...">
                     <span class="input-group-append ripple light" id="basic-addon1">
                       <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
                     </span>

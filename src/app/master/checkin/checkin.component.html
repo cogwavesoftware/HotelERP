@@ -353,7 +353,7 @@
                                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="state ">State</label>
-                                                  <select class="custom-select" #statename  name="state" formControlName="state"
+                                                  <select class="custom-select" #statename (change)="GetStateCodes(statename.value)"  name="state" formControlName="state"
                                                     id="state">
                                                    
                                                     <option value="select">Select</option> 
@@ -512,8 +512,8 @@
                                                       <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabled" (click)="triggerSnapshot();"  >Capture</button>
                                                     <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabled" (click)="SwitchOnCamara()"  >Switch On</button>
                                                     </td>
-                                                    <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFront($event)" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
-                                                    <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfback($event)" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
+                                                    <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdProof($event,'Front')" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
+                                                    <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdProof($event,'Back')" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
                                                     </td>
                                                   </tr>
                                                  
@@ -812,6 +812,7 @@
       
                                                       </div>
       
+
                                                       <div class="td">
                                                         <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
                                                         id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
@@ -825,7 +826,7 @@
       
                                                   <div class="td">
                                                    <input type="number"  id="payAmount"
-                                                    formControlName="payAmount" name="payAmount" autocomplete="off" required />
+                                                    formControlName="payAmount" name="payAmount"  #payAmount (keyup)="CalculateAdvanceAmount(k,payAmount.value)" autocomplete="off" required />
                                                   
                                     
                                                       </div>
@@ -858,9 +859,10 @@
                                            
                                              <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
                                                   <div class=" ">
-                                                    <label  id="BillAmount1"  ><span>Total Amount : </span> <b>5000.00{{TotalBillAmount | currency:'INR'}}</b> </label>   
-                                                    <label  id="BillAmount2" ><span>Paid Amount : </span> <b>5500.00{{TotalPaidAmount | currency:'INR'}}</b> </label>   
-                                                    <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>450.00{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                              
+
+                                                    <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
+                                                    <label  id="BillAmount2" ><span>Paid Amount : </span> <b>{{TotalPaidAmount | currency:'INR'}}</b> </label>   
+                                                    <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                                                                                                   
                                                   </div>
                                                 </div>
                                            
@@ -1843,7 +1845,7 @@
                                    
                                     
                                     <div class="card card-border-primary" style="width: 100%; display:inline-block; position: relative;">
-                                      <button class="deletebtn"   >
+                                      <button type="button" (click)="DeleteSecoundaryGuest(j)" class="deletebtn"    >
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button> 
 
@@ -1886,7 +1888,7 @@
                                                   <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
                                                   </div>  
                                               </div>
-                                              <div class='col-12 col-lg-3 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="gender">  Gender </label>
                                                  <select class="custom-select"  name="gender" formControlName="gender"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.gender.errors }"> 
@@ -1898,7 +1900,7 @@
                                                 </div>
                                                   </div>  
                                               </div>
-                                              <div class='col-12 col-lg-3 col-md-4 col-sm-4'>
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="mobile">Mobile </label>
                                                   <input type="text" class="form-control tooltip-form" id="mobileid" formControlName="mobile" name="mobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobile.errors || form.controls.mobile.touched || form.controls.mobile.dirty}" required  />  
@@ -1906,15 +1908,21 @@
                                                   </div>  
                                               </div>
                                              
+                                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="email">Email </label>
+                                                  <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
+                                                  <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
+                                                  </div>  
+                                              </div>
+
+
                                           </div> <!-- end row -->
                                           <div class="row guestinfofirstrow">
-                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="email">Email </label>
-                                                <input type="email" class="form-control tooltip-form" id="emailid" formControlName="email" name="email" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.email.errors || form.controls.email.touched || form.controls.email.dirty}" required  />  
-                                                <div class="invalid-feedback" *ngIf="form.controls.mobile.errors?.required" >email   is required</div>
-                                                </div>  
-                                            </div>
+                                           
+
+
+
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="pincode">Pincode </label>
@@ -1923,6 +1931,16 @@
                                                  <div class="invalid-feedback" *ngIf="form.controls.pincode.errors?.required" >pincode   is required</div>
                                                 </div>  
                                             </div>
+
+
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="Area">Area </label>
+                                                <input type="text" class="form-control tooltip-form searchiconrelative" id="Area" formControlName="Area" name="Area" autocomplete="off"  required  />  
+                                                   </div>  
+                                            </div>
+
+
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="city">City </label>
@@ -1931,11 +1949,27 @@
                                                 </div>  
                                             </div>
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                              <div class="form-group">
+
+                                              <!-- <div class="form-group">
                                                 <label class="form-control-label" for="state">State </label>
                                                 <input type="text" class="form-control tooltip-form" id="state" formControlName="state" name="state" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.state.errors || form.controls.state.touched || form.controls.state.dirty}" required  />  
                                                 <div class="invalid-feedback" *ngIf="form.controls.state.errors?.required" >state   is required</div>
-                                                </div>  
+                                                </div>  -->
+
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="state ">State</label>
+                                                  <select class="custom-select" #statename (change)="GetStateCodes(statename.value)"  name="state" formControlName="state"
+                                                    id="state">
+                                                   
+                                                    <option value="select">Select</option> 
+                                                    <option  *ngFor="let state of StateList"
+                                                      [value]=" state.State">{{ state.State  }}</option>
+                                                  </select>
+                                                  
+                                                </div>
+
+
+
                                             </div>
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                         
@@ -1957,6 +1991,23 @@
                                             </div>
                                             
   
+                                            <div class='col-12 col-lg-2 col-md-4 col-sm-4'>  
+                                              <div class="form-group"> 
+                                                <label class="form-control-label" for="state">StateCode </label>
+                                                <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off" required  />  
+                                              </div> 
+                                            </div>
+      
+
+
+
+
+
+                                          </div>
+                                          <div class="row  guestinfofirstrow"  > 
+                                            
+
+
                                             <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                               <div class="form-group">
                                                 <label class="form-control-label" for="gstno">GSTNO </label>
@@ -1964,54 +2015,33 @@
                                                 <div class="invalid-feedback" *ngIf="form.controls.gstno.errors?.required" >gstno   is required</div>
                                                 </div>  
                                             </div>
-                                          </div>
-                                          <div class="row  guestinfofirstrow"  > 
-                                            
-                                             
-                                           </div> <!-- end of row-->
-                                           <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
-                                            <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
-                                             <div class="form-group">
-                                              <label class="form-control-label" for="address1"> Address1</label>       
-                                              <input type="text" class="form-control tooltip-form" id="address1" formControlName="address1">
-                                              
-                                              </div>  
-  
-              
-                                          </div> 
-  
-                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                           <div class="form-group">
-                                            <label class="form-control-label" for="address2"> Address2 </label>       
-                                            <input type="text" class="form-control tooltip-form" id="address2" formControlName="address2">
-                                           
-                                            </div>  
-  
-            
-                                        </div> 
-  
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                         <div class="form-group">
-                                          <label class="form-control-label" for="address3"> Address 3 </label>       
-                                          <input type="text" class="form-control tooltip-form" id="address3" formControlName="address3">
-                                         
-                                          </div>   
-                                      </div>  
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="Area">Area </label>
-                                          <input type="text" class="form-control tooltip-form searchiconrelative" id="Area" formControlName="Area" name="Area" autocomplete="off"  required  />  
-                                             </div>  
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>  
-                                        <div class="form-group"> 
-                                          <label class="form-control-label" for="state">StateCode </label>
-                                          <input type="text" class="form-control tooltip-form" id="StateCode" formControlName="StateCode" name="StateCode" autocomplete="off" required  />  
-                                        </div> 
-                                      </div>
 
+                                            <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                              <div class="form-group">
+                                               <label class="form-control-label" for="address1"> Address1</label>       
+                                               <input type="text" class="form-control tooltip-form" id="address1" formControlName="address1">
+                                               
+                                               </div>  
+              
+                                           </div> 
+
+
+                                           <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                            <div class="form-group">
+                                             <label class="form-control-label" for="address2"> Address2 </label>       
+                                             <input type="text" class="form-control tooltip-form" id="address2" formControlName="address2">
+                                            
+                                             </div>  
+                                         </div> 
+                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                          <div class="form-group">
+                                           <label class="form-control-label" for="address3"> Address 3 </label>       
+                                           <input type="text" class="form-control tooltip-form" id="address3" formControlName="address3">
                                           
-                                          </div> <!-- row end -->
+                                           </div>   
+                                       </div>                                               
+                                           </div> <!-- end of row-->
+                                       
                                           </div>
                                           <div class="col-md-4">
                                             <table class="table table-responsive">
@@ -2028,18 +2058,18 @@
                                                   <td>
                                                     <div *ngIf="j==0">
                                                     <img [src]="GuetImg0"  style="width:100px;height:75px">    
-                                                  </div>                                         
-                                                 </td>
-                                                 <!-- <td>
+                                                  </div> 
+
                                                   <div *ngIf="j==1">
-                                                  <img [src]="GuetImg1"  style="width:100px;height:75px">    
-                                                </div>                                         
-                                               </td>
-                                               <td>
-                                                <div *ngIf="j==2">
-                                                <img [src]="GuetImg2"  style="width:100px;height:75px">    
-                                              </div>                                         
-                                             </td> -->
+                                                    <img [src]="GuetImg1"  style="width:100px;height:75px">    
+                                                  </div> 
+
+                                                  <div *ngIf="j==2">
+                                                    <img [src]="GuetImg2"  style="width:100px;height:75px">    
+                                                  </div> 
+
+                                                 </td>
+                                              
                                               <td>
                                                 <div *ngIf="j==0">
                                                 <img   [src]="GuetIdFront0" style="width:100px;height:75px">                                                    
@@ -2111,7 +2141,9 @@
                </div>          
             </app-modal-animation>
       
-          </div>
+      </div>
+
+
           <div class="addGuestouter1" >
             <app-modal-animation [modalID]="'addressmodeleffect'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect camwindow '" >   
                 <h3 class="f-15" style="position: relative; font-size: 90%; ">Camera Window - Guest Photo

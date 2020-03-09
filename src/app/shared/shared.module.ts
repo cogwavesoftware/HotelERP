@@ -24,6 +24,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import {WebcamModule} from 'ngx-webcam';
+import { LoadingComponent } from '../master/loading/loading.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,7 @@ import {WebcamModule} from 'ngx-webcam';
     CalculatorComponent,
     ClickOutsideModule,WebcamModule,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
-    
+    ,LoadingComponent
   ],
   declarations: [
     ToggleFullScreenDirective,
@@ -65,7 +66,7 @@ import {WebcamModule} from 'ngx-webcam';
     SpinnerComponent,
     CalculatorComponent,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
-  
+  ,LoadingComponent
     
   ],
   providers: [

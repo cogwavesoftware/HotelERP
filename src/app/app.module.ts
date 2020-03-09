@@ -50,7 +50,11 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent, 
+<<<<<<< HEAD
     ConfirmationDialogComponent ,
+=======
+    ConfirmationDialogComponent
+>>>>>>> 8faec9fc53cf9c395e5626194127329a1704eca4
     
   ],
   imports: [

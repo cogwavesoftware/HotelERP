@@ -37,7 +37,11 @@ import { RoomadvanceComponent } from './roomadvance/roomadvance.component';
 // import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [LoadingComponent, RoomadvanceComponent],
+=======
+  declarations: [],
+>>>>>>> 8faec9fc53cf9c395e5626194127329a1704eca4
   imports: [
     CommonModule,MasterRoutingModule
   ],

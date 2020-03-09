@@ -1,4 +1,3 @@
-import { LoadingComponent } from './../loading/loading.component';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,7 +16,7 @@ import {DatePipe} from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
  
  @NgModule({
-  declarations: [ReservationComponent ,LoadingComponent],
+  declarations: [ReservationComponent ],
   //declarations: [ReservationComponent,ConfirmationDialogComponent],
   providers: [DatePipe,ConfirmationDialogService],
   imports: [
@@ -30,7 +29,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
      ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  entryComponents:[LoadingComponent]
+ //entryComponents:[LoadingComponent]
 })
 export class ReservationModule { }
 
