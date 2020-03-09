@@ -5803,7 +5803,8 @@ outerdiv{
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-1,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-4,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-5,
-.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-12{
+.outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-12,
+.outerdiv .guestinfofirstrow .col-lg-4{
     padding-right:1px;
     padding-left:0;
 }
@@ -6875,3 +6876,61 @@ outerdiv{
     font-size: 148%;
     color: #000;
  }
+ // General styles
+ .h2{
+    width:100%;
+    display: block;
+    color: #fff;
+    font-size: 110%;
+    border-top-right-radius: 5px;
+    padding: 5px;
+    margin: 0px 2px 0px 0px;
+    padding-left: 10px;
+    background: linear-gradient(-40deg, #360033 0%, #0b8793 51%, #360033 100%) !important
+ }
+ .outerdiv .advanceroom .thead{  
+    color: #000; 
+    padding: 0px 0px 0px 0px; 
+    font-weight: bold;  
+ }
+ .outerdiv .advanceroom .thead .td{
+    width: 19%;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+    display: inline-block;
+ }
+ .outerdiv .advanceroom .thead .td.lasttd,
+ .outerdiv .advanceroom .tbody .td.lasttd{
+     padding: 0px 5px 0px 5px;
+     border:0 none;
+     width:10px;
+ }
+ .outerdiv .advanceroom .tbody .td{
+    // width: 181px; 
+    width: 19%; 
+    padding:0px 0px 1px 0px;
+    font-weight: normal;
+    display: inline-block;
+ }
+ .outerdiv .advanceroom .tbody .td input,
+ .outerdiv .advanceroom .tbody .td select{
+     width:100%;
+ }
+
+ .outerdiv .advanceroomtbl .table thead tr td{
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding: 2px 0px 2px 0px;
+    font-weight: normal; 
+ }
+ .outerdiv .advanceroomtbl .table tbody tr td{
+    width: 25% ; 
+    border: 1px solid #ccc;
+    
+}
