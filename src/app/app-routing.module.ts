@@ -252,7 +252,10 @@ const routes: Routes = [
         path: 'monthchart',
         loadChildren: './master/monthchart/monthchart.module#MonthchartModule'
       },
-
+      {
+        path: 'roomadvance',
+        loadChildren: './master/roomadvance/roomadvance.module#RoomadvanceModule'
+      },
       //  {
       //  path:'printgrc',
       //   loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'
