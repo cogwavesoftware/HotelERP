@@ -1,5 +1,8 @@
 
-import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef,SimpleChanges, OnChanges } from "@angular/core";
+import {
+  HostListener, Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation,
+  ViewChild, ElementRef, SimpleChanges, OnChanges
+} from "@angular/core";
 import { Observable, Observer, empty, fromEvent } from "rxjs";
 
 import { NgForm } from "@angular/forms";
@@ -69,10 +72,10 @@ export interface addcheckins {
   ]
 })
 export class CheckinComponent implements OnInit, OnDestroy {
-  
+
   FormAddcheckin: addcheckins;
   Process: string;
-  StateList:any;
+  StateList: any;
   IsDisableBookindGrid: Boolean;
   addcompanydiv: boolean = false;
   searchresultsdiv: boolean = true;
@@ -87,9 +90,9 @@ export class CheckinComponent implements OnInit, OnDestroy {
   SnapshotbuttonDisabled: boolean;
   camarabuttonDisabled: boolean;
   public snapshotshow = false;
-  TotalPaidAmount:number ;
-  TotalBillAmount:number ;
-  TotalBalanceAmount:number ;
+  TotalPaidAmount: number;
+  TotalBillAmount: number;
+  TotalBalanceAmount: number;
   ChildimageName: string;
 
   public OnCamera: string = "OnCamera"
@@ -229,7 +232,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchTermPinSec', { static: false }) searchTermPinSec: ElementRef;
   @ViewChild('searchTermguestInsidePopup', { static: false }) searchTermguestInsidePopup: ElementRef;
-
+  @HostListener('keydown.shift.control.g')
   public Guestphotopathurl: string;
   public GuestDoucmentFrontpathurl: string = "0";
   public GuestDoucmentBackpathurl: string = "0";
@@ -345,7 +348,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       checkouttime: [this.myTime, [Validators.required]],
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
-    
+
       disctype: ["select", [Validators.required]],
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
@@ -380,7 +383,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       CreatedBy: [localStorage.getItem("id"), [Validators.required]],
       TaxHeader: ["GST"],
       StateCode: [""],
-      bankAccountForms:this.formBuilder.array([]),
+      bankAccountForms: this.formBuilder.array([]),
     });
   }
 
@@ -504,68 +507,67 @@ export class CheckinComponent implements OnInit, OnDestroy {
             Tax: this.checkinform["checkin"].Tax,
             Grand: this.checkinform["checkin"].Grand
           }
-        ]);   
+        ]);
         this.CalculateSummaryAmount(this.checkinform["checkin"].Grand)
       });
-     
+
     }
     this.CreateNoofDays(31)
     this.CalculateNoofDays();
   }
 
 
- CalculateNoofDays()
- {
-      this.form.get('checkoutdate').valueChanges.subscribe(
-      data => {   
+  CalculateNoofDays() {
+    this.form.get('checkoutdate').valueChanges.subscribe(
+      data => {
         console.log(data)
 
       });
 
 
-      this.form.get('checkoutdate').valueChanges.subscribe(() => {
+    this.form.get('checkoutdate').valueChanges.subscribe(() => {
 
-        let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
-        let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
-        console.log(CheckinDate)
-        console.log(checkoutdate)
-        if (CheckinDate < checkoutdate) {
-  
-          let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
-          alert(numberofdays)
-          this.form.patchValue({
-            nofdays: numberofdays
-          });
-        }
-        else {
-          this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
-        }
-  
-      });
+      let CheckinDate = this.datePipe.transform(this.form.get('checkindate').value, "MM/dd/yyyy");
+      let checkoutdate = this.datePipe.transform(this.form.get('checkoutdate').value, "MM/dd/yyyy");
+      console.log(CheckinDate)
+      console.log(checkoutdate)
+      if (CheckinDate < checkoutdate) {
 
- }
+        let numberofdays = (datediff(parseDate(CheckinDate), parseDate(checkoutdate)));
+        alert(numberofdays)
+        this.form.patchValue({
+          nofdays: numberofdays
+        });
+      }
+      else {
+        this.addToast("Cogwave Software", "Departure Date +  '" + checkoutdate + "' Less  then Arrival Date ", "info");
+      }
+
+    });
+
+  }
 
 
- GetStateCodes(StateName: string) {
- 
-  let Cons = this.StateList.filter(x => x.State == StateName);
-  this.form.patchValue({
-    StateCode: Cons[0].StateCode
-  })
-}
+  GetStateCodes(StateName: string) {
 
-PatchStateCode(StateName: string,index:number) {
- alert(index)
-  let Cons = this.StateList.filter(x => x.State == StateName);
-  this.bankAccountForms.controls[index].patchValue({
-    StateCode: Cons[0].StateCode
-  })
-}
+    let Cons = this.StateList.filter(x => x.State == StateName);
+    this.form.patchValue({
+      StateCode: Cons[0].StateCode
+    })
+  }
 
- 
+  PatchStateCode(StateName: string, index: number) {
+    alert(index)
+    let Cons = this.StateList.filter(x => x.State == StateName);
+    this.bankAccountForms.controls[index].patchValue({
+      StateCode: Cons[0].StateCode
+    })
+  }
+
+
 
   checkValue(event: any, index: number) {
-  
+
     if (event.target.checked == true) {
       this.SwipeDataFromPrimaryGuest(index)
     }
@@ -597,8 +599,8 @@ PatchStateCode(StateName: string,index:number) {
       nation: nation,
       gstno: gstno,
       company: company,
-      StateCode:StateCode,
-      Area:Area
+      StateCode: StateCode,
+      Area: Area
     })
   }
 
@@ -614,8 +616,8 @@ PatchStateCode(StateName: string,index:number) {
       nation: "",
       gstno: "",
       company: "",
-      Area:"",
-      StateCode:""
+      Area: "",
+      StateCode: ""
 
     })
 
@@ -669,10 +671,8 @@ PatchStateCode(StateName: string,index:number) {
           for (let groupdata of this.Groupcheckin) {
             this.AddBokingButtonviaForeach(groupdata)
           }
+          this.CalculateSummaryAmount();
         });
-
-
-
     }
     else {
       document.querySelector("#" + RoomNos).classList.remove('occroom');
@@ -680,13 +680,13 @@ PatchStateCode(StateName: string,index:number) {
       let index = this.selectedRoomNoArray.indexOf(RoomNo);
       this.selectedRoomNoArray.splice(index);
       this.onDelete(0, index);
-
+      this.CalculateSummaryAmount();
 
     }
-    this.CalculateSummaryAmount();
+
   }
 
-  
+
 
   // removeItem() {
   //   debugger;
@@ -701,7 +701,7 @@ PatchStateCode(StateName: string,index:number) {
 
 
   CalculateAdvanceAmount(index: number, AdvanceAmount: number) {
-   
+
     let paymode = this.PayArray.controls[index].get('Paymode').value;
     let Paysubmode = this.PayArray.controls[index].get('Paysubmode').value;
     if (paymode == "select" || Paysubmode == "select") {
@@ -913,11 +913,11 @@ PatchStateCode(StateName: string,index:number) {
         console.log(this.driverlist);
       });
 
-      
-      
 
 
-      fromEvent(this.searchTermPinSec.nativeElement, 'keyup')
+
+
+    fromEvent(this.searchTermPinSec.nativeElement, 'keyup')
       .pipe(
         filter(text => this.searchTermPinSec.nativeElement.value.length > 2),
         debounceTime(1000),
@@ -932,19 +932,19 @@ PatchStateCode(StateName: string,index:number) {
 
 
 
-      
+
     fromEvent(this.searchTermguestInsidePopup.nativeElement, 'keyup')
-    .pipe(
-      filter(text => this.searchTermguestInsidePopup.nativeElement.value.length > 2),
-      debounceTime(1000),
-      distinctUntilChanged(),
-      // tap(x=>console.log('from tap' + x)),
-      switchMap(id => {
-        //console.log(id)
-        console.log('guestmap')
-        return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguestInsidePopup.nativeElement.value);
-      })
-    ).subscribe(res => this.guest = res);
+      .pipe(
+        filter(text => this.searchTermguestInsidePopup.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          console.log('guestmap')
+          return this._masterservice.GuetDataSearch(this.Branch, this.searchTermguestInsidePopup.nativeElement.value);
+        })
+      ).subscribe(res => this.guest = res);
 
 
   }
@@ -1120,12 +1120,12 @@ PatchStateCode(StateName: string,index:number) {
 
   get PayArray(): FormArray {
     return this.form.get("PayArray") as FormArray;
-  } 
+  }
 
 
   get bankAccountForms(): FormArray {
     return this.form.get("bankAccountForms") as FormArray;
-  } 
+  }
 
 
 
@@ -1135,15 +1135,15 @@ PatchStateCode(StateName: string,index:number) {
       pincode: SelectedData.Pincode,
       city: SelectedData.City,
       state: SelectedData.State,
-      Area:SelectedData.AreaData,
+      Area: SelectedData.AreaData,
       nation: "India",
     })
-   
-   var statename=this.form.get("state").value;
-   let Cons = this.StateList.filter(x => x.State == statename);
-  this.form.patchValue({
-    StateCode: Cons[0].StateCode
-  })
+
+    var statename = this.form.get("state").value;
+    let Cons = this.StateList.filter(x => x.State == statename);
+    this.form.patchValue({
+      StateCode: Cons[0].StateCode
+    })
 
     var allbtn = document.querySelector('.md-show');
     console.log(allbtn);
@@ -1151,22 +1151,22 @@ PatchStateCode(StateName: string,index:number) {
   }
 
 
-  
+
   patchPincodeModalData(SelectedData: any, event: any) {
     let IndexFormObs;
-    this._bankservice.currentindex.subscribe(res=>{
-      IndexFormObs=res;
+    this._bankservice.currentindex.subscribe(res => {
+      IndexFormObs = res;
     })
     let Cons = this.StateList.filter(x => x.State == SelectedData.State);
     this.bankAccountForms.controls[IndexFormObs].patchValue({
       pincode: SelectedData.Pincode,
       city: SelectedData.City,
       state: SelectedData.State,
-      Area:SelectedData.AreaData,
+      Area: SelectedData.AreaData,
       nation: "India",
       StateCode: Cons[0].StateCode
     })
-   
+
   }
 
 
@@ -1318,12 +1318,12 @@ PatchStateCode(StateName: string,index:number) {
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
-  
+
 
   PatchGuestSecoundaryData(SelectedData: any, event: any) {
     let IndexFromObs;
-    this._bankservice.currentindex.subscribe(res=>{
-     IndexFromObs=res;
+    this._bankservice.currentindex.subscribe(res => {
+      IndexFromObs = res;
     })
     this.bankAccountForms.controls[IndexFromObs].patchValue({
       Guestcode: SelectedData.GuestCode,
@@ -1343,29 +1343,26 @@ PatchStateCode(StateName: string,index:number) {
       GuestImage: SelectedData.GuestPhotoPath,
       GuestIdFronturl: SelectedData.GuestIdFront,
       GuestIdBackurl: SelectedData.GuestIdBack,
-    }) 
+    })
     this.bankAccountForms.controls[IndexFromObs].get('guestname').disable({ onlySelf: true });
     //this.snapshotshow = true;
-    if(IndexFromObs==0)
-    {    
-    this.GuetImg0 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
-    this.GuetIdFront0 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
-    this.GuetIdBack0 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+    if (IndexFromObs == 0) {
+      this.GuetImg0 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
+      this.GuetIdFront0 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
+      this.GuetIdBack0 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
     }
-    else if(IndexFromObs==1)
-    {
+    else if (IndexFromObs == 1) {
       this.GuetImg1 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
       this.GuetIdFront1 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
       this.GuetIdBack1 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
     }
-  else if(IndexFromObs==2)
-  {
-    this.GuetImg2 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
-    this.GuetIdFront2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
-    this.GuetIdBack2 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
-  }
-   // var allbtn = document.querySelector('.md-show');
-   // allbtn.classList.remove("md-show");
+    else if (IndexFromObs == 2) {
+      this.GuetImg2 = environment.GuestimagePath + "/" + SelectedData.GuestPhotoPath;
+      this.GuetIdFront2 = environment.GuestimagePath + "/" + SelectedData.GuestIdFront;
+      this.GuetIdBack2 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
+    }
+    // var allbtn = document.querySelector('.md-show');
+    // allbtn.classList.remove("md-show");
   }
 
 
@@ -1375,7 +1372,7 @@ PatchStateCode(StateName: string,index:number) {
     this._bankservice.changeindexvalue(index);
     document.querySelector("#" + event).classList.add("md-show");
   }
-  secondaryGuestModel(event, data,j) {
+  secondaryGuestModel(event, data, j) {
     alert(j)
     this._bankservice.changeindexvalue(j);
     document.querySelector("#" + event).classList.add("md-show");
@@ -1384,7 +1381,7 @@ PatchStateCode(StateName: string,index:number) {
     this.filterQuery = "";
     document.querySelector("#" + event).classList.add("md-show");
   }
-  openMyModalPincodePopup(event, data,j) {
+  openMyModalPincodePopup(event, data, j) {
     this.filterQuery = "";
     this._bankservice.changeindexvalue(j);
     document.querySelector("#" + event).classList.add("md-show");
@@ -1405,7 +1402,8 @@ PatchStateCode(StateName: string,index:number) {
 
 
   onDeletePayment(bankAccountID, k) {
-    if (k != 0) (<FormArray>this.form.get("PayArray")).removeAt(k);
+    // if (k != 0) (<FormArray>this.form.get("PayArray")).removeAt(k);
+    (<FormArray>this.form.get("PayArray")).removeAt(k);
   }
 
 
@@ -1437,7 +1435,7 @@ PatchStateCode(StateName: string,index:number) {
     };
 
     this._masterservice.GetBookingData(this.Formcheckin).subscribe(data => {
-      this.checkinform=data;
+      this.checkinform = data;
       this.other.controls[index].patchValue({
         RoomNo: data["RoomNo"],
         RoomCode: data["RoomCode"],
@@ -1448,29 +1446,27 @@ PatchStateCode(StateName: string,index:number) {
         Tax: data["Tax"],
         Grand: data["Grand"]
       });
-      console.log( this.checkinform)
-      console.log( 'this.checkinform')
-     this.CalculateSummaryAmount(this.checkinform["Grand"]);
+      console.log(this.checkinform)
+      console.log('this.checkinform')
+      this.CalculateSummaryAmount(this.checkinform["Grand"]);
     });
-     
+
   }
 
-  fileProgressIdProof(fileInput: any,photoname:string) {
-    if(photoname=="Front")
-    {
+  fileProgressIdProof(fileInput: any, photoname: string) {
+    if (photoname == "Front") {
       this.fileDataIdfront = <File>fileInput.target.files[0];
       this.previewImage(photoname);
     }
-    else{
+    else {
       this.fileDataIdBack = <File>fileInput.target.files[0];
       this.previewImage(photoname);
-    }   
+    }
   }
 
 
-  previewImage(photoname:string) {
-    if(photoname=="Front")
-    {
+  previewImage(photoname: string) {
+    if (photoname == "Front") {
       var mimeType = this.fileDataIdfront.type;
       if (mimeType.match(/image\/*/) == null) {
         return;
@@ -1481,20 +1477,19 @@ PatchStateCode(StateName: string,index:number) {
         this.previewUrl2 = reader.result;
       }
     }
-    else
-    {
+    else {
       var mimeType = this.fileDataIdBack.type;
       if (mimeType.match(/image\/*/) == null) {
         return;
       }
-  
+
       var reader = new FileReader();
       reader.readAsDataURL(this.fileDataIdBack);
       reader.onload = (_event) => {
         this.previewUrl3 = reader.result;
       }
     }
-  
+
   }
 
 
@@ -1614,7 +1609,7 @@ PatchStateCode(StateName: string,index:number) {
   Submit() {
 
     console.log(this.bankAccountForms.value)
-    
+
     const randomCheckinNo = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let text1 = '';
     for (let i = 0; i < 5; i++) {
@@ -1782,7 +1777,7 @@ PatchStateCode(StateName: string,index:number) {
         case 3:
           this.GuetImg3 = environment.GuestimagePath + "/" + event;
           break;
-       
+
       }
 
     })
@@ -1801,9 +1796,8 @@ PatchStateCode(StateName: string,index:number) {
 
 
 
-  addBankAccountForm(index: number) 
-  {
-    
+  addBankAccountForm(index: number) {
+
     let index1 = this.bankAccountForms.length;
     this.LoadDummyImage(index1);
     if (index1 <= 2) {
@@ -1838,33 +1832,29 @@ PatchStateCode(StateName: string,index:number) {
 
   }
 
-LoadDummyImage(index:number)
-{
-  
-  if(index==0)
-  {
-    this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
-    this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
-    this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
-  }
-  if(index==1)
-  {
-    this.GuetImg1 = environment.GuestimagePath + '/imagenot1.png';
-    this.GuetIdFront1 = environment.GuestimagePath + '/imagenot1.png';
-    this.GuetIdBack1 = environment.GuestimagePath + '/imagenot1.png';
-  }
-  if(index==2)
-  {
-    this.GuetImg2= environment.GuestimagePath + '/imagenot1.png';
-    this.GuetIdFront2 = environment.GuestimagePath + '/imagenot1.png';
-    this.GuetIdBack2 = environment.GuestimagePath + '/imagenot1.png';
-  }
- 
-  
+  LoadDummyImage(index: number) {
 
-}
+    if (index == 0) {
+      this.GuetImg0 = environment.GuestimagePath + '/imagenot1.png';
+      this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
+      this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
+    }
+    if (index == 1) {
+      this.GuetImg1 = environment.GuestimagePath + '/imagenot1.png';
+      this.GuetIdFront1 = environment.GuestimagePath + '/imagenot1.png';
+      this.GuetIdBack1 = environment.GuestimagePath + '/imagenot1.png';
+    }
+    if (index == 2) {
+      this.GuetImg2 = environment.GuestimagePath + '/imagenot1.png';
+      this.GuetIdFront2 = environment.GuestimagePath + '/imagenot1.png';
+      this.GuetIdBack2 = environment.GuestimagePath + '/imagenot1.png';
+    }
+
+
+
+  }
   onSubmitcompany(f?: NgForm) {
-    
+
     f.value.BranchCode = this.Branch;
     f.value.CreatedBy = 1;
     f.value.BranchCode = this.Branch;
@@ -1949,13 +1939,14 @@ LoadDummyImage(index:number)
 
   onDelete(bankAccountID, i) {
     (<FormArray>this.form.get("other")).removeAt(i);
+    this.CalculateSummaryAmount(); 
   }
 
 
   DeleteSecoundaryGuest(i) {
-    
+
     (<FormArray>this.form.get("bankAccountForms")).removeAt(i);
-   
+
   }
 
   AddBokingButtonClick(): void {
@@ -1968,29 +1959,31 @@ LoadDummyImage(index:number)
     (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
   }
 
-  CalculateSummaryAmount(Grand?:number) {
-    this.TotalBillAmount=0;
-    this.TotalPaidAmount=0; 
-    this.TotalBalanceAmount=0; 
-    if(this.isGorupCheckin==false)
-    {
-      for (let Payarray of this.PayArray.controls) { 
-        this.TotalPaidAmount += Payarray.get("payAmount").value;
-      }
-    this.TotalBillAmount= Grand;
-    this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
-    }
-    else
-    {
+
+
+
+  CalculateSummaryAmount(Grand?: number) {
+    this.TotalBillAmount = 0;
+    this.TotalPaidAmount = 0;
+    this.TotalBalanceAmount = 0;
+    debugger;
+    if (this.isGorupCheckin == false) {
       for (let Payarray of this.PayArray.controls) {
         this.TotalPaidAmount += Payarray.get("payAmount").value;
       }
-      for (let other of this.other.controls) {       
-          this.TotalBillAmount += other.get("Grand").value;    
-      } 
+      this.TotalBillAmount = Grand;
       this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
     }
- 
+    else {
+      for (let Payarray of this.PayArray.controls) {
+        this.TotalPaidAmount += Payarray.get("payAmount").value;
+      }
+      for (let other of this.other.controls) {
+        this.TotalBillAmount += other.get("Grand").value;
+      }
+      this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+    }
+
   }
 
 
@@ -2024,9 +2017,13 @@ LoadDummyImage(index:number)
     document.querySelector("#" + event).classList.remove("md-show");
   }
 
+
+  doSomething() {
+    alert('fr')
+  }
+
+
 }
-
-
 
 function parseDate(str) {
   var mdy = str.split('/');

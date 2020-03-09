@@ -678,7 +678,7 @@
                                     
                                                                         <div class="td">
                                                                           <select class="custom-select" name="disctype" formControlName="disctype" id="disctype">                                                           
-                                                                          <option value="select">Select</option>
+                                                                          <option value="0">Select</option>
                                                                           <option *ngFor="let sour of discounttypes"
                                                                             [value]="sour">{{ sour  }}</option>
                                                                         </select>
@@ -834,9 +834,9 @@
                                             <div class="col-lg-2">
                                               <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
                                                 <div class=" ">
-                                                  <label  id="BillAmount1"  ><span>Total Amount : </span> <b>5000.00{{TotalBillAmount | currency:'INR'}}</b> </label>   
-                                                  <label  id="BillAmount2" ><span>Paid Amount : </span> <b>5500.00{{TotalPaidAmount | currency:'INR'}}</b> </label>   
-                                                  <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>450.00{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                              
+                                                  <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
+                                                  <label  id="BillAmount2" ><span>Paid Amount : </span> <b>{{TotalPaidAmount | currency:'INR'}}</b> </label>   
+                                                  <label  id="BillAmount3"  ><span>Balance Amount : </span> <b>{{TotalBalanceAmount | currency:'INR'}}</b> </label>                                                                              
                                                 </div>
                                               </div>
                                             </div>

@@ -550,25 +550,24 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   
   }
 
+
+
   CalculateSummaryAmount() {
-
-    for (let Payarray of this.PayArray.controls) {
-      this.TotalPaidAmount += Payarray.get("payAmount").value;
-    }
-    for (let other of this.other.controls) {
-      let req = other.get('Required').value;
-      if (req > 0) {
-        this.TotalBillAmount += other.get("Net").value;
+    this.TotalBillAmount=0;
+    this.TotalPaidAmount=0; 
+    this.TotalBalanceAmount=0; 
+   
+   
+      for (let Payarray of this.PayArray.controls) {
+        this.TotalPaidAmount += Payarray.get("payAmount").value;
       }
-    }
-
-    // for (let Extrach of this.PayExtra.controls) {
-    //   this.TotalBillAmount += Extrach.get("TotalAmount").value;
-    // }
-    // this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
-
+      for (let other of this.other.controls) {       
+          this.TotalBillAmount += other.get("Grand").value;    
+      } 
+      this.TotalBalanceAmount = this.TotalBillAmount - this.TotalPaidAmount;
+    
+ 
   }
-
 
 
 
@@ -641,7 +640,8 @@ export class RescheckinComponent implements OnInit, OnDestroy {
           //   this.AddBokingButtonviaForeach(groupdata)
           // }
           let Count = this.CheckRoom(RoomCodes);
-          if (Count == 0) {
+          if (Count == 0)
+           {
             var Warning = "Not Allowed to book! Already you Selected"
             this.addToast("Cogwave Software", Warning, "warning");
             document.querySelector("#" + RoomNos).classList.remove('occroom');
@@ -650,6 +650,7 @@ export class RescheckinComponent implements OnInit, OnDestroy {
             this.selectedRoomNoArray.splice(index);
             this.onDelete(0, index);
           }
+          this.CalculateSummaryAmount();
         });
     }
     else {
@@ -658,11 +659,9 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       let index = this.selectedRoomNoArray.indexOf(RoomNo);
       this.selectedRoomNoArray.splice(index);
       this.onDelete(0, index);
-
-
-
+      this.CalculateSummaryAmount();
     }
-
+   
   }
 
 
@@ -675,6 +674,10 @@ export class RescheckinComponent implements OnInit, OnDestroy {
   }
 
   AddbokingGridviaForeach(groupdata): FormGroup {
+
+    console.log('groupdata')
+    console.log(groupdata)
+
     return this.formBuilder.group({
       bankAccountID: [],
       RoomCode: [groupdata.RoomCode],
