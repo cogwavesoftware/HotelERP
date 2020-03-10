@@ -1362,7 +1362,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
       this.GuetIdBack2 = environment.GuestimagePath + "/" + SelectedData.GuestIdBack;
     }
     // var allbtn = document.querySelector('.md-show');
-    // allbtn.classList.remove("md-show");
+     //allbtn.classList.remove("md-show");
   }
 
 
@@ -1373,7 +1373,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-show");
   }
   secondaryGuestModel(event, data, j) {
-    alert(j)
+  
     this._bankservice.changeindexvalue(j);
     document.querySelector("#" + event).classList.add("md-show");
   }

@@ -66,14 +66,20 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   }
   LoadReservationCheckinpage(ResNo:string)
   {
+    
     this.router.navigate(['/Master/reschk',ResNo])
   }
 
-
-  openMyModal(event,name){
-    console.log("roomname"  );
-    document.querySelector("#" + event).classList.add("md-show");
+  OpenMyModel(event,name){ 
+    // var allbtn = document.querySelector('.modal');
+    // //allbtn.classList.remove("model");
+    // allbtn.classList.add("hidesa");
+    // document.querySelector("#" + event).classList.add("md-show");
+    // allbtn.classList.remove("hidesa");
+    // //allbtn.classList.add("model");
   }
+
+
   openRoomsPopup(event, roomname ) {
     this.model2 = {       
         roomname: roomname,        
@@ -91,15 +97,55 @@ parentroomhover(rmno:string,roomname1:string){
   this.rmno = rmno;
   this.roomname1=roomname1;
   console.log( this.rmno+this.roomname1);
-}
-modelroomhover (){
-  console.log("test");
-}
+  }
+
+
   closeMyModal(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"
     );
   }
+
+// ------------------------------------Model--------------------
+// Post-OpenPosModel
+// Advance-OpenAdvanceModel
+// Shifft-OpenShifftModel
+// Discount-OpenDiscountModel
+// ExtraBed-OpenExtraBedModel
+// ChangePax-OpenChangepaxModel
+// Amend-OpenAmendModel
+// ChangeCompany-OpenChangeCompanyModel
+// HouseGuest-OpenHouseGuestModel
+// ChangePlan-OpenChangePlanModel
+// ChangeGuest-OpenChangeGuestModel
+// Instruction-OpenInstructionModel
+// FoodCoupon-OpenFoodCouponModel
+// PaxonBill-OpenPaxonBillModel
+// SmsCoupon-OpenSmsCouponModel
+// linkunlink-OpenlinkunlinkModel
+// WakeUp-OpenWakeUpModel
+// HouseKeeping-OpenHouseKeepingModel
+// Compliment-OpenComplimentModel
+// EditRate-OpenEditRateModel
+// ExpressCheckin-OpenExpressCheckinModel
+// Block-OpenBlockModel
+// Management-OpenManagementModel
+// Rate-OpenRateModel
+// RoomHistory-OpenRoomHistoryModel
+// GuestHistory-OpenGuestHistoryModel
+// Poweronvisit-OpenPoweronvisitModel
+// PoweronCleaning-OpenPoweronCleaningModel
+// PowerOff-OpenPowerOffModel
+// Release-OpenReleaseModel
+OpenModel(event,RoomNo)
+  {
+    console.log(event)
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+
+
+
+
 }
  
  
