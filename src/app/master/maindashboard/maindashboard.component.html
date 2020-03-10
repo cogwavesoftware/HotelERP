@@ -52,7 +52,7 @@
           </div>
           </div>
         </div>
-
+    
         <div class="roomsrow">
         <div class="col-md-12  "> 
         <div class="row">
@@ -414,6 +414,10 @@
             
         </div>
             
+        <div class="test">
+          <li> <a href="javascript:;" class="modelgradiant btn-lg btn-block"  (click)="OpenBlockDetails ('blockdeatils')"><i class="fa fa-user" aria-hidden="true"></i> Grace </a></li>
+        </div>
+
 
  <app-modal-animation class="modellg contentboxmodel" [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">   
   <h3 class="f-15" style="position: relative;">Today Arrival List
@@ -662,6 +666,29 @@
                
                 </div>
                 
+              </div>
+            </div>        
+             </div>          
+          </app-modal-animation>
+    
+    </div>
+
+
+   
+ 
+
+    <div class="blocldetailsouter">
+      <app-modal-animation [modalID]="'blockdeatils'" [modalClass]="' model-lg md-effect-4 addressmodeleffect blockdetailsmodel'">      
+        <h3 class="f-15" style="position: relative;"><i   class="fa  fa-user-md"></i> Block Details Details
+        </h3>
+          <div class="app-modal-body text-center" style="position: relative;"> 
+            <div class="table-content crm-table">
+              <div class="project-table addaddinalguest">
+                <div id="crm-contact" class="dt-responsive">  
+              <perfect-scrollbar class="overflow-container" [style.width]="'600'"  [style.height]="'auto'" [config]="config">
+              <app-blockingdetails></app-blockingdetails>
+                </perfect-scrollbar> 
+                </div> 
               </div>
             </div>        
              </div>          

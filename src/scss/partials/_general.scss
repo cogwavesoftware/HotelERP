@@ -5804,7 +5804,8 @@ outerdiv{
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-4,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-5,
 .outerdiv .tabouter .taboutercreatebtn .guestinfofirstrow .col-lg-12,
-.outerdiv .guestinfofirstrow .col-lg-4{
+.outerdiv .guestinfofirstrow .col-lg-4,
+.outerdiv .guestinfofirstrow .col-lg-12{
     padding-right:1px;
     padding-left:0;
 }
@@ -6790,7 +6791,7 @@ outerdiv{
  .form-control-label,
  .accouter .test123.grpcheckinbookingtbl .grid-table .thead .td{   
     font-weight: normal;
-    font-size: 90%;    
+    // font-size: 90%;    
     }
     .addGuestouter .guestinfofirstrow select.custom-select{
         padding-top: 0;
@@ -6806,12 +6807,7 @@ outerdiv{
     font-size: 90%;
 }
  
-.newresroomavail .md-overlay{    
-    z-index:1055!important;
-}
-.newresroomavail .md-modal{
-    z-index:1068!important;
-}
+
 .calcdiv .modal-body{
     padding:0px; 
 }
@@ -6934,3 +6930,20 @@ outerdiv{
     border: 1px solid #ccc;
     
 }
+.newresroomavail .md-overlay{    
+    z-index:1055!important;
+}
+.newresroomavail .md-modal{
+    z-index:1068!important;
+}
+.blocldetailsouter .md-overlay{    
+    z-index:1055!important;
+}
+.blocldetailsouter .md-modal {
+    z-index: 1068 !important; 
+}
+.pcoded-content .pcoded-inner-content .main-body .page-wrapper .blockdetailsmodel  {
+    width:100%!important;
+    max-width:60%;     
+}
+ 

@@ -81,7 +81,10 @@ export class MaindashboardComponent implements OnInit,OnDestroy {
   console.log("roomname"+ roomname  );
   document.querySelector("#" + event).classList.add("md-show");
 }
-
+OpenBlockDetails(event){
+  console.log("openspecial"  );
+  document.querySelector("#" + event).classList.add("md-show"); 
+}
  
 openspecial(event, roomname){
   console.log("openspecial"  );

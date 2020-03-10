@@ -20,11 +20,15 @@ import { CompareValidatorDirective } from './compare-validator.directive';
 import { SelectRequiredValidatorDirective } from './select-validator.directive';
 import { ConfirmValidatorDirective } from './confirm-validator.directive';
 import { CalculatorComponent } from '../master/reservation/calculator/calculator.component';
+import {BlockingdetailsComponent} from '../master/maindashboard/blockingdetails/blockingdetails.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+ import {DatePipe} from '@angular/common';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import {WebcamModule} from 'ngx-webcam';
 import { LoadingComponent } from '../master/loading/loading.component';
+//import { DiscountportalComponent } from '../master/maindashboard/discountportal/discountportal.component';
 
 @NgModule({
   imports: [
@@ -32,7 +36,8 @@ import { LoadingComponent } from '../master/loading/loading.component';
     NgbModule.forRoot(),
     HttpClientModule,
     PerfectScrollbarModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     NgbModule,
@@ -49,6 +54,8 @@ import { LoadingComponent } from '../master/loading/loading.component';
     ModalAnimationComponent,
     SpinnerComponent,
     CalculatorComponent,
+     BlockingdetailsComponent,
+    // DiscountportalComponent,
     ClickOutsideModule,WebcamModule,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
     ,LoadingComponent
@@ -65,15 +72,19 @@ import { LoadingComponent } from '../master/loading/loading.component';
     ModalAnimationComponent,
     SpinnerComponent,
     CalculatorComponent,
+     BlockingdetailsComponent,
+     //DiscountportalComponent,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
   ,LoadingComponent
     
   ],
   providers: [
     {
+      
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    [DatePipe]
   ] ,
   schemas: [ NO_ERRORS_SCHEMA ]
 })
