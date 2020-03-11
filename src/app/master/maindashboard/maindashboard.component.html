@@ -1,49 +1,13 @@
-<div class="maindashboard"> 
+<div class="maindashboard">
   <div class="container-fluid">
     <div class="col-md-12" style="padding-right:0; padding-left:0">
       <div class="row ">
-       
+
         <div class="col-md-9 " style="padding-left: 0; border:1px solid #ccc">
-      
+
           <div class=" ">
-             
-          <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;"> 
-          <div class="row">
-            <div class="col-md-12">
-              <ul>
-                <li>
-               
 
-                  <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active" > <i class="icon-comments"></i> <span>Reservation</span></a>
-                </li>
-                <li>
-                <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i class="icon-comments"></i><span>Group Checkin </span></a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon-comments"></i><span>Block Rooms</span></a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon-comments"></i><span>Release Rooms</span></a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon-comments"></i> <span>Night Audit</span></a>
-                </li>
-                <li>
-                 
-                  <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active"><i class="icon-comments"></i><span>Reservation Chart</span></a>
-                </li>
-                <li>
-                  <a href="#"> <i class="icon-comments"></i><span>Guest Search</span></a>
-                </li>
-                  <li>
-                  <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i class="icon-comments"></i><span>Reservation List</span></a>
-                  </li>
-
-                  
-                  <li>
-                    <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i class="icon-comments"></i><span>Chart</span></a>
-                    </li>
-
+<<<<<<< HEAD
              
                 <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Today Arival</button></li>
                </ul>
@@ -63,71 +27,139 @@
                     <ul class="roomstatus" >
                     <li class="  ">
                     <label class="label label-success">Vacant : {{finalMenu.Vacant}}</label>
+=======
+            <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
+              <div class="row">
+                <div class="col-md-12">
+                  <ul>
+                    <li>
+
+
+                      <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> <i
+                          class="icon-comments"></i> <span>Reservation</span></a>
+>>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
                     </li>
-                    <li class="  ">
-                    <label class="label label-danger">Occupied : {{finalMenu.Occupied}}</label>
+                    <li>
+                      <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
+                          class="icon-comments"></i><span>Group Checkin </span></a>
                     </li>
-                    <li class="  ">
-                    <label class="label label-inverse">Dirty : {{finalMenu.Dirty}}</label>
+                    <li>
+                      <a href="#"> <i class="icon-comments"></i><span>Block Rooms</span></a>
                     </li>
-                    <li class="  ">
-                    <label class="label label-warning" style="background-color: orange;">Blocked : {{finalMenu.Blocked}}</label>
+                    <li>
+                      <a href="#"> <i class="icon-comments"></i><span>Release Rooms</span></a>
                     </li>
-                    <li class="  ">
-                    <label class="label label-warning">Un_Settel : {{finalMenu.Un_Settel}}</label>
+                    <li>
+                      <a href="#"> <i class="icon-comments"></i> <span>Night Audit</span></a>
                     </li>
-                    
-                    <li class="  ">
-                    <label class="label label-primary">Management : {{finalMenu.Management}}</label>
+                    <li>
+
+                      <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active"><i
+                          class="icon-comments"></i><span>Reservation Chart</span></a>
                     </li>
-                    <li class="  ">
-                    <label class="label label-danger">Occupancy : {{finalMenu.Occ}}</label>
+                    <li>
+                      <a href="#"> <i class="icon-comments"></i><span>Guest Search</span></a>
                     </li>
-                    <li class="  ">
-                    <label class="label label-primary">TodayCheckin : {{finalMenu.TodayCheckin}}</label>
+                    <li>
+                      <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i
+                          class="icon-comments"></i><span>Reservation List</span></a>
                     </li>
-                    <li class="  ">
-                    <label class="label label-primary">TodayCheckout : {{finalMenu.TodayCheckout}}</label>
+
+
+                    <li>
+                      <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i
+                          class="icon-comments"></i><span>Chart</span></a>
                     </li>
-                    </ul> 
+
+
+                    <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Today Arival</button></li>
+                  </ul>
+                </div>
+
               </div>
+            </div>
           </div>
-        
-        <div class="row">
-              <div class="col-md-12 ">     
-                  <div class=" " id="leftNavBar">          
-                    <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors"  >
-                    <li class="parentNav  peach-gradient">
-                    <i class="fa fas fa-building"></i>               
-                    {{item.FloorName}}</li>
-                      <li class="childData">
-                        <ul style="display: inline-block" >
-                          <li style="float: left; margin-left: 0px "  *ngFor="let child of finalMenu.Rooms"  >
-                          <div *ngIf="item.FloorCode==child.FloorCode ">
+
+          <div class="roomsrow">
+            <div class="col-md-12  ">
+              <div class="row">
+
+                <div class="col-md-12 ">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <ul class="roomstatus">
+                        <li class="  ">
+                          <label class="label label-success">Vacant : {{finalMenu.Vacant}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-danger">Occupied : {{finalMenu.Occupied}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-inverse">Dirty : {{finalMenu.Dirty}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-warning" style="background-color: orange;">Blocked :
+                            {{finalMenu.Blocked}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-warning">Un_Settel : {{finalMenu.Un_Settel}}</label>
+                        </li>
+
+                        <li class="  ">
+                          <label class="label label-primary">Management : {{finalMenu.Management}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-danger">Occupancy : {{finalMenu.Occ}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-primary">TodayCheckin : {{finalMenu.TodayCheckin}}</label>
+                        </li>
+                        <li class="  ">
+                          <label class="label label-primary">TodayCheckout : {{finalMenu.TodayCheckout}}</label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 ">
+                      <div class=" " id="leftNavBar">
+                        <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors">
+                          <li class="parentNav  peach-gradient">
+                            <i class="fa fas fa-building"></i>
+                            {{item.FloorName}}</li>
+                          <li class="childData">
+                            <ul style="display: inline-block">
+                              <li style="float: left; margin-left: 0px " *ngFor="let child of finalMenu.Rooms">
+                                <div *ngIf="item.FloorCode==child.FloorCode ">
 
 
-                          <div *ngIf = "child.Status == 'V'">                       
-                          <span class="mytooltip tooltip-effect-1">
-                          <span class="tooltip-item">
-                          <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalVacent.show()" class="btn btn-success btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
-                          {{child.RoomNo}} <br> 
-                          <span class=" ">{{child.RoomCode}}</span>
-                          </button></span>
-                         
-                          </span>       
-                          </div> <!-- end of if condition -->
+                                  <div *ngIf="child.Status == 'V'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
+                                          (click)="modalVacent.show()" class="btn btn-success btn-square ripple light"
+                                          placement="top" ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+
+                                    </span>
+                                  </div> <!-- end of if condition -->
 
 
 
-                          <div *ngIf = "child.Status == 'O'">                      
-                          <span class="mytooltip tooltip-effect-1">
-                          <span class="tooltip-item">
-                          <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" (click)="modalOverflow.show()" class="btn btn-danger ripple light" placement="right" ngbTooltip="{{child.RoomNo}}">
-                          {{child.RoomNo}}  <br>
-                          <span class="">{{child.RoomCode}}</span>
-                          </button>
-                        </span>
-                          <!--<span class="tooltip-content clearfix">
+                                  <div *ngIf="child.Status == 'O'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
+                                          (click)="modalOverflow.show()" class="btn btn-danger ripple light"
+                                          placement="right" ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class="">{{child.RoomCode}}</span>
+                                        </button>
+                                      </span>
+                                      <!--<span class="tooltip-content clearfix">
                           <img src="assets/images/GuestImage/1580366171214_mCx4C.png" width="150" alt="Ecluid.png">
                            <span class="tooltip-text"> 
                             <span>Name:Francis </span>  
@@ -140,277 +172,294 @@
                       
                         </span> 
                           </span>-->
-                          </span> 
-                          </div><!-- end of if condition -->
+                                    </span>
+                                  </div><!-- end of if condition -->
 
 
 
-                          <div *ngIf = "child.Status == 'D'">                      
-                          <span class="mytooltip tooltip-effect-1">
-                          <span class="tooltip-item">
-                          <button type="button" class="btn btn-inverse btn-square ripple light" placement="top" ngbTooltip="{{child.RoomNo}}">
-                          {{child.RoomNo}}  <br>
-                          <span class=" ">{{child.RoomCode}}</span>
-                          </button></span>
-                          <span class="tooltip-content clearfix">
-                          <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
-                          <span class="tooltip-text">The Room is Dirty</span>
-                          </span>
-                          </span> 
-                          </div><!-- end of if condition -->
-
-                          
-                          <div *ngIf = "child.Status == 'B'">                      
-                          <span class="mytooltip tooltip-effect-1">
-                          <span class="tooltip-item">
-                          <button type="button" class="btn btn-warning btn-square ripple" (click)="modalBlock.show()"  placement="top" ngbTooltip="{{child.RoomNo}}">
-                          {{child.RoomNo}}  <br>
-                          <span class=" ">{{child.RoomCode}}</span>
-                          </button></span>
-                          <span class="tooltip-content clearfix">
-                  
-                          <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
-                          </span>
-                          </span> 
-                          </div>
+                                  <div *ngIf="child.Status == 'D'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" class="btn btn-inverse btn-square ripple light"
+                                          placement="top" ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+                                      <span class="tooltip-content clearfix">
+                                        <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
+                                        <span class="tooltip-text">The Room is Dirty</span>
+                                      </span>
+                                    </span>
+                                  </div><!-- end of if condition -->
 
 
+                                  <div *ngIf="child.Status == 'B'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" class="btn btn-warning btn-square ripple"
+                                          (click)="modalBlock.show()" placement="top" ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+                                      <span class="tooltip-content clearfix">
 
-
+                                        <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
+                                      </span>
+                                    </span>
+                                  </div>
 
 
 
 
-                          <div *ngIf = "child.Status == 'D'">                      
-                            <span class="mytooltip tooltip-effect-1">
-                            <span class="tooltip-item">
-                            <button type="button" class="btn btn-warning btn-square ripple" placement="top" ngbTooltip="{{child.RoomNo}}">
-                            {{child.RoomNo}}  <br>
-                            <span class=" ">{{child.RoomCode}}</span>
-                            </button></span>
-                            <span class="tooltip-content clearfix">
-                            <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
-                            <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
-                            </span>
-                            </span> 
-                            </div><!-- end of if condition -->
 
 
-                          <div *ngIf = "child.Status == 'M'">                      
-                          <span class="mytooltip tooltip-effect-1">
-                          <span class="tooltip-item">
-                          <button type="button" class="btn btn-primary btn-square ripple light" placement="top" (click)="modalManagement.show()" ngbTooltip="{{child.RoomNo}}">
-                          {{child.RoomNo}}  <br>
-                          <span class=" ">{{child.RoomCode}}</span>
-                          </button></span>
-                          <span class="tooltip-content clearfix">
-                         
-                          <span class="tooltip-text">Room is Management .Reason Md Guest.</span>
-                          </span>
-                          </span> 
-                          </div><!-- end of if condition -->
 
 
-                          <!-- <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button>  -->
-                          </div>     
-                          
-                                              
+                                  <div *ngIf="child.Status == 'D'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" class="btn btn-warning btn-square ripple" placement="top"
+                                          ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+                                      <span class="tooltip-content clearfix">
+                                        <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
+                                        <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
+                                      </span>
+                                    </span>
+                                  </div><!-- end of if condition -->
+
+
+                                  <div *ngIf="child.Status == 'M'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" class="btn btn-primary btn-square ripple light"
+                                          placement="top" (click)="modalManagement.show()"
+                                          ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+                                      <span class="tooltip-content clearfix">
+
+                                        <span class="tooltip-text">Room is Management .Reason Md Guest.</span>
+                                      </span>
+                                    </span>
+                                  </div><!-- end of if condition -->
+
+
+                                  <!-- <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button>  -->
+                                </div>
+
+
+                              </li>
+                            </ul>
                           </li>
                         </ul>
-                      </li> 
-                    </ul>  
-                  
-                  
-                  
-                  </div>
 
 
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <!-- Bootstrap tab card start -->
-                     
-                        <div class="row stickytab">
-                          <div class="col-md-12  ">                         
-                            <!-- <app-dashtabs></app-dashtabs> -->
+
+                      </div>
+
+
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <!-- Bootstrap tab card start -->
+
+                          <div class="row stickytab">
+                            <div class="col-md-12  ">
+                              <!-- <app-dashtabs></app-dashtabs> -->
+                            </div>
+
                           </div>
-                        
+
+                          <!-- Bootstrap tab card end -->
                         </div>
-                     
-                      <!-- Bootstrap tab card end -->
+                      </div>
+
+
+                      <!-- end rooms dashborad -->
+
                     </div>
+
                   </div>
 
-                   
-              <!-- end rooms dashborad -->
-              
+                  <!-- Bootstrap tab card end -->
+
+
+                </div>
+
+
               </div>
-        
-        </div>
-        
-        <!-- Bootstrap tab card end -->
-        
-        
-        </div>
-        
-   
-        </div>
-        </div><!-- col-md-12-->
-
-      
+            </div><!-- col-md-12-->
 
 
-        </div> <!-- roomsrow -->
 
-       
-        
+
+          </div> <!-- roomsrow -->
+
+
+
         </div> <!-- col md 9  end -->
-      
-        
-        <div class="col-md-3 maindashboardrightside" style="padding-left: 0; padding-right: 0;">    
-                
-      
-            <div class="dashboardlogo">             
-              <img src="assets/images/logo_2.png" alt="Cogwave">
-            </div>
 
-            <div class="expectedcheckout">
-              <h2><i class="fa fa-hotel"></i> Expected Checkout</h2>
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered full-data-table"  > 
-                  <thead>
-                  <tr class="blueorange-gradient">                    
+
+        <div class="col-md-3 maindashboardrightside" style="padding-left: 0; padding-right: 0;">
+
+
+          <div class="dashboardlogo">
+            <img src="assets/images/logo_2.png" alt="Cogwave">
+          </div>
+
+          <div class="expectedcheckout">
+            <h2><i class="fa fa-hotel"></i> Expected Checkout</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table">
+                <thead>
+                  <tr class="blueorange-gradient">
                     <th>Room No </th>
                     <th>Time</th>
-                    <th>Action </th>                   
-                  </tr>                
-                  </thead>
-                  <tbody>
-                  <tr>                    
-                    <td>400</td>                   
-                    <td>01:56:43</td>                   
+                    <th>Action </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>400</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
-                  <tr>                    
-                    <td>402</td>                   
-                    <td>01:56:43</td>                   
+                  <tr>
+                    <td>402</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
-                    </td>
-                  </tr>
-
-                  <tr>                    
-                    <td>403</td>                   
-                    <td>01:56:43</td>                   
-                    <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
 
-                  <tr>                    
-                    <td>404</td>                   
-                    <td>01:56:43</td>                   
+                  <tr>
+                    <td>403</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
-                  </tbody>                   
-                </table>
-              </div>
+
+                  <tr>
+                    <td>404</td>
+                    <td>01:56:43</td>
+                    <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="specialinstruction">
-              <h2><i class="fa fa-gavel"></i> Special Instruction</h2>
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered full-data-table"  > 
-                  <thead>
-                  <tr class="blueorange-gradient">                    
+          </div>
+          <div class="specialinstruction">
+            <h2><i class="fa fa-gavel"></i> Special Instruction</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table">
+                <thead>
+                  <tr class="blueorange-gradient">
                     <th>Room No </th>
                     <th>Time</th>
-                    <th>Action </th>                   
-                  </tr>                
-                  </thead>
-                  <tbody>
-                  <tr>                    
-                    <td>400</td>                   
-                    <td>01:56:43</td>                   
+                    <th>Action </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>400</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openspecial('effect-2',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openspecial('effect-2',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
-                  <tr>                    
-                    <td>402</td>                   
-                    <td>01:56:43</td>                   
+                  <tr>
+                    <td>402</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
-                    </td>
-                  </tr>
-
-                  <tr>                    
-                    <td>403</td>                   
-                    <td>01:56:43</td>                   
-                    <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
 
-                  <tr>                    
-                    <td>404</td>                   
-                    <td>01:56:43</td>                   
+                  <tr>
+                    <td>403</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
-                  </tbody>                   
-                </table>
-              </div>
+
+                  <tr>
+                    <td>404</td>
+                    <td>01:56:43</td>
+                    <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="wakeupalarm">
-              <h2><i class="fa fa-history" ></i> Wakeup Alarm</h2>
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered full-data-table"  > 
-                  <thead>
-                  <tr class="blueorange-gradient">                    
+          </div>
+          <div class="wakeupalarm">
+            <h2><i class="fa fa-history"></i> Wakeup Alarm</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table">
+                <thead>
+                  <tr class="blueorange-gradient">
                     <th>Room No </th>
                     <th>Time</th>
-                    <th>Action </th>                   
-                  </tr>                
-                  </thead>
-                  <tbody>
-                  <tr>                    
-                    <td>400</td>                   
-                    <td>01:56:43</td>                   
+                    <th>Action </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>400</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
-                  <tr>                    
-                    <td>402</td>                   
-                    <td>01:56:43</td>                   
+                  <tr>
+                    <td>402</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
-                    </td>
-                  </tr>
-
-                  <tr>                    
-                    <td>403</td>                   
-                    <td>01:56:43</td>                    
-                    <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
 
-                  <tr>                    
-                    <td>404</td>                   
-                    <td>01:56:43</td>                   
+                  <tr>
+                    <td>403</td>
+                    <td>01:56:43</td>
                     <td class="action-icon">
-                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>                                                 
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
                     </td>
                   </tr>
-                  </tbody>                   
-                </table>
-              </div>
+
+                  <tr>
+                    <td>404</td>
+                    <td>01:56:43</td>
+                    <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                        (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+<<<<<<< HEAD
             
         </div>
             
@@ -433,243 +482,249 @@
         <div class="input-group" style="padding:10px; margin-bottom: 0;">
           <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
           <span class="input-group-append ripple light" id="basic-addon1"><i (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
+=======
+          </div>
+
+>>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
         </div>
-        <div class="col-sm-6" *ngFor="let data of BookingList" >
-          <!-- Invoice list card start -->
-          <div class="card card-border-primary">
-            <div class="card-header">
-              <h5> {{data.GuestName | uppercase}}</h5>        
-                               
-             <div ngbDropdown class="dropdown-secondary dropdown f-right">
-                <!-- <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button> -->
-                <a href="javasript:;" title="Checkin" (click)="LoadReservationCheckinpage(data.BookingNo)" class="btn btn-info btn-mini b-none ripple light"><i class="icofont icofont-eye-alt m-0"></i></a>
-              
-                <span class="f-left m-r-5 text-inverse">Checkin : </span>
-              </div>  
-              <br>
-              <strong *ngIf="data.CompanyName !='0'"  class="label label-primary">Company: {{data.CompanyName}}</strong>
-             
-            </div>
-            <div class="card-body">
+
+
+
+
+        <!-- OCCUPIED -->
+
+        <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+            </label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+              [config]="config">
               <div class="row">
-                <div class="col-sm-6">
-                  <ul class="list list-unstyled">
-                    <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
-                    <li>Arr Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
-                    
+                <div class="col-sm-12">
+                  <ul>
+                    <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i
+                          class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Post',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Post Charge</a>
+                    </li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Advance',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Advance
+                        Posting</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Shifft',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
+                        Shifft</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Discount',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Discount Posting</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ExtraBed',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> ExtraBed Posting</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Change pax</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
+                        Rate</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Amend',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Amend
+                        Date</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ChangeCompany',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Change Company</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> link & Unlink </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('HouseGuest',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> House Guest</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Change Plan</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ChangeGuest',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Change Guest</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Instruction',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Room Instruction</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('FoodCoupon',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Food Coupon</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('PaxonBill',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Pax
+                        on Bill </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('SmsCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Sms
+                        Coupon</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('WakeUp',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Wake
+                        Up</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Compliment',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> Compliment</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('HouseKeeping',rmno)"><i class="fa fa-user"
+                          aria-hidden="true"></i> House Keeping</a></li>
                   </ul>
                 </div>
-                <div class="col-sm-6">
-                  <ul class="list list-unstyled text-right">
-                    <li>Total: &nbsp;{{data.BillAmount| currency:'INR'}}</li>
-                    <li>Paid: <span class="text-semibold">{{data.AdvancePaidAmount| currency:'INR'}}</span></li>
-                    <!-- <li>Advance Paid: <span class="text-semibold">{{'₹'+data.AdvancePaidAmount| currency}}</span></li> -->
+
+
+              </div>
+            </perfect-scrollbar>
+
+          </div>
+        </app-modal-basic>
+
+
+
+        <!-- Vacent -->
+
+        <app-modal-basic #modalVacent [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="modalVacent.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: red;  color: #ffffff;   padding: 10px;   width: 100%;">Room {{rmno}}
+              ({{roomname1}})
+
+            </label>
+            <!-- <input type="hidden" name="SelectedRoom" class="form-control" [(ngModel)]="model.SelectedRoom" #SelectedRoom="ngModel" value="{{rmno}}"> -->
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <ul>
+                    <li><a [routerLink]="['/Master/roomcheckin/',rmno]" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('ExpressCheckin',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Express Checkin</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Block',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Block </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Management',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Management</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Rate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Rate</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('RoomHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room History</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('GuestHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Guest History</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Poweronvisit',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Visit</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PowerOff',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power OFF</a></li>
+
+
                   </ul>
+                </div>
+
+
+              </div>
+            </perfect-scrollbar>
+
+          </div>
+        </app-modal-basic>
+
+      
+  
+
+        <!-- Block -->
+        <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="modalBlock.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+            </label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <ul>
+
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
+
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>                
+
+                  </ul>
+                </div>
+
+              </div>
+
+            </perfect-scrollbar>
+          </div>
+        </app-modal-basic>
+
+
+
+        <!-- Management -->
+        <app-modal-basic #modalManagement [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="modalManagement.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+            </label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'665px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <ul>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
+
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>                
+
+
+                  </ul>
+                </div>
+
+
+              </div>
+            </perfect-scrollbar>
+
+          </div>
+        </app-modal-basic>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="addGuestouter">
+          <app-modal-animation [modalID]="'adguesteffect'"
+            [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">
+            <h3 class="f-15" style="position: relative;">Additional Guest Details
+            </h3>
+            <div class="app-modal-body text-center" style="position: relative;">
+              <div class="table-content crm-table">
+                <div class="project-table addaddinalguest">
+                  <div id="crm-contact" class="dt-responsive">
+
+                    <perfect-scrollbar class="overflow-container model-lg" [style.height]="'500px'" [config]="config">
+
+                    </perfect-scrollbar>
+
+                  </div>
+
                 </div>
               </div>
             </div>
-
-            <!-- end of card-footer -->
-          </div>
-          <!-- Invoice list card end -->
-        </div>
-
-
-      </div>
-      <!-- Task board design block end -->
-    </div>
-
-      </perfect-scrollbar>
-
-     
-      </div>
-       
-    </app-modal-animation>  
-
-<!-- OCCUPIED -->
- 
-    <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
-      <div class="app-modal-body">
-        <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <label class="font-header" style="background-color: red;
-        color: #ffffff;
-        padding: 10px;
-        width: 100%;">Room {{rmno}} ({{roomname1}})
-        </label>       
-        
-        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
-          <div class="row">
-            <div class="col-sm-12">
-              <ul>                 
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
-                <li><a  class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Post Charge</a></li>
-                <li><a  class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Room Shifting</a></li>
-                <li><a class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Advances</a></li>
-                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Pax</a></li>
-                <li><a  class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i>ExtraBed</a></li>
-                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Discount</a></li>
-                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Grace Period</a></li>
-                <li> <a href="javascript:;" class="modelgradiant btn-lg btn-block"  (click)="OpenGraceModel ('adguesteffect')"><i class="fa fa-user" aria-hidden="true"></i> Grace </a></li>
-                
-                <li><a  class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Set Complement</a></li>       
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Guest</a></li> 
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>House Keeping</a></li> 
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Room Instruction</a></li>
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Plan</a></li>     
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Company</a></li>              
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Wake Up</a></li>
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Food Coupon</a></li>   
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Link Room</a></li>   
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>UnLink Room</a></li>
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Set Compliment</a></li>
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Pax On Bill</a></li>     
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Sms Coupon</a></li>     
-                <li><a class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i>Change Guest</a></li>     
-                
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Edit Extra Pax </a></li>
-                               
-              </ul> 
-            </div>
-           
-                    
-          </div>
-        </perfect-scrollbar>
-         
-      </div>
-    </app-modal-basic>
-
-
-
-    <!-- Vacent -->
-
-    <app-modal-basic #modalVacent [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
-      <div class="app-modal-body">
-        <button type="button" class="close basic-close-light-box" (click)="modalVacent.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <label class="font-header"  style="background-color: red;  color: #ffffff;   padding: 10px;   width: 100%;">Room {{rmno}} ({{roomname1}})
-          
-        </label>       
-        <!-- <input type="hidden" name="SelectedRoom" class="form-control" [(ngModel)]="model.SelectedRoom" #SelectedRoom="ngModel" value="{{rmno}}"> -->
-        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
-          <div class="row">
-            <div class="col-sm-12">
-              <ul>
-               
-                <li><a [routerLink]="['/Master/roomcheckin/',rmno]" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Block</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Management</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Power on Visit</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Power Off</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Room History</a></li>  
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Guest History</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant btn-lg btn-block"><i class="fa fa-user" aria-hidden="true"></i> Tariff Rate</a></li>
-              </ul> 
-            </div>
-           
-                    
-          </div>
-        </perfect-scrollbar>
-         
-      </div>
-    </app-modal-basic>
-
-
-    <!-- Block -->
-    <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">     
-         
-      <div class="app-modal-body">
-        <button type="button" class="close basic-close-light-box" (click)="modalBlock.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <label class="font-header" style="background-color: red;
-        color: #ffffff;
-        padding: 10px;
-        width: 100%;">Room {{rmno}} ({{roomname1}})
-        </label>       
-        
-        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'465px'" [config]="config">
-          <div class="row">
-            <div class="col-sm-12">
-              <ul>
-                 
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Power on Cleaning</a></li>
-                
-              </ul> 
-            </div>        
-                    
-          </div>
-          
-        </perfect-scrollbar>
-           </div>
-    </app-modal-basic>
-
-
-    
-    <!-- Management -->
-    <app-modal-basic #modalManagement [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
-      <div class="app-modal-body">
-        <button type="button" class="close basic-close-light-box" (click)="modalManagement.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <label class="font-header" style="background-color: red;
-        color: #ffffff;
-        padding: 10px;
-        width: 100%;">Room {{rmno}} ({{roomname1}})
-        </label>       
-        
-        <perfect-scrollbar class="overflow-container"  [style.width]="'100%'" [style.height]="'665px'" [config]="config">
-          <div class="row">
-            <div class="col-sm-12">
-              <ul>
-                 
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
-                <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant  btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Power on Cleaning</a></li>
-                
-              </ul> 
-            </div>
-           
-                    
-          </div>
-        </perfect-scrollbar>
-         
-      </div>
-    </app-modal-basic>
- 
-
-
-
-
-
-
-
-
-
-
-    
-
-    <div class="addGuestouter">
-      <app-modal-animation [modalID]="'adguesteffect'" [modalClass]="'md-effect-4 addressmodeleffect additionalguest'">      
-        <h3 class="f-15" style="position: relative;">Additional Guest Details
-        </h3>
-          <div class="app-modal-body text-center" style="position: relative;"> 
-            <div class="table-content crm-table">
-              <div class="project-table addaddinalguest">
-                <div id="crm-contact" class="dt-responsive">                 
-                 
-              <perfect-scrollbar class="overflow-container model-lg"   [style.height]="'500px'" [config]="config">
-              
-                </perfect-scrollbar>
-               
-                </div>
-                
-              </div>
-            </div>        
-             </div>          
           </app-modal-animation>
+<<<<<<< HEAD
     
     </div>
 
@@ -696,3 +751,618 @@
     
     </div>
  
+=======
+
+        </div>
+
+
+
+
+        <!-- Today Arrival -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'effect-2'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Today Arrival List
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                  <div class="input-group" style="padding:10px; margin-bottom: 0;">
+                    <input type="text" class="form-control" name="searchdata" #searchdata placeholder="Search here...">
+                    <span class="input-group-append ripple light" id="basic-addon1"><i
+                        (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
+                  </div>
+                  <div class="col-sm-6" *ngFor="let data of BookingList">
+                    <!-- Invoice list card start -->
+                    <div class="card card-border-primary">
+                      <div class="card-header">
+                        <h5> {{data.GuestName | uppercase}}</h5>
+
+                        <div ngbDropdown class="dropdown-secondary dropdown f-right">
+                          <!-- <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button> -->
+                          <a href="javasript:;" title="Checkin" (click)="LoadReservationCheckinpage(data.BookingNo)"
+                            class="btn btn-info btn-mini b-none ripple light"><i
+                              class="icofont icofont-eye-alt m-0"></i></a>
+
+                          <span class="f-left m-r-5 text-inverse">Checkin : </span>
+                        </div>
+                        <br>
+                        <strong *ngIf="data.CompanyName !='0'" class="label label-primary">Company:
+                          {{data.CompanyName}}</strong>
+
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <ul class="list list-unstyled">
+                              <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
+                              <li>Arr Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
+
+                            </ul>
+                          </div>
+                          <div class="col-sm-6">
+                            <ul class="list list-unstyled text-right">
+                              <li>Total: &nbsp;{{data.BillAmount| currency:'INR'}}</li>
+                              <li>Paid: <span class="text-semibold">{{data.AdvancePaidAmount| currency:'INR'}}</span>
+                              </li>
+                              <!-- <li>Advance Paid: <span class="text-semibold">{{'₹'+data.AdvancePaidAmount| currency}}</span></li> -->
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- end of card-footer -->
+                    </div>
+                    <!-- Invoice list card end -->
+                  </div>
+
+
+                </div>
+                <!-- Task board design block end -->
+              </div>
+
+            </perfect-scrollbar>
+
+          </div>
+
+        </app-modal-animation>
+
+
+
+        <!-- Grace -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Grace'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Grace Period
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+
+        <!-- Discount -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Discount Posting
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- Advance -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Advance'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Advance Posting
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- Amend -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Amend'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Amend Room
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- Post -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Post'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Post Room
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- Shifft -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Shifft'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Shifft Room
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- ChangePax -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePax'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Change Pax
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- ExtraBed -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExtraBed'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">ExtraBed
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+        <!-- Compliment -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Compliment'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;"> Set Compliment
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- HouseGuest -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'HouseGuest'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;"> House Guest
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- HouseKeeping -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'HouseKeeping'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;"> House Keeping
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+
+        <!-- Instruction -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;"> Room Instruction
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+        <!-- ChangePlan -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Change Plan
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- ChangeCompany -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Change Company
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+
+
+        <!-- WakeUp -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">WakeUp
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- FoodCoupon -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Food Coupon
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- linkunlink -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Link & Unlink
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- PaxonBill -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Pax on Bill
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+        <!-- SmsCoupon -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'SmsCoupon'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Sms Coupon
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- ChangeGuest -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Change Guest
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- EditRate -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'EditRate'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Edit Rate
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+
+        <!-- Block -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Block'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Block Room
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- ExpressCheckin -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExpressCheckin'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Express Checkin
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+        <!-- Release -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Release'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Release Room
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+        <!-- Management -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Management'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Management
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- Rate -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Rate'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Rate
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+        <!-- RoomHistory -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'RoomHistory'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Room History
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- GuestHistory -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'GuestHistory'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Guest History
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- Poweronvisit -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Poweronvisit'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Power On Visit
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+        <!-- PoweronCleaning -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'PoweronCleaning'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Power On Cleaning
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+        <!-- PowerOff -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'PowerOff'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Power Off
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+>>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
