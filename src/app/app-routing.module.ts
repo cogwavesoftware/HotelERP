@@ -255,6 +255,14 @@ const routes: Routes = [
       {
         path: 'roomadvance',
         loadChildren: './master/roomadvance/roomadvance.module#RoomadvanceModule'
+      },       
+      {
+        path: 'blockingdetails',
+        loadChildren: './master/maindashboard/blockingdetails/blockingdetails.module#BlockingdetailsModule'
+      },
+      {
+        path: 'discountportal',
+        loadChildren: './master/maindashboard/discountportal/discountportal.module#DiscountportalModule'
       },
       //  {
       //  path:'printgrc',

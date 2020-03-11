@@ -87,6 +87,32 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     console.log("roomname" + roomname);
     document.querySelector("#" + event).classList.add("md-show");
   }
+<<<<<<< HEAD
+  openRoomsPopup(event, roomname ) {
+    this.model2 = {       
+        roomname: roomname,        
+    };
+  console.log("roomname"+ roomname  );
+  document.querySelector("#" + event).classList.add("md-show");
+}
+OpenBlockDetails(event){
+  console.log("openspecial"  );
+  document.querySelector("#" + event).classList.add("md-show"); 
+}
+ 
+openspecial(event, roomname){
+  console.log("openspecial"  );
+  document.querySelector("#" + event).classList.add("md-show");
+}
+parentroomhover(rmno:string,roomname1:string){
+  this.rmno = rmno;
+  this.roomname1=roomname1;
+  console.log( this.rmno+this.roomname1);
+}
+modelroomhover (){
+  console.log("test");
+}
+=======
 
 
   openspecial(event, roomname) {
@@ -100,6 +126,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
 
+>>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
   closeMyModal(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"

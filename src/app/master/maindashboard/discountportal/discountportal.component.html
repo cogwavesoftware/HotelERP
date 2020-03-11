@@ -1,0 +1,75 @@
+<div class="outerdiv discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+                 <form [formGroup]="discountportalform" (ngSubmit)="onSubmit()"> 
+                    <div class="container-fluid" >             
+                        <div class='row'>                            
+                              <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-12" > 
+                                        <div class="guestinfofirstrow  row">
+                                            <div class='col-12 col-lg-4'>
+                                                <div class="form-group">
+                                                  <label class="form-control-label" for="date">Date</label>
+                                                  <input  id="frmdate" name="frmdate"  formControlName="frmdate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                                 </div>  
+                                              </div>
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="rmno">Room No </label>
+                                          <input type="text" class="form-control tooltip-form" id="roomno" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.roomno.errors || discountportalform.controls.roomno.touched || discountportalform.controls.roomno.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.roomno.errors?.required" >Roomno is required</div>
+                                          </div>  
+                                      </div>
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="gname">Discount Value</label>
+                                          <input type="text" class="form-control tooltip-form" id="discvalue" formControlName="discvalue" name="discvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.discvalue.errors || discountportalform.controls.discvalue.touched || discountportalform.controls.discvalue.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.discvalue.errors?.required" >discvalue is required</div>
+                                          </div>  
+                                      </div>
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="date">Checkin Date</label>
+                                          <input  id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                         </div>  
+                                      </div>
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="date">checkinno</label>
+                                          <input  id="checkinno" name="checkinno"  formControlName="checkinno"   class="form-control">
+                                         </div>  
+                                      </div>
+                                    
+ 
+                                     
+                                      <div class='col-12 col-lg-12'>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="reason">Reason </label>
+                                             <textarea class="form-control" rows="5" id="reason" formControlName="reason" name="reason" autocomplete="off"></textarea>  
+                                             </div>   
+                                      </div>
+                                      <div class='col-12 col-lg-12'>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="remarks">Remarks </label>
+                                             <textarea class="form-control" rows="5" id="remarks" formControlName="remarks" name="remarks" autocomplete="off"></textarea>  
+                                             </div>   
+                                      </div>
+                                     
+                                       </div>
+                                                                       
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="row modelbtn">   
+                          <div class="col-md-12">
+                            <button  class="btn btn-primary"><i class="fa  fa-close"></i> Close </button>
+                            <button  class="btn btn-primary"><i class="fa  fa-user-md"></i> Save </button> 
+                          </div>  
+                         </div>  
+                    </div>
+                 </form>
+        </div>
+     </div>
+ </div>

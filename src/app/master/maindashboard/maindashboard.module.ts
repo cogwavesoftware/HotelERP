@@ -12,9 +12,9 @@ import {ChartModule} from 'angular2-chartjs';
 import { ProductstatusRoutingModule } from './productstatus/productstatus-routing.module';
 import { RoomgridComponent } from './roomgrid/roomgrid.component';
 import { DashtabsComponent } from './dashtabs/dashtabs.component';
- 
+  
 @NgModule({
-  declarations: [MaindashboardComponent, ProductstatusComponent, RoomgridComponent, DashtabsComponent] ,
+  declarations: [MaindashboardComponent, ProductstatusComponent, RoomgridComponent, DashtabsComponent ] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule, ProductstatusRoutingModule,
