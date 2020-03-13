@@ -54,7 +54,7 @@ import { LoadingComponent } from '../master/loading/loading.component';
     ModalAnimationComponent,
     SpinnerComponent,
     CalculatorComponent,
-     BlockingdetailsComponent,
+     //BlockingdetailsComponent,
     // DiscountportalComponent,
     ClickOutsideModule,WebcamModule,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
@@ -72,7 +72,7 @@ import { LoadingComponent } from '../master/loading/loading.component';
     ModalAnimationComponent,
     SpinnerComponent,
     CalculatorComponent,
-     BlockingdetailsComponent,
+    // BlockingdetailsComponent,
      //DiscountportalComponent,
     DataFilterPipe,CompareValidatorDirective,SelectRequiredValidatorDirective,ConfirmValidatorDirective
   ,LoadingComponent

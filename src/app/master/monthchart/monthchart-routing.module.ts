@@ -6,12 +6,12 @@ import { Routes,RouterModule } from '@angular/router';
 const routes:Routes = [{
   path:'',
   component:MonthchartComponent,
-  data:{
-    title:'Ledger Creation',
-    icon:'icon-home',
-    caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
-    status: true
-  }
+  // data:{
+  //   title:'Ledger Creation',
+  //   icon:'icon-home',
+  //   caption: 'lorem ipsum dolor sit amet, consectetur adipisicing elit',
+  //   status: true
+  // }
   }];
 
 @NgModule({

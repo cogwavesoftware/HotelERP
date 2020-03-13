@@ -7,27 +7,6 @@
 
           <div class=" ">
 
-<<<<<<< HEAD
-             
-                <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Today Arival</button></li>
-               </ul>
-             </div>
-             
-          </div>
-          </div>
-        </div>
-    
-        <div class="roomsrow">
-        <div class="col-md-12  "> 
-        <div class="row">
-        
-        <div class="col-md-12 ">  
-          <div class="row">
-              <div class="col-md-12">          
-                    <ul class="roomstatus" >
-                    <li class="  ">
-                    <label class="label label-success">Vacant : {{finalMenu.Vacant}}</label>
-=======
             <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
               <div class="row">
                 <div class="col-md-12">
@@ -37,7 +16,6 @@
 
                       <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> <i
                           class="icon-comments"></i> <span>Reservation</span></a>
->>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
                     </li>
                     <li>
                       <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
@@ -72,7 +50,7 @@
                     </li>
 
 
-                    <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Today Arival</button></li>
+                    <li><button class="btn dbutton" (click)="OpenMyModel('effect-2',item)">Today Arival</button></li>
                   </ul>
                 </div>
 
@@ -459,35 +437,15 @@
                 </tbody>
               </table>
             </div>
-<<<<<<< HEAD
-            
-        </div>
-            
-        <div class="test">
-          <li> <a href="javascript:;" class="modelgradiant btn-lg btn-block"  (click)="OpenBlockDetails ('blockdeatils')"><i class="fa fa-user" aria-hidden="true"></i> Grace </a></li>
-        </div>
-
-
- <app-modal-animation class="modellg contentboxmodel" [modalID]="'effect-2'"  [modalClass]="'md-effect-2'">   
-  <h3 class="f-15" style="position: relative;">Today Arrival List
-    <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModal($event)">Close</button>             
-                 
- </h3>
-    <div class="app-modal-body text-center"> 
-      <perfect-scrollbar class="overflow-container modal-lg"  [style.width]="'100%'" [style.height]="'510px'" [config]="config">
-       
-
-        <div class="col-sm-12 filter-bar"> 
-      <div class="row" >
-        <div class="input-group" style="padding:10px; margin-bottom: 0;">
-          <input type="text" class="form-control" name="searchdata" #searchdata  placeholder="Search here...">
-          <span class="input-group-append ripple light" id="basic-addon1"><i (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
-=======
           </div>
 
->>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
         </div>
+
+
+
+
         <!-- OCCUPIED -->
+
         <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
           <div class="app-modal-body">
             <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
@@ -598,7 +556,7 @@
                   <ul>
                     <li><a [routerLink]="['/Master/roomcheckin/',rmno]" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('ExpressCheckin',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Express Checkin</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Block',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Block </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="BlockForm.show()"><i class="fa fa-user" aria-hidden="true"></i> Block </a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Management',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Management</a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Rate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Rate</a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('RoomHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room History</a></li>
@@ -607,7 +565,7 @@
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PowerOff',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power OFF</a></li>
 
-
+                    
                   </ul>
                 </div>
 
@@ -719,34 +677,6 @@
               </div>
             </div>
           </app-modal-animation>
-<<<<<<< HEAD
-    
-    </div>
-
-
-   
- 
-
-    <div class="blocldetailsouter">
-      <app-modal-animation [modalID]="'blockdeatils'" [modalClass]="' model-lg md-effect-4 addressmodeleffect blockdetailsmodel'">      
-        <h3 class="f-15" style="position: relative;"><i   class="fa  fa-user-md"></i> Block Details Details
-        </h3>
-          <div class="app-modal-body text-center" style="position: relative;"> 
-            <div class="table-content crm-table">
-              <div class="project-table addaddinalguest">
-                <div id="crm-contact" class="dt-responsive">  
-              <perfect-scrollbar class="overflow-container" [style.width]="'600'"  [style.height]="'auto'" [config]="config">
-              <app-blockingdetails></app-blockingdetails>
-                </perfect-scrollbar> 
-                </div> 
-              </div>
-            </div>        
-             </div>          
-          </app-modal-animation>
-    
-    </div>
- 
-=======
 
         </div>
 
@@ -803,7 +733,7 @@
                               <li>Total: &nbsp;{{data.BillAmount| currency:'INR'}}</li>
                               <li>Paid: <span class="text-semibold">{{data.AdvancePaidAmount| currency:'INR'}}</span>
                               </li>
-                              <!-- <li>Advance Paid: <span class="text-semibold">{{'₹'+data.AdvancePaidAmount| currency}}</span></li> -->
+                              <!-- <li>Advance Paid: <span class="text-semibold">{{'?'+data.AdvancePaidAmount| currency}}</span></li> -->
                             </ul>
                           </div>
                         </div>
@@ -825,6 +755,9 @@
 
         </app-modal-animation>
 
+
+
+       
 
 
         <!-- Grace -->
@@ -1192,7 +1125,7 @@
 
 
         <!-- Block -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Block'" [modalClass]="'md-effect-2'">
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Block11'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Block Room
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
@@ -1206,6 +1139,8 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
+
+
 
 
         <!-- ExpressCheckin -->
@@ -1360,4 +1295,69 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
->>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
+
+
+
+
+
+        
+        <!-- <div class="blocldetailsouter">
+          <app-modal-animation [modalID]="'Block'" [modalClass]="' model-lg md-effect-4 addressmodeleffect blockdetailsmodel'">      
+            <h3 class="f-15" style="position: relative;"><i   class="fa  fa-user-md"></i> Block Details Details
+            </h3>
+              <div class="app-modal-body text-center" style="position: relative;"> 
+                <div class="table-content crm-table">
+                  <div class="project-table addaddinalguest">
+                    <div id="crm-contact" class="dt-responsive">  
+                  <perfect-scrollbar class="overflow-container" [style.width]="'600'"  [style.height]="'auto'" [config]="config">
+                  <app-blockingdetails></app-blockingdetails>
+                    </perfect-scrollbar> 
+                    </div> 
+                  </div>
+                </div>        
+                 </div>          
+              </app-modal-animation>        
+           </div> -->
+
+
+
+
+
+        
+        <!-- BlockForm -->
+        <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header" style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}} ({{roomname1}})</label>
+            <input type="text" name="Refinput" [(ngModel)]="Refinputs" #Refinput="ngModel" value={{Refinput}} class="form-control input-lg full-data-search" placeholder="Search here...">
+            <button type="button" (click)="UpdateName()" >Submit</button>
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-blockingdetails  [Inputvalue]="Refinputs" ></app-blockingdetails>
+                </div>
+
+
+              </div>
+            </perfect-scrollbar>
+
+          </div>
+        </app-modal-basic>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

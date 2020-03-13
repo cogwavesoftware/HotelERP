@@ -1,38 +1,76 @@
-import { Component, OnInit, ViewChild,Renderer2 } from '@angular/core';
-import {  FormBuilder,  FormGroup,  FormArray,  FormControl,  ValidatorFn,  Validators} from "@angular/forms";
-import { Observable } from 'rxjs'; 
+
+
+
+import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges,DoCheck } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import {  FormBuilder,  FormGroup,  FormArray,  FormControl,  ValidatorFn, 
+   Validators, NgModel} from "@angular/forms";
+import { NgForm } from '@angular/forms';
   import { Router, ActivatedRoute } from "@angular/router";
   import { MasterformService } from 'src/app/_services/masterform.service';
 
+
+
+
+  
 @Component({
   selector: 'app-blockingdetails',  
   templateUrl: './blockingdetails.component.html',
   styleUrls: ['./blockingdetails.component.scss']
 })
-export class BlockingdetailsComponent implements OnInit {
+export class BlockingdetailsComponent implements OnInit,OnChanges {
   Branch: string;
   blockingdetailsform: FormGroup;
   submitted = false;
   minDate = new Date();
   maxDate = new Date();
-  constructor(  
-    public router: Router,   private renderer: Renderer2,
-    public formBuilder: FormBuilder,  
-    private route: ActivatedRoute, 
-    private _masterservice: MasterformService) { 
-      this.Branch= localStorage.getItem("BranchCode");
-    }
+  Name:string="Blocking Data"; 
+  model:any;
+  @Input() Inputvalue : any;
+  constructor(
+    public router: Router,
+    
+    private route: ActivatedRoute,
+    public formBuilder: FormBuilder,) { }
 
-  ngOnInit() {
+
+  ngOnInit()
+   {
+    
     this.blockingdetailsform = this.formBuilder.group({
-      frmdate: [new Date(), [Validators.required]],
+      Status: ['SHORT', Validators.required],
+      Blockfrmdate: [new Date(), [Validators.required]],
       noofdays: ['', Validators.required] ,
-      todate:[new Date(),Validators.required],
+      BlocktoDate:[new Date(),Validators.required],
       roomno: ['', Validators.required] ,
-      roomcode: ['', Validators.required] ,
+      roomcode: [this.Inputvalue, Validators.required] ,
       rname: ['', Validators.required],
       reason: ['', Validators.required],
     }); 
+  }
+
+  ngOnChanges(changes:SimpleChanges)
+  {
+    console.log('changes')
+    console.log(changes.Inputvalue)
+  
+  }
+  ngDoCheck()
+  {
+    console.log('child ngDoCheck')
+    console.log(' child ngDoCheck' + this.Inputvalue)
+    
+  }
+   
+  Submit(blockingdetails:FormGroup)
+  {
+    alert('d')
+
+    console.log(blockingdetails)
+    console.log('blockingdetails')
+    console.log(this.blockingdetailsform.value)
+  
+
   }
 
 }
