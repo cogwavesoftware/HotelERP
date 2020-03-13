@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
  import {DatePipe} from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 import {MatDialogModule} from '@angular/material/dialog';
+
+import { ToastyModule } from 'ng2-toasty';
 @NgModule({
   declarations: [],
 //  providers: [DatePipe],
@@ -19,7 +21,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     HttpClientModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,ToastyModule.forRoot()
     //MatDialogModule,
     //BsDatepickerModule.forRoot()
   ]

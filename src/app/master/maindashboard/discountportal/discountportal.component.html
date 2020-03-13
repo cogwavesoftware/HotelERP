@@ -34,14 +34,25 @@
                                           <input  id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                          </div>  
                                       </div>
+                                     
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="date">checkinno</label>
                                           <input  id="checkinno" name="checkinno"  formControlName="checkinno"   class="form-control">
                                          </div>  
                                       </div>
-                                    
- 
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="date">disctype</label>
+                                          <select class="custom-select" #disctype name="disctype" formControlName="disctype" >
+                                              <option value="0">Select</option>
+                                              <option  *ngFor="let type of discountvalue" [value]="type">
+                                                {{ type  }}</option>
+                                            </select>
+                                         </div>  
+                                      </div>
+                                     
+
                                      
                                       <div class='col-12 col-lg-12'>
                                         <div class="form-group">

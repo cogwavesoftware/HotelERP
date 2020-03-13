@@ -9,7 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {MaindashboardComponent} from './maindashboard.component';
 import {ChartModule} from 'angular2-chartjs';
  
-  import { ProductstatusComponent } from './productstatus/productstatus.component';
+import { ToastyModule } from 'ng2-toasty';
+import { ProductstatusComponent } from './productstatus/productstatus.component';
 import { ProductstatusRoutingModule } from './productstatus/productstatus-routing.module';
 import { RoomgridComponent } from './roomgrid/roomgrid.component';
 import { DashtabsComponent } from './dashtabs/dashtabs.component';
@@ -27,7 +28,7 @@ import {DatePipe} from '@angular/common';
     FormsModule,
     ReactiveFormsModule ,
     ChartModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),ToastyModule.forRoot()
   ],
  // entryComponents:[BlockingdetailsComponent]
 })
