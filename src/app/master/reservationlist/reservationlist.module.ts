@@ -24,7 +24,7 @@ import { ReservationlistComponent } from './reservationlist.component';
     FormsModule,
     ReactiveFormsModule,ToastyModule.forRoot()
   ],
-  providers:[DatePipe,ConfirmationDialogService]
+  providers:[DatePipe]
 })
 export class ReservationlistModule { }
 

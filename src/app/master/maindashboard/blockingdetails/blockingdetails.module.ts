@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
  import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
  import {DatePipe} from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
- 
 import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [],
