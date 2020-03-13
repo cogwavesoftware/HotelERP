@@ -27,8 +27,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   DasboardLoad: any;
   floorname: any;
   rmno: string = "1000";
-  Refinputs:string="Francis";
+  Refinputs:string;
   roomname1: string;
+  RoomCode:string;
+  RoomNo:string;
   finalMenu = new Array();
   floor = new Array<any>();
   model: any;
@@ -58,36 +60,26 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
 
     this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
       this.finalMenu = res;
-      // this.DasboardLoad = setInterval(() => {
-      //   // alert('cal')
-      //   this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
-      //     this.finalMenu = res;
-      //     console.log(this.finalMenu);
-      //   })
-      // }, 7000)
+      this.DasboardLoad = setInterval(() => {
+        // alert('cal')
+        this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
+          this.finalMenu = res;
+          console.log(this.finalMenu);
+        })
+      }, 7000)
 
     })
 
   }
 
-  ngAfterViewInit()
-  {
-    console.log('this.block.Name')
-   // console.log(this.block.Name)
-    //console.log(this.name)
-    //console.log(this.block.blockingdetailsform.get('roomno').value)
-  }
+
 
   ngOnDestroy() {
     // this._bankservice.changeMessage("expanded")
-    //clearInterval(this.DasboardLoad);
+    clearInterval(this.DasboardLoad);
   }
   
 
-  UpdateName()
-  {
-    this.Refinputs="Vinoth"
-  }
 
   LoadReservationCheckinpage(ResNo: string) {
     this.router.navigate(['/Master/reschk', ResNo])
@@ -119,6 +111,8 @@ openspecial(event, roomname){
 parentroomhover(rmno:string,roomname1:string){
   this.rmno = rmno;
   this.roomname1=roomname1;
+  this.RoomNo=rmno;
+  this.RoomCode=roomname1
   console.log( this.rmno+this.roomname1);
 }
 modelroomhover (){

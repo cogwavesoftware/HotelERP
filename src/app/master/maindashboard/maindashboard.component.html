@@ -1331,13 +1331,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header" style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}} ({{roomname1}})</label>
-            <input type="text" name="Refinput" [(ngModel)]="Refinputs" #Refinput="ngModel" value={{Refinput}} class="form-control input-lg full-data-search" placeholder="Search here...">
-            <button type="button" (click)="UpdateName()" >Submit</button>
+            
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
               [config]="config">
               <div class="row">
                 <div class="col-sm-12">
-                  <app-blockingdetails  [Inputvalue]="Refinputs" ></app-blockingdetails>
+                  <app-blockingdetails  [RoomNo]="RoomNo" [RoomCode]="RoomCode" ></app-blockingdetails>
                 </div>
 
 

@@ -7,7 +7,7 @@
   <div class="formdesign" style="padding: 0;">
       <div class="userlist">
                <form [formGroup]="blockingdetailsform" (ngSubmit)="Submit(blockingdetailsform)"> 
-             <h1>{{Inputvalue}}</h1>
+            
                   <div class="container-fluid" >             
                       <div class='row'>                            
                             <div class="col-md-12">
@@ -18,24 +18,33 @@
 
                                       <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
                                         <div class="form-group">
-                                          <label class="form-control-label" for="Short Time">Short Time</label>                                                  
-                                      
-                                          <input type="radio"  class="form-control" style="width: 15px" value="SHORT" formControlName="Status">  
-  
+                                          <label class="form-control-label" for="Short Time">Short Time</label>                                                                                  
+                                          <input type="radio" (click)="Selected('SHORT')"  class="form-control" style="width: 15px" value="SHORT" formControlName="Status">  
+                                                                                
                                         </div>
                                       </div>
+
+
                                       <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="Long Time">Long Time </label>
-                                          <input type="radio" value="LONG" class="form-control" style="width: 15px" formControlName="Status"> 
+                                          <input type="radio" value="LONG" (click)="Selected('LONG')" class="form-control" style="width: 15px" formControlName="Status"> 
                                         
-                                         
+                                
                                         </div>
                                       </div>
-  
+                                     
                                     </div>
 
+                                     <div *ngIf=IsLongTime>
+                                       <p>You Clicked Long Time this Block Room Will affect in Room Chart</p>
+                                     </div>
 
+                                     <div *ngIf=!IsLongTime>
+                                      <p>You Clicked Short Time this Block Room Will not  affect in Room Chart</p>
+                                    </div>
+   
+                            {{RoomNo}}
 
                                   <div class="guestinfofirstrow  row">
                                     <div class='col-12 col-lg-4'>
@@ -54,14 +63,14 @@
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label class="form-control-label" for="rmno">Room No </label>
-                                        <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.roomno.errors || blockingdetailsform.controls.roomno.touched || blockingdetailsform.controls.roomno.dirty}" required  />  
+                                        <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="roomno" value=" {{RoomNo}}" readonly name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.roomno.errors || blockingdetailsform.controls.roomno.touched || blockingdetailsform.controls.roomno.dirty}" required  />  
                                         <div class="invalid-feedback" *ngIf="blockingdetailsform.controls.roomno.errors?.required" >Roomno is required</div>
                                         </div>  
                                     </div>
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label class="form-control-label" for="rmcd">Room Code </label>
-                                        <input type="text" class="form-control tooltip-form" id="roomcoded" formControlName="roomcode" name="roomcode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.roomcode.errors || blockingdetailsform.controls.roomcode.touched || blockingdetailsform.controls.roomcode.dirty}" required  />  
+                                        <input type="text" class="form-control tooltip-form" id="roomcoded" formControlName="roomcode" value=" {{RoomCode}}" readonly name="roomcode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.roomcode.errors || blockingdetailsform.controls.roomcode.touched || blockingdetailsform.controls.roomcode.dirty}" required  />  
                                         <div class="invalid-feedback" *ngIf="blockingdetailsform.controls.roomcode.errors?.required" >Roomcode is required</div>
                                         </div>  
                                     </div>
@@ -74,7 +83,7 @@
                                     </div>
                                     <div class='col-12 col-lg-12'>
                                       <div class="form-group">
-                                          <label class="form-control-label" for="reason">Reason </label>
+                                          <label class="form-control-label" for="reason">Reason For Blocking </label>
                                            <textarea class="form-control" rows="2" id="reason" formControlName="reason" name="reason" autocomplete="off"></textarea>  
                                            </div>   
                                     </div>
