@@ -323,6 +323,11 @@ export class MasterformService {
   SaveStwardDetails(Stward:any){
     return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savestward',Stward,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+
+  SaveBlockinformation(Block:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/SaveBlock',Block,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
  
   GetCompanyTariffDetail(RoomNo:string,Branchcode:string,Id:string) {   
     return this.http.get(environment.apiURL + '/api/CloudHMS/checkin/CompanyTariffDetail?BranchCode=' + Branchcode + '&RoomNo=' + RoomNo + '&Id=' + Id);
