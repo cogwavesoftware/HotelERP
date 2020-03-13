@@ -25,13 +25,14 @@ export class CreditcardComponent implements OnInit {
   msg: string;
   returnUrl: string;
   showClose = true;
-  theme = "bootstrap";
-  type = "default";
+
   closeOther = false;
   isroomt: string;
   isroomc: string;
   ipAddress: string;
   position = 'top-right';
+  theme = "bootstrap";
+  type = "default";
   mode: string;
   Branch: string;
   filterdata: any;

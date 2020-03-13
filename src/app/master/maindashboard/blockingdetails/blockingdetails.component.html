@@ -7,7 +7,10 @@
   <div class="formdesign" style="padding: 0;">
       <div class="userlist">
                <form [formGroup]="blockingdetailsform" (ngSubmit)="Submit(blockingdetailsform)"> 
-            
+                <!-- <input type="hidden"  formControlName="ID"  readonly name="ID" autocomplete="off"/>
+                <input type="hidden"  formControlName="CreatedBy"  readonly name="CreatedBy" autocomplete="off"/>
+                <input type="hidden"  formControlName="BranchCode"  readonly name="BranchCode" autocomplete="off"/>
+                 -->
                   <div class="container-fluid" >             
                       <div class='row'>                            
                             <div class="col-md-12">
@@ -50,41 +53,35 @@
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label class="form-control-label" for="date">From</label>
-                                        <input  id="Blockfrmdate" name="Blockfrmdate"  formControlName="Blockfrmdate"  readonly type="text" bsDatepicker  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                        <input  id="BlockDate" name="BlockDate"  formControlName="BlockDate"  readonly type="text" bsDatepicker  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                        </div>  
                                     </div>
                                    
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label class="form-control-label" for="date">To</label>
-                                        <input  id="BlocktoDate" name="BlocktoDate"  formControlName="BlocktoDate"  readonly type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
+                                        <input  id="ReleaseDate" name="ReleaseDate"  formControlName="ReleaseDate"  readonly type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
                                        </div>  
                                     </div>
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label class="form-control-label" for="rmno">Room No </label>
-                                        <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="roomno" value=" {{RoomNo}}" readonly name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.roomno.errors || blockingdetailsform.controls.roomno.touched || blockingdetailsform.controls.roomno.dirty}" required  />  
-                                        <div class="invalid-feedback" *ngIf="blockingdetailsform.controls.roomno.errors?.required" >Roomno is required</div>
+                                        <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="RoomNo" value=" {{RoomNo}}" readonly name="RoomNo" autocomplete="off"  required  />  
+       
                                         </div>  
                                     </div>
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label class="form-control-label" for="rmcd">Room Code </label>
-                                        <input type="text" class="form-control tooltip-form" id="roomcoded" formControlName="roomcode" value=" {{RoomCode}}" readonly name="roomcode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.roomcode.errors || blockingdetailsform.controls.roomcode.touched || blockingdetailsform.controls.roomcode.dirty}" required  />  
-                                        <div class="invalid-feedback" *ngIf="blockingdetailsform.controls.roomcode.errors?.required" >Roomcode is required</div>
+                                        <input type="text" class="form-control tooltip-form" id="roomcoded" formControlName="RoomCode" value=" {{RoomCode}}" readonly name="RoomCode" autocomplete="off"  required  />  
+                                      
                                         </div>  
                                     </div>
-                                    <div class='col-12 col-lg-4'>
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="rmnme">Name </label>
-                                        <input type="text" class="form-control tooltip-form" id="rname" formControlName="rname" name="rname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && blockingdetailsform.controls.rname.errors || blockingdetailsform.controls.rname.touched || blockingdetailsform.controls.rname.dirty}" required  />  
-                                        <div class="invalid-feedback" *ngIf="blockingdetailsform.controls.rname.errors?.required" >Name is required</div>
-                                        </div>  
-                                    </div>
+                                 
                                     <div class='col-12 col-lg-12'>
                                       <div class="form-group">
                                           <label class="form-control-label" for="reason">Reason For Blocking </label>
-                                           <textarea class="form-control" rows="2" id="reason" formControlName="reason" name="reason" autocomplete="off"></textarea>  
+                                           <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason" autocomplete="off"></textarea>  
                                            </div>   
                                     </div>
                                    
@@ -96,7 +93,7 @@
                       </div>
                       <div class="row modelbtn">   
                         <div class="col-md-12">
-                          <button  class="btn btn-primary"><i class="fa  fa-close"></i> Close </button>
+                          <button  type="button"  (click)="Close()" class="btn btn-primary"><i class="fa  fa-close"></i> Close </button>
                           <button  type="submit"  class="btn btn-primary"> Blocking Details </button> 
                         </div>  
                        </div>  
@@ -105,3 +102,5 @@
       </div>
    </div>
 </div>
+
+<ng2-toasty [position]="position"></ng2-toasty>
