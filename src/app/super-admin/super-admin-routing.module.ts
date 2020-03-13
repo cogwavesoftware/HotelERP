@@ -13,16 +13,19 @@ const routes: Routes = [
     children: [
       {
         path: 'company',
-        loadChildren: './company/company.module#CompanyModule'
+        loadChildren: () => import('./company/company.module').then(m => m.CompanyModule),
+       // loadChildren: './company/company.module#CompanyModule'
       },
       {
         path: 'branch',
-        loadChildren: './branch/branch.module#BranchModule'
+        //loadChildren: './branch/branch.module#BranchModule'
+        loadChildren: () => import('./branch/branch.module').then(m=>m.BranchModule)
       },
 
       {
         path: 'tool',
-        loadChildren: './softwaresetup/softwaresetup.module#SoftwaresetupModule'
+       // loadChildren: './softwaresetup/softwaresetup.module#SoftwaresetupModule'
+        loadChildren: () => import('./softwaresetup/softwaresetup.module').then(m=>m.SoftwaresetupModule)
       }
       // {
       //   path: 'crm-dashboard',

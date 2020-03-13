@@ -481,11 +481,6 @@ public test="fra";
   }
 
 
-  ngAfterViewInt()
-  {
-    
-   // this.verticalNavType="collapsed";
-  }
   onClickedOutsideSidebar(e: Event) {
     
     if ((this.windowWidth <= 992 && this.toggleOn && this.verticalNavType !== 'offcanvas') || this.verticalEffect === 'overlay') {

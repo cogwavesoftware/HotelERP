@@ -7,7 +7,9 @@ import { ReservationComponent } from './reservation.component';
 const routes:Routes = [{
   path:'',
   component:ReservationComponent,
+  
   }];
+
 
 @NgModule({
   declarations: [],

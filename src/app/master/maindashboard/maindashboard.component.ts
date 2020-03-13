@@ -1,6 +1,8 @@
+import { ElementRef } from '@angular/core';
+import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
 import { Router } from '@angular/router';
 import { ReservationService } from './../../_services/reservation.service';
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit,DoCheck } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Observable } from 'rxjs';
 import { MasterformService } from './../../_services/masterform.service';
@@ -8,6 +10,7 @@ import { HmsdashboardService } from './../../_services/hmsdashboard.service';
 import { IpserviceService } from 'src/app/_services/ipservice.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { BankService } from 'src/app/_services/bank.service';
+
 @Component({
   selector: 'app-maindashboard',
   templateUrl: './maindashboard.component.html',
@@ -24,16 +27,25 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   DasboardLoad: any;
   floorname: any;
   rmno: string = "1000";
+  Refinputs:string="Francis";
   roomname1: string;
   finalMenu = new Array();
   floor = new Array<any>();
   model: any;
   Branch: string;
   BookingList: any;
+  
+  @ViewChild(BlockingdetailsComponent, {static:false}) block : BlockingdetailsComponent
+
+  @ViewChild('Name1', {static:false}) name : ElementRef
+
+
+
   constructor(private _masterformservice: MasterformService, private router: Router,
+  
     private http: HttpClient, private _reservationservice: ReservationService,
     private _ipservice: IpserviceService, private _hmsdashboard: HmsdashboardService, private _bankservice: BankService) {
-    // this._bankservice.changeMessage("collapsed")
+  //this._bankservice.changeMessage("collapsed")
     this.Branch = "CW_1001";
   }
 
@@ -42,41 +54,48 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
       this.BookingList = data;
       console.log(this.BookingList)
-
     });
 
     this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
       this.finalMenu = res;
-
-      this.DasboardLoad = setInterval(() => {
-        // alert('cal')
-        this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
-          this.finalMenu = res;
-          console.log(this.finalMenu);
-        })
-      }, 7000)
+      // this.DasboardLoad = setInterval(() => {
+      //   // alert('cal')
+      //   this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
+      //     this.finalMenu = res;
+      //     console.log(this.finalMenu);
+      //   })
+      // }, 7000)
 
     })
 
   }
 
+  ngAfterViewInit()
+  {
+    console.log('this.block.Name')
+   // console.log(this.block.Name)
+    //console.log(this.name)
+    //console.log(this.block.blockingdetailsform.get('roomno').value)
+  }
+
   ngOnDestroy() {
     // this._bankservice.changeMessage("expanded")
-    clearInterval(this.DasboardLoad);
+    //clearInterval(this.DasboardLoad);
+  }
+  
+
+  UpdateName()
+  {
+    this.Refinputs="Vinoth"
   }
 
   LoadReservationCheckinpage(ResNo: string) {
-
     this.router.navigate(['/Master/reschk', ResNo])
   }
 
   OpenMyModel(event, name) {
-    // var allbtn = document.querySelector('.modal');
-    // //allbtn.classList.remove("model");
-    // allbtn.classList.add("hidesa");
-    // document.querySelector("#" + event).classList.add("md-show");
-    // allbtn.classList.remove("hidesa");
-    // //allbtn.classList.add("model");
+    document.querySelector("#" + event).classList.add("md-show");
+   
   }
 
 
@@ -87,14 +106,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     console.log("roomname" + roomname);
     document.querySelector("#" + event).classList.add("md-show");
   }
-<<<<<<< HEAD
-  openRoomsPopup(event, roomname ) {
-    this.model2 = {       
-        roomname: roomname,        
-    };
-  console.log("roomname"+ roomname  );
-  document.querySelector("#" + event).classList.add("md-show");
-}
+
 OpenBlockDetails(event){
   console.log("openspecial"  );
   document.querySelector("#" + event).classList.add("md-show"); 
@@ -112,21 +124,19 @@ parentroomhover(rmno:string,roomname1:string){
 modelroomhover (){
   console.log("test");
 }
-=======
+
+// AddOrEditOrderItem(orderItemIndex, OrderID) {
+//   const dialogConfig = new MatDialogConfig();
+//   dialogConfig.autoFocus = true;
+//   dialogConfig.disableClose = true;
+//   dialogConfig.width = "50%";
+//   dialogConfig.data = { orderItemIndex, OrderID };
+//   this.dialog.open(BlockingdetailsComponent, dialogConfig).afterClosed().subscribe(res => {
+//     //this.updateGrandTotal();
+//   });
+// }
 
 
-  openspecial(event, roomname) {
-    console.log("openspecial");
-    document.querySelector("#" + event).classList.add("md-show");
-  }
-  parentroomhover(rmno: string, roomname1: string) {
-    this.rmno = rmno;
-    this.roomname1 = roomname1;
-    console.log(this.rmno + this.roomname1);
-  }
-
-
->>>>>>> 6d876015ecc6f11cb74137680d6c44c790b033ef
   closeMyModal(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"

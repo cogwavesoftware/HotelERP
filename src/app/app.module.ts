@@ -1,3 +1,4 @@
+
 import { CamarawindowComponent } from './master/checkin/camarawindow/camarawindow.component';
 import { LoadingComponent } from './master/loading/loading.component';
 import { LoaderService } from './_services/loader.service';
@@ -61,6 +62,7 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    
     // TranslateModule.forRoot({
     //   loader: {
     //     provide: TranslateLoader,

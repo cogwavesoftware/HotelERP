@@ -39,7 +39,6 @@
                                             </div>
                                     </div>  
 
-
                                     <div class="col-md-6">
                                         <label>Rate*</label>
                                         <input type="number" name="Rate" class="form-control" [(ngModel)]="model.Rate" #Rate="ngModel" value="{{Rate}}"  [ngClass]="{'is-invalid': Rate.touched && Rate.invalid}"  required autocomplete="off">
@@ -47,15 +46,10 @@
                                           <div *ngIf="Rate.errors.required">Rate Amount is invalid - Please enter numeric value</div>
                                         </div>
                                     </div>
-                              
 
-                                 
-                                 
                                   </div>
                                  
-                                  <div class="row">
-                                      
-   
+                                  <div class="row">                                        
                                     <div class="col-md-6"  [class.has-error]="RevId.touched && RevId.errors?.defaultSelected" >
                                         <label>Select RevName*</label>
                                             <select class="custom-select" id="RevId" appSelectValidator="-1"  #RevId="ngModel"  name="RevId" [(ngModel)]="model.RevId">
@@ -64,18 +58,11 @@
                                             </select>
                                             <small class="help-block" *ngIf="RevId.touched && RevId.errors?.defaultSelected">
                                                 Revenue Name is required
-                                            </small>           
-                                                       
+                                            </small>                                                                 
                                     </div> 
-
-
-
-
                                   </div>
-
+                                  
                               </div>
-
-
                             </div>
                           </div>
                      </div>

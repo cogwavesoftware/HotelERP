@@ -1,3 +1,4 @@
+import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaindashboardRoutingModule } from './maindashboard-routing.module';
@@ -12,9 +13,10 @@ import {ChartModule} from 'angular2-chartjs';
 import { ProductstatusRoutingModule } from './productstatus/productstatus-routing.module';
 import { RoomgridComponent } from './roomgrid/roomgrid.component';
 import { DashtabsComponent } from './dashtabs/dashtabs.component';
-  
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {DatePipe} from '@angular/common';
 @NgModule({
-  declarations: [MaindashboardComponent, ProductstatusComponent, RoomgridComponent, DashtabsComponent ] ,
+  declarations: [MaindashboardComponent,BlockingdetailsComponent ] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule, ProductstatusRoutingModule,
@@ -24,7 +26,9 @@ import { DashtabsComponent } from './dashtabs/dashtabs.component';
     DataTableModule,
     FormsModule,
     ReactiveFormsModule ,
-    ChartModule
-  ]
+    ChartModule,
+    BsDatepickerModule.forRoot()
+  ],
+ // entryComponents:[BlockingdetailsComponent]
 })
 export class MaindashboardModule { }
