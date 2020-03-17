@@ -10,6 +10,7 @@ import { MasterformService } from 'src/app/_services/masterform.service';
   styleUrls: ['./discountportal.component.scss']
 })
 export class DiscountportalComponent implements OnInit {
+  discountvalue:string[]= ["50%","100%"];
   Branch: string;
   discountportalform: FormGroup;
   submitted = false;
@@ -32,6 +33,7 @@ export class DiscountportalComponent implements OnInit {
       checkinno: ['', Validators.required],      
       reason: ['', Validators.required],
       remarks: ['', Validators.required],
+      disctype: ["1", [Validators.required]],
     }); 
   }
 
