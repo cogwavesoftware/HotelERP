@@ -2,36 +2,30 @@
   <div class="container-fluid">
     <div class="col-md-12" style="padding-right:0; padding-left:0">
       <div class="row ">
-
         <div class="col-md-9 " style="padding-left: 0; border:1px solid #ccc">
-
           <div class=" ">
-
             <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
               <div class="row">
                 <div class="col-md-12">
                   <ul>
                     <li>
-
-
                       <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> <i
-                          class="icon-comments"></i> <span>Reservation</span></a>
+                          class="icon-comments"></i><span>Reservation</span></a>
                     </li>
                     <li>
                       <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
-                          class="icon-comments"></i><span>Group Checkin </span></a>
+                          class="icon-comments"></i><span>Group Checkin</span></a>
                     </li>
-                    <li>
-                      <a href="#"> <i class="icon-comments"></i><span>Block Rooms</span></a>
+                    <li>                   
+                      <button class="btn dbutton" (click)="OpenModel('GroupBlock',item)">Group Block</button>
                     </li>
                     <li>
                       <a href="#"> <i class="icon-comments"></i><span>Release Rooms</span></a>
                     </li>
                     <li>
-                      <a href="#"> <i class="icon-comments"></i> <span>Night Audit</span></a>
+                      <a href="#"> <i class="icon-comments"></i><span>Night Audit</span></a>
                     </li>
                     <li>
-
                       <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Reservation Chart</span></a>
                     </li>
@@ -42,18 +36,15 @@
                       <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Reservation List</span></a>
                     </li>
-
-
                     <li>
                       <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Chart</span></a>
                     </li>
-
-
-                    <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Today Arival</button></li>
+                    <li>
+                      <button class="btn dbutton" (click)="OpenMyModal('effect-2',item)">Today Arival</button>
+                    </li>
                   </ul>
                 </div>
-
               </div>
             </div>
           </div>
@@ -677,6 +668,8 @@
 
 
 
+
+
         <!-- Today Arrival -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'effect-2'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Today Arrival List
@@ -773,6 +766,69 @@
 
 
 
+         <!-- Block Group 1111-->
+         <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupBlock'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Group Block
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-md-12 ">
+                      <div class=" " id="leftNavBar">
+                        <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors">
+                         
+                          <hr>
+                          {{item.FloorName}}
+                          <li class="childData">
+                            <ul style="display: inline-block">
+                              <li style="float: left; margin-left: 0px " *ngFor="let child of finalMenu.Rooms">
+                                <div *ngIf="item.FloorCode==child.FloorCode ">
+                                  <div *ngIf="child.Status == 'V'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" 
+                                          class="btn btn-success btn-square ripple light"
+                                          placement="top" ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+                                    </span>
+                                  </div> 
+
+                                
+                                </div>
+
+
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+
+
+
+                      </div>
+
+
+
+
+                      <!-- end rooms dashborad -->
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+
         <!-- Discount -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Discount Posting
@@ -801,7 +857,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
-                   <!-- <app-blockingdetails [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-blockingdetails> -->
+                    <app-advanceform [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-advanceform>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -901,6 +957,8 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  
+                  <app-postcharge [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-postcharge>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -936,6 +994,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <app-extrabed [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-extrabed>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -993,9 +1052,6 @@
           </div>
         </app-modal-animation>
 
-
-
-
         <!-- Instruction -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;"> Room Instruction
@@ -1011,8 +1067,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
 
         <!-- ChangePlan -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
@@ -1030,7 +1084,6 @@
           </div>
         </app-modal-animation>
 
-
         <!-- ChangeCompany -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Change Company
@@ -1047,10 +1100,6 @@
           </div>
         </app-modal-animation>
 
-
-
-
-
         <!-- WakeUp -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">WakeUp
@@ -1066,7 +1115,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- FoodCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
@@ -1099,7 +1147,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- PaxonBill -->
         <!-- <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
@@ -1167,8 +1214,6 @@
           </div>
         </app-modal-animation> -->
 
-
-
         <!-- SmsCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'SmsCoupon'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Sms Coupon
@@ -1184,7 +1229,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- ChangeGuest -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
@@ -1202,7 +1246,6 @@
           </div>
         </app-modal-animation>
 
-
         <!-- EditRate -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'EditRate'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Edit Rate
@@ -1218,7 +1261,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- Block -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Block11'" [modalClass]="'md-effect-2'">
@@ -1236,8 +1278,6 @@
           </div>
         </app-modal-animation>
 
-
-
         <!-- ExpressCheckin -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExpressCheckin'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Express Checkin
@@ -1253,8 +1293,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
 
         <!-- Release -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Release'" [modalClass]="'md-effect-2'">

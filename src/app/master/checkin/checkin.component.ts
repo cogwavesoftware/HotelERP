@@ -1620,7 +1620,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.form.value.CreatedBy = localStorage.getItem("id")
     this.form.value.IpAdd = localStorage.getItem("LOCAL_IP")
     console.log(this.form.value)
-    return
+    
     this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Save Checkin ... ?')
       .then((confirmed) => {
         console.log('User confirmed:', confirmed)
