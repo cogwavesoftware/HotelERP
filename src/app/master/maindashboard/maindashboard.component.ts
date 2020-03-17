@@ -130,7 +130,32 @@ modelroomhover (){
 //   });
 // }
 
+popinsidepopforguestnamefunc(event){ 
+  document.querySelector("#" + event).classList.add("md-show");
+  alert("fdfdf")
+  
+}
+popinsidepopforguestnamefunc1(event){
+  document.querySelector("#" + event).classList.add("md-show");
+}
+  
+closeMyModalPin(event){
+  console.log("remove");
+  var openModals = document.querySelectorAll(".md-show");
+  for(let i = 0; i < openModals.length; i++) {
+    openModals[i].classList.remove("md-show"); 
+  }
 
+  var maindashboard = document.querySelectorAll(".maindashboard");
+ 
+ 
+  // for(let i = 0; i < openModals.length; i++) {
+  //   event.target.parentElement.parentElement.parentElement.classList.remove(
+  //     "md-show"
+  //   );
+  // }
+  //event.target.classList.remove("md-show");
+}
   closeMyModal(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(
       "md-show"
@@ -196,8 +221,26 @@ modelroomhover (){
     console.log('event')
     document.querySelector("#" + event).classList.add("md-show");
   }
+  OpenModelWithRoomDetails(event){
+    let Description = event;
+    switch (Description) {
+      case "linksGroup":
+        break;       
+      case "idblockingdetails":
+        break;
+    }
+    console.log(event)
+    console.log('event')
+    document.querySelector("#" + event).classList.add("md-show");
+  }
+    
 
-
+  modalVacentHide(event){ 
+    var allbtn = document.querySelector('.md-show');
+    console.log(allbtn);
+    allbtn.classList.remove("md-show");
+ 
+  }
 }
 
 

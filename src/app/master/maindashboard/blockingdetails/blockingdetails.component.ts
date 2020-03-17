@@ -42,6 +42,7 @@ export class BlockingdetailsComponent implements OnInit {
 
   ngOnInit() {
 
+ 
     this.maxDate.setDate(this.minDate.getDate() + 1);
     this.blockingdetailsform = this.formBuilder.group({
       ID: ['0', Validators.required],
@@ -112,7 +113,13 @@ export class BlockingdetailsComponent implements OnInit {
     this.IsLongTime = !this.IsLongTime
   }
 
-
+  closeMyModalPin(event){ 
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    } 
+    var maindashboard = document.querySelectorAll(".maindashboard"); 
+  }
   Close()
   {
     

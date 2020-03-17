@@ -6257,6 +6257,8 @@ outerdiv{
 .maindashboard .modelgradiant{
     background-color: #0cbaba;
     color:#fff; 
+    font-size: 110%; 
+    padding: 3px 10px 3px 10px;
     background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 }
 .maindashboard .dbutton{
@@ -6947,3 +6949,32 @@ outerdiv{
     max-width:60%;     
 }
  
+.font-header{
+    background-color: red;
+    color: #ffffff;
+    padding: 10px 10px 10px 5px;
+    width: 100%; 
+    max-width: 100%;
+    display: block;
+    margin:0px 0px 10px 0px;
+    border-top-right-radius:3px;    
+    border-top-left-radius:3px;
+    
+}
+.commonmodel  .md-content {
+    padding: 15px;
+}
+.commonmodel  .md-content > div ul{
+     padding: 0;
+}
+.commonmodel button.basic-close-light-box{
+    position: absolute;
+    right: -27px;
+    top: -33px; 
+    font-size: 200%;
+    color:#fff;
+}
+.contentboxmodel  .md-modal{
+    border-top-right-radius:5px;    
+    border-top-left-radius:5px;
+}

@@ -36,5 +36,6 @@ export class DiscountportalComponent implements OnInit {
       disctype: ["1", [Validators.required]],
     }); 
   }
+  
 
 }
