@@ -2,36 +2,30 @@
   <div class="container-fluid">
     <div class="col-md-12" style="padding-right:0; padding-left:0">
       <div class="row ">
-
         <div class="col-md-9 " style="padding-left: 0; border:1px solid #ccc">
-
           <div class=" ">
-
             <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
               <div class="row">
                 <div class="col-md-12">
                   <ul>
                     <li>
-
-
                       <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> <i
-                          class="icon-comments"></i> <span>Reservation</span></a>
+                          class="icon-comments"></i><span>Reservation</span></a>
                     </li>
                     <li>
                       <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
-                          class="icon-comments"></i><span>Group Checkin </span></a>
+                          class="icon-comments"></i><span>Group Checkin</span></a>
                     </li>
-                    <li>
-                      <a href="#"> <i class="icon-comments"></i><span>Block Rooms</span></a>
+                    <li>                   
+                      <button class="btn dbutton" (click)="OpenModel('GroupBlock',item)">Group Block</button>
                     </li>
                     <li>
                       <a href="#"> <i class="icon-comments"></i><span>Release Rooms</span></a>
                     </li>
                     <li>
-                      <a href="#"> <i class="icon-comments"></i> <span>Night Audit</span></a>
+                      <a href="#"> <i class="icon-comments"></i><span>Night Audit</span></a>
                     </li>
                     <li>
-
                       <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Reservation Chart</span></a>
                     </li>
@@ -42,18 +36,15 @@
                       <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Reservation List</span></a>
                     </li>
-
-
                     <li>
                       <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Chart</span></a>
                     </li>
-
-
-                    <li><button class="btn dbutton" (click)="openMyModal('effect-2',item)">Today Arival</button></li>
+                    <li>
+                      <button class="btn dbutton" (click)="OpenMyModal('effect-2',item)">Today Arival</button>
+                    </li>
                   </ul>
                 </div>
-
               </div>
             </div>
           </div>
@@ -117,14 +108,8 @@
                                   <div *ngIf="child.Status == 'V'">
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
-
-                                        <!-- <a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModelWithRoomDetails('linksGroup')"><i class="fa fa-user"
-                          aria-hidden="true"></i> Discount Posting</a> -->
-
-
                                         <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
-                                          (click)="OpenModelWithRoomDetails('linksGroup')" class="btn btn-success btn-square ripple light"
+                                          (click)="modalVacent.show()" class="btn btn-success btn-square ripple light"
                                           placement="top" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class=" ">{{child.RoomCode}}</span>
@@ -139,7 +124,7 @@
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
                                         <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
-                                        (click)="OpenModelWithRoomDetails('vacantdetais')" class="btn btn-danger ripple light"
+                                          (click)="modalOverflow.show()" class="btn btn-danger ripple light"
                                           placement="right" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class="">{{child.RoomCode}}</span>
@@ -454,143 +439,153 @@
 
         <!-- OCCUPIED -->
 
-        <!-- <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
-        
-        </app-modal-basic> -->
+        <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header" style="background-color: red;
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;">Room {{rmno}} ({{roomname1}})
+            </label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <ul>
+                    <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i
+                          class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Post',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Post Charge</a>
+                    </li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Advance',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Advance
+                        Posting</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Shifft',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
+                        Shifft</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Discount',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Discount
+                        Posting</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ExtraBed',rmno)"><i class="fa fa-user" aria-hidden="true"></i> ExtraBed
+                        Posting</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                        pax</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
+                        Rate</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Amend',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Amend
+                        Date</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ChangeCompany',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                        Company</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link &
+                        Unlink </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="HouseGuestForm.show()"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
+                    </li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                        Plan</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ChangeGuest',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                        Guest</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Instruction',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
+                        Instruction</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('FoodCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Food
+                        Coupon</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('PaxonBill',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Pax
+                        on Bill </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('SmsCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Sms
+                        Coupon</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('WakeUp',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Wake
+                        Up</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Compliment',rmno)"><i class="fa fa-user" aria-hidden="true"></i>
+                        Compliment</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('HouseKeeping',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House
+                        Keeping</a></li>
+                  </ul>
+                </div>
 
 
-        
+              </div>
+            </perfect-scrollbar>
+
+          </div>
+        </app-modal-basic>
+
+
+
         <!-- Vacent -->
 
-        <!-- <app-modal-basic #modalVacent [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true"> -->
-          <div class="commonmodel">
-            <app-modal-animation class="modellg contentboxmodel" [modalID]="'linksGroup'" [modalClass]="'md-effect-2'"> 
-              <div class="app-modal-body" style="position: relative;">
-                <button style="position: absolute;" type="button" class="close basic-close-light-box"  (click)="modalVacentHide($event)">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <label class="font-header" >Room {{rmno}}
-                  ({{roomname1}})
-                </label>
-                <!-- <input type="hidden" name="SelectedRoom" class="form-control" [(ngModel)]="model.SelectedRoom" #SelectedRoom="ngModel" value="{{rmno}}"> -->
-                <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
-                  [config]="config">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <ul>
-                        <li><a [routerLink]="['/Master/roomcheckin/',rmno]" class="modelgradiant   btn-lg btn-block"> <i class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('ExpressCheckin',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Express Checkin</a></li>
-                        <!-- <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="BlockForm.show()"><i class="fa fa-user" aria-hidden="true"></i> Block </a> -->
-                          <li>  <a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModelWithRoomDetails('idblockingdetails')"  ><i class="fa fa-search"></i>
-                            Block
-                          </a>
-    
-                        </li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Management',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Management</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Rate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Rate</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('RoomHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room History</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('GuestHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Guest History</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Poweronvisit',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Visit</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PowerOff',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power OFF</a></li>
-    
-                        
-                      </ul>
-                    </div>
-    
-    
-                  </div>
-                </perfect-scrollbar>
-    
+        <app-modal-basic #modalVacent [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="modalVacent.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: red;  color: #ffffff;   padding: 10px;   width: 100%;">Room {{rmno}}
+              ({{roomname1}})
+
+            </label>
+            <!-- <input type="hidden" name="SelectedRoom" class="form-control" [(ngModel)]="model.SelectedRoom" #SelectedRoom="ngModel" value="{{rmno}}"> -->
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <ul>
+                    <li><a [routerLink]="['/Master/roomcheckin/',rmno]" class="modelgradiant   btn-lg btn-block"> <i
+                          class="fa fa-user" aria-hidden="true"></i> Check-in</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('ExpressCheckin',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Express
+                        Checkin</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="BlockForm.show()"><i
+                          class="fa fa-user" aria-hidden="true"></i> Block </a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="ManagementForm.show()"><i class="fa fa-user" aria-hidden="true"></i> Management</a>
+                    </li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Rate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Rate</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('RoomHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
+                        History</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('GuestHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Guest
+                        History</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Poweronvisit',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On
+                        Visit</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power
+                        On Cleaning</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('PowerOff',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power OFF</a>
+                    </li>
+
+
+                  </ul>
+                </div>
+
+
               </div>
-            </app-modal-animation>
+            </perfect-scrollbar>
+
           </div>
-         
-          <div class="commonmodel">
-            <app-modal-animation class="modellg contentboxmodel" [modalID]="'vacantdetais'" [modalClass]="'md-effect-2'"> 
-              <div class="app-modal-body" style="position: relative;">
-                <button type="button" style="position: absolute;" class="close basic-close-light-box" (click)="modalVacentHide($event)">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <label class="font-header" style="background-color: red;
-            color: #ffffff;
-            padding: 10px;
-            width: 100%;">sakthi Room {{rmno}} ({{roomname1}})
-                </label> 
-                <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
-                  [config]="config">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <ul>
-                        <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i
-                              class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Post',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Post Charge</a>
-                        </li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Advance',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Advance
-                            Posting</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Shifft',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
-                            Shifft</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Discount',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Discount
-                            Posting</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('ExtraBed',rmno)"><i class="fa fa-user" aria-hidden="true"></i> ExtraBed
-                            Posting</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
-                            pax</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
-                            Rate</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Amend',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Amend
-                            Date</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('ChangeCompany',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
-                            Company</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link &
-                            Unlink </a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="HouseGuestForm.show()"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
-                        </li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
-                            Plan</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('ChangeGuest',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
-                            Guest</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Instruction',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
-                            Instruction</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('FoodCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Food
-                            Coupon</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('PaxonBill',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Pax
-                            on Bill </a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('SmsCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Sms
-                            Coupon</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('WakeUp',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Wake
-                            Up</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('Compliment',rmno)"><i class="fa fa-user" aria-hidden="true"></i>
-                            Compliment</a></li>
-                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                            (click)="OpenModel('HouseKeeping',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House
-                            Keeping</a></li>
-                      </ul>
-                    </div> 
-                  </div>
-                </perfect-scrollbar> 
-              </div>
-            </app-modal-animation>
-          </div>
+        </app-modal-basic>
+
 
 
 
@@ -604,7 +599,7 @@
             <label class="font-header" style="background-color: red;
         color: #ffffff;
         padding: 10px;
-        width: 100%;">Room  {{rmno}} ({{roomname1}})
+        width: 100%;">Room {{rmno}} ({{roomname1}})
             </label>
 
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
@@ -667,6 +662,8 @@
 
           </div>
         </app-modal-basic>
+
+
 
 
 
@@ -769,6 +766,69 @@
 
 
 
+         <!-- Block Group 1111-->
+         <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupBlock'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Group Block
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-md-12 ">
+                      <div class=" " id="leftNavBar">
+                        <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors">
+                         
+                          <hr>
+                          {{item.FloorName}}
+                          <li class="childData">
+                            <ul style="display: inline-block">
+                              <li style="float: left; margin-left: 0px " *ngFor="let child of finalMenu.Rooms">
+                                <div *ngIf="item.FloorCode==child.FloorCode ">
+                                  <div *ngIf="child.Status == 'V'">
+                                    <span class="mytooltip tooltip-effect-1">
+                                      <span class="tooltip-item">
+                                        <button type="button" 
+                                          class="btn btn-success btn-square ripple light"
+                                          placement="top" ngbTooltip="{{child.RoomNo}}">
+                                          {{child.RoomNo}} <br>
+                                          <span class=" ">{{child.RoomCode}}</span>
+                                        </button></span>
+                                    </span>
+                                  </div> 
+
+                                
+                                </div>
+
+
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+
+
+
+                      </div>
+
+
+
+
+                      <!-- end rooms dashborad -->
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
+
+
+
+
         <!-- Discount -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Discount Posting
@@ -779,6 +839,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <app-discountportal [RoomNo]="RoomNos" [RoomCode]="RoomCodes"> </app-discountportal>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -796,6 +857,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                    <app-advanceform [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-advanceform>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -904,12 +966,15 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  
+                  <app-postcharge [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-postcharge>
                 </div>
               </div>
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
 
+<<<<<<< HEAD
         <!-- Shifft -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Shifft'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;"><i class="fa  fa-hotel"></i> Shift Room
@@ -926,6 +991,9 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
+=======
+      
+>>>>>>> 62926e58832b73a26a371af36c2e6308ec79afbe
 
         <!-- ChangePax -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePax'" [modalClass]="'md-effect-2'">
@@ -954,6 +1022,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <app-extrabed [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-extrabed>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1011,9 +1080,6 @@
           </div>
         </app-modal-animation>
 
-
-
-
         <!-- Instruction -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;"> Room Instruction
@@ -1029,8 +1095,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
 
         <!-- ChangePlan -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
@@ -1048,7 +1112,6 @@
           </div>
         </app-modal-animation>
 
-
         <!-- ChangeCompany -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Change Company
@@ -1065,10 +1128,6 @@
           </div>
         </app-modal-animation>
 
-
-
-
-
         <!-- WakeUp -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">WakeUp
@@ -1084,7 +1143,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- FoodCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
@@ -1117,7 +1175,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- PaxonBill -->
         <!-- <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
@@ -1185,8 +1242,6 @@
           </div>
         </app-modal-animation> -->
 
-
-
         <!-- SmsCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'SmsCoupon'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Sms Coupon
@@ -1202,7 +1257,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
 
         <!-- ChangeGuest -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
@@ -1220,7 +1274,6 @@
           </div>
         </app-modal-animation>
 
-
         <!-- EditRate -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'EditRate'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Edit Rate
@@ -1236,9 +1289,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
-
 
         <!-- Block -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Block11'" [modalClass]="'md-effect-2'">
@@ -1256,9 +1306,6 @@
           </div>
         </app-modal-animation>
 
-
-
-
         <!-- ExpressCheckin -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExpressCheckin'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Express Checkin
@@ -1274,8 +1321,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
 
         <!-- Release -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Release'" [modalClass]="'md-effect-2'">
@@ -1438,42 +1483,31 @@
 
 
         <!-- BlockForm -->
-        <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">-->
-          <app-modal-animation class="modellg contentboxmodel" [modalID]="'idblockingdetails'" [modalClass]="'md-effect-2'">
-          <div class="app-modal-body">            
-            <label class="font-header" style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}} ({{roomname1}})</label>            
+        <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
               [config]="config">
               <div class="row">
                 <div class="col-sm-12">
                   <app-blockingdetails [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-blockingdetails>
                 </div>
+
               </div>
             </perfect-scrollbar>
-          </div>
-        </app-modal-animation>
 
-        <div class="blocldetailsouter"> 
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'RoomHistory'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Room History
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
-              [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                  test
-                </div>
-              </div>
-            </perfect-scrollbar>
           </div>
-        </app-modal-animation>
-          </div>
+        </app-modal-basic>
 
-          
 
-          
+
+
 
         <!-- HouseGuestForm -->
         <!-- <app-modal-basic #HouseGuestForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">

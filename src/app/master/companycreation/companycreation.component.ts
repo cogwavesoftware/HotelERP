@@ -76,6 +76,8 @@ export class CompanycreationComponent implements OnInit {
     this.Branch = localStorage.getItem("BranchCode");
 
   }
+
+
   ngOnInit() {
 
     this.resetForm();
@@ -95,6 +97,7 @@ export class CompanycreationComponent implements OnInit {
     var selectedRowsString = "";
     this.str = JSON.stringify(selectedRows);
   }
+
   onGridReady(params) {
     this.rowData = this._roomtypeservice.GetRoomType(this.Branch);
     console.log(params);
@@ -103,6 +106,7 @@ export class CompanycreationComponent implements OnInit {
     console.log(this.gridColumnApi)
     params.api.sizeColumnsToFit();
   }
+
   /* ag grid code ending */
   validateplan(value) {
     if (value === 'default') {
@@ -124,8 +128,9 @@ export class CompanycreationComponent implements OnInit {
       this.mode = "(New)";
     }
   }
-  resetForm(form?: NgForm) {
 
+
+  resetForm(form?: NgForm) {
     this.model = {
       Id: 0,
       CompanyCode: null,
@@ -169,17 +174,12 @@ export class CompanycreationComponent implements OnInit {
 
 
   onSubmit(form?: NgForm) {
-
     form.value.BranchCode = localStorage.getItem("BranchCode")
     form.value.CreatedBy = localStorage.getItem("id")
     form.value.ModifyBy = localStorage.getItem("id")
     form.value.IpAdd = localStorage.getItem("LOCAL_IP")
-    this.form.value.companytariff = JSON.parse(this.str);
-   
+    this.form.value.companytariff = JSON.parse(this.str); 
     var sdata = JSON.parse(this.str);
-   
-   
-
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");

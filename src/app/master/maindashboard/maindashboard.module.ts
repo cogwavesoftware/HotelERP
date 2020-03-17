@@ -1,3 +1,4 @@
+import { DiscountportalComponent } from './discountportal/discountportal.component';
 import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,19 +9,32 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MaindashboardComponent} from './maindashboard.component';
 import {ChartModule} from 'angular2-chartjs';
+<<<<<<< HEAD
 import { DatePipe } from '@angular/common';
 
 import { ToastyModule } from 'ng2-toasty';
 
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
+=======
+import { ToastyModule } from 'ng2-toasty';
+>>>>>>> 62926e58832b73a26a371af36c2e6308ec79afbe
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
  import { ManagementComponent } from './management/management.component';
 import { HouseGuestComponent } from './house-guest/house-guest.component';
 import { RoomShifftComponent } from './room-shifft/room-shifft.component';
+import { AdvanceformComponent } from './advanceform/advanceform.component';
+import { PostchargeComponent } from './postcharge/postcharge.component';
+import { ExtrabedComponent } from './extrabed/extrabed.component';
 @NgModule({
+<<<<<<< HEAD
   declarations: [MaindashboardComponent,BlockingdetailsComponent, ManagementComponent, HouseGuestComponent, RoomShifftComponent ] ,
   providers: [DatePipe],
+=======
+  declarations: [MaindashboardComponent,BlockingdetailsComponent,ManagementComponent,
+                 HouseGuestComponent,RoomShifftComponent,DiscountportalComponent,
+                 AdvanceformComponent,PostchargeComponent,ExtrabedComponent ] ,
+>>>>>>> 62926e58832b73a26a371af36c2e6308ec79afbe
   imports: [
     CommonModule,
     MaindashboardRoutingModule,

@@ -197,6 +197,7 @@ closeMyModalPin(event){
   // Release-OpenReleaseModel
   
   OpenModel(event, RoomNo) {
+   
     let Description = event;
     switch (Description) {
       case "Discount":
@@ -220,10 +221,8 @@ closeMyModalPin(event){
       case "HouseGuest":
         break;
         case "PaxonBill":
-          alert('pax')
-         
-          break;
-        
+          alert('pax')         
+          break;       
     }
     console.log(event)
     console.log('event')

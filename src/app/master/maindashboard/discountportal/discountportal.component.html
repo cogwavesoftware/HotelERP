@@ -11,14 +11,14 @@
                                             <div class='col-12 col-lg-4'>
                                                 <div class="form-group">
                                                   <label class="form-control-label" for="date">Date</label>
-                                                  <input  id="frmdate" name="frmdate"  formControlName="frmdate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                                  <input  id="ProcessDate" name="ProcessDate"  formControlName="ProcessDate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                                  </div>  
                                               </div>
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="rmno">Room No </label>
-                                          <input type="text" class="form-control tooltip-form" id="roomno" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.roomno.errors || discountportalform.controls.roomno.touched || discountportalform.controls.roomno.dirty}" required  />  
-                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.roomno.errors?.required" >Roomno is required</div>
+                                          <input type="text" class="form-control tooltip-form" id="roomnos" formControlName="roomnos" name="roomnos" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.roomnos.errors || discountportalform.controls.roomnos.touched || discountportalform.controls.roomnos.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.roomnos.errors?.required" >Roomno is required</div>
                                           </div>  
                                       </div>
                                       <div class='col-12 col-lg-4'>

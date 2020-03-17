@@ -302,11 +302,11 @@ const routes: Routes = [
        //  loadChildren: './master/maindashboard/blockingdetails/blockingdetails.module#BlockingdetailsModule'
         loadChildren: () => import('./master/maindashboard/blockingdetails/blockingdetails.module').then(m=>m.BlockingdetailsModule)
       },
-      {
-        path: 'discountportal',
+      //{
+       // path: 'discountportal',
        //  loadChildren: './master/maindashboard/discountportal/discountportal.module#DiscountportalModule'
-        loadChildren: () => import('./master/maindashboard/discountportal/discountportal.module').then(m=>m.DiscountportalModule)
-      },
+       //loadChildren: () => import('./master/maindashboard/discountportal/discountportal.module').then(m=>m.DiscountportalModule)
+      //},
       //  {
       //  path:'printgrc',
       //   loadChildren: './master/printgrc/printgrc.module#PrintgrcModule'
