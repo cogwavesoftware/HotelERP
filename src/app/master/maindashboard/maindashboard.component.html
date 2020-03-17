@@ -139,7 +139,7 @@
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
                                         <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
-                                          (click)="modalOverflow.show()" class="btn btn-danger ripple light"
+                                        (click)="OpenModelWithRoomDetails('vacantdetais')" class="btn btn-danger ripple light"
                                           placement="right" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class="">{{child.RoomCode}}</span>
@@ -454,95 +454,9 @@
 
         <!-- OCCUPIED -->
 
-        <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
-          <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="modalOverflow.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <label class="font-header" style="background-color: red;
-        color: #ffffff;
-        padding: 10px;
-        width: 100%;">Room {{rmno}} ({{roomname1}})
-            </label>
-            <a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="popinsidepopforguestnamefunc('test123')"  ><i class="fa fa-search"></i>
-              parent windiw
-              </a>
-            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
-              [config]="config">
-              <div class="row">
-                <div class="col-sm-12">
-                  <ul>
-                    <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i
-                          class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Post',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Post Charge</a>
-                    </li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Advance',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Advance
-                        Posting</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Shifft',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
-                        Shifft</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Discount',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Discount Posting</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('ExtraBed',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> ExtraBed Posting</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Change pax</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
-                        Rate</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Amend',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Amend
-                        Date</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('ChangeCompany',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Change Company</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> link & Unlink </a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('HouseGuest',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> House Guest</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Change Plan</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('ChangeGuest',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Change Guest</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Instruction',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Room Instruction</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('FoodCoupon',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Food Coupon</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('PaxonBill',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Pax
-                        on Bill </a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('SmsCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Sms
-                        Coupon</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('WakeUp',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Wake
-                        Up</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('Compliment',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> Compliment</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('HouseKeeping',rmno)"><i class="fa fa-user"
-                          aria-hidden="true"></i> House Keeping</a></li>
-                  </ul>
-                </div>
-
-               
-              </div>
-            </perfect-scrollbar>
-
-          </div>
-        </app-modal-basic>
+        <!-- <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
+        
+        </app-modal-basic> -->
 
 
         <a href="">
@@ -605,9 +519,93 @@
             </app-modal-animation>
           </div>
          
+          <div class="commonmodel">
+            <app-modal-animation class="modellg contentboxmodel" [modalID]="'vacantdetais'" [modalClass]="'md-effect-2'"> 
+              <div class="app-modal-body" style="position: relative;">
+                <button type="button" style="position: absolute;" class="close basic-close-light-box" (click)="modalVacentHide($event)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <label class="font-header" style="background-color: red;
+            color: #ffffff;
+            padding: 10px;
+            width: 100%;">sakthi Room {{rmno}} ({{roomname1}})
+                </label> 
+                <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+                  [config]="config">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <ul>
+                        <li><a [routerLink]="['/Master/roomcheckin/']" class="modelgradiant   btn-lg btn-block"> <i
+                              class="fa fa-user" aria-hidden="true"></i> Guest Info</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Post',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Post Charge</a>
+                        </li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Advance',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Advance
+                            Posting</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Shifft',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
+                            Shifft</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Discount',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Discount
+                            Posting</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('ExtraBed',rmno)"><i class="fa fa-user" aria-hidden="true"></i> ExtraBed
+                            Posting</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                            pax</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
+                            Rate</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Amend',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Amend
+                            Date</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('ChangeCompany',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                            Company</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link &
+                            Unlink </a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="HouseGuestForm.show()"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
+                        </li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                            Plan</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('ChangeGuest',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
+                            Guest</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Instruction',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Room
+                            Instruction</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('FoodCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Food
+                            Coupon</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('PaxonBill',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Pax
+                            on Bill </a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('SmsCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Sms
+                            Coupon</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('WakeUp',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Wake
+                            Up</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('Compliment',rmno)"><i class="fa fa-user" aria-hidden="true"></i>
+                            Compliment</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('HouseKeeping',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House
+                            Keeping</a></li>
+                      </ul>
+                    </div> 
+                  </div>
+                </perfect-scrollbar> 
+              </div>
+            </app-modal-animation>
+          </div>
 
-      
-  
+
 
         <!-- Block -->
         <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
@@ -619,7 +617,7 @@
             <label class="font-header" style="background-color: red;
         color: #ffffff;
         padding: 10px;
-        width: 100%;">Room {{rmno}} ({{roomname1}})
+        width: 100%;">Room  {{rmno}} ({{roomname1}})
             </label>
 
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
@@ -628,9 +626,13 @@
                 <div class="col-sm-12">
                   <ul>
 
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a>
+                    </li>
 
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>                
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power
+                        On Cleaning</a></li>
 
                   </ul>
                 </div>
@@ -660,9 +662,13 @@
               <div class="row">
                 <div class="col-sm-12">
                   <ul>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a></li>
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a>
+                    </li>
 
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block" (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On Cleaning</a></li>                
+                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                        (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power
+                        On Cleaning</a></li>
 
 
                   </ul>
@@ -754,7 +760,7 @@
 
 
 
-       
+
 
 
         <!-- Grace -->
@@ -820,6 +826,72 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                    <div class="app-modal-body text-center addcompany">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                            value="{{Id}}">
+                          <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                            #BranchCode="ngModel" value="{{BranchCode}}">
+                          <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                            #IpAdd="ngModel" value="{{IpAdd}}">
+                          <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                            #CreatedBy="ngModel" value="{{CreatedBy}}">
+
+                          <div class="col-md-4">
+                            <label class="required">RoomNo*</label>
+                            <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
+                              #RoomNo="ngModel" value="{{RoomNos}}"
+                              [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}" required autocomplete="off">
+                            <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
+                              <div *ngIf="RoomNo.errors.required">RoomNo is invalid</div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <label>RoomCode*</label>
+                            <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
+                              #RoomCode="ngModel" value="{{RoomCodes}}"
+                              [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}" required
+                              autocomplete="off">
+                            <div *ngIf="RoomCode.touched && RoomCode.invalid" class="invalid-feedback">
+                              <div *ngIf="RoomCode.errors.required">RoomCode is required</div>
+
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <label>CheckoutDate*</label>
+
+                            <input id="CheckoutDate" name="CheckoutDate" class="form-control"
+                              [(ngModel)]="model.CheckoutDate" #CheckoutDate="ngModel" placement="center" type="text"
+                              bsDaterangepicker [minDate]="minDate"
+                              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+
+                          </div>
+
+                          <div class="col-md-4">
+                            <label>AmmendDate*</label>
+
+                            <input id="AmmendDate" name="AmmendDate" class="form-control" [(ngModel)]="model.AmmendDate"
+                              #AmmendDate="ngModel" placement="center" type="text" bsDaterangepicker [minDate]="minDate"
+                              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+
+                          </div>
+
+
+                        </div>
+
+                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block"
+                          style="margin-top:20px;  ">Save</button>
+                        <br />
+                        <hr>
+
+                      </div>
+
+                    </div>
+                  </form>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -852,6 +924,71 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                    <div class="app-modal-body text-center addcompany">
+
+                      <div class="row">
+
+                        <div class="col-md-12">
+
+                          <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                            value="{{Id}}">
+                          <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                            #BranchCode="ngModel" value="{{BranchCode}}">
+                          <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                            #IpAdd="ngModel" value="{{IpAdd}}">
+                          <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                            #CreatedBy="ngModel" value="{{CreatedBy}}">
+
+                          <div class="col-md-4">
+                            <label class="required">GuestName</label>
+                            <input type="text" name="GuestName" class="form-control" [(ngModel)]="model.GuestName"
+                              #GuestName="ngModel" value="{{GuestName}}" readonly required autocomplete="off">
+                          </div>
+
+                          <div class="col-md-4">
+                            <label class="required">RoomCode</label>
+                            <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
+                              #RoomCode="ngModel" value="{{RoomCodes}}" readonly required autocomplete="off">
+                          </div>
+
+                          <div class="col-md-4">
+                            <label class="required">RoomNo</label>
+                            <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
+                              #RoomNo="ngModel" value="{{RoomNos}}" readonly required autocomplete="off">
+                          </div>
+                          <div class="col-md-12">
+
+                            <div class="col-md-4"
+                              [class.has-error]="SRoomNo.touched && SRoomNo.errors?.defaultSelected">
+                              <label class="required">Prefered RoomNo</label>
+                              <select class="custom-select" id="SRoomNo" appSelectValidator="select" #SRoomNo="ngModel"
+                                name="SRoomNo" [(ngModel)]="model.SRoomNo">
+                                <option value="select">Select</option>
+                                <option *ngFor="let item of vacantRoom" [value]="item.RoomNo">{{item.RoomNo}}</option>
+                              </select>
+                              <span class="help-block" *ngIf="SRoomNo.touched && SRoomNo.errors?.defaultSelected">
+                                SRoomNo is required
+                              </span>
+                            </div>
+
+
+                            <div class="col-md-4">
+                              <label class="required">Prefered RoomCode</label>
+                              <input type="text" name="SRoomNo" class="form-control" [(ngModel)]="model.SRoomNo"
+                                #SRoomNo="ngModel" value="{{RoomNos}}" readonly required autocomplete="off">
+                            </div>
+                          </div>
+
+
+                        </div>
+                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block"
+                          style="margin-top:20px;  ">Save</button>
+                        <br />
+                        <hr>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1051,20 +1188,70 @@
 
 
         <!-- PaxonBill -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
+        <!-- <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Pax on Bill
+          
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
+
           <div class="app-modal-body text-center">
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <form #myform = "ngForm" (ngSubmit) ="myform.form.valid && ReferanceSave(myform)" class="">
+          
+                    <div class="app-modal-body text-center addcompany"> 
+                     
+                   
+                     <div class="col-md-12">
+
+                       <div class="row">                
+                
+                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+                        <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+                        <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+                        <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+                                           
+                         <div class="col-md-4">
+                          <label class="required">RoomNo*</label>
+                          <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
+                              <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
+                                 <div *ngIf="RoomNo.errors.required">RoomNo is invalid</div>
+                             </div>
+                         </div>
+
+                         <div class="col-md-4">
+                          <label>RoomCode*</label>
+                          <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}"  required  autocomplete="off">
+                          <div *ngIf="RoomCode.touched && RoomCode.invalid" class="invalid-feedback">
+                            <div *ngIf="RoomCode.errors.required">RoomCode is required</div>
+                            
+                          </div>
+                         </div>
+                         <div class="col-md-4"  >
+                           
+                           <label>Pax*</label>
+                           <input type="number" min="10" max="10" name="Pax" class="form-control" [(ngModel)]="model.Pax" #Pax="ngModel" value="{{Pax}}"  [ngClass]="{'is-invalid': Pax.touched && Pax.invalid}"  required   autocomplete="off">
+                           <div *ngIf="Pax.touched && Pax.invalid" class="invalid-feedback">
+                             <div *ngIf="Pax.errors.required">Pax Cant'be Empty</div>
+                           </div>
+                       </div>
+                       </div>
+                       
+                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
+                        <br/>
+                        <hr>
+         
+                     </div>
+               
+                   </div> 
+               </form>
                 </div>
               </div>
             </perfect-scrollbar>
           </div>
-        </app-modal-animation>
+        </app-modal-animation> -->
 
 
 
@@ -1297,7 +1484,7 @@
 
 
 
-        
+
         <!-- <div class="blocldetailsouter">
           <app-modal-animation [modalID]="'Block'" [modalClass]="' model-lg md-effect-4 addressmodeleffect blockdetailsmodel'">      
             <h3 class="f-15" style="position: relative;"><i   class="fa  fa-user-md"></i> Block Details Details
@@ -1317,7 +1504,7 @@
            </div> -->
 
 
-        
+
         <!-- BlockForm -->
         <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">-->
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'idblockingdetails'" [modalClass]="'md-effect-2'">
@@ -1327,7 +1514,7 @@
               [config]="config">
               <div class="row">
                 <div class="col-sm-12">
-                  <app-blockingdetails  [RoomNo]="RoomNo" [RoomCode]="RoomCode" ></app-blockingdetails>
+                  <app-blockingdetails [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-blockingdetails>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1356,15 +1543,44 @@
 
           
 
+        <!-- HouseGuestForm -->
+        <!-- <app-modal-basic #HouseGuestForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">
+            <div class="app-modal-body">
+              <button type="button" class="close basic-close-light-box" (click)="HouseGuestForm.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <label class="font-header" style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}} ({{roomname1}})</label>
+              
+              <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
+                [config]="config">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <app-house-guest [RoomNo]="RoomNo" [RoomCode]="RoomCode" ></app-house-guest>
+                  </div>
   
-         
+                </div>
+              </perfect-scrollbar>
+  
+            </div>
+          </app-modal-basic> -->
 
+        <!-- Management -->
+        <!-- <app-modal-basic #ManagementForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false">
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="ManagementForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header" style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}} ({{roomname1}})</label>
+            
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-management  [RoomNo]="RoomNo" [RoomCode]="RoomCode" ></app-management>
+                </div>
 
+              </div>
+            </perfect-scrollbar>
 
-
-
-
-
-
-
-        
+          </div>
+        </app-modal-basic> -->

@@ -12,11 +12,11 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 
 @Component({
-  selector: 'app-blockingdetails',
-  templateUrl: './blockingdetails.component.html',
-  styleUrls: ['./blockingdetails.component.scss']
+  selector: 'app-management',
+  templateUrl: './management.component.html',
+  styleUrls: ['./management.component.scss']
 })
-export class BlockingdetailsComponent implements OnInit {
+export class ManagementComponent implements OnInit {
   Branch: string = "CW1001";
   CreatedBy: number = 1;
   blockingdetailsform: FormGroup;
@@ -42,7 +42,6 @@ export class BlockingdetailsComponent implements OnInit {
 
   ngOnInit() {
 
- 
     this.maxDate.setDate(this.minDate.getDate() + 1);
     this.blockingdetailsform = this.formBuilder.group({
       ID: ['0', Validators.required],
@@ -115,14 +114,8 @@ export class BlockingdetailsComponent implements OnInit {
   Selected(MName: string) {
     this.IsLongTime = !this.IsLongTime
   }
+    
 
-  closeMyModalPin(event){ 
-    var openModals = document.querySelectorAll(".md-show");
-    for(let i = 0; i < openModals.length; i++) {
-      openModals[i].classList.remove("md-show"); 
-    } 
-    var maindashboard = document.querySelectorAll(".maindashboard"); 
-  }
   Close()
   {
     this.blockingdetailsform.reset();
