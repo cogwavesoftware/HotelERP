@@ -6944,6 +6944,13 @@ outerdiv{
 .blocldetailsouter .md-modal {
     z-index: 1068 !important; 
 }
+.commonmodel .md-overlay{    
+    z-index:1055!important;
+}
+.commonmodel .md-modal {
+    z-index: 1062 !important; 
+}
+
 .pcoded-content .pcoded-inner-content .main-body .page-wrapper .blockdetailsmodel  {
     width:100%!important;
     max-width:60%;     
@@ -6977,4 +6984,21 @@ outerdiv{
 .contentboxmodel  .md-modal{
     border-top-right-radius:5px;    
     border-top-left-radius:5px;
+}
+
+.shiftroom .guestinfofirstrow  .form-group label{
+    text-align:left;
+    display: block;
+    margin:0;
+    font-size: 90%;
+} 
+.shiftroom .guestinfofirstrow  .form-group button{
+    margin-top: 20px;
+    display: inline-block;
+    margin-left: 10px;
+}
+ 
+.bs-daterangepicker-container{
+    z-index:2016!important;
+    border:1px solid red;
 }

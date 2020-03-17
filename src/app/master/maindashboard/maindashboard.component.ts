@@ -11,6 +11,8 @@ import { HmsdashboardService } from './../../_services/hmsdashboard.service';
 import { IpserviceService } from 'src/app/_services/ipservice.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { BankService } from 'src/app/_services/bank.service';
+import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-maindashboard',
@@ -33,12 +35,19 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   finalMenu = new Array();
   floor = new Array<any>();
   vacantRoom=new Array<any>();
+  timepicker: Partial<TimepickerConfig>;
   model: any;
   Branch: string;
   BookingList: any;
+  myTime = new Date();
+  valid: boolean = true;
+  isValid(event: boolean): void {
+    this.valid = event;
+  }
+
   @ViewChild(BlockingdetailsComponent, {static:false}) block : BlockingdetailsComponent
   @ViewChild('Name1', {static:false}) name : ElementRef
-  constructor(private _masterformservice: MasterformService, private router: Router,
+  constructor(private datePipe: DatePipe,private _masterformservice: MasterformService, private router: Router,
     private http: HttpClient, private _reservationservice: ReservationService,
     private _ipservice: IpserviceService, private _hmsdashboard: HmsdashboardService, 
     private _bankservice: BankService) {
@@ -56,7 +65,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       RoomNo:this.RoomNos,
       RoomCode:this.RoomCodes,
       Pax:0,
-      SRoomNo:"select"
+      SRoomNo:"select" 
     }    
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
       this.BookingList = data;
@@ -147,17 +156,7 @@ closeMyModalPin(event){
   var openModals = document.querySelectorAll(".md-show");
   for(let i = 0; i < openModals.length; i++) {
     openModals[i].classList.remove("md-show"); 
-  }
-
-  var maindashboard = document.querySelectorAll(".maindashboard");
- 
- 
-  // for(let i = 0; i < openModals.length; i++) {
-  //   event.target.parentElement.parentElement.parentElement.classList.remove(
-  //     "md-show"
-  //   );
-  // }
-  //event.target.classList.remove("md-show");
+  } 
 }
   closeMyModal(event) {
     event.target.parentElement.parentElement.parentElement.classList.remove(

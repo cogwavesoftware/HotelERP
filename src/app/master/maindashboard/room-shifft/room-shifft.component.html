@@ -1,1 +1,106 @@
-<p>room-shifft works!</p>
+
+
+<div class="shiftroom discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+
+            <div class="row">
+                <div class="col-md-12" >  
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                        value="{{Id}}">
+                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                        #BranchCode="ngModel" value="{{BranchCode}}">
+                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                        #IpAdd="ngModel" value="{{IpAdd}}">
+                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+
+                        <div class="guestinfofirstrow  row">
+                            <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">GuestName</label>
+                                    <input type="text" name="GuestName" class="form-control" [(ngModel)]="model.GuestName"
+                                      #GuestName="ngModel" value="{{GuestName}}" readonly required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">RoomCode</label>
+                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
+                                      #RoomCode="ngModel" value="{{RoomCodes}}" readonly required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">RoomNo</label>
+                                    <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
+                                      #RoomNo="ngModel" value="{{RoomNos}}" readonly required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group" 
+                                [class.has-error]="SRoomNo.touched && SRoomNo.errors?.defaultSelected">
+                                    <label class="required">Prefered RoomNo</label>
+                                      <select class="custom-select" id="SRoomNo" appSelectValidator="select" #SRoomNo="ngModel"
+                                        name="SRoomNo" [(ngModel)]="model.SRoomNo">
+                                        <option value="select">Select</option>
+                                        <option *ngFor="let item of vacantRoom" [value]="item.RoomNo">{{item.RoomNo}}</option>
+                                      </select>
+                                      <span class="help-block" *ngIf="SRoomNo.touched && SRoomNo.errors?.defaultSelected">
+                                        SRoomNo is required
+                                      </span>
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Prefered RoomCode</label>
+                                        <input type="text" name="SRoomNo" class="form-control" [(ngModel)]="model.SRoomNo"
+                                          #SRoomNo="ngModel" value="{{RoomNos}}" readonly required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Tarif</label>
+                                        <input type="text" name="tarif" class="form-control" [(ngModel)]="model.tarif"
+                                          #tarif="ngModel" value="{{tarif}}"   required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Tax</label>
+                                        <input type="text" name="tax" class="form-control" [(ngModel)]="model.tax"
+                                          #tax="ngModel" value="{{tax}}"   required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">grand</label>
+                                        <input type="text" name="grand" class="form-control" [(ngModel)]="model.grand"
+                                          #grand="ngModel" value="{{grand}}"  required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+                              </div><!--guestinfofirstrow -->
+                              <div class="guestinfofirstrow  row">
+                                <div class='col-12 col-lg-12'>
+                                    <div class="form-group  float-right" >                                   
+                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                        <button type="button" (click)="closeMyModal($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                     </div>  
+                                  </div> 
+                              </div>
+                        
+                      </form>
+
+
+                 
+                          </div>
+                   </div>       
+                  
+        </div>
+     </div>
+ </div>
+
+  
+
+  
