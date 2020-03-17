@@ -1,3 +1,4 @@
+import { DiscountportalComponent } from './discountportal/discountportal.component';
 import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,8 +18,10 @@ import {DatePipe} from '@angular/common';
 import { ManagementComponent } from './management/management.component';
 import { HouseGuestComponent } from './house-guest/house-guest.component';
 import { RoomShifftComponent } from './room-shifft/room-shifft.component';
+import { AdvanceformComponent } from './advanceform/advanceform.component';
 @NgModule({
-  declarations: [MaindashboardComponent,BlockingdetailsComponent, ManagementComponent, HouseGuestComponent, RoomShifftComponent ] ,
+  declarations: [MaindashboardComponent,BlockingdetailsComponent, ManagementComponent,
+     HouseGuestComponent, RoomShifftComponent,DiscountportalComponent, AdvanceformComponent ] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule,
