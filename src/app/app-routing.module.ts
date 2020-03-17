@@ -25,11 +25,11 @@ const routes: Routes = [
         //loadChildren: './commonpage/commonpage.module#CommonpageModule'
         loadChildren: () => import('./commonpage/commonpage.module').then(m=>m.CommonpageModule)
       },
-      {
-        path: 'login/basic-login',
-        loadChildren: './theme/auth/login/login.module#LoginModule'
+      // {
+      //   path: 'login/basic-login',
+      //   loadChildren: './theme/auth/login/login.module#LoginModule'
        
-      },
+      // },
       {
         path:'logins',
         //loadChildren:'./logins/logins.module#LoginsModule'
@@ -65,15 +65,15 @@ const routes: Routes = [
         redirectTo: 'dashboard/default',
         pathMatch: 'full'
       },
-       {
-         path: 'dashboard',
-         loadChildren: './theme/dashboard/dashboard.module#DashboardModule'
+      //  {
+      //    path: 'dashboard',
+      //    loadChildren: './theme/dashboard/dashboard.module#DashboardModule'
          
-       },
-       {
-        path: 'default',
-        loadChildren: './theme/dashboard/default/default.module#DefaultModule'
-      },
+      //  },
+      //  {
+      //   path: 'default',
+      //   loadChildren: './theme/dashboard/default/default.module#DefaultModule'
+      // },
       {
         path: 'company',
        // loadChildren: './super-admin/company/company.module#CompanyModule'

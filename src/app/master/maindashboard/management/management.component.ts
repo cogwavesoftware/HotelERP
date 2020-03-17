@@ -12,11 +12,11 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 
 @Component({
-  selector: 'app-blockingdetails',
-  templateUrl: './blockingdetails.component.html',
-  styleUrls: ['./blockingdetails.component.scss']
+  selector: 'app-management',
+  templateUrl: './management.component.html',
+  styleUrls: ['./management.component.scss']
 })
-export class BlockingdetailsComponent implements OnInit {
+export class ManagementComponent implements OnInit {
   Branch: string = "CW1001";
   CreatedBy: number = 1;
   blockingdetailsform: FormGroup;

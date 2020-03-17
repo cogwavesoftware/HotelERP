@@ -1,3 +1,4 @@
+import { OrderItemsComponent } from './../order-items/order-items.component';
 import { ReservationService } from './../../_services/reservation.service';
 
 import { Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
@@ -30,7 +31,7 @@ import { BankService } from 'src/app/_services/bank.service';
 import { Subject } from 'rxjs/Subject';
 
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
 
@@ -208,7 +209,7 @@ export class GridtestComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) newcompanyform: any;
   constructor(private datePipe: DatePipe,private fb: FormBuilder,
     public router: Router, private toastyService: ToastyService, private renderer: Renderer2,
-    public formBuilder: FormBuilder, private _bankservice: BankService,
+    public formBuilder: FormBuilder, private _bankservice: BankService,  private dialog: MatDialog,
     private route: ActivatedRoute, private savecheckin: CheckinService,
     private roomservice: RoomtypeService, private confirmationDialogService: ConfirmationDialogService,
     private _masterservice: MasterformService, public _addressservice: AddressService, private _reservationservice: ReservationService,
@@ -429,6 +430,19 @@ export class GridtestComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.showWebcam = false;
    // this._bankservice.changeMessage("expanded")
+  }
+
+ // 111//
+
+  AddOrEditOrderItem(orderItemIndex, OrderID) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "50%";
+    dialogConfig.data = { orderItemIndex, OrderID };
+    this.dialog.open(OrderItemsComponent, dialogConfig).afterClosed().subscribe(res => {
+     // this.updateGrandTotal();
+    });
   }
 
   CheckRoom(RoomCodes: string): number {

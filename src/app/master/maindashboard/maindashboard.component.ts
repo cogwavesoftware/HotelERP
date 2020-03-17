@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { ElementRef } from '@angular/core';
 import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
 import { Router } from '@angular/router';
@@ -18,80 +19,79 @@ import { BankService } from 'src/app/_services/bank.service';
     '../../../assets/icon/icofont/css/icofont.scss'],
 })
 export class MaindashboardComponent implements OnInit, OnDestroy {
-
-  // public roomsdetail:Observable<any>;
   public roomsdetail;
   model2: any = {};
   @ViewChild("f", { static: false }) form: any;
   roomname: any;
   DasboardLoad: any;
   floorname: any;
-  rmno: string = "1000";
+  rmno: string;
   Refinputs:string;
   roomname1: string;
-  RoomCode:string;
-  RoomNo:string;
+  RoomCodes:string;
+  RoomNos:string;
   finalMenu = new Array();
   floor = new Array<any>();
+  vacantRoom=new Array<any>();
   model: any;
   Branch: string;
   BookingList: any;
-  
   @ViewChild(BlockingdetailsComponent, {static:false}) block : BlockingdetailsComponent
-
   @ViewChild('Name1', {static:false}) name : ElementRef
-
-
-
   constructor(private _masterformservice: MasterformService, private router: Router,
-  
     private http: HttpClient, private _reservationservice: ReservationService,
-    private _ipservice: IpserviceService, private _hmsdashboard: HmsdashboardService, private _bankservice: BankService) {
-  //this._bankservice.changeMessage("collapsed")
+    private _ipservice: IpserviceService, private _hmsdashboard: HmsdashboardService, 
+    private _bankservice: BankService) {
+  
     this.Branch = "CW_1001";
   }
 
   ngOnInit() {
 
+    this.model={
+      Id:0,
+      BranchCode:this.Branch,
+      IpAdd:1,
+      CreatedBy:1,
+      RoomNo:this.RoomNos,
+      RoomCode:this.RoomCodes,
+      Pax:0,
+      SRoomNo:"select"
+    }    
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
       this.BookingList = data;
-      console.log(this.BookingList)
     });
-
-    this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
+      this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
       this.finalMenu = res;
+      this.vacantRoom=res['Rooms'].filter(a=>a.Status=="V");
       this.DasboardLoad = setInterval(() => {
-        // alert('cal')
-        this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
+      this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
           this.finalMenu = res;
-          console.log(this.finalMenu);
+          this.vacantRoom=res['Rooms'].filter(a=>a.Status=="V");    
         })
       }, 7000)
-
     })
-
   }
 
 
 
-  ngOnDestroy() {
-    // this._bankservice.changeMessage("expanded")
+  ngOnDestroy(){
     clearInterval(this.DasboardLoad);
   }
   
 
 
-  LoadReservationCheckinpage(ResNo: string) {
+  LoadReservationCheckinpage(ResNo: string){
     this.router.navigate(['/Master/reschk', ResNo])
   }
 
-  OpenMyModel(event, name) {
+  OpenMyModel(event, name){
     document.querySelector("#" + event).classList.add("md-show");
-   
-  }
+   }
 
 
   openRoomsPopup(event, roomname) {
+   
     this.model2 = {
       roomname: roomname,
     };
@@ -108,13 +108,16 @@ openspecial(event, roomname){
   console.log("openspecial"  );
   document.querySelector("#" + event).classList.add("md-show");
 }
-parentroomhover(rmno:string,roomname1:string){
-  this.rmno = rmno;
-  this.roomname1=roomname1;
-  this.RoomNo=rmno;
-  this.RoomCode=roomname1
-  console.log( this.rmno+this.roomname1);
+parentroomhover(CrRoomNo:string,CrRoomCode:string){
+  this.rmno = CrRoomNo;
+  this.roomname1=CrRoomCode;
+  this.RoomNos=CrRoomNo;
+  this.RoomCodes=CrRoomCode;
+  console.log('Francis');  
+  console.log(CrRoomNo + CrRoomCode); 
 }
+
+
 modelroomhover (){
   console.log("test");
 }
@@ -168,6 +171,7 @@ modelroomhover (){
   // PoweronCleaning-OpenPoweronCleaningModel
   // PowerOff-OpenPowerOffModel
   // Release-OpenReleaseModel
+  
   OpenModel(event, RoomNo) {
     let Description = event;
     switch (Description) {
@@ -191,6 +195,11 @@ modelroomhover (){
         break;
       case "HouseGuest":
         break;
+        case "PaxonBill":
+          alert('pax')
+         
+          break;
+        
     }
     console.log(event)
     console.log('event')

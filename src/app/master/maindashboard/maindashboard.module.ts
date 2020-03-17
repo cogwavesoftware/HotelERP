@@ -10,17 +10,18 @@ import {MaindashboardComponent} from './maindashboard.component';
 import {ChartModule} from 'angular2-chartjs';
  
 import { ToastyModule } from 'ng2-toasty';
-import { ProductstatusComponent } from './productstatus/productstatus.component';
-import { ProductstatusRoutingModule } from './productstatus/productstatus-routing.module';
-import { RoomgridComponent } from './roomgrid/roomgrid.component';
-import { DashtabsComponent } from './dashtabs/dashtabs.component';
+
+
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {DatePipe} from '@angular/common';
+import { ManagementComponent } from './management/management.component';
+import { HouseGuestComponent } from './house-guest/house-guest.component';
+import { RoomShifftComponent } from './room-shifft/room-shifft.component';
 @NgModule({
-  declarations: [MaindashboardComponent,BlockingdetailsComponent ] ,
+  declarations: [MaindashboardComponent,BlockingdetailsComponent, ManagementComponent, HouseGuestComponent, RoomShifftComponent ] ,
   imports: [
     CommonModule,
-    MaindashboardRoutingModule, ProductstatusRoutingModule,
+    MaindashboardRoutingModule,
     CommonModule,
     SharedModule,
     HttpClientModule,

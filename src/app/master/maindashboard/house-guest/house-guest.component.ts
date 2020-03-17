@@ -10,13 +10,12 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { MasterformService } from 'src/app/_services/masterform.service';
 import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
-
 @Component({
-  selector: 'app-blockingdetails',
-  templateUrl: './blockingdetails.component.html',
-  styleUrls: ['./blockingdetails.component.scss']
+  selector: 'app-house-guest',
+  templateUrl: './house-guest.component.html',
+  styleUrls: ['./house-guest.component.scss']
 })
-export class BlockingdetailsComponent implements OnInit {
+export class HouseGuestComponent implements OnInit {
   Branch: string = "CW1001";
   CreatedBy: number = 1;
   blockingdetailsform: FormGroup;
@@ -29,8 +28,9 @@ export class BlockingdetailsComponent implements OnInit {
   position = 'top-right';
   theme = "bootstrap";
   type = "default";
-  @Input() RoomCode: string;
-  @Input() RoomNo: string;
+
+  @Input('RoomCode') RoomCode: string;
+  @Input('RoomNo') RoomNo: string;
 
   constructor(public router: Router, private datePipe: DatePipe,private toastyService: ToastyService,
     private route: ActivatedRoute, public formBuilder: FormBuilder,private _masterformservice:MasterformService
@@ -38,8 +38,6 @@ export class BlockingdetailsComponent implements OnInit {
 
 
   }
-
-
   ngOnInit() {
 
     this.maxDate.setDate(this.minDate.getDate() + 1);
@@ -51,8 +49,8 @@ export class BlockingdetailsComponent implements OnInit {
       ReleaseDate: [this.maxDate, Validators.required],
       ReleaseTime: [],
       NoOfDays: ['0'],
-      RoomNo: [this.RoomNo, Validators.required],
-      RoomCode: [this.RoomCode, Validators.required],
+      RoomNo: ['', Validators.required],
+      RoomCode: ['', Validators.required],
       CreatedDate: [''],
       CreatedBy: [this.CreatedBy, Validators.required],
       Reason: ['', Validators.required],
@@ -83,7 +81,7 @@ export class BlockingdetailsComponent implements OnInit {
         );
       } 
       else {
-        alert('d')
+       
         this.addToast("Cogwave Software", "Block Information Not Saved", "error");
         this.minDate=new Date();
         this.maxDate.setDate(this.minDate.getDate() + 1);
@@ -117,7 +115,7 @@ export class BlockingdetailsComponent implements OnInit {
     
 
   Close()
-  {
+  { alert('Close')
     this.blockingdetailsform.reset();
   }
 

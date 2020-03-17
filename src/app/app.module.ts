@@ -25,6 +25,8 @@ import { fakeBackendProvider } from './_helpers';
 import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
 import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderInterceptor } from './_helpers/loader.interceptor';
+import { OrderItemsComponent } from './master/order-items/order-items.component';
+
    // import { PrintgrcComponent } from './printgrc/printgrc.component';
 //import { ConfirmationDialogService } from './_services/confirmation-dialog.service';
 //import { ConfirmationDialogComponent } from './master/confirmation-dialog/confirmation-dialog.component';
@@ -44,7 +46,7 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
 // export function HttpLoaderFactory(http: HttpClient) {
 //   return new TranslateHttpLoader(http);
 // }
-
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [   
     AppComponent, 
