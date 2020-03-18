@@ -197,9 +197,10 @@ closeMyModalPin(event){
   // Release-OpenReleaseModel
   
   OpenModel(event, RoomNo) {
-   
     let Description = event;
-    switch (Description) {
+    switch (Description) {      
+      case "Blockdetails":
+        break;
       case "Discount":
         break;
       case "Post":
@@ -233,9 +234,11 @@ closeMyModalPin(event){
     switch (Description) {
       case "linksGroup":
         break;       
+        case "OccupiedPopup":
+        break;               
       case "idblockingdetails":
         break;
-      case "vacantdetais":
+      case "vacantdetails":
         break;
         
     }

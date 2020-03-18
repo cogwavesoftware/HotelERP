@@ -6944,12 +6944,12 @@ outerdiv{
 .blocldetailsouter .md-modal {
     z-index: 1068 !important; 
 }
-.commonmodel .md-overlay{    
-    z-index:1055!important;
-}
-.commonmodel .md-modal {
-    z-index: 1062 !important; 
-}
+// .commonmodel .md-overlay{    
+//     z-index:1055!important;
+// }
+// .commonmodel .md-modal {
+//     z-index: 1062 !important; 
+// }
 
 .pcoded-content .pcoded-inner-content .main-body .page-wrapper .blockdetailsmodel  {
     width:100%!important;
@@ -6981,6 +6981,9 @@ outerdiv{
     font-size: 200%;
     color:#fff;
 }
+.commonmodel .contentboxmodel  .md-content > div ul{
+    padding:0 0 0px 0px; 
+}
 .contentboxmodel  .md-modal{
     border-top-right-radius:5px;    
     border-top-left-radius:5px;
@@ -6998,7 +7001,4 @@ outerdiv{
     margin-left: 10px;
 }
  
-.bs-daterangepicker-container{
-    z-index:2016!important;
-    border:1px solid red;
-}
+ 

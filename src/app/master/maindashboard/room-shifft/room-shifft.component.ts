@@ -24,7 +24,7 @@ export class RoomShifftComponent implements OnInit {
       SRoomNo:"select"
     }    
   }
-  closeMyModal(event){ 
+  closeMyModal(event){  
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
