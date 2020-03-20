@@ -6988,7 +6988,9 @@ outerdiv{
     border-top-right-radius:5px;    
     border-top-left-radius:5px;
 }
-
+.shiftroom{
+    width: 100%;
+}
 .shiftroom .guestinfofirstrow  .form-group label{
     text-align:left;
     display: block;
@@ -7014,5 +7016,40 @@ outerdiv{
     border-bottom: 2px solid #ccc;
     padding:10px;
 }
- 
- 
+.contentboxmodel .md-content .linkandunlink ul {
+    float:left;
+    padding:0!important;
+}
+.linkandunlink{
+    border:1px solid #ccc;
+    padding:10px;
+}
+.linkandunlink ul li{ 
+    width: 75px;
+    float:left;
+    color:#fff;
+}
+.linkandunlink ul li.red{
+    background: red; 
+}
+.linkandunlink ul li.green{
+    background: green; 
+}
+.linkandunlink ul li.blue{
+    background: blue; 
+}
+.smscoupen ul{
+    float:left;
+    padding:0!important;
+}
+.smscoupen ul li{
+    width: auto;
+    padding:10px!important;
+    float:left; 
+}
+.roominstruction{
+    width:100%;
+}
+.roominstruction .table th{
+    background-color: #b8d1f3!important;
+}

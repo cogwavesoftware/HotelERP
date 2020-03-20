@@ -20,11 +20,12 @@ import { AdvanceformComponent } from './advanceform/advanceform.component';
 import { PostchargeComponent } from './postcharge/postcharge.component';
 import { ExtrabedComponent } from './extrabed/extrabed.component';
 import { ChangeguestComponent } from './changeguest/changeguest.component';
+import { RoominstructionComponent } from './roominstruction/roominstruction.component';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,ManagementComponent,
                  HouseGuestComponent,RoomShifftComponent,DiscountportalComponent,
-                 AdvanceformComponent,PostchargeComponent,ExtrabedComponent, ChangeguestComponent ] ,
+                 AdvanceformComponent,PostchargeComponent,ExtrabedComponent, ChangeguestComponent, RoominstructionComponent ] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule,
