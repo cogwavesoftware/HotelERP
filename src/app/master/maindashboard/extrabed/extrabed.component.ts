@@ -18,7 +18,7 @@ import { OperationService } from 'src/app/_services/operation.service';
   styleUrls: ['./extrabed.component.scss']
 })
 export class ExtrabedComponent implements OnInit {
-
+  model:any;
   @Input() RoomCode: string;
   @Input() RoomNo: string;
   Branch: string;
@@ -35,7 +35,22 @@ export class ExtrabedComponent implements OnInit {
      }
  
 
-  ngOnInit() {
-  }
+     ngOnInit() {
+      this.model={
+        Id:0,
+        BranchCode:0,
+        IpAdd:1,
+        CreatedBy:1, 
+        Roomno:0,
+        RoomCode:0,
+        guestname:0,
+        noOfbeds:0,
+        tarif:0,
+        bedamt:0,
+        taxamount:0,
+        netamount:0,
+        reason:0        
+      }    
+    }
 
 }

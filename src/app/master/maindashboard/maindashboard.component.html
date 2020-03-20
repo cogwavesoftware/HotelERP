@@ -541,7 +541,7 @@
               <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <label class="font-header" style="background-color: red;
+              <label class="font-header" style="background-color: green;
           color: #ffffff;
           padding: 10px;
           width: 100%;">Vacant Room  {{rmno}} ({{roomname1}})
@@ -1002,7 +1002,7 @@
         </app-modal-animation>
 
         <!-- ChangePax -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePax'" [modalClass]="'md-effect-2'">
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Changepax'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Change Pax
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
@@ -1011,6 +1011,116 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <div class="shiftroom discountfrm">
+                    <div class="formdesign" style="padding: 0;">
+                        <div class="userlist">                
+                            <div class="row">
+                                <div class="col-md-12" >  
+                                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                                        value="{{Id}}">
+                                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                                        #BranchCode="ngModel" value="{{BranchCode}}">
+                                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                                        #IpAdd="ngModel" value="{{IpAdd}}">
+                                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+                
+                                        <div class="guestinfofirstrow  row">
+                                            <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">Room No</label>
+                                                    <input type="text" name="roomno" class="form-control" [(ngModel)]="model.roomno"
+                                                      #roomno="ngModel" value="{{roomno}}"   autocomplete="off">
+                                                 </div>  
+                                              </div> 
+                                              <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">Room Code</label>
+                                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
+                                                      #RoomCode="ngModel" value="{{RoomCodes}}"   required autocomplete="off">
+                                                 </div>  
+                                              </div> 
+                                              <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">Guest Name</label>
+                                                    <input type="text" name="guestname" class="form-control" [(ngModel)]="model.guestname"
+                                                      #guestname="ngModel" value="{{guestname}}"   required autocomplete="off">
+                                                 </div>  
+                                              </div> 
+                                              <div class='col-12 col-lg-3'>
+                                                <div class="form-group" 
+                                                [class.has-error]="reqpax.touched && reqpax.errors?.defaultSelected">
+                                                    <label class="required">Req. Pax</label>
+                                                      <select class="custom-select" id="reqpax" appSelectValidator="select" #reqpax="ngModel"
+                                                        name="reqpax" [(ngModel)]="model.reqpax">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of vacantRoom" [value]="item.reqpax">{{item.reqpax}}</option>
+                                                      </select>
+                                                      <span class="help-block" *ngIf="reqpax.touched && reqpax.errors?.defaultSelected">
+                                                        reqpax is required
+                                                      </span>
+                                                 </div>  
+                                              </div> 
+                                             
+                                              
+                                              </div><!--guestinfofirstrow -->
+                                              <div class="guestinfofirstrow  row">
+                                                <div class='col-12 col-lg-3'>
+                                                  <div class="form-group">
+                                                      <label class="required">Prescribe Rate</label>
+                                                      <input type="text" name="prescriberate" class="form-control" [(ngModel)]="model.prescriberate"
+                                                        #prescriberate="ngModel" value="{{prescriberate}}"   required autocomplete="off">
+                                                   </div>  
+                                                </div> 
+                                                <div class='col-12 col-lg-3'>
+                                                  <div class="form-group">
+                                                      <label class="required">Offer Rate</label>
+                                                      <input type="text" name="offerrate" class="form-control" [(ngModel)]="model.offerrate"
+                                                        #offerrate="ngModel" value="{{offerrate}}"   required autocomplete="off">
+                                                   </div>  
+                                                </div>
+                                                <div class='col-12 col-lg-3'>
+                                                  <div class="form-group">
+                                                      <label class="required">Tax Amount</label>
+                                                      <input type="text" name="taxamount" class="form-control" [(ngModel)]="model.taxamount"
+                                                        #taxamount="ngModel" value="{{taxamount}}"   required autocomplete="off">
+                                                   </div>  
+                                                </div>
+                                                <div class='col-12 col-lg-3'>
+                                                  <div class="form-group">
+                                                      <label class="required">Net Amount</label>
+                                                      <input type="text" name="netamount" class="form-control" [(ngModel)]="model.netamount"
+                                                        #netamount="ngModel" value="{{netamount}}"   required autocomplete="off">
+                                                   </div>  
+                                                </div>
+                                               
+                                                </div>
+                                                <div class="guestinfofirstrow  row">
+                                                  <div class='col-12 col-lg-12'>
+                                                    <div class="form-group">
+                                                        <label class="required">Reason</label>
+                                                        <textarea type="text" name="reason" class="form-control" [(ngModel)]="model.reason"
+                                                          #reason="ngModel" value="{{reason}}"   required autocomplete="off"></textarea>
+                                                     </div>  
+                                                  </div>
+                                                </div>
+                                              <div class="guestinfofirstrow  row">
+                                                <div class='col-12 col-lg-12'>
+                                                    <div class="form-group  float-right" >                                   
+                                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                     </div>  
+                                                  </div> 
+                                              </div>
+                                        
+                                      </form> 
+                                          </div>
+                                   </div>       
+                                  
+                        </div>
+                     </div>
+                 </div>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1112,6 +1222,78 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <div class="shiftroom discountfrm">
+                    <div class="formdesign" style="padding: 0;">
+                        <div class="userlist">                
+                            <div class="row">
+                                <div class="col-md-12" >  
+                                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                                        value="{{Id}}">
+                                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                                        #BranchCode="ngModel" value="{{BranchCode}}">
+                                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                                        #IpAdd="ngModel" value="{{IpAdd}}">
+                                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+                
+                                        <div class="guestinfofirstrow  row">
+                                            <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">Room No</label>
+                                                    <input type="text" name="roomno" class="form-control" [(ngModel)]="model.roomno"
+                                                      #roomno="ngModel" value="{{roomno}}"   autocomplete="off">
+                                                 </div>  
+                                              </div> 
+                                              <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">Guest Name</label>
+                                                    <input type="text" name="guestname" class="form-control" [(ngModel)]="model.guestname"
+                                                      #guestname="ngModel" value="{{guestname}}"   required autocomplete="off">
+                                                 </div>  
+                                              </div> 
+                                              <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">Current Plan</label>
+                                                    <input type="text" name="currentplan" class="form-control" [(ngModel)]="model.currentplan"
+                                                      #currentplan="ngModel" value="{{currentplan}}"   required autocomplete="off">
+                                                 </div>  
+                                              </div> 
+                                              <div class='col-12 col-lg-3'>
+                                                <div class="form-group" 
+                                                [class.has-error]="changeplan.touched && changeplan.errors?.defaultSelected">
+                                                    <label class="required">Change Plan</label>
+                                                      <select class="custom-select" id="changeplan" appSelectValidator="select" #changeplan="ngModel"
+                                                        name="changeplan" [(ngModel)]="model.changeplan">
+                                                        <option value="select">Select</option>
+                                                        <option *ngFor="let item of vacantRoom" [value]="item.changeplan">{{item.changeplan}}</option>
+                                                      </select>
+                                                      <span class="help-block" *ngIf="changeplan.touched && changeplan.errors?.defaultSelected">
+                                                        changeplan is required
+                                                      </span>
+                                                 </div>  
+                                              </div> 
+                                             
+                                              
+                                              </div><!--guestinfofirstrow -->
+                                               
+                                              
+                                              <div class="guestinfofirstrow  row">
+                                                <div class='col-12 col-lg-12'>
+                                                    <div class="form-group  float-right" >                                   
+                                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                     </div>  
+                                                  </div> 
+                                              </div>
+                                        
+                                      </form> 
+                                          </div>
+                                   </div>       
+                                  
+                        </div>
+                     </div>
+                 </div>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1270,12 +1452,9 @@
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
           <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                </div>
-              </div>
+             <app-changeguest></app-changeguest>
             </perfect-scrollbar>
           </div>
         </app-modal-animation>

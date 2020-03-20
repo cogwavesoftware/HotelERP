@@ -213,7 +213,7 @@ closeMyModalPin(event){
         break;
       case "ExtraBed":
         break;
-      case "ChangePax":
+      case "Changepax":
         break;
       case "Amend":
         break;
