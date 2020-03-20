@@ -29,8 +29,8 @@ export class HouseGuestComponent implements OnInit {
   theme = "bootstrap";
   type = "default";
 
-  @Input('RoomCode') RoomCode: string;
-  @Input('RoomNo') RoomNo: string;
+  @Input() RoomCode: string;
+  @Input() RoomNo: string;
 
   constructor(public router: Router, private datePipe: DatePipe,private toastyService: ToastyService,
     private route: ActivatedRoute, public formBuilder: FormBuilder,private _masterformservice:MasterformService
