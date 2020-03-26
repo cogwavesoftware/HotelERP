@@ -1,0 +1,76 @@
+
+
+<div class="shiftroom discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+  
+            <div class="row">
+                <div class="col-md-12" >  
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                       
+                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="changeplanformmodel.BranchCode"
+                        #BranchCode="ngModel" value="{{changeplanformmodel.BranchCode}}">
+                     
+                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="changeplanformmodel.CreatedBy"
+                        #CreatedBy="ngModel" value="{{changeplanformmodel.CreatedBy}}">
+
+                        <div class="guestinfofirstrow  row">
+                            <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Room No</label>
+                                    <input type="text" name="RoomNo" class="form-control" [(ngModel)]="changeplanformmodel.RoomNo"
+                                      #RoomNo="ngModel" value="{{changeplanformmodel.RoomNo}}"   autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Guest Name</label>
+                                    <input type="text" name="GuestName" class="form-control" [(ngModel)]="changeplanformmodel.GuestName"
+                                      #GuestName="ngModel" value="{{changeplanformmodel.GuestName}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Current Plan</label>
+                                    <input type="text" name="Plan" class="form-control" [(ngModel)]="changeplanformmodel.Plan"
+                                      #Plan="ngModel" value="{{Plan}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group" 
+                                [class.has-error]="CPlan.touched && CPlan.errors?.defaultSelected">
+                                    <label class="required">Change Plan</label>
+                                      <select class="custom-select" id="CPlan" appSelectValidator="0" #CPlan="ngModel"
+                                        name="CPlan" [(ngModel)]="changeplanformmodel.CPlan">
+                                        <option value="0">Select</option>
+                                        <option *ngFor="let catagery of catagerys" [value]="catagery.PlanName">{{catagery.PlanName}}</option>
+                                      </select>
+                                      <span class="help-block" *ngIf="CPlan.touched && CPlan.errors?.defaultSelected">
+                                        changeplan is required
+                                      </span>
+                                 </div>  
+                              </div>                                                           
+                              </div>                                                         
+                              <div class="guestinfofirstrow  row">
+                                <div class='col-12 col-lg-12'>
+                                    <div class="form-group  float-right" >                                   
+                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                     </div>  
+                                  </div> 
+                              </div>
+                        
+                      </form> 
+                 
+                          </div>
+                   </div>       
+                  
+        </div>
+     </div>
+  </div>
+  
+  
+  
+  
+  
+  <ng2-toasty [position]="position"></ng2-toasty>
