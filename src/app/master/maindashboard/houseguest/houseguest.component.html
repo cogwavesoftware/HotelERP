@@ -1,0 +1,93 @@
+<form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+    <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+    value="{{Id}}">
+  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+    #BranchCode="ngModel" value="{{BranchCode}}">
+  <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+    #IpAdd="ngModel" value="{{IpAdd}}">
+  <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+    #CreatedBy="ngModel" value="{{CreatedBy}}"> 
+    <div class="guestinfofirstrow  row">
+      <div class='col-12 col-lg-4'>
+        <div class="form-group">
+            <label class="required">RoomNo</label>
+            <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
+              #RoomNo="ngModel" value="{{RoomNos}}"   required autocomplete="off">
+         </div>  
+      </div> 
+      <div class='col-12 col-lg-4'>
+        <div class="form-group">
+            <label class="required">RoomCode</label>
+            <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
+              #RoomCode="ngModel" value="{{RoomCodes}}"   required autocomplete="off">
+         </div>  
+      </div> 
+      <div class='col-12 col-lg-4'>
+          <div class="form-group">
+              <label class="required">GuestName</label>
+              <input type="text" name="GuestName" class="form-control" [(ngModel)]="model.GuestName"
+                #GuestName="ngModel" value="{{GuestName}}"   required autocomplete="off">
+           </div>  
+        </div> 
+    
+        </div><!--guestinfofirstrow --> 
+    <div class="col-md-12">
+      <div class="row">
+        
+        <div class="col-md-6 linkandunlink"> 
+              <div class="guestinfofirstrow  row">
+                <div class='col-12 col-lg-12'>
+                    <div class="form-group">
+                        <label class="required lblwithcheckbox">Make House Guest</label>
+                        <input style="width:20px;" type="checkbox" name="houseguest" class="form-control"  />                                          
+                     </div>  
+                </div>
+              </div> 
+             
+        </div>
+        <div class="col-md-6 linkandunlink">
+          <div class="guestinfofirstrow  row">
+            <div class='col-12 col-lg-12'>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="required lblwithcheckbox">Remove Guest</label>
+                    <input style="width:20px;" type="checkbox" name="removeguest" class="form-control"  />                                          
+                 </div>  
+              </div>
+              <div class='col-12 col-lg-12'>
+                <div class="form-group">
+                    <label class="required">Enter tarif </label>
+                    <input type="text" name="tarif" class="form-control" [(ngModel)]="model.tarif"
+                      #tarif="ngModel" value="{{tarif}}"   required autocomplete="off">
+                 </div>  
+              </div> 
+          </div> 
+          <div class=" "> 
+            <div class="radioone" style="border: 1px solid #ccc; padding:10px;  ;">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input   type="radio" id="inclPlan" name="tarifGroups" class="form-check-input" value="">Inclusive Plan
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input  type="radio" id="excltarif" name="tarifGroups" class="form-check-input" value="">Exculisive Tarif
+                </label>
+              </div>
+            </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+   
+          
+          <div class="guestinfofirstrow  row">
+            <div class='col-12 col-lg-12'>
+                <div class="form-group  float-right" >                                   
+                    <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Process</button>    
+                    <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                 </div>  
+              </div> 
+          </div>
+    
+  </form> 

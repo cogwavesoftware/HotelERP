@@ -13,6 +13,8 @@ import { DatePipe } from "@angular/common";
   styleUrls: ['./postcharge.component.scss']
 })
 export class PostchargeComponent implements OnInit {
+  form: FormGroup;
+  model:any;
   @Input() RoomCode: string;
   @Input() RoomNo: string;
   Branch: string;
@@ -31,12 +33,50 @@ export class PostchargeComponent implements OnInit {
    
 
   ngOnInit() {
-
+    this.model={
+      Id:0,
+      BranchCode:0,
+      IpAdd:1,
+      CreatedBy:1,
+      RoomNo:0,
+      RoomCode:0,
+      Revenu:0,
+      grand:0,
+      tax:0,
+      tarif:0,
+      SRoomNo:"select"
+    } 
     this._masterservice.getrevenudata(this.Branch).subscribe(res => {
       this.catagerys = res;
+    }); 
+    this.form = this.formBuilder.group({ 
+      PayExtra: this.formBuilder.array([]),
+      roomno: ['', Validators.required],
+      roomcode:['', Validators.required],
+      guestname:['', Validators.required]
     });
-
+     
 
   }
+
+  AddExtraChargeGrid(): FormGroup {
+    return this.formBuilder.group({
+      Revenu: ["-1"],
+      Description: [],
+      Amount: [],
+      TaxAmount: [],
+      TotalAmount: []
+    });
+  }
+  AddExtrachargeButtonClick(): void {
+    (<FormArray>this.form.get("PayExtra")).push(this.AddExtraChargeGrid());
+  }
+  closeMyModalPin(event){ 
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    } 
+  }
+
 
 }

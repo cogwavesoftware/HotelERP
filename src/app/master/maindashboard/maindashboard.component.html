@@ -490,7 +490,7 @@
                         (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link &
                         Unlink </a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="HouseGuestForm.show()"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
+                      (click)="OpenModel('HouseGuest',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
                     </li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
@@ -896,10 +896,9 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
-                  
+               
                   <app-postcharge [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-postcharge>
-                </div>
+              
               </div>
             </perfect-scrollbar>
           </div>
@@ -990,7 +989,19 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
+                <div class="row"> <div class="shiftroom discountfrm">
+                  <div class="formdesign" style="padding: 0;">
+                      <div class="userlist"> 
+                          <div class="row">
+                              <div class="col-md-12" >  
+                                <app-houseguest></app-houseguest>
+                                  
+                                        </div>
+                                 </div>       
+                      </div>
+                   </div>
+                </div>
+
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1021,9 +1032,8 @@
           <div class="app-modal-body text-center">
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                </div>
+              <div class="col-sm-12 filter-bar"> 
+              <app-roominstruction></app-roominstruction> 
               </div>
             </perfect-scrollbar>
           </div>
@@ -1067,6 +1077,113 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  
+
+<div class="shiftroom discountfrm">
+  <div class="formdesign" style="padding: 0;">
+      <div class="userlist">
+
+          <div class="row">
+              <div class="col-md-12" >  
+                  <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                      <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                      value="{{Id}}">
+                    <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                      #BranchCode="ngModel" value="{{BranchCode}}">
+                    <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                      #IpAdd="ngModel" value="{{IpAdd}}">
+                    <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                      #CreatedBy="ngModel" value="{{CreatedBy}}">
+
+                      <div class="guestinfofirstrow  row">
+                        
+                          <div class='col-12 col-lg-3'>
+                            <div class="form-group">
+                                <label class="required">RoomNo</label>
+                                <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
+                                  #RoomNo="ngModel" value="{{RoomNos}}"   required autocomplete="off">
+                             </div>  
+                          </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">RoomCode</label>
+                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
+                                      #RoomCode="ngModel" value="{{RoomCodes}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group" 
+                                [class.has-error]="selcompany.touched && selcompany.errors?.defaultSelected">
+                                    <label class="required">Select Company</label>
+                                      <select class="custom-select" id="selcompany" appSelectValidator="select" #selcompany="ngModel"
+                                        name="selcompany" [(ngModel)]="model.selcompany">
+                                        <option value="select">Select</option>
+                                        <option *ngFor="let item of vacantRoom" [value]="item.selcompany">{{item.selcompany}}</option>
+                                      </select>
+                                      <span class="help-block" *ngIf="selcompany.touched && selcompany.errors?.defaultSelected">
+                                        selcompany is required
+                                      </span>
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Enter Tarif</label>
+                                    <input type="text" name="tarifamt" class="form-control" [(ngModel)]="model.tarifamt"
+                                      #tarifamt="ngModel" value="{{tarifamt}}"   autocomplete="off">
+                                 </div>  
+                              </div>
+                       
+                            </div><!--guestinfofirstrow -->
+
+
+                            <div class="guestinfofirstrow  row"> 
+                              <div class="radioone" style="border: 1px solid #ccc; padding:10px; margin-left: 14px;;">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label">
+                                    <input   type="radio" id="sametarif" name="tarifGroups" class="form-check-input" value="">Same Tarif
+                                  </label>
+                                </div>
+                                <div class="form-check-inline">
+                                  <label class="form-check-label">
+                                    <input  type="radio" id="difftarif" name="tarifGroups" class="form-check-input" value="">Different Tarif
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="radioone" style="border: 1px solid #ccc; padding:10px;margin-left: 14px;">
+                              <div class="form-check-inline">
+                                <label class="form-check-label">
+                                  <input type="radio" id="incltarif" name="incltarifother" class="form-check-input" value=""  >Inclusive Tarif
+                                </label>
+                              </div>
+                              <div class="form-check-inline">
+                                <label class="form-check-label">
+                                  <input type="radio" id="excltarif" name="incltarifother" class="form-check-input" value=""  >Exclusive Tarif
+                                </label>
+                              </div>
+                            </div>
+
+                               
+                              
+                           
+                              </div>
+                            
+                            <div class="guestinfofirstrow  row">
+                              <div class='col-12 col-lg-12'>
+                                  <div class="form-group  float-right" >                                   
+                                      <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                      <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                   </div>  
+                                </div> 
+                            </div>
+                      
+                    </form> 
+                        </div>
+                 </div>       
+      </div>
+   </div>
+</div>
+ 
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1082,8 +1199,9 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
-                </div>
+              
+                  <app-wakeup></app-wakeup>
+             
               </div>
             </perfect-scrollbar>
           </div>
@@ -1115,6 +1233,65 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <div class="shiftroom discountfrm">
+                    <div class="formdesign" style="padding: 0;">
+                        <div class="userlist">
+                  
+                            <div class="row">
+                                <div class="col-md-12" >  
+                                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                                        value="{{Id}}">
+                                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                                        #BranchCode="ngModel" value="{{BranchCode}}">
+                                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                                        #IpAdd="ngModel" value="{{IpAdd}}">
+                                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+                  
+                                        <div class="guestinfofirstrow  row">
+                                        <div class="col-md-12">
+                                          <div class="row">
+                                            <div class="col-md-6 linkandunlink">
+                                              <ul>
+                                                <h2>Panel 1 - LINK</h2>
+                                                <li class="red">101 <br/> AC</li>
+                                                <li class="red">101 <br/> NON AC</li>
+                                                <li class="red">101 <br/> DX</li>
+                                                <li class="blue">101 <br/> SUPER DX</li>
+                                              </ul> 
+                                            </div>
+                                            <div class="col-md-6 linkandunlink">
+                                              <h2>Panel 2 - UNLINK</h2>
+                                              <ul>
+                                                <li class="red">101 <br/> AC</li>
+                                                <li class="red">101 <br/> NON AC</li>
+                                                <li class="red">101 <br/> DX</li>
+                                                <li class="blue">101 <br/> SUPER DX</li>
+                                              </ul> 
+                                            </div>
+                                          </div>
+                                        </div>
+                                      
+                                           
+                                         
+                                         </div><!--guestinfofirstrow --> 
+                                              
+                                              <div class="guestinfofirstrow  row">
+                                                <div class='col-12 col-lg-12'>
+                                                    <div class="form-group  float-right" >                                   
+                                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                     </div>  
+                                                  </div> 
+                                              </div>
+                                        
+                                      </form> 
+                                          </div>
+                                   </div>       
+                        </div>
+                     </div>
+                  </div>
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1196,9 +1373,89 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
-                </div>
+                <div class="row">                   
+                  <div class="shiftroom discountfrm smscoupen">
+                    <div class="formdesign" style="padding: 0;">
+                        <div class="userlist">
+                  
+                            <div class="row">
+                                <div class="col-md-12" >  
+                                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                                        value="{{Id}}">
+                                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                                        #BranchCode="ngModel" value="{{BranchCode}}">
+                                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                                        #IpAdd="ngModel" value="{{IpAdd}}">
+                                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+                  
+                                        <div class="guestinfofirstrow  row">
+                                        <div class="col-md-12" style="border: 1px solid #ccc; padding:10px; border-bottom: 4px solid #ccc;">
+                                          <div class="row">
+                                            <ul>
+                                              <li>
+                                                <div class="form-check-inline">
+                                                  <label class="form-check-label">
+                                                    <input   type="radio" id="day1" name="day1" class="form-check-input" value=""> 1 Day
+                                                  </label>
+                                                </div> 
+                                              </li>
+                                              <li>
+                                                <div class="form-check-inline">
+                                                  <label class="form-check-label">
+                                                    <input   type="radio" id="day2" name="day1" class="form-check-input" value="">2 Day
+                                                  </label>
+                                                </div> 
+                                              </li>
+                                              <li>
+                                                <div class="form-check-inline">
+                                                  <label class="form-check-label">
+                                                    <input   type="radio" id="day3" name="day1" class="form-check-input" value="">3Day
+                                                  </label>
+                                                </div> 
+                                              </li>
+                                            </ul>
+                                          </div>
+                                        </div> 
+                                         </div><!--guestinfofirstrow --> 
+                                         <div class="guestinfofirstrow  row">
+                                          <div class="col-md-12">
+                                            
+                                              <div class="form-group" 
+                        [class.has-error]="mobileno.touched && mobileno.errors?.defaultSelected">
+                            <label class="required">Mobile No</label>
+                              <select class="custom-select" id="mobileno" appSelectValidator="select" #mobileno="ngModel"
+                                name="mobileno" [(ngModel)]="model.mobileno">
+                                <option value="select">Select</option>
+                                <option *ngFor="let item of vacantRoom" [value]="item.selcompany">{{item.mobileno}}</option>
+                              </select>
+                              <span class="help-block" *ngIf="mobileno.touched && mobileno.errors?.defaultSelected">
+                                mobile no is required
+                              </span>
+                         </div> 
+                                              
+                                              </div>
+                                              </div>
+
+                                              <div class="guestinfofirstrow  row">
+                                                <div class='col-12 col-lg-12'>
+                                                    <div class="form-group  float-right" >                                   
+                                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Send </button>    
+                                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                     </div>  
+                                                  </div> 
+                                              </div>
+                                        
+                                      </form> 
+                                          </div>
+                                   </div>       
+                        </div>
+                     </div>
+                  </div>
+            </div>
               </div>
+            
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
