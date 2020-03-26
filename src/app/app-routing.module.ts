@@ -296,7 +296,15 @@ const routes: Routes = [
         path: 'roomadvance',
        //  loadChildren: './master/roomadvance/roomadvance.module#RoomadvanceModule'
         loadChildren: () => import('./master/roomadvance/roomadvance.module').then(m=>m.RoomadvanceModule)
-      },       
+      },    
+
+      
+      {
+        path:'roomcheckin/editguest', 
+        loadChildren: () => import('./master/checkin/editguest/editguest.module').then(m=>m.EditguestModule)
+      },
+       
+
       {
         path: 'blockingdetails',
        //  loadChildren: './master/maindashboard/blockingdetails/blockingdetails.module#BlockingdetailsModule'
