@@ -1,0 +1,28 @@
+.test123.paymentarray .grid-table .thead .td {
+    width: 18%;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    text-align: center;
+    color: #000;
+    float: left;
+    font-size: 81%;
+}
+.test123.paymentarray .grid-table .thead .td.lasttd,
+.test123.paymentarray .grid-table .tbody .td.lasttd{
+    width: 29px;
+    float: left;
+}
+.test123.paymentarray .grid-table .tbody .td input,
+.test123.paymentarray .grid-table .tbody .td select{
+    width: 18%;
+    float: left;
+    height: 23px;;
+}
+  select.custom-select{
+    font-size: 100%;
+    padding: 0px 0px 0px 10px; 
+  }
+  .guestinfofirstrow  .form-group .form-control-label{
+        float: left;
+        margin-bottom: 0;
+  }

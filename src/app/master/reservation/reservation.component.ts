@@ -198,7 +198,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     this.navRight = "nav-off";
     this.timepicker = Object.assign({},
       {
-        hourStep: 2,
+        hourStep: 2,  
         minuteStep: 10,
         showMeridian: false,
         // readonlyInput: false,

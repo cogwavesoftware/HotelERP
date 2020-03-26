@@ -490,7 +490,7 @@
                         (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link &
                         Unlink </a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="HouseGuestForm.show()"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
+                      (click)="OpenModel('HouseGuest',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
                     </li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('ChangePlan',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
@@ -975,10 +975,9 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
-                  
+               
                   <app-postcharge [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-postcharge>
-                </div>
+              
               </div>
             </perfect-scrollbar>
           </div>
@@ -1173,7 +1172,19 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
+                <div class="row"> <div class="shiftroom discountfrm">
+                  <div class="formdesign" style="padding: 0;">
+                      <div class="userlist"> 
+                          <div class="row">
+                              <div class="col-md-12" >  
+                                <app-houseguest></app-houseguest>
+                                  
+                                        </div>
+                                 </div>       
+                      </div>
+                   </div>
+                </div>
+
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1430,8 +1441,9 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
-                </div>
+              
+                  <app-wakeup></app-wakeup>
+             
               </div>
             </perfect-scrollbar>
           </div>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-room-shifft',
-  templateUrl: './room-shifft.component.html',
-  styleUrls: ['./room-shifft.component.scss']
+  selector: 'app-houseguest',
+  templateUrl: './houseguest.component.html',
+  styleUrls: ['./houseguest.component.scss']
 })
-export class RoomShifftComponent implements OnInit {
+export class HouseguestComponent implements OnInit {
+
   model:any;
   constructor() { }
 
@@ -17,17 +18,20 @@ export class RoomShifftComponent implements OnInit {
       CreatedBy:1,
       RoomNo:0,
       RoomCode:0,
-      alarmdate:0,
-      grand:0,
-      tax:0,
+      houseguest:0,
+      removeguest:0,
       tarif:0,
+      tax:0,
+      inclPlan:0,
+      excltarif:0,
       SRoomNo:"select"
     }    
   }
-  closeMyModal(event){  
+  closeMyModalPin(event){  
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
     }  
   }
+
 }
