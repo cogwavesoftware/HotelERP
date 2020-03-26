@@ -1,0 +1,127 @@
+
+
+<div class="shiftroom discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+  
+            <div class="row">
+                <div class="col-md-12" >  
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveChangePax(myform)" class="">
+                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="changepaxform.Id" #Id="ngModel"
+                        value="{{changepaxform.Id}}">
+                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="changepaxform.BranchCode"
+                        #BranchCode="ngModel" value="{{changepaxform.BranchCode}}">
+                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="changepaxform.IpAdd"
+                        #IpAdd="ngModel" value="{{changepaxform.IpAdd}}">
+                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="changepaxform.CreatedBy"
+                        #CreatedBy="ngModel" value="{{changepaxform.CreatedBy}}">
+
+                        <div class="guestinfofirstrow  row">
+                            <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Room No</label>
+                                    <input type="text" name="RoomNo" class="form-control" [(ngModel)]="changepaxform.RoomNo"
+                                      #RoomNo="ngModel" value="{{changepaxform.RoomNo}}"   autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Room Code</label>
+                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="changepaxform.RoomCode"
+                                      #RoomCode="ngModel" value="{{changepaxform.RoomCode}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">
+                                    <label class="required">Guest Name</label>
+                                    <input type="text" name="GuestName" class="form-control" [(ngModel)]="changepaxform.GuestName"
+                                      #GuestName="ngModel" value="{{changepaxform.GuestName}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group" 
+                                [class.has-error]="Pax.touched && Pax.errors?.defaultSelected">
+                                    <label class="required">Req. Pax</label>
+                                      <select class="custom-select" id="Pax" appSelectValidator="0" #Pax="ngModel"
+                                        name="Pax" [(ngModel)]="changepaxform.Pax">
+                                        <option value="0">Select</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                       
+                                      </select>
+                                      <span class="help-block" *ngIf="Pax.touched && Pax.errors?.defaultSelected">
+                                        reqpax is required
+                                      </span>
+                                 </div>  
+                              </div> 
+                             
+                              
+                              </div><!--guestinfofirstrow -->
+                              <div class="guestinfofirstrow  row">
+                                <div class='col-12 col-lg-3'>
+                                  <div class="form-group">
+                                      <label class="required">ActualRate</label>
+                                      <input type="text" name="ActualRate" class="form-control" [(ngModel)]="changepaxform.ActualRate"
+                                        #ActualRate="ngModel" value="{{changepaxform.ActualRate}}"   required autocomplete="off">
+                                   </div>  
+                                </div> 
+                                <div class='col-12 col-lg-3'>
+                                  <div class="form-group">
+                                      <label class="required">Offer Rate</label>
+                                      <input type="text" name="OfferRate" class="form-control" [(ngModel)]="changepaxform.OfferRate"
+                                        #OfferRate="ngModel" value="{{changepaxform.OfferRate}}"   required autocomplete="off">
+                                   </div>  
+                                </div>
+                                <div class='col-12 col-lg-3'>
+                                  <div class="form-group">
+                                      <label class="required">Tax Amount</label>
+                                      <input type="text" name="Tax" class="form-control" [(ngModel)]="changepaxform.Tax"
+                                        #Tax="ngModel" value="{{changepaxform.Tax}}"   required autocomplete="off">
+                                   </div>  
+                                </div>
+                                <div class='col-12 col-lg-3'>
+                                  <div class="form-group">
+                                      <label class="required">Net Amount</label>
+                                      <input type="text" name="NetAmount" class="form-control" [(ngModel)]="changepaxform.NetAmount"
+                                        #NetAmount="ngModel" value="{{changepaxform.NetAmount}}"   required autocomplete="off">
+                                   </div>  
+                                </div>
+                               
+                                </div>
+                                <div class="guestinfofirstrow  row">
+                                  <div class='col-12 col-lg-12'>
+                                    <div class="form-group">
+                                        <label class="required">Reason</label>
+                                        <textarea type="text" name="Reason" class="form-control" [(ngModel)]="changepaxform.Reason"
+                                          #Reason="ngModel" value="{{changepaxform.Reason}}"   required autocomplete="off"></textarea>
+                                     </div>  
+                                  </div>
+                                </div>
+                              <div class="guestinfofirstrow  row">
+                                <div class='col-12 col-lg-12'>
+                                    <div class="form-group  float-right" >                                   
+                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                     </div>  
+                                  </div> 
+                              </div>
+                        
+                      </form> 
+  
+                 
+                          </div>
+                   </div>       
+                  
+        </div>
+     </div>
+  </div>
+  
+  
+  
+  
+  
+  <ng2-toasty [position]="position"></ng2-toasty>

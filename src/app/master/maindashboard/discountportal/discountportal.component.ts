@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { MasterformService } from 'src/app/_services/masterform.service';
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { DatePipe } from "@angular/common";
+import { DiscountFormmodel } from 'src/app/_models/DiscountFormmodel';
 @Component({
   selector: 'app-discountportal',
   templateUrl: './discountportal.component.html',
@@ -19,7 +20,7 @@ export class DiscountportalComponent implements OnInit {
   minDate = new Date();
   maxDate = new Date();
   @Input() RoomCode: string;
-  @Input() RoomNo: string;
+  @Input() discountform: DiscountFormmodel;
   constructor(
     public router: Router, private renderer: Renderer2,
     public formBuilder: FormBuilder, private _masterformservice: MasterformService,
@@ -29,15 +30,17 @@ export class DiscountportalComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.discountportalform = this.formBuilder.group({
       ProcessDate: [new Date(), [Validators.required]],
-      checkindate: [new Date(), [Validators.required]],
-      roomnos: ['', Validators.required],
-      discvalue: ['', Validators.required],
-      checkinno: ['', Validators.required],
-      reason: ['', Validators.required],
-      remarks: ['', Validators.required],
-      disctype: ["1", [Validators.required]],
+      RoomNo: ['', Validators.required],
+      RoomCode: ['', Validators.required],
+      GuestName: ['', Validators.required],
+      Disvalue: ['', Validators.required],    
+      Reason: ['', Validators.required],
+      DiscountType: ["0", [Validators.required]],
+      BranchCode: ["0", [Validators.required]],
+      CreatedBy: ["0", [Validators.required]],
     });
   }
 

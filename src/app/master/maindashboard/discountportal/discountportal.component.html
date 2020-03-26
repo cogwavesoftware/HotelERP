@@ -8,65 +8,69 @@
                                   <div class="row">
                                     <div class="col-md-12" > 
                                         <div class="guestinfofirstrow  row">
-                                            <div class='col-12 col-lg-4'>
-                                                <div class="form-group">
-                                                  <label class="form-control-label" for="date">Date</label>
-                                                  <input  id="ProcessDate" name="ProcessDate"  formControlName="ProcessDate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
-                                                 </div>  
-                                              </div>
+                                           
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="rmno">Room No </label>
-                                          <input type="text" class="form-control tooltip-form" id="roomnos" formControlName="roomnos" name="roomnos" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.roomnos.errors || discountportalform.controls.roomnos.touched || discountportalform.controls.roomnos.dirty}" required  />  
-                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.roomnos.errors?.required" >Roomno is required</div>
+                                          <input type="text" class="form-control tooltip-form" id="RoomNo" formControlName="RoomNo" value="{{discountform.RoomNo}}" name="RoomNo" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.RoomNo.errors || discountportalform.controls.RoomNo.touched || discountportalform.controls.RoomNo.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.RoomNo.errors?.required" >Roomno is required</div>
                                           </div>  
                                       </div>
+
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
-                                          <label class="form-control-label" for="gname">Discount Value</label>
-                                          <input type="text" class="form-control tooltip-form" id="discvalue" formControlName="discvalue" name="discvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.discvalue.errors || discountportalform.controls.discvalue.touched || discountportalform.controls.discvalue.dirty}" required  />  
-                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.discvalue.errors?.required" >discvalue is required</div>
+                                          <label class="form-control-label" for="rmno">RoomCode </label>
+                                          <input type="text" class="form-control tooltip-form" id="RoomCode" formControlName="RoomCode" value="{{discountform.RoomCode}}" name="RoomCode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.RoomCode.errors || discountportalform.controls.RoomCode.touched || discountportalform.controls.RoomCode.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.RoomCode.errors?.required" >RoomCode is required</div>
                                           </div>  
                                       </div>
+
+                                      
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
-                                          <label class="form-control-label" for="date">Checkin Date</label>
-                                          <input  id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                          <label class="form-control-label" for="rmno">GuestName </label>
+                                          <input type="text" class="form-control tooltip-form" id="GuestName" formControlName="GuestName" value="{{discountform.RoomCode}}" name="GuestName" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.GuestName.errors || discountportalform.controls.GuestName.touched || discountportalform.controls.GuestName.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.GuestName.errors?.required" >GuestName is required</div>
+                                          </div>  
+                                      </div>
+
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="date">ProcessDate</label>
+                                          <input  id="ProcessDate" name="ProcessDate"  formControlName="ProcessDate"  readonly type="text"  bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                          </div>  
                                       </div>
                                      
+   
+                                     
+          
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
-                                          <label class="form-control-label" for="date">checkinno</label>
-                                          <input  id="checkinno" name="checkinno"  formControlName="checkinno"   class="form-control">
-                                         </div>  
-                                      </div>
-                                      <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="date">discount type</label>
-                                          <select class="custom-select" #disctype name="disctype" formControlName="disctype" >
+                                          <label class="form-control-label" for="date">Discount Type</label>
+                                          <select class="custom-select" #DiscountType name="DiscountType" value="{{discountform.DiscountType}}" formControlName="DiscountType" >
                                               <option value="0">Select</option>
                                               <option  *ngFor="let type of discountvalue" [value]="type">
                                                 {{ type  }}</option>
                                             </select>
                                          </div>  
                                       </div>
-                                     
+
+                                      <div class='col-12 col-lg-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="gname">Discount Value</label>
+                                          <input type="text" class="form-control tooltip-form" id="Disvalue" formControlName="Disvalue" value="{{discountform.Disvalue}}"  name="Disvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.Disvalue.errors || discountportalform.controls.Disvalue.touched || discountportalform.controls.Disvalue.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.Disvalue.errors?.required" >Disvalue is required</div>
+                                          </div>  
+                                      </div>
 
                                      
                                       <div class='col-12 col-lg-12'>
                                         <div class="form-group">
-                                            <label class="form-control-label" for="reason">Reason </label>
-                                             <textarea class="form-control" rows="5" id="reason" formControlName="reason" name="reason" autocomplete="off"></textarea>  
+                                            <label class="form-control-label" for="Reason">Reason </label>
+                                             <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason"  value="{{discountform.Reason}}" autocomplete="off"></textarea>  
                                              </div>   
                                       </div>
-                                      <div class='col-12 col-lg-12'>
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="remarks">Remarks </label>
-                                             <textarea class="form-control" rows="5" id="remarks" formControlName="remarks" name="remarks" autocomplete="off"></textarea>  
-                                             </div>   
-                                      </div>
-                                     
+                                    
                                        </div>
                                                                        
                                      </div>
