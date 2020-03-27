@@ -3,36 +3,36 @@
         <div class="userlist"> 
             <div class="row">
                 <div class="col-md-12" >  
-                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
-                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
-                        value="{{Id}}">
-                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
-                        #BranchCode="ngModel" value="{{BranchCode}}">
-                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
-                        #IpAdd="ngModel" value="{{IpAdd}}">
-                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
-                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && Saveinstruction(myform)" class="">
+                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="RoomInstruction.Id" #Id="ngModel"
+                        value="{{RoomInstruction.Id}}">
+                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="RoomInstruction.BranchCode"
+                        #BranchCode="ngModel" value="{{RoomInstruction.BranchCode}}">
+                      <!-- <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="RoomInstruction.IpAdd"
+                        #IpAdd="ngModel" value="{{IpAdd}}"> -->
+                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="RoomInstruction.CreatedBy"
+                        #CreatedBy="ngModel" value="{{RoomInstruction.CreatedBy}}">
   
                         <div class="guestinfofirstrow  row" style="border:1px solid #ccc">
                           <div class='col-12 col-lg-6'>
                             <div class="form-group">
                                 <label class="required">RoomNo</label>
-                                <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
-                                  #RoomNo="ngModel" value="{{RoomNos}}"   required autocomplete="off">
+                                <input type="text" name="RoomNo" class="form-control" [(ngModel)]="RoomInstruction.RoomNo"
+                                  #RoomNo="ngModel" value="{{RoomInstruction.RoomNo}}"   required autocomplete="off">
                              </div>  
                           </div> 
                               <div class='col-12 col-lg-6'>
                                 <div class="form-group">
                                     <label class="required">RoomCode</label>
-                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
-                                      #RoomCode="ngModel" value="{{RoomCodes}}"   required autocomplete="off">
+                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="RoomInstruction.RoomCode"
+                                      #RoomCode="ngModel" value="{{RoomInstruction.RoomCode}}"   required autocomplete="off">
                                  </div>  
                               </div> 
                               <div class='col-12 col-lg-12'>
                                 <div class="form-group">
                                     <label class="required">Instruction</label>
-                                    <textarea type="text" name="instruction" class="form-control" [(ngModel)]="model.instruction"
-                                      #instruction="ngModel" value="{{instruction}}"   required autocomplete="off"></textarea>
+                                    <textarea type="text" name="instruction" class="form-control" [(ngModel)]="RoomInstruction.instruction"
+                                      #instruction="ngModel" value="{{RoomInstruction.instruction}}"   required autocomplete="off"></textarea>
                                  </div>  
                               </div>
                               <div class="roominstruction">
@@ -103,3 +103,7 @@
         </div>
      </div>
   </div>
+
+
+  
+ <ng2-toasty [position]="position"></ng2-toasty>

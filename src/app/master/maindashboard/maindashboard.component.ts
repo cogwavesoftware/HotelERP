@@ -1,15 +1,5 @@
-import { ChangePlanFormmodel } from './../../_models/ChangePlanFormmodel';
-import { AmendRoommodel } from './../../_models/AmendRoommodel';
-import { RoomShifftFormmodel } from './../../_models/RoomShifftFormmodel';
-import { ExtraBedFormmodel } from './../../_models/ExtraBedFormmodel';
-import { GuestcreationComponent } from './../guestcreation/guestcreation.component';
-import { User } from './../../_models/user';
-import { Commonmodel } from './../../_models/Commonmodel';
-import { filter } from 'rxjs/operators';
-import { ElementRef } from '@angular/core';
-import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
-import { Router } from '@angular/router';
-import { ReservationService } from './../../_services/reservation.service';
+import { Roominstructionmodel } from './../../_models/Roominstructionmodel';
+
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, DoCheck } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Observable } from 'rxjs';
@@ -23,11 +13,23 @@ import { DatePipe } from "@angular/common";
 import { OperationService } from 'src/app/_services/operation.service';
 import { error } from 'util';
 import { EditPaxRateFormmodel } from 'src/app/_models/EditPaxRateFormmodel';
+import { PaxonBillmodel } from './../../_models/PaxonBillmodel';
+import { ChangePlanFormmodel } from './../../_models/ChangePlanFormmodel';
+import { AmendRoommodel } from './../../_models/AmendRoommodel';
+import { RoomShifftFormmodel } from './../../_models/RoomShifftFormmodel';
+import { ExtraBedFormmodel } from './../../_models/ExtraBedFormmodel';
+import { GuestcreationComponent } from './../guestcreation/guestcreation.component';
 
+import { ElementRef } from '@angular/core';
+import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
+import { Router } from '@angular/router';
+import { ReservationService } from './../../_services/reservation.service';
 
 
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+import { DiscountFormmodel } from 'src/app/_models/DiscountFormmodel';
+import { ChangeCompanymodel } from 'src/app/_models/ChangeCompanymodel';
 @Component({
   selector: 'app-maindashboard',
   templateUrl: './maindashboard.component.html',
@@ -54,6 +56,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   RoomNos: string;
   extrabedform: ExtraBedFormmodel;
   roomshifftformmodel: RoomShifftFormmodel
+  discountform:DiscountFormmodel
+  changecompanyform:ChangeCompanymodel;
+  paxonbillform:PaxonBillmodel;
+  RoomInstruction:Roominstructionmodel;
   finalMenu = new Array();
   floor = new Array<any>();
   vacantRoom = new Array<any>();
@@ -252,8 +258,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     switch (Description) {
       case "Blockdetails":
         break;
-      case "Discount":
-        break;
+     
       case "Post":
         break;
       case "Advance":
@@ -262,6 +267,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         this.ProcessRoomShift(RoomNo);
         break;
       case "Discount":
+        this.ProcessDiscount(RoomNo)
         break;
       case "ExtraBed":
         this.ProcessExtraBed(RoomNo);
@@ -273,14 +279,20 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         this.ProcessAmend(RoomNo);
         break;
       case "ChangeCompany":
+        this.ProcessChangeCompany(RoomNo)
         break;
       case "HouseGuest":
         break;
       case "PaxonBill":
+        this.ProcessPaxOnBill(RoomNo);
         break;
       case "ChangePlan":
-        this.ProcessChangePlan(RoomNo)
+        this.ProcessChangePlan(RoomNo);
         break;
+        case "Instruction":
+          this.ProcessRoomInstruction(RoomNo);
+          break;
+        
     }
     console.log(event)
     console.log('event')
@@ -293,6 +305,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
 
       this.extrabedform = res;
       this.extrabedform.CreatedBy = this.UserId;
+     
     },
       error => {
         console.log('error in ProcessExtraBed')
@@ -303,16 +316,79 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
 
   }
 
+  
+  ProcessPaxOnBill(RoomNo: string) {
+    this.paxonbillform={
+      RoomNo:RoomNo,
+      RoomCode:this.RoomCodes,
+      Pax:1,
+      BranchCode:this.Branch,
+      IpAdd:"0",
+      CreatedBy:this.UserId
+    };
+    console.log('ProcessPaxOnBill')
+    console.log( this.paxonbillform)
+  }
+  ProcessRoomInstruction(RoomNo: string) {
+    
+    this.RoomInstruction={
+      Id:"0",
+      RoomNo:RoomNo,
+      RoomCode:this.RoomCodes,
+      instruction:"",
+      BranchCode:this.Branch,
+      CreatedBy:this.UserId
+    };
+    console.log('ProcessRoomInstruction')
+    console.log( this.RoomInstruction)
+  }
+
+  
+
+  ProcessDiscount(RoomNo: string) {
+    this._OprService.GetDiscountFormData(this.Branch, RoomNo).subscribe(res => {
+      this.discountform = res;
+      this.discountform.CreatedBy = this.UserId;
+      this.discountform.BranchCode = this.Branch;
+      this.discountform.RoomCode = this.RoomCodes;
+    },
+      error => {
+        console.log('error in discountform')
+      },
+      () => {
+        console.log('Sucess in discountform')
+      })
+
+  }
+
+
+  ProcessChangeCompany(RoomNo: string) {
+    this._OprService.GetChangeCompanyData(this.Branch, RoomNo).subscribe(res => {
+      this.changecompanyform = res;
+      this.changecompanyform.CreatedBy = this.UserId;
+      this.changecompanyform.BranchCode = this.Branch;
+      this.changecompanyform.RoomCode = this.RoomCodes;
+    },
+      error => {
+        console.log('error in discountform')
+      },
+      () => {
+        console.log('Sucess in discountform')
+      })
+
+  }
+
+  
   ProcessAmend(RoomNo: string) {
     this._OprService.GetAmendFormData(this.Branch, RoomNo).subscribe(res => {
       this.amendformdata = res;
       this.amendformdata.CreatedBy = this.UserId;
     },
       error => {
-        console.log('error in ProcessExtraBed')
+        console.log('error in ProcessAmend')
       },
       () => {
-        console.log('Sucess in ProcessExtraBed')
+        console.log('Sucess in ProcessAmend')
       })
 
   }
@@ -338,10 +414,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       this.roomshifftformmodel.CreatedBy = this.UserId;
     },
       error => {
-        console.log('error in ProcessExtraBed')
+        console.log('error in ProcessRoomShift')
       },
       () => {
-        console.log('Sucess in ProcessExtraBed')
+        console.log('Sucess in ProcessRoomShift')
       })
 
   }
@@ -352,10 +428,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       this.changeplanformmodel.CreatedBy = this.UserId;
     },
       error => {
-        console.log('error in ProcessChangePax')
+        console.log('error in ProcessChangePlan')
       },
       () => {
-        console.log('Sucess in ProcessChangePax')
+        console.log('Sucess in ProcessChangePlan')
       })
   }
 

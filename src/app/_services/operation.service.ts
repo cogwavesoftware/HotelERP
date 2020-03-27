@@ -65,7 +65,10 @@ export class OperationService {
   {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/discount?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
   }
-
+  GetChangeCompanyData(BranchCode: string,RoomNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/changecompany?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  }
 
   GetRoomTypeViaRoomNo(BranchCode: string,RoomNo:string)
   {
@@ -99,11 +102,37 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveeditrate',Editpax,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
 
   }
+  
+  SaveChangeCompany(changecompany:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savechangecompany',changecompany,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
 
-
+  }
   SaveBlock(RoomBlock:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveblock',RoomBlock,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+
+  }
+
+  SaveWakeupformation(wakeup:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savewakeup',wakeup,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SaveDiscountData(savefromdata:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savediscount',savefromdata,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SavePaxOnBil(paxonbill:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savepaxonbill',paxonbill,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+
+  }
+
+  SaveinstructionData(instruction:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveinstruction',instruction,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
 
   }
 

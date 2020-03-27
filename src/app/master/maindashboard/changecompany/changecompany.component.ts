@@ -3,69 +3,66 @@ import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } f
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { MasterformService } from 'src/app/_services/masterform.service';
-
+import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { OperationService } from 'src/app/_services/operation.service';
-import { Commonmodel } from './../../../_models/Commonmodel';
-import { EditPaxRateFormmodel } from 'src/app/_models/EditPaxRateFormmodel';
-import { AmendRoommodel } from './../../../_models/AmendRoommodel';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
-import { DatePipe } from "@angular/common";
+import { ChangeCompanymodel } from 'src/app/_models/ChangeCompanymodel';
+
 @Component({
-  selector: 'app-amend-date',
-  templateUrl: './amend-date.component.html',
-  styleUrls: ['./amend-date.component.scss']
+  selector: 'app-changecompany',
+  templateUrl: './changecompany.component.html',
+  styleUrls: ['./changecompany.component.scss']
 })
-export class AmendDateComponent implements OnInit {
-  timepicker: Partial<TimepickerConfig>;
+export class ChangecompanyComponent implements OnInit {
+   @Input() RoomCode: string;
+   @Input() RoomNo: string;
+   @Input() changecompanyform:ChangeCompanymodel;
+  Branch: string;
+  submitted = false;
+  subpaymodelist:any;
   theme = "bootstrap";
   type = "default";
   position = 'top-right';
-  minDate=new Date();
-  @Input() amendformdata :AmendRoommodel
-  valid: boolean = true;
-  myTime = new Date();
-  datePickerConfig: Partial<BsDatepickerConfig>;
-  isValid(event: boolean): void {
-    this.valid = event;
-  }
-  constructor(private toastyService: ToastyService,private datePipe: DatePipe,
-     private _oprservice:OperationService) {
-
-      this.timepicker = Object.assign({},
-        {
-          hourStep: 2,  
-          minuteStep: 10,
-          showMeridian: false,
-          // readonlyInput: false,
-          mousewheel: true,
-          showMinutes: true,
-          showSeconds: false,
-          // arrowkeys:true
-        });
-
-      }
-
+  companylist:any;
+  model:any;
+  constructor(  
+    public router: Router,
+    private _oprservice:OperationService,
+    private toastyService: ToastyService, 
+    private route: ActivatedRoute, 
+    private _masterservice: MasterformService ) {
+      this.Branch="CW_1001"    
+      
+     }
+ 
 
   ngOnInit() {
-    let CheckinDate = this.datePipe.transform(this.minDate, "MM/dd/yyyy");
-    this.amendformdata={
-      RoomNo:"0",
-      GuestName:"0",
-      AmendTime:"",
-      CheckoutDate:CheckinDate,
-      AmendDate:CheckinDate,     
-      Reason:"Change Pax",
-      BranchCode:"0",
-      IpAdd:"0",
-      CreatedBy:0,
-    }
+    this.changecompanyform={
+      BranchCode: "0",
+      CreatedBy: 0,
+      RoomNo: "0",
+      RoomCode: "0",
+      CompanyId:"0",
+      IsCompanyTrif:"NO",
+      TarifAmount: 0,
+      Reason: "0",
+      
+      }    
+      this._masterservice.GetRoomcomany(this.Branch).subscribe(res=>{
+        this.companylist=res;
+      });
+
+
   }
 
-  SaveAmend(form?: NgForm) {
+
+  SaveChangeCompany(form?: NgForm) {
     console.log('form.value')
     console.log(form.value)
+    // form.value.BranchCode = localStorage.getItem("BranchCode")
+    // form.value.CreatedBy = localStorage.getItem("id")
+    // form.value.ModifyBy = localStorage.getItem("id")
+    // form.value.IpAddress = localStorage.getItem("LOCAL_IP")
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
@@ -73,28 +70,31 @@ export class AmendDateComponent implements OnInit {
     }
 
    
-    this._oprservice.SaveAmend(form.value).subscribe(data => {
+    this._oprservice.SaveChangeCompany(form.value).subscribe(data => {
       if (data == true) {
         if (form.value.Id == "0") {
           this.addToast(
             "Cogwave Software",
-            "Amend Data Saved Sucessfully",
+            "ExtraBed Saved Sucessfully",
             "success"
           );
         form.reset();              
         } else {
           this.addToast(
             "Cogwave Software",
-            "Amend Data  Updated Sucessfully",
+            "ExtraBed Data Updated Sucessfully",
             "success"
           );
           form.reset();           
         }
       } else {
-        this.addToast("Cogwave Software", "Amend Data  Not Saved", "error");
+        this.addToast("Cogwave Software", "ExtraBed Data Not Saved", "error");
        
       }
-    });   
+    });
+
+ 
+   
   }
 
   addToast(title, Message, theme) {
@@ -137,5 +137,6 @@ export class AmendDateComponent implements OnInit {
         break;
     }
   }
+
 
 }

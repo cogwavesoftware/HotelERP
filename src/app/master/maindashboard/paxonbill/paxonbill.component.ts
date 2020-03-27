@@ -1,47 +1,51 @@
-import { OperationService } from 'src/app/_services/operation.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { Roominstructionmodel } from 'src/app/_models/Roominstructionmodel';
-import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+import { PaxonBillmodel } from './../../../_models/PaxonBillmodel';
+
+import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from "@angular/router";
+import { MasterformService } from 'src/app/_services/masterform.service';
+import { DatePipe } from "@angular/common";
+import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
+import { OperationService } from 'src/app/_services/operation.service';
+
 @Component({
-  selector: 'app-roominstruction',
-  templateUrl: './roominstruction.component.html',
-  styleUrls: ['./roominstruction.component.scss']
+  selector: 'app-paxonbill',
+  templateUrl: './paxonbill.component.html',
+  styleUrls: ['./paxonbill.component.scss']
 })
-export class RoominstructionComponent implements OnInit {
-@Input() RoomInstruction:Roominstructionmodel;
-  model:any;
+export class PaxonbillComponent implements OnInit {
+
+  Branch: string;
+  @Input() paxonbillform:PaxonBillmodel;
+  submitted = false;
+  subpaymodelist:any;
   theme = "bootstrap";
-  
- type = "default";
- position = 'top-right';
-  constructor(private toastyService: ToastyService,private _oprservice:OperationService
+  type = "default";
+  position = 'top-right';
  
-    ) { }
-
+  constructor(public router: Router,
+    private _oprservice:OperationService,
+    private toastyService: ToastyService, 
+    private route: ActivatedRoute, 
+    private _masterservice: MasterformService ) {}
+    
   ngOnInit() {
-    this.RoomInstruction={
-      Id:"0",
-      BranchCode:"0",
-      instruction:"",
-      CreatedBy:0,
+
+    this.paxonbillform={
       RoomNo:"0",
-      RoomCode:"0", 
-    }    
-  }
-  closeMyModal(event){  
-    var openModals = document.querySelectorAll(".md-show");
-    for(let i = 0; i < openModals.length; i++) {
-      openModals[i].classList.remove("md-show"); 
-    }  
-  }
+      RoomCode:"0",
+      Pax:0,
+      BranchCode:"0",
+      IpAdd:"0",
+      CreatedBy:0
+    }
 
+  }
+  SavePaxOnBill(form?: NgForm) {
 
-  
-  Saveinstruction(form?: NgForm) {
     console.log('form.value')
     console.log(form.value)
-   
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
@@ -49,31 +53,33 @@ export class RoominstructionComponent implements OnInit {
     }
 
    
-    this._oprservice.SaveinstructionData(form.value).subscribe(data => {
+    this._oprservice.SavePaxOnBil(form.value).subscribe(data => {
       if (data == true) {
         if (form.value.Id == "0") {
           this.addToast(
             "Cogwave Software",
-            "Guest Instruction Saved Sucessfully",
+            "PaxonBill Saved Sucessfully",
             "success"
           );
         form.reset();              
         } else {
           this.addToast(
             "Cogwave Software",
-            "Guest Instruction Data Updated Sucessfully",
+            "PaxonBill Data Updated Sucessfully",
             "success"
           );
           form.reset();           
         }
       } else {
-        this.addToast("Cogwave Software", "Guest Instruction Data Not Saved", "error");      
+        this.addToast("Cogwave Software", "PaxonBill Data Not Saved", "error");
+       
       }
     });
 
  
    
   }
+
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();
@@ -114,5 +120,4 @@ export class RoominstructionComponent implements OnInit {
         break;
     }
   }
-
 }

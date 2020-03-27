@@ -1,3 +1,4 @@
+import { OperationService } from 'src/app/_services/operation.service';
 
 import { Component, OnInit, ViewChild, Renderer2, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators } from "@angular/forms";
@@ -20,21 +21,26 @@ export class DiscountportalComponent implements OnInit {
   minDate = new Date();
   maxDate = new Date();
   @Input() RoomCode: string;
-  @Input() discountform: DiscountFormmodel;
+  @Input() RoomNo: string;
+  //@Input() discountform: DiscountFormmodel;
   constructor(
     public router: Router, private renderer: Renderer2,
-    public formBuilder: FormBuilder, private _masterformservice: MasterformService,
+    public formBuilder: FormBuilder,private _oprservice:OperationService,
     private route: ActivatedRoute, private datePipe: DatePipe, private toastyService: ToastyService,
     private _masterservice: MasterformService) {
-    this.Branch = localStorage.getItem("BranchCode");
+   
+
+   
+
   }
 
   ngOnInit() {
     
-    this.discountportalform = this.formBuilder.group({
+   
+ this.discountportalform = this.formBuilder.group({
       ProcessDate: [new Date(), [Validators.required]],
-      RoomNo: ['', Validators.required],
-      RoomCode: ['', Validators.required],
+      RoomNo: [this.RoomNo, Validators.required],
+      RoomCode: [this.RoomCode, Validators.required],
       GuestName: ['', Validators.required],
       Disvalue: ['', Validators.required],    
       Reason: ['', Validators.required],
@@ -42,20 +48,21 @@ export class DiscountportalComponent implements OnInit {
       BranchCode: ["0", [Validators.required]],
       CreatedBy: ["0", [Validators.required]],
     });
+
   }
 
 
   Submit(blockingdetails: FormGroup) {
 
-    let BlockDate = this.datePipe.transform(this.discountportalform.get('BlockDate').value, "MM/dd/yyyy");
-    let ReleaseDate = this.datePipe.transform(this.discountportalform.get('ReleaseDate').value, "MM/dd/yyyy");
-
+    let prodate = this.datePipe.transform(this.discountportalform.get('ProcessDate').value, "MM/dd/yyyy");
+   
     this.discountportalform.patchValue({
-      BlockDate: BlockDate,
-      ReleaseDate: ReleaseDate
+      ProcessDate: prodate,
+      DiscountType:"0",
+      BranchCode:localStorage.getItem("BranchCode"),
+      CreatedBy:localStorage.getItem("Id")
     })
-    
-    this._masterformservice.SaveBlockinformation(this.discountportalform.value).subscribe(data => {
+    this._oprservice.SaveDiscountData(this.discountportalform.value).subscribe(data => {
       if (data == true) {
         this.addToast(
           "Cogwave Software",
@@ -67,9 +74,11 @@ export class DiscountportalComponent implements OnInit {
         this.minDate = new Date();
         this.maxDate.setDate(this.minDate.getDate() + 1);
         this.discountportalform.patchValue({
-          BlockDate: this.minDate,
-          ReleaseDate: this.maxDate,
-          Status: "SHORT"
+          ProcessDate: prodate,
+      DiscountType:"0",
+      BranchCode:localStorage.getItem("BranchCode"),
+      CreatedBy:localStorage.getItem("Id")
+          
         })
       }
     },
@@ -79,9 +88,10 @@ export class DiscountportalComponent implements OnInit {
         this.minDate = new Date();
         this.maxDate.setDate(this.minDate.getDate() + 1);
         this.discountportalform.patchValue({
-          BlockDate: this.minDate,
-          ReleaseDate: this.maxDate,
-          Status: "SHORT"
+          ProcessDate: prodate,
+          DiscountType:"0",
+          BranchCode:localStorage.getItem("BranchCode"),
+          CreatedBy:localStorage.getItem("Id")
         })
       },
       () => {

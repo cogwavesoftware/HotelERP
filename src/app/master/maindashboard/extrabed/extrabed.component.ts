@@ -115,12 +115,6 @@ export class ExtrabedComponent implements OnInit {
      
     }
   
-
-
-
-
-
-
     addToast(title, Message, theme) {
       debugger;
       this.toastyService.clearAll();

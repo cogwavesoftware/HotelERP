@@ -1,0 +1,64 @@
+
+
+<div class="shiftroom discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+  
+            <div class="row">
+                <div class="col-md-12" >  
+                    <form #myform = "ngForm" (ngSubmit) ="myform.form.valid && SavePaxOnBill(myform)" class="">
+          
+                        <div class="app-modal-body text-center addcompany"> 
+                         
+                       
+                         <div class="col-md-12">
+    
+                           <div class="row">                
+                    
+                            <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="paxonbillform.BranchCode" #BranchCode="ngModel" value="{{paxonbillform.BranchCode}}">
+                            <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="paxonbillform.IpAdd" #IpAdd="ngModel" value="{{paxonbillform.IpAdd}}">
+                            <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="paxonbillform.CreatedBy" #CreatedBy="ngModel" value="{{paxonbillform.CreatedBy}}">
+                                                
+                             <div class="col-md-4">
+                              <label class="required">RoomNo*</label>
+                              <input type="text" name="RoomNo" class="form-control" [(ngModel)]="paxonbillform.RoomNo" #RoomNo="ngModel" value="{{paxonbillform.RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
+                                  
+                             </div>
+    
+                             <div class="col-md-4">
+                              <label>RoomCode*</label>
+                              <input type="text" name="RoomCode" class="form-control" [(ngModel)]="paxonbillform.RoomCode" #RoomCode="ngModel" value="{{paxonbillform.RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}"  required  autocomplete="off">
+                              
+                             </div>
+                             <div class="col-md-4"  >
+                               
+                               <label>Pax*</label>
+                               <input type="number" min="10" max="10" name="Pax" class="form-control" [(ngModel)]="paxonbillform.Pax" #Pax="ngModel" value="{{paxonbillform.Pax}}"  [ngClass]="{'is-invalid': Pax.touched && Pax.invalid}"  required   autocomplete="off">
+                               <div *ngIf="Pax.touched && Pax.invalid" class="invalid-feedback">
+                                 <div *ngIf="Pax.errors.required">Pax Cant'be Empty</div>
+                               </div>
+                           </div>
+
+                           
+                           </div>
+                           
+                            <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
+                            <br/>
+                            <hr>
+             
+                         </div>
+                   
+                       </div> 
+                   </form>
+                </div>
+            </div>       
+                  
+        </div>
+     </div>
+  </div>
+  
+  
+  
+  
+  
+  <ng2-toasty [position]="position"></ng2-toasty>

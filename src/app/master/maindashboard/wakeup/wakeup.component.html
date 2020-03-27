@@ -1,67 +1,86 @@
-<div class="shiftroom discountfrm">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist"> 
-            <div class="row">
-                <div class="col-md-12" >  
-                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
-                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
-                        value="{{Id}}">
-                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
-                        #BranchCode="ngModel" value="{{BranchCode}}">
-                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
-                        #IpAdd="ngModel" value="{{IpAdd}}">
-                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
-                        #CreatedBy="ngModel" value="{{CreatedBy}}">
-  
-                        <div class="guestinfofirstrow  row"> 
-                          <div class='col-12 col-lg-4'>
-                            <div class="form-group">
-                                <label class="required">RoomNo</label>
-                                <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
-                                  #RoomNo="ngModel" value="{{RoomNos}}"   required autocomplete="off">
-                             </div>  
-                          </div> 
-                            <div class='col-12 col-lg-4'>
-                              <div class="form-group">
-                                  <label class="required">RoomCode</label>
-                                  <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
-                                    #RoomCode="ngModel" value="{{RoomCodes}}"   required autocomplete="off">
-                               </div>  
-                            </div> 
-                          
-                            <div class='col-12 col-lg-4 '> 
-                              <div class="form-group">
-                                <label class="form-control-label" for="alarmdate"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Enter Date </label>
-                                <div class="input-group" style="margin-bottom:0; ">
-                                  <input  id="alarmdate" name="alarmdate"      type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                     
-                                </div>
-                              </div>
-                            </div>
-                          
-                          </div><!--guestinfofirstrow -->
-                         
-                          <div class="guestinfofirstrow  row"> 
-                            <div class='col-12 col-lg-3'   >
-                              <div class="form-group">
-                                <label class="form-control-label" for="alarmtime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Enter Time </label>
-                                 <timepicker id="alarmtime" readonly name="alarmtime"  (isValid)="isValid($event)"  [showSpinners]="false"   [showMeridian]="ismeridian"></timepicker>
+<!-- 
+ <input type="text" name="Name" class="form-control" [(ngModel)]="Name" #Name1="ngModel" value="{{Name}}"    required autocomplete="off"> 
+
+ <h1>Hello {{Name}}</h1> -->
+
+ <div class="  blockingfrm">
+  <div class="formdesign" style="padding: 0;">
+      <div class="userlist">
+               <form [formGroup]="wakeupform" (ngSubmit)="Submit(wakeupform)"> 
+               
+                <input type="hidden"  formControlName="CreatedBy"  readonly name="CreatedBy" autocomplete="off"/>
+                <input type="hidden"  formControlName="BranchCode"  readonly name="BranchCode" autocomplete="off"/>
+                 
+                  <div class="container-fluid" >             
+                      <div class='row'>                            
+                            <div class="col-md-12">
+                                <div class="row">
+                                  <div class="col-md-12" > 
+                           
+
+                                  <div class="guestinfofirstrow  row">
+
+
+                                    <div class='col-12 col-lg-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="rmno">Room No </label>
+                                        <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="RoomNo" value=" {{RoomNo}}" readonly name="RoomNo" autocomplete="off"  required  />  
+       
+                                        </div>  
+                                    </div>
+                                    <div class='col-12 col-lg-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="rmcd">Room Code </label>
+                                        <input type="text" class="form-control tooltip-form" id="roomcoded" formControlName="RoomCode" value=" {{RoomCode}}" readonly name="RoomCode" autocomplete="off"  required  />  
+                                      
+                                        </div>  
+                                    </div>
+
+
+
+                                    <div class='col-12 col-lg-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="date">Date</label>
+                                        <input  id="alarmdate" name="alarmdate"  formControlName="alarmdate"  readonly type="text" bsDatepicker  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                       </div>  
+                                    </div>
+                                  </div>
+                                  <div class="guestinfofirstrow  row">
+
+                                    <div class='col-12 col-lg-4'>
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="date">Time</label>
+                                        <timepicker id="alarmtime" name="alarmtime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="alarmtime" [showMeridian]="ismeridian"></timepicker>
+                                      
+                                       </div>  
+                                    </div>
+                                    
+                                  
+                                 
+                                    <div class='col-12 col-lg-12'>
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="reason">Reason For Blocking </label>
+                                           <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason" autocomplete="off"></textarea>  
+                                           </div>   
+                                    </div>
+                                   
+                                  </div>
+                                                                     
+                                   </div>
                                </div>
-                            </div> 
-                            </div> 
-                              
-                              <div class="guestinfofirstrow  row">
-                                <div class='col-12 col-lg-12'>
-                                    <div class="form-group  float-right" >                                   
-                                        <button type="button" class="btn btn-success " ><i class="fa fa-save"></i> Alarm On</button>  
-                                        <button type="button" class="btn btn-primary " ><i class="fa fa-save"></i> Alarm Off</button>    
-                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                                     </div>  
-                                  </div> 
-                              </div>
-                        
-                      </form> 
                           </div>
-                   </div>       
-        </div>
-     </div>
-  </div>
+                      </div>
+                      <div class="row modelbtn">   
+                        <div class="col-md-12">
+                          <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Close </button>
+                          <button  type="submit"  class="btn btn-primary">Alarm On </button> 
+                          <button  type="button" (click)="offAlarm(wakeupform)"  class="btn btn-primary">Alarm Off </button> 
+                        </div>  
+                       </div>  
+                  </div>
+               </form>
+      </div>
+   </div>
+</div>
+
+<ng2-toasty [position]="position"></ng2-toasty>

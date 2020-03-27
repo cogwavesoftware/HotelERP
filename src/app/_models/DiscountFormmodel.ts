@@ -5,7 +5,6 @@ export class DiscountFormmodel
     RoomCode:string;
     GuestName:string;
     ProcessDate:string;
-  
     DiscountType:string
     Disvalue:number
     Reason:string;
