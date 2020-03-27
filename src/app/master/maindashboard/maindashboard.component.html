@@ -487,8 +487,12 @@
                         (click)="OpenModel('ChangeCompany',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
                         Company</a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
-                        (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link &
-                        Unlink </a></li>
+                        (click)="OpenModel('linkunlink',rmno)"><i class="fa fa-user" aria-hidden="true"></i> link </a></li>
+
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                          (click)="OpenModel('linkunlink1',rmno)"><i class="fa fa-user" aria-hidden="true"></i>  
+                          Unlink </a></li>
+
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                       (click)="OpenModel('HouseGuest',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House Guest</a>
                     </li>
@@ -878,7 +882,8 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
-                  <app-amend-date [amendformdata]="amendformdata"></app-amend-date>
+                  <!-- <app-amend-date [amendformdata]="amendformdata"></app-amend-date> -->
+                  <!-- <app-amend-date ></app-amend-date> -->
                 </div>
               </div>
             </perfect-scrollbar>
@@ -934,7 +939,8 @@
               <div class="col-sm-12 filter-bar">
                 <div class="row">
                 
-                  <app-changepax [changepaxform]="changepaxform"></app-changepax>
+                  <!-- <app-changepax [changepaxform]="changepaxform"></app-changepax> -->
+                  <!-- <app-changepax  ></app-changepax> -->
                 </div>
               </div>
             </perfect-scrollbar>
@@ -1054,8 +1060,8 @@
                         <div class="userlist">                
                             <div class="row">
    
-                              <app-changeplan [changeplanformmodel]="changeplanformmodel"></app-changeplan>
-                                         
+                              <!-- <app-changeplan [changeplanformmodel]="changeplanformmodel"></app-changeplan> -->
+                              <!-- <app-changeplan  ></app-changeplan>         -->
                               </div>       
                                   
                         </div>
@@ -1115,7 +1121,7 @@
 
         <!-- linkunlink -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Link & Unlink
+          <h3 class="f-15" style="position: relative;">Link 
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
           <div class="app-modal-body text-center">
@@ -1142,7 +1148,7 @@
                                         <div class="guestinfofirstrow  row">
                                         <div class="col-md-12">
                                           <div class="row">
-                                            <div class="col-md-6 linkandunlink">
+                                            <div class="col-md-12 linkandunlink">
                                               <ul>
                                                 <h2>Panel 1 - LINK</h2>
                                                 <li class="red">101 <br/> AC</li>
@@ -1150,20 +1156,9 @@
                                                 <li class="red">101 <br/> DX</li>
                                                 <li class="blue">101 <br/> SUPER DX</li>
                                               </ul> 
-                                            </div>
-                                            <div class="col-md-6 linkandunlink">
-                                              <h2>Panel 2 - UNLINK</h2>
-                                              <ul>
-                                                <li class="red">101 <br/> AC</li>
-                                                <li class="red">101 <br/> NON AC</li>
-                                                <li class="red">101 <br/> DX</li>
-                                                <li class="blue">101 <br/> SUPER DX</li>
-                                              </ul> 
-                                            </div>
+                                            </div> 
                                           </div>
-                                        </div>
-                                      
-                                           
+                                        </div> 
                                          
                                          </div><!--guestinfofirstrow --> 
                                               
@@ -1187,7 +1182,68 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink1'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">  Unlink
+            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+          </h3>
+          <div class="app-modal-body text-center">
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+              [config]="config">
+              <div class="col-sm-12 filter-bar">
+                <div class="row">
+                  <div class="shiftroom discountfrm">
+                    <div class="formdesign" style="padding: 0;">
+                        <div class="userlist">
+                  
+                            <div class="row">
+                                <div class="col-md-12" >  
+                                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel"
+                                        value="{{Id}}">
+                                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                                        #BranchCode="ngModel" value="{{BranchCode}}">
+                                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd"
+                                        #IpAdd="ngModel" value="{{IpAdd}}">
+                                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+                  
+                                        <div class="guestinfofirstrow  row">
+                                        <div class="col-md-12">
+                                          <div class="row"> 
+                                            <div class="col-md-12 linkandunlink">
+                                              <h2>Panel 2 - UNLINK</h2>
+                                              <ul>
+                                                <li class="red">101 <br/> AC</li>
+                                                <li class="red">101 <br/> NON AC</li>
+                                                <li class="red">101 <br/> DX</li>
+                                                <li class="blue">101 <br/> SUPER DX</li>
+                                              </ul> 
+                                            </div>
+                                          </div>
+                                        </div> 
+                                         
+                                         </div><!--guestinfofirstrow --> 
+                                              
+                                              <div class="guestinfofirstrow  row">
+                                                <div class='col-12 col-lg-12'>
+                                                    <div class="form-group  float-right" >                                   
+                                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                     </div>  
+                                                  </div> 
+                                              </div>
+                                        
+                                      </form> 
+                                          </div>
+                                   </div>       
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </app-modal-animation>
         <!-- PaxonBill -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Pax on Bill

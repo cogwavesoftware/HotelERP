@@ -286,6 +286,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       case "PaxonBill":
         this.ProcessPaxOnBill(RoomNo);
         break;
+      case "linkunlink":
+        break;
+        case "linkunlink1":
+        break;
       case "ChangePlan":
         this.ProcessChangePlan(RoomNo);
         break;

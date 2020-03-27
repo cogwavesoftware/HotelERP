@@ -21,6 +21,14 @@ export class PostchargeComponent implements OnInit {
   Roomadvanceform: FormGroup;
   submitted = false;
   catagerys:any;
+  codeList = [
+    { id: 1, name: 'Item1' },
+    { id: 2, name: 'Item2' },
+    { id: 3, name: 'Item3' },
+    { id: 4, name: 'Item4' },
+    { id: 5, name: 'Item5' }
+  ];
+
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
   constructor( 
     public router: Router,   private renderer: Renderer2,
@@ -44,6 +52,9 @@ export class PostchargeComponent implements OnInit {
       grand:0,
       tax:0,
       tarif:0,
+      revname:'',
+      stward:'',
+      taxvalue:'',
       SRoomNo:"select"
     } 
     this._masterservice.getrevenudata(this.Branch).subscribe(res => {
@@ -53,16 +64,26 @@ export class PostchargeComponent implements OnInit {
       PayExtra: this.formBuilder.array([]),
       roomno: ['', Validators.required],
       roomcode:['', Validators.required],
-      guestname:['', Validators.required]
+      guestname:['', Validators.required],
+      stward:['',Validators.required],
+      revname:['',Validators.required],
+      taxvalue:['',Validators.required]
     });
      
 
   }
+  /* below code for auto search in dropdownlist */
+  public saveCode(e): void {
+    let name = e.target.value;
+    let list = this.codeList.filter(x => x.name === name)[0];
+    console.log(list.name);
+    console.log(list.id);
+  }
+  /* end below code for auto search in dropdownlist */
 
   AddExtraChargeGrid(): FormGroup {
-    return this.formBuilder.group({
-      Revenu: ["-1"],
-      Description: [],
+    return this.formBuilder.group({ 
+      itemname: [],
       Amount: [],
       TaxAmount: [],
       TotalAmount: []
