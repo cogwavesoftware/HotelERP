@@ -18,6 +18,7 @@ export class RoominstructionComponent implements OnInit {
       CreatedBy:1,
       RoomNo:0,
       RoomCode:0, 
+      roomdate:"12/12/2020"
     }    
   }
   closeMyModal(event){  

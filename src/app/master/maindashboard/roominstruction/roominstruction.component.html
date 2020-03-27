@@ -14,18 +14,26 @@
                         #CreatedBy="ngModel" value="{{CreatedBy}}">
   
                         <div class="guestinfofirstrow  row" style="border:1px solid #ccc">
-                          <div class='col-12 col-lg-6'>
+                          <div class='col-12 col-lg-4'>
                             <div class="form-group">
                                 <label class="required">RoomNo</label>
                                 <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo"
                                   #RoomNo="ngModel" value="{{RoomNos}}"   required autocomplete="off">
                              </div>  
                           </div> 
-                              <div class='col-12 col-lg-6'>
+                              <div class='col-12 col-lg-4'>
                                 <div class="form-group">
                                     <label class="required">RoomCode</label>
                                     <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode"
                                       #RoomCode="ngModel" value="{{RoomCodes}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Date</label>
+                                    <input id="roomdate" name="roomdate" class="form-control" [(ngModel)]="model.roomdate"
+                                    #roomdate="ngModel" placement="center" type="text" bsDatepicker [minDate]="minDate"
+                                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
                                  </div>  
                               </div> 
                               <div class='col-12 col-lg-12'>

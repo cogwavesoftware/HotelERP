@@ -26,16 +26,44 @@
                   <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname   is required</div>
                   </div>  
               </div>
+              <div class='col-12 col-lg-4'>
+                <div class="form-group" 
+                 >
+                <label class="form-control-label required" for="roomcode">Revenue name</label>
+                      <select class="custom-select" id="revname" appSelectValidator="0"  
+                        name="revname" formControlName="revname" >
+                        <option value="0">Select</option>
+                        <option *ngFor="let catagery of catagerys" [value]="catagery.revname">{{catagery.revname}}</option>
+                      </select> 
+                 </div>  
+              </div> 
+              <div class='col-12 col-lg-4'>
+                <div class="form-group" >
+                <label class="form-control-label required" for="stward">St Ward</label>
+                      <select class="custom-select" id="stward" appSelectValidator="0"  
+                        name="stward" formControlName="stward">
+                        <option value="0">Select</option>
+                        <option *ngFor="let catagery of catagerys" [value]="catagery.stward">{{catagery.stward}}</option>
+                      </select>
+                     
+                 </div>  
+              </div> 
+              <div class='col-12 col-lg-4'>
+                <div class="form-group">
+                  <label class="form-control-label" for="taxvalue">Tax Value </label>
+                  <input type="text" class="form-control tooltip-form" id="taxvalue" formControlName="taxvalue" name="taxvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.taxvalue.errors || form.controls.taxvalue.touched || form.controls.taxvalue.dirty}" required  />  
+                  <div class="invalid-feedback" *ngIf="form.controls.taxvalue.errors?.required" >taxvalue   is required</div>
+                  </div>  
+              </div>
             </div>
           </div>
         <div class=" col-md-12">
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8">
               <div class="grid-table" style="width: 100%;">
                 <div class="thead">
-                  <div class="">
-                    <div class="td"><i class="fa fa-cc-visa"></i> Revenu Header</div>
-                    <div class="td"><i class="fa fa-credit-card-alt"></i> Description</div>
+                  <div class=""> 
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> Item Name</div>
                     <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
                     <div class="td"><i class="fa fa-server"></i> Tax</div>
                     <div class="td"><i class="fa fa-retweet"></i> Total</div>
@@ -52,18 +80,15 @@
                   <div formArrayName="PayExtra"
                     *ngFor="let otherExtra of form.get('PayExtra').controls; let e = index">
                     <div [formGroupName]="e">
-                      <div class="tr">
+                      <div class="tr"> 
                         <div class="td"> 
-                          <select   class="custom-select" appSelectValidator="-1" name="Revenu" formControlName="Revenu"
-                          id="Revenu">
-                          <option value="-1">Select</option>
-                          <option *ngFor="let sour of Revenulist" [value]="sour.Id">{{ sour.RevName }}
-                          </option>
-                        </select> 
-                        </div>
-    
-                        <div class="td">
-                          <input type="text" class="" id="Description" formControlName="Description"> 
+
+                        <input type="text"  list="codes"  (change)="saveCode($event)">
+                        <datalist id="codes">
+                          <option *ngFor="let c of codeList" [value]="c.name" >{{c.name}}</option>
+                        </datalist>
+
+                          <!-- <input type="text" class="" id="itemname" formControlName="itemname">  -->
                         </div>
     
                     <div class="td">
@@ -90,17 +115,26 @@
                 </div> 
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="table-responsive">
                 <table class="table table-striped table-bordered full-data-table"> 
+                  <thead> 
+                    <tr><th colspan="2" style="color:#fff;">
+                      Summary
+                    </th></tr>
+                  </thead>
                   <tbody>
                     <tr>
-                      <td>Total</td>
-                      <td>33444</td> 
+                      <td>Bill Amount</td>
+                      <td style="text-align: right;">1000</td> 
                     </tr>
                     <tr>
-                      <td>Sub Total</td>
-                      <td>555</td> 
+                      <td>Tax Amount</td>
+                      <td style="text-align: right;">50</td> 
+                    </tr> 
+                    <tr>
+                      <td style="font-weight: bold;">Total</td>
+                      <td style="text-align: right;">1050</td> 
                     </tr> 
                   </tbody>
                 </table>
