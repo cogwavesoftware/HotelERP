@@ -16,9 +16,10 @@ import { GridtestComponent } from './gridtest.component';
 import { CamarawindowComponent } from '../checkin/camarawindow/camarawindow.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OrderItemsComponent } from './../order-items/order-items.component';
+// import { PettycashComponent } from './pettycash/pettycash.component';
 
 @NgModule({
-  declarations: [GridtestComponent, CamarawindowComponent],
+  declarations: [GridtestComponent, CamarawindowComponent ],
    
   providers: [DatePipe, ConfirmationDialogService],
   imports: [

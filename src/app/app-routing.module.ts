@@ -173,7 +173,11 @@ const routes: Routes = [
         //loadChildren: './master/gridtest/gridtest.module#GridtestModule'
         loadChildren: () => import('./master/gridtest/gridtest.module').then(m=>m.GridtestModule)
       },
-
+      {
+        path: 'pettycash',
+        //loadChildren: './master/gridtest/gridtest.module#GridtestModule'
+        loadChildren: () => import('./master/gridtest/pettycash/pettycash.module').then(m=>m.PettycashModule)
+      },
       {
         path: 'guest',
         //loadChildren: './master/guestcreation/guestcreation.module#GuestcreationModule'
