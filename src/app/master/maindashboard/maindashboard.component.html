@@ -845,8 +845,8 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
-                  <!-- <app-discountportal [RoomNo]="RoomNos" [RoomCode]="RoomCodes"> </app-discountportal> -->
-                  <app-discountportal  > </app-discountportal>
+                 <app-discountportal [RoomNo]="RoomNos" [RoomCode]="RoomCodes"> </app-discountportal> 
+                  
                 </div>
               </div>
             </perfect-scrollbar>
@@ -883,7 +883,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
-                  <!-- <app-amend-date [amendformdata]="amendformdata"></app-amend-date> -->
+                  <app-amend-date [amendformdata]="amendformdata"></app-amend-date> 
                   <!-- <app-amend-date ></app-amend-date> -->
                 </div>
               </div>
@@ -940,7 +940,7 @@
               <div class="col-sm-12 filter-bar">
                 <div class="row">
                 
-                  <!-- <app-changepax [changepaxform]="changepaxform"></app-changepax> -->
+                   <app-changepax [changepaxform]="changepaxform"></app-changepax> 
                   <!-- <app-changepax  ></app-changepax> -->
                 </div>
               </div>
@@ -1001,9 +1001,9 @@
                       <div class="userlist"> 
                           <div class="row">
                               <div class="col-md-12" >  
-                                <app-houseguest></app-houseguest>
-                                  
-                                        </div>
+                               <app-houseguest></app-houseguest>
+                                <!-- <app-house-guest [RoomNo]="RoomNo" [RoomCode]="RoomCode" ></app-house-guest> -->
+                                </div>
                                  </div>       
                       </div>
                    </div>
@@ -1040,7 +1040,7 @@
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar"> 
-              <app-roominstruction></app-roominstruction> 
+                <app-roominstruction [RoomInstruction]="RoomInstruction" ></app-roominstruction> 
               </div>
             </perfect-scrollbar>
           </div>
@@ -1061,7 +1061,7 @@
                         <div class="userlist">                
                             <div class="row">
    
-                              <!-- <app-changeplan [changeplanformmodel]="changeplanformmodel"></app-changeplan> -->
+                               <app-changeplan [changeplanformmodel]="changeplanformmodel"></app-changeplan> 
                                
                               </div>       
                                   
@@ -1207,7 +1207,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
               
-                  <app-wakeup></app-wakeup>
+                <app-wakeup [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-wakeup>
              
               </div>
             </perfect-scrollbar>
@@ -1293,6 +1293,7 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
+
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink1'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">  Unlink
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
@@ -1356,7 +1357,8 @@
           </div>
         </app-modal-animation>
         <!-- PaxonBill -->
-        <!-- <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
+
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Pax on Bill
           
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
@@ -1365,62 +1367,13 @@
           <div class="app-modal-body text-center">
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                  <form #myform = "ngForm" (ngSubmit) ="myform.form.valid && ReferanceSave(myform)" class="">
-          
-                    <div class="app-modal-body text-center addcompany"> 
-                     
-                   
-                     <div class="col-md-12">
-
-                       <div class="row">                
-                
-                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
-                        <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
-                        <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
-                        <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
-                                           
-                         <div class="col-md-4">
-                          <label class="required">RoomNo*</label>
-                          <input type="text" name="RoomNo" class="form-control" [(ngModel)]="model.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
-                              <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
-                                 <div *ngIf="RoomNo.errors.required">RoomNo is invalid</div>
-                             </div>
-                         </div>
-
-                         <div class="col-md-4">
-                          <label>RoomCode*</label>
-                          <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}"  required  autocomplete="off">
-                          <div *ngIf="RoomCode.touched && RoomCode.invalid" class="invalid-feedback">
-                            <div *ngIf="RoomCode.errors.required">RoomCode is required</div>
-                            
-                          </div>
-                         </div>
-                         <div class="col-md-4"  >
-                           
-                           <label>Pax*</label>
-                           <input type="number" min="10" max="10" name="Pax" class="form-control" [(ngModel)]="model.Pax" #Pax="ngModel" value="{{Pax}}"  [ngClass]="{'is-invalid': Pax.touched && Pax.invalid}"  required   autocomplete="off">
-                           <div *ngIf="Pax.touched && Pax.invalid" class="invalid-feedback">
-                             <div *ngIf="Pax.errors.required">Pax Cant'be Empty</div>
-                           </div>
-                       </div>
-                       </div>
-                       
-                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
-                        <br/>
-                        <hr>
-         
-                     </div>
+             
+                  <app-paxonbill [paxonbillform]="paxonbillform"></app-paxonbill>
                
-                   </div> 
-               </form>
-                </div>
-              </div>
             </perfect-scrollbar>
           </div>
-        </app-modal-animation> -->
-
+        </app-modal-animation> 
+       
         <!-- SmsCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'SmsCoupon'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Sms Coupon
