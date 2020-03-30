@@ -1,0 +1,107 @@
+<div class="outerdiv">
+    <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
+  
+      <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
+  
+        <div class="container-fluid"  style="background-color: #fff;">
+   
+          <div class='row tabouter' style="margin-bottom: 0;">
+            <h2 class="h2class"><i class="fa fa-money" aria-hidden="true"></i> Petty Voucher Entry </h2>
+
+            <div class="col-md-12" style="padding-left: 0;">
+              <div class="userlist">
+              <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
+                <div class="col-md-12 taboutercreatebtn">
+                  <div class="row" style="margin-bottom: 0;">
+                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                      <div class="form-group">
+                        <label class="form-control-label" for="voucherno">Voucher No </label>
+                        <input type="text" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.voucherno.errors || form.controls.voucherno.touched || form.controls.voucherno.dirty}" required    /> 
+                      </div>  
+                    </div>
+
+                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                  <label class="form-control-label" for="Date"><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Date </label>
+                  <div class="form-group">
+                    <div class="input-group" style="margin-bottom:0; ">
+                      <input  id="pdate" name="pdate"  formControlName="pdate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                         
+                    </div>
+                  </div>
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="ptime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkout Time </label>
+                      <timepicker id="ptime" name="ptime"    [showSpinners]="false" formControlName="ptime" [showMeridian]="ismeridian"></timepicker>  
+                      <div *ngIf="!valid">Invalid time </div>                                  
+                    </div>
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="ledger">  Ledger </label>
+                     <select class="custom-select"  name="ledger" formControlName="ledger"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.ledger.errors }"> 
+                       <option value="select">Select</option> 
+                       <option *ngFor="let sour of gendertypes" [value]="sour.Description">{{ sour.ledger  }}</option>
+                     </select>
+                     <div *ngIf="submitted && form.ledger.errors" class="invalid-feedback">
+                      <div *ngIf="form.ledger.errors.required">ledger is required</div>
+                    </div>
+                      </div>  
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                    <div class="form-group">
+                      <label class="form-control-label" for="transaction "><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Transaction </label>
+                      <select class="custom-select" #Days name="transaction" formControlName="transaction" (change)="ChangeCheckoutDate(Days.value)"
+                        id="transaction" [ngClass]="{ 'is-invalid': submitted && form.transaction.errors }">
+                        <option value="0">Select</option>
+                        <option  *ngFor="let Day of noofdays" [value]="Day">
+                          {{ Day  }}</option>
+                      </select>
+                      <div *ngIf="submitted && form.transaction.errors" class="invalid-feedback">
+                        <div *ngIf="form.transaction.errors.required">transaction is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                    <div class="form-group">
+                      <label class="form-control-label" for="paymentmode "><i  class="fa fa-calendar" aria-hidden="true"  ></i> Payment mode </label>
+                      <select class="custom-select" #Days name="paymentmode" formControlName="paymentmode" (change)="ChangeCheckoutDate(Days.value)"
+                        id="paymentmode" [ngClass]="{ 'is-invalid': submitted && form.paymentmode.errors }">
+                        <option value="0">Select</option>
+                        <option  *ngFor="let Day of noofdays" [value]="Day">
+                          {{ Day  }}</option>
+                      </select>
+                      <div *ngIf="submitted && form.paymentmode.errors" class="invalid-feedback">
+                        <div *ngIf="form.paymentmode.errors.required">paymentmode is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="payableamount">Particular's </label>
+                      <input type="text" class="form-control tooltip-form searchiconrelative" id="payableamount" formControlName="payableamount" name="payableamount" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.payableamount.errors || form.controls.payableamount.touched || form.controls.payableamount.dirty}" required    /> 
+                    </div>  
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="payableamount">Payable Amount </label>
+                      <input type="text" class="form-control tooltip-form searchiconrelative" id="payableamount" formControlName="payableamount" name="payableamount" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.payableamount.errors || form.controls.payableamount.touched || form.controls.payableamount.dirty}" required    /> 
+                    </div>  
+                  </div>
+
+                  </div><!-- end of row -->
+
+                </div> 
+            </div>
+          </div>
+
+          <button type="submit" id="save" class="btn btn-sm btn-primary m-r-5 m-b-10 m-l-5 float-right" >Save</button>                                                                                 
+
+        </div>
+        
+          </div>
+          </div>
+          </form>
+          </div>
+          </div>
+
