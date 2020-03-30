@@ -11,6 +11,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { RoomadvanceComponent } from './roomadvance/roomadvance.component';
 
 import { OrderItemsComponent } from './order-items/order-items.component';
+
 // import { ReservationComponent } from './reservation/reservation.component';
 // import { ReservationlistComponent } from './reservationlist/reservationlist.component';
 // import { TodayarivallistComponent } from './todayarivallist/todayarivallist.component';
@@ -39,7 +40,7 @@ import { OrderItemsComponent } from './order-items/order-items.component';
 // import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
-  declarations: [ ],
+  declarations: [ HmsoperationComponent, OperatonComponent, OperationComponent],
   imports: [
     CommonModule,MasterRoutingModule
   ],

@@ -47,13 +47,15 @@ import { OrderItemsComponent } from './master/order-items/order-items.component'
 //   return new TranslateHttpLoader(http);
 // }
 import {MatDialogModule} from '@angular/material/dialog';
+import { OperationComponent } from './HMSOperation/operation/operation.component';
+import { HmsoperationComponent } from './hmsoperation/hmsoperation.component';
 @NgModule({
   declarations: [   
     AppComponent, 
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent, 
-    ConfirmationDialogComponent ,
+    ConfirmationDialogComponent, OperationComponent, HmsoperationComponent ,
     
   ],
   imports: [
