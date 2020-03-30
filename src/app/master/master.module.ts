@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import {SharedModule} from 'src/app/shared/shared.module';
 import { MasterRoutingModule } from './master-routing.module';
 
-import { RescheckinComponent } from './rescheckin/rescheckin.component';
+// import { RescheckinComponent } from './rescheckin/rescheckin.component';
 
-import { MonthchartComponent } from './monthchart/monthchart.component';
-import { LoadingComponent } from './loading/loading.component';
-import { RoomadvanceComponent } from './roomadvance/roomadvance.component';
+// import { MonthchartComponent } from './monthchart/monthchart.component';
+// import { LoadingComponent } from './loading/loading.component';
+// import { RoomadvanceComponent } from './roomadvance/roomadvance.component';
 
-import { OrderItemsComponent } from './order-items/order-items.component';
+// import { OrderItemsComponent } from './order-items/order-items.component';
 
 // import { ReservationComponent } from './reservation/reservation.component';
 // import { ReservationlistComponent } from './reservationlist/reservationlist.component';
@@ -40,7 +40,7 @@ import { OrderItemsComponent } from './order-items/order-items.component';
 // import { BranchComponent } from './branch/branch.component';
 
 @NgModule({
-  declarations: [ HmsoperationComponent, OperatonComponent, OperationComponent],
+  declarations: [],
   imports: [
     CommonModule,MasterRoutingModule
   ],

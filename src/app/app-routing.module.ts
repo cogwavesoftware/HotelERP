@@ -119,27 +119,23 @@ const routes: Routes = [
 
   {
     path: 'Master',
-    component: AdminComponent,
-    
+    component: AdminComponent, 
     children: [ 
       {
         path: 'Master',
         redirectTo: 'Master/floor',
         pathMatch: 'full'
-      },
-       
+      },  
       {
         path: 'floor',
         //loadChildren: './master/floorcreation/floorcreation.module#FloorcreationModule'
         loadChildren: () => import('./master/floorcreation/floorcreation.module').then(m=>m.FloorcreationModule)
       },
-
       {
         path: 'RoomType',
         //loadChildren: './master/roomtypecreation/roomtypecreation.module#RoomtypecreationModule'
         loadChildren: () => import('./master/roomtypecreation/roomtypecreation.module').then(m=>m.RoomtypecreationModule)
       },
-
       {
         path: 'RoomNo',
         //loadChildren: './master/roomorganizer/roomorganizer.module#RoomorganizerModule'
@@ -155,7 +151,6 @@ const routes: Routes = [
          //loadChildren: './master/creditcard/creditcard.module#CreditcardModule'
          loadChildren: () => import('./master/creditcard/creditcard.module').then(m=>m.CreditcardModule)
        },
-
        {
         path: 'reference',
         //loadChildren: './master/booking-reference/booking-reference.module#BookingReferenceModule'
@@ -173,11 +168,7 @@ const routes: Routes = [
         //loadChildren: './master/gridtest/gridtest.module#GridtestModule'
         loadChildren: () => import('./master/gridtest/gridtest.module').then(m=>m.GridtestModule)
       },
-      {
-        path: 'pettycash',
-        //loadChildren: './master/gridtest/gridtest.module#GridtestModule'
-        loadChildren: () => import('./master/gridtest/pettycash/pettycash.module').then(m=>m.PettycashModule)
-      },
+      
       {
         path: 'guest',
         //loadChildren: './master/guestcreation/guestcreation.module#GuestcreationModule'
@@ -359,6 +350,42 @@ const routes: Routes = [
         path:'userrights',
         //loadChildren: './controlpanel/userrights/userrights.module#UserrightsModule'
         loadChildren: () => import('./controlpanel/userrights/userrights.module').then(m=>m.UserrightsModule)
+
+       },
+    ]
+  },
+
+
+
+  {
+    path: 'operation',
+    component: AdminComponent,
+    children: [ 
+      {
+        path: 'operation',
+        redirectTo: 'operation/petty',
+        pathMatch: 'full'
+      },
+
+      {
+         path: 'petty',
+         //loadChildren: './hmsoperation/pettycash/pettycash.module#PettycashModule'
+        loadChildren: () => import('./hmsoperation/pettycash/pettycash.module').then(m=>m.PettycashModule)
+       },
+
+       {
+        path: 'linkadvance',        
+        loadChildren: () => import('./hmsoperation/linkadvance/linkadvance.module').then(m=>m.LinkadvanceModule)
+      },
+
+      {
+        path:'transferAdvance',        
+        loadChildren: () => import('./hmsoperation/advancetransfer/advancetransfer.module').then(m=>m.AdvancetransferModule)
+       },
+
+       {
+        path:'roomcancel',        
+        loadChildren: () => import('./hmsoperation/roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
 
        },
     ]

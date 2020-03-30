@@ -1,7 +1,6 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
@@ -104,6 +103,7 @@ const routes: Routes = [
        // loadChildren: './roomboy/roomboy.module#RoomboyModule'
         loadChildren: () => import('./roomboy/roomboy.module').then(m=>m.RoomboyModule)
       },
+
       {
         path: 'visit',
        // loadChildren: './visitpurpose/visitpurpose.module#VisitpurposeModule'
@@ -170,11 +170,6 @@ const routes: Routes = [
     ]
   }
 ];
-
-
-
-
-
 
 @NgModule({
   declarations: [],

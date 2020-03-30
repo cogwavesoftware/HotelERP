@@ -1,8 +1,4 @@
 
-import { CamarawindowComponent } from './master/checkin/camarawindow/camarawindow.component';
-import { LoadingComponent } from './master/loading/loading.component';
-import { LoaderService } from './_services/loader.service';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './layout/admin/admin.component';
 import { AppComponent } from './app.component';
 
-
+import { CamarawindowComponent } from './master/checkin/camarawindow/camarawindow.component';
+import { LoadingComponent } from './master/loading/loading.component';
+import { LoaderService } from './_services/loader.service';
 import { AuthComponent } from './layout/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
@@ -47,15 +45,13 @@ import { OrderItemsComponent } from './master/order-items/order-items.component'
 //   return new TranslateHttpLoader(http);
 // }
 import {MatDialogModule} from '@angular/material/dialog';
-import { OperationComponent } from './HMSOperation/operation/operation.component';
-import { HmsoperationComponent } from './hmsoperation/hmsoperation.component';
 @NgModule({
   declarations: [   
     AppComponent, 
     AuthComponent,
     AdminComponent,
     BreadcrumbsComponent, 
-    ConfirmationDialogComponent, OperationComponent, HmsoperationComponent ,
+    ConfirmationDialogComponent ,
     
   ],
   imports: [

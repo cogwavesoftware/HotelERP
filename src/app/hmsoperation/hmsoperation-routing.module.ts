@@ -7,16 +7,29 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Operation',
+      title: 'operation',
       status: false
     },
+    
     children: [
       {
-        //path: 'floor', 
-        //loadChildren: () => import('./floorcreation/floorcreation.module').then(m=>m.FloorcreationModule)
+        path: 'petty', 
+         //loadChildren: './pettycash/pettycash.module#PettycashModule'
+        loadChildren: () => import('./pettycash/pettycash.module').then(m=>m.PettycashModule)
       },
-     
-      
+
+      {
+        path: 'linkadvance', 
+        loadChildren: () => import('./linkadvance/linkadvance.module').then(m=>m.LinkadvanceModule)
+      },
+      {
+        path: 'transferAdvance', 
+        loadChildren: () => import('./advancetransfer/advancetransfer.module').then(m=>m.AdvancetransferModule)
+      },
+      {
+        path: 'roomcancel', 
+        loadChildren: () => import('./roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
+      },
       
     ]
   }
@@ -27,7 +40,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-
 export class HmsoperationRoutingModule { }
 
 

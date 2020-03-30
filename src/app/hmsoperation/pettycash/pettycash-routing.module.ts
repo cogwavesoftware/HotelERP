@@ -1,10 +1,10 @@
+import { PettycashComponent } from './pettycash.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {  Routes,RouterModule } from "@angular/router";
-import { TaxruleComponent } from './taxrule.component';
+import { Routes,RouterModule } from '@angular/router';
 const routes:Routes = [{
   path:'',
-  component:TaxruleComponent,
+   component:PettycashComponent,
   }];
 @NgModule({
   declarations: [],
@@ -13,4 +13,4 @@ const routes:Routes = [{
   ],
   exports:[RouterModule]
 })
-export class TaxruleRoutingModule { }
+export class PettycashRoutingModule { }
