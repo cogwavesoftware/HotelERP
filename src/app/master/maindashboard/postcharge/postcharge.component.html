@@ -1,4 +1,5 @@
-<form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
+<form [formGroup]="form" (ngSubmit)="Submit(form)" class="  " autocomplete="off">
+ 
   <div class="test123   guestinfofirstrow paymentarray"  >
     <div class="">
      
@@ -8,32 +9,32 @@
               <div class='col-12 col-lg-4'>
                 <div class="form-group">
                   <label class="form-control-label" for="roomno">Room No </label>
-                  <input type="text" class="form-control tooltip-form" id="roomno" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomno.errors || form.controls.roomno.touched || form.controls.roomno.dirty}" required  />  
+                  <input type="text" class="form-control tooltip-form" id="roomno" formControlName="roomno" name="roomno"  value="{{RoomNo}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomno.errors || form.controls.roomno.touched || form.controls.roomno.dirty}" required  />  
                   <div class="invalid-feedback" *ngIf="form.controls.roomno.errors?.required" >roomno   is required</div>
                   </div>  
               </div>
               <div class='col-12 col-lg-4'>
                 <div class="form-group">
                   <label class="form-control-label" for="roomcode">Room Code </label>
-                  <input type="text" class="form-control tooltip-form" id="roomcode" formControlName="roomcode" name="roomcode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomcode.errors || form.controls.roomcode.touched || form.controls.roomcode.dirty}" required  />  
+                  <input type="text" class="form-control tooltip-form" id="roomcode" formControlName="roomcode" name="roomcode" value="{{RoomCode}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomcode.errors || form.controls.roomcode.touched || form.controls.roomcode.dirty}" required  />  
                   <div class="invalid-feedback" *ngIf="form.controls.roomcode.errors?.required" >roomcode   is required</div>
                   </div>  
               </div>
               <div class='col-12 col-lg-4'>
                 <div class="form-group">
-                  <label class="form-control-label" for="guestname">Guest Name </label>
-                  <input type="text" class="form-control tooltip-form" id="guestname" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required  />  
-                  <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname   is required</div>
+                  <label class="form-control-label" for="RefBillNo">RefBillNo</label>
+                  <input type="text" class="form-control tooltip-form" id="RefBillNo" formControlName="RefBillNo" name="RefBillNo" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.RefBillNo.errors || form.controls.RefBillNo.touched || form.controls.RefBillNo.dirty}" required  />  
+                  <div class="invalid-feedback" *ngIf="form.controls.RefBillNo.errors?.required" >RefBillNo   is required</div>
                   </div>  
               </div>
               <div class='col-12 col-lg-4'>
                 <div class="form-group" 
                  >
                 <label class="form-control-label required" for="roomcode">Revenue name</label>
-                      <select class="custom-select" id="revname" appSelectValidator="0"  
+                      <select class="custom-select" id="revname" (change)="GetTaxvalue()"  appSelectValidator="0"  
                         name="revname" formControlName="revname" >
                         <option value="0">Select</option>
-                        <option *ngFor="let catagery of catagerys" [value]="catagery.revname">{{catagery.revname}}</option>
+                        <option *ngFor="let rev of Revenuelist" [value]="rev.Id">{{rev.RevName}}</option>
                       </select> 
                  </div>  
               </div> 
@@ -43,7 +44,7 @@
                       <select class="custom-select" id="stward" appSelectValidator="0"  
                         name="stward" formControlName="stward">
                         <option value="0">Select</option>
-                        <option *ngFor="let catagery of catagerys" [value]="catagery.stward">{{catagery.stward}}</option>
+                        <option *ngFor="let roomboy of RoomBolylist" [value]="roomboy.Id">{{roomboy.StwardName}}</option>
                       </select>
                      
                  </div>  
@@ -83,9 +84,9 @@
                       <div class="tr"> 
                         <div class="td"> 
 
-                        <input type="text"  list="codes"  (change)="saveCode($event)">
+                        <input type="text"  list="codes" #ff  formControlName="itemname" id="itemname" (change)="saveCode(e,ff.value)">
                         <datalist id="codes">
-                          <option *ngFor="let c of codeList" [value]="c.name" >{{c.name}}</option>
+                          <option *ngFor="let c of itemList" [value]="c.ItemName">{{c.ItemName}}</option>
                         </datalist>
 
                           <!-- <input type="text" class="" id="itemname" formControlName="itemname">  -->
@@ -93,7 +94,7 @@
     
                     <div class="td">
                      <input type="number"  id="Amount"
-                      formControlName="Amount" name="Amount" #Amount (keyup)="CalculateExtrachargeAmount(k,Amount.value)" autocomplete="off" required />
+                      formControlName="Amount" name="Amount" #Amount (keyup)="CalculateTaxAmount(e)" autocomplete="off" required />
                     
       
                         </div> 
@@ -126,15 +127,15 @@
                   <tbody>
                     <tr>
                       <td>Bill Amount</td>
-                      <td style="text-align: right;">1000</td> 
+                      <td style="text-align: right;">{{TotalBillAmount}}</td> 
                     </tr>
                     <tr>
                       <td>Tax Amount</td>
-                      <td style="text-align: right;">50</td> 
+                      <td style="text-align: right;">{{TotalTaxAmount}}</td> 
                     </tr> 
                     <tr>
                       <td style="font-weight: bold;">Total</td>
-                      <td style="text-align: right;">1050</td> 
+                      <td style="text-align: right;">{{TotalNetAmount}}</td> 
                     </tr> 
                   </tbody>
                 </table>
@@ -154,3 +155,6 @@
     </div> 
   </div>
 </form>
+
+
+<ng2-toasty [position]="position"></ng2-toasty>

@@ -305,6 +305,11 @@ export class MasterformService {
      return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Userrightlist?UserId=' + UserId + '&ProductId=' + ProductId);
   }
 
+
+  GetTaxValueByRevd(BranchCode:string,Id:number)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/Gettaxvalue?BranchCode=' + BranchCode + '&Id=' + Id);
+  }
   GetAllNation() 
   {
      
@@ -366,6 +371,9 @@ export class MasterformService {
   {
     return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetStateCode');
   }
+
+
+
 
 
   // registerUser(user: User,roles : string[]) {
