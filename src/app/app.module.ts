@@ -45,6 +45,7 @@ import { OrderItemsComponent } from './master/order-items/order-items.component'
 //   return new TranslateHttpLoader(http);
 // }
 import {MatDialogModule} from '@angular/material/dialog';
+
 @NgModule({
   declarations: [   
     AppComponent, 

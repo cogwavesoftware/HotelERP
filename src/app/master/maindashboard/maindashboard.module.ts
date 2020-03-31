@@ -28,6 +28,8 @@ import { WakeupComponent } from './wakeup/wakeup.component';
 import { HouseguestComponent } from './houseguest/houseguest.component';
 import { ChangecompanyComponent } from './changecompany/changecompany.component';
 import { PaxonbillComponent } from './paxonbill/paxonbill.component';
+import { SetcomplimentComponent } from './setcompliment/setcompliment.component';
+import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.component';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,ManagementComponent,
@@ -35,7 +37,7 @@ import { PaxonbillComponent } from './paxonbill/paxonbill.component';
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
                  ChangeguestComponent, ChangepaxComponent, AmendDateComponent, ChangeplanComponent ,
                  PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
-                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent] ,
+                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule,
