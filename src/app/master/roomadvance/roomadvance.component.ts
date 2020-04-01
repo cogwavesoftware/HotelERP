@@ -17,7 +17,7 @@ export class RoomadvanceComponent implements OnInit {
   Branch: string;
   Roomadvanceform: FormGroup;
   submitted = false;
-   
+  subpaymodelist:any;
   constructor(  
     public router: Router,   private renderer: Renderer2,
     public formBuilder: FormBuilder,  
@@ -52,6 +52,42 @@ export class RoomadvanceComponent implements OnInit {
     AddPaymentButtonClick(): void {
       (<FormArray>this.Roomadvanceform.get("PayArray")).push(this.AddpaymentGrid());
     }
+
+    FilterPaymentMode(index: number) {
+
+
+      let mode = this.PayArray.controls[index].get('Paymode').value
+  
+      switch (mode) {
+        case "Cash":
+          this.subpaymodelist = [];
+          this.subpaymodelist.push("Cash")
+          //this.GetsubModepayment("Cash")
+          break;
+        case "Card":
+          this.GetsubModepayment("Card", index)
+          break;
+        case "Online":
+          this.GetsubModepayment("Online", index)
+          break;
+        case "Cheque":
+          this.subpaymodelist = [];
+          //this.GetsubModepayment("Cheque")
+          this.subpaymodelist.push("DD", index)
+          break;
+        case "Walet":
+          this.GetsubModepayment("Walet", index)
+          break;
+      }
+  
+    }
+    GetsubModepayment(Name: string, index: number) {
+
+      this._masterservice.GetAllSubPaymendModeViaMode(this.Branch, Name).subscribe(res => {
+        this.subpaymodelist = res
+      })
+}
+
 
     onSubmit() {
       this.submitted = true;        

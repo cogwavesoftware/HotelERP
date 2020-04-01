@@ -12,21 +12,16 @@
                                         <div class='col-12 col-lg-4'>
                                             <div class="form-group">
                                               <label class="form-control-label" for="roomno">Room No </label>
-                                              <input type="text" class="form-control tooltip-form" id="roomno" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && Roomadvanceform.controls.roomno.errors || Roomadvanceform.controls.roomno.touched || Roomadvanceform.controls.roomno.dirty}" required  />  
-                                              <div class="invalid-feedback" *ngIf="Roomadvanceform.controls.roomno.errors?.required" >roomno   is required</div>
+                                              <input type="text" class="form-control tooltip-form" id="roomno" value="{{RoomNo}}" formControlName="roomno" name="roomno" autocomplete="off"  required  />  
+                   
                                               </div>  
                                           </div>
+                                       
                                           <div class='col-12 col-lg-4'>
                                             <div class="form-group">
-                                              <label class="form-control-label" for="date">Date</label>
-                                              <input  id="bookdate" name="bookdate"  formControlName="bookdate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
-                                             </div>  
-                                          </div>
-                                          <div class='col-12 col-lg-4'>
-                                            <div class="form-group">
-                                              <label class="form-control-label" for="gname">Guest Name </label>
-                                              <input type="text" class="form-control tooltip-form" id="roomno" formControlName="gname" name="gname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && Roomadvanceform.controls.gname.errors || Roomadvanceform.controls.gname.touched || Roomadvanceform.controls.gname.dirty}" required  />  
-                                              <div class="invalid-feedback" *ngIf="Roomadvanceform.controls.gname.errors?.required" >gname is required</div>
+                                              <label class="form-control-label" for="roomcode">RoomCode</label>
+                                              <input type="text" class="form-control tooltip-form" id="roomcode" value="{{RoomCode}}" formControlName="roomcode" name="roomcode" autocomplete="off"  required  />  
+                                             
                                               </div>  
                                           </div>
                                           </div>
@@ -170,3 +165,5 @@
             </div> <!-- end userlist -->      
     </div>
 </div>
+
+<ng2-toasty [position]="position"></ng2-toasty> 

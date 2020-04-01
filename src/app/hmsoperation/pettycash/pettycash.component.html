@@ -2,7 +2,8 @@
     <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
   
       <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
-  
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="Id" formControlName="Id" name="Id" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off"  /> 
         <div class="container-fluid"  style="background-color: #fff;">
    
           <div class='row tabouter' style="margin-bottom: 0;">
@@ -15,32 +16,19 @@
                   <div class="row" style="margin-bottom: 0;">
                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                       <div class="form-group">
-                        <label class="form-control-label" for="voucherno">Voucher No </label>
-                        <input type="text" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.voucherno.errors || form.controls.voucherno.touched || form.controls.voucherno.dirty}" required    /> 
+                        <label class="form-control-label" for="RefNo">Ref No </label>
+                        <input type="text" class="form-control tooltip-form searchiconrelative" id="RefNo" formControlName="RefNo" name="RefNo" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.RefNo.errors || form.controls.RefNo.touched || form.controls.RefNo.dirty}" required    /> 
                       </div>  
                     </div>
 
-                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                  <label class="form-control-label" for="Date"><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Date </label>
-                  <div class="form-group">
-                    <div class="input-group" style="margin-bottom:0; ">
-                      <input  id="pdate" name="pdate"  formControlName="pdate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                         
-                    </div>
-                  </div>
-                  </div>
-                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                    <div class="form-group">
-                      <label class="form-control-label" for="ptime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkout Time </label>
-                      <timepicker id="ptime" name="ptime"    [showSpinners]="false" formControlName="ptime" [showMeridian]="ismeridian"></timepicker>  
-                      <div *ngIf="!valid">Invalid time </div>                                  
-                    </div>
-                  </div>
+                   
+                
                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                     <div class="form-group">
                       <label class="form-control-label" for="ledger">  Ledger </label>
-                     <select class="custom-select"  name="ledger" formControlName="ledger"  id="genderid" [ngClass]="{ 'is-invalid': submitted && form.ledger.errors }"> 
-                       <option value="select">Select</option> 
-                       <option *ngFor="let sour of gendertypes" [value]="sour.Description">{{ sour.ledger  }}</option>
+                     <select class="custom-select"  name="ledger" formControlName="ledger"  id="ledgerid" [ngClass]="{ 'is-invalid': submitted && form.ledger.errors }"> 
+                       <option value="0">Select</option> 
+                       <option *ngFor="let ledg of ledgerlist" [value]="ledg.Id">{{ ledg.LadgerName  }}</option>
                      </select>
                      <div *ngIf="submitted && form.ledger.errors" class="invalid-feedback">
                       <div *ngIf="form.ledger.errors.required">ledger is required</div>
@@ -50,11 +38,11 @@
                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
                     <div class="form-group">
                       <label class="form-control-label" for="transaction "><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Transaction </label>
-                      <select class="custom-select" #Days name="transaction" formControlName="transaction" (change)="ChangeCheckoutDate(Days.value)"
+                      <select class="custom-select" #Days name="transaction" formControlName="transaction"
                         id="transaction" [ngClass]="{ 'is-invalid': submitted && form.transaction.errors }">
                         <option value="0">Select</option>
-                        <option  *ngFor="let Day of noofdays" [value]="Day">
-                          {{ Day  }}</option>
+                        <option value="Receipt">Receipt</option>
+                        <option value="Payment">Payment</option>
                       </select>
                       <div *ngIf="submitted && form.transaction.errors" class="invalid-feedback">
                         <div *ngIf="form.transaction.errors.required">transaction is required</div>
@@ -64,14 +52,38 @@
                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
                     <div class="form-group">
                       <label class="form-control-label" for="paymentmode "><i  class="fa fa-calendar" aria-hidden="true"  ></i> Payment mode </label>
-                      <select class="custom-select" #Days name="paymentmode" formControlName="paymentmode" (change)="ChangeCheckoutDate(Days.value)"
+                      <!-- <select class="custom-select" #Days name="paymentmode" formControlName="paymentmode" (change)="ChangeCheckoutDate(Days.value)"
                         id="paymentmode" [ngClass]="{ 'is-invalid': submitted && form.paymentmode.errors }">
                         <option value="0">Select</option>
                         <option  *ngFor="let Day of noofdays" [value]="Day">
                           {{ Day  }}</option>
-                      </select>
+                      </select> -->
+                      <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="paymentmode" formControlName="paymentmode"
+                      id="paymentmode" [ngClass]="{ 'is-invalid': submitted && form.paymentmode.errors }">
+                      <option value="select">Select</option>
+                      <option *ngFor="let sour of paymentmode" [value]="sour">
+                        {{ sour }}</option>
+                    </select>
+
+
                       <div *ngIf="submitted && form.paymentmode.errors" class="invalid-feedback">
                         <div *ngIf="form.paymentmode.errors.required">paymentmode is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                    <div class="form-group">
+                      <label class="form-control-label" for="Paysubmode "><i  class="fa fa-calendar" aria-hidden="true"  ></i> Payment mode </label>
+                   
+                      <select class="custom-select"  name="Paysubmode" formControlName="Paysubmode"
+                      id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                      <option value="select">Select</option>
+                      <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                        {{ Paysubmode  }}</option>
+                    </select> 
+                      <div *ngIf="submitted && form.Paysubmode.errors" class="invalid-feedback">
+                        <div *ngIf="form.Paysubmode.errors.required">Paysubmode is required</div>
                       </div>
                     </div>
                   </div>
@@ -103,4 +115,111 @@
           </div>
           </form>
           </div>
+
+<!-- -----------table start Here------------ -->
+
+
+
+<div class="productlist">
+  <div class="shadow p-3 mb-5 bg-white rounded" >
+<div class="table-content crm-table">
+  <div class="project-table">
+    <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+      <div class="row">
+
+
+          <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Bank Data List</div>
+              </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div style="text-align: right;">
+                <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                  <!-- <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name"> -->
+                  <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                </label>
+              </div>
+            </div>  
+
+      </div>
+       
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> 
+          <thead>
+          <tr class="blueorange-gradient">
+            <!-- <th>
+              <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+            </th> -->
+            <th>
+              <mfDefaultSorter  by="Id">Id</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter  by="voucherno">VoucherNo</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter  by="ledger">LedgerName</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="transaction">Transaction</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter  by="Paysubmode">PayMode</mfDefaultSorter>
+            </th>
+
+              <th>
+                  <mfDefaultSorter  by="payableamount">Amount</mfDefaultSorter>
+              </th>
+            <th>
+              <mfDefaultSorter>Action</mfDefaultSorter>
+            </th>
+          </tr>
+          <tr>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of mf.data; let i = index;">
+            <!-- <td><img src="{{item.image}}" class="d-inline-block img-circle " alt="tbl"></td> -->
+          <td>{{item.Id}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.IFSCCode}}</td>
+            <td>{{item.BankBranchName}}</td>
+            <td>{{item.MICRCode}}</td>
+            <td>{{item.IsActive}}</td> 
+            <td class="action-icon">
+                <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModal('effect-13',item)"><i class="fa fa-book"></i></a>
+                <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="openMyModalData(i)"><i class="fa fa-edit"></i></a>
+                
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr class="blueorange-gradient">
+            <!-- <th>Profile</th> -->
+            <th>Id</th>
+            <th>VoucherNo</th>
+            <th>LedgerName</th>
+            <th>Transaction</th>
+            <th>PayMode</th>                
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td colspan="10">
+              <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<!-- -----------table End Here------------ -->
+
           </div>
+
+          
+
+      <ng2-toasty [position]="position"></ng2-toasty>

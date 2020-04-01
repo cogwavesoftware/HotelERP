@@ -136,4 +136,20 @@ export class OperationService {
 
   }
 
+  SavePettyDetail(Petty:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/SavePettyCash',Petty,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+
+  }
+
+  SaveRoomCancel(RoomCancel:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/RoomCancel',RoomCancel,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  SaveAdvanceData(advance:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveadvance',advance,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
 }

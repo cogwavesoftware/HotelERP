@@ -2,7 +2,8 @@
     <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
   
       <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
-  
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="Id" formControlName="Id" name="Id" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off"  /> 
         <div class="container-fluid"  style="background-color: #fff;">
    
           <div class='row tabouter' style="margin-bottom: 0;">
@@ -16,52 +17,24 @@
                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                       <div class="form-group">
                         <label class="form-control-label" for="roomno">Room No </label>
-                        <input type="text" class="form-control tooltip-form searchiconrelative" id="roomno" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomno.errors || form.controls.roomno.touched || form.controls.roomno.dirty}" required    /> 
+                        <select class="custom-select"  name="roomno" formControlName="roomno"
+                        id="roomno" [ngClass]="{ 'is-invalid': submitted && form.roomno.errors }">
+                        <option value="0">Select</option>
+                        <option *ngFor="let ROOM of  RoomList" [value]="ROOM.RoomNo">
+                          {{ ROOM.RoomNo  }}</option>
+                      </select> 
+                      <div *ngIf="submitted && form.roomno.errors" class="invalid-feedback">
+                        <div *ngIf="form.roomno.errors.required">roomno is required</div>
+                      </div>
                       </div>  
                     </div>
 
-                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                        <div class="form-group">
-                          <label class="form-control-label" for="guestname">Guest Name </label>
-                          <input type="text" class="form-control tooltip-form searchiconrelative" id="guestname" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    /> 
-                        </div>  
-                      </div>
-                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                        <div class="form-group">
-                          <label class="form-control-label" for="advance">Advance </label>
-                          <input type="text" class="form-control tooltip-form searchiconrelative" id="advance" formControlName="advance" name="advance" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.advance.errors || form.controls.advance.touched || form.controls.advance.dirty}" required    /> 
-                        </div>  
-                      </div>
-                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                        <div class="form-group">
-                          <label class="form-control-label" for="tarrif">Tarrif </label>
-                          <input type="text" class="form-control tooltip-form searchiconrelative" id="tarrif" formControlName="tarrif" name="tarrif" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.tarrif.errors || form.controls.tarrif.touched || form.controls.tarrif.dirty}" required    /> 
-                        </div>  
-                      </div> 
-
-                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                    <div class="form-group">
-                      <label class="form-control-label" for="refuntamt">Refunt Amount </label>
-                      <input type="text" class="form-control tooltip-form searchiconrelative" id="refuntamt" formControlName="refuntamt" name="refuntamt" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.refuntamt.errors || form.controls.refuntamt.touched || form.controls.refuntamt.dirty}" required    /> 
-                    </div>  
-                  </div> 
-                  <div class='col-12 col-lg-2 col-md-4 col-sm-4' style="padding-left:20px;">
-                    <div class="form-group">
-                      <label class="form-control-label" style="width: 100%;" >Date </label>
-                      <label class="form-control-label" style="font-weight: bold;"  >10/10/2020 </label>
-                      </div>  
-                  </div> 
+                  
                   </div><!-- end of row -->
 
                 
                 <div class="row  " style="margin-bottom: 0;"> 
-                    <div class='col-12  col-md-6 '>
-                        <div class="form-group">
-                          <label class="form-control-label" for="guestaddress">Guest Address </label>
-                          <textarea class="form-control" rows="5" id="guestaddress" formControlName="guestaddress" name="guestaddress" ></textarea> 
-                         </div>  
-                      </div> 
-                      <div class='col-12  col-md-6 '>
+                      <div class='col-12  col-md-12 '>
                         <div class="form-group">
                           <label class="form-control-label" for="reason">Reason </label>
                           <textarea class="form-control" rows="5" id="reason"  formControlName="reason" name="reason" ></textarea> 
@@ -80,3 +53,7 @@
           </form>
           </div>
           </div>
+
+          
+
+      <ng2-toasty [position]="position"></ng2-toasty>

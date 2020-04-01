@@ -7,6 +7,8 @@ import { IpserviceService } from 'src/app/_services/ipservice.service';
  import { Router, ActivatedRoute } from "@angular/router";
  import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from "@angular/common";
+import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
+
 @Component({
   selector: 'app-advanceform',
   templateUrl: './advanceform.component.html',
@@ -16,23 +18,28 @@ export class AdvanceformComponent implements OnInit {
   @Input() RoomCode: string;
   @Input() RoomNo: string;
   Branch: string;
+  theme = "bootstrap";
+  type = "default";
+  position = 'top-right';
   Roomadvanceform: FormGroup;
   submitted = false;
   subpaymodelist:any;
+  UserId:number;
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
   constructor(  
-    public router: Router,   private renderer: Renderer2,
-    public formBuilder: FormBuilder,private _oprservice:OperationService, 
-    private route: ActivatedRoute, 
+    public router: Router,private toastyService: ToastyService,
+    public formBuilder: FormBuilder,private _oprservice:OperationService,private route: ActivatedRoute,
     private _masterservice: MasterformService ) {
-      this.Branch="CW_1001"       
+      this.Branch="CW_1001" 
+      this.UserId=1      
      }
  
      ngOnInit() {
       this.Roomadvanceform = this.formBuilder.group({
-        roomno: ['', Validators.required] ,
-        bookdate: ['', Validators.required] ,
-        gname:['',Validators.required],
+        roomno: [this.RoomNo, Validators.required] ,      
+        roomcode:[this.RoomCode,Validators.required],
+        BranchCode: [this.Branch, [Validators.required]],
+        CreatedBy: [this.UserId, [Validators.required]] ,
         PayArray: this.formBuilder.array([this.AddpaymentGrid()]), 
       }); 
     }
@@ -55,15 +62,43 @@ export class AdvanceformComponent implements OnInit {
       (<FormArray>this.Roomadvanceform.get("PayArray")).push(this.AddpaymentGrid());
     }
 
-    onSubmit() {
-      this.submitted = true;        
-      if (this.Roomadvanceform.invalid) {
-          return;
-      }
 
-      alert('SUCCESS!! :-)')
+  onSubmit() {
+ 
+    this.Roomadvanceform.patchValue({
+      roomno:this.RoomNo,
+      roomcode:this.RoomCode
+    })
+    console.log(this.Roomadvanceform.value)
+
+  this._oprservice.SaveAdvanceData(this.Roomadvanceform.value).subscribe(data => {
+    if (data == true) {     
+        this.addToast(
+          "Cogwave Software",
+          "Advance Saved Sucessfully",
+          "success"
+        );
+        this.Roomadvanceform.reset();      
+    } 
+    else {
+      this.addToast("Cogwave Software", "Advance  Not Saved", "error");
+      this.Roomadvanceform.reset();      
+     
+    }
+  },
+  error=>{
+    console.log('error')
+    console.log(error)
+    this.addToast("Cogwave Software", "Advance  Not Saved", "error");
+  });
+
+}
+
+
+  onDeletePayment(bankAccountID, k) {
+     if (k != 0) (<FormArray>this.Roomadvanceform.get("PayArray")).removeAt(k);
+   
   }
-
   
   FilterPaymentMode(index: number) {
 
@@ -122,6 +157,45 @@ GetAllRoomAdvanceList(RoomNo: string)
 
 }
 
+addToast(title, Message, theme) {
+  debugger;
+  this.toastyService.clearAll();
+  const toastOptions: ToastOptions = {
+    title: title,
+    msg: Message,
+    showClose: false,
+    timeout: 3000,
+    theme: theme,
+    onAdd: (toast: ToastData) => {
+      //console.log('Toast ' + toast.id + ' has been added!');
+      // this.router.navigate(['/dashboard/default']);
+    },
+    onRemove: (toast: ToastData) => {
+      /* removed */
+    }
+  };
 
+  switch (theme) {
+    case "default":
+      this.toastyService.default(toastOptions);
+      break;
+    case "info":
+      this.toastyService.info(toastOptions);
+      break;
+    case "success":
+      debugger;
+      this.toastyService.success(toastOptions);
+      break;
+    case "wait":
+      this.toastyService.wait(toastOptions);
+      break;
+    case "error":
+      this.toastyService.error(toastOptions);
+      break;
+    case "warning":
+      this.toastyService.warning(toastOptions);
+      break;
+  }
+}
 
 }
