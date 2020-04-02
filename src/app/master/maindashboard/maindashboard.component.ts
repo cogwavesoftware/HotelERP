@@ -1,40 +1,47 @@
-import { Roominstructionmodel } from './../../_models/Roominstructionmodel';
+import { Roominstructionmodel } from "./../../_models/Roominstructionmodel";
 
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, DoCheck } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  AfterViewInit,
+  DoCheck
+} from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Observable } from 'rxjs';
-import { MasterformService } from './../../_services/masterform.service';
-import { HmsdashboardService } from './../../_services/hmsdashboard.service';
-import { IpserviceService } from 'src/app/_services/ipservice.service';
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { BankService } from 'src/app/_services/bank.service';
-import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
+import { Observable } from "rxjs";
+import { MasterformService } from "./../../_services/masterform.service";
+import { HmsdashboardService } from "./../../_services/hmsdashboard.service";
+import { IpserviceService } from "src/app/_services/ipservice.service";
+import { HttpClient, HttpEventType } from "@angular/common/http";
+import { BankService } from "src/app/_services/bank.service";
+import { TimepickerConfig } from "ngx-bootstrap/timepicker";
 import { DatePipe } from "@angular/common";
-import { OperationService } from 'src/app/_services/operation.service';
-import { error } from 'util';
-import { EditPaxRateFormmodel } from 'src/app/_models/EditPaxRateFormmodel';
-import { PaxonBillmodel } from './../../_models/PaxonBillmodel';
-import { ChangePlanFormmodel } from './../../_models/ChangePlanFormmodel';
-import { AmendRoommodel } from './../../_models/AmendRoommodel';
-import { RoomShifftFormmodel } from './../../_models/RoomShifftFormmodel';
-import { ExtraBedFormmodel } from './../../_models/ExtraBedFormmodel';
-import { GuestcreationComponent } from './../guestcreation/guestcreation.component';
+import { OperationService } from "src/app/_services/operation.service";
+import { error } from "util";
+import { EditPaxRateFormmodel } from "src/app/_models/EditPaxRateFormmodel";
+import { PaxonBillmodel } from "./../../_models/PaxonBillmodel";
+import { ChangePlanFormmodel } from "./../../_models/ChangePlanFormmodel";
+import { AmendRoommodel } from "./../../_models/AmendRoommodel";
+import { RoomShifftFormmodel } from "./../../_models/RoomShifftFormmodel";
+import { ExtraBedFormmodel } from "./../../_models/ExtraBedFormmodel";
+import { GuestcreationComponent } from "./../guestcreation/guestcreation.component";
 
-import { ElementRef } from '@angular/core';
-import { BlockingdetailsComponent } from './blockingdetails/blockingdetails.component';
-import { Router } from '@angular/router';
-import { ReservationService } from './../../_services/reservation.service';
-
-
+import { ElementRef } from "@angular/core";
+import { BlockingdetailsComponent } from "./blockingdetails/blockingdetails.component";
+import { Router } from "@angular/router";
+import { ReservationService } from "./../../_services/reservation.service";
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
-import { DiscountFormmodel } from 'src/app/_models/DiscountFormmodel';
-import { ChangeCompanymodel } from 'src/app/_models/ChangeCompanymodel';
+import { DiscountFormmodel } from "src/app/_models/DiscountFormmodel";
+import { ChangeCompanymodel } from "src/app/_models/ChangeCompanymodel";
 @Component({
-  selector: 'app-maindashboard',
-  templateUrl: './maindashboard.component.html',
-  styleUrls: ['./maindashboard.component.scss',
-    '../../../assets/icon/icofont/css/icofont.scss'],
+  selector: "app-maindashboard",
+  templateUrl: "./maindashboard.component.html",
+  styleUrls: [
+    "./maindashboard.component.scss",
+    "../../../assets/icon/icofont/css/icofont.scss"
+  ]
 })
 export class MaindashboardComponent implements OnInit, OnDestroy {
   public roomsdetail;
@@ -46,7 +53,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   rmno: string;
   theme = "bootstrap";
   type = "default";
-  position = 'top-right';
+  position = "top-right";
   Refinputs: string;
   roomname1: string;
   GuestData: any;
@@ -55,18 +62,18 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   RoomCodes: string;
   RoomNos: string;
   extrabedform: ExtraBedFormmodel;
-  roomshifftformmodel: RoomShifftFormmodel
-  discountform:DiscountFormmodel
-  changecompanyform:ChangeCompanymodel;
-  paxonbillform:PaxonBillmodel;
-  RoomInstruction:Roominstructionmodel;
+  roomshifftformmodel: RoomShifftFormmodel;
+  discountform: DiscountFormmodel;
+  changecompanyform: ChangeCompanymodel;
+  paxonbillform: PaxonBillmodel;
+  RoomInstruction: Roominstructionmodel;
   finalMenu = new Array();
   floor = new Array<any>();
   vacantRoom = new Array<any>();
   timepicker: Partial<TimepickerConfig>;
   changepaxform: EditPaxRateFormmodel;
   amendformdata: AmendRoommodel;
-  changeplanformmodel: ChangePlanFormmodel
+  changeplanformmodel: ChangePlanFormmodel;
   model: any;
   Branch: string;
   BookingList: any;
@@ -76,23 +83,27 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     this.valid = event;
   }
 
-  @ViewChild(BlockingdetailsComponent, { static: false }) block: BlockingdetailsComponent
-  @ViewChild('Name1', { static: false }) name: ElementRef
-  constructor(private datePipe: DatePipe, private _masterformservice: MasterformService,
+  @ViewChild(BlockingdetailsComponent, { static: false })
+  block: BlockingdetailsComponent;
+  @ViewChild("Name1", { static: false }) name: ElementRef;
+  constructor(
+    private datePipe: DatePipe,
+    private _masterformservice: MasterformService,
     private router: Router,
-    private http: HttpClient, private _reservationservice: ReservationService,
-    private toastyService: ToastyService, private _oprservice: OperationService,
-    private _ipservice: IpserviceService, private _hmsdashboard: HmsdashboardService,
-    private _bankservice: BankService, private _OprService: OperationService) {
-
+    private http: HttpClient,
+    private _reservationservice: ReservationService,
+    private toastyService: ToastyService,
+    private _oprservice: OperationService,
+    private _ipservice: IpserviceService,
+    private _hmsdashboard: HmsdashboardService,
+    private _bankservice: BankService,
+    private _OprService: OperationService
+  ) {
     this.Branch = "CW_1001";
     this.UserId = 1;
   }
 
   ngOnInit() {
-
-
-
     this.model = {
       Id: 0,
       BranchCode: this.Branch,
@@ -102,7 +113,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       RoomCode: this.RoomCodes,
       Pax: "0",
       SRoomNo: "select"
-    }
+    };
 
     this.changepaxform = {
       RoomNo: "0",
@@ -118,47 +129,39 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       Id: 0,
       BranchCode: this.Branch,
       IpAdd: "0",
-      CreatedBy: this.UserId,
-    }
-
-
+      CreatedBy: this.UserId
+    };
 
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
       this.BookingList = data;
     });
     this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
       this.finalMenu = res;
-      this.vacantRoom = res['Rooms'].filter(a => a.Status == "V");
+      this.vacantRoom = res["Rooms"].filter(a => a.Status == "V");
       this.DasboardLoad = setInterval(() => {
         this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
           this.finalMenu = res;
-          this.vacantRoom = res['Rooms'].filter(a => a.Status == "V");
-        })
-      }, 7000)
-    })
+          this.vacantRoom = res["Rooms"].filter(a => a.Status == "V");
+        });
+      }, 7000);
+    });
   }
-
-
 
   ngOnDestroy() {
     clearInterval(this.DasboardLoad);
   }
 
-
-
   LoadReservationCheckinpage(ResNo: string) {
-    this.router.navigate(['/Master/reschk', ResNo])
+    this.router.navigate(["/Master/reschk", ResNo]);
   }
 
   OpenMyModel(event, name) {
     document.querySelector("#" + event).classList.add("md-show");
   }
 
-
   openRoomsPopup(event, roomname) {
-
     this.model2 = {
-      roomname: roomname,
+      roomname: roomname
     };
     console.log("roomname" + roomname);
     document.querySelector("#" + event).classList.add("md-show");
@@ -178,10 +181,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     this.roomname1 = CrRoomCode;
     this.RoomNos = CrRoomNo;
     this.RoomCodes = CrRoomCode;
-    console.log('Francis');
+    console.log("Francis");
     console.log(CrRoomNo + CrRoomCode);
   }
-
 
   modelroomhover() {
     console.log("test");
@@ -200,8 +202,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
 
   popinsidepopforguestnamefunc(event) {
     document.querySelector("#" + event).classList.add("md-show");
-    alert("fdfdf")
-
+    alert("fdfdf");
   }
   popinsidepopforguestnamefunc1(event) {
     document.querySelector("#" + event).classList.add("md-show");
@@ -253,12 +254,17 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   // Release-OpenReleaseModel
 
   OpenModel(event, RoomNo) {
-
     let Description = event;
     switch (Description) {
       case "Blockdetails":
         break;
-     
+      case "Management":
+        break;
+      case "Release":
+        break;
+        case "ReleaseB":
+        break;
+        
       case "Post":
         break;
       case "Advance":
@@ -267,7 +273,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         this.ProcessRoomShift(RoomNo);
         break;
       case "Discount":
-        this.ProcessDiscount(RoomNo)
+        this.ProcessDiscount(RoomNo);
         break;
       case "ExtraBed":
         this.ProcessExtraBed(RoomNo);
@@ -279,7 +285,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         this.ProcessAmend(RoomNo);
         break;
       case "ChangeCompany":
-        this.ProcessChangeCompany(RoomNo)
+        this.ProcessChangeCompany(RoomNo);
         break;
       case "HouseGuest":
         break;
@@ -288,158 +294,153 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         break;
       case "linkunlink":
         break;
-        case "linkunlink1":
+      case "linkunlink1":
         break;
       case "ChangePlan":
         this.ProcessChangePlan(RoomNo);
         break;
-        case "Instruction":
-          this.ProcessRoomInstruction(RoomNo);
-          break;
-        
+      case "Instruction":
+        this.ProcessRoomInstruction(RoomNo);
+        break;
     }
-    console.log(event)
-    console.log('event')
+    console.log(event);
+    console.log("event");
     document.querySelector("#" + event).classList.add("md-show");
-
   }
 
   ProcessExtraBed(RoomNo: string) {
-    this._OprService.GetExtraBedFormData(this.Branch, RoomNo).subscribe(res => {
-
-      this.extrabedform = res;
-      this.extrabedform.CreatedBy = this.UserId;
-     
-    },
+    this._OprService.GetExtraBedFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.extrabedform = res;
+        this.extrabedform.CreatedBy = this.UserId;
+      },
       error => {
-        console.log('error in ProcessExtraBed')
+        console.log("error in ProcessExtraBed");
       },
       () => {
-        console.log('Sucess in ProcessExtraBed')
-      })
-
+        console.log("Sucess in ProcessExtraBed");
+      }
+    );
   }
 
-  
   ProcessPaxOnBill(RoomNo: string) {
-    this.paxonbillform={
-      RoomNo:RoomNo,
-      RoomCode:this.RoomCodes,
-      Pax:1,
-      BranchCode:this.Branch,
-      IpAdd:"0",
-      CreatedBy:this.UserId
+    this.paxonbillform = {
+      RoomNo: RoomNo,
+      RoomCode: this.RoomCodes,
+      Pax: 1,
+      BranchCode: this.Branch,
+      IpAdd: "0",
+      CreatedBy: this.UserId
     };
-    console.log('ProcessPaxOnBill')
-    console.log( this.paxonbillform)
+    console.log("ProcessPaxOnBill");
+    console.log(this.paxonbillform);
   }
   ProcessRoomInstruction(RoomNo: string) {
-    
-    this.RoomInstruction={
-      Id:"0",
-      RoomNo:RoomNo,
-      RoomCode:this.RoomCodes,
-      instruction:"",
-      BranchCode:this.Branch,
-      CreatedBy:this.UserId
+    this.RoomInstruction = {
+      Id: "0",
+      RoomNo: RoomNo,
+      RoomCode: this.RoomCodes,
+      instruction: "",
+      BranchCode: this.Branch,
+      CreatedBy: this.UserId
     };
-    console.log('ProcessRoomInstruction')
-    console.log( this.RoomInstruction)
+    console.log("ProcessRoomInstruction");
+    console.log(this.RoomInstruction);
   }
-
-  
 
   ProcessDiscount(RoomNo: string) {
-    this._OprService.GetDiscountFormData(this.Branch, RoomNo).subscribe(res => {
-      this.discountform = res;
-      this.discountform.CreatedBy = this.UserId;
-      this.discountform.BranchCode = this.Branch;
-      this.discountform.RoomCode = this.RoomCodes;
-    },
+    this._OprService.GetDiscountFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.discountform = res;
+        this.discountform.CreatedBy = this.UserId;
+        this.discountform.BranchCode = this.Branch;
+        this.discountform.RoomCode = this.RoomCodes;
+      },
       error => {
-        console.log('error in discountform')
+        console.log("error in discountform");
       },
       () => {
-        console.log('Sucess in discountform')
-      })
-
+        console.log("Sucess in discountform");
+      }
+    );
   }
-
 
   ProcessChangeCompany(RoomNo: string) {
-    this._OprService.GetChangeCompanyData(this.Branch, RoomNo).subscribe(res => {
-      this.changecompanyform = res;
-      this.changecompanyform.CreatedBy = this.UserId;
-      this.changecompanyform.BranchCode = this.Branch;
-      this.changecompanyform.RoomCode = this.RoomCodes;
-    },
+    this._OprService.GetChangeCompanyData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.changecompanyform = res;
+        this.changecompanyform.CreatedBy = this.UserId;
+        this.changecompanyform.BranchCode = this.Branch;
+        this.changecompanyform.RoomCode = this.RoomCodes;
+      },
       error => {
-        console.log('error in discountform')
+        console.log("error in discountform");
       },
       () => {
-        console.log('Sucess in discountform')
-      })
-
+        console.log("Sucess in discountform");
+      }
+    );
   }
 
-  
   ProcessAmend(RoomNo: string) {
-    this._OprService.GetAmendFormData(this.Branch, RoomNo).subscribe(res => {
-      this.amendformdata = res;
-      this.amendformdata.CreatedBy = this.UserId;
-    },
+    this._OprService.GetAmendFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.amendformdata = res;
+        this.amendformdata.CreatedBy = this.UserId;
+      },
       error => {
-        console.log('error in ProcessAmend')
+        console.log("error in ProcessAmend");
       },
       () => {
-        console.log('Sucess in ProcessAmend')
-      })
-
+        console.log("Sucess in ProcessAmend");
+      }
+    );
   }
 
   ProcessChangePax(RoomNo: string) {
-
-    this._OprService.GetPaxEditFormData(this.Branch, RoomNo).subscribe(res => {
-      this.changepaxform = res;
-      this.changepaxform.CreatedBy = this.UserId;
-    },
+    this._OprService.GetPaxEditFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.changepaxform = res;
+        this.changepaxform.CreatedBy = this.UserId;
+      },
       error => {
-        console.log('error in ProcessChangePax')
+        console.log("error in ProcessChangePax");
       },
       () => {
-        console.log('Sucess in ProcessChangePax')
-      })
+        console.log("Sucess in ProcessChangePax");
+      }
+    );
   }
 
   ProcessRoomShift(RoomNo: string) {
-
-    this._OprService.GetRoomShiftFormData(this.Branch, RoomNo).subscribe(res => {
-      this.roomshifftformmodel = res;
-      this.roomshifftformmodel.CreatedBy = this.UserId;
-    },
+    this._OprService.GetRoomShiftFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.roomshifftformmodel = res;
+        this.roomshifftformmodel.CreatedBy = this.UserId;
+      },
       error => {
-        console.log('error in ProcessRoomShift')
+        console.log("error in ProcessRoomShift");
       },
       () => {
-        console.log('Sucess in ProcessRoomShift')
-      })
-
+        console.log("Sucess in ProcessRoomShift");
+      }
+    );
   }
 
   ProcessChangePlan(RoomNo: string) {
-    this._OprService.GetChangePlanFormData(this.Branch, RoomNo).subscribe(res => {
-      this.changeplanformmodel = res;
-      this.changeplanformmodel.CreatedBy = this.UserId;
-    },
+    this._OprService.GetChangePlanFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.changeplanformmodel = res;
+        this.changeplanformmodel.CreatedBy = this.UserId;
+      },
       error => {
-        console.log('error in ProcessChangePlan')
+        console.log("error in ProcessChangePlan");
       },
       () => {
-        console.log('Sucess in ProcessChangePlan')
-      })
+        console.log("Sucess in ProcessChangePlan");
+      }
+    );
   }
-
-
 
   OpenModelWithRoomDetails(event) {
     let Description = event;
@@ -452,22 +453,17 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         break;
       case "vacantdetails":
         break;
-
     }
-    console.log(event)
-    console.log('event')
+    console.log(event);
+    console.log("event");
     document.querySelector("#" + event).classList.add("md-show");
   }
 
-
-
   modalVacentHide(event) {
-    var allbtn = document.querySelector('.md-show');
+    var allbtn = document.querySelector(".md-show");
     console.log(allbtn);
     allbtn.classList.remove("md-show");
-
   }
-
 
   addToast(title, Message, theme) {
     debugger;
@@ -510,5 +506,3 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-

@@ -18,6 +18,7 @@ export class ChangecompanyComponent implements OnInit {
    @Input() RoomNo: string;
    @Input() changecompanyform:ChangeCompanymodel;
   Branch: string;
+  UserId:number;
   submitted = false;
   subpaymodelist:any;
   theme = "bootstrap";
@@ -32,21 +33,20 @@ export class ChangecompanyComponent implements OnInit {
     private route: ActivatedRoute, 
     private _masterservice: MasterformService ) {
       this.Branch="CW_1001"    
-      
+      this.UserId=1
      }
  
 
   ngOnInit() {
     this.changecompanyform={
-      BranchCode: "0",
-      CreatedBy: 0,
+      BranchCode:this.Branch,
+      CreatedBy:this.UserId,
       RoomNo: "0",
       RoomCode: "0",
       CompanyId:"0",
       IsCompanyTrif:"NO",
       TarifAmount: 0,
       Reason: "0",
-      
       }    
       this._masterservice.GetRoomcomany(this.Branch).subscribe(res=>{
         this.companylist=res;
@@ -57,44 +57,41 @@ export class ChangecompanyComponent implements OnInit {
 
 
   SaveChangeCompany(form?: NgForm) {
-    console.log('form.value')
-    console.log(form.value)
-    // form.value.BranchCode = localStorage.getItem("BranchCode")
-    // form.value.CreatedBy = localStorage.getItem("id")
-    // form.value.ModifyBy = localStorage.getItem("id")
-    // form.value.IpAddress = localStorage.getItem("LOCAL_IP")
+    
     if (form.invalid) {
       console.log(form.value);
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-
-   
     this._oprservice.SaveChangeCompany(form.value).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
           this.addToast(
-            "Cogwave Software",
-            "ExtraBed Saved Sucessfully",
+            "Cogwave Software Technologies Pvt Ltd..",
+            "Congratulations Data Saved Sucessfully",
             "success"
-          );
-        form.reset();              
-        } else {
-          this.addToast(
-            "Cogwave Software",
-            "ExtraBed Data Updated Sucessfully",
-            "success"
-          );
-          form.reset();           
-        }
-      } else {
-        this.addToast("Cogwave Software", "ExtraBed Data Not Saved", "error");
-       
+          );               
+      } 
+      else {
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully", "error");
       }
-    });
+    },
+      error=>{
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully", "error");
+      },
+      ()=>{
+      //  form.reset();
+        this.closeMyModalPin(event)
+      });
 
- 
-   
+  }
+
+
+  closeMyModalPin(event){ 
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    } 
+    var maindashboard = document.querySelectorAll(".maindashboard"); 
   }
 
   addToast(title, Message, theme) {

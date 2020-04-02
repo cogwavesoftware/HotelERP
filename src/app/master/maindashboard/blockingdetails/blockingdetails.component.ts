@@ -31,9 +31,12 @@ export class BlockingdetailsComponent implements OnInit {
   type = "default";
   @Input() RoomCode: string;
   @Input() RoomNo: string;
+  @Input() Operation:string;
 
-  constructor(public router: Router, private datePipe: DatePipe,private toastyService: ToastyService,
-    private route: ActivatedRoute, public formBuilder: FormBuilder,private _masterformservice:MasterformService
+  constructor(public router: Router, 
+    private datePipe: DatePipe,private toastyService: ToastyService,
+    private route: ActivatedRoute, public formBuilder: FormBuilder,
+    private _masterformservice:MasterformService
     ) {
 
 
@@ -60,7 +63,8 @@ export class BlockingdetailsComponent implements OnInit {
       BranchCode: [this.Branch, Validators.required],
       ModifyBy: [this.CreatedBy],
       ModifyDate: [''],
-      IpAdd: []
+      IpAdd: [],
+      Operation:[this.Operation,Validators.required]
     });
   }
 
@@ -72,33 +76,51 @@ export class BlockingdetailsComponent implements OnInit {
     let ReleaseDate = this.datePipe.transform(this.blockingdetailsform.get('ReleaseDate').value, "MM/dd/yyyy");
     this.blockingdetailsform.patchValue({
       BlockDate: BlockDate,
-      ReleaseDate: ReleaseDate
+      ReleaseDate: ReleaseDate,
+      RoomNo:this.RoomNo,
+      RoomCode:this.RoomCode,
+      Operation:this.Operation
     })
+    console.log('this.blockingdetailsform.value')
     console.log(this.blockingdetailsform.value)
     this._masterformservice.SaveBlockinformation(this.blockingdetailsform.value).subscribe(data => {
       if (data == true) {
         this.addToast(
-          "Cogwave Software",
-          "Block Information Saved Sucessfully",
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
           "success"
         );
+       
       } 
-      else {
-        alert('d')
-        this.addToast("Cogwave Software", "Block Information Not Saved", "error");
-        this.minDate=new Date();
-        this.maxDate.setDate(this.minDate.getDate() + 1);
-        this.blockingdetailsform.patchValue({
-          BlockDate: this.minDate,
-          ReleaseDate:this.maxDate,
-          Status: "SHORT"
-        })
+      else {       
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+        // this.minDate=new Date();
+        // this.maxDate.setDate(this.minDate.getDate() + 1);
+        // this.blockingdetailsform.patchValue({
+        //   BlockDate: this.minDate,
+        //   ReleaseDate:this.maxDate,
+        //   Status: "SHORT"
+        // })
       }
     },
     error => {
+     console.log(error.message)
+     console.log('error.message')
+      //this.blockingdetailsform.reset();
+      this.addToast("Cogwave Software", error.message, "error");
+      // this.minDate=new Date();
+      // this.maxDate.setDate(this.minDate.getDate() + 1);
+      // this.blockingdetailsform.patchValue({
+      //   BlockDate: this.minDate,
+      //   ReleaseDate:this.maxDate,
+      //   Status: "SHORT",
+      //   RoomNo:this.RoomNo,
+      //   RoomCode:this.RoomCode
+      // })
+    },
+    ()=>{
+      alert('suceesss')
       this.blockingdetailsform.reset();
-     
-      this.addToast("Cogwave Software", "Block Information Not Saved", "error");
       this.minDate=new Date();
       this.maxDate.setDate(this.minDate.getDate() + 1);
       this.blockingdetailsform.patchValue({
@@ -106,9 +128,7 @@ export class BlockingdetailsComponent implements OnInit {
         ReleaseDate:this.maxDate,
         Status: "SHORT"
       })
-    },
-    ()=>{
-      alert('suceesss')
+      this.closeMyModalPin(event);
     });
   }
 
@@ -117,16 +137,20 @@ export class BlockingdetailsComponent implements OnInit {
   }
 
   closeMyModalPin(event){ 
+    this.blockingdetailsform.reset();
+    this.blockingdetailsform.patchValue({
+      BlockDate: this.minDate,
+      ReleaseDate:this.maxDate,
+      Status: "SHORT"
+    })
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
     } 
     var maindashboard = document.querySelectorAll(".maindashboard"); 
   }
-  Close()
-  {
-    this.blockingdetailsform.reset();
-  }
+
+  
 
   addToast(title, Message, theme) {
     debugger;

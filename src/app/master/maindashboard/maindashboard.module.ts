@@ -13,8 +13,6 @@ import { DatePipe } from '@angular/common';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker'; 
 import { ToastyModule } from 'ng2-toasty'; 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
- import { ManagementComponent } from './management/management.component';
-import { HouseGuestComponent } from './house-guest/house-guest.component';
 import { RoomShifftComponent } from './room-shifft/room-shifft.component';
 import { AdvanceformComponent } from './advanceform/advanceform.component';
 import { PostchargeComponent } from './postcharge/postcharge.component';
@@ -30,14 +28,15 @@ import { ChangecompanyComponent } from './changecompany/changecompany.component'
 import { PaxonbillComponent } from './paxonbill/paxonbill.component';
 import { SetcomplimentComponent } from './setcompliment/setcompliment.component';
 import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.component';
+import { ReleaseComponent } from './release/release.component';
 @NgModule({
    providers: [DatePipe],
-  declarations: [MaindashboardComponent,BlockingdetailsComponent,ManagementComponent,
-                 HouseGuestComponent,RoomShifftComponent,DiscountportalComponent,
+  declarations: [MaindashboardComponent,BlockingdetailsComponent,
+                 RoomShifftComponent,DiscountportalComponent,
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
                  ChangeguestComponent, ChangepaxComponent, AmendDateComponent, ChangeplanComponent ,
                  PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
-                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent] ,
+                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule,

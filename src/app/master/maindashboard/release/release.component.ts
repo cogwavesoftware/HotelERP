@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import {
@@ -12,14 +13,14 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 
 @Component({
-  selector: 'app-management',
-  templateUrl: './management.component.html',
-  styleUrls: ['./management.component.scss']
+  selector: 'app-release',
+  templateUrl: './release.component.html',
+  styleUrls: ['./release.component.scss']
 })
-export class ManagementComponent implements OnInit {
+export class ReleaseComponent implements OnInit {
   Branch: string = "CW1001";
   CreatedBy: number = 1;
-  blockingdetailsform: FormGroup;
+  ReleaseForm: FormGroup;
   submitted = false;
   IsLongTime: Boolean = false;
   minDate = new Date();
@@ -31,9 +32,12 @@ export class ManagementComponent implements OnInit {
   type = "default";
   @Input() RoomCode: string;
   @Input() RoomNo: string;
+  @Input() Operation:string;
 
-  constructor(public router: Router, private datePipe: DatePipe,private toastyService: ToastyService,
-    private route: ActivatedRoute, public formBuilder: FormBuilder,private _masterformservice:MasterformService
+  constructor(public router: Router, 
+    private datePipe: DatePipe,private toastyService: ToastyService,
+    private route: ActivatedRoute, public formBuilder: FormBuilder,
+    private _masterformservice:MasterformService
     ) {
 
 
@@ -42,24 +46,20 @@ export class ManagementComponent implements OnInit {
 
   ngOnInit() {
 
+ 
     this.maxDate.setDate(this.minDate.getDate() + 1);
-    this.blockingdetailsform = this.formBuilder.group({
-      ID: ['0', Validators.required],
-      Status: ['SHORT', Validators.required],
-      BlockDate: [new Date(), [Validators.required]],
-      BlockTime: [''],
-      ReleaseDate: [this.maxDate, Validators.required],
-      ReleaseTime: [],
-      NoOfDays: ['0'],
+    this.ReleaseForm = this.formBuilder.group({
+     
+      
+      ReleaseDate: [new Date(), [Validators.required]],
       RoomNo: [this.RoomNo, Validators.required],
       RoomCode: [this.RoomCode, Validators.required],
-      CreatedDate: [''],
+      StwardName:['', Validators.required],
       CreatedBy: [this.CreatedBy, Validators.required],
       Reason: ['', Validators.required],
       BranchCode: [this.Branch, Validators.required],
       ModifyBy: [this.CreatedBy],
-      ModifyDate: [''],
-      IpAdd: []
+      Operation:[this.Operation,Validators.required]
     });
   }
 
@@ -67,59 +67,82 @@ export class ManagementComponent implements OnInit {
 
   Submit(blockingdetails: FormGroup) {
 
-    let BlockDate = this.datePipe.transform(this.blockingdetailsform.get('BlockDate').value, "MM/dd/yyyy");
-    let ReleaseDate = this.datePipe.transform(this.blockingdetailsform.get('ReleaseDate').value, "MM/dd/yyyy");
-    this.blockingdetailsform.patchValue({
-      BlockDate: BlockDate,
-      ReleaseDate: ReleaseDate
+   
+    let ReleaseDate = this.datePipe.transform(this.ReleaseForm.get('ReleaseDate').value, "MM/dd/yyyy");
+    this.ReleaseForm.patchValue({
+      ReleaseDate: ReleaseDate,
+      RoomNo:this.RoomNo,
+      RoomCode:this.RoomCode,
+      Operation:this.Operation
     })
-    console.log(this.blockingdetailsform.value)
-    this._masterformservice.SaveBlockinformation(this.blockingdetailsform.value).subscribe(data => {
+    console.log('this.ReleaseForm.value')
+    console.log(this.ReleaseForm.value)
+    this._masterformservice.SaveBlockinformation(this.ReleaseForm.value).subscribe(data => {
       if (data == true) {
         this.addToast(
-          "Cogwave Software",
-          "Block Information Saved Sucessfully",
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
           "success"
         );
+       
       } 
-      else {
-        alert('d')
-        this.addToast("Cogwave Software", "Block Information Not Saved", "error");
-        this.minDate=new Date();
-        this.maxDate.setDate(this.minDate.getDate() + 1);
-        this.blockingdetailsform.patchValue({
-          BlockDate: this.minDate,
-          ReleaseDate:this.maxDate,
-          Status: "SHORT"
-        })
+      else {       
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+        // this.minDate=new Date();
+        // this.maxDate.setDate(this.minDate.getDate() + 1);
+        // this.blockingdetailsform.patchValue({
+        //   BlockDate: this.minDate,
+        //   ReleaseDate:this.maxDate,
+        //   Status: "SHORT"
+        // })
       }
     },
     error => {
-      this.blockingdetailsform.reset();
-     
-      this.addToast("Cogwave Software", "Block Information Not Saved", "error");
-      this.minDate=new Date();
-      this.maxDate.setDate(this.minDate.getDate() + 1);
-      this.blockingdetailsform.patchValue({
-        BlockDate: this.minDate,
-        ReleaseDate:this.maxDate,
-        Status: "SHORT"
-      })
+     console.log(error.message)
+     console.log('error.message')
+      //this.blockingdetailsform.reset();
+      this.addToast("Cogwave Software", error.message, "error");
+      // this.minDate=new Date();
+      // this.maxDate.setDate(this.minDate.getDate() + 1);
+      // this.blockingdetailsform.patchValue({
+      //   BlockDate: this.minDate,
+      //   ReleaseDate:this.maxDate,
+      //   Status: "SHORT",
+      //   RoomNo:this.RoomNo,
+      //   RoomCode:this.RoomCode
+      // })
     },
     ()=>{
       alert('suceesss')
+      this.ReleaseForm.reset();
+      this.minDate=new Date();
+      this.maxDate.setDate(this.minDate.getDate() + 1);
+      this.ReleaseForm.patchValue({ 
+        ReleaseDate:this.maxDate,
+      })
+      this.closeMyModalPin(event);
     });
   }
 
   Selected(MName: string) {
     this.IsLongTime = !this.IsLongTime
   }
-    
 
-  Close()
-  {
-    this.blockingdetailsform.reset();
+  closeMyModalPin(event){ 
+    this.ReleaseForm.reset();
+    this.ReleaseForm.patchValue({
+      BlockDate: this.minDate,
+      ReleaseDate:this.maxDate,
+      Status: "SHORT"
+    })
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    } 
+    var maindashboard = document.querySelectorAll(".maindashboard"); 
   }
+
+  
 
   addToast(title, Message, theme) {
     debugger;

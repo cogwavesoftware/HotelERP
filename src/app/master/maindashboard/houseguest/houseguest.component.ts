@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-houseguest',
@@ -6,25 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./houseguest.component.scss']
 })
 export class HouseguestComponent implements OnInit {
-
+  @Input () RoomNo:string
+  @Input () RoomCode:string
+  
   model:any;
   constructor() { }
 
   ngOnInit() {
     this.model={
-      Id:0,
       BranchCode:0,
-      IpAdd:1,
       CreatedBy:1,
-      RoomNo:0,
-      RoomCode:0,
-      houseguest:0,
-      removeguest:0,
+      RoomNos:this.RoomNo,
+      RoomCodes:this.RoomCode,
+      Type:0,
       tarif:0,
-      tax:0,
-      inclPlan:0,
-      excltarif:0,
-      SRoomNo:"select"
+      status:0,      
     }    
   }
   closeMyModalPin(event){  
