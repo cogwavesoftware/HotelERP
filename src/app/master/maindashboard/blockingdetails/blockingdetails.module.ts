@@ -21,7 +21,8 @@ import { ToastyModule } from 'ng2-toasty';
     HttpClientModule,
     DataTableModule,
     FormsModule,
-    ReactiveFormsModule,ToastyModule.forRoot()
+    ReactiveFormsModule,
+    //ToastyModule.forRoot()
     //MatDialogModule,
     //BsDatepickerModule.forRoot()
   ]

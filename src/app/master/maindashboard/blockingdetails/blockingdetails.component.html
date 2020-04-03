@@ -41,11 +41,11 @@
                                     </div>
 
                                      <div *ngIf=IsLongTime>
-                                       <p>You Clicked Long Time this Block Room Will affect in Room Chart</p>
+                                       <p>You Clicked Long Time this  Room Will affect in Room Chart</p>
                                      </div>
 
                                      <div *ngIf=!IsLongTime>
-                                      <p>You Clicked Short Time this Block Room Will not  affect in Room Chart</p>
+                                      <p>You Clicked Short Time this  Room Will not  affect in Room Chart</p>
                                     </div>
    
                           
@@ -82,7 +82,7 @@
                                  
                                     <div class='col-12 col-lg-12'>
                                       <div class="form-group">
-                                          <label class="form-control-label" for="reason">Reason For Blocking </label>
+                                          <label class="form-control-label" for="reason">Reason</label>
                                            <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason" autocomplete="off"></textarea>  
                                            </div>   
                                     </div>
@@ -95,8 +95,8 @@
                       </div>
                       <div class="row modelbtn">   
                         <div class="col-md-12">
-                          <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Close </button>
-                          <button  type="submit"  class="btn btn-primary"> Blocking Details </button> 
+                          <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Exit </button>
+                          <button  type="submit"  class="btn btn-primary"> Process </button> 
                         </div>  
                        </div>  
                   </div>
@@ -104,5 +104,5 @@
       </div>
    </div>
 </div>
-
-<ng2-toasty [position]="position"></ng2-toasty>
+<!-- 
+<ng2-toasty [position]="position"></ng2-toasty> -->
