@@ -1,1 +1,80 @@
-<p>advancetransfer works!</p>
+<div class="outerdiv">
+    <div class="formdesign checkinforms advancetrasfer" style="padding: 0;">
+  
+      <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="Id" formControlName="Id" name="Id" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off"  /> 
+        <div class="container-fluid"  style="background-color: #fff;">
+   
+          <div class='row tabouter' style="margin-bottom: 0;">
+            <h2 class="h2class"> <i   class="fa fa-building"></i> Advance Transfer </h2>
+
+            <div class="col-md-12" style="padding-left: 0;">
+              <div class="userlist">
+              <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
+                <div class="col-md-12 taboutercreatebtn">
+                  <div class="row" style="margin-bottom: 0;"> 
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="roomno"><i   class="fa fa-building"></i> Room no </label>
+                     <select class="custom-select"  name="roomno" formControlName="roomno"  id="ledgerid" [ngClass]="{ 'is-invalid': submitted && form.roomno.errors }"> 
+                       <option value="0">Select</option> 
+                       <option *ngFor="let ledg of ledgerlist" [value]="ledg.Id">{{ ledg.LadgerName  }}</option>
+                     </select>
+                     <div *ngIf="submitted && form.roomno.errors" class="invalid-feedback">
+                      <div *ngIf="form.roomno.errors.required">roomno is required</div>
+                    </div>
+                      </div>  
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                    <div class="form-group">
+                      <label class="form-control-label" for="receiptno "><i   class="fa fa-building"></i>  Receipt No </label>
+                      <select class="custom-select" #Days name="receiptno" formControlName="receiptno"
+                        id="receiptno" [ngClass]="{ 'is-invalid': submitted && form.receiptno.errors }">
+                        <option value="0">Select</option>
+                        <option value="Receipt">Receipt</option>
+                        <option value="Payment">Payment</option>
+                      </select>
+                      <div *ngIf="submitted && form.receiptno.errors" class="invalid-feedback">
+                        <div *ngIf="form.receiptno.errors.required">receiptno is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="amount">  <i   class="fa fa-building"></i> Amount </label>
+                      <input type="text" class="form-control tooltip-form searchiconrelative" id="amount" formControlName="amount" name="amount" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.amount.errors || form.controls.amount.touched || form.controls.amount.dirty}" required    /> 
+                    </div>  
+                  </div>
+
+                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                    <div class="form-group">
+                      <label class="form-control-label" for="transroomno "><i   class="fa fa-building"></i> Tranfer Room No </label>                   
+                      <select class="custom-select"  name="transroomno" formControlName="transroomno"
+                      id="transroomno" [ngClass]="{ 'is-invalid': submitted && form.transroomno.errors }">
+                      <option value="select">Select</option>
+                      <option *ngFor="let transroomno of  subpaymodelist" [value]="transroomno">
+                        {{ transroomno  }}</option>
+                    </select> 
+                      
+                    </div>
+                  </div>
+
+                 
+                  
+
+                  </div><!-- end of row -->
+
+                </div> 
+            </div>
+          </div>
+
+          <button type="submit" id="save" class="btn btn-sm btn-primary m-r-5 m-b-10 m-l-5 float-right" ><i class="fa fa-save"></i> Save</button> 
+          <button type="button" id="save" class="btn btn-sm btn-primary m-r-5 m-b-10 m-l-5 float-right" ><i class="fa fa-times"></i> Close </button> 
+        </div>
+        
+          </div>
+          </div>
+          </form>
+          </div>
+</div>
