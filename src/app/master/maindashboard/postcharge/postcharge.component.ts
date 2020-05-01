@@ -10,6 +10,7 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { fromEvent } from 'rxjs';
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { NumberFilter } from 'ag-grid-community';
 @Component({
   selector: 'app-postcharge',
   templateUrl: './postcharge.component.html',
@@ -33,7 +34,7 @@ export class PostchargeComponent implements OnInit {
   TotalBillAmount:number;
   TotalTaxAmount:number;
   TotalNetAmount:number;
-  
+  RoundTax:number;
   @ViewChild('Amount', { static: false }) Amount: ElementRef;
   constructor(
     public router: Router, private toastyService: ToastyService, 
@@ -153,9 +154,12 @@ export class PostchargeComponent implements OnInit {
         TotalAmount: 0
       });
 
-
+      debugger
       let Amount = this.PayExtra.controls[index].get('Amount').value;
-      let Taxmount = Amount * this.form.get('taxvalue').value / 100;
+      let Taxper=  this.form.get('taxvalue').value
+      this.RoundTax = Amount / 100 * Taxper;
+      alert( this.RoundTax)
+      let Taxmount=Amount / 100 * Taxper;
       let TotalAmount = Taxmount + Amount
       this.PayExtra.controls[index].patchValue({
         Amount: Amount,
