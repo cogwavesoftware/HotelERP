@@ -14,6 +14,7 @@ export class ExtraBedFormmodel
     BedAmount:number
     TaxAmount:number
     NetAmount:number
+    TotalBedAmount:number
     Reason:string;
     Mode:string;
 }

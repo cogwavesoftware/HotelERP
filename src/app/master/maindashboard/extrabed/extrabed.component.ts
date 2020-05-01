@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { ExtraBedFormmodel } from './../../../_models/ExtraBedFormmodel';
 
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
@@ -55,6 +56,7 @@ export class ExtrabedComponent implements OnInit {
       NoofBed: 0,
       Tarif: 0,
       BedAmount: 0,
+      TotalBedAmount: 0,
       TaxAmount: 0,
       NetAmount: 0,
       Reason: "0",
@@ -72,6 +74,13 @@ export class ExtrabedComponent implements OnInit {
         return;
       }
 
+    }
+
+    CalculateTaxAmount(RoomNo:string,NoofBed:number)
+    {
+      this._oprservice.GetExtraBedFormData(this.Branch,RoomNo,NoofBed).subscribe(res=>{
+        this.extrabedform=res;
+      })
     }
 
     SaveExtraBed(form?: NgForm) {

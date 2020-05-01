@@ -309,7 +309,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   ProcessExtraBed(RoomNo: string) {
-    this._OprService.GetExtraBedFormData(this.Branch, RoomNo).subscribe(
+    this._OprService.GetExtraBedFormData(this.Branch, RoomNo,1).subscribe(
       res => {
         this.extrabedform = res;
         this.extrabedform.CreatedBy = this.UserId;

@@ -35,9 +35,9 @@ export class OperationService {
   }
 
 
-  GetExtraBedFormData(BranchCode: string,RoomNo:string)
+  GetExtraBedFormData(BranchCode: string,RoomNo:string,NoofBed:number)
   {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/extrabedform?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/extrabedform?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&NoofBed=' + NoofBed);
   }
 
   GetAmendFormData(BranchCode: string,RoomNo:string)
@@ -161,4 +161,10 @@ export class OperationService {
    {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/getroomvalue',getvalue,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
+
+  // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
+  // {
+  //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getexTax?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  // }
 }
+
