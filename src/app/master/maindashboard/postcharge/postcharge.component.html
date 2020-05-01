@@ -8,16 +8,16 @@
             <div class="row">
               <div class='col-12 col-lg-4'>
                 <div class="form-group">
-                  <label class="form-control-label" for="roomno">Room No </label>
-                  <input type="text" class="form-control tooltip-form" id="roomno" formControlName="roomno" name="roomno"  value="{{RoomNo}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomno.errors || form.controls.roomno.touched || form.controls.roomno.dirty}" required  />  
-                  <div class="invalid-feedback" *ngIf="form.controls.roomno.errors?.required" >roomno   is required</div>
+                  <label class="form-control-label" for="RoomNo">Room No </label>
+                  <input type="text" class="form-control tooltip-form" id="RoomNo" formControlName="RoomNo" name="RoomNo"  value="{{RoomNo}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.RoomNo.errors || form.controls.RoomNo.touched || form.controls.RoomNo.dirty}" required  />  
+                  <div class="invalid-feedback" *ngIf="form.controls.RoomNo.errors?.required" >RoomNo   is required</div>
                   </div>  
               </div>
               <div class='col-12 col-lg-4'>
                 <div class="form-group">
                   <label class="form-control-label" for="roomcode">Room Code </label>
-                  <input type="text" class="form-control tooltip-form" id="roomcode" formControlName="roomcode" name="roomcode" value="{{RoomCode}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomcode.errors || form.controls.roomcode.touched || form.controls.roomcode.dirty}" required  />  
-                  <div class="invalid-feedback" *ngIf="form.controls.roomcode.errors?.required" >roomcode   is required</div>
+                  <input type="text" class="form-control tooltip-form" id="RoomCode" formControlName="RoomCode" name="RoomCode" value="{{RoomCode}}" autocomplete="off"  required  />  
+                  <div class="invalid-feedback" *ngIf="form.controls.RoomCode.errors?.required" >roomcode   is required</div>
                   </div>  
               </div>
               <div class='col-12 col-lg-4'>

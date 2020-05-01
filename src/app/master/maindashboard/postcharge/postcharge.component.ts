@@ -63,8 +63,8 @@ export class PostchargeComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       PayExtra: this.formBuilder.array([]),
-      roomno: [this.RoomNo, Validators.required],
-      roomcode: [this.RoomCode, Validators.required],
+      RoomNo: [this.RoomNo, Validators.required],
+      RoomCode: [this.RoomCode, Validators.required],
       RefBillNo: ['', Validators.required],
       stward: ['0', Validators.required],
       revname: [, Validators.required],
@@ -172,12 +172,12 @@ export class PostchargeComponent implements OnInit {
       TotalBillAmount:this.TotalBillAmount,
       TotalTaxAmount:this.TotalTaxAmount,
       TotalNetAmount:this.TotalNetAmount,
-      roomcode:this.RoomCode,
-      roomno:this.RoomNo
+      RoomCode:this.RoomCode,
+      RoomNo:this.RoomNo
     })
      console.log(form.value)
      console.log(this.form.value)
-     this._masterservice.SaveBlockinformation(form.value).subscribe(data => {
+     this._oprservice.SavePostChargeData(form.value).subscribe(data => {
        if (data == true) {
          this.addToast(
            "Cogwave Software",

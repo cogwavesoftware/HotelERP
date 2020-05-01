@@ -152,4 +152,8 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveadvance',advance,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
+   SavePostChargeData(Post:any)
+   {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savepost',Post,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+   }
 }
