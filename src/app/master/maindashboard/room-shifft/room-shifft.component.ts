@@ -2,11 +2,9 @@ import { NgForm } from '@angular/forms';
 import { OperationService } from 'src/app/_services/operation.service';
 
 import { RoomShifftFormmodel } from './../../../_models/RoomShifftFormmodel';
-import { Component, OnInit, Input } from '@angular/core';
-
-
-
-
+import { Component,ViewChild, OnInit, Input,ElementRef } from '@angular/core';
+import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { fromEvent } from 'rxjs';
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { format } from 'url';
@@ -21,9 +19,11 @@ theme = "bootstrap";
 Typelist:any;
  type = "default";
  position = 'top-right';
-  @Input() roomshifftformmodel :RoomShifftFormmodel
+ Getvaluemodel:any={};
+ @ViewChild('NetAmountttttt', { static: false }) NetAmountttttt: ElementRef;
+ @ViewChild('Tariff', { static: false }) Tariff: ElementRef;
+@Input() roomshifftformmodel :RoomShifftFormmodel
   constructor(private toastyService: ToastyService,private _oprservice:OperationService ) { }
-
   ngOnInit() {
     this.roomshifftformmodel={
     Id:0,
@@ -48,6 +48,49 @@ Typelist:any;
     this._oprservice.GetRoomTypeViaRoomNo(this.roomshifftformmodel.BranchCode,RoomNo).subscribe(data => {
              this.Typelist=data;
     })
+  }
+
+  GetRoomValue(Description:string,Amount:number,RoomNo:string,RoomCode:string)
+  {
+   
+    this.Getvaluemodel={   
+      Description:Description,
+      Amount:Amount,
+      RoomNo:RoomNo,
+      RoomCode:RoomCode,
+      BranchCode:localStorage.getItem("BranchCode"),
+      Tariff:0,
+      Tax:0,
+      NetAmount:0
+    }
+    debugger
+    // console.log(this.NetAmountttttt.nativeElement)
+    // fromEvent(this.NetAmountttttt.nativeElement, 'keyup')
+    // .pipe(
+    //   filter(text => this.NetAmountttttt.nativeElement.value > 200),
+    //   debounceTime(8000),
+     
+    //   distinctUntilChanged(),
+    //   // tap(x=>console.log('from tap' + x)),
+    //   switchMap(id => {
+    //     //console.log(id)
+    //     console.log('guestmap')
+    //     console.log(this.Getvaluemodel)
+    //     return this._oprservice.GetRoomValue(this.Getvaluemodel);
+    //   })
+    // ).subscribe(res => 
+    //  console.log(res)
+    //   );
+
+
+
+console.log(this.NetAmountttttt.nativeElement)
+
+      this._oprservice.GetRoomValue(this.Getvaluemodel).subscribe(data => {
+
+      console.log(data)
+     })
+
   }
 
   SaveRoomShift(form?: NgForm) {
@@ -91,6 +134,8 @@ Typelist:any;
    
   }
  
+
+
   
   addToast(title, Message, theme) {
     debugger;

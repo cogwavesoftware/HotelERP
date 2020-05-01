@@ -156,4 +156,9 @@ export class OperationService {
    {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savepost',Post,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
    }
+
+   GetRoomValue(getvalue:any)
+   {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/getroomvalue',getvalue,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
 }
