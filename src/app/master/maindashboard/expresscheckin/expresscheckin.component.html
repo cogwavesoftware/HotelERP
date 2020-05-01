@@ -1,1 +1,134 @@
-<p>expresscheckin works!</p>
+
+
+<div class="shiftroom discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+
+            <div class="row">
+                <div class="col-md-12" >  
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveRoomShift(myform)" class="">
+                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="expresscheckinmmodel.Id" #Id="ngModel"
+                        value="{{Id}}">
+                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="expresscheckinmmodel.BranchCode"
+                        #BranchCode="ngModel" value="{{BranchCode}}">
+                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="expresscheckinmmodel.IpAdd"
+                        #IpAdd="ngModel" value="{{IpAdd}}">
+                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="expresscheckinmmodel.CreatedBy"
+                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+
+                        <div class="guestinfofirstrow  row">
+                            <div class='col-12 col-lg-4'>
+                                <div class="form-group" 
+                                [class.has-error]="guestname.touched && guestname.errors?.defaultSelected">
+                                    <label class="required">Guest Name</label>
+                                      <select class="custom-select" id="guestname" (change)="LoadType(guestname.value)" appSelectValidator="0" #guestname="ngModel"
+                                        name="guestname" [(ngModel)]="expresscheckinmmodel.guestname">
+                                        <option value="0">Select</option>
+                                        <option *ngFor="let item of expresscheckinmmodel.RoomNos" [value]="item.RoomNos">{{item.RoomNos}}</option>
+                                      </select>
+                                      <span class="help-block" *ngIf="guestname.touched && guestname.errors?.defaultSelected">
+                                        guestname is required
+                                      </span>
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Mobile</label>
+                                    <input type="text" name="mobile" class="form-control" [(ngModel)]="expresscheckinmmodel.mobile"
+                                      #mobile="ngModel" value="{{expresscheckinmmodel.mobile}}"  required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group" 
+                                [class.has-error]="roomno.touched && roomno.errors?.defaultSelected">
+                                    <label class="required">Room No</label>
+                                      <select class="custom-select" id="roomno" (change)="LoadType(roomno.value)" appSelectValidator="0" #roomno="ngModel"
+                                        name="roomno" [(ngModel)]="expresscheckinmmodel.roomno">
+                                        <option value="0">Select</option>
+                                        <option *ngFor="let item of expresscheckinmmodel.RoomNos" [value]="item.RoomNos">{{item.RoomNos}}</option>
+                                      </select>
+                                      <span class="help-block" *ngIf="roomno.touched && roomno.errors?.defaultSelected">
+                                        roomno is required
+                                      </span>
+                                 </div>  
+                              </div>  
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Room Code</label>
+                                    <input type="text" name="roomcode" class="form-control" [(ngModel)]="expresscheckinmmodel.roomcode"
+                                      #roomcode="ngModel" value="{{expresscheckinmmodel.roomcode}}"  required autocomplete="off">
+                                 </div>  
+                              </div>  
+                               
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Pay</label>
+                                        <input type="text" name="pay" class="form-control" [(ngModel)]="expresscheckinmmodel.pay"
+                                          #pay="ngModel" value="{{expresscheckinmmodel.pay}}"   required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Fax</label>
+                                        <input type="text" name="fax" class="form-control" [(ngModel)]="expresscheckinmmodel.fax"
+                                          #fax="ngModel" value="{{expresscheckinmmodel.fax}}"   required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+
+                              
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Plan</label>
+                                        <input type="text" name="plan" class="form-control" [(ngModel)]="expresscheckinmmodel.plan"
+                                          #plan="ngModel" value="{{expresscheckinmmodel.plan}}"  required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Tariff</label>
+                                        <input type="text" name="tariff" class="form-control" [(ngModel)]="expresscheckinmmodel.tariff"
+                                          #tariff="ngModel" value="{{expresscheckinmmodel.plan}}"  required autocomplete="off">                                        
+                                 </div>  
+                              </div>
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Tax</label>
+                                        <input type="text" name="tax" class="form-control" [(ngModel)]="expresscheckinmmodel.tax"
+                                          #tax="ngModel" value="{{expresscheckinmmodel.tax}}"  required autocomplete="off">                                        
+                                 </div>  
+                              </div>
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">                                   
+                                        <label class="required">Net</label>
+                                        <input type="text" name="net" class="form-control" [(ngModel)]="expresscheckinmmodel.net"
+                                          #net="ngModel" value="{{expresscheckinmmodel.net}}"  required autocomplete="off">                                        
+                                 </div>  
+                              </div>
+
+                              </div><!--guestinfofirstrow -->
+                              <div class="guestinfofirstrow  row">
+                                <div class='col-12 col-lg-12'>
+                                    <div class="form-group  float-right" >                                   
+                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                        <button type="button" (click)="closeMyModal($event,myform)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                     </div>  
+                                  </div> 
+                              </div>
+                        
+                      </form>
+
+
+                 
+                          </div>
+                   </div>       
+                  
+        </div>
+     </div>
+ </div>
+
+  
+
+  
+
+ <ng2-toasty [position]="position"></ng2-toasty>
