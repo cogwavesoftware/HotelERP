@@ -1,7 +1,27 @@
-.discountfrm{
+
+.blockingfrm{
     background-color: #fff;
 }
 .userlist{
     background-color: #fff;
     padding:2px 0px 2px 3px;
+}
+
+.modelbtn .col-md-12 button{ 
+    float:right;
+    margin:0px 0px 0px 10px;
+}
+.radiogrp .form-group{
+    width: 150px;
+    float: left;
+    margin: 5px 0px 5px 0px;
+    border:1px solid #c2c2c3;
+}
+.radiogrp .form-group input{ 
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.radiogrp .form-group label{
+    padding:2px 0px 0px 10px;
 }

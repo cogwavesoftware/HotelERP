@@ -42,7 +42,7 @@
                                 <div class="form-group" 
                                 [class.has-error]="Pax.touched && Pax.errors?.defaultSelected">
                                     <label class="required">Req. Pax</label>
-                                      <select class="custom-select" id="Pax" appSelectValidator="0" #Pax="ngModel"
+                                      <select class="custom-select" id="Pax" (change)="GetTarrif(Pax.value)" appSelectValidator="0" #Pax="ngModel"
                                         name="Pax" [(ngModel)]="changepaxform.Pax">
                                         <option value="0">Select</option>
                                         <option value="1">1</option>
@@ -76,7 +76,8 @@
                                         #OfferRate="ngModel" value="{{changepaxform.OfferRate}}"   required autocomplete="off">
                                    </div>  
                                 </div>
-                                <div class='col-12 col-lg-3'>
+
+                                <!-- <div class='col-12 col-lg-3'>
                                   <div class="form-group">
                                       <label class="required">Tax Amount</label>
                                       <input type="text" name="Tax" class="form-control" [(ngModel)]="changepaxform.Tax"
@@ -89,7 +90,7 @@
                                       <input type="text" name="NetAmount" class="form-control" [(ngModel)]="changepaxform.NetAmount"
                                         #NetAmount="ngModel" value="{{changepaxform.NetAmount}}"   required autocomplete="off">
                                    </div>  
-                                </div>
+                                </div> -->
                                
                                 </div>
                                 <div class="guestinfofirstrow  row">
@@ -124,4 +125,4 @@
   
   
   
-  <ng2-toasty [position]="position"></ng2-toasty>
+  <!-- <ng2-toasty [position]="position"></ng2-toasty> -->

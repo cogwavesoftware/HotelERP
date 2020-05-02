@@ -54,7 +54,10 @@ export class OperationService {
   {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/roomshift?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
   }
-
+  GetTarrif(RoomCode:string,Pax:number,BranchCode: string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/GetTarrif?RoomCode=' + RoomCode + '&Pax=' + Pax + '&BranchCode=' + BranchCode);
+  }
 
   GetChangePlanFormData(BranchCode: string,RoomNo:string)
   {

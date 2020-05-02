@@ -25,7 +25,6 @@ export class ChangepaxComponent implements OnInit {
 
   ngOnInit() {
 
-    
     this.changepaxform={
       RoomNo:"0",
       RoomCode:"0",
@@ -78,6 +77,13 @@ export class ChangepaxComponent implements OnInit {
     });   
   }
 
+  GetTarrif(pax:number)
+  {
+    this._oprservice.GetTarrif(this.changepaxform.RoomCode, pax,this.changepaxform.BranchCode).subscribe(data=>{
+      this.changepaxform.OfferRate=data;
+      this.changepaxform.ActualRate=data;
+    })
+  }
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();

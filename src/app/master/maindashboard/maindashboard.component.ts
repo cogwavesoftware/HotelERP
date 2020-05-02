@@ -383,10 +383,18 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   ProcessAmend(RoomNo: string) {
+    let Checkintime, checkoutTime, checkindate, checkoutdate;
+
     this._OprService.GetAmendFormData(this.Branch, RoomNo).subscribe(
       res => {
         this.amendformdata = res;
-        this.amendformdata.CreatedBy = this.UserId;
+        checkoutdate = new Date(res.CheckoutDate)
+        this.amendformdata.CheckoutDate=checkoutdate
+        var cin = res.AmendTime.split(':');
+        Checkintime.setHours(cin[0], cin[1], cin[2]);
+        this.amendformdata.AmendTime=Checkintime;
+       this.amendformdata.CreatedBy = this.UserId;
+      // this.amendformdata.AmendDate=new Date();
       },
       error => {
         console.log("error in ProcessAmend");

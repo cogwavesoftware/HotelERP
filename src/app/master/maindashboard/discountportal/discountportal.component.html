@@ -2,13 +2,37 @@
     <div class="formdesign" style="padding: 0;">
         <div class="userlist">
         
-                 <form [formGroup]="discountportalform" (ngSubmit)="onSubmit()"> 
+                 <form [formGroup]="discountportalform" (ngSubmit)="onSubmit(discountportalform)"> 
                     <div class="container-fluid" >             
                         <div class='row'>                            
                               <div class="col-md-12">
                                   <div class="row">
                                     <div class="col-md-12" > 
-                                        <div class="guestinfofirstrow  row">
+                                       
+
+                                      
+                                    <div class="guestinfofirstrow  row">
+
+                                      <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Discount">Discount</label>                                                                                  
+                                          <input type="radio" (click)="Selected('Discount')"  class="form-control" style="width: 15px" value="DISCOUNT" formControlName="Status">  
+                                                                                
+                                        </div>
+                                      </div>
+
+
+                                      <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Allowance">Allowance</label>
+                                          <input type="radio" value="Allowance" (click)="Selected('Allowance')" class="form-control" style="width: 15px" formControlName="Status"> 
+                       
+                                        </div>
+                                      </div>
+                                     
+                                    </div>
+
+                                        <div  class="guestinfofirstrow  row">
                                         <div class='col-12 col-lg-4'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="rmno">Room No </label>
@@ -24,13 +48,6 @@
                                           </div>  
                                       </div>
 
-                                      <!-- <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="rmno">GuestName </label>
-                                          <input type="text" class="form-control tooltip-form" id="GuestName" formControlName="GuestName"  name="GuestName" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.GuestName.errors || discountportalform.controls.GuestName.touched || discountportalform.controls.GuestName.dirty}" required  />  
-                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.GuestName.errors?.required" >GuestName is required</div>
-                                          </div>  
-                                      </div> -->
 
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
@@ -42,7 +59,7 @@
    
                                      
           
-                                      <div class='col-12 col-lg-4'>
+                                      <div class='col-12 col-lg-4' *ngIf=!IsLongTime>
                                         <div class="form-group">
                                           <label class="form-control-label" for="date">Discount Type</label>
                                           <select class="custom-select" #DiscountType name="DiscountType" formControlName="DiscountType" >
@@ -53,11 +70,18 @@
                                          </div>  
                                       </div>
 
-                                      <div class='col-12 col-lg-4'>
+                                      <div class='col-12 col-lg-4' *ngIf=!IsLongTime>
                                         <div class="form-group">
                                           <label class="form-control-label" for="gname">Discount Value</label>
                                           <input type="text" class="form-control tooltip-form" id="Disvalue" formControlName="Disvalue"  name="Disvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.Disvalue.errors || discountportalform.controls.Disvalue.touched || discountportalform.controls.Disvalue.dirty}" required  />  
                                           <div class="invalid-feedback" *ngIf="discountportalform.controls.Disvalue.errors?.required" >Disvalue is required</div>
+                                          </div>  
+                                      </div>
+                                      <div class='col-12 col-lg-4' *ngIf=IsLongTime>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="gname">Allowance Amount</label>
+                                          <input type="text" class="form-control tooltip-form" id="AllowanceAmt" formControlName="AllowanceAmt"  name="AllowanceAmt" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.AllowanceAmt.errors || discountportalform.controls.AllowanceAmt.touched || discountportalform.controls.AllowanceAmt.dirty}" required  />  
+                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.AllowanceAmt.errors?.required" >AllowanceAmt is required</div>
                                           </div>  
                                       </div>
 
@@ -69,8 +93,6 @@
                                              </div>   
                                       </div> 
 
-
-                                    
                                        </div>
                                                                        
                                      </div>
@@ -79,8 +101,8 @@
                         </div>
                         <div class="row modelbtn">   
                           <div class="col-md-12">
-                            <button  class="btn btn-primary"><i class="fa  fa-close"></i> Close </button>
-                            <button  class="btn btn-primary"><i class="fa  fa-user-md"></i> Save </button> 
+                            <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Exit </button>
+                            <button  type="submit"  class="btn btn-primary"> Process </button> 
                           </div>  
                          </div>  
                     </div>
