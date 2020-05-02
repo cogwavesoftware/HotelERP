@@ -89,7 +89,7 @@ export class OperationService {
 
   SaveRoomShifft(RoomShifft:any)
   {
-    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/roomshift',RoomShifft,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveshift',RoomShifft,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
   SaveAmend(amend:any)

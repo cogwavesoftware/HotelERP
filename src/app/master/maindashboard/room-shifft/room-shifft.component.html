@@ -61,7 +61,7 @@
                                  <div class="form-group" 
                                  [class.has-error]="SRoomCode.touched && SRoomCode.errors?.defaultSelected">
                                      <label class="required">Prefered RoomNo</label>
-                                       <select class="custom-select" id="SRoomCode" appSelectValidator="0" (change)="GetRoomValue('NULL',0,SRoomNo.value,SRoomCode.value)" #SRoomCode="ngModel"
+                                       <select class="custom-select" id="SRoomCode" appSelectValidator="0" (change)="GetRoomValue('NULL',0,CRoomNo.value,SRoomCode.value,SRoomNo.value)" #SRoomCode="ngModel"
                                          name="SRoomCode" [(ngModel)]="roomshifftformmodel.SRoomCode">
                                          <option value="0">Select</option>
                                          <option *ngFor="let item of Typelist" [value]="item">{{item}}</option>
@@ -75,7 +75,7 @@
                               <div class='col-12 col-lg-4'>
                                 <div class="form-group">                                   
                                         <label class="required">Tarif</label>
-                                        <input type="text" name="Tariff" class="form-control" (keyup)="GetRoomValue('Tariff',Tariff.value,SRoomNo.value,SRoomCode.value)" [(ngModel)]="roomshifftformmodel.Tariff"
+                                        <input type="text" name="Tariff" class="form-control" (keyup)="GetRoomValue('Tariff',Tariff.value,CRoomNo.value,SRoomCode.value,SRoomNo.value)" [(ngModel)]="roomshifftformmodel.Tariff"
                                           #Tariff="ngModel" value="{{roomshifftformmodel.Tariff}}"   required autocomplete="off">                                        
                                  </div>  
                               </div> 
@@ -87,13 +87,20 @@
                                  </div>  
                               </div> 
                               <div class='col-12 col-lg-4'>
-                                <div class="form-group">                                   
+                                <div class="form-group">      
+                                                            
                                         <label class="required">grand</label>
-                                        <input type="text" name="NetAmount" class="form-control" #NetAmountttttt (keyup)="GetRoomValue('Net',NetAmount.value,SRoomNo.value,SRoomCode.value)" [(ngModel)]="roomshifftformmodel.NetAmount"
-                                          #NetAmount="ngModel" value="{{roomshifftformmodel.NetAmount}}"  required autocomplete="off">                                        
+                                       
+                                         <input type="text" name="NetAmount" class="form-control" #NetAmountttttt (keyup)="GetRoomValue('Net',NetAmount.value,CRoomNo.value,SRoomCode.value,SRoomNo.value)" [(ngModel)]="roomshifftformmodel.NetAmount"
+                                          #NetAmount="ngModel" value="{{roomshifftformmodel.NetAmount}}"  required autocomplete="off">                                         
                                  </div>  
                               </div> 
                               </div><!--guestinfofirstrow -->
+
+
+                             
+
+
                               <div class="guestinfofirstrow  row">
                                 <div class='col-12 col-lg-12'>
                                     <div class="form-group  float-right" >                                   
@@ -118,4 +125,4 @@
 
   
 
- <ng2-toasty [position]="position"></ng2-toasty>
+ <!-- <ng2-toasty [position]="position"></ng2-toasty> -->

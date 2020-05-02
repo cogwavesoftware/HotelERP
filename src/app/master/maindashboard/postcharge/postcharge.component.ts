@@ -91,13 +91,18 @@ export class PostchargeComponent implements OnInit {
       // })
     }
     else {
-      let Amount = list['Rate']
-      let Taxmount = Amount * this.form.get('taxvalue').value / 100;
-      let TotalAmount = Taxmount + Amount
+      let Rate = list['Rate']
+      
+      
+      let TotalAmount= Rate * 1
+      let Taxmount = TotalAmount * this.form.get('taxvalue').value / 100;
+      let Net = Taxmount + TotalAmount
       this.PayExtra.controls[index].patchValue({
-        Amount: Amount,
+        Rate: Rate,
+        TotalAmount:TotalAmount,
+       // Quanity:Quanity,
         TaxAmount: Taxmount,
-        TotalAmount: TotalAmount
+        Net: Net
       });
       //this.AddExtrachargeButtonClick();
       
@@ -114,9 +119,11 @@ export class PostchargeComponent implements OnInit {
   AddExtraChargeGrid(): FormGroup {
     return this.formBuilder.group({
       itemname: [],
-      Amount: [],
+      Rate: [],
+      Quanity: 1,
+      TotalAmount: [],
       TaxAmount: [],
-      TotalAmount: []
+      Net:[]
     });
   }
   AddExtrachargeButtonClick(): void {
@@ -153,20 +160,28 @@ export class PostchargeComponent implements OnInit {
         TaxAmount: 0,
         TotalAmount: 0
       });
+     
+      let Quanity=this.PayExtra.controls[index].get('Quanity').value
+      if(Quanity>=1)
+      {
+        debugger
+        let Rate = this.PayExtra.controls[index].get('Rate').value;
+        let Taxper=  this.form.get('taxvalue').value
+        let TotAmt=Rate *  Quanity;
 
-      debugger
-      let Amount = this.PayExtra.controls[index].get('Amount').value;
-      let Taxper=  this.form.get('taxvalue').value
-      this.RoundTax = Amount / 100 * Taxper;
-      alert( this.RoundTax)
-      let Taxmount=Amount / 100 * Taxper;
-      let TotalAmount = Taxmount + Amount
-      this.PayExtra.controls[index].patchValue({
-        Amount: Amount,
-        TaxAmount: Taxmount,
-        TotalAmount: TotalAmount
-      });
-    this.CalculateSummaryAmount();
+        this.RoundTax = TotAmt / 100 * Taxper;
+        //alert( this.RoundTax)
+        let Taxmount=TotAmt / 100 * Taxper;
+        let Net = Taxmount + TotAmt
+        this.PayExtra.controls[index].patchValue({
+          Rate: Rate,
+          TaxAmount: Taxmount,
+          TotalAmount: TotAmt,
+          Net:Net
+        });
+      this.CalculateSummaryAmount();
+      }
+      
   }
 
   Submit(form:FormGroup)
@@ -207,9 +222,9 @@ export class PostchargeComponent implements OnInit {
     this.TotalTaxAmount=0;
     this.TotalNetAmount=0;  
     for (let Extrach of this.PayExtra.controls) {
-      this.TotalBillAmount += Extrach.get("Amount").value;
+      this.TotalBillAmount += Extrach.get("TotalAmount").value;
       this.TotalTaxAmount += Extrach.get("TaxAmount").value;
-      this.TotalNetAmount += Extrach.get("TotalAmount").value;
+      this.TotalNetAmount += Extrach.get("Net").value;
     }
   }
   addToast(title, Message, theme) {

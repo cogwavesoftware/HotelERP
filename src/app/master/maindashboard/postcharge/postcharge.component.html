@@ -65,9 +65,11 @@
                 <div class="thead">
                   <div class=""> 
                     <div class="td"><i class="fa fa-credit-card-alt"></i> Item Name</div>
-                    <div class="td"><i class="fa fa-credit-card-alt"></i> Amount</div>
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> Rate</div>
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> Quanity</div>
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> TotalAmount</div>
                     <div class="td"><i class="fa fa-server"></i> Tax</div>
-                    <div class="td"><i class="fa fa-retweet"></i> Total</div>
+                    <div class="td"><i class="fa fa-retweet"></i>Net</div>
                     
                     <div class="td lasttd">
                       <button type="button"   class=" " (click)="AddExtrachargeButtonClick()">
@@ -93,17 +95,29 @@
                         </div>
     
                     <div class="td">
-                     <input type="number"  id="Amount"
-                      formControlName="Amount" name="Amount" #Amount (keyup)="CalculateTaxAmount(e)" autocomplete="off" required />
+                     <input type="number"  id="Rate"
+                      formControlName="Rate" name="Rate" #Rate (keyup)="CalculateTaxAmount(e)" autocomplete="off" required />
                     
       
                         </div> 
+                       
+                        <div class="td">
+                          <input type="number"  id="Quanity"
+                           formControlName="Quanity" name="Quanity" #Quanity (keyup)="CalculateTaxAmount(e)" autocomplete="off" required />
+                         </div>
+                         
+                         <div class="td  ">
+                          <input type="text" class="" id="TotalAmount" formControlName="TotalAmount"> 
+                        </div> 
+
+
                         <div class="td">
                           <input type="text" class="" id="TaxAmount" formControlName="TaxAmount"> 
                         </div>
     
+                        
                         <div class="td  ">
-                          <input type="text" class="" id="TotalAmount" formControlName="TotalAmount"> 
+                          <input type="text" class="" id="Net" formControlName="Net"> 
                         </div> 
                         <div class="td lasttd" style="text-align: left;">                                      
                           <button type="button" (click)="onDeleteExtracharge(0,e)">
