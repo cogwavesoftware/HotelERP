@@ -1,26 +1,26 @@
 [
   {
-    "id": 1,
-    "company":"sasas",
-    "gender": "Sortino",
-    "name": "Sortino@domain.com"
+    "date": "11/12/2020",
+    "receiptno":"88",
+    "guestname": "Sortino",
+    "amount": "12333"
   },
   {
-    "id": 2,
-    "company":"sasas",
-    "gender": "Sortino",
-    "name": "Sortino@domain.com"
+    "date": "12/12/2020",
+    "receiptno":"555",
+    "guestname": "Sortino",
+    "amount": "12333"
   },
   {
-    "id": 3,
-    "company":"sasas",
-    "gender": "Sortino",
-    "name": "Sortino@domain.com"
+    "date": "13/12/2020",
+    "receiptno":"22",
+    "guestname": "Sortino",
+    "amount": "12333"
   } ,
   {
-    "id": 19,
-    "company":"sasas",
-    "gender": "Sortino",
-    "name": "Sortino@domain.com"
+    "date": "1412/2020",
+    "receiptno":"3",
+    "guestname": "Sortino",
+    "amount": "12333"
   }
 ]

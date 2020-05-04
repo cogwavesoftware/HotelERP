@@ -7056,3 +7056,25 @@ outerdiv{
     float: left;
     padding: 7px 20px 0px 0px;
     }
+
+
+    /* model style */
+    .modelstyle{ 
+     height:100%;    
+     min-height:100%;
+    background: rgba(237,237,237,1);
+    }
+      .overflow-container{           
+        background: rgba(237,237,237,1);
+        border-bottom:10px solid #69a1ff; 
+        border-left:10px solid #69a1ff; 
+        border-right:10px solid #69a1ff; 
+
+  }
+  .modelstyle input.form-control,
+  .modelstyle .form-group select {
+    border-radius: 0px;
+    height: 1.50rem;
+    font-size: 100%;
+    padding: 0px 0px 0px 10px; 
+  }
