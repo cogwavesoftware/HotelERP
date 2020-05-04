@@ -64,7 +64,9 @@ export class DiscountportalComponent implements OnInit {
     this.discountportalform.patchValue({
       ProcessDate: prodate,
       BranchCode:localStorage.getItem("BranchCode"),
-      CreatedBy:localStorage.getItem("Id")
+      CreatedBy:localStorage.getItem("Id"),
+      RoomNo:this.RoomNo,
+      RoomCode:this.RoomCode
     })
   
     this._oprservice.SaveDiscountData(this.discountportalform.value).subscribe(data => {
