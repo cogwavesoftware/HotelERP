@@ -2,14 +2,13 @@ import { NgForm } from '@angular/forms';
 import { OperationService } from 'src/app/_services/operation.service';
 
 import { RoomShifftFormmodel } from './../../../_models/RoomShifftFormmodel';
-import { Component, OnInit, Input } from '@angular/core';
-
-
-
-
+import { Component,ViewChild, OnInit, Input,ElementRef } from '@angular/core';
+import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { fromEvent } from 'rxjs';
 
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { format } from 'url';
+import { ConvertActionBindingResult } from '@angular/compiler/src/compiler_util/expression_converter';
 @Component({
   selector: 'app-room-shifft',
   templateUrl: './room-shifft.component.html',
@@ -21,15 +20,18 @@ theme = "bootstrap";
 Typelist:any;
  type = "default";
  position = 'top-right';
-  @Input() roomshifftformmodel :RoomShifftFormmodel
+ Getvaluemodel:any={};
+ @ViewChild('searchTermguest', { static: false }) searchTermguest: ElementRef;
+ @ViewChild('Tariff', { static: false }) Tariff: ElementRef;
+@Input() roomshifftformmodel :RoomShifftFormmodel
   constructor(private toastyService: ToastyService,private _oprservice:OperationService ) { }
-
   ngOnInit() {
-    this.roomshifftformmodel={
+    let id=localStorage.getItem("Id");
+  this.roomshifftformmodel={
     Id:0,
     BranchCode:"0",
     IpAdd:"0",
-    CreatedBy:0,
+    CreatedBy:Number(id),
     CRoomNo:"0",
     CRoomCode:"0",
     SRoomNo:"0",
@@ -49,6 +51,75 @@ Typelist:any;
              this.Typelist=data;
     })
   }
+
+  GetRoomValue(Description:string,Amount:number,RoomNo:string,RoomCode:string,SRoomNo:string)
+  {
+   
+    this.Getvaluemodel={   
+      Description:Description,
+      Amount:Amount,
+      RoomNo:RoomNo,
+      RoomCode:RoomCode,
+      BranchCode:localStorage.getItem("BranchCode"),
+      Tariff:0,
+      Tax:0,
+      NetAmount:0,
+      SRoomNo:SRoomNo,
+    }
+    debugger
+    // console.log(this.NetAmountttttt.nativeElement)
+    // fromEvent(this.NetAmountttttt.nativeElement, 'keyup')
+    // .pipe(
+    //   filter(text => this.NetAmountttttt.nativeElement.value > 200),
+    //   debounceTime(8000),
+     
+    //   distinctUntilChanged(),
+    //   // tap(x=>console.log('from tap' + x)),
+    //   switchMap(id => {
+    //     //console.log(id)
+    //     console.log('guestmap')
+    //     console.log(this.Getvaluemodel)
+    //     return this._oprservice.GetRoomValue(this.Getvaluemodel);
+    //   })
+    // ).subscribe(res => 
+    //  console.log(res)
+    //   );
+
+
+    setTimeout (()=>{
+      this._oprservice.GetRoomValue(this.Getvaluemodel).subscribe(data => {
+        this.roomshifftformmodel.NetAmount=data['NetAmount']
+        this.roomshifftformmodel.Tariff=data['Tariff']
+        this.roomshifftformmodel.Tax=data['Tax']
+        console.log(data)
+     })
+    },3000)
+   
+
+  }
+
+
+
+  // ngAfterViewInit() {
+  //   alert('k')
+  //   //server-side search
+  //  fromEvent(this.searchTermguest.nativeElement, 'keyup')
+  //   .pipe(
+  //     filter(text => this.searchTermguest.nativeElement.value.length > 2),
+  //     debounceTime(3000),
+  //     distinctUntilChanged(),
+  //     // tap(x=>console.log('from tap' + x)),
+  //     switchMap(id => {
+  //       //console.log(id)
+  //       console.log('guestmap')
+  //       console.log(this.Getvaluemodel)
+  //       return this._oprservice.GetRoomValue(this.Getvaluemodel);
+  //     })
+  //   ).subscribe(res => 
+  //    console.log(res)
+  //     );
+  // }
+
 
   SaveRoomShift(form?: NgForm) {
     console.log('form.value')
@@ -91,6 +162,8 @@ Typelist:any;
    
   }
  
+
+
   
   addToast(title, Message, theme) {
     debugger;
@@ -132,8 +205,7 @@ Typelist:any;
         break;
     }
   }
-
-
+  
   closeMyModal(event,form?:NgForm){  
     form.resetForm();
     var openModals = document.querySelectorAll(".md-show");

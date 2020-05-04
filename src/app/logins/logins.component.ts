@@ -171,8 +171,7 @@ export class LoginsComponent implements OnInit {
         this.authenticationService
           .GetloginuserDetails(username)
           .subscribe(data => {
-            this.loginMaster = data;
-            
+            this.loginMaster = data;           
             //this.authenticationService.setUserName(data.UserName)
             localStorage.setItem("id", data.UserId.toString());
             localStorage.setItem("IsRole", data.IsRole.toString());
@@ -191,9 +190,13 @@ export class LoginsComponent implements OnInit {
        // console.log(this.error);
         this.addToast("Cogwave Software😃", error + "👊", "error");       
         this.loading = false;
+      },
+      ()=>{
+           alert('d')
       }
     );
   }
+
   //      setTimeout(()=>{
   //       //this.messageSuccess = false;
   //  }, 3000);

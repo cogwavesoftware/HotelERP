@@ -10,6 +10,7 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { fromEvent } from 'rxjs';
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { NumberFilter } from 'ag-grid-community';
 @Component({
   selector: 'app-postcharge',
   templateUrl: './postcharge.component.html',
@@ -33,7 +34,7 @@ export class PostchargeComponent implements OnInit {
   TotalBillAmount:number;
   TotalTaxAmount:number;
   TotalNetAmount:number;
-  
+  RoundTax:number;
   @ViewChild('Amount', { static: false }) Amount: ElementRef;
   constructor(
     public router: Router, private toastyService: ToastyService, 
@@ -63,8 +64,8 @@ export class PostchargeComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       PayExtra: this.formBuilder.array([]),
-      roomno: [this.RoomNo, Validators.required],
-      roomcode: [this.RoomCode, Validators.required],
+      RoomNo: [this.RoomNo, Validators.required],
+      RoomCode: [this.RoomCode, Validators.required],
       RefBillNo: ['', Validators.required],
       stward: ['0', Validators.required],
       revname: [, Validators.required],
@@ -90,13 +91,18 @@ export class PostchargeComponent implements OnInit {
       // })
     }
     else {
-      let Amount = list['Rate']
-      let Taxmount = Amount * this.form.get('taxvalue').value / 100;
-      let TotalAmount = Taxmount + Amount
+      let Rate = list['Rate']
+      
+      
+      let TotalAmount= Rate * 1
+      let Taxmount = TotalAmount * this.form.get('taxvalue').value / 100;
+      let Net = Taxmount + TotalAmount
       this.PayExtra.controls[index].patchValue({
-        Amount: Amount,
+        Rate: Rate,
+        TotalAmount:TotalAmount,
+       // Quanity:Quanity,
         TaxAmount: Taxmount,
-        TotalAmount: TotalAmount
+        Net: Net
       });
       //this.AddExtrachargeButtonClick();
       
@@ -113,9 +119,11 @@ export class PostchargeComponent implements OnInit {
   AddExtraChargeGrid(): FormGroup {
     return this.formBuilder.group({
       itemname: [],
-      Amount: [],
+      Rate: [],
+      Quanity: 1,
+      TotalAmount: [],
       TaxAmount: [],
-      TotalAmount: []
+      Net:[]
     });
   }
   AddExtrachargeButtonClick(): void {
@@ -152,17 +160,28 @@ export class PostchargeComponent implements OnInit {
         TaxAmount: 0,
         TotalAmount: 0
       });
+     
+      let Quanity=this.PayExtra.controls[index].get('Quanity').value
+      if(Quanity>=1)
+      {
+        debugger
+        let Rate = this.PayExtra.controls[index].get('Rate').value;
+        let Taxper=  this.form.get('taxvalue').value
+        let TotAmt=Rate *  Quanity;
 
-
-      let Amount = this.PayExtra.controls[index].get('Amount').value;
-      let Taxmount = Amount * this.form.get('taxvalue').value / 100;
-      let TotalAmount = Taxmount + Amount
-      this.PayExtra.controls[index].patchValue({
-        Amount: Amount,
-        TaxAmount: Taxmount,
-        TotalAmount: TotalAmount
-      });
-    this.CalculateSummaryAmount();
+        this.RoundTax = TotAmt / 100 * Taxper;
+        //alert( this.RoundTax)
+        let Taxmount=TotAmt / 100 * Taxper;
+        let Net = Taxmount + TotAmt
+        this.PayExtra.controls[index].patchValue({
+          Rate: Rate,
+          TaxAmount: Taxmount,
+          TotalAmount: TotAmt,
+          Net:Net
+        });
+      this.CalculateSummaryAmount();
+      }
+      
   }
 
   Submit(form:FormGroup)
@@ -172,12 +191,12 @@ export class PostchargeComponent implements OnInit {
       TotalBillAmount:this.TotalBillAmount,
       TotalTaxAmount:this.TotalTaxAmount,
       TotalNetAmount:this.TotalNetAmount,
-      roomcode:this.RoomCode,
-      roomno:this.RoomNo
+      RoomCode:this.RoomCode,
+      RoomNo:this.RoomNo
     })
      console.log(form.value)
      console.log(this.form.value)
-     this._masterservice.SaveBlockinformation(form.value).subscribe(data => {
+     this._oprservice.SavePostChargeData(form.value).subscribe(data => {
        if (data == true) {
          this.addToast(
            "Cogwave Software",
@@ -203,9 +222,9 @@ export class PostchargeComponent implements OnInit {
     this.TotalTaxAmount=0;
     this.TotalNetAmount=0;  
     for (let Extrach of this.PayExtra.controls) {
-      this.TotalBillAmount += Extrach.get("Amount").value;
+      this.TotalBillAmount += Extrach.get("TotalAmount").value;
       this.TotalTaxAmount += Extrach.get("TaxAmount").value;
-      this.TotalNetAmount += Extrach.get("TotalAmount").value;
+      this.TotalNetAmount += Extrach.get("Net").value;
     }
   }
   addToast(title, Message, theme) {

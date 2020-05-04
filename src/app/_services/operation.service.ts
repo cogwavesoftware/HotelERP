@@ -35,9 +35,9 @@ export class OperationService {
   }
 
 
-  GetExtraBedFormData(BranchCode: string,RoomNo:string)
+  GetExtraBedFormData(BranchCode: string,RoomNo:string,NoofBed:number)
   {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/extrabedform?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/extrabedform?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&NoofBed=' + NoofBed);
   }
 
   GetAmendFormData(BranchCode: string,RoomNo:string)
@@ -54,7 +54,10 @@ export class OperationService {
   {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/roomshift?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
   }
-
+  GetTarrif(RoomCode:string,Pax:number,BranchCode: string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/GetTarrif?RoomCode=' + RoomCode + '&Pax=' + Pax + '&BranchCode=' + BranchCode);
+  }
 
   GetChangePlanFormData(BranchCode: string,RoomNo:string)
   {
@@ -89,7 +92,7 @@ export class OperationService {
 
   SaveRoomShifft(RoomShifft:any)
   {
-    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/roomshift',RoomShifft,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveshift',RoomShifft,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
   SaveAmend(amend:any)
@@ -152,4 +155,19 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveadvance',advance,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
+   SavePostChargeData(Post:any)
+   {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savepost',Post,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+   }
+
+   GetRoomValue(getvalue:any)
+   {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/getroomvalue',getvalue,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
+
+  // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
+  // {
+  //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getexTax?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  // }
 }
+

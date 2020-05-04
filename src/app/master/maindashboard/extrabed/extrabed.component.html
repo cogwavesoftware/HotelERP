@@ -42,7 +42,7 @@
                               <div class="form-group" 
                               [class.has-error]="NoofBed.touched && NoofBed.errors?.defaultSelected">
                                   <label class="required">NoofBed</label>
-                                    <select class="custom-select" id="NoofBed" appSelectValidator="0" #NoofBed="ngModel"
+                                    <select class="custom-select" id="NoofBed" (change)="CalculateTaxAmount(RoomNo.value,NoofBed.value)" appSelectValidator="0" #NoofBed="ngModel"
                                       name="NoofBed" [(ngModel)]="extrabedform.NoofBed">
                                       <option value="0">Select</option>
                                       <option value="1">1</option>
@@ -62,11 +62,14 @@
                             <div class="guestinfofirstrow  row">
                               <div class='col-12 col-lg-3'>
                                   <div class="form-group">                                   
-                                          <label class="required">Tarif  </label>
+                                          <label class="required">Tarif </label>
                                           <input type="text" name="Tarif" class="form-control" [(ngModel)]="extrabedform.Tarif"
                                             #Tarif="ngModel" value="{{extrabedform.Tarif}}"     autocomplete="off">                                        
                                    </div>  
                                 </div> 
+
+                                
+
                                 <div class='col-12 col-lg-3'>
                                   <div class="form-group">                                   
                                           <label class="required">Bed Amount</label>
@@ -74,6 +77,15 @@
                                             #BedAmount="ngModel" value="{{extrabedform.BedAmount}}"   required autocomplete="off">                                        
                                    </div>  
                                 </div> 
+
+                                <div class='col-12 col-lg-3'>
+                                  <div class="form-group">                                   
+                                          <label class="required">TotalBed Amount</label>
+                                          <input type="text" name="TotalBedAmount" class="form-control" [(ngModel)]="extrabedform.TotalBedAmount"
+                                            #TotalBedAmount="ngModel" value="{{extrabedform.TotalBedAmount}}"   required autocomplete="off">                                        
+                                   </div>  
+                                </div> 
+
                                 <div class='col-12 col-lg-3'>
                                   <div class="form-group">                                   
                                           <label class="required">Tax Amount</label>
@@ -81,16 +93,19 @@
                                             #TaxAmount="ngModel" value="{{extrabedform.TaxAmount}}"   required autocomplete="off">                                        
                                    </div>  
                                 </div> 
-                                <div class='col-12 col-lg-3'>
-                                  <div class="form-group">                                   
-                                          <label class="required">Net Amount</label>
-                                          <input type="text" name="NetAmount" class="form-control" [(ngModel)]="extrabedform.NetAmount"
-                                            #NetAmount="ngModel" value="{{extrabedform.NetAmount}}"   required autocomplete="off">                                        
-                                   </div>  
-                                </div> 
+                              
                             </div>
                             <div class="guestinfofirstrow  row">
-                              <div class='col-12 col-lg-12'>
+
+                              <div class='col-12 col-lg-3'>
+                                <div class="form-group">                                   
+                                        <label class="required">Net Amount</label>
+                                        <input type="text" name="NetAmount" class="form-control" [(ngModel)]="extrabedform.NetAmount"
+                                          #NetAmount="ngModel" value="{{extrabedform.NetAmount}}"   required autocomplete="off">                                        
+                                 </div>  
+                              </div> 
+
+                              <div class='col-12 col-lg-9'>
                                 <div class="form-group">
                                     <label class="required">Reason</label>
                                     <textarea type="text" name="Reason" class="form-control" [(ngModel)]="extrabedform.Reason"
@@ -130,5 +145,5 @@
 
 
 
-
-<ng2-toasty [position]="position"></ng2-toasty>
+<!-- 
+<ng2-toasty [position]="position"></ng2-toasty> -->

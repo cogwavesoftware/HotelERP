@@ -828,8 +828,8 @@
 
 
 
-        <!-- Discount -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount'" [modalClass]="'md-effect-2'">
+        <!-- Discount OLD DELETE -->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount1'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Discount Posting
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
@@ -845,6 +845,39 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
+
+
+
+
+
+        <!-- Discount -->
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount'" [modalClass]="'md-effect-2'">
+      
+          <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="Discount.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: RED;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+  
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'500px'"
+              [config]="config">
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-discountportal [RoomNo]="RoomNos" [RoomCode]="RoomCodes"> </app-discountportal> 
+                
+                 
+                </div>
+  
+              </div>
+            </perfect-scrollbar>
+  
+          </div>
+        </app-modal-animation>  
+       </div>
+  
 
 
         <!-- Advance -->

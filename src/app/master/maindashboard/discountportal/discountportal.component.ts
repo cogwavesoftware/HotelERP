@@ -20,6 +20,7 @@ export class DiscountportalComponent implements OnInit {
   submitted = false;
   minDate = new Date();
   maxDate = new Date();
+  IsLongTime:boolean;
   @Input() RoomCode: string;
   @Input() RoomNo: string;
   //@Input() discountform: DiscountFormmodel;
@@ -47,21 +48,27 @@ export class DiscountportalComponent implements OnInit {
       DiscountType: ["0", [Validators.required]],
       BranchCode: ["0", [Validators.required]],
       CreatedBy: ["0", [Validators.required]],
+      Status: ["DISCOUNT", [Validators.required]],
+      AllowanceAmt:["0",[Validators.required]]
     });
 
   }
 
+  Selected(MName: string) {
+    this.IsLongTime = !this.IsLongTime
+  }
 
-  Submit(blockingdetails: FormGroup) {
+  onSubmit(blockingdetails: FormGroup) {
 
     let prodate = this.datePipe.transform(this.discountportalform.get('ProcessDate').value, "MM/dd/yyyy");
-   
     this.discountportalform.patchValue({
       ProcessDate: prodate,
-      DiscountType:"0",
       BranchCode:localStorage.getItem("BranchCode"),
-      CreatedBy:localStorage.getItem("Id")
+      CreatedBy:localStorage.getItem("Id"),
+      RoomNo:this.RoomNo,
+      RoomCode:this.RoomCode
     })
+  
     this._oprservice.SaveDiscountData(this.discountportalform.value).subscribe(data => {
       if (data == true) {
         this.addToast(
@@ -71,35 +78,52 @@ export class DiscountportalComponent implements OnInit {
       }
       else {
         this.addToast("Cogwave Software", "Discount Information Not Saved", "error");
-        this.minDate = new Date();
-        this.maxDate.setDate(this.minDate.getDate() + 1);
-        this.discountportalform.patchValue({
-          ProcessDate: prodate,
-      DiscountType:"0",
-      BranchCode:localStorage.getItem("BranchCode"),
-      CreatedBy:localStorage.getItem("Id")
-          
-        })
       }
     },
       error => {
-        this.discountportalform.reset();
-        this.addToast("Cogwave Software", "Discount Information Not Saved", "error");
-        this.minDate = new Date();
-        this.maxDate.setDate(this.minDate.getDate() + 1);
-        this.discountportalform.patchValue({
-          ProcessDate: prodate,
-          DiscountType:"0",
-          BranchCode:localStorage.getItem("BranchCode"),
-          CreatedBy:localStorage.getItem("Id")
-        })
+        console.log(error.message)
+       console.log('error.message')
+      this.addToast("Cogwave Software", error.message, "error");
+        
       },
       () => {
-        alert('suceesss')
+      
+        // this.discountportalform.reset();
+        // this.minDate = new Date();
+        // this.maxDate.setDate(this.minDate.getDate() + 1);
+        // this.discountportalform.patchValue({
+        //   ProcessDate: prodate,
+        //   DiscountType:"0",
+        //   AllowanceAmt:0,
+        //   Status: "DISCOUNT",
+        //   BranchCode:localStorage.getItem("BranchCode"),
+        //   CreatedBy:localStorage.getItem("Id")
+        // })
+        this.closeMyModalPin(event);
       });
   }
 
 
+  closeMyModalPin(event){ 
+    this.discountportalform.reset();
+        this.discountportalform.reset();
+        this.minDate = new Date();
+        this.maxDate.setDate(this.minDate.getDate() + 1);
+        this.discountportalform.patchValue({
+          ProcessDate:  this.minDate,
+          DiscountType:"0",
+          AllowanceAmt:0,
+          Status: "DISCOUNT",
+          BranchCode:localStorage.getItem("BranchCode"),
+          CreatedBy:localStorage.getItem("Id")
+        })
+    this.IsLongTime=false;
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    } 
+    var maindashboard = document.querySelectorAll(".maindashboard"); 
+  }
 
   addToast(title, Message, theme) {
     debugger;

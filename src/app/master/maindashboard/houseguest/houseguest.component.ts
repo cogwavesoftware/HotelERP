@@ -20,7 +20,7 @@ export class HouseguestComponent implements OnInit {
       RoomCodes:this.RoomCode,
       Type:0,
       tarif:0,
-      status:0,      
+      status:0,     
     }    
   }
   closeMyModalPin(event){  
