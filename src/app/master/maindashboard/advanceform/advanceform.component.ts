@@ -156,7 +156,12 @@ GetAllRoomAdvanceList(RoomNo: string)
   })
 
 }
-
+closeMyModalPin(event) { 
+  var openModals = document.querySelectorAll(".md-show");
+  for (let i = 0; i < openModals.length; i++) {
+    openModals[i].classList.remove("md-show");
+  }
+}
 addToast(title, Message, theme) {
   debugger;
   this.toastyService.clearAll();

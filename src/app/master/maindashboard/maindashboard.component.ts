@@ -346,7 +346,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       RoomNo: RoomNo,
       RoomCode: this.RoomCodes,
       ProcessDate:new Date(),
-      instruction: "",
+      special: "",
       BranchCode: this.Branch,
       CreatedBy: this.UserId
     };

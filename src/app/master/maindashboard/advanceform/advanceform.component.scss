@@ -1,12 +1,34 @@
-.roomadvancefrm{
-    background-color: #fff;
+.test123.paymentarray .grid-table .thead .td {
+    width: 19%;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    text-align: center;
+    color: #000;
+    float: left;
+    font-size: 81%;
 }
-.userlist{
-    background-color: #fff;
-    padding:2px 0px 2px 3px;
-}
-.roomadvancefrm .form-group  label{
+.test123.paymentarray .grid-table .thead .td.lasttd,
+.test123.paymentarray .grid-table .tbody .td.lasttd{
+    width: 29px;
     float: left;
 }
- 
+.test123.paymentarray .grid-table .tbody .td input,
+.test123.paymentarray .grid-table .tbody .td select{
+    width: 19%;
+    float: left;
+    height: 23px;;
+}
+  select.custom-select{
+    font-size: 100%;
+    padding: 0px 0px 0px 10px; 
+  }
+  .guestinfofirstrow  .form-group .form-control-label{
+        float: left;
+        margin-bottom: 0;
+  }
 
+  .altertable{
+    border: 1px solid #ccc;
+    margin: 20px 0px 0px 0px;
+    padding: 5px;
+  }

@@ -875,21 +875,32 @@
 
 
         <!-- Advance -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Advance'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Advance Posting
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Advance'" [modalClass]="'md-effect-2'">
+           <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                    <app-advanceform [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-advanceform>
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-advanceform [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-advanceform>
                 </div>
+
               </div>
             </perfect-scrollbar>
+
           </div>
-        </app-modal-animation>
+        </app-modal-animation>  
+       </div>
+
+
+        
 
 
         <!-- Amend -->
