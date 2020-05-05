@@ -8,8 +8,8 @@ export class AmendRoommodel
     RoomNo:string;
     GuestName:string;
     CheckoutDate:string;
-    AmendDate:string;
-    AmendTime:string
+    AmendDate:Date;
+    AmendTime:Date;
     Reason:string;
     
 }

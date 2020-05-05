@@ -30,9 +30,8 @@ export class AmendDateComponent implements OnInit {
   isValid(event: boolean): void {
     this.valid = event;
   }
-  constructor(private toastyService: ToastyService,private datePipe: DatePipe,
-     private _oprservice:OperationService) {
-
+  constructor(private toastyService: ToastyService,private datePipe: DatePipe,private _oprservice:OperationService)
+  {
       this.timepicker = Object.assign({},
         {
           hourStep: 2,  
@@ -44,35 +43,38 @@ export class AmendDateComponent implements OnInit {
           showSeconds: false,
           // arrowkeys:true
         });
-
       }
 
 
   ngOnInit() {
+   
+    this.minDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() + 1);
     let CheckinDate = this.datePipe.transform(this.minDate, "MM/dd/yyyy");
     this.amendformdata={
       RoomNo:"0",
       GuestName:"0",
-      AmendTime:"",
+      AmendTime:this.myTime,
       CheckoutDate:CheckinDate,
-      AmendDate:CheckinDate,     
+      AmendDate:new Date(),     
       Reason:"Change Pax",
       BranchCode:"0",
       IpAdd:"0",
       CreatedBy:0,
     }
   }
-
+  
   SaveAmend(form?: NgForm) {
+    debugger;
     console.log('form.value')
     console.log(form.value)
-    if (form.invalid) {
-      console.log(form.value);
-      this.addToast("Cogwave Software", "invalid Data", "warning");
-      return;
-    }
-
-   
+    // if (form.invalid) {
+    //   alert('f')
+    //   console.log(form.value);
+    //   this.addToast("Cogwave Software", "invalid Data", "warning");
+    //   return;
+    // } 
+    alert('tru')
     this._oprservice.SaveAmend(form.value).subscribe(data => {
       if (data == true) {
         if (form.value.Id == "0") {
@@ -91,8 +93,7 @@ export class AmendDateComponent implements OnInit {
           form.reset();           
         }
       } else {
-        this.addToast("Cogwave Software", "Amend Data  Not Saved", "error");
-       
+        this.addToast("Cogwave Software", "Amend Data  Not Saved", "error");      
       }
     });   
   }

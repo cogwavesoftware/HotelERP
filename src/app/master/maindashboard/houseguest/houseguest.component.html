@@ -1,12 +1,11 @@
-<form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+<form #myform="ngForm" (ngSubmit)= "SaveHouseGuest(myform)" class="">
  
-
-  {{RoomCode}}
   <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
     #BranchCode="ngModel" value="{{BranchCode}}">
 
   <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
     #CreatedBy="ngModel" value="{{CreatedBy}}"> 
+
     <div class="guestinfofirstrow  row">
       <div class='col-12 col-lg-4'>
         <div class="form-group">
@@ -31,20 +30,20 @@
                 <div class='col-12 col-lg-6'>
                     <div class="form-group">
                         <label class="required lblwithcheckbox">Make House Guest1</label>
-                        <input style="width:20px;" type="radio" id="status" name="statu"  value="Make" class="form-control"  />                                          
+                        <input style="width:20px;" type="radio" id="status" name="statu" (click)="Selected('House')"  value="Make" class="form-control"  />                                          
                      </div>  
                 </div>
                 <div class='col-12 col-lg-6'>
                   <div class="form-group" style="margin-bottom: 0;">
                       <label class="required lblwithcheckbox">Remove Guest</label>
-                      <input style="width:20px;" type="radio" id="status" name="statu" value="Remove" class="form-control"  />                                          
+                      <input style="width:20px;" type="radio" id="status" name="statu" (click)="Selected('Remove')" value="Remove" class="form-control"  />                                          
                    </div>  
                 </div>
               </div> 
              
         </div>
 
-        <div class="col-md-6 linkandunlink"> 
+        <div *ngIf="isRemoveHouse" class="col-md-6 linkandunlink"> 
           <div class="guestinfofirstrow  row">
             <div class='col-12 col-lg-6'>
               <div class="form-group">
@@ -64,26 +63,22 @@
     </div>
 
         
-        <div class="">
-         
+    <!-- <div class="">         
           <div class=" "> 
             <div class="radioone" style="border: 1px solid #ccc; padding:10px;  ;">
               <div class="form-check-inline">
-                <label class="form-check-label">
-       
+                <label class="form-check-label">       
                   <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" >Inclusive Plan
                 </label>
               </div>
               <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" value="">Exculisive Tarif
-                                                      
+                  <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" value="">Exculisive Tarif                                                      
                 </label>
               </div>
             </div>
-            </div>
-            
-        </div>
+            </div>           
+        </div> -->
       </div>
     </div>
    
@@ -91,7 +86,7 @@
           <div class="guestinfofirstrow  row">
             <div class='col-12 col-lg-12'>
                 <div class="form-group  float-right" >                                   
-                    <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Process</button>    
+                    <button type="submit"  class="btn btn-success " ><i class="fa fa-save"></i> Process</button>    
                     <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
                  </div>  
               </div> 
