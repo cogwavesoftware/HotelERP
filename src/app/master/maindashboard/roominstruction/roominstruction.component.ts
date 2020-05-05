@@ -19,6 +19,7 @@ datePickerConfig: Partial<BsDatepickerConfig>;
  position = 'top-right';
  minDate=new Date();
  @ViewChild('myform',{static:false}) form:any;
+ @Input('roominstructionmodel') roominstructionmodel:any
   constructor(private toastyService: ToastyService,private _oprservice:OperationService
  
     ) { }
@@ -77,9 +78,10 @@ datePickerConfig: Partial<BsDatepickerConfig>;
       }
     });
 
- 
-   
   }
+
+
+
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();

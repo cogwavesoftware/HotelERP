@@ -7,3 +7,4 @@ export class Roominstructionmodel {
     BranchCode:string;
     CreatedBy:number;
 }
+

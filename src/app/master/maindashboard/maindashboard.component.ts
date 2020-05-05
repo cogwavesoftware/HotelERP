@@ -51,7 +51,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   DasboardLoad: any;
   floorname: any;
   rmno: string;
-  guestmodel:any;
+  roominstructionmodel:any;
   theme = "bootstrap";
   type = "default";
   position = "top-right";
@@ -338,15 +338,15 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     console.log(this.paxonbillform);
   }
   ProcessRoomInstruction(RoomNo: string) {
-    // this._oprservice.GetGuestDetailViaRoomNo(this.Branch,RoomNo).subscribe(data=>{
-    //      this.guestmodel=data;
-    // })
+    this._oprservice.GetRoomInstructionData(this.Branch,RoomNo).subscribe(data=>{
+         this.roominstructionmodel=data;
+    })
     this.RoomInstruction = {
       Id: "0",
       RoomNo: RoomNo,
       RoomCode: this.RoomCodes,
       ProcessDate:new Date(),
-      instruction: "",
+      special: "",
       BranchCode: this.Branch,
       CreatedBy: this.UserId
     };

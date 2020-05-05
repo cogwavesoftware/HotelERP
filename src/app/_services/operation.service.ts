@@ -182,7 +182,10 @@ export class OperationService {
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveroominstruction',instruction,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
-
+  GetRoomInstructionData(BranchCode: string,RoomNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getinstruction?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+    }
   
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {
