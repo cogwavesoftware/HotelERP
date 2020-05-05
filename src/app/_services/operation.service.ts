@@ -100,10 +100,6 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/amend',amend,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
 
-  SaveHouseGuest(HouseGuest:any)
-  {
-    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savehouse',HouseGuest,{ headers:environment.BASE_CONTENTTYPE_HEADER })
-  }
 
   SaveEditPax(Editpax:any)
   {
@@ -173,6 +169,12 @@ export class OperationService {
   CheckHouseHuest(BranchCode: string,RoomNo:string)
   {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkhouse?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  }
+
+
+  SaveHouseGuest(HouseGuest:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savehouseguest',HouseGuest,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
 
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
