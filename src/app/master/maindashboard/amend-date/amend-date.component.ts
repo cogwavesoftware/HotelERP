@@ -30,7 +30,8 @@ export class AmendDateComponent implements OnInit {
   isValid(event: boolean): void {
     this.valid = event;
   }
-  constructor(private toastyService: ToastyService,private datePipe: DatePipe,private _oprservice:OperationService)
+  constructor(private toastyService: ToastyService,private datePipe: DatePipe,
+    private _oprservice:OperationService)
   {
       this.timepicker = Object.assign({},
         {

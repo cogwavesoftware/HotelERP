@@ -6,7 +6,7 @@
   
             <div class="row">
                 <div class="col-md-12" >  
-                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && ReferanceSave(myform)" class="">
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && Submit(myform)" class="">
                        
                       <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="changeplanformmodel.BranchCode"
                         #BranchCode="ngModel" value="{{changeplanformmodel.BranchCode}}">
