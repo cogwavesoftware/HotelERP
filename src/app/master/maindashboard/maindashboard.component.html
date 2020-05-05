@@ -915,13 +915,13 @@
 
         <!-- Post -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Post'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Post Room
+          <h3 class="f-15" style="position: relative; background-color: orange;">Post Room
             <!-- <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button> -->
           </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'520px'"
+          <div class="app-modal-body text-center"  >
+            <perfect-scrollbar  class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'520px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
+              <div class="col-sm-12 filter-bar" >
                
                   <app-postcharge [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-postcharge>
               
