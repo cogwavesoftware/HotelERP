@@ -6,6 +6,7 @@
                     <form #myform="ngForm" (ngSubmit)="myform.form.valid && Saveinstruction(myform)" class="">
                         <input type="hidden" name="Id" class="form-control" [(ngModel)]="RoomInstruction.Id" #Id="ngModel"
                         value="{{RoomInstruction.Id}}">
+
                       <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="RoomInstruction.BranchCode"
                         #BranchCode="ngModel" value="{{RoomInstruction.BranchCode}}">
                       <!-- <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="RoomInstruction.IpAdd"
@@ -61,28 +62,28 @@
                                       <th>Id</th>
                                        <th>Instruction</th>
                                        <th>Date</th>
-                                       <th>Action</th>
+                                       <!-- <th>Action</th> -->
                                      </tr>
                                    </thead>
                                    <tbody>
-                                     <tr>
-                                      <td>1</td>
-                                       <td>ABCD</td>
-                                       <td>10/10/2019</td>
-                                       <td class="action-icon">
-                                         <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                                            > <i class="fa  fa-edit"></i> </a>
-                                       </td>
-                                     </tr>
-                                     <tr>
-                                       <td>2</td>
-                                       <td>ABCD</td>
-                                       <td>01:56:43</td>
-                                       <td class="action-icon">
-                                         <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                                            > <i class="fa  fa-edit"></i> </a>
-                                       </td>
-                                     </tr>                     
+
+
+
+
+                                     <tr *ngFor="let item of roominstructionmodel; let i = index;">
+                                      <td>{{item.Id}}</td>  
+                                      <td>{{item.Description}}</td>   
+                                      <td>{{item.CreatedDate | date}}</td>                           
+                                          
+                                     <!-- <td class="action-icon">
+                                        <a href="javascript:;" class="m-r-15 crm-action-view text-info">
+                                             <i class="fa  fa-edit" (click)="openMyModalData(item,i)"></i> </a>
+                                     </td> -->
+                                   </tr>  
+
+                                 
+                                     
+                                     
                                    </tbody>
                                  </table>
                                </div>
