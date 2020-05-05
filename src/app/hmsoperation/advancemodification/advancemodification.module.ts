@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SetcomplimentRoutingModule } from './setcompliment-routing.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; 
-import { SetcomplimentComponent } from './setcompliment.component';
+import { CommonModule } from '@angular/common';  
+import { AdvancemodificationComponent} from './advancemodification.component';
+import { AdvancemodificationRoutingModule } from './advancemodification-routing.module'; 
 
+
+ import { HttpClientModule } from '@angular/common/http';  
 
 import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -13,18 +13,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {DatePipe} from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-  
 
 @NgModule({
-  declarations: [SetcomplimentComponent],
+  declarations: [AdvancemodificationComponent],  
   providers: [DatePipe],
   imports: [
-    BrowserModule,
-    HttpClientModule,
-    CommonModule,
-    SetcomplimentRoutingModule,
-    CommonModule, 
-     SharedModule,
+    CommonModule,SharedModule,
+    AdvancemodificationRoutingModule,
+ 
+    HttpClientModule,    
      HttpClientModule,
      DataTableModule,
      FormsModule,
@@ -32,4 +29,4 @@ import { SharedModule } from 'src/app/shared/shared.module';
      ReactiveFormsModule
   ]
 })
-export class SetcomplimentModule { }
+export class AdvancemodificationModule { }

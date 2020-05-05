@@ -29,8 +29,7 @@ const routes: Routes = [
       {
         path: 'roomcancel', 
         loadChildren: () => import('./roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
-      },
-      
+      }  
     ]
   }
 ];

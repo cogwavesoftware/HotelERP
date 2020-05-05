@@ -382,7 +382,10 @@ const routes: Routes = [
         path:'transferAdvance',        
         loadChildren: () => import('./hmsoperation/advancetransfer/advancetransfer.module').then(m=>m.AdvancetransferModule)
        },
-
+       {
+        path: 'advancemodification', 
+        loadChildren: () => import('./hmsoperation/advancemodification/advancemodification.module').then(m=>m.AdvancemodificationModule)
+      },
        {
         path:'roomcancel',        
         loadChildren: () => import('./hmsoperation/roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
