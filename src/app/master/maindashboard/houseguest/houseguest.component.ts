@@ -34,7 +34,7 @@ export class HouseguestComponent implements OnInit {
       RoomNos:this.RoomNo,
       RoomCodes:this.RoomCode,
       tarif:0,
-      status:0,     
+      status:"HOUSE",     
     }    
   }
   closeMyModalPin(event){  
@@ -59,7 +59,18 @@ export class HouseguestComponent implements OnInit {
 
   SaveHouseGuest(form?: NgForm) {
 
+     
+     form.value.RoomCodes = this.RoomCode
+     form.value.RoomNos= this.RoomNo
      console.log(form.value)
+
+
+     this._oprservice.CheckHouseHuest(this.Branch,this.RoomNo).subscribe(res=>{
+       
+     })
+
+
+     return;
     this._oprservice.SaveHouseGuest(form.value).subscribe(data => {
       if (data == true) {
         this.addToast(

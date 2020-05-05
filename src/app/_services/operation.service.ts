@@ -170,6 +170,11 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/getroomvalue',getvalue,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
   }
 
+  CheckHouseHuest(BranchCode: string,RoomNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkhouse?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  }
+
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {
   //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getexTax?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
