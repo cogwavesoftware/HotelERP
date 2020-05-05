@@ -7,7 +7,7 @@ export class AmendRoommodel
     CreatedBy:number; 
     RoomNo:string;
     GuestName:string;
-    CheckoutDate:string;
+    CheckoutDate:Date;
     AmendDate:Date;
     AmendTime:Date;
     Reason:string;

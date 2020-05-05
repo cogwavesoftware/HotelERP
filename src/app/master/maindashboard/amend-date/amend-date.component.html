@@ -41,16 +41,18 @@
                                     <div class='col-12 col-lg-4'>
                                       <div class="form-group">
                                         <label>Checkout Date*</label>
-                                        <input id="CheckoutDate" name="CheckoutDate" class="form-control"
-                                          [(ngModel)]="amendformdata.CheckoutDate" #CheckoutDate="ngModel" placement="center" type="text"
-                                          bsDatepicker [minDate]="minDate"
+                                        <input id="CheckoutDate" name="CheckoutDate" class="form-control" readonly
+                                          [(ngModel)]="amendformdata.CheckoutDate" #CheckoutDate="ngModel" bsDatepicker placement="center" type="text"
+                                         
                                           [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
                                       </div>
                                     </div>
+                                    <!-- bsDatepicker [minDate]="minDate" -->
                                     <div class='col-12 col-lg-4' >
                                       <div class="form-group">
                                         <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
-                                         <timepicker id="AmendTime" [(ngModel)]="amendformdata.AmendTime" readonly name="AmendTime"  (isValid)="isValid($event)"  [showSpinners]="false"   [showMeridian]="ismeridian"></timepicker>
+                                         <timepicker id="AmendTime" [(ngModel)]="amendformdata.AmendTime"   name="AmendTime"  (isValid)="isValid($event)"  [showSpinners]="false"   [showMeridian]="ismeridian"></timepicker>
+                                      
                                        </div>
                                     </div>  
 

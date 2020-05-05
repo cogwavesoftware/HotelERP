@@ -30,13 +30,14 @@
                 <div class='col-12 col-lg-6'>
                     <div class="form-group">
                         <label class="required lblwithcheckbox">Make House Guest1</label>
-                        <input style="width:20px;" type="radio" id="status" name="statu" (click)="Selected('House')"  value="Make" class="form-control"  />                                          
+                        <input style="width:20px;" type="radio" id="status"  #status="ngModel" [(ngModel)]="model.status" name="status" (click)="Selected('House')"  value="HOUSE" class="form-control"  />                                          
                      </div>  
                 </div>
                 <div class='col-12 col-lg-6'>
                   <div class="form-group" style="margin-bottom: 0;">
                       <label class="required lblwithcheckbox">Remove Guest</label>
-                      <input style="width:20px;" type="radio" id="status" name="statu" (click)="Selected('Remove')" value="Remove" class="form-control"  />                                          
+                      <input style="width:20px;" type="radio"   #status="ngModel" [(ngModel)]="model.status" id="status" name="status" (click)="Selected('Remove')" value="Remove" class="form-control"  />  
+                                                                                
                    </div>  
                 </div>
               </div> 
