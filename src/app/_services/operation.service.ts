@@ -185,7 +185,13 @@ export class OperationService {
   GetRoomInstructionData(BranchCode: string,RoomNo:string)
   {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getinstruction?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
-    }
+  }
+
+  ChangeGuestData(BranchCode: string,RoomNo:string,GuestCode:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/changeguest?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&GuestCode=' + GuestCode);
+  }
+  
   
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {

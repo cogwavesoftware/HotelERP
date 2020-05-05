@@ -3,56 +3,37 @@
       
         <div class="changeguest_mddel_table searchguest">
           <div class="input-group" style="padding:10px; margin-bottom: 0;">
-            <input type="text" class="form-control" name="searchTermguest" #searchTermguest placeholder="Search here...">
+            <input type="text" class="form-control" name="searchTermguest"  (keyup)="SearchGuestData($event)" #searchTermguest placeholder="Search here...">
             <span class="input-group-append ripple light" id="basic-addon1"><i
-                (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
+              (click)="ShowAllData()"  class="icofont icofont-search input-group-text"></i></span>
           </div>
           <div class=" ">
             <div class="table-responsive">
              <table class="table table-striped table-bordered full-data-table">
                <thead>
                  <tr class="blueorange-gradient">
-                   <th>Guest Name </th>
-                   <th>Mobile</th>
-                   <th>Pincode </th>
+                   <th>GuestCode</th>
+                   <th>GuestTittle</th>
+                   <th>Gender </th>
+                   <th>GuestName</th>
+                   <th>MobileNo</th>
                    <th>Action</th>
                  </tr>
                </thead>
                <tbody>
-                 <tr>
-                   <td>Mustabha</td>
-                   <td>99808 45563</td>
-                   <td>654000</td>
+                 <tr *ngFor="let item of guest;  let i = index;">
+                  <td>{{item.GuestCode}}</td>
+                  <td>{{item.GuestTittle}}</td>
+                  <td>{{item.Gender}}</td>
+                  <td>{{item.GuestName}}</td>
+                  <td>{{item.MobileNo}}</td>
+                  
                    <td class="action-icon">
-                      <button class="btn btn-success btn-sm">Process</button>
+                      <button (click)="ProcessData(item.GuestCode)" class="btn btn-success btn-sm">Process</button>
                    </td>
                  </tr>
-                 <tr>
-                   <td>Mustabha</td>
-                   <td>01:56:43</td>
-                   <td>654000</td>
-                   <td class="action-icon">
-                    <button class="btn btn-success btn-sm">Process</button>
-                 </td>
-                 </tr>
+                
 
-                 <tr>
-                   <td>Mustabha</td>
-                   <td>01:56:43</td>
-                   <td>654000</td>
-                   <td class="action-icon">
-                    <button class="btn btn-success btn-sm">Process</button>
-                 </td>
-                 </tr>
-
-                 <tr>
-                   <td>Mustabha</td>
-                   <td>01:56:43</td>
-                   <td>654000</td>
-                   <td class="action-icon">
-                    <button class="btn btn-success btn-sm">Process</button>
-                 </td>
-                 </tr>
                </tbody>
              </table>
            </div>  
