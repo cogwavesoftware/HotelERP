@@ -134,11 +134,7 @@ export class OperationService {
 
   }
 
-  SaveinstructionData(instruction:any)
-  {
-    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveinstruction',instruction,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
-
-  }
+ 
 
   SavePettyDetail(Petty:any)
   {
@@ -177,6 +173,17 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savehouseguest',HouseGuest,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
 
+  SavePlanForm(planform:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveplan',planform,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+  SaveRoomInstruction(instruction:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveroominstruction',instruction,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+  
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {
   //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getexTax?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);

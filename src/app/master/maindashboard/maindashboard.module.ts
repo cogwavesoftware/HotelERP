@@ -29,6 +29,7 @@ import { PaxonbillComponent } from './paxonbill/paxonbill.component';
 import { SetcomplimentComponent } from './setcompliment/setcompliment.component';
 import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.component';
 import { ReleaseComponent } from './release/release.component';
+import {TagInputModule} from 'ngx-chips';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,
@@ -48,7 +49,7 @@ import { ReleaseComponent } from './release/release.component';
     ReactiveFormsModule ,
     ChartModule,
     BsDatepickerModule.forRoot(),ToastyModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),TagInputModule
   ],
  // entryComponents:[BlockingdetailsComponent]
 })
