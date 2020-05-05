@@ -82,7 +82,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   isValid(event: boolean): void {
     this.valid = event;
   }
-
+  Todaydate=new Date()
   @ViewChild(BlockingdetailsComponent, { static: false })
   block: BlockingdetailsComponent;
   @ViewChild("Name1", { static: false }) name: ElementRef;
@@ -383,18 +383,20 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   ProcessAmend(RoomNo: string) {
+   
     let Checkintime, checkoutTime, checkindate, checkoutdate;
-
+    this.Todaydate.setDate(this.Todaydate.getDate() + 1);
     this._OprService.GetAmendFormData(this.Branch, RoomNo).subscribe(
       res => {
         this.amendformdata = res;
         checkoutdate = new Date(res.CheckoutDate)
-        this.amendformdata.CheckoutDate=checkoutdate
-        var cin = res.AmendTime.split(':');
-        Checkintime.setHours(cin[0], cin[1], cin[2]);
-        this.amendformdata.AmendTime=Checkintime;
-       this.amendformdata.CreatedBy = this.UserId;
-      // this.amendformdata.AmendDate=new Date();
+        this.amendformdata.CheckoutDate=checkoutdate;
+        this.amendformdata.AmendDate=this.Todaydate;
+        //var cin = res.AmendTime.split(':');
+        //Checkintime.setHours(cin[0], cin[1], cin[2]);
+        this.amendformdata.AmendTime=this.Todaydate;
+        this.amendformdata.CreatedBy = this.UserId;
+      
       },
       error => {
         console.log("error in ProcessAmend");

@@ -100,6 +100,11 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/amend',amend,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
 
+  SaveHouseGuest(HouseGuest:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savehouse',HouseGuest,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
   SaveEditPax(Editpax:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saveeditrate',Editpax,{ headers:environment.BASE_CONTENTTYPE_HEADER })  

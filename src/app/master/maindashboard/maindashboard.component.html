@@ -853,7 +853,6 @@
         <!-- Discount -->
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount'" [modalClass]="'md-effect-2'">
-      
           <div class="app-modal-body">
             <button type="button" class="close basic-close-light-box" (click)="Discount.hide()">
               <span aria-hidden="true">&times;</span>
@@ -861,19 +860,14 @@
             <label class="font-header"
               style="background-color: RED;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
               ({{roomname1}})</label>
-  
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'500px'"
               [config]="config">
               <div class="row">
                 <div class="col-sm-12">
                   <app-discountportal [RoomNo]="RoomNos" [RoomCode]="RoomCodes"> </app-discountportal> 
-                
-                 
                 </div>
-  
               </div>
             </perfect-scrollbar>
-  
           </div>
         </app-modal-animation>  
        </div>
@@ -910,7 +904,7 @@
               <div class="col-sm-12 filter-bar">
                 <div class="row">
                   <app-amend-date [amendformdata]="amendformdata"></app-amend-date> 
-                  <!-- <app-amend-date ></app-amend-date> -->
+                  
                 </div>
               </div>
             </perfect-scrollbar>
@@ -975,7 +969,6 @@
         </app-modal-animation>
 
 
-
         <!-- ExtraBed -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExtraBed'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">ExtraBed
@@ -994,8 +987,6 @@
           </div>
         </app-modal-animation>
 
-
-
         <!-- Compliment -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Compliment'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;"> Set Compliment
@@ -1012,8 +1003,6 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
 
         <!-- HouseKeeping -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'HouseKeeping'" [modalClass]="'md-effect-2'">
