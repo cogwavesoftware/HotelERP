@@ -210,6 +210,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   closeMyModalPin(event) {
+    alert("fff");
     console.log("remove");
     var openModals = document.querySelectorAll(".md-show");
     for (let i = 0; i < openModals.length; i++) {

@@ -1,13 +1,10 @@
-<form [formGroup]="form" (ngSubmit)="Submit(form)" class="  " autocomplete="off">
- 
-   
-           
+<form [formGroup]="form" (ngSubmit)="Submit(form)" class="  " autocomplete="off"> 
   <div class="test123   guestinfofirstrow paymentarray" >
     <div class="modelstyle"> 
         <div class="row">
           <div class="col-md-12">
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-12">
                 <div class="row">
                 <div class='col-12 col-lg-4'>
                   <div class="form-group">
@@ -61,31 +58,7 @@
                 </div>
               </div>
               </div>
-              <div class="col-md-4" style="  padding-right:0;">
-                <div class="table-responsive">
-                  <table class="table table-striped table-bordered full-data-table"> 
-                    <thead> 
-                      <tr><th colspan="2" style="color:#fff;">
-                        Summary
-                      </th></tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Bill Amount</td>
-                        <td style="text-align: right;">{{TotalBillAmount}}</td> 
-                      </tr>
-                      <tr>
-                        <td>Tax Amount</td>
-                        <td style="text-align: right;">{{TotalTaxAmount}}</td> 
-                      </tr> 
-                      <tr>
-                        <td style="font-weight: bold;">Total</td>
-                        <td style="text-align: right;">{{TotalNetAmount}}</td> 
-                      </tr> 
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              
 
            
             </div>
@@ -97,13 +70,13 @@
       
      <div class="row"> 
         <div class=" col-md-12"> 
-              <div class="grid-table" style="width: 100%;">
+              <div class="grid-table" >
                 <div class="thead">
                   <div class=""> 
-                    <div class="td"><i class="fa fa-credit-card-alt"></i> Item Name</div>
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> Item</div>
                     <div class="td"><i class="fa fa-credit-card-alt"></i> Rate</div>
-                    <div class="td"><i class="fa fa-credit-card-alt"></i> Quanity</div>
-                    <div class="td"><i class="fa fa-credit-card-alt"></i> TotalAmount</div>
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> Qty</div>
+                    <div class="td"><i class="fa fa-credit-card-alt"></i> Amt</div>
                     <div class="td"><i class="fa fa-server"></i> Tax</div>
                     <div class="td"><i class="fa fa-retweet"></i>Net</div>
                     
@@ -167,19 +140,44 @@
               </div>  
         </div>  
       </div> 
-
+<div class=" ">
+  <div class="col-md-4 float-right m-t-10" style="  padding-right:0;">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered full-data-table"> 
+        <thead> 
+          <tr><th colspan="2" style="color:#fff;">
+            Summary
+          </th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bill Amount</td>
+            <td style="text-align: right;">{{TotalBillAmount}}</td> 
+          </tr>
+          <tr>
+            <td>Tax Amount</td>
+            <td style="text-align: right;">{{TotalTaxAmount}}</td> 
+          </tr> 
+          <tr>
+            <td style="font-weight: bold;">Total</td>
+            <td style="text-align: right;">{{TotalNetAmount}}</td> 
+          </tr> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
     </div> <!-- end of modelstyle -->
   </div><!-- end of payment -->
-
-      <div class="guestinfofirstrow" style="padding-top:20px;"> 
-            <div class="form-group  float-right" >                                   
-                <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
-                <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
-             </div>   
-      </div>
-    
  
-
+      <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+        <div  style="width:100%" >
+          <div class="form-group  " style="float: right;" >                                   
+            <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+            <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+         </div>
+        </div> 
+      </div> 
 </form>
 
 

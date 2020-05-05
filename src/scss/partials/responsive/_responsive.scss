@@ -884,7 +884,18 @@
     .grid-table .tbody .td select{         
        
         height: 23px;
+    } 
+    .test123.paymentarray .grid-table .thead .td { 
+        width: 14%!important;
     }
+   
+    .test123.paymentarray .grid-table .tbody .td input,
+.test123.paymentarray .grid-table .tbody .td select{
+    width: 14%!important;
+    height:18px!important;
+}
+
+    
 }
 @media only screen and (max-width: 991px) {
     .main-body .page-wrapper .align-items-end {
@@ -1298,6 +1309,7 @@
     .checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
         width:53px!important;        
     }
+   
 }
 @media only screen and (max-width: 420px) {
     #msform {
