@@ -47,17 +47,14 @@ export class AmendDateComponent implements OnInit {
 
 
   ngOnInit() {
-   
-    this.minDate = new Date();
-    this.minDate.setDate(this.minDate.getDate() + 1);
-    let CheckinDate = this.datePipe.transform(this.minDate, "MM/dd/yyyy");
+  
     this.amendformdata={
       RoomNo:"0",
       GuestName:"0",
       AmendTime:this.myTime,
-      CheckoutDate:CheckinDate,
+      CheckoutDate:new Date(),
       AmendDate:new Date(),     
-      Reason:"Change Pax",
+      Reason:"AMEND DATE",
       BranchCode:"0",
       IpAdd:"0",
       CreatedBy:0,
@@ -75,7 +72,7 @@ export class AmendDateComponent implements OnInit {
     //   return;
     // } 
     alert('tru')
-    this._oprservice.SaveAmend(form.value).subscribe(data => {
+    this._oprservice.SaveAmend(this.amendformdata).subscribe(data => {
       if (data == true) {
         if (form.value.Id == "0") {
           this.addToast(
