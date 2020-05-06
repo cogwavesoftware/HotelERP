@@ -48,6 +48,11 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   model2: any = {};
   @ViewChild("f", { static: false }) form: any;
   roomname: any;
+  golbalresponse:any;
+  RoomNoArray: string[] = [];
+  
+  OriginalArray: string[] = [];
+  selectedRoomNoArray: string[] = [];
   DasboardLoad: any;
   floorname: any;
   rmno: string;
@@ -78,6 +83,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   model: any;
   Branch: string;
   BookingList: any;
+  linkroommodel:any;
   myTime = new Date();
   valid: boolean = true;
   isValid(event: boolean): void {
@@ -295,8 +301,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         this.ProcessPaxOnBill(RoomNo);
         break;
       case "linkunlink":
+        this.ProcessLinkRoom(RoomNo,"LINK");
         break;
       case "linkunlink1":
+        this.ProcessLinkRoom(RoomNo,"UNLINK");
         break;
       case "ChangePlan":
         this.ProcessChangePlan(RoomNo);
@@ -309,6 +317,122 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     console.log("event");
     document.querySelector("#" + event).classList.add("md-show");
   }
+
+  ProcessLinkRoom(RoomNo: string,Des:string) {
+    this.selectedRoomNoArray=[];
+    this.linkroommodel=[];
+    if(Des=="LINK")
+    {
+      this.golbalresponse=[];
+      this._oprservice.GetLinkingRooms(this.Branch,this.RoomNos,"LINK").subscribe(res=>{
+      this.linkroommodel=res;
+      })
+    }
+    else
+    {
+      this.golbalresponse=[];
+      this._oprservice.GetLinkingRooms(this.Branch,this.RoomNos,"UNLINK").subscribe(res=>{
+      this.linkroommodel=res;
+      })
+    }  
+  }
+
+  enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
+    debugger
+    const classNameS = event.target.className;
+    if (classNameS.indexOf('freeroom') >= 0) {
+      document.querySelector("#" + RoomNos).classList.remove('freeroom');
+      document.querySelector("#" + RoomNos).classList.add('occroom');
+      this.addData(RoomNo);
+    }
+    else {     
+      document.querySelector("#" + RoomNos).classList.remove('occroom');
+      document.querySelector("#" + RoomNos).classList.add('freeroom');
+       this.deleteMsg(RoomNo);
+    }
+
+  }
+
+addData(msg: string) {
+    this.selectedRoomNoArray.push(msg);
+}
+getData() {
+
+    return this.selectedRoomNoArray;
+}
+deleteMsg(msg:string) {
+  const index: number = this.selectedRoomNoArray.indexOf(msg);
+  if (index !== -1) {
+      this.selectedRoomNoArray.splice(index, 1);
+  }        
+}
+
+  SaveLinkRoom(type:string)
+  {
+    this.golbalresponse=this.getData();
+    console.log('this.golbalresponse')
+    console.log(this.golbalresponse)
+    var sdata = JSON.stringify(this.golbalresponse);
+    var leftstring = sdata.replace('[', '');
+    var rightstr = leftstring.replace(']', '');
+    console.log(rightstr);
+    this._oprservice.UpdateLinkRoom(this.Branch,this.RoomNos,rightstr).subscribe(res=>{
+      if(res==true)
+      {
+        this.addToast(
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
+          "success"
+        );
+      }
+      else
+      {
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+      }
+    },
+    error=>{
+      console.log(error.message)
+      console.log('error.message')
+       this.addToast("Cogwave Software", error.message, "error");
+    },
+    ()=>{
+      this.closeMyModalPin(event);
+    });
+  }
+
+  SaveUnLinkRoom(type:string)
+  {
+    this.golbalresponse=this.getData();
+    console.log('this.golbalresponse')
+    console.log(this.golbalresponse)
+    var sdata = JSON.stringify(this.golbalresponse);
+    var leftstring = sdata.replace('[', '');
+    var rightstr = leftstring.replace(']', '');
+    console.log(rightstr);
+    this._oprservice.UpdateUnlinkRoom(this.Branch,this.RoomNos,rightstr).subscribe(res=>{
+      if(res==true)
+      {
+        this.addToast(
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
+          "success"
+        );
+      }
+      else
+      {
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+      }
+    },
+    error=>{
+      console.log(error.message)
+      console.log('error.message')
+       this.addToast("Cogwave Software", error.message, "error");
+    },
+    ()=>{
+      this.closeMyModalPin(event);
+    });
+  }
+  
 
   ProcessExtraBed(RoomNo: string) {
     this._OprService.GetExtraBedFormData(this.Branch, RoomNo,1).subscribe(

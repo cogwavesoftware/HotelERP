@@ -192,6 +192,19 @@ export class OperationService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/changeguest?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&GuestCode=' + GuestCode);
   }
   
+  GetLinkingRooms(BranchCode: string,RoomNo:string,desc:string)
+  {
+   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getlink?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&desc=' + desc);
+  }
+  UpdateLinkRoom(BranchCode: string,RoomNo:string,LinkRoom:string)
+  {
+  return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/updatelink?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&LinkRoom=' + LinkRoom);
+  }
+  UpdateUnlinkRoom(BranchCode: string,RoomNo:string,LinkRoom:string)
+  {
+  return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/updateunlink?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&LinkRoom=' + LinkRoom);
+  }
+  
   
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {
