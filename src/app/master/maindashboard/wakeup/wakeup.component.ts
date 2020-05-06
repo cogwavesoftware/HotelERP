@@ -118,12 +118,7 @@ export class WakeupComponent implements OnInit {
         error => {
           //this.wakeupform.reset();
           this.addToast("Cogwave Software", "Block Information Not Saved", "error");
-          // this.minDate=new Date();
-          // this.maxDate.setDate(this.minDate.getDate() + 1);
-          // this.wakeupform.patchValue({
-          //   alarmdate: this.minDate,
-          //   alarmtime:this.myTime
-          // })
+          
         },
         ()=>{
           this.closeMyModalPin(event);

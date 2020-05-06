@@ -204,7 +204,10 @@ export class OperationService {
   {
   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/updateunlink?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo + '&LinkRoom=' + LinkRoom);
   }
-  
+  SaveRelase(realse:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saverealse',realse,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
   
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {

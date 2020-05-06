@@ -1,3 +1,4 @@
+import { OperationService } from 'src/app/_services/operation.service';
 
 
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
@@ -33,15 +34,12 @@ export class ReleaseComponent implements OnInit {
   @Input() RoomCode: string;
   @Input() RoomNo: string;
   @Input() Operation:string;
-
   constructor(public router: Router, 
     private datePipe: DatePipe,private toastyService: ToastyService,
     private route: ActivatedRoute, public formBuilder: FormBuilder,
-    private _masterformservice:MasterformService
-    ) {
+    private _masterformservice:MasterformService,private _oprservice:OperationService
+    ) {}
 
-
-  }
 
 
   ngOnInit() {
@@ -49,8 +47,6 @@ export class ReleaseComponent implements OnInit {
  
     this.maxDate.setDate(this.minDate.getDate() + 1);
     this.ReleaseForm = this.formBuilder.group({
-     
-      
       ReleaseDate: [new Date(), [Validators.required]],
       RoomNo: [this.RoomNo, Validators.required],
       RoomCode: [this.RoomCode, Validators.required],
@@ -77,18 +73,16 @@ export class ReleaseComponent implements OnInit {
     })
     console.log('this.ReleaseForm.value')
     console.log(this.ReleaseForm.value)
-    this._masterformservice.SaveBlockinformation(this.ReleaseForm.value).subscribe(data => {
+    this._oprservice.SaveRelase(this.ReleaseForm.value).subscribe(data => {
       if (data == true) {
         this.addToast(
           "Cogwave Software Technologies Pvt Ltd..",
           "Congratulations Data Saved Sucessfully",
           "success"
-        );
-       
+        );     
       } 
       else {       
-        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
-      
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");      
       }
     },
     error => {
@@ -100,12 +94,8 @@ export class ReleaseComponent implements OnInit {
     },
     ()=>{
       alert('suceesss')
-      this.ReleaseForm.reset();
-      this.minDate=new Date();
-      this.maxDate.setDate(this.minDate.getDate() + 1);
-      this.ReleaseForm.patchValue({ 
-        ReleaseDate:this.maxDate,
-      })
+    
+     
       this.closeMyModalPin(event);
     });
   }
@@ -116,10 +106,11 @@ export class ReleaseComponent implements OnInit {
 
   closeMyModalPin(event){ 
     this.ReleaseForm.reset();
+    this.minDate=new Date();
+    this.maxDate.setDate(this.minDate.getDate() + 1);
     this.ReleaseForm.patchValue({
-      BlockDate: this.minDate,
       ReleaseDate:this.maxDate,
-      Status: "SHORT"
+     
     })
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
