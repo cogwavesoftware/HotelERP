@@ -16,7 +16,7 @@
                            <div class="row">                
                     
                             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="paxonbillform.BranchCode" #BranchCode="ngModel" value="{{paxonbillform.BranchCode}}">
-                            <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="paxonbillform.IpAdd" #IpAdd="ngModel" value="{{paxonbillform.IpAdd}}">
+                          
                             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="paxonbillform.CreatedBy" #CreatedBy="ngModel" value="{{paxonbillform.CreatedBy}}">
                                                 
                              <div class="col-md-4">
@@ -30,14 +30,33 @@
                               <input type="text" name="RoomCode" class="form-control" [(ngModel)]="paxonbillform.RoomCode" #RoomCode="ngModel" value="{{paxonbillform.RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}"  required  autocomplete="off">
                               
                              </div>
-                             <div class="col-md-4"  >
+                             <!-- <div class="col-md-4"  >
                                
                                <label>Pax*</label>
                                <input type="number" min="10" max="10" name="Pax" class="form-control" [(ngModel)]="paxonbillform.Pax" #Pax="ngModel" value="{{paxonbillform.Pax}}"  [ngClass]="{'is-invalid': Pax.touched && Pax.invalid}"  required   autocomplete="off">
                                <div *ngIf="Pax.touched && Pax.invalid" class="invalid-feedback">
                                  <div *ngIf="Pax.errors.required">Pax Cant'be Empty</div>
                                </div>
-                           </div>
+                           </div> -->
+
+                           <div class='col-md-4'>
+                            <div class="form-group" 
+                            [class.has-error]="Pax.touched && Pax.errors?.defaultSelected">
+                                <label class="required">Pax</label>
+                                  <select class="custom-select" id="Pax" (change)="CalculateTaxAmount(RoomNo.value,Pax.value)" appSelectValidator="0" #Pax="ngModel"
+                                    name="Pax" [(ngModel)]="paxonbillform.Pax">
+                                    <option value="0">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    
+                                  </select>
+                                  <span class="help-block" *ngIf="Pax.touched && Pax.errors?.defaultSelected">
+                                    Pax is required
+                                  </span>
+                             </div>  
+                          </div> 
 
                            
                            </div>
@@ -59,6 +78,3 @@
   
   
   
-  
-  
-  <ng2-toasty [position]="position"></ng2-toasty>

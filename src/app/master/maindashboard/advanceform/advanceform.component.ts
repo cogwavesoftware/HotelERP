@@ -104,7 +104,7 @@ export class AdvanceformComponent implements OnInit {
 
 
     let mode = this.PayArray.controls[index].get("Paymode").value;
-
+    alert(mode)
     switch (mode) {
       case "Cash":
         this.subpaymodelist = [];

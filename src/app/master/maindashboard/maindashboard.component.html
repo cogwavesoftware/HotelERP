@@ -1154,70 +1154,70 @@
         </app-modal-animation>
 
 
-  <!-- linkunlink -->
-  <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink'" [modalClass]="'md-effect-2'">
-    <h3 class="f-15" style="position: relative;">Link 
-      <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-    </h3>
-    <div class="app-modal-body text-center">
-      <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
-        [config]="config">
-        <div class="col-sm-12 filter-bar">
-          <div class="row">
-            <div class="shiftroom discountfrm">
-              <div class="formdesign" style="padding: 0;">
-                  <div class="userlist">
-            
-                      <div class="row">
-                          <div class="col-md-12" >  
-                              <form #myform="ngForm" (ngSubmit)="SaveLinkRoom('LINK')" class="">
-                                
+ 
 
-                                    <div class="row">            
-                                      <div id="availrooms">
-                                      <div class="container">
-                                        <div class="col-md-12">
-                                          <div class="row">
-                                            <ul style="display: inline-block" *ngFor="let room of linkroommodel">
-                                              <li style="float: left; margin-left: 0px ">
-                                                <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
-                                                  {{room.RoomNo}}
-                                                  <br>
-                                                  {{room.RoomCode}}
-                                              </div>
-                                              </li>                   
-                                            </ul>
-                                          </div>
+
+ <!-- linkunlink -->
+ <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink'" [modalClass]="'md-effect-2'">
+  <h3 class="f-15" style="position: relative;">Link 
+    <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
+  </h3>
+  <div class="app-modal-body text-center">
+    <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+      [config]="config">
+      <div class="col-sm-12 filter-bar">
+        <div class="row">
+          <div class="shiftroom discountfrm">
+            <div class="formdesign" style="padding: 0;">
+                <div class="userlist">
+          
+                    <div class="row">
+                        <div class="col-md-12" >  
+                            <form #myform="ngForm" (ngSubmit)="SaveLinkRoom('LINK')" class="">
+                              
+
+                                  <div class="row">            
+                                    <div id="availrooms">
+                                    <div class="container">
+                                      <div class="col-md-12">
+                                        <div class="row">
+                                          <ul style="display: inline-block" *ngFor="let room of linkroommodel">
+                                            <li style="float: left; margin-left: 0px ">
+                                              <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="buttonlinlclick($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                                                {{room.RoomNo}}
+                                                <br>
+                                                {{room.RoomCode}}
+                                            </div>
+                                            </li>                   
+                                          </ul>
                                         </div>
-                                      </div>  
-                                    </div>
-                                    </div>
+                                      </div>
+                                    </div>  
+                                  </div>
+                                  </div>
+                              
                                 
-                                  
-                                        
-                                        <div class="guestinfofirstrow  row">
-                                          <div class='col-12 col-lg-12'>
-                                              <div class="form-group  float-right" >                                   
-                                                  <button type="submit"  class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
-                                                  <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                                               </div>  
-                                            </div> 
-                                        </div>
-                                  
-                                </form> 
-                                    </div>
-                             </div>       
-                  </div>
-               </div>
-            </div>
+                                      
+                                      <div class="guestinfofirstrow  row">
+                                        <div class='col-12 col-lg-12'>
+                                            <div class="form-group  float-right" >                                   
+                                                <button type="submit"  class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                                <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                             </div>  
+                                          </div> 
+                                      </div>
+                                
+                              </form> 
+                                  </div>
+                           </div>       
+                </div>
+             </div>
           </div>
         </div>
-      </perfect-scrollbar>
-    </div>
-  </app-modal-animation>
-
-
-
+      </div>
+    </perfect-scrollbar>
+  </div>
+</app-modal-animation>
       
 
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink1'" [modalClass]="'md-effect-2'">
@@ -1245,7 +1245,8 @@
                                             <div class="row">
                                               <ul style="display: inline-block" *ngFor="let room of linkroommodel">
                                                 <li style="float: left; margin-left: 0px ">
-                                                  <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'d'+ room.RoomNo}}" (click)="enableDisableRule($event,'d'+room.RoomNo,room.RoomCode,room.RoomNo)">
+                                             
+                                                    <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'U'+ room.RoomNo}}" (click)="buttonlinlclick($event,'U'+room.RoomNo,room.RoomCode,room.RoomNo)">
                                                     {{room.RoomNo}}
                                                     <br>
                                                     {{room.RoomCode}}
@@ -1328,29 +1329,24 @@
                                         <div class="guestinfofirstrow  row">
                                         <div class="col-md-12" style="border: 1px solid #ccc; padding:10px; border-bottom: 4px solid #ccc;">
                                           <div class="row">
-                                            <ul>
-                                              <li>
-                                                <div class="form-check-inline">
-                                                  <label class="form-check-label">
-                                                    <input   type="radio" id="day1" name="day1" class="form-check-input" value=""> 1 Day
-                                                  </label>
-                                                </div> 
-                                              </li>
-                                              <li>
-                                                <div class="form-check-inline">
-                                                  <label class="form-check-label">
-                                                    <input   type="radio" id="day2" name="day1" class="form-check-input" value="">2 Day
-                                                  </label>
-                                                </div> 
-                                              </li>
-                                              <li>
-                                                <div class="form-check-inline">
-                                                  <label class="form-check-label">
-                                                    <input   type="radio" id="day3" name="day1" class="form-check-input" value="">3Day
-                                                  </label>
-                                                </div> 
-                                              </li>
-                                            </ul>
+                                            <div class='col-md-4'>
+                                              <div class="form-group" 
+                                              [class.has-error]="Pax.touched && Pax.errors?.defaultSelected">
+                                                  <label class="required">Pax</label>
+                                                    <select class="custom-select" id="Pax" (change)="CalculateTaxAmount(RoomNo.value,Pax.value)" appSelectValidator="0" #Pax="ngModel"
+                                                      name="Pax" [(ngModel)]="model.Pax">
+                                                      <option value="0">Select</option>
+                                                      <option value="1">1</option>
+                                                      <option value="2">2</option>
+                                                      <option value="3">3</option>
+                                                      <option value="4">4</option>
+                                                      
+                                                    </select>
+                                                    <span class="help-block" *ngIf="Pax.touched && Pax.errors?.defaultSelected">
+                                                      Pax is required
+                                                    </span>
+                                               </div>  
+                                            </div> 
                                           </div>
                                         </div> 
                                          </div><!--guestinfofirstrow --> 

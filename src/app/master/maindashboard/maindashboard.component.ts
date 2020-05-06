@@ -337,7 +337,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     }  
   }
 
-  enableDisableRule(event, RoomNos, RoomCodes, RoomNo) {
+ 
+
+  buttonlinlclick(event, RoomNos, RoomCodes, RoomNo) {
     debugger
     const classNameS = event.target.className;
     if (classNameS.indexOf('freeroom') >= 0) {
