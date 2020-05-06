@@ -32,3 +32,15 @@
     margin: 20px 0px 0px 0px;
     padding: 5px;
   }
+  @media only screen and (max-width: 640px) {
+    .test123.paymentarray .grid-table.grid-table1 .thead .td { 
+      width: 16%!important;
+      height:50px;
+      white-space: break-spaces;
+  } 
+  .test123.paymentarray .grid-table.grid-table1 .tbody .td input,
+  .test123.paymentarray .grid-table.grid-table1 .tbody .td select{
+  width: 17%!important;
+  height:18px!important;
+  }
+  }

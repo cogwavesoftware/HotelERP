@@ -1,112 +1,110 @@
-<div class="outerdiv discountfrm">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist">
-        
+<div class=" "> 
+        <div class=" "> 
                  <form [formGroup]="discountportalform" (ngSubmit)="onSubmit(discountportalform)"> 
-                    <div class="container-fluid" >             
-                        <div class='row'>                            
-                              <div class="col-md-12">
-                                  <div class="row">
-                                    <div class="col-md-12" > 
-                                       
-
-                                      
-                                    <div class="guestinfofirstrow  row">
-
-                                      <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="Discount">Discount</label>                                                                                  
-                                          <input type="radio" (click)="Selected('Discount')"  class="form-control" style="width: 15px" value="DISCOUNT" formControlName="Status">  
-                                                                                
-                                        </div>
-                                      </div>
-
-
-                                      <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="Allowance">Allowance</label>
-                                          <input type="radio" value="Allowance" (click)="Selected('Allowance')" class="form-control" style="width: 15px" formControlName="Status"> 
-                       
-                                        </div>
-                                      </div>
-                                     
-                                    </div>
-
-                                        <div  class="guestinfofirstrow  row">
-                                        <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="rmno">Room No </label>
-                                          <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="RoomNo"  value="{{RoomNo}}" name="RoomNo"  autocomplete="off"  required  />    
-                                          </div>  
-                                      </div>
-
-                                      <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="rmno">RoomCode </label>
-                                          <input type="text" class="form-control tooltip-form" id="RoomCodes"  value="{{RoomCode}}" formControlName="RoomCode" name="RoomCode"    autocomplete="off"  required  />  
-                                          
-                                          </div>  
-                                      </div>
-
-
-                                      <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="date">ProcessDate</label>
-                                          <input  id="ProcessDate" name="ProcessDate"  formControlName="ProcessDate"  readonly type="text"  bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
-                                         </div>  
-                                      </div>
-                                     
-   
-                                     
-          
-                                      <div class='col-12 col-lg-4' *ngIf=!IsLongTime>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="date">Discount Type</label>
-                                          <select class="custom-select" #DiscountType name="DiscountType" formControlName="DiscountType" >
-                                              <option value="0">Select</option>
-                                              <option  *ngFor="let type of discountvalue" [value]="type">
-                                                {{ type  }}</option>
-                                            </select>
-                                         </div>  
-                                      </div>
-
-                                      <div class='col-12 col-lg-4' *ngIf=!IsLongTime>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="gname">Discount Value</label>
-                                          <input type="text" class="form-control tooltip-form" id="Disvalue" formControlName="Disvalue"  name="Disvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.Disvalue.errors || discountportalform.controls.Disvalue.touched || discountportalform.controls.Disvalue.dirty}" required  />  
-                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.Disvalue.errors?.required" >Disvalue is required</div>
-                                          </div>  
-                                      </div>
-                                      <div class='col-12 col-lg-4' *ngIf=IsLongTime>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="gname">Allowance Amount</label>
-                                          <input type="text" class="form-control tooltip-form" id="AllowanceAmt" formControlName="AllowanceAmt"  name="AllowanceAmt" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.AllowanceAmt.errors || discountportalform.controls.AllowanceAmt.touched || discountportalform.controls.AllowanceAmt.dirty}" required  />  
-                                          <div class="invalid-feedback" *ngIf="discountportalform.controls.AllowanceAmt.errors?.required" >AllowanceAmt is required</div>
-                                          </div>  
-                                      </div>
-
-                                     
-                                      <div class='col-12 col-lg-12'>
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="Reason">Reason </label>
-                                             <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason"   autocomplete="off"></textarea>  
-                                             </div>   
-                                      </div> 
-
-                                       </div>
-                                                                       
-                                     </div>
-                                 </div>
-                            </div>
-                        </div>
-                        <div class="row modelbtn">   
+                  <div class="test123   guestinfofirstrow paymentarray" >
+                    <div class="modelstyle"> 
+                        <div class="row">
                           <div class="col-md-12">
-                            <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Exit </button>
-                            <button  type="submit"  class="btn btn-primary"> Process </button> 
-                          </div>  
-                         </div>  
-                    </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class='row'>                            
+                                  <div class="col-md-12">
+                                      <div class="row">
+                                        <div class="col-md-12" >   
+                                        <div class="guestinfofirstrow  row"> 
+                                          <div class='col-12 col-md-2'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="Discount">Discount</label>                                                                                  
+                                              <input type="radio" (click)="Selected('Discount')"  class="form-control radiobtn" style="width: 15px" value="DISCOUNT" formControlName="Status">  
+                                                                                    
+                                            </div>
+                                          </div> 
+                                          <div class='col-12 col-md-2'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="Allowance">Allowance</label>
+                                              <input type="radio" value="Allowance" (click)="Selected('Allowance')" class="form-control radiobtn" style="width: 15px" formControlName="Status">  
+                                            </div>
+                                          </div>
+                                         
+                                        </div>
+    
+                                            <div  class="guestinfofirstrow  row">
+                                              <div class='col-12 col-md-2'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="rmno">Room No </label>
+                                              <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="RoomNo"  value="{{RoomNo}}" name="RoomNo"  autocomplete="off"  required  />    
+                                              </div>  
+                                          </div>
+    
+                                          <div class='col-12 col-md-2'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="rmno">Room Code </label>
+                                              <input type="text" class="form-control tooltip-form" id="RoomCodes"  value="{{RoomCode}}" formControlName="RoomCode" name="RoomCode"    autocomplete="off"  required  />   
+                                              </div>  
+                                          </div>
+    
+    
+                                          <div class='col-12 col-md-2'>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="date">Process Date</label>
+                                              <input  id="ProcessDate" name="ProcessDate"  formControlName="ProcessDate"    type="text"  bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                             </div>  
+                                          </div>           
+              
+                                          <div class='col-12 col-md-4' *ngIf=!IsLongTime>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="date">Discount Type</label>
+                                              <select class="custom-select" #DiscountType name="DiscountType" formControlName="DiscountType" >
+                                                  <option value="0">Select</option>
+                                                  <option  *ngFor="let type of discountvalue" [value]="type">
+                                                    {{ type  }}</option>
+                                                </select>
+                                             </div>  
+                                          </div>
+    
+                                          <div class='col-12 col-md-2' *ngIf=!IsLongTime>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="gname">Discount Value</label>
+                                              <input type="text" class="form-control tooltip-form" id="Disvalue" formControlName="Disvalue"  name="Disvalue" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.Disvalue.errors || discountportalform.controls.Disvalue.touched || discountportalform.controls.Disvalue.dirty}" required  />  
+                                              <div class="invalid-feedback" *ngIf="discountportalform.controls.Disvalue.errors?.required" >Disvalue is required</div>
+                                              </div>  
+                                          </div>
+                                          <div class='col-12 col-md-2' *ngIf=IsLongTime>
+                                            <div class="form-group">
+                                              <label class="form-control-label" for="gname">Allowance Amount</label>
+                                              <input type="text" class="form-control tooltip-form" id="AllowanceAmt" formControlName="AllowanceAmt"  name="AllowanceAmt" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && discountportalform.controls.AllowanceAmt.errors || discountportalform.controls.AllowanceAmt.touched || discountportalform.controls.AllowanceAmt.dirty}" required  />  
+                                              <div class="invalid-feedback" *ngIf="discountportalform.controls.AllowanceAmt.errors?.required" >AllowanceAmt is required</div>
+                                              </div>  
+                                          </div>
+    
+                                         
+                                          <div class='col-12 col-lg-12'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="Reason">Reason </label>
+                                                 <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason"   autocomplete="off"></textarea>  
+                                                 </div>   
+                                          </div>  
+                                           </div>                        
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                                
+                      <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0; margin-top:20px  " > 
+                        <div  style="width:100%" >
+                          <div class="form-group  " style="float: right;" >                                   
+                            <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Process</button>    
+                            <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                         </div>
+                        </div> 
+                      </div>   
                  </form>
         </div>
-     </div>
+     
  </div>

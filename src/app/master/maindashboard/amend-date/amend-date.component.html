@@ -1,103 +1,103 @@
 
 
-<div class="shiftroom discountfrm">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist">
-  
-            <div class="row">
-                <div class="col-md-12" >  
+ 
                     <form #myform="ngForm" (ngSubmit)="SaveAmend(myform)" class="">
-                        <div class="app-modal-body text-center addcompany">
-                          <div class="col-md-12">
+                      <div class="test123   guestinfofirstrow paymentarray" >
+                        <div class="modelstyle"> 
                             <div class="row">
-                             
-                              <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="amendformdata.BranchCode"
-                                #BranchCode="ngModel" value="{amendformdata.BranchCode}}">
-                            
-                              <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="amendformdata.CreatedBy"
-                                #CreatedBy="ngModel" value="{{amendformdata.CreatedBy}}">
-    
-                                <div class="guestinfofirstrow  row" style="padding: 15px;">
-                                  <div class='col-12 col-lg-4'>
-                                      <div class="form-group">
-                                        <label class="required">Room No*</label>
-                                        <input type="text" name="RoomNo" class="form-control" [(ngModel)]="amendformdata.RoomNo"
-                                          #RoomNo="ngModel" value="{{RoomNos}}"
-                                          [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}" required autocomplete="off">
-                                        <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
-                                          <div *ngIf="RoomNo.errors.required">RoomNo is invalid</div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  
-                                    <div class='col-12 col-lg-4'>
-                                      <div class="form-group">
-                                        <label>Ammend Date*</label>
-                                      <input id="AmendDate" name="AmendDate" class="form-control" [(ngModel)]="amendformdata.AmendDate"
-                                        #AmendDate="ngModel" placement="center" type="text" bsDatepicker [minDate]="minDate"
-                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
-                                      </div>
-                                    </div> 
-                                    <div class='col-12 col-lg-4'>
-                                      <div class="form-group">
-                                        <label>Checkout Date*</label>
-                                        <input id="CheckoutDate" name="CheckoutDate" class="form-control" readonly
-                                          [(ngModel)]="amendformdata.CheckoutDate" #CheckoutDate="ngModel" bsDatepicker placement="center" type="text"
-                                         
-                                          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
-                                      </div>
-                                    </div>
-                                    <!-- bsDatepicker [minDate]="minDate" -->
-                                    <div class='col-12 col-lg-4' >
-                                      <div class="form-group">
-                                        <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
-                                         <timepicker id="AmendTime" [(ngModel)]="amendformdata.AmendTime"   name="AmendTime"  (isValid)="isValid($event)"  [showSpinners]="false"   [showMeridian]="ismeridian"></timepicker>
-                                      
-                                       </div>
-                                    </div>  
+                              <div class="col-md-12">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="row"> 
+                                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="amendformdata.BranchCode"
+                                        #BranchCode="ngModel" value="{amendformdata.BranchCode}}">
+                                    
+                                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="amendformdata.CreatedBy"
+                                        #CreatedBy="ngModel" value="{{amendformdata.CreatedBy}}">
+            
+                                        
+                                          <div class='col-12 col-md-3'>
+                                              <div class="form-group">
+                                                <label class="required">Room No*</label>
+                                                <input type="text" name="RoomNo" class="form-control" [(ngModel)]="amendformdata.RoomNo"
+                                                  #RoomNo="ngModel" value="{{RoomNos}}"
+                                                  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}" required autocomplete="off">
+                                                <div *ngIf="RoomNo.touched && RoomNo.invalid" class="invalid-feedback">
+                                                  <div *ngIf="RoomNo.errors.required">RoomNo is invalid</div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          
+                                            <div class='col-12 col-md-3'>
+                                              <div class="form-group">
+                                                <label>Ammend Date*</label>
+                                              <input id="AmendDate" name="AmendDate" class="form-control" [(ngModel)]="amendformdata.AmendDate"
+                                                #AmendDate="ngModel" placement="center" type="text" bsDatepicker [minDate]="minDate"
+                                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+                                              </div>
+                                            </div> 
+                                            <div class='col-12 col-md-3'>
+                                              <div class="form-group">
+                                                <label>Checkout Date*</label>
+                                                <input id="CheckoutDate" name="CheckoutDate" class="form-control"  
+                                                  [(ngModel)]="amendformdata.CheckoutDate" #CheckoutDate="ngModel" bsDatepicker placement="center" type="text"
+                                                 
+                                                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+                                              </div>
+                                            </div>
+                                            <!-- bsDatepicker [minDate]="minDate" -->
+                                            <div class='col-12 col-md-3' >
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
+                                                 <timepicker id="AmendTime" [(ngModel)]="amendformdata.AmendTime"   name="AmendTime"  (isValid)="isValid($event)"  [showSpinners]="false"   [showMeridian]="ismeridian"></timepicker>
+                                              
+                                               </div>
+                                            </div>  
+        
+                                            <div class='col-12 col-md-3'>
+                                              <div class="form-group">
+                                                  <label class="required">Guest Name</label>
+                                                  <input type="text" name="GuestName" class="form-control" [(ngModel)]="amendformdata.GuestName"
+                                                    #GuestName="ngModel" value="{{amendformdata.GuestName}}"   required autocomplete="off">
+                                               </div>  
+                                            </div> 
+                                            
+                                        
+                                          <div class='col-12 col-md-8'>
+                                            <div class="form-group">
+                                                <label class="required">Reason</label>
+                                                <input type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
+                                                #Reason="ngModel"     required autocomplete="off"> 
+                                                 
+                                                  <!-- <textarea type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
+                                                  #Reason="ngModel" value="{{amendformdata.Reason}}"   required autocomplete="off"></textarea> -->
+                                             </div>  
+                                          </div>
+                                       
+                                            
 
-                                    <div class='col-12 col-lg-3'>
-                                      <div class="form-group">
-                                          <label class="required">Guest Name</label>
-                                          <input type="text" name="GuestName" class="form-control" [(ngModel)]="amendformdata.GuestName"
-                                            #GuestName="ngModel" value="{{amendformdata.GuestName}}"   required autocomplete="off">
-                                       </div>  
-                                    </div> 
-                                   
-                                </div>
+                                            <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                                              <div  style="width:100%" >
+                                                <div class="form-group  " style="float: right;" >   
+                                                  <button type="submit"  class="btn btn-success " style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+                                                      <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                 </div>
+                                              </div> 
+                                            </div> 
 
-                                <div class="guestinfofirstrow  row">
-                                  <div class='col-12 col-lg-12'>
-                                    <div class="form-group">
-                                        <label class="required">Reason</label>
-                                        <textarea type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
-                                          #Reason="ngModel" value="{{amendformdata.Reason}}"   required autocomplete="off"></textarea>
-                                     </div>  
+
+                                    </div> 
+                                    </div>
                                   </div>
                                 </div>
-                                    <div class="guestinfofirstrow  row" style="width: 100%;">
-                                      <div class='col-12 col-lg-12'>
-                                          <div class="form-group  float-right" >     
-                                            <!-- [disabled]="myform.form.invalid"  -->
-                                              <button type="submit"  class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
-                                              <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                                           </div>  
-                                        </div> 
-                                    </div> 
-                                
-                              
-                            </div>  
-                          </div> 
-                        </div>
+                              </div>
+                            </div>
+                          </div>
+
+                      
                       </form>
                  
-                          </div>
-                   </div>       
-                  
-        </div>
-     </div>
-  </div>
-  
+                           
   
   
   
