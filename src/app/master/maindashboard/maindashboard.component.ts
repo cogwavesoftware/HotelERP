@@ -31,7 +31,7 @@ import { ElementRef } from "@angular/core";
 import { BlockingdetailsComponent } from "./blockingdetails/blockingdetails.component";
 import { Router } from "@angular/router";
 import { ReservationService } from "./../../_services/reservation.service";
-
+import { ConfirmationDialogService } from '../../_services/confirmation-dialog.service';
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { DiscountFormmodel } from "src/app/_models/DiscountFormmodel";
 import { ChangeCompanymodel } from "src/app/_models/ChangeCompanymodel";
@@ -48,15 +48,15 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   model2: any = {};
   @ViewChild("f", { static: false }) form: any;
   roomname: any;
-  golbalresponse:any;
+  golbalresponse: any;
   RoomNoArray: string[] = [];
-  
+
   OriginalArray: string[] = [];
   selectedRoomNoArray: string[] = [];
   DasboardLoad: any;
   floorname: any;
   rmno: string;
-  roominstructionmodel:any;
+  roominstructionmodel: any;
   theme = "bootstrap";
   type = "default";
   position = "top-right";
@@ -83,17 +83,17 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   model: any;
   Branch: string;
   BookingList: any;
-  linkroommodel:any;
+  linkroommodel: any;
   myTime = new Date();
   valid: boolean = true;
   isValid(event: boolean): void {
     this.valid = event;
   }
-  Todaydate=new Date()
+  Todaydate = new Date()
   @ViewChild(BlockingdetailsComponent, { static: false })
   block: BlockingdetailsComponent;
   @ViewChild("Name1", { static: false }) name: ElementRef;
-  constructor(
+  constructor(private confirmationDialogService: ConfirmationDialogService,
     private datePipe: DatePipe,
     private _masterformservice: MasterformService,
     private router: Router,
@@ -216,7 +216,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   closeMyModalPin(event) {
-    alert("fff");
+
     console.log("remove");
     var openModals = document.querySelectorAll(".md-show");
     for (let i = 0; i < openModals.length; i++) {
@@ -270,9 +270,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         break;
       case "Release":
         break;
-        case "ReleaseB":
+      case "ReleaseB":
         break;
-        
+
       case "Post":
         break;
       case "Advance":
@@ -301,10 +301,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         this.ProcessPaxOnBill(RoomNo);
         break;
       case "linkunlink":
-        this.ProcessLinkRoom(RoomNo,"LINK");
+        this.ProcessLinkRoom(RoomNo, "LINK");
         break;
       case "linkunlink1":
-        this.ProcessLinkRoom(RoomNo,"UNLINK");
+        this.ProcessLinkRoom(RoomNo, "UNLINK");
         break;
       case "ChangePlan":
         this.ProcessChangePlan(RoomNo);
@@ -318,26 +318,24 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     document.querySelector("#" + event).classList.add("md-show");
   }
 
-  ProcessLinkRoom(RoomNo: string,Des:string) {
-    this.selectedRoomNoArray=[];
-    this.linkroommodel=[];
-    if(Des=="LINK")
-    {
-      this.golbalresponse=[];
-      this._oprservice.GetLinkingRooms(this.Branch,this.RoomNos,"LINK").subscribe(res=>{
-      this.linkroommodel=res;
+  ProcessLinkRoom(RoomNo: string, Des: string) {
+    this.selectedRoomNoArray = [];
+    this.linkroommodel = [];
+    if (Des == "LINK") {
+      this.golbalresponse = [];
+      this._oprservice.GetLinkingRooms(this.Branch, this.RoomNos, "LINK").subscribe(res => {
+        this.linkroommodel = res;
       })
     }
-    else
-    {
-      this.golbalresponse=[];
-      this._oprservice.GetLinkingRooms(this.Branch,this.RoomNos,"UNLINK").subscribe(res=>{
-      this.linkroommodel=res;
+    else {
+      this.golbalresponse = [];
+      this._oprservice.GetLinkingRooms(this.Branch, this.RoomNos, "UNLINK").subscribe(res => {
+        this.linkroommodel = res;
       })
-    }  
+    }
   }
 
- 
+
 
   buttonlinlclick(event, RoomNos, RoomCodes, RoomNo) {
     debugger
@@ -347,97 +345,121 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       document.querySelector("#" + RoomNos).classList.add('occroom');
       this.addData(RoomNo);
     }
-    else {     
+    else {
       document.querySelector("#" + RoomNos).classList.remove('occroom');
       document.querySelector("#" + RoomNos).classList.add('freeroom');
-       this.deleteMsg(RoomNo);
+      this.deleteMsg(RoomNo);
     }
 
   }
 
-addData(msg: string) {
+  addData(msg: string) {
     this.selectedRoomNoArray.push(msg);
-}
-getData() {
+  }
+  getData() {
 
     return this.selectedRoomNoArray;
-}
-deleteMsg(msg:string) {
-  const index: number = this.selectedRoomNoArray.indexOf(msg);
-  if (index !== -1) {
+  }
+  deleteMsg(msg: string) {
+    const index: number = this.selectedRoomNoArray.indexOf(msg);
+    if (index !== -1) {
       this.selectedRoomNoArray.splice(index, 1);
-  }        
-}
-
-  SaveLinkRoom(type:string)
-  {
-    this.golbalresponse=this.getData();
-    console.log('this.golbalresponse')
-    console.log(this.golbalresponse)
-    var sdata = JSON.stringify(this.golbalresponse);
-    var leftstring = sdata.replace('[', '');
-    var rightstr = leftstring.replace(']', '');
-    console.log(rightstr);
-    this._oprservice.UpdateLinkRoom(this.Branch,this.RoomNos,rightstr).subscribe(res=>{
-      if(res==true)
-      {
-        this.addToast(
-          "Cogwave Software Technologies Pvt Ltd..",
-          "Congratulations Data Saved Sucessfully",
-          "success"
-        );
-      }
-      else
-      {
-        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
-      }
-    },
-    error=>{
-      console.log(error.message)
-      console.log('error.message')
-       this.addToast("Cogwave Software", error.message, "error");
-    },
-    ()=>{
-      this.closeMyModalPin(event);
-    });
+    }
   }
 
-  SaveUnLinkRoom(type:string)
-  {
-    this.golbalresponse=this.getData();
-    console.log('this.golbalresponse')
-    console.log(this.golbalresponse)
-    var sdata = JSON.stringify(this.golbalresponse);
-    var leftstring = sdata.replace('[', '');
-    var rightstr = leftstring.replace(']', '');
-    console.log(rightstr);
-    this._oprservice.UpdateUnlinkRoom(this.Branch,this.RoomNos,rightstr).subscribe(res=>{
-      if(res==true)
-      {
-        this.addToast(
-          "Cogwave Software Technologies Pvt Ltd..",
-          "Congratulations Data Saved Sucessfully",
-          "success"
-        );
-      }
-      else
-      {
-        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
-      }
-    },
-    error=>{
-      console.log(error.message)
-      console.log('error.message')
-       this.addToast("Cogwave Software", error.message, "error");
-    },
-    ()=>{
-      this.closeMyModalPin(event);
-    });
+  SaveLinkRoom(type: string) {
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Change Guest ... ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {
+          this.golbalresponse = this.getData();
+          console.log('this.golbalresponse')
+          console.log(this.golbalresponse)
+          var sdata = JSON.stringify(this.golbalresponse);
+          var leftstring = sdata.replace('[', '');
+          var rightstr = leftstring.replace(']', '');
+          console.log(rightstr);
+          this._oprservice.UpdateLinkRoom(this.Branch, this.RoomNos, rightstr).subscribe(res => {
+            if (res == true) {
+              this.addToast(
+                "Cogwave Software Technologies Pvt Ltd..",
+                "Congratulations Data Saved Sucessfully",
+                "success"
+              );
+            }
+            else {
+              this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+            }
+          },
+            error => {
+              console.log(error.message)
+              console.log('error.message')
+              this.addToast("Cogwave Software", error.message, "error");
+            },
+            () => {
+              this.closeMyModalPin(event);
+            });
+        }
+        else {
+          return;
+        }
+      })
+      .catch(() => {
+        alert('cach')
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
+
+
   }
-  
+
+  SaveUnLinkRoom(type: string) {
+
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Change Guest ... ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {
+          this.golbalresponse = this.getData();
+          console.log('this.golbalresponse')
+          console.log(this.golbalresponse)
+          var sdata = JSON.stringify(this.golbalresponse);
+          var leftstring = sdata.replace('[', '');
+          var rightstr = leftstring.replace(']', '');
+          console.log(rightstr);
+          this._oprservice.UpdateUnlinkRoom(this.Branch, this.RoomNos, rightstr).subscribe(res => {
+            if (res == true) {
+              this.addToast(
+                "Cogwave Software Technologies Pvt Ltd..",
+                "Congratulations Data Saved Sucessfully",
+                "success"
+              );
+            }
+            else {
+              this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+            }
+          },
+            error => {
+              console.log(error.message)
+              console.log('error.message')
+              this.addToast("Cogwave Software", error.message, "error");
+            },
+            () => {
+              this.closeMyModalPin(event);
+            });
+        }
+      }).catch(() => {
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
+
+
+
+
+
+
+  }
+
 
   ProcessExtraBed(RoomNo: string) {
-    this._OprService.GetExtraBedFormData(this.Branch, RoomNo,1).subscribe(
+    this._OprService.GetExtraBedFormData(this.Branch, RoomNo, 1).subscribe(
       res => {
         this.extrabedform = res;
         this.extrabedform.CreatedBy = this.UserId;
@@ -464,14 +486,14 @@ deleteMsg(msg:string) {
     console.log(this.paxonbillform);
   }
   ProcessRoomInstruction(RoomNo: string) {
-    this._oprservice.GetRoomInstructionData(this.Branch,RoomNo).subscribe(data=>{
-         this.roominstructionmodel=data;
+    this._oprservice.GetRoomInstructionData(this.Branch, RoomNo).subscribe(data => {
+      this.roominstructionmodel = data;
     })
     this.RoomInstruction = {
       Id: "0",
       RoomNo: RoomNo,
       RoomCode: this.RoomCodes,
-      ProcessDate:new Date(),
+      ProcessDate: new Date(),
       special: "",
       BranchCode: this.Branch,
       CreatedBy: this.UserId
@@ -515,20 +537,20 @@ deleteMsg(msg:string) {
   }
 
   ProcessAmend(RoomNo: string) {
-   
+
     let Checkintime, checkoutTime, checkindate, checkoutdate;
-    this.Todaydate=new Date();
+    this.Todaydate = new Date();
     this.Todaydate.setDate(this.Todaydate.getDate() + 1);
     this._OprService.GetAmendFormData(this.Branch, RoomNo).subscribe(
       res => {
         this.amendformdata = res;
-        
+
         checkoutdate = new Date(res.CheckoutDate)
-        this.amendformdata.CheckoutDate=checkoutdate;
-        this.amendformdata.AmendDate=this.Todaydate;
-        this.amendformdata.AmendTime=new Date();
-        this.amendformdata.CreatedBy = this.UserId;  
-        this.amendformdata.BranchCode=this.Branch;
+        this.amendformdata.CheckoutDate = checkoutdate;
+        this.amendformdata.AmendDate = this.Todaydate;
+        this.amendformdata.AmendTime = new Date();
+        this.amendformdata.CreatedBy = this.UserId;
+        this.amendformdata.BranchCode = this.Branch;
       },
       error => {
         console.log("error in ProcessAmend");
@@ -574,7 +596,7 @@ deleteMsg(msg:string) {
     this._OprService.GetChangePlanFormData(this.Branch, RoomNo).subscribe(
       res => {
         this.changeplanformmodel = res;
-        this.changeplanformmodel.CPlan="0";
+        this.changeplanformmodel.CPlan = "0";
         this.changeplanformmodel.CreatedBy = this.UserId;
       },
       error => {

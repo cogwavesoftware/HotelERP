@@ -8,7 +8,7 @@
       <div class="userlist">
                <form [formGroup]="wakeupform" (ngSubmit)="Submit(wakeupform)"> 
                
-                <input type="hidden"  formControlName="CreatedBy"  readonly name="CreatedBy" autocomplete="off"/>
+                <input type="hidden"  formControlName="CreatedBy" id="UserIds" value="{{ UserId }}"  readonly name="CreatedBy" autocomplete="off"/>
                 <input type="hidden"  formControlName="BranchCode"  readonly name="BranchCode" autocomplete="off"/>
                  
                   <div class="container-fluid" >             
@@ -82,5 +82,5 @@
       </div>
    </div>
 </div>
-
-<ng2-toasty [position]="position"></ng2-toasty>
+<!-- 
+<ng2-toasty [position]="position"></ng2-toasty> -->

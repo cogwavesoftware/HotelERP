@@ -13,14 +13,15 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { ConfirmationDialogService } from './../../../_services/confirmation-dialog.service';
 @Component({
   selector: 'app-wakeup',
   templateUrl: './wakeup.component.html',
   styleUrls: ['./wakeup.component.scss']
 })
 export class WakeupComponent implements OnInit {
-  Branch: string = "CW1001";
-  CreatedBy: number = 1;
+  // Branch: string = "CW1001";
+  // CreatedBy: number = 1;
   wakeupform: FormGroup;
   submitted = false;
   IsLongTime: Boolean = false;
@@ -33,6 +34,8 @@ export class WakeupComponent implements OnInit {
   type = "default";
   @Input() RoomCode: string;
   @Input() RoomNo: string;
+  @Input() BranchCode: string;
+  @Input() UserId: string;
   valid: boolean = true;
   myTime = new Date();
   datePickerConfig: Partial<BsDatepickerConfig>;
@@ -42,8 +45,10 @@ export class WakeupComponent implements OnInit {
   }
 
 
-  constructor(public router: Router, private datePipe: DatePipe,private toastyService: ToastyService,
-    private route: ActivatedRoute, public formBuilder: FormBuilder,private _oprservice:OperationService
+  constructor(public router: Router, private datePipe: DatePipe,
+    private toastyService: ToastyService,private confirmationDialogService:ConfirmationDialogService,
+    private route: ActivatedRoute, public formBuilder: FormBuilder,
+    private _oprservice:OperationService
     ) {
 
       this.timepicker = Object.assign({},
@@ -65,9 +70,9 @@ export class WakeupComponent implements OnInit {
           alarmtime: [this.myTime],
           RoomNo: ['', Validators.required],
           RoomCode: ['', Validators.required],
-          CreatedBy: ['', Validators.required],
+          CreatedBy: [this.UserId, Validators.required],
           Reason: ['', Validators.required],
-          BranchCode: ['', Validators.required],
+          BranchCode: [this.BranchCode, Validators.required],
         });
     
   }
@@ -76,12 +81,7 @@ export class WakeupComponent implements OnInit {
 
   
   }
-  closeMyModalPin(event){  
-    var openModals = document.querySelectorAll(".md-show");
-    for(let i = 0; i < openModals.length; i++) {
-      openModals[i].classList.remove("md-show"); 
-    }  
-  }
+ 
 
   offAlarm(form:any)
   {
@@ -89,52 +89,75 @@ export class WakeupComponent implements OnInit {
     console.log(form)
   }
 
-
-
-
   Submit(wakeupform: FormGroup) {
-
-    let BlockDate = this.datePipe.transform(this.wakeupform.get('alarmdate').value, "MM/dd/yyyy");
-    
-    this.wakeupform.patchValue({
-      RoomNo:this.RoomNo,
-      RoomCode:this.RoomCode
-    })
-    console.log(this.wakeupform.value)
-    this._oprservice.SaveWakeupformation(this.wakeupform.value).subscribe(data => {
-      if (data == true) {
-        this.addToast(
-          "Cogwave Software",
-          "Block Information Saved Sucessfully",
-          "success"
-        );
-      } 
-      else {
-        alert('d')
-        this.addToast("Cogwave Software", "Block Information Not Saved", "error");
-        this.minDate=new Date();
-        this.maxDate.setDate(this.minDate.getDate() + 1);
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Change Guest ... ?')
+    .then((confirmed) => {
+      console.log('User confirmed:', confirmed)
+      if (confirmed === true) {
+        let BlockDate = this.datePipe.transform(this.wakeupform.get('alarmdate').value, "MM/dd/yyyy");
         this.wakeupform.patchValue({
-          alarmdate: this.minDate,
-          alarmtime:this.myTime
+          RoomNo:this.RoomNo,
+          RoomCode:this.RoomCode,
+          CreatedBy:this.UserId,
+          BranchCode:this.BranchCode
+    
         })
+        console.log(this.wakeupform.value)
+        this._oprservice.SaveWakeupformation(this.wakeupform.value).subscribe(data => {
+          if (data == true) {
+            this.addToast(
+              "Cogwave Software",
+              "Block Information Saved Sucessfully",
+              "success"
+            );
+          } 
+          else {
+            this.addToast("Cogwave Software", "Block Information Not Saved", "error");  
+          }
+        },
+        error => {
+          //this.wakeupform.reset();
+          this.addToast("Cogwave Software", "Block Information Not Saved", "error");
+          // this.minDate=new Date();
+          // this.maxDate.setDate(this.minDate.getDate() + 1);
+          // this.wakeupform.patchValue({
+          //   alarmdate: this.minDate,
+          //   alarmtime:this.myTime
+          // })
+        },
+        ()=>{
+          this.closeMyModalPin(event);
+        });
+      }//confoirmtrue end
+      else {
+        return;
       }
-    },
-    error => {
-      this.wakeupform.reset();
-     
-      this.addToast("Cogwave Software", "Block Information Not Saved", "error");
+    })
+    .catch(() => {
+      alert('cach')
+      console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+    });
+
+  
+  }
+
+
+  closeMyModalPin(event){ 
+    this.wakeupform.reset();
       this.minDate=new Date();
       this.maxDate.setDate(this.minDate.getDate() + 1);
       this.wakeupform.patchValue({
         alarmdate: this.minDate,
-        alarmtime:this.myTime
+        alarmtime:this.myTime,
+        Reason:'',
       })
-    },
-    ()=>{
-      alert('suceesss')
-    });
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    } 
+    var maindashboard = document.querySelectorAll(".maindashboard"); 
   }
+
 
   addToast(title, Message, theme) {
     debugger;

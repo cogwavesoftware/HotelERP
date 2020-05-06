@@ -464,9 +464,9 @@
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
                         pax</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                    <!-- <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
-                        Rate</a></li>
+                        Rate</a></li> -->
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('Amend',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Amend
                         Date</a></li>
@@ -498,18 +498,18 @@
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('PaxonBill',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Pax
                         on Bill </a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                    <!-- <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('SmsCoupon',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Sms
-                        Coupon</a></li>
+                        Coupon</a></li> -->
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('WakeUp',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Wake
                         Up</a></li>
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('Compliment',rmno)"><i class="fa fa-user" aria-hidden="true"></i>
                         Compliment</a></li>
-                    <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                    <!-- <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('HouseKeeping',rmno)"><i class="fa fa-user" aria-hidden="true"></i> House
-                        Keeping</a></li>
+                        Keeping</a></li> -->
                   </ul>
                 </div>
 
@@ -1130,7 +1130,7 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
               
-                <app-wakeup [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-wakeup>
+                <app-wakeup [RoomNo]="RoomNos" [BranchCode]="Branch" [UserId]="UserId" [RoomCode]="RoomCodes"></app-wakeup>
              
               </div>
             </perfect-scrollbar>

@@ -88,13 +88,7 @@ export class ReleaseComponent implements OnInit {
       } 
       else {       
         this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
-        // this.minDate=new Date();
-        // this.maxDate.setDate(this.minDate.getDate() + 1);
-        // this.blockingdetailsform.patchValue({
-        //   BlockDate: this.minDate,
-        //   ReleaseDate:this.maxDate,
-        //   Status: "SHORT"
-        // })
+      
       }
     },
     error => {
@@ -102,15 +96,7 @@ export class ReleaseComponent implements OnInit {
      console.log('error.message')
       //this.blockingdetailsform.reset();
       this.addToast("Cogwave Software", error.message, "error");
-      // this.minDate=new Date();
-      // this.maxDate.setDate(this.minDate.getDate() + 1);
-      // this.blockingdetailsform.patchValue({
-      //   BlockDate: this.minDate,
-      //   ReleaseDate:this.maxDate,
-      //   Status: "SHORT",
-      //   RoomNo:this.RoomNo,
-      //   RoomCode:this.RoomCode
-      // })
+      
     },
     ()=>{
       alert('suceesss')
