@@ -1,112 +1,107 @@
-<div class="shiftroom discountfrm">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist"> 
-            <div class="row">
-                <div class="col-md-12" >  
+ 
                     <form #myform="ngForm" (ngSubmit)="myform.form.valid && Saveinstruction(myform)" class="">
-                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="RoomInstruction.Id" #Id="ngModel"
-                        value="{{RoomInstruction.Id}}">
+                      <div class="test123   guestinfofirstrow paymentarray" >
+                        <div class="modelstyle">  
+                                    <div class="row">
+                                      <input type="hidden" name="Id" class="form-control" [(ngModel)]="RoomInstruction.Id" #Id="ngModel"
+                                      value="{{RoomInstruction.Id}}">
+              
+                                    <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="RoomInstruction.BranchCode"
+                                      #BranchCode="ngModel" value="{{RoomInstruction.BranchCode}}">
+                                    <!-- <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="RoomInstruction.IpAdd"
+                                      #IpAdd="ngModel" value="{{IpAdd}}"> -->
+                                    <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="RoomInstruction.CreatedBy"
+                                      #CreatedBy="ngModel" value="{{RoomInstruction.CreatedBy}}"> 
+                                      
+                                        <div class='col-12 col-lg-4'>
+                                          <div class="form-group">
+                                              <label class="required">RoomNo</label>
+                                              <input type="text" name="RoomNo" class="form-control" [(ngModel)]="RoomInstruction.RoomNo"
+                                                #RoomNo="ngModel" value="{{RoomInstruction.RoomNo}}"   required autocomplete="off">
+                                           </div>  
+                                        </div> 
+                                            <div class='col-12 col-lg-4'>
+                                              <div class="form-group">
+                                                  <label class="required">RoomCode</label>
+                                                  <input type="text" name="RoomCode" class="form-control" [(ngModel)]="RoomInstruction.RoomCode"
+                                                    #RoomCode="ngModel" value="{{RoomInstruction.RoomCode}}"   required autocomplete="off">
+                                               </div>  
+                                            </div> 
+                                            <div class='col-12 col-lg-4'>
+                                              <div class="form-group">
+                                                  <label class="required">Date</label>
+                                                  <input id="ProcessDate" name="ProcessDate" class="form-control" [(ngModel)]="RoomInstruction.ProcessDate"
+                                                  #ProcessDate="ngModel" placement="center" type="text" bsDatepicker [minDate]="minDate"
+                                                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+                                               </div>  
+                                            </div> 
+                                            <div class='col-12 col-lg-12'>
+                                              <div class="form-group">
+                                                  <label class="required">Instruction</label>
+                                                  <label class="form-control-label" for="WaitingList ">Special Instruction </label>
+                                                  <tag-input class="tag-chips" name="special"   #special="ngModel"  [(ngModel)]="RoomInstruction.special"  [maxItems]="5"  placeholder="Insert a new item"  [editable]="true"></tag-input>
+                                       
+                                                  <!-- <textarea type="text" name="instruction" class="form-control" [(ngModel)]="RoomInstruction.instruction"
+                                                    #instruction="ngModel" value="{{RoomInstruction.instruction}}"   required autocomplete="off"></textarea> -->
+                                               </div>  
+                                            </div>
+                                            <!-- <div class="">
+                                              <div class='col-12 col-lg-12 col-md-4 col-sm-4'>
+                                                <label class="form-control-label" for="WaitingList ">Special Instruction </label>
+                                                <tag-input class="tag-chips"  #instruction="ngModel"  [(ngModel)]="RoomInstruction.instruction"  [maxItems]="5"  placeholder="Insert a new item"  [editable]="true"></tag-input>
+                                                
+                                              </div>
+                                            </div> -->
+                                            <div class="roominstruction">
+                                              <div class="table-responsive">
+                                               <table class="table table-striped table-bordered full-data-table">
+                                                 <thead>
+                                                   <tr class="blueorange-gradient">
+                                                    <th>Id</th>
+                                                     <th>Instruction</th>
+                                                     <th>Date</th>
+                                                     <!-- <th>Action</th> -->
+                                                   </tr>
+                                                 </thead>
+                                                 <tbody>
+              
+              
+              
+              
+                                                   <tr *ngFor="let item of roominstructionmodel; let i = index;">
+                                                    <td>{{item.Id}}</td>  
+                                                    <td>{{item.Description}}</td>   
+                                                    <td>{{item.CreatedDate | date}}</td>                           
+                                                        
+                                                   <!-- <td class="action-icon">
+                                                      <a href="javascript:;" class="m-r-15 crm-action-view text-info">
+                                                           <i class="fa  fa-edit" (click)="openMyModalData(item,i)"></i> </a>
+                                                   </td> -->
+                                                 </tr>  
+                                                 </tbody>
+                                               </table>
+                                             </div>
+                                           </div>
+                                            
+                                         
 
-                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="RoomInstruction.BranchCode"
-                        #BranchCode="ngModel" value="{{RoomInstruction.BranchCode}}">
-                      <!-- <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="RoomInstruction.IpAdd"
-                        #IpAdd="ngModel" value="{{IpAdd}}"> -->
-                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="RoomInstruction.CreatedBy"
-                        #CreatedBy="ngModel" value="{{RoomInstruction.CreatedBy}}">
-  
-                        <div class="guestinfofirstrow  row" style="border:1px solid #ccc">
-                          <div class='col-12 col-lg-4'>
-                            <div class="form-group">
-                                <label class="required">RoomNo</label>
-                                <input type="text" name="RoomNo" class="form-control" [(ngModel)]="RoomInstruction.RoomNo"
-                                  #RoomNo="ngModel" value="{{RoomInstruction.RoomNo}}"   required autocomplete="off">
-                             </div>  
-                          </div> 
-                              <div class='col-12 col-lg-4'>
-                                <div class="form-group">
-                                    <label class="required">RoomCode</label>
-                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="RoomInstruction.RoomCode"
-                                      #RoomCode="ngModel" value="{{RoomInstruction.RoomCode}}"   required autocomplete="off">
-                                 </div>  
-                              </div> 
-                              <div class='col-12 col-lg-4'>
-                                <div class="form-group">
-                                    <label class="required">Date</label>
-                                    <input id="ProcessDate" name="ProcessDate" class="form-control" [(ngModel)]="RoomInstruction.ProcessDate"
-                                    #ProcessDate="ngModel" placement="center" type="text" bsDatepicker [minDate]="minDate"
-                                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
-                                 </div>  
-                              </div> 
-                              <div class='col-12 col-lg-12'>
-                                <div class="form-group">
-                                    <label class="required">Instruction</label>
-                                    <label class="form-control-label" for="WaitingList ">Special Instruction </label>
-                                    <tag-input class="tag-chips" name="special"   #special="ngModel"  [(ngModel)]="RoomInstruction.special"  [maxItems]="5"  placeholder="Insert a new item"  [editable]="true"></tag-input>
-                         
-                                    <!-- <textarea type="text" name="instruction" class="form-control" [(ngModel)]="RoomInstruction.instruction"
-                                      #instruction="ngModel" value="{{RoomInstruction.instruction}}"   required autocomplete="off"></textarea> -->
-                                 </div>  
-                              </div>
-                              <!-- <div class="">
-                                <div class='col-12 col-lg-12 col-md-4 col-sm-4'>
-                                  <label class="form-control-label" for="WaitingList ">Special Instruction </label>
-                                  <tag-input class="tag-chips"  #instruction="ngModel"  [(ngModel)]="RoomInstruction.instruction"  [maxItems]="5"  placeholder="Insert a new item"  [editable]="true"></tag-input>
-                                  
-                                </div>
-                              </div> -->
-                              <div class="roominstruction">
-                                <div class="table-responsive">
-                                 <table class="table table-striped table-bordered full-data-table">
-                                   <thead>
-                                     <tr class="blueorange-gradient">
-                                      <th>Id</th>
-                                       <th>Instruction</th>
-                                       <th>Date</th>
-                                       <!-- <th>Action</th> -->
-                                     </tr>
-                                   </thead>
-                                   <tbody>
+                                           <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                                            <div  style="width:100%" >
+                                              <div class="form-group  " style="float: right;" >                                   
+                                                <button type="submit" [disabled]="myform.form.invalid"  class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+                                                <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                                             </div>
+                                            </div> 
+                                          </div> 
 
+                                            
+                                      </div>
+                                    </div>
+                                  </div> <!-- test 123-->
 
-
-
-                                     <tr *ngFor="let item of roominstructionmodel; let i = index;">
-                                      <td>{{item.Id}}</td>  
-                                      <td>{{item.Description}}</td>   
-                                      <td>{{item.CreatedDate | date}}</td>                           
-                                          
-                                     <!-- <td class="action-icon">
-                                        <a href="javascript:;" class="m-r-15 crm-action-view text-info">
-                                             <i class="fa  fa-edit" (click)="openMyModalData(item,i)"></i> </a>
-                                     </td> -->
-                                   </tr>  
-
-                                 
-                                     
-                                     
-                                   </tbody>
-                                 </table>
-                               </div>
-                             </div>
-                              </div><!--guestinfofirstrow -->
-                          
-  
-                           
-                              <div class="guestinfofirstrow  row">
-                                <div class='col-12 col-lg-12'>
-                                    <div class="form-group  float-right" >                                   
-                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
-                                        <button type="button" (click)="closeMyModal($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                                     </div>  
-                                  </div> 
-                              </div> 
+                       
                       </form> 
-                          </div>
-                   </div>       
-                  
-        </div>
-     </div>
-  </div>
+                           
 
 <!-- 
   

@@ -1,117 +1,110 @@
-<div class="shiftroom discountfrm">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist">
-
-            <div class="row">
-                <div class="col-md-12">
+ 
                     <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveChangeCompany(myform)" class="">
+                        <div class="test123   guestinfofirstrow paymentarray" >
+                            <div class="modelstyle"> 
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div class="row">
+                                            <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="changecompanyform.BranchCode"
+                                            #BranchCode="ngModel" value="{{changecompanyform.BranchCode}}">
+                                        
+                                        <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="changecompanyform.CreatedBy"
+                                            #CreatedBy="ngModel" value="{{changecompanyform.CreatedBy}}">
+                
+                                       
+                                            <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">RoomNo</label>
+                                                    <input type="text" name="RoomNo" class="form-control" [(ngModel)]="changecompanyform.RoomNo"
+                                                        #RoomNo="ngModel" value="{{changecompanyform.RoomNo}}" required autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">RoomCode</label>
+                                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="changecompanyform.RoomCode"
+                                                        #RoomCode="ngModel" value="{{changecompanyform.RoomCode}}" required autocomplete="off">
+                                                </div>
+                                            </div>
+                
+                                            <div class='col-12 col-lg-3'>
+                                                <div class="form-group"
+                                                    [class.has-error]="CompanyId.touched && CompanyId.errors?.defaultSelected">
+                                                    <label class="required">Select Company</label>
+                                                    <select class="custom-select" id="CompanyId" appSelectValidator="select"
+                                                        #CompanyId="ngModel" name="CompanyId" [(ngModel)]="changecompanyform.CompanyId">
+                                                        <option value="0">Select</option>
+                                                        <option value="NONE">None</option>
+                                                        <option *ngFor="let item of companylist" [value]="item.Id">
+                                                            {{item.CompanyName}}</option>
+                                                    </select>
+                                                    <span class="help-block"
+                                                        *ngIf="CompanyId.touched && CompanyId.errors?.defaultSelected">
+                                                        Company is required
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                            <div class='col-12 col-lg-3'>
+                                                <div class="form-group">
+                                                    <label class="required">TarifAmount</label>
+                                                    <input type="text" name="TarifAmount" class="form-control" [(ngModel)]="changecompanyform.TarifAmount"
+                                                        #TarifAmount="ngModel" value="{{changecompanyform.TarifAmount}}" required autocomplete="off">
+                                                </div>
+                                            </div>
 
-                        <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="changecompanyform.BranchCode"
-                            #BranchCode="ngModel" value="{{changecompanyform.BranchCode}}">
-                        
-                        <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="changecompanyform.CreatedBy"
-                            #CreatedBy="ngModel" value="{{changecompanyform.CreatedBy}}">
+                                            <div class='col-12 col-lg-12'>
+                                                <div class="radioone" style="border: 1px solid #ccc; padding:10px;  ">
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="radio"  #IsCompanyTrif="ngModel"  [(ngModel)]="changecompanyform.IsCompanyTrif" name="IsCompanyTrif" class="form-check-input"
+                                                                value="YES">Company Tarif
+                                                        </label>
+                                                    </div> 
+                                                    
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="radio"  #IsCompanyTrif="ngModel"  [(ngModel)]="changecompanyform.IsCompanyTrif"  name="IsCompanyTrif" class="form-check-input"
+                                                                value="NO">Room Tarif
+                                                        </label>
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                           
+                
+                                          
+                                            <div class='col-12 col-lg-12'>
+                                                <div class="form-group">
+                                                    <label class="required">Reason</label>
+                                                    <textarea type="text" name="Reason" class="form-control" [(ngModel)]="changecompanyform.Reason"
+                                                    #Reason="ngModel" value="{{changecompanyform.Reason}}"   required autocomplete="off"></textarea>  
 
-                        <div class="guestinfofirstrow  row">
+                                                     
+                                                </div>
+                                            </div>  
+                                        
+                                            <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                                                <div  style="width:100%" >
+                                                  <div class="form-group "  style="float: right;" >                                   
+                                                    <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Process</button>    
+                                                    <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                                                 </div>
+                                                </div> 
+                                              </div> 
 
-                            <div class='col-12 col-lg-3'>
-                                <div class="form-group">
-                                    <label class="required">RoomNo</label>
-                                    <input type="text" name="RoomNo" class="form-control" [(ngModel)]="changecompanyform.RoomNo"
-                                        #RoomNo="ngModel" value="{{changecompanyform.RoomNo}}" required autocomplete="off">
+                                           
+                
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class='col-12 col-lg-3'>
-                                <div class="form-group">
-                                    <label class="required">RoomCode</label>
-                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="changecompanyform.RoomCode"
-                                        #RoomCode="ngModel" value="{{changecompanyform.RoomCode}}" required autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class='col-12 col-lg-3'>
-                                <div class="form-group"
-                                    [class.has-error]="CompanyId.touched && CompanyId.errors?.defaultSelected">
-                                    <label class="required">Select Company</label>
-                                    <select class="custom-select" id="CompanyId" appSelectValidator="select"
-                                        #CompanyId="ngModel" name="CompanyId" [(ngModel)]="changecompanyform.CompanyId">
-                                        <option value="0">Select</option>
-                                        <option value="NONE">None</option>
-                                        <option *ngFor="let item of companylist" [value]="item.Id">
-                                            {{item.CompanyName}}</option>
-                                    </select>
-                                    <span class="help-block"
-                                        *ngIf="CompanyId.touched && CompanyId.errors?.defaultSelected">
-                                        Company is required
-                                    </span>
-                                </div>
-                            </div>
-                          
-
                         </div>
-                        <!--guestinfofirstrow -->
-
-
-                        <div class="guestinfofirstrow  row">
-                            <div class="radioone" style="border: 1px solid #ccc; padding:10px; margin-left: 14px;;">
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio"  #IsCompanyTrif="ngModel"  [(ngModel)]="changecompanyform.IsCompanyTrif" name="IsCompanyTrif" class="form-check-input"
-                                            value="YES">Company Tarif
-                                    </label>
-                                </div>
-                                
-                                
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio"  #IsCompanyTrif="ngModel"  [(ngModel)]="changecompanyform.IsCompanyTrif"  name="IsCompanyTrif" class="form-check-input"
-                                            value="NO">Room Tarif
-                                    </label>
-                                </div>
-                                
-                            </div>
-                           
-
-                            <div class='col-12 col-lg-3'>
-                                <div class="form-group">
-                                    <label class="required">TarifAmount</label>
-                                    <input type="text" name="TarifAmount" class="form-control" [(ngModel)]="changecompanyform.TarifAmount"
-                                        #TarifAmount="ngModel" value="{{changecompanyform.TarifAmount}}" required autocomplete="off">
-                                </div>
-                            </div>
-                            <div class='col-12 col-lg-3'>
-                                <div class="form-group">
-                                    <label class="required">Reason</label>
-                                    <input type="text" name="Reason" class="form-control" [(ngModel)]="changecompanyform.Reason"
-                                        #Reason="ngModel" value="{{changecompanyform.Reason}}" required autocomplete="off">
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                        <div class="guestinfofirstrow  row">
-                            <div class='col-12 col-lg-12'>
-                                <div class="form-group  float-right">
-                                    <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success "><i
-                                            class="fa fa-save"></i> Process</button>
-                                    <button type="button" (click)="closeMyModalPin($event)" class="btn btn-danger"> <i
-                                            class="fa  fa-times-circle"></i> Exit</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
+                       
+                    </form>
+                
 
 <!-- 
 <ng2-toasty [position]="position"></ng2-toasty> -->

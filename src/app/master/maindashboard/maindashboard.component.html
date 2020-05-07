@@ -1085,84 +1085,108 @@
         </app-modal-animation>
 
         <!-- Instruction -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;"> Room Instruction
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
+           <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar"> 
-                <app-roominstruction [RoomInstruction]="RoomInstruction" [roominstructionmodel]="roominstructionmodel" ></app-roominstruction> 
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-roominstruction [RoomInstruction]="RoomInstruction" [roominstructionmodel]="roominstructionmodel" ></app-roominstruction>  
+                </div>
+
               </div>
             </perfect-scrollbar>
+
           </div>
-        </app-modal-animation>
+        </app-modal-animation>  
+       </div> 
+ 
 
         <!-- ChangePlan -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Change Plan
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
+           <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                  <div class="shiftroom discountfrm">
-                    <div class="formdesign" style="padding: 0;">
-                        <div class="userlist">                
-                            <div class="row">
-   
-                               <app-changeplan [changeplanformmodel]="changeplanformmodel"></app-changeplan> 
-                               
-                              </div>       
-                                  
-                        </div>
-                     </div>
-                 </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-changeplan [changeplanformmodel]="changeplanformmodel"></app-changeplan> 
                 </div>
+
               </div>
             </perfect-scrollbar>
+
           </div>
-        </app-modal-animation>
+        </app-modal-animation>  
+       </div> 
+
+      <!-- ChangeCompany -->
+      <div class="commonmodel">
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
+         <div class="app-modal-body">
+          <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <label class="font-header"
+            style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+            ({{roomname1}})</label>
+
+          <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
+            [config]="config">
+            <div class="row">
+              <div class="col-sm-12">
+                <app-changecompany [changecompanyform]="changecompanyform" ></app-changecompany>
+              </div>
+
+            </div>
+          </perfect-scrollbar>
+
+        </div>
+      </app-modal-animation>  
+     </div>
 
       
 
-
-      <!-- ChangeCompany -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Change Company
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
-              [config]="config">
-              <div class="col-sm-12 filter-bar">
-              
-                <app-changecompany [changecompanyform]="changecompanyform" ></app-changecompany>
-             
-              </div>
-            </perfect-scrollbar>
-          </div>
-        </app-modal-animation>
-
         <!-- WakeUp -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">WakeUp
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
+           <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+  
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
-              <div class="col-sm-12 filter-bar">
-              
-                <app-wakeup [RoomNo]="RoomNos" [BranchCode]="Branch" [UserId]="UserId" [RoomCode]="RoomCodes"></app-wakeup>
-             
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-wakeup [RoomNo]="RoomNos" [BranchCode]="Branch" [UserId]="UserId" [RoomCode]="RoomCodes"></app-wakeup>
+                </div>
+  
               </div>
             </perfect-scrollbar>
+  
           </div>
-        </app-modal-animation>
+        </app-modal-animation>  
+       </div>
+    
 
         <!-- FoodCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
@@ -1309,24 +1333,28 @@
 
 
         <!-- PaxonBill -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Pax on Bill
-          
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
+           <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
 
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
-             
+              <div class="row">
+                <div class="col-sm-12">
                   <app-paxonbill [paxonbillform]="paxonbillform"></app-paxonbill>
-               
-            </perfect-scrollbar>
+                </div> 
+              </div>
+            </perfect-scrollbar> 
           </div>
-        </app-modal-animation> 
-
-
-       
+        </app-modal-animation>  
+       </div> 
+ 
         <!-- SmsCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'SmsCoupon'" [modalClass]="'md-effect-2'">
           <h3 class="f-15" style="position: relative;">Sms Coupon
@@ -1419,17 +1447,29 @@
         </app-modal-animation>
 
         <!-- ChangeGuest -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Change Guest
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'510px'"
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
+           <div class="app-modal-body">
+            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label class="font-header"
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+              ({{roomname1}})</label>
+
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
-             <app-changeguest  [RoomNo]="RoomNos"></app-changeguest>
-            </perfect-scrollbar>
+              <div class="row">
+                <div class="col-sm-12">
+                  <app-changeguest  [RoomNo]="RoomNos"></app-changeguest> 
+                </div> 
+              </div>
+            </perfect-scrollbar> 
           </div>
-        </app-modal-animation>
+        </app-modal-animation>  
+       </div> 
+
+       
 
 
         <!-- ExpressCheckin -->
@@ -1515,17 +1555,17 @@
        
         <!-- HouseGuest -->
         <div class="commonmodel">
-          <app-modal-animation class="modellg contentboxmodel" [modalID]="'HouseGuest'" [modalClass]="'md-effect-4'">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'HouseGuest'" [modalClass]="'md-effect-2'">
       
           <div class="app-modal-body">
             <button type="button" class="close basic-close-light-box" (click)="HouseGuest.hide()">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
-              style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">HouseGuest RoomNo - {{rmno}}
+              style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">HouseGuest RoomNo - {{rmno}}
               ({{roomname1}})</label>
 
-            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
+            <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
               <div class="row">
                 <div class="col-sm-12">
