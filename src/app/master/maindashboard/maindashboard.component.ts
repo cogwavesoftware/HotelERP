@@ -74,8 +74,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   changecompanyform: ChangeCompanymodel;
   paxonbillform: PaxonBillmodel;
   RoomInstruction: Roominstructionmodel;
-  Foodcouponmodel:Foodcouponmodel;
+  Foodcouponmodel: Foodcouponmodel;
   finalMenu = new Array();
+  Groupblock = new Array();
   floor = new Array<any>();
   vacantRoom = new Array<any>();
   timepicker: Partial<TimepickerConfig>;
@@ -147,9 +148,12 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
       this.finalMenu = res;
       this.vacantRoom = res["Rooms"].filter(a => a.Status == "V");
+
       this.DasboardLoad = setInterval(() => {
         this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
           this.finalMenu = res;
+          console.log(this.finalMenu)
+          console.log('this.finalMenu')
           this.vacantRoom = res["Rooms"].filter(a => a.Status == "V");
         });
       }, 7000);
@@ -268,13 +272,26 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     switch (Description) {
       case "Blockdetails":
         break;
+        case "GroupBlockForm":
+          this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
+            this.Groupblock = res;
+          })
+          break;
+        
       case "Management":
         break;
       case "Release":
         break;
       case "ReleaseB":
         break;
-
+        case "ReleaseD":
+        break;
+      case "GroupRelease":
+        this._hmsdashboard.GetHmsDashboard(this.Branch).subscribe(res => {
+          console.log('this.Groupblock = res')
+          this.Groupblock = res;
+        })
+        break;
       case "Post":
         break;
       case "Advance":
@@ -314,9 +331,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       case "Instruction":
         this.ProcessRoomInstruction(RoomNo);
         break;
-        case "FoodCoupon":
-          this.ProcessFoodcoupon(RoomNo);
-          break;
+      case "FoodCoupon":
+        this.ProcessFoodcoupon(RoomNo);
+        break;
     }
     console.log(event);
     console.log("event");
@@ -356,6 +373,20 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       this.deleteMsg(RoomNo);
     }
 
+  }
+  ProcessGroupRelese(event, RoomNos, RoomCodes, RoomNo)
+  {
+    const classNameS = event.target.className;
+    if (classNameS.indexOf('dirtyroom') >= 0) {
+      document.querySelector("#" + RoomNos).classList.remove('dirtyroom');
+      document.querySelector("#" + RoomNos).classList.add('vacents');
+      this.addData(RoomNo);
+    }
+    else {
+      document.querySelector("#" + RoomNos).classList.remove('vacents');
+      document.querySelector("#" + RoomNos).classList.add('dirtyroom');
+      this.deleteMsg(RoomNo);
+    }
   }
 
   addData(msg: string) {
@@ -455,14 +486,85 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
       });
 
+  }
 
-
-
-
+  SaveGroupBlocks() {
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Block Rooms ... ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {
+          this.golbalresponse = this.getData();
+          console.log('this.golbalresponse')
+          console.log(this.golbalresponse)
+          var sdata = JSON.stringify(this.golbalresponse);
+          var leftstring = sdata.replace('[', '');
+          var rightstr = leftstring.replace(']', '');
+          console.log(rightstr);
+          this._oprservice.UpdateGroupBlocksRoom(this.Branch,'x', rightstr).subscribe(res => {
+            if (res == true) {
+              this.addToast(
+                "Cogwave Software Technologies Pvt Ltd..",
+                "Congratulations Data Saved Sucessfully",
+                "success"
+              );
+            }
+            else {
+              this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+            }
+          },
+            error => {
+              console.log(error.message)
+              console.log('error.message')
+              this.addToast("Cogwave Software", error.message, "error");
+            },
+            () => {
+              this.closeMyModalPin(event);
+            });
+        }
+      }).catch(() => {
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
 
   }
 
+  ProcessDirtyRoom(des:string) {
+    this.confirmationDialogService.confirm('Please confirm ..', 'Do you really want to Block Rooms ... ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed)
+        if (confirmed === true) {
+          this.golbalresponse = this.getData();
+          console.log('this.golbalresponse')
+          console.log(this.golbalresponse)
+          var sdata = JSON.stringify(this.golbalresponse);
+          var leftstring = sdata.replace('[', '');
+          var rightstr = leftstring.replace(']', '');
+          console.log(rightstr);
+          this._oprservice.UpdateGroupReleaseRoom(this.Branch,des, rightstr).subscribe(res => {
+            if (res == true) {
+              this.addToast(
+                "Cogwave Software Technologies Pvt Ltd..",
+                "Congratulations Data Saved Sucessfully",
+                "success"
+              );
+            }
+            else {
+              this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+            }
+          },
+            error => {
+              console.log(error.message)
+              console.log('error.message')
+              this.addToast("Cogwave Software", error.message, "error");
+            },
+            () => {
+              this.closeMyModalPin(event);
+            });
+        }
+      }).catch(() => {
+        console.log('e.g., by using ESC, clicking the cross icon, or clicking outside the dialog')
+      });
 
+  }
   ProcessExtraBed(RoomNo: string) {
     this._OprService.GetExtraBedFormData(this.Branch, RoomNo, 1).subscribe(
       res => {
@@ -621,8 +723,8 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
 
         console.log(res)
         console.log('res')
-        this.Foodcouponmodel.RoomCode =this.RoomCodes;
-        this.Foodcouponmodel.ProcessDate=new Date();
+        this.Foodcouponmodel.RoomCode = this.RoomCodes;
+        this.Foodcouponmodel.ProcessDate = new Date();
         this.Foodcouponmodel.CreatedBy = this.UserId;
       },
       error => {
@@ -641,10 +743,16 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         break;
       case "OccupiedPopup":
         break;
-      case "idblockingdetails":
+      case "Blockpoup":
         break;
       case "vacantdetails":
         break;
+        case "Dirtypoup":
+          break;
+          case "Managementpop":
+          break;
+          
+        
     }
     console.log(event);
     console.log("event");

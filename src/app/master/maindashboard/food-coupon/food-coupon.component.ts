@@ -45,6 +45,12 @@ export class FoodCouponComponent implements OnInit {
     }
     console.log(this.Foodcouponmodel)
     console.log(form)
+
+    if(this.Foodcouponmodel.Plan=="EP")
+    {
+      this.addToast("Cogwave Software", "Sorry EP Plan Can't Generate Coupon", "error"); 
+      return;
+    }
     
     this._oprservice.SaveFoodCoupon(this.Foodcouponmodel).subscribe(data => {
       if (data == true) {

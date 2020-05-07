@@ -31,6 +31,7 @@ import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.compone
 import { ReleaseComponent } from './release/release.component';
 import {TagInputModule} from 'ngx-chips';
 import { FoodCouponComponent } from './food-coupon/food-coupon.component';
+import { GroupblockComponent } from './groupblock/groupblock.component';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,
@@ -38,7 +39,7 @@ import { FoodCouponComponent } from './food-coupon/food-coupon.component';
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
                  ChangeguestComponent, ChangepaxComponent, AmendDateComponent, ChangeplanComponent ,
                  PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
-                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent] ,
+                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent, GroupblockComponent] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule,

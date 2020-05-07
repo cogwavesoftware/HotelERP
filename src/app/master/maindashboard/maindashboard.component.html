@@ -16,11 +16,15 @@
                       <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
                           class="icon-comments"></i><span>Group Checkin</span></a>
                     </li>
-                    <li>                   
-                      <button class="btn dbutton" (click)="OpenModel('GroupBlock',item)">Group Block</button>
+                    <li>  
+                      <a (click)="OpenModel('GroupBlockForm',item)"> <i
+                        class="icon-comments"></i><span>Group Block</span></a>                 
+                     
                     </li>
                     <li>
-                      <a href="#"> <i class="icon-comments"></i><span>Release Rooms</span></a>
+                      <a (click)="OpenModel('GroupRelease',item)"> <i
+                        class="icon-comments"></i><span>Release Room</span></a>                 
+                     
                     </li>
                     <li>
                       <a href="#"> <i class="icon-comments"></i><span>Night Audit</span></a>
@@ -139,7 +143,8 @@
                                   <div *ngIf="child.Status == 'D'">
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
-                                        <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" class="btn btn-inverse btn-square ripple light"
+                                        <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
+                                        (click)="OpenModelWithRoomDetails('Dirtypoup')" class="btn btn-inverse btn-square ripple light"
                                           placement="top" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class=" ">{{child.RoomCode}}</span>
@@ -156,7 +161,7 @@
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
                                         <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" class="btn btn-warning btn-square ripple"
-                                          (click)="modalBlock.show()" placement="top" ngbTooltip="{{child.RoomNo}}">
+                                          (click)="OpenModelWithRoomDetails('Blockpoup')" placement="top" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class=" ">{{child.RoomCode}}</span>
                                         </button></span>
@@ -168,13 +173,7 @@
                                   </div>
 
 
-
-
-
-
-
-
-                                  <div *ngIf="child.Status == 'D'">
+                                  <div *ngIf="child.Status == 'U'">
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
                                         <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" class="btn btn-warning btn-square ripple" placement="top"
@@ -184,17 +183,17 @@
                                         </button></span>
                                       <span class="tooltip-content clearfix">
                                         <!-- <img src="assets/images/tooltip/euclid.png" alt="Ecluid.png"> -->
-                                        <span class="tooltip-text"> Room is Bloecked .Reason Ac Not working </span>
+                                        <span class="tooltip-text"> SETTLEMENT </span>
                                       </span>
                                     </span>
-                                  </div><!-- end of if condition -->
+                                  </div>
 
-
+                                  
                                   <div *ngIf="child.Status == 'M'">
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
                                         <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)" class="btn btn-primary btn-square ripple light"
-                                          placement="top" (click)="modalManagement.show()"
+                                          placement="top"  (click)="OpenModelWithRoomDetails('Managementpop')"
                                           ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class=" ">{{child.RoomCode}}</span>
@@ -434,11 +433,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header" style="background-color: red;
-        color: #ffffff;
-        padding: 10px;
-        width: 100%;">Occupy Room  {{rmno}} ({{roomname1}})
-            </label>
-
+        color: #ffffff;  padding: 10px;   width: 100%;">Occupy Room  {{rmno}} ({{roomname1}})     </label>
+       
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
               [config]="config">
               <div class="row">
@@ -525,19 +521,11 @@
         <!-- Vacent -->
         <div class="commonmodel">
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'vacantdetails'" [modalClass]="'md-effect-2'">
-
- 
-          <!-- <app-modal-basic #modalOverflow [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true"> -->
             <div class="app-modal-body">
               <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <label class="font-header" style="background-color: green;
-          color: #ffffff;
-          padding: 10px;
-          width: 100%;">Vacant Room  {{rmno}} ({{roomname1}})
-              </label>
-  
+              <label class="font-header" style="background-color: green; color: #ffffff; padding: 10px;  width: 100%;">Vacant Room  {{rmno}} ({{roomname1}}) </label>       
               <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
                 [config]="config">
                 <div class="row">
@@ -548,18 +536,14 @@
                       <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                           (click)="OpenModel('ExpressCheckin',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Express
                           Checkin</a></li>
-                     
+
                             <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                               (click)="OpenModel('Blockdetails',rmno)"><i
                                  class="fa fa-user" aria-hidden="true"></i> Block </a></li>
-
                                  
                             <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                               (click)="OpenModel('Management',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Management </a>
-                            </li>
-                                 
-
-                      
+                            </li>                                                     
                       <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                           (click)="OpenModel('Rate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Rate</a></li>
                       <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
@@ -568,8 +552,6 @@
                       <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                           (click)="OpenModel('GuestHistory',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Guest
                           History</a></li>
-
-
 
                       <!-- <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                           (click)="OpenModel('Poweronvisit',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power On
@@ -590,13 +572,12 @@
             </div>
           
           </app-modal-animation>
-
         </div>
         
 
 
 
-        <!-- Block -->
+        <!-- Block  old -->
         <app-modal-basic #modalBlock [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
 
           <div class="app-modal-body">
@@ -632,9 +613,57 @@
           </div>
         </app-modal-basic>
 
+      <!-- Block  NEW -->
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Blockpoup'" [modalClass]="'md-effect-2'">
+              <div class="app-modal-body">
+                <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <label class="font-header" style="background-color: orange; color: #ffffff; padding: 10px;  width: 100%;">Block RoomNo  {{rmno}} ({{roomname1}}) </label>       
+                <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+                  [config]="config">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <ul>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                          (click)="OpenModel('ReleaseB',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a>
+                      </li>
+                      </ul>
+                    </div>        
+                  </div>
+                </perfect-scrollbar>    
+              </div>            
+            </app-modal-animation>
+          </div>
+
+         <!-- Dirty  NEW -->
+          <div class="commonmodel">
+            <app-modal-animation class="modellg contentboxmodel" [modalID]="'Dirtypoup'" [modalClass]="'md-effect-2'">
+                <div class="app-modal-body">
+                  <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <label class="font-header" style="background-color: green; color: #ffffff; padding: 10px;  width: 100%;">Dirty RoomNo  {{rmno}} ({{roomname1}}) </label>       
+                  <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+                    [config]="config">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <ul>
+                          <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                            (click)="OpenModel('ReleaseD',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a>
+                        </li>
+                        </ul>
+                      </div>        
+                    </div>
+                  </perfect-scrollbar>    
+                </div>            
+              </app-modal-animation>
+            </div>
+  
 
 
-        <!-- Management Model -->
+        <!-- Management old -->
         <app-modal-basic #modalManagement [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="true">
           <div class="app-modal-body">
             <button type="button" class="close basic-close-light-box" (click)="modalManagement.hide()">
@@ -658,17 +687,36 @@
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('PoweronCleaning',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Power
                         On Cleaning</a></li>
-
-
                   </ul>
                 </div>
-
-
               </div>
             </perfect-scrollbar>
-
           </div>
         </app-modal-basic>
+
+       <!-- Management New -->
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Managementpop'" [modalClass]="'md-effect-2'">
+              <div class="app-modal-body">
+                <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <label class="font-header" style="background-color: blue; color: #ffffff; padding: 10px;  width: 100%;">Management RoomNo  {{rmno}} ({{roomname1}}) </label>       
+                <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+                  [config]="config">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <ul>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                          (click)="OpenModel('Release',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Release</a>
+                      </li>
+                      </ul>
+                    </div>        
+                  </div>
+                </perfect-scrollbar>    
+              </div>            
+            </app-modal-animation>
+          </div>
 
 
 
@@ -773,9 +821,12 @@
 
 
 
-         <!-- Block Group 1111-->
-         <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupBlock'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Group Block
+        
+
+        
+<!-- GroupRelease 1111-->
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupRelease'" [modalClass]="'md-effect-2'">
+          <h3 class="f-15" style="position: relative;">Group Release
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
           <div class="app-modal-body text-center">
@@ -783,69 +834,49 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
-                  <div class="row">
+                 
                     <div class="col-md-12 ">
-                      <div class=" " id="leftNavBar">
-                        <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors">
-                         
-                          <hr>
-                          {{item.FloorName}}
+                                                                     
                           <li class="childData">
                             <ul style="display: inline-block">
-                              <li style="float: left; margin-left: 0px " *ngFor="let child of finalMenu.Rooms">
-                                <div *ngIf="item.FloorCode==child.FloorCode ">
-                                  <div *ngIf="child.Status == 'V'">
-                                    <span class="mytooltip tooltip-effect-1">
-                                      <span class="tooltip-item">
-                                        <button type="button" 
-                                          class="btn btn-success btn-square ripple light"
-                                          placement="top" ngbTooltip="{{child.RoomNo}}">
-                                          {{child.RoomNo}} <br>
-                                          <span class=" ">{{child.RoomCode}}</span>
-                                        </button></span>
+                              <li style="float: left; margin-left: 0px " *ngFor="let child1 of Groupblock.Rooms">
+                               
+                                  <div *ngIf="child1.Status =='D'">
+                                    <span class="mytooltip tooltip-effect-1">                                                                          
+                                        <div class="col-lg-1 co-sm-2 col-xs-3 roomselect dirtyroom" id="{{'R'+ child1.RoomNo}}" (click)="ProcessGroupRelese($event,'R'+child1.RoomNo,child1.RoomCode,child1.RoomNo)">
+                                          {{child1.RoomNo}}
+                                          <br>
+                                          {{child1.RoomCode}}
+                                      </div>
                                     </span>
                                   </div> 
-
-                                
-                                </div>
-
-
                               </li>
                             </ul>
                           </li>
-                        </ul>
-                      </div>
-                      <!-- end rooms dashborad -->
+                          <div class='col-12 col-lg-12'>
+                            <div class="form-group">
+                                <label class="required">Reason</label>
+                                <textarea type="text" name="Reasonforrelease" class="form-control" [(ngModel)]="model.Reasonforrelease"
+                                  #Reasonforrelease="ngModel" value=""   required autocomplete="off"></textarea>
+                             </div>  
+                          </div>            
                     </div>
 
-                  </div>
                 </div>
+                <div class="guestinfofirstrow  row">
+                  <div class='col-12 col-lg-12'>
+                      <div class="form-group  float-right" >                                   
+                          <button type="button" (click)="ProcessDirtyRoom(Reasonforrelease.value)"  class="btn btn-success " ><i class="fa fa-save"></i>Process</button>    
+                          <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                       </div>  
+                    </div> 
+                </div>
+
+
               </div>
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
-
-
-
-        <!-- Discount OLD DELETE -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Discount1'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Discount Posting
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'452px'"
-              [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                 <app-discountportal [RoomNo]="RoomNos" [RoomCode]="RoomCodes"> </app-discountportal> 
-                  
-                </div>
-              </div>
-            </perfect-scrollbar>
-          </div>
-        </app-modal-animation>
-
 
 
 
@@ -957,22 +988,9 @@
        </div>
 
 
-        <!-- <div class="commonmodel">
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Post'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative; background-color: orange;">Post Room
-           </h3>
-          <div class="app-modal-body text-center"  >
-            <perfect-scrollbar  class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'520px'"
-              [config]="config">
-              <div class="col-sm-12 filter-bar" >
-               
-                  <app-postcharge [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-postcharge>
-              
-              </div>
-            </perfect-scrollbar>
-          </div>
-        </app-modal-animation>
-      </div> -->
+      
+
+
         <!-- Shifft -->
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Shifft'" [modalClass]="'md-effect-2'"> 
@@ -1457,16 +1475,16 @@
 
 
 
-        <!-- Release Mange -->
+        <!-- Release Mangement -->
         <div class="commonmodel">
-          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Release'" [modalClass]="'md-effect-2'">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Release'" [modalClass]="'md-effect-4'">
       
           <div class="app-modal-body">
             <button type="button" class="close basic-close-light-box" (click)="Release.hide()">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
-              style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">Release RoomNo - {{rmno}}
+              style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;"> RoomNo - {{rmno}}
               ({{roomname1}})</label>
 
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
@@ -1496,14 +1514,14 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
-              style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">Block RoomNo - {{rmno}}
+              style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo - {{rmno}}
               ({{roomname1}})</label>
 
             <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
               [config]="config">
               <div class="row">
                 <div class="col-sm-12">
-                  <app-release [Operation]="'ManagementBlock'" [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-release>
+                  <app-release [Operation]="'BlockRealse'" [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-release>
                   <!-- <app-blockingdetails [Operation]="'Block'" [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-blockingdetails> -->
                 </div>
 
@@ -1513,6 +1531,35 @@
           </div>
         </app-modal-animation>  
        </div>
+
+
+
+       <!-- Release Dirty -->
+       <div class="commonmodel">
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'ReleaseD'" [modalClass]="'md-effect-4'">
+    
+        <div class="app-modal-body">
+          <button type="button" class="close basic-close-light-box" (click)="ReleaseD.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <label class="font-header"
+            style="background-color: black;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo - {{rmno}}
+            ({{roomname1}})</label>
+
+          <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
+            [config]="config">
+            <div class="row">
+              <div class="col-sm-12">
+                <app-release [Operation]="'DirtyRealse'" [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-release>
+                <!-- <app-blockingdetails [Operation]="'Block'" [RoomNo]="RoomNos" [RoomCode]="RoomCodes"></app-blockingdetails> -->
+              </div>
+
+            </div>
+          </perfect-scrollbar>
+
+        </div>
+      </app-modal-animation>  
+     </div>
 
 
 
@@ -1709,6 +1756,31 @@
        </div>
 
 
+       <!-- GroupBlockForm -->
+       <div class="commonmodel">
+        <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupBlockForm'" [modalClass]="'md-effect-4'">
+      <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false"> -->
+        <div class="app-modal-body">
+          <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <label class="font-header"
+            style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+            ({{roomname1}})</label>
+
+          <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'400px'"
+            [config]="config">
+            <div class="row">
+              <div class="col-sm-12">
+                <app-groupblock [Groupblock]="Groupblock"></app-groupblock>
+              </div>
+
+            </div>
+          </perfect-scrollbar>
+
+        </div>
+      </app-modal-animation>  
+     </div>
 
 
         <!-- HouseGuestForm -->

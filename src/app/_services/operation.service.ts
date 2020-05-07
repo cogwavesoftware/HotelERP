@@ -219,11 +219,57 @@ export class OperationService {
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savefood',food,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
+  
+  UpdateGroupBlocksRoom(BranchCode: string,des:string,LinkRoom:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/updategroubblock?BranchCode=' + BranchCode + '&des=' + des + '&LinkRoom=' + LinkRoom);
+  }
+
+  UpdateGroupReleaseRoom(BranchCode: string,des:string, LinkRoom:string)
+  {
+  return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/updaterelease?BranchCode=' + BranchCode + '&des=' + des + '&LinkRoom=' + LinkRoom);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {
   //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getexTax?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
   // }
-}
-
