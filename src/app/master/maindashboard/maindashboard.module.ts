@@ -30,6 +30,7 @@ import { SetcomplimentComponent } from './setcompliment/setcompliment.component'
 import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.component';
 import { ReleaseComponent } from './release/release.component';
 import {TagInputModule} from 'ngx-chips';
+import { FoodCouponComponent } from './food-coupon/food-coupon.component';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,
@@ -37,7 +38,7 @@ import {TagInputModule} from 'ngx-chips';
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
                  ChangeguestComponent, ChangepaxComponent, AmendDateComponent, ChangeplanComponent ,
                  PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
-                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent] ,
+                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent] ,
   imports: [
     CommonModule,
     MaindashboardRoutingModule,

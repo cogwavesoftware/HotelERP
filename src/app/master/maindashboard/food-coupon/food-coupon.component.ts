@@ -1,45 +1,41 @@
 import { MasterformService } from './../../../_services/masterform.service';
-import { ChangePlanFormmodel } from './../../../_models/ChangePlanFormmodel';
+import { Foodcouponmodel } from './../../../_models/Foodcouponmodel';
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { OperationService } from 'src/app/_services/operation.service';
 import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
 import { DatePipe } from "@angular/common";
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
 @Component({
-  selector: 'app-changeplan',
-  templateUrl: './changeplan.component.html',
-  styleUrls: ['./changeplan.component.scss']
+  selector: 'app-food-coupon',
+  templateUrl: './food-coupon.component.html',
+  styleUrls: ['./food-coupon.component.scss']
 })
-export class ChangeplanComponent implements OnInit {
-  timepicker: Partial<TimepickerConfig>;
+export class FoodCouponComponent implements OnInit {
   theme = "bootstrap";
+  datePickerConfig: Partial<BsDatepickerConfig>;
   type = "default";
   position = 'top-right';
   minDate=new Date();
   catagerys:any;
   @ViewChild('myform', {static:false}) form:any;
-  @Input() changeplanformmodel :ChangePlanFormmodel
+  @Input() Foodcouponmodel :Foodcouponmodel
   constructor(private toastyService: ToastyService,private datePipe: DatePipe,
-     private _masterformservice: MasterformService,
-    private _oprservice:OperationService) { }
-
-
+    private _masterformservice: MasterformService,private _oprservice:OperationService) { }
   ngOnInit() {
-    this._masterformservice.getplan().subscribe(res => {
-      this.catagerys = res;
-    });
-
-
-    this.changeplanformmodel={
+    this.Foodcouponmodel={
       RoomNo:"0",
       GuestName:"0",
       BranchCode:"0",
       Plan:"0",
-      CPlan:"0",
+      RoomCode:"0",
+      ProcessDate:this.minDate,
       CreatedBy:0,
     }
   }
+
   Submit(form?: NgForm) {
 
     if (form.invalid) {
@@ -47,10 +43,10 @@ export class ChangeplanComponent implements OnInit {
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-    console.log(this.changeplanformmodel)
+    console.log(this.Foodcouponmodel)
     console.log(form)
     
-    this._oprservice.SavePlanForm(this.changeplanformmodel).subscribe(data => {
+    this._oprservice.SaveFoodCoupon(this.Foodcouponmodel).subscribe(data => {
       if (data == true) {
         this.addToast(
           "Cogwave Software Technologies Pvt Ltd..",
@@ -70,14 +66,14 @@ export class ChangeplanComponent implements OnInit {
     ()=>{
       alert('suceesss')
       form.reset();
-      this.changeplanformmodel.CPlan="0"
+     
       this.closeMyModalPin(event);
     });
   }
 
   closeMyModalPin(event){ 
     this.form.reset();  
-    this.changeplanformmodel.CPlan="0"
+    this.Foodcouponmodel.ProcessDate=new Date();
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
@@ -125,5 +121,4 @@ export class ChangeplanComponent implements OnInit {
         break;
     }
   }
-
 }

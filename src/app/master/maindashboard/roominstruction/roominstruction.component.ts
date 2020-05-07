@@ -20,9 +20,7 @@ datePickerConfig: Partial<BsDatepickerConfig>;
  minDate=new Date();
  @ViewChild('myform',{static:false}) form:any;
  @Input('roominstructionmodel') roominstructionmodel:any
-  constructor(private toastyService: ToastyService,private _oprservice:OperationService
- 
-    ) { }
+  constructor(private toastyService: ToastyService,private _oprservice:OperationService) { }
 
   ngOnInit() {
     this.RoomInstruction={

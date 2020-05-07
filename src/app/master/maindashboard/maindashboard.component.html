@@ -1188,17 +1188,21 @@
        </div>
     
 
-        <!-- FoodCoupon -->
+       
+   
+
+ <!-- FoodCoupon -->
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Food Coupon
+          <h3 class="f-15" style="position: relative;">FoodCoupon
             <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
           </h3>
           <div class="app-modal-body text-center">
             <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
-                <div class="row">
-                </div>
+              
+                <app-food-coupon [Foodcouponmodel]="Foodcouponmodel" ></app-food-coupon>
+             
               </div>
             </perfect-scrollbar>
           </div>

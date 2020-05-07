@@ -209,6 +209,18 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/saverealse',realse,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
   
+
+  GetfoodcouponFormData(BranchCode: string,RoomNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/foodcoupon?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  }
+
+  SaveFoodCoupon(food:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savefood',food,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+
   // GetExtraBedTaxAmount(BranchCode: string,RoomNo:string,NoofBed:number)
   // {
   //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getexTax?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
