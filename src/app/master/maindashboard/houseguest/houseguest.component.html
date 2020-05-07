@@ -1,96 +1,112 @@
 <form #myform="ngForm" (ngSubmit)= "SaveHouseGuest(myform)" class="">
- 
-  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
-    #BranchCode="ngModel" value="{{BranchCode}}">
+  <div class="test123   guestinfofirstrow paymentarray" >
+    <div class="modelstyle"> 
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode"
+                  #BranchCode="ngModel" value="{{BranchCode}}">
+              
+                <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
+                  #CreatedBy="ngModel" value="{{CreatedBy}}"> 
+              
+                   
+                    <div class='col-12 col-lg-6'>
+                      <div class="form-group">
+                          <label class="required">RoomNo</label>
+                          <input type="text" name="RoomNos" class="form-control" [(ngModel)]="model.RoomNos"
+                            #RoomNos="ngModel" value="{{RoomNo}}"   required autocomplete="off">
+                       </div>  
+                    </div> 
+                    <div class='col-12 col-lg-6'>
+                      <div class="form-group">
+                          <label class="required">RoomCode</label>
+                          <input type="text" name="RoomCodes" class="form-control" [(ngModel)]="model.RoomCodes"
+                            #RoomCodes="ngModel" value="{{RoomCode}}"   required autocomplete="off">
+                       </div>  
+                    </div> 
+                   
+                  <div class="col-md-12" style="padding-bottom: 20px;" >
+                      <div class="col-md-12 linkandunlink">  
+                        <div class="row"> 
+                          <div class='col-12 col-md-6'>
+                            <div class="form-group">
+                                <label class="required lblwithcheckbox">Make House Guest</label>
+                                <input style="width:20px;" type="radio" id="status"  #status="ngModel" [(ngModel)]="model.status" name="status" (click)="Selected('House')"  value="HOUSE" class="form-control"  />                                          
+                             </div>  
+                             <div class="form-group" style="margin-bottom: 0;">
+                              <label class="required lblwithcheckbox">Remove Guest</label>
+                              <input style="width:20px;" type="radio"   #status="ngModel" [(ngModel)]="model.status" id="status" name="status" (click)="Selected('Remove')" value="Remove" class="form-control"  />   
+                           </div> 
 
-  <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy"
-    #CreatedBy="ngModel" value="{{CreatedBy}}"> 
+                        </div>
+                        <div class='col-12 col-md-6'>
+                          <div *ngIf="isRemoveHouse" class="col-md-12 linkandunlink"> 
+                            <div class="guestinfofirstrow  row">
+                              <div class='col-12 col-lg-12'>
+                                <div class="form-group">
+                                  <label class="required">Enter tarif </label>
+                                  <input type="text" name="tarif" class="form-control" [(ngModel)]="model.tarif"
+                                    #tarif="ngModel" value="{{tarif}}"   required autocomplete="off">
+                               </div> 
+                              </div>
+                              <!-- <div class='col-12 col-lg-6'>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="required lblwithcheckbox">Remove Guest</label>
+                                    <input style="width:20px;" type="radio" name="houseguest" class="form-control"  />                                          
+                                 </div>  
+                              </div> -->
+                            </div> 
+                           
+                      </div>
 
-    <div class="guestinfofirstrow  row">
-      <div class='col-12 col-lg-4'>
-        <div class="form-group">
-            <label class="required">RoomNo</label>
-            <input type="text" name="RoomNos" class="form-control" [(ngModel)]="model.RoomNos"
-              #RoomNos="ngModel" value="{{RoomNo}}"   required autocomplete="off">
-         </div>  
-      </div> 
-      <div class='col-12 col-lg-4'>
-        <div class="form-group">
-            <label class="required">RoomCode</label>
-            <input type="text" name="RoomCodes" class="form-control" [(ngModel)]="model.RoomCodes"
-              #RoomCodes="ngModel" value="{{RoomCode}}"   required autocomplete="off">
-         </div>  
-      </div> 
-    </div><!--guestinfofirstrow --> 
-    <div class="col-md-12">
-      <div class="row">
-        
-        <div class="col-md-6 linkandunlink"> 
-              <div class="guestinfofirstrow  row">
-                <div class='col-12 col-lg-6'>
-                    <div class="form-group">
-                        <label class="required lblwithcheckbox">Make House Guest1</label>
-                        <input style="width:20px;" type="radio" id="status"  #status="ngModel" [(ngModel)]="model.status" name="status" (click)="Selected('House')"  value="HOUSE" class="form-control"  />                                          
-                     </div>  
+                          
+                        </div>
+                        </div> 
+                      </div>
+              
+                     
+              
+                      
+                  <!-- <div class="">         
+                        <div class=" "> 
+                          <div class="radioone" style="border: 1px solid #ccc; padding:10px;  ;">
+                            <div class="form-check-inline">
+                              <label class="form-check-label">       
+                                <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" >Inclusive Plan
+                              </label>
+                            </div>
+                            <div class="form-check-inline">
+                              <label class="form-check-label">
+                                <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" value="">Exculisive Tarif                                                      
+                              </label>
+                            </div>
+                          </div>
+                          </div>           
+                      </div> -->
+                     
+                  </div>
+                 <br/>
+                  <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                    <div  style="width:100%" >
+                      <div class="form-group  " style="float: right;" >                                   
+                        <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Process</button>    
+                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                     </div>
+                    </div> 
+                  </div> 
+
+                        
+                  </div>
                 </div>
-                <div class='col-12 col-lg-6'>
-                  <div class="form-group" style="margin-bottom: 0;">
-                      <label class="required lblwithcheckbox">Remove Guest</label>
-                      <input style="width:20px;" type="radio"   #status="ngModel" [(ngModel)]="model.status" id="status" name="status" (click)="Selected('Remove')" value="Remove" class="form-control"  />  
-                                                                                
-                   </div>  
-                </div>
-              </div> 
-             
-        </div>
-
-        <div *ngIf="isRemoveHouse" class="col-md-6 linkandunlink"> 
-          <div class="guestinfofirstrow  row">
-            <div class='col-12 col-lg-6'>
-              <div class="form-group">
-                <label class="required">Enter tarif </label>
-                <input type="text" name="tarif" class="form-control" [(ngModel)]="model.tarif"
-                  #tarif="ngModel" value="{{tarif}}"   required autocomplete="off">
-             </div> 
-            </div>
-            <!-- <div class='col-12 col-lg-6'>
-              <div class="form-group" style="margin-bottom: 0;">
-                  <label class="required lblwithcheckbox">Remove Guest</label>
-                  <input style="width:20px;" type="radio" name="houseguest" class="form-control"  />                                          
-               </div>  
-            </div> -->
-          </div> 
-         
-    </div>
-
-        
-    <!-- <div class="">         
-          <div class=" "> 
-            <div class="radioone" style="border: 1px solid #ccc; padding:10px;  ;">
-              <div class="form-check-inline">
-                <label class="form-check-label">       
-                  <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" >Inclusive Plan
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label">
-                  <input  type="radio" id="Type"  value="EXT" name="Types" class="form-check-input" value="">Exculisive Tarif                                                      
-                </label>
               </div>
             </div>
-            </div>           
-        </div> -->
-      </div>
-    </div>
-   
-          
-          <div class="guestinfofirstrow  row">
-            <div class='col-12 col-lg-12'>
-                <div class="form-group  float-right" >                                   
-                    <button type="submit"  class="btn btn-success " ><i class="fa fa-save"></i> Process</button>    
-                    <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                 </div>  
-              </div> 
           </div>
+        </div>
+      </div>
+    
+
     
   </form> 
