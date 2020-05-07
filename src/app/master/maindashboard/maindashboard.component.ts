@@ -26,7 +26,6 @@ import { AmendRoommodel } from "./../../_models/AmendRoommodel";
 import { RoomShifftFormmodel } from "./../../_models/RoomShifftFormmodel";
 import { ExtraBedFormmodel } from "./../../_models/ExtraBedFormmodel";
 import { GuestcreationComponent } from "./../guestcreation/guestcreation.component";
-
 import { ElementRef } from "@angular/core";
 import { BlockingdetailsComponent } from "./blockingdetails/blockingdetails.component";
 import { Router } from "@angular/router";
@@ -35,6 +34,8 @@ import { ConfirmationDialogService } from '../../_services/confirmation-dialog.s
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { DiscountFormmodel } from "src/app/_models/DiscountFormmodel";
 import { ChangeCompanymodel } from "src/app/_models/ChangeCompanymodel";
+import { Foodcouponmodel } from "src/app/_models/Foodcouponmodel";
+
 @Component({
   selector: "app-maindashboard",
   templateUrl: "./maindashboard.component.html",
@@ -73,6 +74,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   changecompanyform: ChangeCompanymodel;
   paxonbillform: PaxonBillmodel;
   RoomInstruction: Roominstructionmodel;
+  Foodcouponmodel:Foodcouponmodel;
   finalMenu = new Array();
   floor = new Array<any>();
   vacantRoom = new Array<any>();
@@ -312,6 +314,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       case "Instruction":
         this.ProcessRoomInstruction(RoomNo);
         break;
+        case "FoodCoupon":
+          this.ProcessFoodcoupon(RoomNo);
+          break;
     }
     console.log(event);
     console.log("event");
@@ -604,6 +609,27 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       },
       () => {
         console.log("Sucess in ProcessChangePlan");
+      }
+    );
+  }
+
+  ProcessFoodcoupon(RoomNo: string) {
+
+    this._OprService.GetfoodcouponFormData(this.Branch, RoomNo).subscribe(
+      res => {
+        this.Foodcouponmodel = res;
+
+        console.log(res)
+        console.log('res')
+        this.Foodcouponmodel.RoomCode =this.RoomCodes;
+        this.Foodcouponmodel.ProcessDate=new Date();
+        this.Foodcouponmodel.CreatedBy = this.UserId;
+      },
+      error => {
+        console.log("error in ProcessFoodcoupon");
+      },
+      () => {
+        console.log("Sucess in ProcessFoodcoupon");
       }
     );
   }

@@ -1,0 +1,79 @@
+
+
+<div class="shiftroom discountfrm">
+    <div class="formdesign" style="padding: 0;">
+        <div class="userlist">
+  
+            <div class="row">
+                <div class="col-md-12" >  
+                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && Submit(myform)" class="">
+                       
+                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="Foodcouponmodel.BranchCode"
+                        #BranchCode="ngModel" value="{{Foodcouponmodel.BranchCode}}">
+                     
+                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="Foodcouponmodel.CreatedBy"
+                        #CreatedBy="ngModel" value="{{Foodcouponmodel.CreatedBy}}">
+
+                        <div class="guestinfofirstrow  row">
+                            <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Room No</label>
+                                    <input type="text" name="RoomNo" class="form-control" [(ngModel)]="Foodcouponmodel.RoomNo"
+                                      #RoomNo="ngModel" value="{{Foodcouponmodel.RoomNo}}"   autocomplete="off">
+                                 </div>  
+                              </div> 
+
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">RoomCode</label>
+                                    <input type="text" name="RoomCode" class="form-control" [(ngModel)]="Foodcouponmodel.RoomCode"
+                                      #RoomCode="ngModel" value="{{Foodcouponmodel.RoomCode}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Guest Name</label>
+                                    <input type="text" name="GuestName" class="form-control" [(ngModel)]="Foodcouponmodel.GuestName"
+                                      #GuestName="ngModel" value="{{Foodcouponmodel.GuestName}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Current Plan</label>
+                                    <input type="text" name="Plan" class="form-control" [(ngModel)]="Foodcouponmodel.Plan"
+                                      #Plan="ngModel" value="{{Plan}}"   required autocomplete="off">
+                                 </div>  
+                              </div> 
+
+                              <div class='col-12 col-lg-4'>
+                                <div class="form-group">
+                                    <label class="required">Date</label>
+                                    <input id="ProcessDate" name="ProcessDate" class="form-control" [(ngModel)]="Foodcouponmodel.ProcessDate"
+                                    #ProcessDate="ngModel" placement="center" type="text" bsDatepicker [minDate]="minDate"
+                                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">
+                                 </div>  
+                              </div> 
+                                                                                      
+                              </div>                                                         
+                              <div class="guestinfofirstrow  row">
+                                <div class='col-12 col-lg-12'>
+                                    <div class="form-group  float-right" >                                   
+                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
+                                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
+                                     </div>  
+                                  </div> 
+                              </div>
+                        
+                      </form> 
+                 
+                          </div>
+                   </div>       
+                  
+        </div>
+     </div>
+  </div>
+  
+  
+  
+  
+  
