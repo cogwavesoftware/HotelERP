@@ -7,10 +7,10 @@
   <div class="formdesign" style="padding: 0;">
       <div class="userlist">
                <form [formGroup]="blockingdetailsform" (ngSubmit)="Submit(blockingdetailsform)"> 
-                <!-- <input type="hidden"  formControlName="ID"  readonly name="ID" autocomplete="off"/>
-                <input type="hidden"  formControlName="CreatedBy"  readonly name="CreatedBy" autocomplete="off"/>
-                <input type="hidden"  formControlName="BranchCode"  readonly name="BranchCode" autocomplete="off"/>
-                 -->
+                 <input type="hidden"  formControlName="ID"  readonly name="ID" autocomplete="off"/>
+                <input type="hidden"  formControlName="CreatedBy" value="{{CreatedBy}}"  readonly name="CreatedBy" autocomplete="off"/>
+                <input type="hidden"  formControlName="BranchCode" value="{{BranchCode}}" readonly name="BranchCode" autocomplete="off"/>
+                
                   <div class="container-fluid" >             
                       <div class='row'>                            
                             <div class="col-md-12">

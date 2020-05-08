@@ -229,7 +229,10 @@ export class OperationService {
   {
   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/updaterelease?BranchCode=' + BranchCode + '&des=' + des + '&LinkRoom=' + LinkRoom);
   }
-
+  SaveBlockinformation(Block:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/SaveBlock',Block,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
 }
 
 
