@@ -95,7 +95,8 @@ export class ExtrabedComponent implements OnInit {
         this.addToast("Cogwave Software", "invalid Data", "warning");
         return;
       }
-  
+
+     
      
       this._oprservice.SaveExtraBed(form.value).subscribe(data => {
         if (data == true) {
@@ -129,6 +130,13 @@ export class ExtrabedComponent implements OnInit {
         openModals[i].classList.remove("md-show");
       }
     }
+
+    OpenModelforGuest(event){
+      alert("g");
+      document.querySelector("#" + event).classList.add("md-show");
+    }
+
+
     addToast(title, Message, theme) {
       debugger;
       this.toastyService.clearAll();

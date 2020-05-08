@@ -1,118 +1,51 @@
 <div class="col-md-12">
-    <div class="row">
-        <div class='col-12 col-lg-12  '>
-            <label class="form-control-label" style="font-size: 100%;">  <i class="fa fa-calendar" ></i> Select date1</label>
-            <div class="form-group">
-              <div class="input-group" style="margin-bottom:0; ">
-                <input id="frmdate" name="frmdate" class="form-control"  [(ngModel)]="model.frmdate" #frmdate="ngModel"   placement="center" type="text"   bsDaterangepicker   [minDate]="minDate"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">                  
-              </div>
-            </div>
-          </div>
+ 
+   
+  <ngx-datatable style="width: 100%"
+  class="data-table dt-chk"
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10"
+    [selected]="selected"
+    [selectionType]="'checkbox'"
+    (activate)="onActivate($event)"
+    (select)='onSelect($event)'>
 
-<div class="col-12 col-lg-12 ">
-    <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
-        <div class="row">
-      
-          <div class="col-xs-12 col-sm-12 col-md-6">
-            <div style="text-align: right;">
-              <label>Search:
-                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
-              </label>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="panel-heading">User information</div>-->
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
-                 [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-            <thead>
-            <tr>
-              <th>
-                <mfDefaultSorter  by="date">Date</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter  by="receiptno">Receipt No</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter  by="guestname">Guest Name</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter  by="amount">Amount</mfDefaultSorter>
-              </th>  
-              <th>
-                <mfDefaultSorter>Action</mfDefaultSorter>
-              </th>
-            </tr>
-            <tr>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of mf.data; let i = index;"> 
-              <td>{{item.date}}</td>
-              <td>{{item.receiptno}}</td>
-              <td>{{item.guestname}}</td>
-              <td>{{item.amount}}</td>  
-              <td class="action-icon">
-                <input type="checkbox" [checked]="isSelected" (change)="openMyModal('effect-6',data)"/>
-               </td>
-            </tr>
-            </tbody>
-            <tfoot> 
-            <tr>
-              <td colspan="10">
-                <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-              </td>
-            </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-</div>
+    <ngx-datatable-column name="revcode"></ngx-datatable-column> 
+    <ngx-datatable-column name="Name"></ngx-datatable-column>
 
-
-  
-</div>
-</div>
-
-
-
-<app-modal-animation [modalID]="'effect-6'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect'">
-  
-    <h3 class="f-15" style="position: relative;">Guest Details
-      <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
-   </h3>
+    <ngx-datatable-column   [width]="150" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"> 
+      <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn"> 
+           <label class="lblcenter">Complement</label> <br /> <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkcenter"/> 
+      </ng-template> 
+      <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"> 
+            <input id="complementcheckbox" type="checkbox" [checked]="complementisSelected" (click)="complementcheck($event)" (change)="onCheckboxChangeFn($event)" class="checkcenter"/> 
+      </ng-template> 
+    </ngx-datatable-column>
     
-      <div class="app-modal-body text-center" style="position: relative;"> 
-        <div class="table-content crm-table">
-          <div class="project-table addressproject-table">
-            <div id="crm-contact" class="dt-responsive">           
-              
-  
-               <div class="table-responsive">
-                <table class="table table-striped table-bordered full-data-table"> 
-                      <thead>
-                      <tr class="blueorange-gradient">        
-                      <th> GuestName</th>             
-                      <th> City </th>
-                      <th> Pincode </th>
-                      <th> MobileNo </th>  
-                  </tr>
-                  <tr> </tr>               
-                  </thead>
-                  <tbody>                    
-                   <tr  >                     
-                     <td> </td>   
-                     <td> </td>   
-                     <td> </td>                   
-                     <td> </td>        
-                   
-                  </tr>  
-                  </tbody>
-                   
-                </table>
-              </div> 
-            </div>
-          </div>
-        </div>     
-         </div>         
-      </app-modal-animation>
+    
+
+    <ngx-datatable-column   [width]="150" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"> 
+      <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn"> 
+           <label class="lblcenter">Block</label> <br /> <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkcenter"/> 
+      </ng-template> 
+      <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"> 
+            <input id="blockcheckbox" type="checkbox" [checked]="blockisSelected" (click)="blockcheck($event)" (change)="onCheckboxChangeFn($event)" class="checkcenter"/> 
+      </ng-template> 
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+  <div class="row">
+    <div class='col-sm-12 selected-column'>
+      <h4 class="sub-title p-t-15">Selected Row</h4>
+      <span *ngFor='let sel of selected'>
+          <label class="label label-primary">{{sel.name}}</label>
+        </span>
+      <span *ngIf="!selected.length">No Selections</span>
+    </div>
+  </div>
+  <pre> {{ selected | json }}</pre>
+</div>

@@ -1,34 +1,27 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { CommonModule } from '@angular/common';
 import { SetcomplimentRoutingModule } from './setcompliment-routing.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; 
+ import { HttpClientModule } from '@angular/common/http'; 
 import { SetcomplimentComponent } from './setcompliment.component';
 
 
 import {DataTableModule} from 'angular2-datatable';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {DatePipe} from '@angular/common';
-import { SharedModule } from 'src/app/shared/shared.module';
 
   
+import { SharedModule } from 'src/app/shared/shared.module'; 
 
 @NgModule({
-  declarations: [SetcomplimentComponent],
-  providers: [DatePipe],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    CommonModule,
-    SetcomplimentRoutingModule,
-    CommonModule, 
+  declarations: [SetcomplimentComponent] ,
+  
+    
+  imports:      [ BrowserModule, FormsModule ,
      SharedModule,
      HttpClientModule,
      DataTableModule,
-     FormsModule,
-     BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
+     FormsModule, 
      ReactiveFormsModule
   ]
 })
