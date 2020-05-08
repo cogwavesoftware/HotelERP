@@ -1,3 +1,4 @@
+import { OperationService } from 'src/app/_services/operation.service';
 
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
@@ -36,7 +37,7 @@ export class BlockingdetailsComponent implements OnInit {
   constructor(public router: Router, 
     private datePipe: DatePipe,private toastyService: ToastyService,
     private route: ActivatedRoute, public formBuilder: FormBuilder,
-    private _masterformservice:MasterformService
+    private _oprservice:OperationService
     ) {
 
 
@@ -83,7 +84,7 @@ export class BlockingdetailsComponent implements OnInit {
     })
     console.log('this.blockingdetailsform.value')
     console.log(this.blockingdetailsform.value)
-    this._masterformservice.SaveBlockinformation(this.blockingdetailsform.value).subscribe(data => {
+    this._oprservice.SaveBlockinformation(this.blockingdetailsform.value).subscribe(data => {
       if (data == true) {
         this.addToast(
           "Cogwave Software Technologies Pvt Ltd..",

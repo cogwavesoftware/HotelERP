@@ -1,16 +1,13 @@
-<!-- 
- <input type="text" name="Name" class="form-control" [(ngModel)]="Name" #Name1="ngModel" value="{{Name}}"    required autocomplete="off"> 
 
- <h1>Hello {{Name}}</h1> -->
 
  <div class="  blockingfrm">
     <div class="formdesign" style="padding: 0;">
         <div class="userlist">
                  <form [formGroup]="blockingdetailsform" (ngSubmit)="Submit(blockingdetailsform)"> 
-                  <!-- <input type="hidden"  formControlName="ID"  readonly name="ID" autocomplete="off"/>
-                  <input type="hidden"  formControlName="CreatedBy"  readonly name="CreatedBy" autocomplete="off"/>
-                  <input type="hidden"  formControlName="BranchCode"  readonly name="BranchCode" autocomplete="off"/>
-                   -->
+                   <input type="hidden"  formControlName="ID"  readonly name="ID"  autocomplete="off"/>
+                  <input type="hidden"  formControlName="CreatedBy"   value="{{CreatedBy}}" readonly name="CreatedBy" autocomplete="off"/>
+                  <input type="hidden"  formControlName="BranchCode" value="{{BranchCode}}" readonly name="BranchCode" autocomplete="off"/>
+                   
                     <div class="container-fluid" >             
                         <div class='row'>                            
                               <div class="col-md-12">
@@ -60,7 +57,7 @@
                                      
                                       <div class='col-12 col-lg-4'>
                                         <div class="form-group">
-                                          IsLongTime                <label class="form-control-label" for="date">To</label>
+                                          <label class="form-control-label" for="date">To</label>
                                           <input  id="ReleaseDate" name="ReleaseDate"  formControlName="ReleaseDate"  readonly type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
                                          </div>  
                                       </div>
