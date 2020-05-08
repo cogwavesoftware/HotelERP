@@ -32,6 +32,7 @@ import { ReleaseComponent } from './release/release.component';
 import {TagInputModule} from 'ngx-chips';
 import { FoodCouponComponent } from './food-coupon/food-coupon.component';
 import { GroupblockComponent } from './groupblock/groupblock.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,
@@ -41,7 +42,7 @@ import { GroupblockComponent } from './groupblock/groupblock.component';
                  PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
                  WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent, GroupblockComponent] ,
   imports: [
-    CommonModule,
+    CommonModule,NgxDatatableModule,
     MaindashboardRoutingModule,
     CommonModule,
     SharedModule,

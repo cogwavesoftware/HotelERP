@@ -1,19 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef,Inject, PLATFORM_ID, } from "@angular/core";
-import { Observable, Observer, empty } from "rxjs";
-import { NgForm } from "@angular/forms";
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { DatePipe } from "@angular/common";
-import {HttpClient} from '@angular/common/http'; 
-
-
-export class CrmContact {
-  receiptno: string;
-  guestname: any;
-  amount: string;
-  date: string; 
-}
+ 
 
 @Component({
   selector: 'app-setcompliment',
@@ -21,32 +7,76 @@ export class CrmContact {
   styleUrls: ['./setcompliment.component.scss']
 })
 export class SetcomplimentComponent implements OnInit {
-  public data: Observable<CrmContact>;
-  public rowsOnPage = 10;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
-  // rows = [];
+  rows = [];
+  columns = []
   selected = [];
-  form: FormGroup;
-  datePickerConfig: Partial<BsDatepickerConfig>; 
-  model: any = {};
-  maxDate = new Date();
-  myTime = new Date();
-  todate = new Date();
-  fromdate = new Date();
   isSelected=false;
+  complementisSelected = false;
+  blockisSelected = false;
+  constructor() {
+    this.fetch((data) => {
+      this.rows = data;
+    });
+   }
 
-  constructor(public httpClient: HttpClient,private datePipe: DatePipe, elementRef: ElementRef,public formBuilder: FormBuilder) { }
-
-  ngOnInit() {
-    this.model.frmdate = new Date();
-    this.data = this.httpClient.get<CrmContact>(`assets/data/crm-contact.json`);
-    console.log(this.data);
+  ngOnInit() {    
   }
-  openMyModal(event,data ) {  
-    this.isSelected = true;
-    document.querySelector('#' + event).classList.add('md-show');
+  fetch(cb) {
+    const req = new XMLHttpRequest();
+    req.open('GET', `assets/data/company.json`);
+    req.onload = () => {
+      cb(JSON.parse(req.response));
+    };
+
+    req.send();
+  }
+  onSelect({ selected }) {
+   // this.isSelected=!this.isSelected; 
+
+    this.selected.splice(0, this.selected.length);
+
+    this.selected.push(...selected);
+
+    console.log(selected); 
+  }
+
+  complementcheck(event){
+    alert("complet");
+    console.log(event.target.value);
+
+    //if(this.complementisSelected == true){
+      this.complementisSelected = true;
+      this.blockisSelected=false; 
+    //}
+    
+  }
+  blockcheck(event){
+    alert("block");
+    console.log(event.target.value);
+    //if(this.blockisSelected == true){
+      this.blockisSelected = true;
+      this.complementisSelected=false; 
+   // }
+
+  }
+  onCheckboxChangeFn(event){
+   
+  }
+  onActivate(event) {
+     
+  }
+
+  add() {
+    this.selected.push(this.rows[1], this.rows[3]);
+  }
+
+  update() {
+    this.selected = [this.rows[1], this.rows[3]];
+
+  }
+
+  remove() {
+    this.selected = [];
   }
 
 }

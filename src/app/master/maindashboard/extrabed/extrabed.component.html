@@ -100,8 +100,8 @@
 
                                             <div class='col-12 col-md-3'>
                                               <div class="form-group">                                   
-                                                      <label class="required" style="width: 100%;">Add Guest</label>
-                                                      <input   type="checkbox" name="addguest" class=" " />
+                                                      <label class="required" style="width: 100%;">Add Guest</label>  
+                                                      <input  (change)="OpenModelforGuest('addguest')" type="checkbox" name="addguest" class=" " />
                                                </div>  
                                             </div>
                                            
@@ -135,7 +135,29 @@
                       
                     </form>
 
- 
+                    <div class="commonmodel">
+                      <app-modal-animation class="modellg contentboxmodel" [modalID]="'addguest'" [modalClass]="'md-effect-2'">
+                       <div class="app-modal-body">
+                        <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <label class="font-header"
+                          style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+                          ({{roomname1}})</label>
+              
+                        <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
+                          [config]="config">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              teste
+                            </div>
+              
+                          </div>
+                        </perfect-scrollbar>
+              
+                      </div>
+                    </app-modal-animation>  
+                   </div>
 
 <!-- 
 <ng2-toasty [position]="position"></ng2-toasty> -->

@@ -51,6 +51,7 @@ export class GroupblockComponent implements OnInit {
       ID: ['0', Validators.required],
       Status: ['SHORT', Validators.required],
       BlockDate: [new Date(), [Validators.required]],
+      ReleaseDate:[new Date(), [Validators.required]],
       CreatedBy: [this.CreatedBy, Validators.required],
       Reason: ['', Validators.required],
       BranchCode: [this.Branch, Validators.required],
