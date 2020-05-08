@@ -1,23 +1,216 @@
-.h2class{
-    background-color: #63a4ff !important;
-    background-image: linear-gradient(315deg, #63a4ff 74%, #83eaf1 0%) !important;
-    font-family: Poppins-Medium;
-    font-size: 15px;
-    font-weight: 500;
-    display:  block;
-    margin-right: 10px;
-    line-height: 1.4;
-    padding:3px;
-    width: 100%;
+.test123{
+     
+    /* You can add global styles to this file, and also import other style files */
+.grid-table
+{
+	display:table;
+}
+.thead
+{
+	display:table-header-group;
+	font-weight:bold;
+	border-bottom: 1px solid black;
+    text-align: center;
+    background-color: #f0f8ff;
+}
+.thead .td{
+  
+    width: 115px;
+    text-align: left;
+}
+.tbody
+{
+	display:table-row-group;
+}
+.tbody .td input,
+.tbody .td select{
+     
+    width: 115px;
+    height: 23px;
+}
+.thead .td .btn.btn-outline-success{
+    
+    width: 30px;
+    height: 28px;
+    padding: 0;
+    background: none;
+    color: #000;
+    font-size: 90%;
+    text-align: center;
+    border:1px solid #585858;
+}
+.tbody .td button.ng-tns-c5-1{   
+    // border-radius: 5px;
+    // width: 30px;
+    // padding: 0;
+    // background: red;
+    // color: #fff;
+    // font-size: 115%;
+}
+.tr
+{
+	display:table-row;
+	
+}
+.td
+{
+	display:table-cell;
+	padding:  0px 1px 0px 0px;
+}
+.thead div.tr div.td:last-child{
+    background-color: #fff;
+}
+i:hover{
+	cursor: pointer;
+}
+
+input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+	border-color: #dc3545;
+}
+
+
+.elementToFadeInAndOut {
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  50% { opacity: 1; }
+}
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid yellow!important;
+    }
+
+}
+ @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid blue!important;
+    }
+  }
+
+
+
+
+
+
+
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td.lasttd{
+    width: 31px!important;
 }
  
-.linkadvancetable .table th{
-    padding:5px;
-    background-color: #b8d1f3;
-}
-.linkadvancetable .table td{
-    padding:5px;
-}
-.action-icon{
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td  {
+    width: 181px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
     text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+    font-size: 90%;
+}
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td input{
+    width:181px;
+ 
+}
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.gridtestpayarray .grid-table .tbody .td.lasttd{
+    width:auto;
+}
+
+.brdrclass{ 
+    border:1px solid #ccc;
+}
+
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
+    width: 113px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+    font-size: 90%;
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
+    width:112px;
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td.lasttd{
+    width:auto;
+}
+.outerdiv .reservedright thead tr th ,
+.outerdiv .reservedright tbody tr td {
+    border:1px solid #ccc;
+    padding:2px;
+     
+}
+.outerdiv .reservedright thead tr th{     
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;     
+    font-weight: normal;
+    font-size: 75%;
+}
+.outerdiv .showedcolorbg th{
+    color:#000;
+    padding:0px;
+}
+.guestphotoscreen .table thead tr th,
+.additionalguest .table thead tr th,
+.addGuestouter .table thead tr th{
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+}
+.guestphotoscreen .table tbody tr td,
+.additionalguest .table tbody tr td,
+.addGuestouter .table tbody tr td{
+    border: 1px solid #ccc;
+    text-align: center; 
+    margin: 0 auto;
+}
+.guestphotoscreen .table tbody tr td img,
+.additionalguest .table tbody tr td img,
+.addGuestouter .table tbody tr td img{
+    border-radius: 5px;
+    border:1px solid #000;    
+}
+.width100 label{
+    width: 218px;
+    display: block;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+.width100 label b{ 
+    float:right;
+    font-weight: bold;
+}
+.outerdiv .form-group .input-group{
+    margin-bottom: 0;
+}
+.outerdiv .form-group label, .outerdiv .formdesign label{
+    // border: 1px solid #ccc;
+    // background-color: #f3f3f3;
+    // color: #000;
+    // text-align: center;
+    // padding: 2px 0px 2px 0px;
+    // font-weight: normal;
+    // display: block;
 }

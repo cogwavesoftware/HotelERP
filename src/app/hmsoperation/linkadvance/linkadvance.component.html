@@ -1,141 +1,232 @@
 
+<div class="outerdiv">
+
+  <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+    <div class="row">
+        <div class="col-md-11">
+            <h5 class="ng-tns-c6-1"> Advance Receipt Edit</h5>         
+            
+          </div>
+        
+    </div>
+  </div>
 
 
-<div class="shiftroom linkadvance  " style="border:1px solid #ccc; background-color: #fff;">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist">
+  <div class="formdesign branchform" *ngIf="Show">
+      <div class="col-xs-12 col-sm-12 col-md-6" style="padding-left: 0px;">
+          <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Edit Advance</div>
+          </div>
+      <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow p-3 mb-5 bg-white rounded" autocomplete="off" >
+        <input type="hidden" class="form-control tooltip-form" id="ReceiptNoS" formControlName="ReceiptNo" name="ReceiptNo"> 
+        <input type="hidden" class="form-control tooltip-form" id="BranchCodes" formControlName="BranchCode" name="BranchCode"> 
+        <input type="hidden" class="form-control tooltip-form" id="ModifyBys" formControlName="ModifyBy" name="ModifyBy"> 
+         
 
-            <div class="row">
-                <div class="col-md-12" >  
-                    <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveRoomShift(myform)" class="">
-                        <input type="hidden" name="Id" class="form-control" [(ngModel)]="linkadvance.Id" #Id="ngModel"
-                        value="{{Id}}">
-                      <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="linkadvance.BranchCode"
-                        #BranchCode="ngModel" value="{{BranchCode}}">
-                      <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="linkadvance.IpAdd"
-                        #IpAdd="ngModel" value="{{IpAdd}}">
-                      <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="linkadvance.CreatedBy"
-                        #CreatedBy="ngModel" value="{{CreatedBy}}">
+        <div class="row">
+  
+          <div class='col-md-6'>
+            <label class="col-sm-3 form-control-label" for="PurchaseId">Select RoomNo</label>
+            <select  class="custom-select" name="RoomNo" formControlName="RoomNo" id="RoomNo">  
+            <option value="0">Select</option>
+            <option *ngFor="let sour of roomlist" [value]="sour.RoomNo"> {{ sour.RoomNo }}</option>   
+          </select>              
+          </div>
 
-                         
-                            <div class="expectedcheckout linkadvancetable">
-                                <h2 class="h2class"><i class="fa fa-hotel"></i> Expected Checkout</h2>
-                                <div class="table-responsive">
-                                  <table class="table table-striped table-bordered full-data-table">
-                                    <thead>
-                                      <tr class="blueorange-gradient">
-                                        <th>Registration No </th>
-                                        <th>Guest Name</th>
-                                        <th>Tr Date</th>
-                                        <th>Mobile</th>
-                                        <th>Amount </th>
-                                        <th>No</th>
-                                        <th style="text-align: center;">Action </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>1</td>
-                                        <td>test223</td>
-                                        <td>12/12/2020</td>
-                                        <td>99888 88878</td>
-                                        <td>5000</td>
-                                        <td>222</td> 
-                                        <td class="action-icon">
-                                          <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                                            (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>1</td>
-                                        <td>test223</td>
-                                        <td>12/12/2020</td>
-                                        <td>99888 88878</td>
-                                        <td>5000</td>
-                                        <td>222</td> 
-                                        <td class="action-icon">
-                                          <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                                            (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>1</td>
-                                        <td>test223</td>
-                                        <td>12/12/2020</td>
-                                        <td>99888 88878</td>
-                                        <td>5000</td>
-                                        <td>222</td> 
-                                        <td class="action-icon">
-                                          <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                                            (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td>1</td>
-                                        <td>test223</td>
-                                        <td>12/12/2020</td>
-                                        <td>99888 88878</td>
-                                        <td>5000</td>
-                                        <td>222</td> 
-                                        <td class="action-icon">
-                                          <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                                            (click)="openMyModal('effect-13',item)"><i class="fa fa-paper-plane"></i></a>
-                                        </td>
-                                      </tr>
-                              
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                       
-                        <div class="guestinfofirstrow  row">
-                            <div class='col-12 col-lg-4'>
-                                <div class="form-group" 
-                                [class.has-error]="roomno.touched && roomno.errors?.defaultSelected">
-                                    <label class="required">Room no</label>
-                                      <select class="custom-select" id="roomno" (change)="LoadType(roomno.value)" appSelectValidator="0" #roomno="ngModel"
-                                        name="roomno" [(ngModel)]="linkadvance.roomno">
-                                        <option value="0">Select</option>
-                                        <option *ngFor="let item of linkadvance.RoomNos" [value]="item.RoomNos">{{item.RoomNos}}</option>
-                                      </select>
-                                      <span class="help-block" *ngIf="roomno.touched && roomno.errors?.defaultSelected">
-                                        roomno is required
-                                      </span>
-                                 </div>  
-                              </div> 
-                              <div class='col-12 col-lg-4'>
-                                <div class="form-group">
-                                    <label class="required">Guest Name</label>
-                                    <input type="text" name="guestname" class="form-control" [(ngModel)]="linkadvance.guestname"
-                                      #guestname="ngModel" value="{{linkadvance.guestname}}"  required autocomplete="off">
-                                 </div>  
-                              </div> 
-                              
-
-                              </div><!--guestinfofirstrow -->
-                              <div class="guestinfofirstrow  row">
-                                <div class='col-12 col-lg-12'>
-                                    <div class="form-group  float-right" >                                   
-                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
-                                      </div>  
-                                  </div> 
-                              </div>
-                        
-                      </form>
-
-
-                 
-                          </div>
-                   </div>       
-                  
         </div>
-     </div>
- </div>
 
-  
+            <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
+             
+              <div class="row">
+                <div class="col-lg-9">
+                  <div class="grid-table" style="width: 100%;">
+                    <div class="thead">
+                      <div class="">
+                        <div class="td"><i  class="fa fa-building"></i> Select Mode</div>
+                        <div class="td"><i  class="fa fa-bed"></i> Delect Detail</div>
+                        <div class="td"><i  class="fa fa-paypal"></i>Amount</div>
+                        <div class="td"><i  class="fa fa-area-chart"  ></i> Description</div>
+                        <div class="td "><i  class="fa fa-cutlery"></i> Selected Mode</div>
+                        
+                     
+                      
+                      </div>
+                    </div>
+                    <div class="tbody">
 
-  
+                      <div formArrayName="PayArray"
+                        *ngFor="let other of form.get('PayArray').controls; let k = index">
+                        <div [formGroupName]="k">
+                          <div class="tr">
+                            <div class="td">
+                          
 
- <ng2-toasty [position]="position"></ng2-toasty>
+                              <select  (change)="FilterPaymentMode(k)" disabled class="custom-select" name="Paymode" formControlName="Paymode"
+                              id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                              <option value="select">Select</option>
+                              <option *ngFor="let sour of paymentmode" [value]="sour">
+                                {{ sour }}</option>
+                            </select>
+
+
+                            </div>
+
+                            <div class="td">
+                              <select class="custom-select" disabled  (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                              id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                              <option value="select">Select</option>
+                              <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                {{ Paysubmode  }}</option>
+                            </select> 
+
+
+                            </div>
+
+                        <div class="td">
+                         <input type="number"  id="payAmount"
+                          formControlName="payAmount" name="payAmount" disabled  autocomplete="off" required />
+                        
+          
+                            </div>
+
+
+                            <div class="td">
+                              <input type="text" class="" id="Descriptions" disabled formControlName="Descriptions">
+                              
+                            </div>
+
+                            <div class="td">
+                              <input type="text" class="" id="modeselected" disabled formControlName="modeselected">
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+                  </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
+                      <div class=" ">
+                        <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
+                              
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+
+              
+            </div>
+         
+         <div class="col-sm-12">
+          <div class="form-group text-center">               
+              <button type="submit"   [disabled]="form.invalid" class="btn btn-primary">Register</button>
+              <button type="button" (click)="CloseFormmodel()"  class="btn btn-primary">Close</button>
+          </div>
+        </div> 
+
+    </form>
+</div>
+
+
+
+<div class="productlist">
+  <div class="shadow p-3 mb-5 bg-white rounded" >
+    <div class="table-content crm-table">
+      <div class="project-table">
+       
+          <div class="row"> 
+              <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Advance List</div>
+              </div>
+                     
+          </div>
+          
+
+
+      <div class="col-sm-12 filter-bar">
+        <div class="row">
+          <div class="input-group" style="padding:10px; margin-bottom: 0;">
+            <input type="text" class="form-control" name="searchdata" #searchdata placeholder="Search here...">
+            <span class="input-group-append ripple light" id="basic-addon1"><i
+                (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
+          </div>
+          <div class="col-sm-6" *ngFor="let data of BookingList">
+            <!-- Invoice list card start -->
+            <div class="card card-border-primary">
+              <div class="card-header">
+                <h5> {{data.GuestName | uppercase}}</h5>
+
+                <div ngbDropdown class="dropdown-secondary dropdown f-right">
+                  <!-- <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button> -->
+                  <a href="javasript:;" title="Checkin" (click)="LoadReservationCheckinpage(data.BookingNo)"
+                    class="btn btn-info btn-mini b-none ripple light"><i
+                      class="icofont icofont-eye-alt m-0"></i></a>
+
+                  <span class="f-left m-r-5 text-inverse" style="color: yellow;">Checkin : </span>
+                </div>
+                <br>
+                <strong *ngIf="data.CompanyName !='0'" class="label label-primary">Company:
+                  {{data.CompanyName}}</strong>
+
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <ul class="list list-unstyled">
+                      <li>Resv No #: &nbsp;{{data.BookingNo}}</li>
+                      <li>Arr Date: <span class="text-semibold">{{data.ArivalDate | date}}</span></li>
+
+                    </ul>
+                  </div>
+                  <div class="col-sm-6">
+                    <ul class="list list-unstyled text-right">
+                      <li>Total: &nbsp;{{data.BillAmount| currency:'INR'}}</li>
+                      <li>Paid: <span class="text-semibold">{{data.AdvancePaidAmount| currency:'INR'}}</span>
+                      </li>
+                      <!-- <li>Advance Paid: <span class="text-semibold">{{'?'+data.AdvancePaidAmount| currency}}</span></li> -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- end of card-footer -->
+            </div>
+            <!-- Invoice list card end -->
+          </div>
+
+
+        </div>
+        <!-- Task board design block end -->
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+</app-card> -->
+
+
+
+
+</div>
+
+
 

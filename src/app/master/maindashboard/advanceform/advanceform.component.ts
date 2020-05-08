@@ -151,7 +151,7 @@ export class AdvanceformComponent implements OnInit {
   
 GetAllRoomAdvanceList(RoomNo: string)
 {
-   this._oprservice.GetAllReceipt(this.Branch,RoomNo).subscribe(data => {
+   this._oprservice.GetAllReceiptviaRoomNo(this.Branch,RoomNo).subscribe(data => {
     this.subpaymodelist = data;
   })
 

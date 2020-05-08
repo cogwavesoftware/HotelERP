@@ -1,120 +1,237 @@
-<div class="col-md-12">
-    <div class="row">
-        <div class='col-12 col-lg-12  '>
-            <label class="form-control-label" style="font-size: 100%;">  <i class="fa fa-calendar" ></i> Select date1</label>
-            <div class="form-group">
-              <div class="input-group" style="margin-bottom:0; ">
-                <input id="frmdate" name="frmdate" class="form-control"  [(ngModel)]="model.frmdate" #frmdate="ngModel"   placement="center" type="text"   bsDaterangepicker   [minDate]="minDate"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }">                  
-              </div>
-            </div>
-          </div>
 
-<div class="col-12 col-lg-12 ">
-    <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
-        <div class="row">
-      
-          <div class="col-xs-12 col-sm-12 col-md-6">
-            <div style="text-align: right;">
-              <label>Search:
-                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
-              </label>
-            </div>
+<div class="outerdiv">
+
+  <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+    <div class="row">
+        <div class="col-md-11">
+            <h5 class="ng-tns-c6-1"> Advance Receipt Edit</h5>         
+            
           </div>
-        </div>
-        <!-- <div class="panel-heading">User information</div>-->
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
-                 [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-            <thead>
-            <tr>
-              <th>
-                <mfDefaultSorter  by="date">Date</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter  by="receiptno">Receipt No</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter  by="guestname">Guest Name</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter  by="amount">Amount</mfDefaultSorter>
-              </th>  
-              <th>
-                <mfDefaultSorter>Action</mfDefaultSorter>
-              </th>
-            </tr>
-            <tr>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of mf.data; let i = index;"> 
-              <td>{{item.date}}</td>
-              <td>{{item.receiptno}}</td>
-              <td>{{item.guestname}}</td>
-              <td>{{item.amount}}</td>  
-              <td class="action-icon">
-                <input type="checkbox" [checked]="isSelected" (change)="openMyModal('effect-6',data)"/>
-               </td>
-            </tr>
-            </tbody>
-            <tfoot> 
-            <tr>
-              <td colspan="10">
-                <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-              </td>
-            </tr>
-            </tfoot>
-          </table>
+        
+    </div>
+  </div>
+
+
+  <div class="formdesign branchform" *ngIf="Show">
+      <div class="col-xs-12 col-sm-12 col-md-6" style="padding-left: 0px;">
+          <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Edit Advance</div>
+          </div>
+      <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow p-3 mb-5 bg-white rounded" autocomplete="off" >
+        <input type="hidden" class="form-control tooltip-form" id="ReceiptNoS" formControlName="ReceiptNo" name="ReceiptNo"> 
+        <input type="hidden" class="form-control tooltip-form" id="BranchCodes" formControlName="BranchCode" name="BranchCode"> 
+        <input type="hidden" class="form-control tooltip-form" id="ModifyBys" formControlName="ModifyBy" name="ModifyBy"> 
+         
+            <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
+             
+              <div class="row">
+                <div class="col-lg-9">
+                  <div class="grid-table" style="width: 100%;">
+                    <div class="thead">
+                      <div class="">
+                        <div class="td"><i  class="fa fa-building"></i> Select Mode</div>
+                        <div class="td"><i  class="fa fa-bed"></i> Delect Detail</div>
+                        <div class="td"><i  class="fa fa-paypal"></i>Amount</div>
+                        <div class="td"><i  class="fa fa-area-chart"  ></i> Description</div>
+                        <div class="td "><i  class="fa fa-cutlery"></i> Selected Mode</div>
+                        
+                        <div class="td lasttd">
+                          <button type="button" class=" " (click)="AddPaymentButtonClick()">
+                            <i class="fa fa-plus"></i> 
+                          </button>
+                        </div>
+                      
+                      </div>
+                    </div>
+                    <div class="tbody">
+
+                      <div formArrayName="PayArray"
+                        *ngFor="let other of form.get('PayArray').controls; let k = index">
+                        <div [formGroupName]="k">
+                          <div class="tr">
+                            <div class="td">
+                          
+
+                              <select  (change)="FilterPaymentMode(k)"  class="custom-select" name="Paymode" formControlName="Paymode"
+                              id="Paymode" [ngClass]="{ 'is-invalid': submitted && form.Paymode.errors }">
+                              <option value="select">Select</option>
+                              <option *ngFor="let sour of paymentmode" [value]="sour">
+                                {{ sour }}</option>
+                            </select>
+
+
+                            </div>
+
+                            <div class="td">
+                              <select class="custom-select" (change)="PatchSubModeName(k)" name="Paysubmode" formControlName="Paysubmode"
+                              id="Paysubmode" [ngClass]="{ 'is-invalid': submitted && form.Paysubmode.errors }">
+                              <option value="select">Select</option>
+                              <option *ngFor="let Paysubmode of  subpaymodelist" [value]="Paysubmode">
+                                {{ Paysubmode  }}</option>
+                            </select> 
+
+
+                            </div>
+
+                        <div class="td">
+                         <input type="number"  id="payAmount"
+                          formControlName="payAmount" name="payAmount" autocomplete="off" required />
+                        
+          
+                            </div>
+
+
+                            <div class="td">
+                              <input type="text" class="" id="Descriptions" formControlName="Descriptions">
+                              
+                            </div>
+
+                            <div class="td">
+                              <input type="text" class="" id="modeselected" formControlName="modeselected">
+                              
+                            </div>
+
+
+                            <div class="td">                                      
+                              <button (click)="onDeletePayment(0,k)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+                  </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
+                      <div class=" ">
+                        <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
+                              
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+
+              
+            </div>
+         
+         <div class="col-sm-12">
+          <div class="form-group text-center">               
+              <button type="submit"  class="btn btn-primary">Register</button>
+              <button type="button" (click)="CloseFormmodel()"  class="btn btn-primary">Close</button>
+          </div>
+        </div> 
+
+    </form>
+</div>
+
+
+
+<div class="productlist">
+  <div class="shadow p-3 mb-5 bg-white rounded" >
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+          <div class="row"> 
+              <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Advance List</div>
+              </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div style="text-align: right;">
+                <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                  <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                </label>
+              </div>
+            </div>             
+          </div>
+          
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+              [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+             
+              <thead>
+              <tr class="blueorange-gradient">
+                <!-- <th>
+                  <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+                </th> -->
+                <th>
+                  <mfDefaultSorter  by="ReceiptNo">ReceiptNo</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="ReservationNo">Booking No</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="TrDate">TrDate</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="PaidAmount">Amount</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="Time">PaidTime</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="Branchcode">Branchcode</mfDefaultSorter>
+                </th>
+
+                <th>
+                  <mfDefaultSorter>Action</mfDefaultSorter>
+                </th>
+              </tr>
+             
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of mf.data; let i = index;">
+                
+                <td>{{item.ReceiptNo}}</td>
+                <td>{{item.ReservationNo}}</td>
+                <td>{{item.TrDate  | date }}</td>
+                <td>{{item.PaidAmount}}</td>
+                <td>{{item.Time  }}</td>
+              
+                <td>{{item.BranchCode}}</td>
+                <td class="action-icon">
+                    <!-- <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalDataview(i);modalDefault.show();"><i class="fa fa-book"></i></a> -->
+                    <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="EditForm(item)"><i class="fa fa-edit"></i></a>
+                  <!-- <a href="javascript:;" class="crm-action-delete text-danger"><i class="fa fa-trash"></i></a> -->
+                </td>
+              </tr>
+              </tbody>
+<tfoot >
+              <tr class="blueorange-gradient">                  
+                <th>ReceiptNo</th>
+                <th>Booking No</th>
+                <th>TrDate</th>
+                <th>Amount</th>
+                <th>PaidTime</th>                
+                <th>Branchcode</th>
+                <th>Action</th>
+              </tr>
+              <tr>
+                <td colspan="10">
+                  <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<!-- 
+</app-card> -->
+
+
+
+
 </div>
 
 
-  
-</div>
-</div>
 
-
-
-<app-modal-animation [modalID]="'effect-6'" style="position: absolute; z-index: 99999;" [modalClass]="'md-effect-4 addressmodeleffect'">
-  
-    <h3 class="f-15" style="position: relative;">Guest Details
-      <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button>             
-   </h3>
-    
-      <div class="app-modal-body text-center" style="position: relative;"> 
-        <div class="table-content crm-table">
-          <div class="project-table addressproject-table">
-            <div id="crm-contact" class="dt-responsive">           
-              
-  
-               <div class="table-responsive">
-                <table class="table table-striped table-bordered full-data-table"> 
-                      <thead>
-                      <tr class="blueorange-gradient">        
-                      <th> Date</th>             
-                      <th> Receiptno </th>
-                      <th> Guestname </th>
-                      <th> Amount </th>  
-                  </tr>
-                  <tr> </tr>               
-                  </thead>
-                  <tbody>                    
-                   <tr  >                     
-                     <td><input type="text" id="date" value="10/10/2020" /></td>   
-                     <td><input type="text" id="receiptno" value="12020" /> </td>   
-                     <td><input type="text" id="guestname" value="Chandi" /> </td>                   
-                     <td><input type="text" id="amount" value="1000" /> </td>        
-                   
-                  </tr>  
-                  </tbody>
-                   
-                </table>
-                <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                
-              </div> 
-            </div>
-          </div>
-        </div>     
-         </div>         
-      </app-modal-animation>

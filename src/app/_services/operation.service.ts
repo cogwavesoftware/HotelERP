@@ -19,7 +19,7 @@ export class OperationService {
 
   }
 
-    GetAllReceipt(BranchCode: string,RoomNo:string) {
+    GetAllReceiptviaRoomNo(BranchCode: string,RoomNo:string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/GetAllReceipt?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
   }
 
@@ -233,6 +233,22 @@ export class OperationService {
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/SaveBlock',Block,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
+
+
+  GetAllReceipt(BranchCode: string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getallreceipt?BranchCode=' + BranchCode);
+  }
+
+  
+
+  GetAdvanceReceiptByReciptNo(BranchCode: string,ReceiptNo:string) {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getreceiptbyno?BranchCode=' + BranchCode + '&ReceiptNo=' + ReceiptNo);
+  }
+  GetAdvanceDetailByBookingNo(BranchCode: string,BookingNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getreceiptbyno?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
+  }
+
 }
 
 
