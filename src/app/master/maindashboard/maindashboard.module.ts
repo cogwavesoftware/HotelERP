@@ -33,6 +33,7 @@ import {TagInputModule} from 'ngx-chips';
 import { FoodCouponComponent } from './food-coupon/food-coupon.component';
 import { GroupblockComponent } from './groupblock/groupblock.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import { SetblockComponent } from './setblock/setblock.component';
 @NgModule({
    providers: [DatePipe],
   declarations: [MaindashboardComponent,BlockingdetailsComponent,
@@ -40,7 +41,7 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
                  ChangeguestComponent, ChangepaxComponent, AmendDateComponent, ChangeplanComponent ,
                  PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
-                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent, GroupblockComponent] ,
+                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent, GroupblockComponent, SetblockComponent] ,
   imports: [
     CommonModule,NgxDatatableModule,
     MaindashboardRoutingModule,

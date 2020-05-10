@@ -7,15 +7,11 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, ElementRef,
   styleUrls: ['./setcompliment.component.scss']
 })
 export class SetcomplimentComponent implements OnInit {
-  rows = [];
-  columns = []
-  selected = [];
-  isSelected=false;
-  complementisSelected = false;
-  blockisSelected = false;
+  rows1 = []; 
+  selected = []; 
   constructor() {
     this.fetch((data) => {
-      this.rows = data;
+      this.rows1 = data;
     });
    }
 
@@ -30,53 +26,51 @@ export class SetcomplimentComponent implements OnInit {
 
     req.send();
   }
-  onSelect({ selected }) {
-   // this.isSelected=!this.isSelected; 
-
+  onSelect({ selected }) { 
+ 
     this.selected.splice(0, this.selected.length);
 
     this.selected.push(...selected);
 
     console.log(selected); 
   }
-
-  complementcheck(event){
-    alert("complet");
-    console.log(event.target.value);
+ 
+  //complementcheck(event){
+   // alert("complet");
+   // console.log(event.target.value);
 
     //if(this.complementisSelected == true){
-      this.complementisSelected = true;
-      this.blockisSelected=false; 
+    //  this.complementisSelected = true;
+      //this.blockisSelected=false; 
     //}
     
-  }
-  blockcheck(event){
-    alert("block");
-    console.log(event.target.value);
+ // }
+  //blockcheck(event){
+    //alert("block");
+  //  console.log(event.target.value);
     //if(this.blockisSelected == true){
-      this.blockisSelected = true;
-      this.complementisSelected=false; 
+     // this.blockisSelected = true;
+     // this.complementisSelected=false; 
    // }
 
-  }
-  onCheckboxChangeFn(event){
+  //}
+  //onCheckboxChangeFn(event){
    
-  }
+  //}
   onActivate(event) {
      
   }
 
-  add() {
-    this.selected.push(this.rows[1], this.rows[3]);
-  }
-
-  update() {
-    this.selected = [this.rows[1], this.rows[3]];
-
-  }
+ 
 
   remove() {
     this.selected = [];
+  }
+  closeMyModalPin(event) { 
+    var openModals = document.querySelectorAll(".md-show");
+    for (let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show");
+    }
   }
 
 }

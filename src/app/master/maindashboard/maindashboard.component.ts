@@ -89,6 +89,8 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   linkroommodel: any;
   myTime = new Date();
   valid: boolean = true;
+  showcomplement:boolean =true;
+  showblock:boolean =false;
   isValid(event: boolean): void {
     this.valid = event;
   }
@@ -764,6 +766,8 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     console.log(allbtn);
     allbtn.classList.remove("md-show");
   }
+
+ 
 
   addToast(title, Message, theme) {
     debugger;

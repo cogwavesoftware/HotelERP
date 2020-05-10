@@ -1,9 +1,7 @@
-<div class="col-md-12">
- 
-   
-  <ngx-datatable style="width: 100%"
+<div class="col-md-12"> 
+  <ngx-datatable  
   class="data-table dt-chk"
-    [rows]="rows"
+    [rows]="rows1"
     [columnMode]="'force'"
     [headerHeight]="50"
     [footerHeight]="50"
@@ -14,31 +12,20 @@
     (activate)="onActivate($event)"
     (select)='onSelect($event)'>
 
-    <ngx-datatable-column name="revcode"></ngx-datatable-column> 
-    <ngx-datatable-column name="Name"></ngx-datatable-column>
+    <ngx-datatable-column name="revcode1" style="width:25%"></ngx-datatable-column> 
+    <ngx-datatable-column name="Name1" style="width:50%"></ngx-datatable-column>
 
-    <ngx-datatable-column   [width]="150" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"> 
+    <ngx-datatable-column   style="width:25%" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"> 
       <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn"> 
            <label class="lblcenter">Complement</label> <br /> <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkcenter"/> 
       </ng-template> 
       <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"> 
-            <input id="complementcheckbox" type="checkbox" [checked]="complementisSelected" (click)="complementcheck($event)" (change)="onCheckboxChangeFn($event)" class="checkcenter"/> 
+            <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"class="checkcenter"/> 
       </ng-template> 
-    </ngx-datatable-column>
-    
-    
-
-    <ngx-datatable-column   [width]="150" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"> 
-      <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn"> 
-           <label class="lblcenter">Block</label> <br /> <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkcenter"/> 
-      </ng-template> 
-      <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"> 
-            <input id="blockcheckbox" type="checkbox" [checked]="blockisSelected" (click)="blockcheck($event)" (change)="onCheckboxChangeFn($event)" class="checkcenter"/> 
-      </ng-template> 
-    </ngx-datatable-column>
+    </ngx-datatable-column>  
 
   </ngx-datatable>
-  <div class="row">
+  <!-- <div class="row">
     <div class='col-sm-12 selected-column'>
       <h4 class="sub-title p-t-15">Selected Row</h4>
       <span *ngFor='let sel of selected'>
@@ -47,5 +34,18 @@
       <span *ngIf="!selected.length">No Selections</span>
     </div>
   </div>
-  <pre> {{ selected | json }}</pre>
+  <pre> {{ selected | json }}</pre> -->
+
+ 
+</div>
+
+<div class="row">
+  <div class="col-md-12 row"   > 
+    <div  style="width:100%" >
+      <div class="form-group  " style="float: right; padding: 10px;" >                                   
+        <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+     </div>
+    </div> 
+  </div> 
 </div>
