@@ -26,15 +26,15 @@ import { WakeupComponent } from './wakeup/wakeup.component';
 import { HouseguestComponent } from './houseguest/houseguest.component';
 import { ChangecompanyComponent } from './changecompany/changecompany.component';
 import { PaxonbillComponent } from './paxonbill/paxonbill.component';
-//import { SetcomplimentComponent } from './setcompliment/setcompliment.component';
+import { SetcomplimentComponent } from './setcompliment/setcompliment.component';
 import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.component';
 import { ReleaseComponent } from './release/release.component';
 import {TagInputModule} from 'ngx-chips';
-import { FoodCouponComponent } from './food-coupon/food-coupon.component';
+import { FoodCouponComponent } from './food-coupon/food-coupon.component'; 
 import { GroupblockComponent } from './groupblock/groupblock.component';
 @NgModule({
    providers: [DatePipe],
-  declarations: [MaindashboardComponent,BlockingdetailsComponent,
+  declarations: [MaindashboardComponent,BlockingdetailsComponent,SetcomplimentComponent,
                  RoomShifftComponent,DiscountportalComponent,
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
                  ChangeguestComponent, ChangepaxComponent, AmendDateComponent,

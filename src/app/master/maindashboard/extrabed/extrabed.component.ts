@@ -14,8 +14,7 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { OperationService } from 'src/app/_services/operation.service';
 import { Commonmodel } from './../../../_models/Commonmodel';
-
-@Component({
+ @Component({
   selector: 'app-extrabed',
   templateUrl: './extrabed.component.html',
   styleUrls: ['./extrabed.component.scss']
@@ -27,6 +26,7 @@ export class ExtrabedComponent implements OnInit {
   @Input() extrabedform:ExtraBedFormmodel;
   Branch: string;
   Roomadvanceform: FormGroup;
+  addgstform:FormGroup;
   submitted = false;
   subpaymodelist:any;
   theme = "bootstrap";
@@ -34,7 +34,7 @@ export class ExtrabedComponent implements OnInit {
   position = 'top-right';
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
   constructor(  
-    public router: Router,
+    public router: Router,public formBuilder1: FormBuilder,
     public formBuilder: FormBuilder,private _oprservice:OperationService,
     private toastyService: ToastyService, 
     private route: ActivatedRoute, 
@@ -62,6 +62,10 @@ export class ExtrabedComponent implements OnInit {
       Reason: "0",
       Mode: "0",  
       }    
+      this.addgstform  =  this.formBuilder1.group({
+        guestname: ['', Validators.required] 
+    });
+
     }
 
   
@@ -130,7 +134,13 @@ export class ExtrabedComponent implements OnInit {
       document.querySelector("#" + event).classList.add("md-show");
     }
      
-
+    closeguestModal (event) { 
+      alert("tetseet");
+      var openModals = document.querySelectorAll(".md-show");
+      for (let i = 0; i < openModals.length; i++) {
+        openModals[i].classList.remove("md-show");
+      }
+    }
 
     addToast(title, Message, theme) {
       debugger;
