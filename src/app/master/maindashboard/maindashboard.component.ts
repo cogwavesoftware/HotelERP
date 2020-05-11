@@ -47,11 +47,12 @@ import { Foodcouponmodel } from "src/app/_models/Foodcouponmodel";
 export class MaindashboardComponent implements OnInit, OnDestroy {
   public roomsdetail;
   model2: any = {};
+  model3: any = {};
   @ViewChild("f", { static: false }) form: any;
   roomname: any;
   golbalresponse: any;
   RoomNoArray: string[] = [];
-
+ 
   OriginalArray: string[] = [];
   selectedRoomNoArray: string[] = [];
   DasboardLoad: any;
@@ -127,7 +128,15 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       SRoomNo: "select"
     };
 
-
+    this.model3 = {
+     
+      BranchCode: this.Branch,
+      CreatedBy: this.UserId,
+      RoomNo: this.RoomNos,
+      RoomCode: this.RoomCodes,
+      Grace:1,
+      Particular: "S"
+    };
 
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
       this.BookingList = data;
@@ -322,6 +331,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       case "FoodCoupon":
         this.ProcessFoodcoupon(RoomNo);
         break;
+        case "Grace":
+        this.model3.RoomNo=this.RoomNos
+        this.model3.RoomCode=this.RoomCodes
+        break;
     }
     console.log(event);
     console.log("event");
@@ -389,6 +402,38 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     if (index !== -1) {
       this.selectedRoomNoArray.splice(index, 1);
     }
+  }
+
+
+  SaveGrace(form?: NgForm) {
+
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "invalid Data", "warning");
+      return;
+    }
+
+    
+    this._oprservice.SaveGracePeroid(this.model3).subscribe(data => {
+      if (data == true) {
+        this.addToast(
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
+          "success"
+        );
+      } 
+      else {       
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");  
+      }
+    },
+    error => {
+     console.log(error.message)
+     console.log('error.message')
+      this.addToast("Cogwave Software", error.message, "error");
+    },
+    ()=>{
+      this.closeMyModalPin(event);
+    });
   }
 
   SaveLinkRoom(type: string) {

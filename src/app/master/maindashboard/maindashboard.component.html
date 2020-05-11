@@ -460,6 +460,9 @@
                     <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('Changepax',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Change
                         pax</a></li>
+                        <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
+                          (click)="OpenModel('Grace',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Grace Period</a>
+                        </li>
                     <!-- <li><a href="javascript:;" class="modelgradiant  btn-lg btn-block"
                         (click)="OpenModel('EditRate',rmno)"><i class="fa fa-user" aria-hidden="true"></i> Edit
                         Rate</a></li> -->
@@ -812,6 +815,56 @@
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
+                  <form #myform1 = "ngForm" (ngSubmit) =" SaveGrace(myform1)" class="">
+          
+                    <div class="app-modal-body text-center addcompany "> 
+                     
+                     
+                     <div class="col-md-12">
+                        
+                       <div class="row">                                                  
+                        <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model3.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">               
+                        <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model3.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+                         
+                    
+                         <div class="col-md-4">
+                          <label class="required">RoomNo</label>
+                          <input type="text" name="RoomNo" readonly class="form-control" [(ngModel)]="model3.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
+                             
+                         </div>
+                         <div class="col-md-4">
+                          <label>RoomCode</label>
+                          <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model3.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}" readonly required  autocomplete="off">                        
+                         </div>
+                         <div class="col-md-4"  >
+                           
+                           <label>Grace*</label>
+                           <input type="number" min="10" max="10" name="Grace" class="form-control" [(ngModel)]="model3.Grace" #Grace="ngModel" value="{{Grace}}"  [ngClass]="{'is-invalid': Grace.touched && Grace.invalid}"  required   autocomplete="off">
+                           <div *ngIf="Grace.touched && Grace.invalid" class="invalid-feedback">
+                             <div *ngIf="Grace.errors.required">Grace Cant'be Empty</div>
+                           </div>
+                       </div>
+
+                       <div class="col-md-4">
+                        <label>Select Grace</label>
+                        <select class="custom-select" id="Particular" #Particular="ngModel"  name="Particular" [(ngModel)]="model3.Particular">
+                          <option value="S">SingleRoom</option>
+                          <option value="G">GroupRoom</option>
+                         
+                        </select>
+                       </div>
+
+                       </div>
+                       
+                        <button type="submit"  class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
+                        <br/>
+                        <hr>
+         
+                     </div>
+               
+                   </div> 
+               </form>
+
                 </div>
               </div>
             </perfect-scrollbar>

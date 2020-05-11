@@ -267,7 +267,12 @@ export class OperationService {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/transferAdvance',transferAd,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   
   }
+
   
+  SaveGracePeroid(grace:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savegrace',grace,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
   }
 
 

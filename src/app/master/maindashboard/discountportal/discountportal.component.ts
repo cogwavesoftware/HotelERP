@@ -49,6 +49,7 @@ export class DiscountportalComponent implements OnInit {
       BranchCode: ["0", [Validators.required]],
       CreatedBy: ["0", [Validators.required]],
       Status: ["DISCOUNT", [Validators.required]],
+      Particular: ["S", [Validators.required]],
       AllowanceAmt:["0",[Validators.required]]
     });
 
@@ -69,6 +70,7 @@ export class DiscountportalComponent implements OnInit {
       RoomCode:this.RoomCode
     })
   
+    console.log(this.discountportalform.value)
     this._oprservice.SaveDiscountData(this.discountportalform.value).subscribe(data => {
       if (data == true) {
         this.addToast(
