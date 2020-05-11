@@ -29,7 +29,11 @@ const routes: Routes = [
       {
         path: 'roomcancel', 
         loadChildren: () => import('./roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
-      }  
+      }  ,
+      {
+        path: 'advanceposting', 
+        loadChildren: () => import('./advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
+      } 
     ]
   }
 ];

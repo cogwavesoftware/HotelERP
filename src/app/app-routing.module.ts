@@ -391,6 +391,11 @@ const routes: Routes = [
         loadChildren: () => import('./hmsoperation/roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
 
        },
+
+       {
+        path: 'advanceposting', 
+        loadChildren: () => import('./hmsoperation/advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
+      } 
     ]
   },
 

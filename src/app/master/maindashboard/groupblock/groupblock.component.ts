@@ -19,7 +19,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrls: ['./groupblock.component.scss']
 })
 export class GroupblockComponent implements OnInit {
-  Branch: string = "CW1001";
+  Branch: string = "CW_1001";
   CreatedBy: number = 1;
   datePickerConfig: Partial<BsDatepickerConfig>;
   golbalresponse:any

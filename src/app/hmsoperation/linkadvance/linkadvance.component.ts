@@ -8,7 +8,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty'
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { OperationService } from 'src/app/_services/operation.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-linkadvance',
@@ -36,7 +36,9 @@ export class LinkadvanceComponent implements OnInit {
   Branch:string="CW_1001";
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
   constructor(public _reservationservice:ReservationService,private _masterservice:MasterformService,
-    public formBuilder: FormBuilder, public _oprservice: OperationService) {
+    public formBuilder: FormBuilder, public _oprservice: OperationService,
+    private toastyService: ToastyService, public router: Router,
+    private route: ActivatedRoute) {
      
     this.form = this.formBuilder.group({
       ReceiptNo: ["0", [Validators.required]],
@@ -58,9 +60,78 @@ export class LinkadvanceComponent implements OnInit {
   }
 
   Submit()
-  {
-    console.log(this.form.value)
+  { 
+    this.form.patchValue({
+      BranchCode:this.Branch,
+      ModifyBy:this.UserId
+    }) 
+    this._oprservice.LinkReservationAdvance(this.form.value).subscribe(res=>{
+     if(res==true)
+       {
+        this.addToast(
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
+          "Success"
+        );
+       }
+       else
+       {
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+       }
+    },
+    error=>{
+      console.log(error.message)
+      console.log('error.message')
+       this.addToast("Cogwave Software", error.message, "error");
+    },
+    ()=>{
+      this.form.reset();
+      this.router.navigate(["/Master/dashboard"]);
+    })
+   
   }
+
+  addToast(title, Message, theme) {
+    debugger;
+    this.toastyService.clearAll();
+    const toastOptions: ToastOptions = {
+      title: title,
+      msg: Message,
+      showClose: false,
+      timeout: 3000,
+      theme: theme,
+      onAdd: (toast: ToastData) => {
+        //console.log('Toast ' + toast.id + ' has been added!');
+        // this.router.navigate(['/dashboard/default']);
+      },
+      onRemove: (toast: ToastData) => {
+        /* removed */
+      }
+    };
+  
+    switch (theme) {
+      case "default":
+        this.toastyService.default(toastOptions);
+        break;
+      case "info":
+        this.toastyService.info(toastOptions);
+        break;
+      case "success":
+        debugger;
+        this.toastyService.success(toastOptions);
+        break;
+      case "wait":
+        this.toastyService.wait(toastOptions);
+        break;
+      case "error":
+        this.toastyService.error(toastOptions);
+        break;
+      case "warning":
+        this.toastyService.warning(toastOptions);
+        break;
+    }
+  }
+
   LoadReservationCheckinpage(BookingNo)
   {
     this.Show = true;

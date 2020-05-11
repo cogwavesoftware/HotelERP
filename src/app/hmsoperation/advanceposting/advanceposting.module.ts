@@ -1,11 +1,9 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
-import { AdvancemodificationComponent} from './advancemodification.component';
-import { AdvancemodificationRoutingModule } from './advancemodification-routing.module'; 
-
-
- import { HttpClientModule } from '@angular/common/http';  
-
+import { AdvancepostingComponent } from './advanceposting.component';
+import { AdvancepostingRoutingModule } from './advanceposting-routing.module';
+import { HttpClientModule } from '@angular/common/http';  
 import {DataTableModule} from 'angular2-datatable';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -14,13 +12,12 @@ import {DatePipe} from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ToastyModule } from 'ng2-toasty';
-
 @NgModule({
-  declarations: [AdvancemodificationComponent],  
+  declarations: [AdvancepostingComponent],  
   providers: [DatePipe],
   imports: [
     CommonModule,SharedModule,
-    AdvancemodificationRoutingModule,
+    AdvancepostingRoutingModule,
  
     HttpClientModule,    
      HttpClientModule,
@@ -30,4 +27,4 @@ import { ToastyModule } from 'ng2-toasty';
      ReactiveFormsModule,ToastyModule.forRoot()
   ]
 })
-export class AdvancemodificationModule { }
+export class AdvancepostingModule { }

@@ -30,20 +30,23 @@ import { SetcomplimentComponent } from './setcompliment/setcompliment.component'
 import { ExpresscheckinComponent } from './expresscheckin/expresscheckin.component';
 import { ReleaseComponent } from './release/release.component';
 import {TagInputModule} from 'ngx-chips';
-import { FoodCouponComponent } from './food-coupon/food-coupon.component';
+import { FoodCouponComponent } from './food-coupon/food-coupon.component'; 
 import { GroupblockComponent } from './groupblock/groupblock.component';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-import { SetblockComponent } from './setblock/setblock.component';
 @NgModule({
    providers: [DatePipe],
-  declarations: [MaindashboardComponent,BlockingdetailsComponent,
+  declarations: [MaindashboardComponent,BlockingdetailsComponent,SetcomplimentComponent,
                  RoomShifftComponent,DiscountportalComponent,
                  AdvanceformComponent,PostchargeComponent,ExtrabedComponent, 
-                 ChangeguestComponent, ChangepaxComponent, AmendDateComponent, ChangeplanComponent ,
-                 PostchargeComponent,ExtrabedComponent,ChangeguestComponent, RoominstructionComponent,
-                 WakeupComponent, HouseguestComponent, ChangecompanyComponent, PaxonbillComponent, SetcomplimentComponent, ExpresscheckinComponent, ReleaseComponent, FoodCouponComponent, GroupblockComponent, SetblockComponent] ,
+                 ChangeguestComponent, ChangepaxComponent, AmendDateComponent,
+                  ChangeplanComponent ,
+                 PostchargeComponent,ExtrabedComponent,ChangeguestComponent,
+                  RoominstructionComponent,
+                 WakeupComponent, HouseguestComponent, ChangecompanyComponent,
+                  PaxonbillComponent,
+                   ExpresscheckinComponent, ReleaseComponent,
+                    FoodCouponComponent, GroupblockComponent] ,
   imports: [
-    CommonModule,NgxDatatableModule,
+    CommonModule,
     MaindashboardRoutingModule,
     CommonModule,
     SharedModule,
