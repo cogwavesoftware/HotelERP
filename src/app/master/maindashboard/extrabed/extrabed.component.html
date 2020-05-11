@@ -128,7 +128,7 @@
                     </form>
 
                  
-                    <div class="commonmodel">
+                    <div class="commonmodel  guestcommonmodel">
                       <app-modal-animation class="modellg contentboxmodel" [modalID]="'addGuestModel'" [modalClass]="'md-effect-2'">
                        <div class="app-modal-body"> 
                         <label class="font-header"
@@ -138,12 +138,26 @@
                         <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
                           [config]="config">
                           <div class="row">
-                            <form [formGroup]="form" (ngSubmit)="Submit(form)" class="  " autocomplete="off"> 
-                            test
+                            <form [formGroup]="addgstform" (ngSubmit)="Submit(addgstform)" class="  " autocomplete="off"> 
+                              <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Guest Name">Guest Name </label>
+                                  <input   type="text" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" required    />   
+                                
+                                   
+                                  </div>  
+                              </div>
                             
-                            </form>
- 
+                            </form> 
             
+                  <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                    <div  style="width:100%" >
+                      <div class="form-group  " style="float: right;" >                                   
+                        <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+                        <button type="button" (click)="closeguestModal($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                    </div>
+                    </div> 
+                  </div> 
                           </div>
                         </perfect-scrollbar>
             
