@@ -1,23 +1,23 @@
 [
     {
-        "revcode": "1 ",
-        "name": "aaaa" 
+        "revcode1": "1 ",
+        "name1": "aaaa" 
     },
     {
-        "revcode": " 2",
-        "name": "bbbb" 
+        "revcode1": " 2",
+        "name1": "bbbb" 
     },
     {
-        "revcode": " 3",
-        "name": "ffff" 
+        "revcode1": " 3",
+        "name1": "ffff" 
     },
     {
-        "revcode": "4",
-        "name": "rrrr" 
+        "revcode1": "4",
+        "name1": "rrrr" 
     },
     {
-        "revcode": "5",
-        "name": "eeee" 
+        "revcode1": "5",
+        "name1": "eeee" 
     } 
     
 ]

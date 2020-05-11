@@ -124,17 +124,12 @@ export class ExtrabedComponent implements OnInit {
    
      
     }
-    closeMyModalPin(event) { 
-      var openModals = document.querySelectorAll(".md-show");
-      for (let i = 0; i < openModals.length; i++) {
-        openModals[i].classList.remove("md-show");
-      }
-    }
+ 
 
-    OpenModelforGuest(event){
-      alert("g");
+    openguestmodel(event){ 
       document.querySelector("#" + event).classList.add("md-show");
     }
+     
 
 
     addToast(title, Message, theme) {
