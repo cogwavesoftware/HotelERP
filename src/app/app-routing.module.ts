@@ -372,7 +372,10 @@ const routes: Routes = [
          //loadChildren: './hmsoperation/pettycash/pettycash.module#PettycashModule'
         loadChildren: () => import('./hmsoperation/pettycash/pettycash.module').then(m=>m.PettycashModule)
        },
-
+       {
+        path: 'driverdetail', 
+       loadChildren: () => import('./hmsoperation/driverdetail/driverdetail.module').then(m=>m.DriverdetailModule)
+      },
        {
         path: 'linkadvance',        
         loadChildren: () => import('./hmsoperation/linkadvance/linkadvance.module').then(m=>m.LinkadvanceModule)

@@ -17,6 +17,11 @@ const routes: Routes = [
          //loadChildren: './pettycash/pettycash.module#PettycashModule'
         loadChildren: () => import('./pettycash/pettycash.module').then(m=>m.PettycashModule)
       },
+      {
+        path: 'driverdetail', 
+         //loadChildren: './pettycash/pettycash.module#PettycashModule'
+        loadChildren: () => import('./driverdetail/driverdetail.module').then(m=>m.DriverdetailModule)
+      },
 
       {
         path: 'linkadvance', 
