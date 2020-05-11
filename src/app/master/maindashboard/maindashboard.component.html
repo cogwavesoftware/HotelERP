@@ -1072,10 +1072,7 @@
         <!-- Compliment -->
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Compliment'" [modalClass]="'md-effect-2'">
-           <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+           <div class="app-modal-body"> 
             <label class="font-header"
               style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
               ({{roomname1}})</label>
@@ -1097,6 +1094,26 @@
                 </div>
   
               </div>
+
+              <ngb-tabset>
+                <ngb-tab title="Home">
+                  <ng-template ngbTabContent>
+                    <div   class="m-t-15">
+                      <input  name ="bbb" type="checkbox" id="vvv"   class="checkcenter"/> 
+
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Profile">
+                  <ng-template ngbTabContent>
+                    <div   class="m-t-15">
+                      <input name ="aaa" type="checkbox" id="ffff"  class="checkcenter"/>  
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+            
+               
+              </ngb-tabset>
             </perfect-scrollbar>
   
           </div>

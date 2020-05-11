@@ -1,6 +1,7 @@
  
                   <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveExtraBed(myform)" class="">
                     <div class="test123   guestinfofirstrow paymentarray" >
+                      
                       <div class="modelstyle"> 
                           <div class="row">
                             <div class="col-md-12">
@@ -111,7 +112,7 @@
                                             <div class='col-12 col-md-3'>
                                               <div class="form-group">                                   
                                                       <label class="required" style="width: 100%;">Add Guest</label>   
-                                                      <input   type="checkbox" name="addguest" class="form-ontrol" />
+                                                      <input (click)="openguestmodel('addGuestModel')"  type="checkbox" name="addguest" class="form-ontrol" />
                                                </div>  
                                             </div>
                                            
@@ -127,6 +128,27 @@
                     </form>
 
                  
-
+                    <div class="commonmodel">
+                      <app-modal-animation class="modellg contentboxmodel" [modalID]="'addGuestModel'" [modalClass]="'md-effect-2'">
+                       <div class="app-modal-body"> 
+                        <label class="font-header"
+                          style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+                          ({{roomname1}})</label>
+            
+                        <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
+                          [config]="config">
+                          <div class="row">
+                            <form [formGroup]="form" (ngSubmit)="Submit(form)" class="  " autocomplete="off"> 
+                            test
+                            
+                            </form>
+ 
+            
+                          </div>
+                        </perfect-scrollbar>
+            
+                      </div>
+                    </app-modal-animation>  
+                   </div>
 <!-- 
 <ng2-toasty [position]="position"></ng2-toasty> -->

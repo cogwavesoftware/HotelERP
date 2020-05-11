@@ -126,10 +126,10 @@ export class ExtrabedComponent implements OnInit {
     }
  
 
-    OpenModelforGuest(event){
-      alert("g");
-     // document.querySelector("#" + event).classList.add("md-show");
+    openguestmodel(event){ 
+      document.querySelector("#" + event).classList.add("md-show");
     }
+     
 
 
     addToast(title, Message, theme) {
