@@ -3,7 +3,9 @@
   
       <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
         <input type="hidden" class="form-control tooltip-form searchiconrelative" id="Id" formControlName="Id" name="Id" autocomplete="off"  /> 
-        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="BranchCode" value="{{BranchCode}}" formControlName="BranchCode" name="BranchCode" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="CreatedBy" value="{{CreatedBy}}" formControlName="CreatedBy" name="CreatedBy" autocomplete="off"  /> 
+        
         <div class="container-fluid"  style="background-color: #fff;">
    
           <div class='row tabouter' style="margin-bottom: 0;">
@@ -14,36 +16,17 @@
               <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
                 <div class="col-md-12 taboutercreatebtn">
                   <div class="row" style="margin-bottom: 0;"> 
-                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                    <div class="form-group">
-                      <label class="form-control-label" for="roomno"><i   class="fa fa-building"></i> Room no </label>
-                     <select class="custom-select"  name="roomno" formControlName="roomno"  id="ledgerid" [ngClass]="{ 'is-invalid': submitted && form.roomno.errors }"> 
-                       <option value="0">Select</option> 
-                       <option *ngFor="let ledg of ledgerlist" [value]="ledg.Id">{{ ledg.LadgerName  }}</option>
-                     </select>
-                     <div *ngIf="submitted && form.roomno.errors" class="invalid-feedback">
-                      <div *ngIf="form.roomno.errors.required">roomno is required</div>
-                    </div>
-                      </div>  
-                  </div>
+               
                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
                     <div class="form-group">
                       <label class="form-control-label" for="receiptno "><i   class="fa fa-building"></i>  Receipt No </label>
-                      <select class="custom-select" #Days name="receiptno" formControlName="receiptno"
-                        id="receiptno" [ngClass]="{ 'is-invalid': submitted && form.receiptno.errors }">
-                        <option value="0">Select</option>
-                        <option value="Receipt">Receipt</option>
-                        <option value="Payment">Payment</option>
-                      </select>
-                      <div *ngIf="submitted && form.receiptno.errors" class="invalid-feedback">
-                        <div *ngIf="form.receiptno.errors.required">receiptno is required</div>
-                      </div>
+                      <input type="text" class="form-control tooltip-form searchiconrelative" id="ReceipstNo" formControlName="ReceiptNo" name="ReceiptNo" autocomplete="off" required    /> 
                     </div>
                   </div>
                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                     <div class="form-group">
                       <label class="form-control-label" for="amount">  <i   class="fa fa-building"></i> Amount </label>
-                      <input type="text" class="form-control tooltip-form searchiconrelative" id="amount" formControlName="amount" name="amount" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.amount.errors || form.controls.amount.touched || form.controls.amount.dirty}" required    /> 
+                      <input type="text" class="form-control tooltip-form searchiconrelative" id="Amount" formControlName="Amount" name="Amount" autocomplete="off" required    /> 
                     </div>  
                   </div>
 
@@ -52,9 +35,9 @@
                       <label class="form-control-label" for="transroomno "><i   class="fa fa-building"></i> Tranfer Room No </label>                   
                       <select class="custom-select"  name="transroomno" formControlName="transroomno"
                       id="transroomno" [ngClass]="{ 'is-invalid': submitted && form.transroomno.errors }">
-                      <option value="select">Select</option>
-                      <option *ngFor="let transroomno of  subpaymodelist" [value]="transroomno">
-                        {{ transroomno  }}</option>
+                      <option value="0">Select</option>
+                      <option *ngFor="let transroomno of  RoomList" [value]="transroomno.RoomNo">
+                        {{ transroomno.RoomNo  }}</option>
                     </select> 
                       
                     </div>
@@ -77,4 +60,108 @@
           </div>
           </form>
           </div>
+
+
+
+
+  
+<div class="productlist">
+  <div class="shadow p-3 mb-5 bg-white rounded" >
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+          <div class="row"> 
+              <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Advance List</div>
+              </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div style="text-align: right;">
+                <label class="searchlbl"><img src="/assets/images/cogwaveimages/searchison.png" width="20px" height="20px">
+                  <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                </label>
+              </div>
+            </div>             
+          </div>
+          
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+              [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+             
+              <thead>
+              <tr class="blueorange-gradient">
+                <!-- <th>
+                  <mfDefaultSorter  by="image">Profile</mfDefaultSorter>
+                </th> -->
+                <th>
+                  <mfDefaultSorter  by="ReceiptNo">ReceiptNo</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="ReservationNo">Booking No</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="TrDate">TrDate</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="CashAmount">CashAmount</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="CardAmount">CardAmount</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="OnlineAmount">OnlineAmount</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter  by="WaletAmount">WaletAmount</mfDefaultSorter>
+                </th>
+
+                <th>
+                  <mfDefaultSorter>Action</mfDefaultSorter>
+                </th>
+              </tr>
+             
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of mf.data; let i = index;">
+                
+                <td>{{item.ReceiptNo}}</td>
+                <td>{{item.ReservationNo}}</td>
+                <td>{{item.TrDate  | date }}</td>
+                <td>{{item.CashAmount}}</td>
+                <td>{{item.CardAmount}}</td>
+                <td>{{item.OnlineAmount}}</td>
+                <td>{{item.WaletAmount}}</td>
+                <td class="action-icon">
+                   
+                    <a href="javascript:;" class="m-r-15 crm-action-edit text-primary" (click)="EditForm(item)"><i class="fa fa-edit"></i></a>
+                
+                </td>
+              </tr>
+              </tbody>
+<tfoot >
+              <tr class="blueorange-gradient">                  
+                <th>ReceiptNo</th>
+                <th>Booking No</th>
+                <th>TrDate</th>
+                <th>CashAmount</th>
+                <th>CardAmount</th>                
+                <th>OnlineAmount</th>
+                <th>WaletAmount</th>
+                
+                <th>Action</th>
+              </tr>
+              <tr>
+                <td colspan="10">
+                  <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
 </div>

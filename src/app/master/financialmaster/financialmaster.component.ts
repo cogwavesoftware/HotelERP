@@ -56,6 +56,7 @@ export class FinancialmasterComponent implements OnInit {
       });
       
        
+      
     }
     mouseEnter(div : string){
       if(div=="Re"){

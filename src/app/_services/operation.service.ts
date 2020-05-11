@@ -134,8 +134,6 @@ export class OperationService {
 
   }
 
- 
-
   SavePettyDetail(Petty:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/SavePettyCash',Petty,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
@@ -233,14 +231,9 @@ export class OperationService {
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/SaveBlock',Block,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
-
-
   GetAllReceipt(BranchCode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getallreceipt?BranchCode=' + BranchCode);
   }
-
-  
-
   GetAdvanceReceiptByReciptNo(BranchCode: string,ReceiptNo:string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getreceiptbyno?BranchCode=' + BranchCode + '&ReceiptNo=' + ReceiptNo);
   }
@@ -249,7 +242,34 @@ export class OperationService {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getreceiptbyno?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
   }
 
-}
+  GetAdvancelistForOccupiedRoom(BranchCode: string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/OAdvance?BranchCode=' + BranchCode);
+  }
+
+  
+  SaveReservationPosting(ResAdvance:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/advanceposting',ResAdvance,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+  EditCheckinAdvance(CheckinAdvance:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/advanceEdit',CheckinAdvance,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+  LinkReservationAdvance(linkadvances:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/linkadvance',linkadvances,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+  AdvanceTransfer(transferAd:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/transferAdvance',transferAd,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  
+  }
+  
+  }
+
 
 
 

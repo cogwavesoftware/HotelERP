@@ -1,9 +1,13 @@
+import { error } from 'util';
+import { ReservationService } from './../../_services/reservation.service';
+
+
+
+
 import { MasterformService } from 'src/app/_services/masterform.service';
 import { OperationService } from 'src/app/_services/operation.service';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-
-import { Observable, empty } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty'
@@ -12,13 +16,16 @@ import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators
 import { CompanyService } from '../../_services/company.service';
 import { Branchmodel, } from 'src/app/_models/Branchmodel';
 import { Router, ActivatedRoute } from '@angular/router';
+import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
+import { Observable, Observer, empty, fromEvent } from "rxjs";
 
 @Component({
-  selector: 'app-advancemodification',
-  templateUrl: './advancemodification.component.html',
-  styleUrls: ['./advancemodification.component.scss']
+  selector: 'app-advanceposting',
+  templateUrl: './advanceposting.component.html',
+  styleUrls: ['./advanceposting.component.scss']
 })
-export class AdvancemodificationComponent implements OnInit {
+export class AdvancepostingComponent implements OnInit {
+  BookingList:any;
   public rowsOnPage = 10;
   public filterQuery = '';
   public sortBy = '';
@@ -41,57 +48,102 @@ export class AdvancemodificationComponent implements OnInit {
   theme = 'bootstrap';
   type = 'default';
   closeOther = false;
+  isCompany:boolean=false;
+  IsReservation:boolean=false;
   submitted = false;
   public data: Observable<Branchmodel>;
   form: FormGroup;
   mode: string;
   Show: boolean;
   UserId:string;
+  companylist:any;
+  complist:any;
   Branch:string;
   companyname: any;
-  constructor(public _masterservice: MasterformService,
-     public _oprservice: OperationService,private toastyService: ToastyService,
-    public router: Router, public formBuilder: FormBuilder, private route: ActivatedRoute, private _companyservice: CompanyService) {
-    this.mode = "(List)";
-    this.UserId=localStorage.getItem('id');
+  isselected:boolean=false;
+  @ViewChild('searchdata', { static: false }) searchdata: ElementRef;
+  constructor(public _masterservice: MasterformService, public _oprservice: OperationService,
+    public router: Router, public formBuilder: FormBuilder, 
+    private _reservationservice: ReservationService, private toastyService: ToastyService,
+    private route: ActivatedRoute, private _companyservice: CompanyService) {
+
     this.Branch=localStorage.getItem('BranchCode');
+    this.UserId=localStorage.getItem('id');  
+    this.mode = "(List)";
+ 
     this.form = this.formBuilder.group({
       ReceiptNo: ["0", [Validators.required]],
+      BookingNo: ["0", [Validators.required]],
+      CompanyName:["0", [Validators.required]],
       BranchCode: [this.Branch, [Validators.required]],
       ModifyBy: [this.UserId, [Validators.required]],
       PayArray: this.formBuilder.array([]),
+      BookingStatus:["Reservation", [Validators.required]],
+      guestname:["0", [Validators.required]],
     });
   }
 
   ngOnInit() {
-   
+    this.btitle = "Add Item";
+    this.mode = "(List)";
     this.Show = false;
-    this.data = this._oprservice.GetAllReceipt("CW_1001");
-  }
-  GetPaymentDetails(Mode, Submode, Description, Amount) {
-    (<FormArray>this.form.get("PayArray")).push(
-      this.formBuilder.group({
-        Paymode: [Mode],
-        Paysubmode: ["select", [Validators.required]],
-        payAmount: [Amount, [Validators.required]],
-        Descriptions: [Description],
-        modeselected: [Submode]
-      })
-    );
+    this.data = this._oprservice.GetAllReceipt(this.Branch);
+    this._masterservice.GetRoomcomany(this.Branch).subscribe(res=>{
+      this.complist=res;
+    });
   }
 
 
+
+  Submit()
+  { 
+    this.form.patchValue({
+      BranchCode:this.Branch,
+      ModifyBy:this.UserId
+    }) 
+    this._oprservice.EditCheckinAdvance(this.form.value).subscribe(res=>{
+     if(res==true)
+       {
+        this.addToast(
+          "Cogwave Software Technologies Pvt Ltd..",
+          "Congratulations Data Saved Sucessfully",
+          "Success"
+        );
+       }
+       else
+       {
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+       }
+    },
+    error=>{
+      console.log(error.message)
+      console.log('error.message')
+       this.addToast("Cogwave Software", error.message, "error");
+    },
+    ()=>{
+      this.form.reset();
+      this.router.navigate(["/Master/dashboard"]);
+    })
+   
+  }
 
   EditForm(Editform) {
+    this.form.reset();
+    this.isselected=true;
     console.log(Editform.ReceiptNo)
+    this.mode = "(Edit)"+  Editform.ReceiptNo;
     console.log('Editform')
     this.Show=true
     this.btitle="Hide";
      this.form = this.formBuilder.group({
       ReceiptNo: [Editform.ReceiptNo, [Validators.required]],
-      BranchCode: [Editform.BranchCode, [Validators.required]],
-      ModifyBy: ["", [Validators.required]],
+      BranchCode: [this.Branch, [Validators.required]],
+      ModifyBy: [this.UserId, [Validators.required]],
       PayArray: this.formBuilder.array([]),
+      BookingStatus:["Reservation", [Validators.required]],
+      BookingNo: ["0", [Validators.required]],
+      guestname:["0", [Validators.required]],
+      CompanyName:["0", [Validators.required]],
     });
   
     this._oprservice.GetAdvanceReceiptByReciptNo(this.Branch,Editform.ReceiptNo).subscribe(res=>{
@@ -119,9 +171,84 @@ export class AdvancemodificationComponent implements OnInit {
      });
     
   }
+
+
+
+
+
+
+  OnCheckBoxChange(name)
+  {
+    this.form.reset();
+    this.isselected=true;
+    this.IsReservation=false;
+    this.isCompany=false;
+    this.form.patchValue({
+      BookingStatus:name
+    })
+   if(name=="Company")
+   {
+    this.companylist=this.complist;
+    this.isCompany=!this.isCompany;
+   
+   }
+   else
+   { 
+    
+    this.IsReservation=!this.IsReservation;
+  }
+  }
+ 
+  ngAfterViewInit() {
+    fromEvent(this.searchdata.nativeElement, 'keyup')
+      .pipe(
+        filter(text => this.searchdata.nativeElement.value.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        // tap(x=>console.log('from tap' + x)),
+        switchMap(id => {
+          //console.log(id)
+          return this._reservationservice.FilterBookingListAllsearch(this.Branch, this.searchdata.nativeElement.value);
+        })
+      ).subscribe(res => {
+        this.BookingList = res;
+      });
+  }
+
+
+  Showhide() {
+  
+    if (this.btitle == "Hide Form")
+     {
+      this.Show = false;
+      this.btitle = "Add Item";
+      this.mode = "(List)";
+    } else {
+      this.form.reset();
+      this.Show = true;
+      this.btitle = "Hide Form";
+      this.mode = "(New)";
+    }
+  }
+
+  GetPaymentDetails(Mode, Submode, Description, Amount) {
+    (<FormArray>this.form.get("PayArray")).push(
+      this.formBuilder.group({
+        Paymode: [Mode],
+        Paysubmode: ["select", [Validators.required]],
+        payAmount: [Amount, [Validators.required]],
+        Descriptions: [Description],
+        modeselected: [Submode]
+      })
+    );
+  }
+
   onDeletePayment(bankAccountID, k) {
     if (k != 0) (<FormArray>this.form.get("PayArray")).removeAt(k);
   }
+
+
+
   AddPaymentButtonClick(): void {
    
     (<FormArray>this.form.get("PayArray")).push(this.AddpaymentGrid());
@@ -152,10 +279,9 @@ export class AdvancemodificationComponent implements OnInit {
         break;
     }
   }
-  CloseFormmodel()
-  {
-    this.Show=!this.Show
-  }
+
+
+  
   GetsubModepayment(Name: string, index: number) {
     this._masterservice.GetAllSubPaymendModeViaMode("CW_1001", Name).subscribe(res => {
       this.subpaymodelist = res
@@ -180,39 +306,27 @@ export class AdvancemodificationComponent implements OnInit {
     });
   }
 
- 
-
-  Submit()
-  { 
-    this.form.patchValue({
-      BranchCode:this.Branch,
-      ModifyBy:this.UserId
-    }) 
-    this._oprservice.SaveReservationPosting(this.form.value).subscribe(res=>{
-     if(res==true)
-       {
-        this.addToast(
-          "Cogwave Software Technologies Pvt Ltd..",
-          "Congratulations Data Saved Sucessfully",
-          "Success"
-        );
-       }
-       else
-       {
-        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
-       }
-    },
-    error=>{
-      console.log(error.message)
-      console.log('error.message')
-       this.addToast("Cogwave Software", error.message, "error");
-    },
-    ()=>{
-      this.form.reset();
-      this.router.navigate(["/Master/dashboard"]);
-    })
-   
+  
+  
+  GuestModelOpen(event, data) {
+    this.filterQuery = ""; 
+    // if (isPlatformBrowser(this.platformId)) {
+    //   this.searchTermguest.nativeElement.focus();
+    // }
+    document.querySelector("#" + event).classList.add("md-show");
   }
+    
+
+  PatchGuest(SelectedData: any, event: any) {
+    this.form.patchValue({
+      BookingNo: SelectedData.BookingNo,
+      guestname: SelectedData.GuestName,
+    });
+    //this.form.get('BookingNo').disable({ onlySelf: true });
+    var allbtn = document.querySelector('.md-show');
+    allbtn.classList.remove("md-show");
+  }
+
   CalculateSummaryAmount() {
 
   this.TotalBillAmount=0;
@@ -222,7 +336,10 @@ export class AdvancemodificationComponent implements OnInit {
     }
     this.TotalBillAmount =  this.TotalPaidAmount;
   }
-
+  CloseFormmodel()
+  {
+    this.Show=!this.Show
+  }
   get PayArray(): FormArray {
     return this.form.get("PayArray") as FormArray;
   }
@@ -272,4 +389,5 @@ export class AdvancemodificationComponent implements OnInit {
     }
   }
 }
+
 

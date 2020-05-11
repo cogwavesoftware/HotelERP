@@ -125,22 +125,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       SRoomNo: "select"
     };
 
-    // this.changepaxform = {
-    //   RoomNo: "0",
-    //   RoomCode: "0",
-    //   GuestName: "0",
-    //   Pax: 0,
-    //   ActualRate: 0,
-    //   OfferRate: 0,
-    //   Tax: 0,
-    //   NetAmount: 0,
-    //   Reason: "Change Pax",
-    //   Mode: "Change",
-    //   Id: 0,
-    //   BranchCode: this.Branch,
-    //   IpAdd: "0",
-    //   CreatedBy: this.UserId
-    // };
+
 
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
       this.BookingList = data;
@@ -268,6 +253,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   // Release-OpenReleaseModel
 
   OpenModel(event, RoomNo) {
+    clearInterval(this.DasboardLoad);
     let Description = event;
     switch (Description) {
       case "Blockdetails":
@@ -750,8 +736,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         case "Dirtypoup":
           break;
           case "Managementpop":
-          break;
-          
+          break;       
         
     }
     console.log(event);

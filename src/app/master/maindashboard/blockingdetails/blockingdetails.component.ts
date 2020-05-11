@@ -18,7 +18,7 @@ import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
   styleUrls: ['./blockingdetails.component.scss']
 })
 export class BlockingdetailsComponent implements OnInit {
-  Branch: string = "CW1001";
+  Branch: string = "CW_1001";
   CreatedBy: number = 1;
   blockingdetailsform: FormGroup;
   submitted = false;
