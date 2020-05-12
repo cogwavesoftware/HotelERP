@@ -806,70 +806,80 @@
 
 
         <!-- Grace -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'Grace'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">Grace Period
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
-              [config]="config">
-              <div class="col-sm-12 filter-bar">
-                <div class="row">
-                  <form #myform1 = "ngForm" (ngSubmit) =" SaveGrace(myform1)" class="">
-          
-                    <div class="app-modal-body text-center addcompany "> 
-                     
-                     
-                     <div class="col-md-12">
-                        
-                       <div class="row">                                                  
-                        <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model3.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">               
-                        <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model3.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
-                         
-                    
-                         <div class="col-md-4">
-                          <label class="required">RoomNo</label>
-                          <input type="text" name="RoomNo" readonly class="form-control" [(ngModel)]="model3.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
+        <div class="commonmodel">
+          <app-modal-animation class="modellg contentboxmodel" [modalID]="'Grace'" [modalClass]="'md-effect-2'">
+              <div class="app-modal-body">
+                <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <label class="font-header" style="background-color: orange; color: #ffffff; padding: 10px;  width: 100%;">Management RoomNo  {{rmno}} ({{roomname1}}) </label>       
+                <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
+                  [config]="config">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <form #myform1 = "ngForm" (ngSubmit) =" SaveGrace(myform1)" class="">
+                        <div class="test123 guestinfofirstrow paymentarray" >
+                          <div class="modelstyle">  
+                            <div class="row"> 
+                        <div class="app-modal-body text-center addcompany ">  
+                         <div class="col-md-12"> 
+                           <div class="row">                                                  
+                            <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model3.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">               
+                            <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model3.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
                              
-                         </div>
-                         <div class="col-md-4">
-                          <label>RoomCode</label>
-                          <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model3.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}" readonly required  autocomplete="off">                        
-                         </div>
-                         <div class="col-md-4"  >
-                           
-                           <label>Grace*</label>
-                           <input type="number" min="10" max="10" name="Grace" class="form-control" [(ngModel)]="model3.Grace" #Grace="ngModel" value="{{Grace}}"  [ngClass]="{'is-invalid': Grace.touched && Grace.invalid}"  required   autocomplete="off">
-                           <div *ngIf="Grace.touched && Grace.invalid" class="invalid-feedback">
-                             <div *ngIf="Grace.errors.required">Grace Cant'be Empty</div>
+                        
+                             <div class="col-md-4">
+                              <label class="required">RoomNo</label>
+                              <input type="text" name="RoomNo" readonly class="form-control" [(ngModel)]="model3.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
+                                 
+                             </div>
+                             <div class="col-md-4">
+                              <label>RoomCode</label>
+                              <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model3.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}" readonly required  autocomplete="off">                        
+                             </div>
+                             <div class="col-md-4"  >
+                               
+                               <label>Grace*</label>
+                               <input type="number" min="10" max="10" name="Grace" class="form-control" [(ngModel)]="model3.Grace" #Grace="ngModel" value="{{Grace}}"  [ngClass]="{'is-invalid': Grace.touched && Grace.invalid}"  required   autocomplete="off">
+                               <div *ngIf="Grace.touched && Grace.invalid" class="invalid-feedback">
+                                 <div *ngIf="Grace.errors.required">Grace Cant'be Empty</div>
+                               </div>
                            </div>
-                       </div>
+    
+                           <div class="col-md-4">
+                            <label>Select Grace</label>
+                            <select class="custom-select" id="Particular" #Particular="ngModel"  name="Particular" [(ngModel)]="model3.Particular">
+                              <option value="S">SingleRoom</option>
+                              <option value="G">GroupRoom</option> 
+                            </select>
+                           </div> 
+                           </div> 
+                             
+             
+                         </div>
+                   
+                       </div> 
+                      </div> 
+                    </div> 
+                  </div> 
 
-                       <div class="col-md-4">
-                        <label>Select Grace</label>
-                        <select class="custom-select" id="Particular" #Particular="ngModel"  name="Particular" [(ngModel)]="model3.Particular">
-                          <option value="S">SingleRoom</option>
-                          <option value="G">GroupRoom</option>
-                         
-                        </select>
-                       </div>
-
-                       </div>
-                       
-                        <button type="submit"  class="btn btn-success btn-sm btn-block" style="margin-top:20px;  ">Save</button>
-                        <br/>
-                        <hr>
-         
+                  <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                    <div  style="width:100%" >
+                      <div class="form-group  " style="float: right;" >                                   
+                        <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+                        <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
                      </div>
-               
-                   </div> 
-               </form>
-
-                </div>
-              </div>
-            </perfect-scrollbar>
+                    </div> 
+                  </div> 
+                   </form>
+                    </div>        
+                  </div>
+                </perfect-scrollbar>    
+              </div>            
+            </app-modal-animation>
           </div>
-        </app-modal-animation>
+
+         
 
 
 
@@ -1269,33 +1279,42 @@
    
 
  <!-- FoodCoupon -->
-        <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">FoodCoupon
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
-          <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
-              [config]="config">
-              <div class="col-sm-12 filter-bar">
-              
-                <app-food-coupon [Foodcouponmodel]="Foodcouponmodel" ></app-food-coupon>
-             
-              </div>
-            </perfect-scrollbar>
-          </div>
-        </app-modal-animation>
+ <div class="commonmodel">
+  <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
+   <div class="app-modal-body">
+    <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <label class="font-header"
+      style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+      ({{roomname1}})</label> 
+    <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'452px'"
+      [config]="config">
+      <div class="row">
+        <div class="col-sm-12">
+          <app-food-coupon [Foodcouponmodel]="Foodcouponmodel" ></app-food-coupon>
+        </div> 
+      </div>
+    </perfect-scrollbar> 
+  </div>
+</app-modal-animation>  
+</div>
+
+       
 
 
  
 
 
  <!-- linkunlink -->
+ <div class="commonmodel">
  <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink'" [modalClass]="'md-effect-2'">
-  <h3 class="f-15" style="position: relative;">Link 
-    <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-  </h3>
+  
   <div class="app-modal-body text-center">
-    <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+    <label class="font-header"
+      style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+      ({{roomname1}})</label> 
+    <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'452px'"
       [config]="config">
       <div class="col-sm-12 filter-bar">
         <div class="row">
@@ -1350,14 +1369,15 @@
     </perfect-scrollbar>
   </div>
 </app-modal-animation>
-      
-
+ </div>
+ <div class="commonmodel">
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'linkunlink1'" [modalClass]="'md-effect-2'">
-          <h3 class="f-15" style="position: relative;">  Unlink
-            <button style="position: absolute; right: 0; top:0; color:red" (click)="closeMyModal($event)">Close</button>
-          </h3>
+          
           <div class="app-modal-body text-center">
-            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'510px'"
+            <label class="font-header"
+      style="background-color: orange;  color: #ffffff;  padding: 10px;  width: 100%;">RoomNo- {{rmno}}
+      ({{roomname1}})</label> 
+            <perfect-scrollbar class="overflow-container modal-lg" [style.width]="'100%'" [style.height]="'452px'"
               [config]="config">
               <div class="col-sm-12 filter-bar">
                 <div class="row">
@@ -1411,7 +1431,7 @@
             </perfect-scrollbar>
           </div>
         </app-modal-animation>
-
+</div>
 
         <!-- PaxonBill -->
         <div class="commonmodel">
