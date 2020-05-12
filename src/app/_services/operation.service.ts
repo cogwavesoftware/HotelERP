@@ -268,11 +268,16 @@ export class OperationService {
   
   }
 
-  
   SaveGracePeroid(grace:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/savegrace',grace,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
+
+  SaveCompliment(compliment:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/operation/Savecompliment',compliment,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
   }
 
 
