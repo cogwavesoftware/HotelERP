@@ -798,6 +798,17 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
  
+  ngAfterViewInit() {
+    // server-side search
+
+9
+4523
+33
+
+
+  }
+
+
 
   addToast(title, Message, theme) {
     debugger;

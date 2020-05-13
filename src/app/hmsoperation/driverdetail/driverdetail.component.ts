@@ -43,7 +43,7 @@ export class DriverdetailComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      DriverId: ["0", [Validators.required]], 
+      DriverId: [, [Validators.required]], 
       drivername: ["", [Validators.required]],
       MobileNo: ["", [Validators.required]],
       vehicleno: ["", [Validators.required]],
@@ -79,12 +79,9 @@ export class DriverdetailComponent implements OnInit {
       });
   }
 
-
-
-
   OpenDrivermodelsDetail(SelectedData: any, event: any) {
     this.form.patchValue({
-      driverTd: SelectedData.DriverId,
+      DriverId: SelectedData.DriverId,
       drivername: SelectedData.DriverName,
       MobileNo: SelectedData.MobileNo,
       vehicleno: SelectedData.VechileNo,

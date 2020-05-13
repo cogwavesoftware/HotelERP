@@ -9,21 +9,21 @@
                 <div class='col-12 col-lg-4'>
                   <div class="form-group">
                     <label class="form-control-label" for="RoomNo">Room No </label>
-                    <input type="text" class="form-control tooltip-form" id="RoomNo" formControlName="RoomNo" name="RoomNo"  value="{{RoomNo}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.RoomNo.errors || form.controls.RoomNo.touched || form.controls.RoomNo.dirty}" required  />  
+                    <input type="text" class="form-control tooltip-form" id="RoomNo" readonly formControlName="RoomNo" name="RoomNo"  value="{{RoomNo}}" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.RoomNo.errors || form.controls.RoomNo.touched || form.controls.RoomNo.dirty}" required  />  
                     <div class="invalid-feedback" *ngIf="form.controls.RoomNo.errors?.required" >RoomNo   is required</div>
                     </div>  
                 </div>
                 <div class='col-12 col-lg-4'>
                   <div class="form-group">
                     <label class="form-control-label" for="roomcode">Room Code </label>
-                    <input type="text" class="form-control tooltip-form" id="RoomCode" formControlName="RoomCode" name="RoomCode" value="{{RoomCode}}" autocomplete="off"  required  />  
+                    <input type="text" class="form-control tooltip-form" id="RoomCode" readonly formControlName="RoomCode" name="RoomCode" value="{{RoomCode}}" autocomplete="off"  required  />  
                     <div class="invalid-feedback" *ngIf="form.controls.RoomCode.errors?.required" >roomcode   is required</div>
                     </div>  
                 </div>
                 <div class='col-12 col-lg-4'>
                   <div class="form-group">
                     <label class="form-control-label" for="RefBillNo">RefBillNo</label>
-                    <input type="text" class="form-control tooltip-form" id="RefBillNo" formControlName="RefBillNo" name="RefBillNo" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.RefBillNo.errors || form.controls.RefBillNo.touched || form.controls.RefBillNo.dirty}" required  />  
+                    <input type="text" class="form-control tooltip-form" id="RefBillNo" formControlName="RefBillNo" name="RefBillNo" autocomplete="off"  required  />  
                     <div class="invalid-feedback" *ngIf="form.controls.RefBillNo.errors?.required" >RefBillNo   is required</div>
                     </div>  
                 </div>
@@ -173,7 +173,7 @@
       <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
         <div  style="width:100%" >
           <div class="form-group  " style="float: right;" >                                   
-            <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+            <button type="submit"  class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
             <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
          </div>
         </div> 

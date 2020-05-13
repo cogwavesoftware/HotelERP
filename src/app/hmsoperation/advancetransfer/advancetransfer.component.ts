@@ -94,9 +94,7 @@ export class AdvancetransferComponent implements OnInit {
      if(res==true)
        {
         this.addToast(
-          "Cogwave Software Technologies Pvt Ltd..",
-          "Congratulations Data Saved Sucessfully",
-          "Success"
+          "Cogwave Software Technologies Pvt Ltd..", "Congratulations Data Saved Sucessfully", "Success"  
         );
        }
        else
@@ -115,11 +113,6 @@ export class AdvancetransferComponent implements OnInit {
     })
    
   }
-
-
-
-
-
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();
