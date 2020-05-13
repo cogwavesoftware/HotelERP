@@ -23,9 +23,9 @@
          
 
         <div class="row">
-  
-          <div class='col-md-6'>
-            <label class="col-sm-3 form-control-label" for="PurchaseId">Select RoomNo</label>
+          
+          <div class='col-md-12'>
+            <label class="col-sm-3 form-control-label" for="PurchaseId"><i   class="fa fa-bed"></i> Select RoomNo</label>
             <select  class="custom-select" name="RoomNo" formControlName="RoomNo" id="RoomNo">  
             <option value="0">Select</option>
             <option *ngFor="let sour of roomlist" [value]="sour.RoomNo"> {{ sour.RoomNo }}</option>   
@@ -34,10 +34,9 @@
 
         </div>
 
-            <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
-             
+            <div class="test123 userlist gridtestpayarray"  >             
               <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-6" style="border: 1px solid #ccc;">
                   <div class="grid-table" style="width: 100%;">
                     <div class="thead">
                       <div class="">
@@ -108,7 +107,7 @@
 
                   </div>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-6" style="border: 1px solid #ccc; padding: 10px;">
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
                       <div class=" ">
                         <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
@@ -122,12 +121,17 @@
               
             </div>
          
-         <div class="col-sm-12">
-          <div class="form-group text-center">               
-              <button type="submit"   [disabled]="form.invalid" class="btn btn-primary">Register</button>
-              <button type="button" (click)="CloseFormmodel()"  class="btn btn-primary">Close</button>
-          </div>
+     
+
+        <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+          <div  style="width:100%" >
+            <div class="form-group " style="float: right;" >                                   
+              <button type="submit"  [disabled]="form.invalid" class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Register</button>    
+              <button type="button"  (click)="CloseFormmodel()"   class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+           </div>
+          </div> 
         </div> 
+
 
     </form>
 </div>
@@ -135,7 +139,7 @@
 
 
 <div class="productlist">
-  <div class="shadow p-3 mb-5 bg-white rounded" >
+   
     <div class="table-content crm-table">
       <div class="project-table">
        
@@ -148,14 +152,14 @@
           
 
 
-      <div class="col-sm-12 filter-bar">
+      <div class="col-sm-12 filter-bar" style="background-color: #fff;">
         <div class="row">
           <div class="input-group" style="padding:10px; margin-bottom: 0;">
             <input type="text" class="form-control" name="searchdata" #searchdata placeholder="Search here...">
             <span class="input-group-append ripple light" id="basic-addon1"><i
                 (click)="ShowAllReservationList()" class="icofont icofont-search input-group-text"></i></span>
           </div>
-          <div class="col-sm-6" *ngFor="let data of BookingList">
+          <div class="col-sm-4 linkbox" *ngFor="let data of BookingList">
             <!-- Invoice list card start -->
             <div class="card card-border-primary">
               <div class="card-header">
@@ -164,10 +168,10 @@
                 <div ngbDropdown class="dropdown-secondary dropdown f-right">
                   <!-- <button ngbDropdownToggle class="btn btn-primary btn-mini dropdown-toggle ripple light" type="button" id="dropdown9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay</button> -->
                   <a href="javasript:;" title="Checkin" (click)="LoadReservationCheckinpage(data.BookingNo)"
-                    class="btn btn-info btn-mini b-none ripple light"><i
-                      class="icofont icofont-eye-alt m-0"></i></a>
+                    class="btn btn-info btn-mini b-none ripple light">
+                    <i class="icofont icofont-eye-alt m-0"></i>Checkin</a>
 
-                  <span class="f-left m-r-5 text-inverse" style="color: yellow;">Checkin : </span>
+                  <!-- <span class="f-left m-r-5 text-inverse" style="color: yellow;">Checkin : </span> -->
                 </div>
                 <br>
                 <strong *ngIf="data.CompanyName !='0'" class="label label-primary">Company:
@@ -218,7 +222,7 @@
          
       </div>
     </div>
-  </div>
+   
 </div>
 <!-- 
 </app-card> -->

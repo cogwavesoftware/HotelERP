@@ -23,10 +23,10 @@
         <input type="hidden" class="form-control tooltip-form" id="ModifyBys" formControlName="ModifyBy" name="ModifyBy"> 
          
     
-            <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
+            <div class="test123 userlist gridtestpayarray"  >
              
               <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-9" style="border: 1px solid #ccc;">
                   <div class="grid-table" style="width: 100%;">
                     <div class="thead">
                       <div class="">
@@ -108,7 +108,7 @@
 
                   </div>
                   </div>
-                  <div class="col-lg-2">
+                  <div class="col-lg-3" style="border: 1px solid #ccc; padding:10px" >
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
                       <div class=" ">
                         <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
@@ -122,12 +122,12 @@
               
             </div>
          
-         <div class="col-sm-12">
-          <div class="form-group text-center">               
-              <button type="submit"  class="btn btn-primary">Register</button>
-              <button type="button" (click)="CloseFormmodel()"  class="btn btn-primary">Close</button>
-          </div>
-        </div> 
+     
+
+        <div class="row" style="width: 100%; display:inline-block">
+          <button type="button"  (click)="CloseFormmodel()"  class="btn btn-sm btn-danger m-r-5 m-l-5 float-right" >Close</button>                                                                  
+          <button type="submit" id="save" class="btn btn-sm btn-primary m-r-5  m-l-5 float-right" >Register</button>       
+         </div>
 
     </form>
 </div>

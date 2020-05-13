@@ -15,8 +15,11 @@
 }
 .thead .td{
   
-    width: 115px;
+    width: 20%;
     text-align: left;
+}
+.tbody .td{ 
+    width: 20%; 
 }
 .tbody
 {
@@ -25,7 +28,7 @@
 .tbody .td input,
 .tbody .td select{
      
-    width: 115px;
+    width: 100%;
     height: 23px;
 }
 .thead .td .btn.btn-outline-success{

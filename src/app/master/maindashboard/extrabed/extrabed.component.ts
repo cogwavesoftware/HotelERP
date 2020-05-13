@@ -1,6 +1,6 @@
 import { stringify } from '@angular/compiler/src/util';
 import { ExtraBedFormmodel } from './../../../_models/ExtraBedFormmodel';
-
+import { environment } from 'src/environments/environment';
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import {
@@ -14,6 +14,8 @@ import { DatePipe } from "@angular/common";
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { OperationService } from 'src/app/_services/operation.service';
 import { Commonmodel } from './../../../_models/Commonmodel';
+import { BankService } from 'src/app/_services/bank.service'; 
+import { Observable, Observer, empty, fromEvent } from "rxjs";
  @Component({
   selector: 'app-extrabed',
   templateUrl: './extrabed.component.html',
@@ -33,14 +35,34 @@ export class ExtrabedComponent implements OnInit {
   type = "default";
   position = 'top-right';
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
+
+  previewUrl: any = null;
+  previewUrl2: any = null;
+  previewUrl3: any = null;
+  GuetIdFront0: any = null;
+  GuetImg0; GuetImg1; GuetImg2; GuetImg3: any = null;
+  GuetIdFront1; GuetIdFront2; GuetIdFront3: any = null;
+  GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3: any = null;
+  fileDataIdfront: File = null;
+  fileDataIdBack: File = null;
+
+  fileDataIdfrontSecGuest: File = null;
+  fileDataIdBackSecGuest: File = null;
+  back = false;
+  Id$: Observable<string>;
+  guest: any;  
+  picodelist: any;
+  public filterQuery = "";
+  public data: Observable<any> 
+  model: any = {};
+
   constructor(  
     public router: Router,public formBuilder1: FormBuilder,
     public formBuilder: FormBuilder,private _oprservice:OperationService,
-    private toastyService: ToastyService, 
+    private toastyService: ToastyService, private _bankservice: BankService,
     private route: ActivatedRoute, 
     private _masterservice: MasterformService ) {
-      this.Branch="CW_1001"    
-      
+      this.Branch="CW_1001"   
      }
  
 
@@ -63,8 +85,30 @@ export class ExtrabedComponent implements OnInit {
       Mode: "0",  
       }    
       this.addgstform  =  this.formBuilder1.group({
-        guestname: ['', Validators.required] 
+        guestname: ['', Validators.required] ,
+        title: ['', Validators.required] ,
+        gender:['', Validators.required] ,
+        mobile:['', Validators.required] ,
+        email:['', Validators.required] ,
+        pincode:['', Validators.required] ,
+        Area:['', Validators.required] ,
+        city:['', Validators.required] ,
+        state:['', Validators.required] ,
+        StateCode:['', Validators.required] ,
+        nation:['', Validators.required] ,
+        gstno:['', Validators.required] ,
+        address1:['', Validators.required] ,
+        address2:['', Validators.required] ,
+        address3:['', Validators.required] ,
+        GuestIdFront: ["", [Validators.required]],
+        GuestIdBack: ["", [Validators.required]]
     });
+
+    this.previewUrl = environment.GuestimagePath + '/imagenot.png';
+    this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
+    this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
 
     }
 
@@ -134,14 +178,29 @@ export class ExtrabedComponent implements OnInit {
       document.querySelector("#" + event).classList.add("md-show");
     }
      
-    closeguestModal (event) { 
-      alert("tetseet");
+    closeguestModal (event) {  
       var openModals = document.querySelectorAll(".md-show");
       for (let i = 0; i < openModals.length; i++) {
         openModals[i].classList.remove("md-show");
       }
     }
+    secondaryGuestModel(event, data, j) {
+  
+      this._bankservice.changeindexvalue(j);
+      document.querySelector("#" + event).classList.add("md-show");
+    }
 
+    openMyModalPincodePopup(event, data, j) {
+      this.filterQuery = "";
+      this._bankservice.changeindexvalue(j);
+      document.querySelector("#" + event).classList.add("md-show");
+    } 
+
+    closeMyModalPin(event) {
+      event.target.parentElement.parentElement.parentElement.classList.remove(
+        "md-show"
+      );
+    }
     addToast(title, Message, theme) {
       debugger;
       this.toastyService.clearAll();

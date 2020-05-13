@@ -26,21 +26,49 @@
           <input type="hidden" class="form-control tooltip-form" id="BranchCodes" formControlName="BranchCode" name="BranchCode"> 
           <input type="hidden" class="form-control tooltip-form" id="ModifyBys" formControlName="ModifyBy" name="ModifyBy"> 
            
-           <div class="row">
-            <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+          
+             <div class="col-md-12">
+              <div class="row">
+              <div class='col-12  col-md-6' style="border: 1px solid #ccc;">
                 <div class="form-group">
-                  <label class="form-control-label" for="cometoknow ">Reservation Advance</label>                                                                   
-                   <input type="radio"  class="form-control" style="width: 15px" (change)="OnCheckBoxChange('Reservation')"  value="Reservation" formControlName="BookingStatus">   
+                 <input type="radio"  class="form-control inpt"   (change)="OnCheckBoxChange('Reservation')"  value="Reservation" formControlName="BookingStatus">  
+                 <label class="form-control-label lbl" for="cometoknow " >Reservation Advance</label>  
+                </div>
+                <div class="form-group">
+                  <input type="radio" value="Company" (change)="OnCheckBoxChange('Company')" class="form-control inpt" style="width: 15px" formControlName="BookingStatus"> 
+                  <label class="form-control-label lbl" for="WaitingList ">Company Advance </label> 
                 </div>
               </div>
-
-              <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
-                <div class="form-group">
-                  <label class="form-control-label" for="WaitingList ">Company Advance </label>
-                  <input type="radio" value="Company" (change)="OnCheckBoxChange('Company')" class="form-control" style="width: 15px" formControlName="BookingStatus"> 
+               <div class="col-md-6" style="border: 1px solid #ccc;">
+                
+                <div class="row p-t-10"> 
+                  
+                  <div class="col-md-6" *ngIf="IsReservation"> 
+                  <label class="form-control-label" for="BookingNo">Enter BookingNo</label>
+                  <input type="text" autofocus class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="BookingNo" name="BookingNo" autocomplete="off" required    />  
+                  <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="GuestModelOpen('effect-5',data)" style="position: absolute;right: 2px;
+                  top: 21px;"><i class="fa fa-search"></i></a>
+                
+                  <div class="invalid-feedback" *ngIf="form.controls.BookingNo.errors?.required" >BookingNo fees is required</div>
+                  </div> 
+      
+                  <div class="col-md-6" *ngIf="IsReservation">
+                      <label class="form-control-label" for="Guest Name">Enter guestname</label>
+                      <input type="text" autofocus class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" required    />             
+                  </div> 
+                  
+                  
+                  <div class="col-md-12" *ngIf="isCompany" > 
+                      <label class="col-sm-12" for="PurchaseId" style="padding: 0;">Select Company</label>
+                      <select  class="custom-select" name="CompanyName" formControlName="CompanyName" id="CompanyName">  
+                      <option value="0">Select</option>
+                      <option *ngFor="let itm of companylist" [value]="itm.CompanyName">{{itm.CompanyName}}</option>
+                    </select>              
+                    
+                </div> 
                 </div>
-              </div>
-
+               </div>
+             </div>  
            </div>
          
 
@@ -49,37 +77,12 @@
 
           
   
-          <div class="row">
-         
-
-            <div class="col-md-6" *ngIf="IsReservation">
-            <label class="form-control-label" for="BookingNo">Enter BookingNo</label>
-            <input type="text" autofocus class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="BookingNo" name="BookingNo" autocomplete="off" required    />  
-            <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="GuestModelOpen('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
           
-            <div class="invalid-feedback" *ngIf="form.controls.BookingNo.errors?.required" >BookingNo fees is required</div>
-            </div> 
-
-            <div class="col-md-6" *ngIf="IsReservation">
-                <label class="form-control-label" for="Guest Name">Enter guestname</label>
-                <input type="text" autofocus class="form-control tooltip-form searchiconrelative uppercase" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" required    />             
-            </div> 
-            
-            
-            <div class="col-md-6" *ngIf="isCompany" >
-                <label class="col-sm-3 form-control-label" for="PurchaseId">Select Company</label>
-                <select  class="custom-select" name="CompanyName" formControlName="CompanyName" id="CompanyName">  
-                <option value="0">Select</option>
-                <option *ngFor="let itm of companylist" [value]="itm.CompanyName">{{itm.CompanyName}}</option>
-              </select>              
-              
-          </div> 
-          </div>
   
-              <div *ngIf="isselected" class="test123 userlist gridtestpayarray" style="padding: 2px;">
+              <div *ngIf="isselected" class="test123 userlist gridtestpayarray"  >
               
                 <div class="row">
-                  <div class="col-lg-9">
+                  <div class="col-lg-8" style="border:1px solid #ccc">
                     <div class="grid-table" style="width: 100%;">
                       <div class="thead">
                         <div class="">
@@ -161,7 +164,7 @@
   
                     </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-4" style="border: 1px solid #ccc; padding: 10px;">
                       <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 width100" >
                         <div class=" ">
                           <label  id="BillAmount1"  ><span>Total Amount : </span> <b>{{TotalBillAmount | currency:'INR'}}</b> </label>   
@@ -173,15 +176,11 @@
   
   
                 
-              </div>
-           
-           <div class="col-sm-12">
-            <div class="form-group text-center">               
-                <button type="submit"  class="btn btn-primary">Register</button>
-                <button type="button" (click)="CloseFormmodel()"  class="btn btn-primary">Close</button>
-            </div>
-          </div> 
-  
+              </div> 
+              <div class="row" style="width: 100%; display:inline-block">
+                <button type="button"  (click)="CloseFormmodel()"  class="btn btn-sm btn-danger m-r-5 m-l-5 float-right" >Close</button>                                                                  
+                <button type="submit" id="save" class="btn btn-sm btn-primary m-r-5  m-l-5 float-right" >Register</button>       
+               </div>
       </form>
   </div>
   
@@ -191,10 +190,9 @@
     <div class="shadow p-3 mb-5 bg-white rounded" >
       <div class="table-content crm-table">
         <div class="project-table">
-            <div class="row">
-                <div class="col-md-6">
-                  <label>Filter Type</label>
-                    
+            <div class="row m-b-10" >
+                <div class="col-md-12">
+                  <label><i class="fa fa-filter" aria-hidden="true"></i> Filter Type</label> 
                       <select  class="custom-select" name="RoomNo" formControlName="RoomNo" id="RoomNo">  
                       <option value="0">Select</option>
                       <option value="1">Reservation</option>
@@ -292,18 +290,13 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- 
-  </app-card> -->
-  
-  
-  
+  </div> 
   
   </div>
   
   
   
-  ////guestname -->
+   
   <app-modal-animation [modalID]="'effect-5'" [modalClass]="'md-effect-4 addressmodeleffect'">   
     <h3 class="f-15" style="position: relative;">Search Details
     <!--  <button style="position: absolute; right: 0; top:0; color:red"  (click)="closeMyModalPin($event)">Close</button> -->
