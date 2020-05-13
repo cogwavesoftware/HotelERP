@@ -5,12 +5,14 @@
 }
 
 .freeroom {
-    background-color: green;    
-    padding: 0px;
-    width: 75px;
-    height: 50px;   
+    background-color: #11c15b;    
+    padding: 2px 0px 2px 0px;
+    width: 70px; 
     display: inline-table;
     margin: 2px 1px 2px 3px;
+    font-size: 90%;
+    font-weight: normal; 
+    border-bottom:2px solid greenyellow;
 }
 
 .occroom {
@@ -40,3 +42,8 @@
     display: inline-table;
     margin: 2px 1px 2px 3px;
 }
+select.custom-select{
+    font-size: 100%;
+    padding: 0px 0px 0px 10px; 
+    height: 23px;;
+  }

@@ -1,126 +1,132 @@
 
 
- <div class="  blockingfrm">
+  
     <div class="formdesign" style="padding: 0;">
         <div class="userlist">
-                 <form [formGroup]="blockingdetailsform" (ngSubmit)="Submit(blockingdetailsform)"> 
-                   <input type="hidden"  formControlName="ID"  readonly name="ID"  autocomplete="off"/>
-                  <input type="hidden"  formControlName="CreatedBy"   value="{{CreatedBy}}" readonly name="CreatedBy" autocomplete="off"/>
-                  <input type="hidden"  formControlName="BranchCode" value="{{BranchCode}}" readonly name="BranchCode" autocomplete="off"/>
-                   
-                    <div class="container-fluid" >             
-                        <div class='row'>                            
-                              <div class="col-md-12">
-                                  <div class="row">
-                                    <div class=" " > 
- 
-  
-                                      <div class="guestinfofirstrow  row">
-  
-                                        <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="Short Time">Short Time</label>                                                                                  
-                                            <input type="radio" (click)="Selected('SHORT')"  class="form-control" style="width: 15px" value="SHORT" formControlName="Status">  
-                                                                                  
-                                          </div>
-                                        </div>
-  
-  
-                                        <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="Long Time">Long Time </label>
-                                            <input type="radio" value="LONG" (click)="Selected('LONG')" class="form-control" style="width: 15px" formControlName="Status"> 
-                                          
-                                  
-                                          </div>
-                                        </div>
-                                       
-                                      </div>
-  
-                                       <div *ngIf=IsLongTime>
-                                         <p>You Clicked Long Time this  Room Will affect in Room Chart</p>
-                                       </div>
-  
-                                       <div *ngIf=!IsLongTime>
-                                        <p>You Clicked Short Time this  Room Will not  affect in Room Chart</p>
-                                      </div>
-     
+          <div class="test123 guestinfofirstrow paymentarray" >
+            <div class="modelstyle">  
+                        <div class="row"> 
+                          <form [formGroup]="blockingdetailsform" (ngSubmit)="Submit(blockingdetailsform)"> 
+                            <input type="hidden"  formControlName="ID"  readonly name="ID"  autocomplete="off"/>
+                           <input type="hidden"  formControlName="CreatedBy"   value="{{CreatedBy}}" readonly name="CreatedBy" autocomplete="off"/>
+                           <input type="hidden"  formControlName="BranchCode" value="{{BranchCode}}" readonly name="BranchCode" autocomplete="off"/>
                             
-  
-                                    <div class="guestinfofirstrow  row">
-                                      <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="date">From</label>
-                                          <input  id="BlockDate" name="BlockDate"  formControlName="BlockDate"  readonly type="text" bsDatepicker  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
-                                         </div>  
-                                      </div>
-                                     
-                                      <div class='col-12 col-lg-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="date">To</label>
-                                          <input  id="ReleaseDate" name="ReleaseDate"  formControlName="ReleaseDate"  readonly type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
-                                         </div>  
-                                      </div>
-                                      
-
-                                  
                                     
-                                   
-                                      <div class='col-12 col-lg-12'>
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="reason">Reason</label>
-                                             <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason" autocomplete="off"></textarea>  
-                                             </div>   
-                                      </div>
-                                     
-                                       </div>
-                                                                       
+                                 <div class='row'>                            
+                                       <div class="col-md-12">
+                                           <div class="row"> 
+                                            <div class="col-md-7" style="border-right: 1px solid #ccc">
+                                              <div class="row">
+                                                <div class='col-12 col-md-4'>
+                                                  <div class="form-group">
+                                                    <input type="radio" (click)="Selected('SHORT')"  class="form-control inputradio" style="width: 15px" value="SHORT" formControlName="Status">   
+                                                    <label class="form-control-label lbl" for="Short Time">Short Time</label>  
+                                                  </div>
+                                                </div>
+                                                <div class='col-12 col-md-4'>
+                                                  <div class="form-group">
+                                                    <input type="radio" value="LONG" (click)="Selected('LONG')" class="form-control inputradio" style="width: 15px" formControlName="Status">  
+                                                    <label class="form-control-label lbl" for="Long Time" >Long Time </label> 
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <div *ngIf=IsLongTime>
+                                                    <p>You Clicked <b style="color:green">Long Time</b> this  Room Will affect in Room Chart</p>
+                                                  </div> 
+                                                  <div *ngIf=!IsLongTime>
+                                                   <p>You Clicked <b style="color:green">Short Time </b>this  Room Will not  affect in Room Chart</p>
+                                                 </div> 
+                                                </div> 
+                                              </div>
+                                           <div class="row">
+                                            <div class='col-12 col-lg-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="date">From</label>
+                                                <input  id="BlockDate" name="BlockDate"  formControlName="BlockDate"  readonly type="text" bsDatepicker  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
+                                               </div>  
+                                            </div>
+                                            <div class='col-12 col-lg-4'>
+                                              <div class="form-group">
+                                                <label class="form-control-label" for="date">To</label>
+                                                <input  id="ReleaseDate" name="ReleaseDate"  formControlName="ReleaseDate"  readonly type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
+                                               </div>  
+                                            </div> 
+                                           </div> 
+                                            </div>
+                                            <div class="col-md-5">
+                                              <div class='col-12 col-lg-12'>
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="reason">Reason</label>
+                                                     <textarea class="form-control" rows="2" id="Reason" formControlName="Reason" name="Reason" autocomplete="off"></textarea>  
+                                                     </div>   
+                                              </div>
+                                            </div>
+
+                                                
+           
+           
+                                                 
+                                                 
+           
+                                          
+                                             
+                                             
+                                              
+                                             
+                                            
+                                            
+                                              
+                                               
+                                                                                
+                                              
+                                          </div>
                                      </div>
                                  </div>
-                            </div>
-                        </div>
-     
-                        <div class="row">
-                 
-                            <div class="col-md-12 ">
-                              
-                               
-                                  <li class="childData">
-                                    <ul style="display: inline-block">
-                                      <li style="float: left; margin-left: 0px " *ngFor="let child1 of Groupblock.Rooms">
-                                       
-                                          <div *ngIf="child1.Status == 'V'">
-                                            <span class="mytooltip tooltip-effect-1">                                                                          
-                                                <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'G'+ child1.RoomNo}}" (click)="buttonlinlclick($event,'G'+child1.RoomNo,child1.RoomCode,child1.RoomNo)">
-                                                  {{child1.RoomNo}}
-                                                  <br>
-                                                  {{child1.RoomCode}}
-                                              </div>
-                                            </span>
-                                          </div> 
+              
+                                 <div class="row"> 
+                                     <div class="col-md-12 "> 
+                                           <li class="childData" style="list-style-type:none">
+                                             <ul style="display: inline-block">
+                                               <li style="float: left; margin-left: 0px " *ngFor="let child1 of Groupblock.Rooms">
+                                                
+                                                   <div *ngIf="child1.Status == 'V'">
+                                                     <span class="mytooltip tooltip-effect-1">                                                                          
+                                                         <div class="col-lg-1 co-sm-2 col-xs-3 roomselect freeroom" id="{{'G'+ child1.RoomNo}}" (click)="buttonlinlclick($event,'G'+child1.RoomNo,child1.RoomCode,child1.RoomNo)">
+                                                           {{child1.RoomNo}}
+                                                           <br>
+                                                           {{child1.RoomCode}}
+                                                       </div>
+                                                     </span>
+                                                   </div>  
+                                               </li>
+                                             </ul>
+                                           </li>
                                         
-                                      
-        
-        
-                                      </li>
-                                    </ul>
-                                  </li>
-                               
-                              <!-- end rooms dashborad -->
-                            </div>
-        
-                        </div>
+                                       <!-- end rooms dashborad -->
+                                     </div>
+                 
+                                 </div>
+         
+                                 <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                                  <div  style="width:100%" >
+                                    <div class="form-group  " style="float: right;" >                                   
+                                       <button  type="submit"  class="btn btn-primary"  style=" display:inline-block">Process </button> 
+                                       <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                                   </div>
+                                  </div> 
+                                </div> 
 
-                        <div class="row modelbtn">   
-                          <div class="col-md-12">
-                            <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Exit </button>
-                            <button  type="submit"  class="btn btn-primary"> Process </button> 
-                          </div>  
-                         </div>  
-                    </div>
-                 </form>
+ 
+                          </form>
+                          </div>
+                        </div>
+                      </div>
+
+                 
         </div>
      </div>
-  </div>
+   
   <!-- 
   <ng2-toasty [position]="position"></ng2-toasty> -->
