@@ -196,6 +196,7 @@ export class LinkadvanceComponent implements OnInit {
   CloseFormmodel()
   {
     this.Show=!this.Show
+    // this.Show=!this.Show
   }
   AddpaymentGrid(): FormGroup {
     return this.formBuilder.group({

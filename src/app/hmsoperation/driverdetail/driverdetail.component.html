@@ -15,8 +15,11 @@
 <div class="outerdiv">
     <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
   
-      <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
-        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="Id" formControlName="Id" name="Id" autocomplete="off"  /> 
+      <form [formGroup]="form" (ngSubmit)="Submit(form)" class="  " autocomplete="off">
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="DriverId" formControlName="DriverId" name="DriverId" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="CreatedBy" formControlName="CreatedBy" name="CreatedBy" value="{{CreatedBy}}" autocomplete="off"  /> 
+        <input type="hidden" class="form-control tooltip-form searchiconrelative" id="BranchCode" formControlName="BranchCode" name="BranchCode" value="{{BranchCode}}" autocomplete="off"  /> 
+
          <div class="container-fluid"  style="background-color: #fff;">
    
           <div class='row tabouter' style="margin-bottom: 0;"> 
@@ -28,13 +31,14 @@
                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                       <div class="form-group">
                         <label class="form-control-label" for="drivername">Driver Name </label>
-                        <input type="text" class="form-control tooltip-form searchiconrelative" id="drivername" formControlName="drivername" name="drivername" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.drivername.errors || form.controls.drivername.touched || form.controls.drivername.dirty}" required    /> 
+                        <input type="text" class="form-control tooltip-form searchiconrelative" id="drivername" formControlName="drivername" name="drivername" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.drivername.errors || form.controls.drivername.touched || form.controls.drivername.dirty}" required    />
+                        <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="Opendrivermodel('effect-9',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a>  
                       </div>  
                     </div> 
                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                       <div class="form-group">
                         <label class="form-control-label" for="mobileno">Mobile No </label>
-                        <input type="text" class="form-control tooltip-form searchiconrelative" id="mobileno" formControlName="mobileno" name="mobileno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.mobileno.errors || form.controls.mobileno.touched || form.controls.mobileno.dirty}" required    /> 
+                        <input type="text" class="form-control tooltip-form searchiconrelative" id="MobileNo" formControlName="MobileNo" name="MobileNo" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.MobileNo.errors || form.controls.MobileNo.touched || form.controls.MobileNo.dirty}" required    /> 
                       </div>  
                     </div> 
                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
@@ -49,16 +53,21 @@
                         <input type="text" class="form-control tooltip-form searchiconrelative" id="charge" formControlName="charge" name="charge" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.charge.errors || form.controls.charge.touched || form.controls.charge.dirty}" required    /> 
                       </div>  
                     </div>
+                     
                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                       <div class="form-group">
-                        <label class="form-control-label" for="guestname">Guest name </label>
-                        <input type="text" class="form-control tooltip-form searchiconrelative" id="guestname" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    /> 
-                      </div>  
-                    </div>
-                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                      <div class="form-group">
-                        <label class="form-control-label" for="roomno"> Room no </label>
-                        <input type="text" class="form-control tooltip-form searchiconrelative" id="roomno" formControlName="roomno" name="roomno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.roomno.errors || form.controls.roomno.touched || form.controls.roomno.dirty}" required    /> 
+                        <div class="form-group">
+                          <label class="form-control-label" for="roomno">Room No </label>
+                          <select class="custom-select"  name="roomno" formControlName="roomno"
+                          id="roomno" [ngClass]="{ 'is-invalid': submitted && form.roomno.errors }">
+                          <option value="0">Select</option>
+                          <option *ngFor="let ROOM of  RoomList" [value]="ROOM.RoomNo">
+                            {{ ROOM.RoomNo  }}</option>
+                        </select> 
+                        <div *ngIf="submitted && form.roomno.errors" class="invalid-feedback">
+                          <div *ngIf="form.roomno.errors.required">roomno is required</div>
+                        </div>
+                        </div> 
                       </div>  
                     </div>
                   </div><!-- end of row -->
@@ -86,4 +95,61 @@
           </div>
 
           
- 
+ <!-- ////drivermodel --> 
+ <app-modal-animation [modalID]="'effect-9'" [modalClass]="'md-effect-9 addressmodeleffect'">
+  <h3 class="f-15">Driver Details</h3>
+    <div class="app-modal-body text-center" style="position: relative;"> 
+      <div class="table-content crm-table">
+        <div class="project-table addressproject-table">
+          <div id="crm-contact" class="dt-responsive">
+                         
+            <div class="row">         
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <input type="text" #searchTermdriver class="form-control input-lg full-data-search" placeholder="Search here...">
+                  <span class="input-group-append ripple light" id="basic-addon1">
+                    <i class="fa fa-search input-group-text" style="font-size: 100%;"></i>                          
+                  </span>
+                </div> 
+              </div>      
+        </div>   
+             <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table"> 
+                    <thead>
+                    <tr class="blueorange-gradient">        
+                    <th>DriverName</th>             
+                    <th> MobileNo </th>
+                    <th> VechileNo </th>                       
+                    <th>Action</th>
+                </tr>
+                <tr> </tr>               
+                </thead>
+                <tbody>                    
+                 <tr *ngFor="let item of driverlist; let i = index;">                     
+                   <td>{{item.DriverName}}</td>   
+                   <td>{{item.MobileNo}}</td>  
+                   <td>{{item.VechileNo}}</td>                             
+                  <td class="action-icon">
+                      <a href="javascript:;" class="m-r-15 crm-action-edit text-primary"  md-button (click)="OpenDrivermodelsDetail(item,$event)"> <i class="fa fa-download" aria-hidden="true"></i></a>                     
+                  </td>
+                </tr>  
+                </tbody>
+                <!-- <tfoot>
+                <tr class="blueorange-gradient">     
+                <th>DriverName</th>            
+                <th>MobileNo</th>                          
+                <th>VehicleNo</th>    
+                <th>Action</th>      
+                </tr>              
+                </tfoot> -->
+              </table>
+            </div> 
+          </div>
+        </div>
+      </div>     
+           <button (click)="closeMyModalPin($event)" class="btn btn-danger waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>             
+      </div>      
+    </app-modal-animation>
+
+    
+    <ng2-toasty [position]="position"></ng2-toasty>

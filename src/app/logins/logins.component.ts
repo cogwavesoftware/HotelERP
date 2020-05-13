@@ -192,7 +192,7 @@ export class LoginsComponent implements OnInit {
         this.loading = false;
       },
       ()=>{
-           alert('d')
+           //alert('d')
       }
     );
   }

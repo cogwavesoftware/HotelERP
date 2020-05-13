@@ -1,5 +1,5 @@
 import { OperationService } from './../../../_services/operation.service';
-import { Component, OnInit, Input, ViewChild, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Renderer2, ElementRef ,OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn, Validators } from "@angular/forms";
 import { Observable } from 'rxjs';
 import { MasterformService } from './../../../_services/masterform.service';
@@ -16,7 +16,7 @@ import { NumberFilter } from 'ag-grid-community';
   templateUrl: './postcharge.component.html',
   styleUrls: ['./postcharge.component.scss']
 })
-export class PostchargeComponent implements OnInit {
+export class PostchargeComponent implements OnInit,OnDestroy {
   form: FormGroup;
   model: any;
   @Input() RoomCode: string;
@@ -68,7 +68,7 @@ export class PostchargeComponent implements OnInit {
       RoomCode: [this.RoomCode, Validators.required],
       RefBillNo: ['', Validators.required],
       stward: ['0', Validators.required],
-      revname: [, Validators.required],
+      revname: ["0", Validators.required],
       taxvalue: ['0', Validators.required],
       BranchCode: [this.Branch, Validators.required],
       CreatedBy: [this.Id, Validators.required],
@@ -88,12 +88,10 @@ export class PostchargeComponent implements OnInit {
     if (list == undefined) {
       // this.PayExtra.controls[index].patchValue({
         
-      // })
+      // }) 
     }
     else {
       let Rate = list['Rate']
-      
-      
       let TotalAmount= Rate * 1
       let Taxmount = TotalAmount * this.form.get('taxvalue').value / 100;
       let Net = Taxmount + TotalAmount
@@ -129,16 +127,24 @@ export class PostchargeComponent implements OnInit {
   AddExtrachargeButtonClick(): void {
     (<FormArray>this.form.get("PayExtra")).push(this.AddExtraChargeGrid());
   }
-  closeMyModalPin(event) {
 
-    this.TotalBillAmount=0;
-    this.TotalTaxAmount=0;
-    this.TotalNetAmount=0;  
-    var openModals = document.querySelectorAll(".md-show");
-    for (let i = 0; i < openModals.length; i++) {
-      openModals[i].classList.remove("md-show");
-    }
+  onDeleteExtracharge(k) {
+    (<FormArray>this.form.get("PayExtra")).removeAt(k);
   }
+    
+
+
+  removeItem() {
+    let val =10;
+   for(let k=0; k<val; k++)
+   {
+     let len=this.PayExtra.length
+     if(len>=1)
+     {
+      this.PayExtra.removeAt(this.PayExtra.length - 1);
+     }
+   }  
+ }
 
   GetTaxvalue() {
     this._masterservice.GetTaxValueByRevd(this.Branch, this.form.get('revname').value).subscribe((data: any) => {
@@ -152,6 +158,8 @@ export class PostchargeComponent implements OnInit {
       this.itemList = res;
     });
   }
+
+
 
 
   CalculateTaxAmount(index) {
@@ -185,8 +193,8 @@ export class PostchargeComponent implements OnInit {
   }
 
   Submit(form:FormGroup)
-  {
-     
+  {   
+   
     this.form.patchValue({
       TotalBillAmount:this.TotalBillAmount,
       TotalTaxAmount:this.TotalTaxAmount,
@@ -209,13 +217,34 @@ export class PostchargeComponent implements OnInit {
        }
      },
      error => {
-       this.form.reset();
        this.addToast("Cogwave Software", "Postcharge Information Not Saved", "error");
      },
      ()=>{
-      // alert('suceesss')
+      this.closeMyModalPin(event);
      });
   }
+
+
+  closeMyModalPin(event) {
+    this.form.reset();
+    this.form.patchValue({
+      RoomNo:this.RoomNo,
+      RoomCode:this.RoomCode,
+      stward:"0",
+      revname:"0",
+      taxvalue:0
+    })
+    this.removeItem();
+    this.TotalBillAmount=0;
+    this.TotalTaxAmount=0;
+    this.TotalNetAmount=0;  
+    var openModals = document.querySelectorAll(".md-show");
+    for (let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show");
+    }
+  }
+
+
 
   CalculateSummaryAmount() {
     this.TotalBillAmount=0;
@@ -227,6 +256,8 @@ export class PostchargeComponent implements OnInit {
       this.TotalNetAmount += Extrach.get("Net").value;
     }
   }
+
+
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();
@@ -266,6 +297,9 @@ export class PostchargeComponent implements OnInit {
         this.toastyService.warning(toastOptions);
         break;
     }
+  }
+  ngOnDestroy() {
+    // ...
   }
 
 }

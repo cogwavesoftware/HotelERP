@@ -90,13 +90,13 @@ export class AdvancetransferComponent implements OnInit {
       BranchCode:this.Branch,
       ModifyBy:this.UserId
     }) 
+
+    console.log(this.form.value)
     this._operservice.AdvanceTransfer(this.form.value).subscribe(res=>{
      if(res==true)
        {
         this.addToast(
-          "Cogwave Software Technologies Pvt Ltd..",
-          "Congratulations Data Saved Sucessfully",
-          "Success"
+          "Cogwave Software Technologies Pvt Ltd..", "Congratulations Data Saved Sucessfully", "Success"  
         );
        }
        else
@@ -115,11 +115,6 @@ export class AdvancetransferComponent implements OnInit {
     })
    
   }
-
-
-
-
-
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();

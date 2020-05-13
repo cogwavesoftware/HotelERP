@@ -60,6 +60,7 @@ export class AdvancemodificationComponent implements OnInit {
       BranchCode: [this.Branch, [Validators.required]],
       ModifyBy: [this.UserId, [Validators.required]],
       PayArray: this.formBuilder.array([]),
+      BookingNo: ["0", [Validators.required]],
     });
   }
 
@@ -92,6 +93,7 @@ export class AdvancemodificationComponent implements OnInit {
       BranchCode: [Editform.BranchCode, [Validators.required]],
       ModifyBy: ["", [Validators.required]],
       PayArray: this.formBuilder.array([]),
+      BookingNo:[Editform.ReservationNo, [Validators.required]],
     });
   
     this._oprservice.GetAdvanceReceiptByReciptNo(this.Branch,Editform.ReceiptNo).subscribe(res=>{
