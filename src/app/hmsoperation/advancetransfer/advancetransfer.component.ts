@@ -90,6 +90,8 @@ export class AdvancetransferComponent implements OnInit {
       BranchCode:this.Branch,
       ModifyBy:this.UserId
     }) 
+
+    console.log(this.form.value)
     this._operservice.AdvanceTransfer(this.form.value).subscribe(res=>{
      if(res==true)
        {
