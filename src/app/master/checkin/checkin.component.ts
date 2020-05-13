@@ -1,24 +1,14 @@
 
 import {
-  HostListener, Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation,
-  ViewChild, ElementRef, SimpleChanges, OnChanges
-} from "@angular/core";
+  HostListener, Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation,ViewChild, ElementRef, SimpleChanges, OnChanges 
+} from "@angular/core"; 
 import { Observable, Observer, empty, fromEvent } from "rxjs";
-
 import { NgForm } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  FormControl,
-  ValidatorFn,
-  Validators
-} from "@angular/forms";
+import { FormBuilder, FormGroup, FormArray, FormControl,ValidatorFn,Validators} from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { CheckinService } from './../../_services/checkin.service';
-
 //import { Subscription } from "rxjs/Subscription";
 import { ConfirmationDialogService } from 'src/app/_services/confirmation-dialog.service';
 import { animate, style, transition, trigger } from "@angular/animations";
@@ -31,14 +21,9 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from "@angular/common";
 import { BankService } from 'src/app/_services/bank.service';
 import { Subject } from 'rxjs/Subject';
-
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators'
-import { IfStmt } from '@angular/compiler';
-import { StartEditingCellParams } from 'ag-grid-community';
-
 export interface Checkinss {
   RoomCode: string;
   RoomNo: string;

@@ -18,12 +18,26 @@
           <div class="panel-heading"  ><i class="fa fa-list" aria-hidden="true"></i> Edit Advance</div>
           </div>
       <form [formGroup]="form" (ngSubmit)="Submit()"  class=" shadow p-3 mb-5 bg-white rounded" autocomplete="off" >
-        <input type="hidden" class="form-control tooltip-form" id="ReceiptNoS" formControlName="ReceiptNo" name="ReceiptNo"> 
+        <!-- <input type="hidden" class="form-control tooltip-form" id="ReceiptNoS" formControlName="ReceiptNo" name="ReceiptNo">  -->
         <input type="hidden" class="form-control tooltip-form" id="BranchCodes" formControlName="BranchCode" name="BranchCode"> 
         <input type="hidden" class="form-control tooltip-form" id="ModifyBys" formControlName="ModifyBy" name="ModifyBy"> 
          
-    
+        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+          <div class="form-group">
+            <label class="form-control-label" for="BookingNo">BookingNo</label>
+             <input type="text" class="form-control tooltip-form " id="BookingNo" formControlName="BookingNo" name="BookingNo" readonly autocomplete="off"  required    /> 
+          </div>  
+        </div> 
+        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+          <div class="form-group">
+            <label class="form-control-label" for="ReceiptNo">ReceiptNo </label>
+            <input type="text" class="form-control tooltip-form" id="ReceiptNo" formControlName="ReceiptNo" name="ReceiptNo" autocomplete="off" readonly required    /> 
+          </div>  
+        </div> 
+
             <div class="test123 userlist gridtestpayarray" style="padding: 2px;">
+
+
              
               <div class="row">
                 <div class="col-lg-9">
