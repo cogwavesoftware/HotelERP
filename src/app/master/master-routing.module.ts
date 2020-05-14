@@ -166,6 +166,10 @@ const routes: Routes = [
        // loadChildren: './monthchart/monthchart.module#MonthchartModule'
         loadChildren: () => import('./monthchart/monthchart.module').then(m=>m.MonthchartModule)
       },
+      {
+        path: 'drivermaster', 
+        loadChildren: () => import('./drivermaster/drivermaster.module').then(m=>m.DrivermasterModule)
+      },
      
     ]
   }

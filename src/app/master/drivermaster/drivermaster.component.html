@@ -1,0 +1,71 @@
+<div class="outerdiv">
+
+    <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+      <div class="row">
+          <div class="col-md-11">
+              <h5 class="ng-tns-c6-1">Driver Master  {{mode}}</h5>         
+              <span class="ng-tns-c6-1 ng-star-inserted">Driver master details... </span>
+            </div> 
+      </div>
+    </div> 
+
+    <div class="formdesign aqua-gradient" >
+        <div class="formouter rotate" >
+         <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.form)" #f="ngForm">      
+             <input type="hidden" name="Id" class="form-control" [(ngModel)]="model.Id" #Id="ngModel" value="{{Id}}"  >
+             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">
+             <input type="hidden" name="IpAdd" class="form-control" [(ngModel)]="model.IpAdd" #IpAdd="ngModel" value="{{IpAdd}}">
+             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
+             
+             <div class="auth-box card">
+                   <div class="card-block">
+                     <div class="frmdata" >              
+                        <div class="containar">
+                            <div class="row">
+                                <div class="col-md-12"> 
+                                  <div class="row">
+                                        <div class="col-md-4"> 
+                                            <label class="required">Driver name *</label>
+                                              <input type="text" name="drivername"  class="form-control" [(ngModel)]="model.drivername" #drivername="ngModel" value="{{drivername}}"  [ngClass]="{'is-invalid': drivername.touched && drivername.invalid}"  required autocomplete="off">
+                                              <div *ngIf="drivername.touched && drivername.invalid" class="invalid-feedback">
+                                                  <div *ngIf="drivername.errors.required">Driver name is invalid</div>
+                                              </div>
+                                        </div>                            
+                                        <div class="col-md-4">
+                                            <label>Vehicle no</label>
+                                            <input type="text" name="vehicleno" class="form-control" [(ngModel)]="model.vehicleno" #vehicleno="ngModel" value="{{vehicleno}}"  [ngClass]="{'is-invalid': vehicleno.touched && vehicleno.invalid}"  required autocomplete="off">
+                                            <div *ngIf="vehicleno.touched && vehicleno.invalid" class="invalid-feedback">
+                                              <div *ngIf="vehicleno.errors.required">Vehicleno is invalid</div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <label>Mobile no</label>
+                                            <input type="text" name="mobileno" class="form-control" [(ngModel)]="model.mobileno" #mobileno="ngModel" value="{{mobileno}}"  [ngClass]="{'is-invalid': mobileno.touched && mobileno.invalid}"  required autocomplete="off">
+                                            <div *ngIf="mobileno.touched && mobileno.invalid" class="invalid-feedback">
+                                            <div *ngIf="mobileno.errors.required">mobileno can't be Blank</div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">
+                                            <label>Address*</label>
+                                            <textarea type="text" name="Address" class="form-control" [(ngModel)]="model.Address" #Address="ngModel" value="{{Address}}"  [ngClass]="{'is-invalid': Address.touched && Address.invalid}"  required autocomplete="off"></textarea> 
+                                            <div *ngIf="Address.touched && Address.invalid" class="invalid-feedback">
+                                              <div *ngIf="Address.errors.required">Address is invalid</div>
+                                            </div>
+                                        </div>
+                                  </div> 
+                              </div> 
+                            </div>
+                          </div>
+                     </div>
+                     <div class=" ">
+                        <div class="col-md-12 text-center" >
+                          <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary btn-md btn-sml waves-light text-center   ripple m-r-10">Save</button>
+                          <button type="button" (click)="Closeform()"  class="btn btn-primary btn-md btn-sml waves-light text-center    ripple">Reset</button>
+                        </div>
+                      </div>
+                    </div>
+              </div>       
+          </form>
+       </div> 
+     </div> 
+ </div>
