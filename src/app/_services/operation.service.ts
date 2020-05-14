@@ -277,11 +277,14 @@ export class OperationService {
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/Savecompliment',compliment,{ headers:environment.BASE_CONTENTTYPE_HEADER })
   }
-
-
   SaveDriverDetails(driver:any)
   {
     return this.http.post(environment.apiURL + '/api/CloudHMS/operation/Savedriver',driver,{ headers:environment.BASE_CONTENTTYPE_HEADER })
+  }
+
+  CheckUserDiscountAndGrace(BranchCode:string,val:number,CreatedBy:number,type:string,des:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkgrace?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
   }
 
   }

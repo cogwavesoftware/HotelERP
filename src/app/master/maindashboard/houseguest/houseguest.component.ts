@@ -22,7 +22,6 @@ export class HouseguestComponent implements OnInit {
   UserId:string;
   model:any;
   constructor(private toastyService: ToastyService,private _oprservice:OperationService) {
-
    }
 
   ngOnInit() {
@@ -38,6 +37,10 @@ export class HouseguestComponent implements OnInit {
     }    
   }
   closeMyModalPin(event){  
+
+    this.model.status="HOUSE"
+    this.model.tarif=0;
+    this.isRemoveHouse = false;
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
@@ -72,8 +75,6 @@ export class HouseguestComponent implements OnInit {
      },
      error=>{
       this.addToast("Cogwave Software", error.message, "error");
-     },
-     ()=>{
      })
 
      if( form.value.RoomCodes.tarif==0)
@@ -104,8 +105,6 @@ export class HouseguestComponent implements OnInit {
       
     },
     ()=>{
-      alert('suceesss')
-      form.reset();
      
       this.closeMyModalPin(event);
     });

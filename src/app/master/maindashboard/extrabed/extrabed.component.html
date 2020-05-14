@@ -1,5 +1,5 @@
- 
-                  <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveExtraBed(myform)" class="">
+<!-- myform.form.valid &&  -->
+                  <form #myform="ngForm" (ngSubmit)="SaveExtraBed(myform)" class="">
                     <div class="test123   guestinfofirstrow paymentarray" >
                       
                       <div class="modelstyle"> 
@@ -124,7 +124,14 @@
                   </div>
               </div>
  
-                      
+              <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0; margin-top:20px  " > 
+                <div  style="width:100%" >
+                  <div class="form-group  " style="float: right;" >                                   
+                    <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Process</button>    
+                    <button type="button" (click)="closeMyModalPin($event,form)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                 </div>
+                </div> 
+              </div>   
                     </form>
 
                  

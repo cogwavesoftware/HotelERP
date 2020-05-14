@@ -862,7 +862,13 @@
                       </div> 
                     </div> 
                   </div> 
-
+                  <div class='col-12 col-lg-12'>
+                  <div class="form-group">
+                      <label class="required">Reason</label>
+                      <textarea type="text" name="Reason" class="form-control" [(ngModel)]="model3.Reason"
+                        #Reason="ngModel" value="{{Reason}}"   required autocomplete="off"></textarea>
+                   </div>  
+                </div>
                   <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
                     <div  style="width:100%" >
                       <div class="form-group  " style="float: right;" >                                   

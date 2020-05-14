@@ -54,7 +54,7 @@
                                                </div>
                                             </div>  
         
-                                            <div class='col-12 col-md-3'>
+                                            <div class='col-12 col-md-12'>
                                               <div class="form-group">
                                                   <label class="required">Guest Name</label>
                                                   <input type="text" name="GuestName" class="form-control" [(ngModel)]="amendformdata.GuestName"
@@ -63,14 +63,14 @@
                                             </div> 
                                             
                                         
-                                          <div class='col-12 col-md-8'>
+                                          <div class='col-12 col-md-12'>
                                             <div class="form-group">
                                                 <label class="required">Reason</label>
-                                                <input type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
-                                                #Reason="ngModel"     required autocomplete="off"> 
+                                                <!-- <input type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
+                                                #Reason="ngModel"     required autocomplete="off">  -->
                                                  
-                                                  <!-- <textarea type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
-                                                  #Reason="ngModel" value="{{amendformdata.Reason}}"   required autocomplete="off"></textarea> -->
+                                                <textarea type="text" name="Reason" class="form-control" [(ngModel)]="amendformdata.Reason"
+                                                  #Reason="ngModel" value="{{amendformdata.Reason}}"   required autocomplete="off"></textarea>
                                              </div>  
                                           </div>
                                        

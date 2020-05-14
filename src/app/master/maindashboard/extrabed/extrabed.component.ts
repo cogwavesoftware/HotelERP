@@ -35,7 +35,6 @@ export class ExtrabedComponent implements OnInit {
   type = "default";
   position = 'top-right';
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
-
   previewUrl: any = null;
   previewUrl2: any = null;
   previewUrl3: any = null;
@@ -45,7 +44,6 @@ export class ExtrabedComponent implements OnInit {
   GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3: any = null;
   fileDataIdfront: File = null;
   fileDataIdBack: File = null;
-
   fileDataIdfrontSecGuest: File = null;
   fileDataIdBackSecGuest: File = null;
   back = false;
@@ -85,6 +83,7 @@ export class ExtrabedComponent implements OnInit {
       Mode: "0",  
       }    
       this.addgstform  =  this.formBuilder1.group({
+        RoomNo:[ this.extrabedform.RoomNo, Validators.required],
         guestname: ['', Validators.required] ,
         title: ['', Validators.required] ,
         gender:['', Validators.required] ,
@@ -103,13 +102,11 @@ export class ExtrabedComponent implements OnInit {
         GuestIdFront: ["", [Validators.required]],
         GuestIdBack: ["", [Validators.required]]
     });
-
     this.previewUrl = environment.GuestimagePath + '/imagenot.png';
     this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
     this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
     this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
-
     }
 
   
@@ -132,47 +129,41 @@ export class ExtrabedComponent implements OnInit {
     }
 
     SaveExtraBed(form?: NgForm) {
-      console.log('form.value')
-      console.log(form.value)
-      // form.value.BranchCode = localStorage.getItem("BranchCode")
-      // form.value.CreatedBy = localStorage.getItem("id")
-      // form.value.ModifyBy = localStorage.getItem("id")
-      // form.value.IpAddress = localStorage.getItem("LOCAL_IP")
+     
+       form.value.BranchCode = localStorage.getItem("BranchCode")
+       form.value.CreatedBy = localStorage.getItem("id")
+      
       if (form.invalid) {
         console.log(form.value);
         this.addToast("Cogwave Software", "invalid Data", "warning");
         return;
       }
-
-     
-     
       this._oprservice.SaveExtraBed(form.value).subscribe(data => {
         if (data == true) {
-          if (form.value.Id == "0") {
-            this.addToast(
-              "Cogwave Software",
-              "ExtraBed Saved Sucessfully",
-              "success"
-            );
-          form.reset();              
-          } else {
-            this.addToast(
-              "Cogwave Software",
-              "ExtraBed Data Updated Sucessfully",
-              "success"
-            );
-            form.reset();           
-          }
-        } else {
-          this.addToast("Cogwave Software", "ExtraBed Data Not Saved", "error");
-         
+            this.addToast(  "Cogwave Software", "ExtraBed Saved Sucessfully","success" );       
+        } 
+        else {
+          this.addToast("Cogwave Software", "ExtraBed Data Not Saved", "error");  
         }
+      },error=>{
+        console.log('error')
+        console.log(error)
+        this.addToast("Cogwave Software", error, "error");
+      },
+      ()=>{
+              this.closeMyModalPin(event,form)
       });
-  
-   
-     
+    
     }
- 
+
+
+    closeMyModalPin(event,form?:NgForm) {   
+     
+      var openModals = document.querySelectorAll(".md-show");
+      for (let i = 0; i < openModals.length; i++) {
+        openModals[i].classList.remove("md-show");
+      }
+    }
 
     openguestmodel(event){ 
       document.querySelector("#" + event).classList.add("md-show");
@@ -196,11 +187,9 @@ export class ExtrabedComponent implements OnInit {
       document.querySelector("#" + event).classList.add("md-show");
     } 
 
-    closeMyModalPin(event) {
-      event.target.parentElement.parentElement.parentElement.classList.remove(
-        "md-show"
-      );
-    }
+ 
+
+
     addToast(title, Message, theme) {
       debugger;
       this.toastyService.clearAll();

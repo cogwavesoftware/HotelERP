@@ -14,8 +14,8 @@ import { ChangeCompanymodel } from 'src/app/_models/ChangeCompanymodel';
   styleUrls: ['./changecompany.component.scss']
 })
 export class ChangecompanyComponent implements OnInit {
-   @Input() RoomCode: string;
-   @Input() RoomNo: string;
+   //@Input() RoomCode: string;
+   //@Input() RoomNo: string;
    @Input() changecompanyform:ChangeCompanymodel;
   Branch: string;
   UserId:number;
@@ -32,15 +32,14 @@ export class ChangecompanyComponent implements OnInit {
     private toastyService: ToastyService, 
     private route: ActivatedRoute, 
     private _masterservice: MasterformService ) {
-      this.Branch="CW_1001"    
-      this.UserId=1
+    
      }
  
 
   ngOnInit() {
     this.changecompanyform={
-      BranchCode:this.Branch,
-      CreatedBy:this.UserId,
+      BranchCode:"0",
+      CreatedBy:0,
       RoomNo: "0",
       RoomCode: "0",
       CompanyId:"0",
@@ -48,11 +47,9 @@ export class ChangecompanyComponent implements OnInit {
       TarifAmount: 0,
       Reason: "0",
       }    
-      this._masterservice.GetRoomcomany(this.Branch).subscribe(res=>{
+      this._masterservice.GetRoomcomany(localStorage.getItem('BranchCode')).subscribe(res=>{
         this.companylist=res;
       });
-
-
   }
 
 
@@ -63,6 +60,12 @@ export class ChangecompanyComponent implements OnInit {
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
+    if (form.value.CompanyId=="0") {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "Please Select Company", "warning");
+      return;
+    }
+
     this._oprservice.SaveChangeCompany(form.value).subscribe(data => {
       if (data == true) {
           this.addToast(
