@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -51,29 +52,20 @@ export class ChangepaxComponent implements OnInit {
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-
-   
     this._oprservice.SaveEditPax(form.value).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
-          this.addToast(
-            "Cogwave Software",
-            "Edit Pax Saved Sucessfully",
-            "success"
-          );
-        form.reset();              
-        } else {
-          this.addToast(
-            "Cogwave Software",
-            "Edit Pax Data Updated Sucessfully",
-            "success"
-          );
-          form.reset();           
-        }
-      } else {
-        this.addToast("Cogwave Software", "Edit Pax Data Not Saved", "error");
-       
+          this.addToast( "Cogwave Software","Edit Pax Saved Sucessfully","success" );             
+      } 
+      else
+       {
+        this.addToast("Cogwave Software", "Edit Pax Data Not Saved", "error");      
       }
+    },
+    error=>{
+      this.addToast("Cogwave Software", error, "error");
+    },
+    ()=>{
+      this.closeMyModalPin(event,form);
     });   
   }
 
@@ -84,8 +76,9 @@ export class ChangepaxComponent implements OnInit {
       this.changepaxform.ActualRate=data;
     })
   }
-
-  closeMyModalPin(event) { 
+  closeMyModalPin(event,form?:NgForm) {
+   
+    form.resetForm();
     var openModals = document.querySelectorAll(".md-show");
     for (let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show");

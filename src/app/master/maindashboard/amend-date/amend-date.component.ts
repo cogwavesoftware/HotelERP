@@ -1,3 +1,4 @@
+import { error } from 'util';
 
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -48,7 +49,6 @@ export class AmendDateComponent implements OnInit {
 
 
   ngOnInit() {
-  
     this.amendformdata={
       RoomNo:"0",
       GuestName:"0",
@@ -63,44 +63,45 @@ export class AmendDateComponent implements OnInit {
   }
   
   SaveAmend(form?: NgForm) {
+
+    if (form.invalid) {
+      console.log(form.value);
+      this.addToast("Cogwave Software", "Invalid Data", "warning");
+      return;
+    }
     debugger;
     console.log('form.value')
     console.log(form.value)
-    // if (form.invalid) {
-    //   alert('f')
-    //   console.log(form.value);
-    //   this.addToast("Cogwave Software", "invalid Data", "warning");
-    //   return;
-    // } 
-    alert('tru')
+    this.amendformdata.BranchCode=localStorage.getItem('BranchCode');
+    var Ids=localStorage.getItem('id');
+    this.amendformdata.CreatedBy=+Ids;
     this._oprservice.SaveAmend(this.amendformdata).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
-          this.addToast(
-            "Cogwave Software",
-            "Amend Data Saved Sucessfully",
-            "success"
-          );
-        form.reset();              
-        } else {
-          this.addToast(
-            "Cogwave Software",
-            "Amend Data  Updated Sucessfully",
-            "success"
-          );
-          form.reset();           
-        }
-      } else {
-        this.addToast("Cogwave Software", "Amend Data  Not Saved", "error");      
+          this.addToast("Cogwave Software","Amend Data Saved Sucessfully","success");
       }
+       else {
+        this.addToast("Cogwave Software", "Amend Data  Not Saved", "warning");      
+      }
+    },
+    error=>{
+      this.addToast("Cogwave Software", error, "error");   
+    },
+    ()=>{
+      this.closeMyModalPin(event)
     });   
   }
-  closeMyModalPin(event) { 
+
+
+ closeMyModalPin(event) {
+  this.amendformdata.AmendTime=new Date();
+  this.amendformdata.AmendDate=new Date(); 
+  this.amendformdata.CheckoutDate=new Date();
     var openModals = document.querySelectorAll(".md-show");
     for (let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show");
     }
   }
+
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();

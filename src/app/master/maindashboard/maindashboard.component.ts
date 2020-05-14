@@ -135,7 +135,8 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       RoomNo: this.RoomNos,
       RoomCode: this.RoomCodes,
       Grace:1,
-      Particular: "S"
+      Particular: "S",
+      Reason:""
     };
 
     this._reservationservice.GetBookingList(this.Branch).subscribe(data => {
@@ -218,8 +219,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   closeMyModalPin(event) {
-
     console.log("remove");
+    this.model3.Reason="";
+    this.model3.Grace=1;
+    this.model3.Particular="S";
     var openModals = document.querySelectorAll(".md-show");
     for (let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show");
@@ -412,13 +415,24 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-
+    
+    this._OprService.CheckUserDiscountAndGrace(this.Branch,this.model3.Grace,this.UserId,"0","G").subscribe(data=>{
+      if(data)
+      {}
+      else
+      {
+        this.addToast("Cogwave Software", "Please Contact Admin", "error"); 
+        return 
+      }
+    });
+     
+    
     
     this._oprservice.SaveGracePeroid(this.model3).subscribe(data => {
       if (data == true) {
         this.addToast(
           "Cogwave Software Technologies Pvt Ltd..",
-          "Congratulations Data Saved Sucessfully",
+          "Grace Peroid Saved Sucessfully",
           "success"
         );
       } 
