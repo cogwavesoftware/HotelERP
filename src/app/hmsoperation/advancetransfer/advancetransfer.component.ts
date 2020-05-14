@@ -115,6 +115,10 @@ export class AdvancetransferComponent implements OnInit {
     })
    
   }
+
+
+  
+
   addToast(title, Message, theme) {
     debugger;
     this.toastyService.clearAll();

@@ -44,17 +44,14 @@ Typelist:any;
     Mode:"0"
     }    
   }
-
   LoadType(RoomNo:string )
   {
     this._oprservice.GetRoomTypeViaRoomNo(this.roomshifftformmodel.BranchCode,RoomNo).subscribe(data => {
              this.Typelist=data;
     })
   }
-
   GetRoomValue(Description:string,Amount:number,RoomNo:string,RoomCode:string,SRoomNo:string)
-  {
-   
+  { 
     this.Getvaluemodel={   
       Description:Description,
       Amount:Amount,
@@ -94,7 +91,6 @@ Typelist:any;
         console.log(data)
      })
     },3000)
-   
 
   }
 
@@ -122,8 +118,6 @@ Typelist:any;
 
 
   SaveRoomShift(form?: NgForm) {
-    console.log('form.value')
-    console.log(form.value)
     // form.value.BranchCode = localStorage.getItem("BranchCode")
     // form.value.CreatedBy = localStorage.getItem("id")
     // form.value.ModifyBy = localStorage.getItem("id")
@@ -133,37 +127,33 @@ Typelist:any;
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-
-   
     this._oprservice.SaveRoomShifft(form.value).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
-          this.addToast(
-            "Cogwave Software",
-            "RoomShift Saved Sucessfully",
-            "success"
-          );
-        form.reset();              
-        } else {
-          this.addToast(
-            "Cogwave Software",
-            "RoomShift Data Updated Sucessfully",
-            "success"
-          );
-          form.reset();           
+          this.addToast("Cogwave Software","RoomShift Saved Sucessfully",  "success");  
+        } 
+        else
+        {
+          this.addToast("Cogwave Software", "Advance  Not Saved", "error");  
         }
-      } else {
-        this.addToast("Cogwave Software", "RoomShift Data Not Saved", "error");
-       
-      }
-    });
-
- 
-   
+      },
+      error=>{
+        console.log('error')
+        console.log(error)
+        this.addToast("Cogwave Software", "Advance  Not Saved", "error");
+      },
+      ()=>{
+        this.closeMyModal(event,form)
+      });
   }
  
 
-
+  closeMyModal(event,form?:NgForm){  
+    form.resetForm();
+    var openModals = document.querySelectorAll(".md-show");
+    for(let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show"); 
+    }  
+  }
   
   addToast(title, Message, theme) {
     debugger;
@@ -206,11 +196,5 @@ Typelist:any;
     }
   }
   
-  closeMyModal(event,form?:NgForm){  
-    form.resetForm();
-    var openModals = document.querySelectorAll(".md-show");
-    for(let i = 0; i < openModals.length; i++) {
-      openModals[i].classList.remove("md-show"); 
-    }  
-  }
+
 }

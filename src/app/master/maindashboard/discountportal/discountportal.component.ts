@@ -90,17 +90,7 @@ export class DiscountportalComponent implements OnInit {
       },
       () => {
       
-        // this.discountportalform.reset();
-        // this.minDate = new Date();
-        // this.maxDate.setDate(this.minDate.getDate() + 1);
-        // this.discountportalform.patchValue({
-        //   ProcessDate: prodate,
-        //   DiscountType:"0",
-        //   AllowanceAmt:0,
-        //   Status: "DISCOUNT",
-        //   BranchCode:localStorage.getItem("BranchCode"),
-        //   CreatedBy:localStorage.getItem("Id")
-        // })
+      
         this.closeMyModalPin(event);
       });
   }
@@ -116,6 +106,9 @@ export class DiscountportalComponent implements OnInit {
           DiscountType:"0",
           AllowanceAmt:0,
           Status: "DISCOUNT",
+          RoomNo:this.RoomNo,
+          RoomCode:this.RoomCode,
+          Particular:"S",
           BranchCode:localStorage.getItem("BranchCode"),
           CreatedBy:localStorage.getItem("Id")
         })

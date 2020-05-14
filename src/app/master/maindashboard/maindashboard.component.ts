@@ -264,7 +264,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   // Release-OpenReleaseModel
 
   OpenModel(event, RoomNo) {
-    clearInterval(this.DasboardLoad);
+   
     let Description = event;
     switch (Description) {
       case "Blockdetails":

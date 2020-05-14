@@ -70,26 +70,25 @@ export class AdvanceformComponent implements OnInit {
       roomcode:this.RoomCode
     })
     console.log(this.Roomadvanceform.value)
-
   this._oprservice.SaveAdvanceData(this.Roomadvanceform.value).subscribe(data => {
     if (data == true) {     
         this.addToast(
           "Cogwave Software",
           "Advance Saved Sucessfully",
           "success"
-        );
-        this.Roomadvanceform.reset();      
+        );        
     } 
     else {
-      this.addToast("Cogwave Software", "Advance  Not Saved", "error");
-      this.Roomadvanceform.reset();      
-     
+      this.addToast("Cogwave Software", "Advance  Not Saved", "error");  
     }
   },
   error=>{
     console.log('error')
     console.log(error)
     this.addToast("Cogwave Software", "Advance  Not Saved", "error");
+  },
+  ()=>{
+    this.closeMyModalPin(event)
   });
 
 }
@@ -156,12 +155,33 @@ GetAllRoomAdvanceList(RoomNo: string)
   })
 
 }
-closeMyModalPin(event) { 
-  var openModals = document.querySelectorAll(".md-show");
-  for (let i = 0; i < openModals.length; i++) {
-    openModals[i].classList.remove("md-show");
-  }
+
+removeItem() {
+  let val =10;
+ for(let k=0; k<val; k++)
+ {
+   let len=this.PayArray.length
+   if(len>=1)
+   {
+    this.PayArray.removeAt(this.PayArray.length - 1);
+   }
+ }  
 }
+closeMyModalPin(event) {
+this.Roomadvanceform.reset();
+this.Roomadvanceform.patchValue({
+  RoomNo:this.RoomNo,
+  RoomCode:this.RoomCode,
+  CreatedBy:this.UserId,
+  BranchCode:this.Branch, 
+})
+this.removeItem();
+var openModals = document.querySelectorAll(".md-show");
+for (let i = 0; i < openModals.length; i++) {
+  openModals[i].classList.remove("md-show");
+}
+}
+
 addToast(title, Message, theme) {
   debugger;
   this.toastyService.clearAll();
