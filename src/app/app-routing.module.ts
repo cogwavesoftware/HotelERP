@@ -305,6 +305,11 @@ const routes: Routes = [
        //  loadChildren: './master/maindashboard/blockingdetails/blockingdetails.module#BlockingdetailsModule'
         loadChildren: () => import('./master/maindashboard/blockingdetails/blockingdetails.module').then(m=>m.BlockingdetailsModule)
       },
+      {
+        path: 'drivermaster',
+      //  loadChildren: './master/bankname/bankname.module#BanknameModule'
+        loadChildren: () => import('./master/drivermaster/drivermaster.module').then(m=>m.DrivermasterModule)
+      }
       //{
        // path: 'discountportal',
        //  loadChildren: './master/maindashboard/discountportal/discountportal.module#DiscountportalModule'
