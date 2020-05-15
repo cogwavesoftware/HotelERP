@@ -8,6 +8,7 @@ import { DataTableModule } from 'angular2-datatable';
 import { HttpClientModule } from '@angular/common/http';
 
 
+import { ToastyModule } from 'ng2-toasty';
 @NgModule({
   declarations: [DrivermasterComponent],
   imports: [
@@ -18,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     DataTableModule,
     HttpClientModule,
-    DrivermasterRoutingModule
+    DrivermasterRoutingModule,ToastyModule.forRoot()
   ]
 })
 export class DrivermasterModule { }

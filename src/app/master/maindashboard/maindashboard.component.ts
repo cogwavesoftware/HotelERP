@@ -1,3 +1,4 @@
+import { AdvanceformComponent } from './advanceform/advanceform.component';
 import { Roominstructionmodel } from "./../../_models/Roominstructionmodel";
 
 import {
@@ -5,6 +6,7 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
+  AfterContentChecked,AfterContentInit,AfterViewChecked,
   AfterViewInit,
   DoCheck
 } from "@angular/core";
@@ -44,7 +46,7 @@ import { Foodcouponmodel } from "src/app/_models/Foodcouponmodel";
     "../../../assets/icon/icofont/css/icofont.scss"
   ]
 })
-export class MaindashboardComponent implements OnInit, OnDestroy {
+export class MaindashboardComponent implements OnInit ,OnDestroy {
   public roomsdetail;
   model2: any = {};
   model3: any = {};
@@ -52,7 +54,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   roomname: any;
   golbalresponse: any;
   RoomNoArray: string[] = [];
- 
+
   OriginalArray: string[] = [];
   selectedRoomNoArray: string[] = [];
   DasboardLoad: any;
@@ -95,10 +97,13 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   isValid(event: boolean): void {
     this.valid = event;
   }
+  Advalist:any;
+  Complist:any;
   Todaydate = new Date()
   @ViewChild(BlockingdetailsComponent, { static: false })
   block: BlockingdetailsComponent;
   @ViewChild("Name1", { static: false }) name: ElementRef;
+  @ViewChild(AdvanceformComponent,{ static: false }) viewChild: AdvanceformComponent;
   constructor(private confirmationDialogService: ConfirmationDialogService,
     private datePipe: DatePipe,
     private _masterformservice: MasterformService,
@@ -117,7 +122,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   
+
     this.model = {
       Id: 0,
       BranchCode: this.Branch,
@@ -130,7 +135,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     };
 
     this.model3 = {
-     
+
       BranchCode: this.Branch,
       CreatedBy: this.UserId,
       RoomNo: this.RoomNos,
@@ -162,6 +167,29 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     clearInterval(this.DasboardLoad);
   }
 
+  // ngAfterViewInit() :void {
+  //  this.doSomething();
+  // }
+
+  ngAfterViewChecked() {
+    // // viewChild is updated after the view has been checked
+    // if (this.prevHero === this.viewChild.hero) {
+    //   this.logIt('AfterViewChecked (no change)');
+    // } else {
+    //   this.prevHero = this.viewChild.hero;
+    //   this.logIt('AfterViewChecked');
+    //   this.doSomething();
+    // }
+    //alert('ngAfterViewChecked')
+  }
+  private doSomething() {
+    alert('dosothing')
+    // let c = this.viewChild.hero.length > 10 ? `That's a long name` : '';
+    // if (c !== this.comment) {
+    //   // Wait a tick because the component's view has already been checked
+    //   this.logger.tick_then(() => this.comment = c);
+    // }
+  }
   LoadReservationCheckinpage(ResNo: string) {
     this.router.navigate(["/Master/reschk", ResNo]);
   }
@@ -268,7 +296,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
   // Release-OpenReleaseModel
 
   OpenModel(event, RoomNo) {
-   
+
     let Description = event;
     switch (Description) {
       case "Blockdetails":
@@ -278,8 +306,15 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
             this.Groupblock = res;
           })
           break;
-        
+
       case "Management":
+        break; 
+        case "Compliment":
+
+          this._oprservice.GetComplementDataRoomWise(this.Branch,RoomNo).subscribe(data=>{
+            this.Complist=data;
+            console.log(this.Complist)
+          })
         break;
       case "Release":
         break;
@@ -296,6 +331,10 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       case "Post":
         break;
       case "Advance":
+        this._oprservice.GetAdvanceReceiptByRoomNo(this.Branch,RoomNo).subscribe(data=>{
+        this.Advalist=data;
+        console.log(this.Advalist)
+      })
         break;
       case "Shifft":
         this.ProcessRoomShift(RoomNo);
@@ -344,7 +383,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     console.log("event");
     document.querySelector("#" + event).classList.add("md-show");
   }
-
+  
   ProcessLinkRoom(RoomNo: string, Des: string) {
     this.selectedRoomNoArray = [];
     this.linkroommodel = [];
@@ -416,19 +455,19 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
       this.addToast("Cogwave Software", "invalid Data", "warning");
       return;
     }
-    
+
     this._OprService.CheckUserDiscountAndGrace(this.Branch,this.model3.Grace,this.UserId,"0","G").subscribe(data=>{
       if(data)
       {}
       else
       {
-        this.addToast("Cogwave Software", "Please Contact Admin", "error"); 
-        return 
+        this.addToast("Cogwave Software", "Please Contact Admin", "error");
+        return
       }
     });
-     
-    
-    
+
+
+
     this._oprservice.SaveGracePeroid(this.model3).subscribe(data => {
       if (data == true) {
         this.addToast(
@@ -436,9 +475,9 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
           "Grace Peroid Saved Sucessfully",
           "success"
         );
-      } 
-      else {       
-        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");  
+      }
+      else {
+        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
       }
     },
     error => {
@@ -798,8 +837,8 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
         case "Dirtypoup":
           break;
           case "Managementpop":
-          break;       
-        
+          break;
+
     }
     console.log(event);
     console.log("event");
@@ -812,7 +851,7 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     allbtn.classList.remove("md-show");
   }
 
- 
+
   ngAfterViewInit() {
     // server-side search
 
