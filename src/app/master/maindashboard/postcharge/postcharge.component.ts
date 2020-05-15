@@ -226,6 +226,7 @@ export class PostchargeComponent implements OnInit,OnDestroy {
 
 
   closeMyModalPin(event) {
+
     this.form.reset();
     this.form.patchValue({
       RoomNo:this.RoomNo,
@@ -242,6 +243,7 @@ export class PostchargeComponent implements OnInit,OnDestroy {
     for (let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show");
     }
+    
   }
 
 

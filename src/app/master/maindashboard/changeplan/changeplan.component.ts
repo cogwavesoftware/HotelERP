@@ -68,21 +68,25 @@ export class ChangeplanComponent implements OnInit {
       this.addToast("Cogwave Software", error.message, "error");
     },
     ()=>{
-      alert('suceesss')
-      form.reset();
-      this.changeplanformmodel.CPlan="0"
+      //form.reset();  
       this.closeMyModalPin(event);
     });
   }
 
   closeMyModalPin(event){ 
-    this.form.reset();  
+    
+     this.form.reset({
+      CPlan: "0"
+    });
     this.changeplanformmodel.CPlan="0"
+    console.log( 'this.changeplanformmodel.CPlan="0"')
+    console.log( this.changeplanformmodel.CPlan)
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
     } 
     var maindashboard = document.querySelectorAll(".maindashboard"); 
+    
   }
 
   addToast(title, Message, theme) {

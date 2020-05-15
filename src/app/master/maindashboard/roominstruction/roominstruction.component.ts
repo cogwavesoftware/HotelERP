@@ -35,7 +35,7 @@ datePickerConfig: Partial<BsDatepickerConfig>;
   }
   closeMyModalPin(event){ 
     this.form.reset();  
-    //this.changeplanformmodel.CPlan="0"
+    
     var openModals = document.querySelectorAll(".md-show");
     for(let i = 0; i < openModals.length; i++) {
       openModals[i].classList.remove("md-show"); 
@@ -56,26 +56,17 @@ datePickerConfig: Partial<BsDatepickerConfig>;
    
     this._oprservice.SaveRoomInstruction(this.RoomInstruction).subscribe(data => {
       if (data == true) {
-        if (form.value.Id == "0") {
-          this.addToast(
-            "Cogwave Software",
-            "Guest Instruction Saved Sucessfully",
-            "success"
-          );
-        form.reset();              
-        } else {
-          this.addToast(
-            "Cogwave Software",
-            "Guest Instruction Data Updated Sucessfully",
-            "success"
-          );
-          form.reset();           
-        }
-      } else {
+          this.addToast("Cogwave Software", "Guest Instruction Saved Sucessfully", "success"  );
+      }
+       else {
         this.addToast("Cogwave Software", "Guest Instruction Data Not Saved", "error");      
       }
-    });
-
+    },
+      error=>{
+        this.addToast("Cogwave Software", error, "error"); 
+      },()=>{
+      this.closeMyModalPin(event)
+      });
   }
 
 

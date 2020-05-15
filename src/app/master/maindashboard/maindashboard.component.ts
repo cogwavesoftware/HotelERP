@@ -113,10 +113,11 @@ export class MaindashboardComponent implements OnInit, OnDestroy {
     private _OprService: OperationService
   ) {
     this.Branch = "CW_1001";
-    this.UserId = 1;
+    this.UserId = 4;
   }
 
   ngOnInit() {
+   
     this.model = {
       Id: 0,
       BranchCode: this.Branch,
