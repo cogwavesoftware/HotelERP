@@ -1,14 +1,24 @@
 <div class="outerdiv">
+
+  <div class="card-header ripple ng-tns-c6-1 ng-star-inserted">
+    <div class="row">
+        <div class="col-md-11">
+            <h5 class="ng-tns-c6-1">Petty Voucher Entry</h5>         
+            <span class="ng-tns-c6-1 ng-star-inserted">Petty Voucher Entry Details... </span>
+          </div> 
+    </div>
+  </div>
+</div>
+
+<div class="outerdiv">
     <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
   
-      <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
+      <form [formGroup]="form" (ngSubmit)="Submit()" class="shadow p-3 mb-5 bg-white rounded ng-untouched ng-pristine ng-valid " autocomplete="off">
         <input type="hidden" class="form-control tooltip-form searchiconrelative" id="Id" formControlName="Id" name="Id" autocomplete="off"  /> 
         <input type="hidden" class="form-control tooltip-form searchiconrelative" id="voucherno" formControlName="voucherno" name="voucherno" autocomplete="off"  /> 
         <div class="container-fluid"  style="background-color: #fff;">
    
-          <div class='row tabouter' style="margin-bottom: 0;">
-            <h2 class="h2class"><i class="fa fa-money" aria-hidden="true"></i> Petty Voucher Entry </h2>
-
+          <div class='row tabouter' style="margin-bottom: 0;"> 
             <div class="col-md-12" style="padding-left: 0;">
               <div class="userlist">
               <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
@@ -107,7 +117,14 @@
             </div>
           </div>
 
-          <button type="submit" id="save" class="btn btn-sm btn-primary m-r-5 m-b-10 m-l-5 float-right" >Save</button>                                                                                 
+
+          <div class="row" style="width: 100%; display:inline-block">
+            <!-- <button type="button"  (click)="CloseFormmodel()"  class="btn btn-sm btn-danger m-r-5 m-l-5 float-right" >Close</button>                                                                   -->
+            <button type="submit" id="save" class="btn btn-sm btn-primary m-r-5  m-l-5 float-right" >Save</button>       
+           </div>
+
+
+           
 
         </div>
         
