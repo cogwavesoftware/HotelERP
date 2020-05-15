@@ -1,5 +1,3 @@
-import { NgForm } from '@angular/forms';
-
 import { Component, OnInit, Inject, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";

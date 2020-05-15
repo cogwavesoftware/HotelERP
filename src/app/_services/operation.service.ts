@@ -284,7 +284,7 @@ export class OperationService {
 
   CheckUserDiscountAndGrace(BranchCode:string,val:number,CreatedBy:number,type:string,des:string)
   {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkgrace?BranchCode=' + BranchCode + '&BookingNo=' + BookingNo);
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkgrace?BranchCode=' + BranchCode + '&BookingNo=' + BranchCode);
   }
 
   }
