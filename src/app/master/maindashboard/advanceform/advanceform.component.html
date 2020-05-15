@@ -110,6 +110,19 @@
               </div>  
         </div>  
       </div> 
+
+    </div> <!-- end of modelstyle -->
+  </div><!-- end of payment --> 
+
+      <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0; margin-top:20px  " > 
+        <div  style="width:100%" >
+          <div class="form-group  " style="float: right;" >                                   
+            <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+            <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+         </div>
+        </div> 
+      </div> 
+</form>
 <div class="altertable ">
   <div >
     <div class="table-responsive">
@@ -124,48 +137,21 @@
             <td>Date </td>
             <td>Receipt No</td> 
             <td> Amount  </td>
-            <td> Mode  </td>
-            <td> Action  </td> 
+            <td> BookingNo  </td>
+          
           </tr>
-          <tr>
-            <td>10/10/20</td>
-            <td>1</td> 
-            <td>1000</td> 
-            <td>Cash</td> 
-            <td style="text-align: center;"><a href="#"><i  class="fa fa-file-pdf-o"></i></a></td>
-          </tr> 
-          <tr>
-            <td>10/10/20</td>
-            <td>1</td> 
-            <td>1000</td> 
-            <td>Cash</td> 
-            <td style="text-align: center;"><a href="#"><i  class="fa fa-file-pdf-o"></i></a></td>
-          </tr> 
-          <tr>
-            <td>10/10/20</td>
-            <td>1</td> 
-            <td>1000</td> 
-            <td>Cash</td> 
-            <td style="text-align: center;"><a href="#"><i  class="fa fa-file-pdf-o"></i></a></td>
-          </tr> 
+          <tr *ngFor="let item of Advalist; let i = index;">
+            <td>{{item.TrDate | date}}</td>  
+            <td>{{item.ReceiptNo}}</td>   
+            <td>{{item.PaidAmount}}</td>
+            <td>{{item.ReservationNo}}</td>
+          </tr>
+          
         </tbody>
       </table>
     </div>
   </div>
 </div>
-    </div> <!-- end of modelstyle -->
-  </div><!-- end of payment --> 
-
-      <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0; margin-top:20px  " > 
-        <div  style="width:100%" >
-          <div class="form-group  " style="float: right;" >                                   
-            <button type="submit"   class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
-            <button type="button" (click)="closeMyModalPin($event)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
-         </div>
-        </div> 
-      </div> 
-</form>
- 
  
 <!-- 
 <ng2-toasty [position]="position"></ng2-toasty>  -->

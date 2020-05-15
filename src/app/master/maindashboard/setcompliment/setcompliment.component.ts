@@ -27,6 +27,7 @@ export class SetcomplimentComponent implements OnInit {
   @Input() RoomName: string;
   
   @Input() Room: string;
+  @Input() Complist: any;
   categories: any[];
   constructor(private _masterformservice: MasterformService,private _oprservice:OperationService,
     private _ipservice: IpserviceService,
@@ -49,7 +50,7 @@ export class SetcomplimentComponent implements OnInit {
 
    
 
-    this.data = this._masterformservice.getrevenudata(this.Branch);
+   // this.data = this._masterformservice.getrevenudata(this.Branch);
 
     this._masterformservice.getrevenudata(this.Branch).subscribe(data=>{
       data.forEach(obj => (obj.selected = false));

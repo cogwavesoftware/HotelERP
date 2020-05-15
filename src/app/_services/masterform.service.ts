@@ -368,9 +368,16 @@ export class MasterformService {
   {
     return this.http.get(environment.apiURL + '/api/CloudHMS/Master/GetStateCode');
   }
+ 
+  GetDriverMaster(BranchCode:string)
+  {
+    return this.http.get(environment.apiURL + '/api/CloudHMS/Master/getdriver?BranchCode=' + BranchCode);
+  }
 
-
-
+  SaveDriverMaster(driv:any)
+  {
+    return this.http.post(environment.apiURL + '/api/CloudHMS/Master/savedriver',driv,{ headers:environment.BASE_CONTENTTYPE_HEADER })  
+  }
 
 
   // registerUser(user: User,roles : string[]) {

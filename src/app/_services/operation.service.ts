@@ -29,10 +29,10 @@ export class OperationService {
   }
 
 
-  GetCheckinDataViaRoomNo(BranchCode: string,RoomNo:string)
-  {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/CheckinData?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
-  }
+  // GetCheckinDataViaRoomNovv(BranchCode: string,RoomNo:string)
+  // {
+  //   return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/CheckinData?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  // }
 
 
   GetExtraBedFormData(BranchCode: string,RoomNo:string,NoofBed:number)
@@ -284,7 +284,17 @@ export class OperationService {
 
   CheckUserDiscountAndGrace(BranchCode:string,val:number,CreatedBy:number,type:string,des:string)
   {
-    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkgrace?BranchCode=' + BranchCode + '&BookingNo=' + BranchCode);
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/checkgrace?BranchCode=' + BranchCode + '&val=' + val + '&CreatedBy=' + CreatedBy + '&type=' + type + '&des=' + des);
+  }
+
+  GetAdvanceReceiptByRoomNo(BranchCode:string,RoomNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getreceiptbyno?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
+  }
+
+  GetComplementDataRoomWise(BranchCode:string,RoomNo:string)
+  {
+    return this.http.get<any>(environment.apiURL + '/api/CloudHMS/operation/getcomplimentbyno?BranchCode=' + BranchCode + '&RoomNo=' + RoomNo);
   }
 
   }

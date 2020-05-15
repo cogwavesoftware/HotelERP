@@ -17,6 +17,8 @@ import { ToastData,ToastOptions,ToastyService } from 'ng2-toasty'
 export class AdvanceformComponent implements OnInit {
   @Input() RoomCode: string;
   @Input() RoomNo: string;
+  @Input() Advalist: any;
+  
   Branch: string;
   theme = "bootstrap";
   type = "default";
@@ -24,14 +26,15 @@ export class AdvanceformComponent implements OnInit {
   Roomadvanceform: FormGroup;
   submitted = false;
   subpaymodelist:any;
-  UserId:number;
+  UserId:string;
+  Advalists:any;
   paymentmode: string[] = ["Cash", "Card", "Online", "Walet"];
   constructor(  
     public router: Router,private toastyService: ToastyService,
     public formBuilder: FormBuilder,private _oprservice:OperationService,private route: ActivatedRoute,
     private _masterservice: MasterformService ) {
-      this.Branch="CW_1001" 
-      this.UserId=1      
+      this.Branch=localStorage.getItem('BranchCode');
+      this.UserId=localStorage.getItem('id');
      }
  
      ngOnInit() {
@@ -42,8 +45,10 @@ export class AdvanceformComponent implements OnInit {
         CreatedBy: [this.UserId, [Validators.required]] ,
         PayArray: this.formBuilder.array([this.AddpaymentGrid()]), 
       }); 
-    }
 
+
+      
+    }
 
     AddpaymentGrid(): FormGroup {
       return this.formBuilder.group({
