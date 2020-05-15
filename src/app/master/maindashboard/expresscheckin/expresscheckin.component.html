@@ -1,11 +1,6 @@
 
 
-<div class="shiftroom discountfrm">
-    <div class="formdesign" style="padding: 0;">
-        <div class="userlist">
-
-            <div class="row">
-                <div class="col-md-12" >  
+ 
                     <form #myform="ngForm" (ngSubmit)="myform.form.valid && SaveRoomShift(myform)" class="">
                       <div class="test123   guestinfofirstrow paymentarray" >
                         <div class="modelstyle"> 
@@ -110,31 +105,22 @@
 
                               </div>
                             </div>
-                          </div>   
+                          </div>             
 
-                      
+                              <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
+                                <div  style="width:100%" >
+                                  <div class="form-group  " style="float: right;" >                                   
+                                    <button type="submit"  [disabled]="myform.form.invalid" class="btn btn-success "  style=" display:inline-block"><i class="fa fa-save"></i> Save</button>    
+                                    <button type="button" (click)="closeMyModal($event,myform)"  class="btn btn-danger" style="margin-left: 10px; display:inline-block"> <i class="fa  fa-times-circle"></i> Close</button>                           
+                                 </div>
+                                </div> 
+                              </div> 
 
-                        
-                              <div class="guestinfofirstrow  row">
-                                <div class='col-12 col-lg-12'>
-                                    <div class="form-group  float-right" >                                   
-                                        <button type="submit" [disabled]="myform.form.invalid" class="btn btn-success " ><i class="fa fa-save"></i> Save</button>    
-                                        <button type="button" (click)="closeMyModal($event,myform)"  class="btn btn-danger" > <i class="fa  fa-times-circle"></i> Close</button>                           
-                                     </div>  
-                                  </div> 
-                              </div>
                         
                       </form>
 
 
-                 
-                          </div>
-                   </div>       
                   
-        </div>
-     </div>
- </div>
-
   
 
   

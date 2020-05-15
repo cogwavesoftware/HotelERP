@@ -32,7 +32,7 @@
                                         <div class='col-12 col-lg-6 col-md-4 col-sm-4'>
                                           <div class="form-group"> 
                                             <input type="radio" value="LONG" (click)="Selected('LONG')" class="form-control" style="width: 15px;float:left" formControlName="Status">  
-                                            <label class="form-control-label" for="Long Time">Long Time </label>
+                                            <label class="form-control-label" for="Long Time" style="padding: 2px 0px 0px 10px">Long Time </label>
                                           </div>
                                         </div>
                                        
@@ -49,28 +49,28 @@
                             
    
                                     <div class="guestinfofirstrow  row">
-                                      <div class='col-12 col-lg-4'>
+                                      <div class='col-12 col-lg-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="date">From</label>
                                           <input  id="BlockDate" name="BlockDate"  formControlName="BlockDate"  readonly type="text" bsDatepicker  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control"> 
                                          </div>  
                                       </div>
                                      
-                                      <div class='col-12 col-lg-4'>
+                                      <div class='col-12 col-lg-3'>
                                         <div class="form-group">
                                           IsLongTime                <label class="form-control-label" for="date">To</label>
                                           <input  id="ReleaseDate" name="ReleaseDate"  formControlName="ReleaseDate"  readonly type="text" bsDatepicker   [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">
                                          </div>  
                                       </div>
                                       
-                                      <div class='col-12 col-lg-4'>
+                                      <div class='col-12 col-lg-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="rmno">Room No </label>
                                           <input type="text" class="form-control tooltip-form" id="roomnod" formControlName="RoomNo" value=" {{RoomNo}}" readonly name="RoomNo" autocomplete="off"  required  />  
          
                                           </div>  
                                       </div>
-                                      <div class='col-12 col-lg-4'>
+                                      <div class='col-12 col-lg-3'>
                                         <div class="form-group">
                                           <label class="form-control-label" for="rmcd">Room Code </label>
                                           <input type="text" class="form-control tooltip-form" id="roomcoded" formControlName="RoomCode" value=" {{RoomCode}}" readonly name="RoomCode" autocomplete="off"  required  />  
@@ -93,8 +93,8 @@
                         </div>
                         <div class="row modelbtn">   
                           <div class="col-md-12">
-                            <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-primary"><i class="fa  fa-close"></i> Exit </button>
-                            <button  type="submit"  class="btn btn-primary"> Process </button> 
+                            <button  type="button"  (click)="closeMyModalPin($event)" class="btn btn-danger"><i class="fa  fa-close"></i> Exit </button>
+                            <button  type="submit"  class="btn btn-success"> Process </button> 
                           </div>  
                          </div>  
                     </div>

@@ -809,67 +809,61 @@
         <!-- Grace -->
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Grace'" [modalClass]="'md-effect-2'">
-              <div class="app-modal-body">
+              <div class="app-modal-body" >
                 <button type="button" class="close basic-close-light-box" (click)="modalVacentHide($event)">
                   <span aria-hidden="true">&times;</span>
                 </button>
                 <label class="font-header" style="background-color: orange; color: #ffffff; padding: 10px;  width: 100%;">Management RoomNo  {{rmno}} ({{roomname1}}) </label>       
                 <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'465px'"
                   [config]="config">
-                  <div class="row">
-                    <div class="col-sm-12">
+                   
                       <form #myform1 = "ngForm" (ngSubmit) =" SaveGrace(myform1)" class="">
                         <div class="test123 guestinfofirstrow paymentarray" >
                           <div class="modelstyle">  
                             <div class="row"> 
-                        <div class="app-modal-body text-center addcompany ">  
+                        <div class="app-modal-body text-center addcompany " style="width: 100%;">  
                          <div class="col-md-12"> 
                            <div class="row">                                                  
                             <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model3.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">               
                             <input type="hidden" name="CreatedBy" class="form-control" [(ngModel)]="model3.CreatedBy" #CreatedBy="ngModel" value="{{CreatedBy}}">
-                             
-                        
-                             <div class="col-md-4">
-                              <label class="required">RoomNo</label>
-                              <input type="text" name="RoomNo" readonly class="form-control" [(ngModel)]="model3.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off">
-                                 
+                      
+                             <div class="col-md-3">
+                              <label class="required lbl"  >RoomNo</label>
+                              <input type="text" name="RoomNo" readonly class="form-control" [(ngModel)]="model3.RoomNo" #RoomNo="ngModel" value="{{RoomNo}}"  [ngClass]="{'is-invalid': RoomNo.touched && RoomNo.invalid}"  required autocomplete="off"> 
                              </div>
-                             <div class="col-md-4">
-                              <label>RoomCode</label>
+                             <div class="col-md-3">
+                              <label class="lbl">RoomCode</label>
                               <input type="text" name="RoomCode" class="form-control" [(ngModel)]="model3.RoomCode" #RoomCode="ngModel" value="{{RoomCode}}"  [ngClass]="{'is-invalid': RoomCode.touched && RoomCode.invalid}" readonly required  autocomplete="off">                        
                              </div>
-                             <div class="col-md-4"  >
-                               
-                               <label>Grace*</label>
+                             <div class="col-md-3"  > 
+                               <label class="lbl">Grace*</label>
                                <input type="number" min="10" max="10" name="Grace" class="form-control" [(ngModel)]="model3.Grace" #Grace="ngModel" value="{{Grace}}"  [ngClass]="{'is-invalid': Grace.touched && Grace.invalid}"  required   autocomplete="off">
                                <div *ngIf="Grace.touched && Grace.invalid" class="invalid-feedback">
                                  <div *ngIf="Grace.errors.required">Grace Cant'be Empty</div>
                                </div>
                            </div>
     
-                           <div class="col-md-4">
-                            <label>Select Grace</label>
+                           <div class="col-md-3">
+                            <label class="lbl" >Select Grace</label>
                             <select class="custom-select" id="Particular" #Particular="ngModel"  name="Particular" [(ngModel)]="model3.Particular">
                               <option value="S">SingleRoom</option>
                               <option value="G">GroupRoom</option> 
                             </select>
                            </div> 
-                           </div> 
-                             
-             
+                           </div>  
                          </div>
-                   
+                         <div class='col-12 col-lg-12'>
+                          <div class="form-group">
+                              <label class="required lbl">Reason</label>
+                              <textarea type="text" name="Reason" class="form-control" [(ngModel)]="model3.Reason"
+                                #Reason="ngModel" value="{{Reason}}"   required autocomplete="off"></textarea>
+                           </div>  
+                        </div>
                        </div> 
                       </div> 
                     </div> 
                   </div> 
-                  <div class='col-12 col-lg-12'>
-                  <div class="form-group">
-                      <label class="required">Reason</label>
-                      <textarea type="text" name="Reason" class="form-control" [(ngModel)]="model3.Reason"
-                        #Reason="ngModel" value="{{Reason}}"   required autocomplete="off"></textarea>
-                   </div>  
-                </div>
+                  
                   <div class="col-md-12 row" style="padding-left: 0; padding-right: 0; margin:0;  " > 
                     <div  style="width:100%" >
                       <div class="form-group  " style="float: right;" >                                   
@@ -879,8 +873,7 @@
                     </div> 
                   </div> 
                    </form>
-                    </div>        
-                  </div>
+                    
                 </perfect-scrollbar>    
               </div>            
             </app-modal-animation>
