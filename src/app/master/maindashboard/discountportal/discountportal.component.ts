@@ -16,6 +16,7 @@ import { DiscountFormmodel } from 'src/app/_models/DiscountFormmodel';
 export class DiscountportalComponent implements OnInit {
   discountvalue: string[] = ["%", "Amount"];
   Branch: string;
+  UserId:number;
   discountportalform: FormGroup;
   submitted = false;
   minDate = new Date();
@@ -30,7 +31,8 @@ export class DiscountportalComponent implements OnInit {
     private route: ActivatedRoute, private datePipe: DatePipe, private toastyService: ToastyService,
     private _masterservice: MasterformService) {
    
-
+      this.Branch=localStorage.getItem('BranchCode');
+      this.UserId=+localStorage.getItem('id');
    
 
   }
@@ -69,30 +71,40 @@ export class DiscountportalComponent implements OnInit {
       RoomNo:this.RoomNo,
       RoomCode:this.RoomCode
     })
+
+    this._oprservice.CheckUserDiscountAndGrace(this.Branch,this.discountportalform.value.Disvalue,this.UserId,this.discountportalform.value.DiscountType,"D").subscribe(data=>{
+      if(data)
+      {
+        console.log(this.discountportalform.value)
+        this._oprservice.SaveDiscountData(this.discountportalform.value).subscribe(data => {
+          if (data == true) {
+            this.addToast(
+              "Cogwave Software",
+              "Discount Information Saved Sucessfully",
+              "success");       
+          }
+          else {
+            this.addToast("Cogwave Software", "Discount Information Not Saved", "error");
+          }
+        },
+          error => {
+            console.log(error.message)
+           console.log('error.message')
+          this.addToast("Cogwave Software", error.message, "error");
+            
+          },
+          () => {
+          
+          
+            this.closeMyModalPin(event);
+          });
+      }
+      else{
+        this.addToast("Cogwave Software", "Please Contact Admin", "error");
+        return
+      }
+    });
   
-    console.log(this.discountportalform.value)
-    this._oprservice.SaveDiscountData(this.discountportalform.value).subscribe(data => {
-      if (data == true) {
-        this.addToast(
-          "Cogwave Software",
-          "Discount Information Saved Sucessfully",
-          "success");       
-      }
-      else {
-        this.addToast("Cogwave Software", "Discount Information Not Saved", "error");
-      }
-    },
-      error => {
-        console.log(error.message)
-       console.log('error.message')
-      this.addToast("Cogwave Software", error.message, "error");
-        
-      },
-      () => {
-      
-      
-        this.closeMyModalPin(event);
-      });
   }
 
 
