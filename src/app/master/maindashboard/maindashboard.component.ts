@@ -258,9 +258,10 @@ export class MaindashboardComponent implements OnInit ,OnDestroy {
     }
   }
   closeMyModal(event) {
-    event.target.parentElement.parentElement.parentElement.classList.remove(
-      "md-show"
-    );
+    var openModals = document.querySelectorAll(".md-show");
+    for (let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show");
+    }
   }
 
   // ------------------------------------Model--------------------

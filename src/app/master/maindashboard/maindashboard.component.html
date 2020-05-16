@@ -203,9 +203,7 @@
                                         <span class="tooltip-text">Room is Management .Reason Md Guest.</span>
                                       </span>
                                     </span>
-                                  </div><!-- end of if condition -->
-
-
+                                  </div><!-- end of if condition --> 
                                   <!-- <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button>  -->
                                 </div>
 
@@ -972,7 +970,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Advance'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1001,7 +999,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Amend'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1028,8 +1026,9 @@
 
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel"  [modalID]="'Post'" [modalClass]="'md-effect-2'">
-           <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+           <div class="app-modal-body"> 
+            <!-- (click)="closeMyModalPin($event)" --> 
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1058,7 +1057,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Shifft'" [modalClass]="'md-effect-2'"> 
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1082,7 +1081,7 @@
          <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Changepax'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1110,7 +1109,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExtraBed'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1175,7 +1174,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1201,7 +1200,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1226,7 +1225,7 @@
       <div class="commonmodel">
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
          <div class="app-modal-body">
-          <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+          <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
           <label class="font-header"
@@ -1253,7 +1252,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1282,7 +1281,7 @@
  <div class="commonmodel">
   <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
    <div class="app-modal-body">
-    <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+    <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
       <span aria-hidden="true">&times;</span>
     </button>
     <label class="font-header"
@@ -1437,7 +1436,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1551,7 +1550,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1573,7 +1572,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel"  [modalID]="'ExpressCheckin'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1832,7 +1831,7 @@
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Management'" [modalClass]="'md-effect-2'">
     
         <div class="app-modal-body">
-          <button type="button" class="close basic-close-light-box" (click)="Management.hide()">
+          <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
           <label class="font-header"
@@ -1859,7 +1858,7 @@
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Blockdetails'" [modalClass]="'md-effect-2'">
         <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false"> -->
           <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1886,7 +1885,7 @@
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupBlockForm'" [modalClass]="'md-effect-4'">
       <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false"> -->
         <div class="app-modal-body">
-          <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+          <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
           <label class="font-header"
