@@ -459,35 +459,34 @@ export class MaindashboardComponent implements OnInit ,OnDestroy {
 
     this._OprService.CheckUserDiscountAndGrace(this.Branch,this.model3.Grace,this.UserId,"0","G").subscribe(data=>{
       if(data)
-      {}
+      {
+        this._oprservice.SaveGracePeroid(this.model3).subscribe(data => {
+          if (data == true) {
+            this.addToast(
+              "Cogwave Software Technologies Pvt Ltd..",
+              "Grace Peroid Saved Sucessfully",
+              "success"
+            );
+          }
+          else {
+            this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
+          }
+        },
+        error => {
+         console.log(error.message)
+         console.log('error.message')
+          this.addToast("Cogwave Software", error.message, "error");
+        },
+        ()=>{
+          this.closeMyModalPin(event);
+        });
+
+      }
       else
       {
         this.addToast("Cogwave Software", "Please Contact Admin", "error");
         return
       }
-    });
-
-
-
-    this._oprservice.SaveGracePeroid(this.model3).subscribe(data => {
-      if (data == true) {
-        this.addToast(
-          "Cogwave Software Technologies Pvt Ltd..",
-          "Grace Peroid Saved Sucessfully",
-          "success"
-        );
-      }
-      else {
-        this.addToast("Cogwave Software", "Sorry Data Not Saved Sucessfully ", "error");
-      }
-    },
-    error => {
-     console.log(error.message)
-     console.log('error.message')
-      this.addToast("Cogwave Software", error.message, "error");
-    },
-    ()=>{
-      this.closeMyModalPin(event);
     });
   }
 
