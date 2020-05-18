@@ -6139,12 +6139,7 @@ outerdiv{
         text-align: center;
         font-size:90%;
 }
-.maindashboard li.parentNav{   
-        background-color: #63a4ff !important;
-        background-image: linear-gradient(315deg, #63a4ff  74%, #83eaf1 0%) !important;
-        // background-color:  #63a4ff!important;         
-        // background-image: linear-gradient(315deg, #ffffff 74%, #2C3E50 0%)!important; 
-        border-top-right-radius:5px;
+.maindashboard li.parentNav{     
         color: #37474f;    
         padding: 2px;
         margin-bottom: 1px;
@@ -6281,45 +6276,41 @@ outerdiv{
     padding:2px 2px 2px 2px;
     width:100px;
 }
+.maindashboard .productheader {
+    display:flex;
+    height: 79px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 1px 7px 0 rgba(0,0,0,.4)
+}
 .maindashboard .productheader ul li{
-    // border-top-left-radius: 0px;
-    // border-top-right-radius: 0px;
-    // border-bottom-left-radius: 10px;
-    // border-bottom-right-radius: 10px; 
-    // border:2px solid #ccc;
-    // width:91px;
-    // display: inline-block;
-    // vertical-align: top; 
-    // background-image: linear-gradient(315deg, #2C3E50 74%, #ffe100 0%) !important; 
-    //     color: #fff;     
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px; 
-    border:1px solid #ffffff;
-    width:91px;
-    display: inline-block;
-    vertical-align: top; 
-    background-image: linear-gradient(315deg, #63a4ff 74%, #ffe100 0%) !important;
-    color: #fff;  
+    //  border-top-left-radius: 0px;
+    //  border-top-right-radius: 0px;
+    //  border-bottom-left-radius: 10px;
+    //  border-bottom-right-radius: 10px; 
+    //  border:2px solid #ccc;
+     width:91px;
+     display: inline-block;
+     vertical-align: top;    
+     color:#212529;
+     
 
 }
 .maindashboard .productheader ul li:hover{
     background-image: linear-gradient(315deg, #ffe100 74%, #63a4ff 0%) !important;
 }
 .maindashboard .productheader ul li img,
-.maindashboard .productheader ul li{
-    
-    text-align: center;
-     
+.maindashboard .productheader ul li{ 
+    text-align: center; 
 }
 .maindashboard .productheader ul li span{
     display:block;
     text-align:center;
-    font-size:75%;
-    color:#ffffff;
+    font-size:82%; 
     font-weight: bold;
-    // color:#585858;
+    color:#585858;
+}
+.maindashboard .productheader ul li.last{
+    width:80px;
 }
 .maindashboard .md-content .table-responsive .table tr th,
 .maindashboard .md-content .table-responsive .table tr td{
