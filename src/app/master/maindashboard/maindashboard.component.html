@@ -5,7 +5,7 @@
       <div class="row ">
         <div class="col-md-9 " style="border:1px solid #ccc">
           <div class=" ">
-            <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
+            <div class="col-md-12 productheader " style="padding-top:10px">
               <div class="row">
                 <div class="col-md-12">
                   <ul>
@@ -48,7 +48,8 @@
                           class="fa fa-line-chart"></i><span>Chart</span></a>
                     </li>
                     <li class="last">
-                      <button class="btn dbutton" (click)="OpenMyModal('effect-2',item)">Today Arival</button>
+                      <a href="javascript:;" (click)="OpenMyModal('effect-2',item)">
+                         <img src="assets/images/arrival.png" style="width:29px"><span>Today Arrival</span></a> 
                     </li>
                   </ul>
                 </div>
@@ -103,11 +104,11 @@
                     <div class="col-md-12 ">
                       <div class=" " id="leftNavBar">
                         <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors">
-                          <li class="parentNav  peach-gradient">
+                          <li class="parentNav   ">
                             <i class="fa fas fa-building"></i>
                             {{item.FloorName}}</li>
                           <li class="childData">
-                            <ul style="display: inline-block">
+                            <ul style="display: inline-block; margin-bottom: 0; padding-bottom: 0;"  >
                               <li style="float: left; margin-left: 0px " *ngFor="let child of finalMenu.Rooms">
                                 <div *ngIf="item.FloorCode==child.FloorCode ">
 

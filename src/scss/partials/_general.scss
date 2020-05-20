@@ -6143,7 +6143,7 @@ outerdiv{
         color: #37474f;    
         padding: 2px;
         margin-bottom: 1px;
-        margin-top:10px;
+        margin-top:10px; 
 }  
 .maindashboard .roomstatus li{
     display:inline-block;
@@ -6278,9 +6278,9 @@ outerdiv{
 }
 .maindashboard .productheader {
     display:flex;
-    height: 79px;
+    height: 60px;
     border-radius: 8px;
-    -webkit-box-shadow: 0 1px 7px 0 rgba(0,0,0,.4)
+    //-webkit-box-shadow: 0 1px 7px 0 rgba(0,0,0,.4)
 }
 .maindashboard .productheader ul li{
     //  border-top-left-radius: 0px;
@@ -6288,7 +6288,7 @@ outerdiv{
     //  border-bottom-left-radius: 10px;
     //  border-bottom-right-radius: 10px; 
     //  border:2px solid #ccc;
-     width:91px;
+     width:89px;
      display: inline-block;
      vertical-align: top;    
      color:#212529;
@@ -6314,7 +6314,7 @@ outerdiv{
     color:#585858;
 }
 .maindashboard .productheader ul li.last{
-    width:80px;
+    width:75px;
 }
 .maindashboard .md-content .table-responsive .table tr th,
 .maindashboard .md-content .table-responsive .table tr td{

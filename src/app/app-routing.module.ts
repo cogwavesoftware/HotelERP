@@ -399,11 +399,20 @@ const routes: Routes = [
         loadChildren: () => import('./hmsoperation/roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
 
        },
+       {
+        path:'guestinfo',        
+        loadChildren: () => import('./hmsoperation/gustinfo/guestinfo.module').then(m=>m.GuestinfoModule)
+
+       },
 
        {
         path: 'advanceposting', 
         loadChildren: () => import('./hmsoperation/advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
-      } 
+      } ,
+      {
+        path: 'guestinformation', 
+        loadChildren: () => import('./hmsoperation/guestinformation/guestinformation.module').then(m=>m.GuestinformationModule)
+      },
     ]
   },
 

@@ -38,7 +38,15 @@ const routes: Routes = [
       {
         path: 'advanceposting', 
         loadChildren: () => import('./advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
-      } 
+      } ,
+      {
+        path: 'guestinfo',  
+        loadChildren: () => import('./gustinfo/guestinfo.module').then(m=>m.GuestinfoModule)
+      },
+      {
+        path: 'guestinformation',  
+        loadChildren: () => import('./guestinformation/guestinformation.module').then(m=>m.GuestinformationModule)
+      },
     ]
   }
 ];

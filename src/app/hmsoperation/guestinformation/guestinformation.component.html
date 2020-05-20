@@ -1,0 +1,185 @@
+
+<div class="outerdiv">
+    <div class="formdesign checkinforms checkinformsgrops" style="padding: 0;">
+  
+      <form [formGroup]="form" (ngSubmit)="Submit()" class="  " autocomplete="off">
+  
+        <div class="container-fluid">
+   
+          <div class='row tabouter' style="margin-bottom: 0;">
+  
+            <div class="col-md-12"  >
+              <div class="row" style="margin-bottom: 0;">
+                <div class="col-md-12 taboutercreatebtn">
+                  <!-- tab starting -->
+                   <ngb-tabset> 
+                    <ngb-tab title="Guest Information"  >
+                      <ng-template ngbTabContent>
+                        <div   class="m-t-15">
+                          <div class="row" >
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="Guest Name">Guest Name </label>
+                                          <input type="text"  (keydown.shift.control.z)="OpenGuestMosel('effect-5',data)" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="guestname" name="guestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.guestname.errors || form.controls.guestname.touched || form.controls.guestname.dirty}" required    />  
+                                          <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute; right:10px; top:21px"><i class="fa fa-search"></i></a> 
+                                          <div class="invalid-feedback" *ngIf="form.controls.guestname.errors?.required" >guestname fees is required</div>
+                                          </div>  
+                                    </div>
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="checkinno"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Checkin No </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="checkinno" name="checkinno"  formControlName="checkinno"    type="text"   class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="arrdate"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Arrival  Date </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="arrdate" name="arrdate"  formControlName="arrdate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                                        <div class="form-group">
+                                          <label class="form-control-label" for="arr"><i  class="fa fa-clock-o" aria-hidden="true"></i> Arrival Time </label>
+                                           <timepicker id="arrtime" readonly name="arrtime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="arrtime" [showMeridian]="ismeridian"></timepicker> 
+                                        </div>
+                                      </div> 
+
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="checkindate"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Checkin Date </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="checkindate" name="checkindate"  formControlName="checkindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="planid"> Plan ID </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="planid" name="planid"  formControlName="planid"    type="text"   class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="planid"> Roomno </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="roomno" name="roomno"  formControlName="roomno"    type="text"  class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="companyname">  Company Name </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="companyname" name="companyname"  formControlName="companyname"    type="text"  class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="gstno"> Gst no </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="gstno" name="gstno"  formControlName="gstno"    type="text"  class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                        <label class="form-control-label" for="bid"> BID </label>
+                                        <div class="form-group">
+                                          <div class="input-group" style="margin-bottom:0; ">
+                                            <input  id="bid" name="bid"  formControlName="bid"    type="text"  class="form-control">  
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
+                                        <div class="form-group" style="margin-top: 21px;"> 
+                                            <input  id="linkcompany" name="linkcompany" (click)="openguestname($event)"  formControlName="linkcompany" type="checkbox"  class="" style="float:left; padding:0px 0px 0px 0px" >                                             
+                                            <label class="form-control-label" for="linkcompany" style="display: inline-block;padding-left: 10px;">  Link Company </label>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                            </div> 
+                          </div>  
+
+                          <div class="row">
+                              <div class="col-md-12">
+                                <ag-grid-angular  
+                                #agGrid
+                                id="agGrid"     
+                                style="width: 100%; height: 300px" 
+                                class="ag-theme-balham"
+                                [rowData]="rowData  | async" 
+                                [columnDefs]="columnDefs"
+                                (gridReady)="onGridReady($event)"
+                                (selectionChanged)="onSelectionChanged($event)"
+                                [groupDefaultExpanded]="groupDefaultExpanded"
+                                  [suppressAggFuncInHeader]="true"
+                                  [enableCellChangeFlash]="true"
+                                  [animateRows]="true" 
+                                  (rowClicked)="onRowClicked($event)"
+                                 >
+                            </ag-grid-angular>
+                              </div> 
+                        </div> 
+                        </div>
+                      </ng-template>
+                    </ngb-tab>
+                  
+                    <ngb-tab title="Other Details">
+                      <ng-template ngbTabContent>
+                        <div class="userlist reservotherinfo" style="background-color: #fff;">
+                        
+                         
+                       </div>
+  
+                         
+                      </ng-template>
+                    </ngb-tab>
+                  
+  
+              
+                  </ngb-tabset>
+                  <!-- tab ending -->
+  
+                  
+  
+                </div>
+  
+              </div>
+            </div>
+  
+  
+  
+  
+  
+  
+  
+          </div>
+        </div><!-- container -->
+       
+      </form>
+  
+      
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
