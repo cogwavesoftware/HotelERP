@@ -131,8 +131,8 @@
                                   <div *ngIf="child.Status == 'O'">
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
-                                        <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
-                                          (click)="OpenModelWithRoomDetails('OccupiedPopup')" class="btn btn-danger ripple light"
+                                        <button type="button"  [ngClass]="occupicolorchange" (mouseout)="colorback()" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode,'OccupiedPopup')"
+                                          (click)="OpenModelWithRoomDetails('OccupiedPopup')"  
                                           placement="right" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class="">{{child.RoomCode}}</span>
