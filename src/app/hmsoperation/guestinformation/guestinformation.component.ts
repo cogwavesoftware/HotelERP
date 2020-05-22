@@ -65,7 +65,52 @@ export class GuestinformationComponent implements OnInit {
         gstno: ["", [Validators.required]],
         bid: ["", [Validators.required]] ,
         linkcompany: ["", [Validators.required]] ,
-        roomno: ["", [Validators.required]] 
+        roomno: ["", [Validators.required]] ,
+        othercheckindate: [new Date(), [Validators.required]],  
+        othercheckoutdate: [new Date(), [Validators.required]],
+        othercheckintime: [this.myTime, [Validators.required]], 
+        othercheckouttime: [this.myTime, [Validators.required]], 
+        othernofdays: ["", [Validators.required]] ,
+
+
+        otherRefName: ["", [Validators.required]] ,
+        otherTitle: ["", [Validators.required]] ,
+        otherguestname : ["", [Validators.required]] ,
+        othergender: ["", [Validators.required]] ,
+        othermobile: ["", [Validators.required]] ,
+        otheremail: ["", [Validators.required]] ,
+        otherpincode: ["", [Validators.required]] ,
+        otherArea: ["", [Validators.required]] ,
+        othercity: ["", [Validators.required]] ,
+        otherstate: ["", [Validators.required]] ,
+        otherstateCode: ["", [Validators.required]] ,
+        othernation: ["", [Validators.required]] ,
+        otherBookingid: ["", [Validators.required]] ,        
+        othercompany: ["", [Validators.required]] ,
+        othergstno: ["", [Validators.required]] ,            
+        otheraddress1: ["", [Validators.required]] ,
+        otheraddress2: ["", [Validators.required]] ,
+        otheraddress3: ["", [Validators.required]] ,
+        otherforiegnguest: ["", [Validators.required]] ,
+        othersource: ["", [Validators.required]] ,
+        otherArrivalfrom: ["", [Validators.required]] ,
+        otherconvenience: ["", [Validators.required]] ,
+        otherarivalmode: ["", [Validators.required]] ,
+        otherProceeding: ["", [Validators.required]] ,
+        othervisit: ["", [Validators.required]] ,
+        otherVehicle: ["", [Validators.required]] ,
+        otherBags: ["", [Validators.required]] ,
+        othernews: ["", [Validators.required]] ,
+        otherBilling: ["", [Validators.required]] ,
+        othercometoknow: ["", [Validators.required]] ,
+        otherDOB: ["", [Validators.required]] ,
+        otherDOA: ["", [Validators.required]] ,
+        otheridproof: ["", [Validators.required]] ,
+        otheridproofno: ["", [Validators.required]] ,
+        othergraceperiod: ["", [Validators.required]] 
+
+        
+
       });
       this.columnDefs = [
         { headerName: 'Days', field: 'RNO', sortable: true, filter: true },
