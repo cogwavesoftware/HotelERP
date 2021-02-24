@@ -47,6 +47,7 @@ import { Foodcouponmodel } from "src/app/_models/Foodcouponmodel";
   ]
 })
 export class MaindashboardComponent implements OnInit ,OnDestroy {
+   occupicolorchange =  'btn-danger';
   public roomsdetail;
   model2: any = {};
   model3: any = {};
@@ -54,7 +55,7 @@ export class MaindashboardComponent implements OnInit ,OnDestroy {
   roomname: any;
   golbalresponse: any;
   RoomNoArray: string[] = [];
-
+   
   OriginalArray: string[] = [];
   selectedRoomNoArray: string[] = [];
   DasboardLoad: any;
@@ -215,15 +216,22 @@ export class MaindashboardComponent implements OnInit ,OnDestroy {
     console.log("openspecial");
     document.querySelector("#" + event).classList.add("md-show");
   }
-  parentroomhover(CrRoomNo: string, CrRoomCode: string) {
+  parentroomhover(CrRoomNo: string, CrRoomCode: string,status:string) {
     this.rmno = CrRoomNo;
     this.roomname1 = CrRoomCode;
     this.RoomNos = CrRoomNo;
     this.RoomCodes = CrRoomCode;
     console.log("Francis");
-    console.log(CrRoomNo + CrRoomCode);
-  }
 
+    if(status == 'OccupiedPopup'){ 
+      this.occupicolorchange =  'btn-primary';
+    } 
+
+    console.log(CrRoomNo + CrRoomCode +status);
+  }
+  colorback(){ 
+    this.occupicolorchange =  'btn-danger';
+  }
   modelroomhover() {
     console.log("test");
   }
@@ -258,9 +266,10 @@ export class MaindashboardComponent implements OnInit ,OnDestroy {
     }
   }
   closeMyModal(event) {
-    event.target.parentElement.parentElement.parentElement.classList.remove(
-      "md-show"
-    );
+    var openModals = document.querySelectorAll(".md-show");
+    for (let i = 0; i < openModals.length; i++) {
+      openModals[i].classList.remove("md-show");
+    }
   }
 
   // ------------------------------------Model--------------------

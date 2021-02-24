@@ -399,6 +399,11 @@ const routes: Routes = [
         loadChildren: () => import('./hmsoperation/roomcancel/roomcancel.module').then(m=>m.RoomcancelModule)
 
        },
+       {
+        path:'guestinfo',        
+        loadChildren: () => import('./hmsoperation/gustinfo/guestinfo.module').then(m=>m.GuestinfoModule)
+
+       },
 
        {
         path: 'advanceposting', 
@@ -407,6 +412,10 @@ const routes: Routes = [
       {
         path:'newdash',
         loadChildren:()=> import('./hmsoperation/newdashboard/newdashboard.module').then(m=>m.NewdashboardModule)
+      },
+      {
+        path: 'guestinformation', 
+        loadChildren: () => import('./hmsoperation/guestinformation/guestinformation.module').then(m=>m.GuestinformationModule)
       }
     ]
   },

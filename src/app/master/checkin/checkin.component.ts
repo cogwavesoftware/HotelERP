@@ -369,6 +369,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
       TaxHeader: ["GST"],
       StateCode: [""],
       bankAccountForms: this.formBuilder.array([]),
+      passportno: ["", [Validators.required]],
+      issuedplace: ["", [Validators.required]],
+      pissuedate: [this.maxDate, [Validators.required]],
+      pexpirydate: [this.maxDate, [Validators.required]],
+      parrivaldate: [this.maxDate, [Validators.required]],
+
+      visano: ["", [Validators.required]],
+      vissuedplace: ["", [Validators.required]],
+      vissuedate: [this.maxDate, [Validators.required]],
+      vexpirydate: [this.maxDate, [Validators.required]],
+      staydays: ["", [Validators.required]]
     });
   }
 

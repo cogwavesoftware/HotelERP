@@ -40,9 +40,19 @@ const routes: Routes = [
         loadChildren: () => import('./advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
       } ,
       {
+<<<<<<< HEAD
         path:'newdash',
         loadChildren:()=> import('./newdashboard/newdashboard.module').then(m=>m.NewdashboardModule)
       }
+=======
+        path: 'guestinfo',  
+        loadChildren: () => import('./gustinfo/guestinfo.module').then(m=>m.GuestinfoModule)
+      },
+      {
+        path: 'guestinformation',  
+        loadChildren: () => import('./guestinformation/guestinformation.module').then(m=>m.GuestinformationModule)
+      },
+>>>>>>> 1aefb35e7dde49f8c4cedbe4358b0216d1750edb
     ]
   }
 ];

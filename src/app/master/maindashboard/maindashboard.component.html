@@ -5,50 +5,56 @@
 
     <div class="col-md-12" style="padding-right:0; padding-left:0">
       <div class="row ">
-        <div class="col-md-9 " style="padding-left: 0; border:1px solid #ccc">
+        <div class="col-md-9 " style="border:1px solid #ccc">
           <div class=" ">
-            <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
+            <div class="col-md-12 productheader " style="padding-top:10px">
               <div class="row">
                 <div class="col-md-12">
                   <ul>
                     <li>
-                      <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> <i
-                          class="icon-comments"></i><span>Reservation</span></a>
+                      <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> 
+                        <i class="fa fa-bed" style="font-size: 28px;"></i><span>Reservation</span></a>
                     </li>
-                    <li>
-                      <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
-                          class="icon-comments"></i><span>Group Checkin</span></a>
+                    <li> 
+
+                      <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"> <i class=" fa fa-users" style="font-size: 28px;"></i><span>Group Checkin</span></a>
                     </li>
                     <li>  
                       <a (click)="OpenModel('GroupBlockForm',item)"> <i
-                        class="icon-comments"></i><span>Group Block</span></a>                 
+                        class="fa fa-object-group" style="font-size: 28px;"></i><span>Group Block</span></a>                 
                      
                     </li>
                     <li>
                       <a (click)="OpenModel('GroupRelease',item)"> <i
-                        class="icon-comments"></i><span>Release Room</span></a>                 
+                        class="fa fa-user-times" style="font-size: 28px;"></i><span>Release Room</span></a>                 
                      
                     </li>
                     <li>
-                      <a href="#"> <i class="icon-comments"></i><span>Night Audit</span></a>
+                      <a href="#"> <i class="fa fa-table" style="font-size: 28px;"></i><span>Night Audit</span></a>
                     </li>
                     <li>
-                      <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active"><i
-                          class="icon-comments"></i><span>Reservation Chart</span></a>
+                      <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active">
+
+                        <i class="fa fa-bar-chart" aria-hidden="true" style="font-size: 28px;"></i><span>Reservation Chart</span></a>
                     </li>
                     <li>
-                      <a href="#"> <i class="icon-comments"></i><span>Guest Search</span></a>
+                      <a href="#"> <i class="fa fa-search-plus" style="font-size: 28px;"></i><span>Guest Search</span></a>
                     </li>
                     <li>
-                      <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i
-                          class="icon-comments"></i><span>Reservation List</span></a>
+                      <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active">
+                        <i class="fa fa-list" style="font-size: 28px;" aria-hidden="true"></i><span>Reservation List</span></a>
                     </li>
                     <li>
-                      <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i
-                          class="icon-comments"></i><span>Chart</span></a>
+                      <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active">
+                        <i style="font-size: 28px;"
+                          class="fa fa-line-chart"></i><span>Chart</span></a>
                     </li>
-                    <li>
-                      <button class="btn dbutton" (click)="OpenMyModal('effect-2',item)">Today Arival</button>
+
+                   
+                    <li class="last"> 
+                      <a href="javascript:;" (click)="OpenMyModal('effect-2',item)">
+                           <i style="font-size: 28px;"
+                           class="fa fa-plane"></i><span>Chart</span> </a> 
                     </li>
                   </ul>
                 </div>
@@ -103,11 +109,11 @@
                     <div class="col-md-12 ">
                       <div class=" " id="leftNavBar">
                         <ul class="borderbtmforrooms" *ngFor="let item of finalMenu.Floors">
-                          <li class="parentNav  peach-gradient">
+                          <li class="parentNav   ">
                             <i class="fa fas fa-building"></i>
                             {{item.FloorName}}</li>
                           <li class="childData">
-                            <ul style="display: inline-block">
+                            <ul style="display: inline-block; margin-bottom: 0; padding-bottom: 0;"  >
                               <li style="float: left; margin-left: 0px " *ngFor="let child of finalMenu.Rooms">
                                 <div *ngIf="item.FloorCode==child.FloorCode ">
 
@@ -130,8 +136,8 @@
                                   <div *ngIf="child.Status == 'O'">
                                     <span class="mytooltip tooltip-effect-1">
                                       <span class="tooltip-item">
-                                        <button type="button" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode)"
-                                          (click)="OpenModelWithRoomDetails('OccupiedPopup')" class="btn btn-danger ripple light"
+                                        <button type="button"  [ngClass]="occupicolorchange" (mouseout)="colorback()" (mouseover)="parentroomhover(child.RoomNo,child.RoomCode,'OccupiedPopup')"
+                                          (click)="OpenModelWithRoomDetails('OccupiedPopup')"  
                                           placement="right" ngbTooltip="{{child.RoomNo}}">
                                           {{child.RoomNo}} <br>
                                           <span class="">{{child.RoomCode}}</span>
@@ -205,9 +211,7 @@
                                         <span class="tooltip-text">Room is Management .Reason Md Guest.</span>
                                       </span>
                                     </span>
-                                  </div><!-- end of if condition -->
-
-
+                                  </div><!-- end of if condition --> 
                                   <!-- <button class="greenbutton" >  {{child.RoomNo}} <br> {{child.RoomCode}} </button>  -->
                                 </div>
 
@@ -974,7 +978,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Advance'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1003,7 +1007,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Amend'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1030,8 +1034,9 @@
 
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel"  [modalID]="'Post'" [modalClass]="'md-effect-2'">
-           <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+           <div class="app-modal-body"> 
+            <!-- (click)="closeMyModalPin($event)" --> 
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1060,7 +1065,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Shifft'" [modalClass]="'md-effect-2'"> 
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1084,7 +1089,7 @@
          <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Changepax'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1112,7 +1117,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'ExtraBed'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1177,7 +1182,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Instruction'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1203,7 +1208,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangePlan'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1228,7 +1233,7 @@
       <div class="commonmodel">
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeCompany'" [modalClass]="'md-effect-2'">
          <div class="app-modal-body">
-          <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+          <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
           <label class="font-header"
@@ -1255,7 +1260,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'WakeUp'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1284,7 +1289,7 @@
  <div class="commonmodel">
   <app-modal-animation class="modellg contentboxmodel" [modalID]="'FoodCoupon'" [modalClass]="'md-effect-2'">
    <div class="app-modal-body">
-    <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+    <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
       <span aria-hidden="true">&times;</span>
     </button>
     <label class="font-header"
@@ -1439,7 +1444,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'PaxonBill'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1553,7 +1558,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'ChangeGuest'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1575,7 +1580,7 @@
         <div class="commonmodel">
           <app-modal-animation class="modellg contentboxmodel"  [modalID]="'ExpressCheckin'" [modalClass]="'md-effect-2'">
            <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1834,7 +1839,7 @@
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'Management'" [modalClass]="'md-effect-2'">
     
         <div class="app-modal-body">
-          <button type="button" class="close basic-close-light-box" (click)="Management.hide()">
+          <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
           <label class="font-header"
@@ -1861,7 +1866,7 @@
           <app-modal-animation class="modellg contentboxmodel" [modalID]="'Blockdetails'" [modalClass]="'md-effect-2'">
         <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false"> -->
           <div class="app-modal-body">
-            <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+            <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
               <span aria-hidden="true">&times;</span>
             </button>
             <label class="font-header"
@@ -1888,7 +1893,7 @@
         <app-modal-animation class="modellg contentboxmodel" [modalID]="'GroupBlockForm'" [modalClass]="'md-effect-4'">
       <!-- <app-modal-basic #BlockForm [dialogClass]="'modal-lg'" [hideHeader]="true" [hideFooter]="false"> -->
         <div class="app-modal-body">
-          <button type="button" class="close basic-close-light-box" (click)="BlockForm.hide()">
+          <button type="button" class="close basic-close-light-box" (click)="closeMyModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
           <label class="font-header"

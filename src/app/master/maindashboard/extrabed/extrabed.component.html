@@ -49,8 +49,7 @@
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    
+                                                    <option value="4">4</option> 
                                                   </select>
                                                   <span class="help-block" *ngIf="NoofBed.touched && NoofBed.errors?.defaultSelected">
                                                     NoofBed is required
@@ -295,75 +294,46 @@
                                         </div> <!-- row  -->  
                                       </div> <!-- col-md-7 --> 
 
-                                      <div class="col-md-5">
-                                        <table class="table table-responsive">
-                                           
-                                          <thead>
-                                            <tr>
-                                              <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
-                                              <th><i class="fa fa-user" aria-hidden="true"></i> ID Front</th>
-                                              <th><i class="fa fa-user" aria-hidden="true"></i> ID Back</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>
-                                                <div *ngIf="j==0">
-                                                <img [src]="GuetImg0"  style="width:100px;height:75px">    
-                                              </div> 
-      
-                                              <div *ngIf="j==1">
-                                                <img [src]="GuetImg1"  style="width:100px;height:75px">    
-                                              </div> 
-      
-                                              <div *ngIf="j==2">
-                                                <img [src]="GuetImg2"  style="width:100px;height:75px">    
-                                              </div> 
-      
-                                             </td>
+                                      <div class="col-md-4" style="padding-top: 5px; border:1px">
+                                        <div class="row guestinfofirstrow guestphotoscreen" >  
+                                          <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenAdditionalGuest ('adguesteffect')"   ><i class="fa fa-user" aria-hidden="true"></i> Add Additional Guest Detsils </a>
+
+                                           <table class="table table-responsive" style="padding-left:6px; width:95%; margin-bottom: 0;">
+                                            <thead>
+                                              <tr>
+                                                <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th> 
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td>
+                                                  <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImage($event,j)" *ngIf="showWebcam"
+                                                  [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                                                  [videoOptions]="videoOptions"
+                                                  [imageQuality]="1"
+                                                  (cameraSwitched)="cameraWasSwitched($event)"
+                                                  (initError)="handleInitError($event)"
+                                                 ></webcam>
                                           
-                                          <td>
-                                            <div *ngIf="j==0">
-                                            <img   [src]="GuetIdFront0" style="width:100px;height:75px">                                                    
-                                            </div> 
-      
-                                            <div *ngIf="j==1">
-                                            <img   [src]="GuetIdFront1" style="width:100px;height:75px">
-                                            </div> 
-      
-                                            <div *ngIf="j==2">
-                                            <img   [src]="GuetIdFront2" style="width:100px;height:75px">                                                 
-                                            </div>  
-      
+                                          <div class="snapshot ">
+                                                           <div *ngIf="snapshotshow">                               
+                                               <img  [height]="75" [width]="100" [src]="previewUrl"  />
+                                             </div>  
+                                             
                                             
-                                          </td>
-                                          <td>
-                                            <div *ngIf="j==0">
-                                              <img [src]="GuetIdBack0"  style="width:100px;height:75px">     
-                                              </div> 
-      
-                                              <div *ngIf="j==1">
-                                              <img [src]="GuetIdBack1"  style="width:100px;height:75px">     
-                                              </div> 
-      
-                                              <div *ngIf="j==2">
-                                              <img [src]="GuetIdBack2"  style="width:100px;height:75px">      
-                                              </div>
-                                          </td>
-                                            
-                                            </tr>
-                                            <tr>
-                                              <td>
-                                                <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenCameraDetails ('addressmodeleffect',j)"   ><i class="fa fa-user" aria-hidden="true"></i>  Take Photo </a> 
-                                              </td>
-                                              <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdfFrontSecGuest($event,j,'Front')" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
-                                              <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdfFrontSecGuest($event,j,'Back')" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
-                                              </td>
-                                            </tr>
-                                           
-                                          </tbody>
-                                        </table>
-                                        <h6>{{Process}}</h6>
+                                             <ul *ngFor="let error of errors">
+                                               <li>{{error | json}}</li>
+                                             </ul>
+                                             </div> </td>
+                                                 
+                                              </tr>
+                                          
+                                             
+                                            </tbody>
+                                          </table>
+                                    
+                                      
+                                       </div> <!-- row end -->
                                       </div>
                                     </div>
                                   </div>
