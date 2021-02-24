@@ -1,0 +1,252 @@
+<div class="maindashboard">
+
+<div class="container-fluid">
+    <div class="row ">
+    <div class=" ">
+        <div class="col-md-12 productheader " style="padding:10px 10px 10px 0px;">
+          <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li>
+                  <a [routerLink]="['/Master/reservation/','NewRes']" routerLinkActive="active"> <i
+                      class="icon-comments"></i><span>Reservation</span></a>
+                </li>
+                <li>
+                  <a [routerLink]="['/Master/roomcheckin/','GROUP']" routerLinkActive="active"><i
+                      class="icon-comments"></i><span>Group Checkin</span></a>
+                </li>
+                <li>  
+                  <a (click)="OpenModel('GroupBlockForm',item)"> <i
+                    class="icon-comments"></i><span>Group Block</span></a>                 
+                 
+                </li>
+                <li>
+                  <a (click)="OpenModel('GroupRelease',item)"> <i
+                    class="icon-comments"></i><span>Release Room</span></a>                 
+                 
+                </li>
+                <li>
+                  <a href="#"> <i class="icon-comments"></i><span>Night Audit</span></a>
+                </li>
+                <li>
+                  <a [routerLink]="['/Master/monthchart/']" routerLinkActive="active"><i
+                      class="icon-comments"></i><span>Reservation Chart</span></a>
+                </li>
+                <li>
+                  <a href="#"> <i class="icon-comments"></i><span>Guest Search</span></a>
+                </li>
+                <li>
+                  <a [routerLink]="['/Master/reservationlist/']" routerLinkActive="active"><i
+                      class="icon-comments"></i><span>Reservation List</span></a>
+                </li>
+                <li>
+                  <a [routerLink]="['/Master/arivallist/']" routerLinkActive="active"><i
+                      class="icon-comments"></i><span>Chart</span></a>
+                </li>
+                <li>
+                  <button class="btn dbutton" (click)="OpenMyModal('effect-2',item)">Today Arival</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+     
+      <ngb-tabset>
+        <ngb-tab title="Analaysis">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+           
+                <div class="page-body">
+                    <div class="row">
+                  
+                      <!-- task, page, download counter  start -->
+                     
+
+                      <div class="col-xl-3 col-md-6" >
+                        <div class="card">
+                          <div class="card-block RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-8">
+                                <h4 class="text-c-purple">37</h4>
+                                <h6 class="text-muted m-b-0">Vacant</h6>
+                              </div>
+                              <div class="col-4 text-right">
+                                <i class="fa fa-bar-chart f-28"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer bg-c-purple RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-9">
+                                <p class="text-white m-b-0">% change</p>
+                              </div>
+                              <div class="col-3 text-right">
+                                <i class="fa fa-line-chart text-white f-16"></i>
+                              </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-md-6" >
+                        <div class="card">
+                          <div class="card-block RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-8">
+                                <h4 class="text-c-purple">37</h4>
+                                <h6 class="text-muted m-b-0">Vacant</h6>
+                              </div>
+                              <div class="col-4 text-right">
+                                <i class="fa fa-bar-chart f-28"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer bg-c-purple RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-9">
+                                <p class="text-white m-b-0">% change</p>
+                              </div>
+                              <div class="col-3 text-right">
+                                <i class="fa fa-line-chart text-white f-16"></i>
+                              </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-md-6" >
+                        <div class="card">
+                          <div class="card-block RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-8">
+                                <h4 class="text-c-purple">37</h4>
+                                <h6 class="text-muted m-b-0">Vacant</h6>
+                              </div>
+                              <div class="col-4 text-right">
+                                <i class="fa fa-bar-chart f-28"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer bg-c-purple RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-9">
+                                <p class="text-white m-b-0">% change</p>
+                              </div>
+                              <div class="col-3 text-right">
+                                <i class="fa fa-line-chart text-white f-16"></i>
+                              </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-3 col-md-6" >
+                        <div class="card">
+                          <div class="card-block RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-8">
+                                <h4 class="text-c-purple">37</h4>
+                                <h6 class="text-muted m-b-0">Vacant</h6>
+                              </div>
+                              <div class="col-4 text-right">
+                                <i class="fa fa-bar-chart f-28"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer bg-c-purple RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-9">
+                                <p class="text-white m-b-0">% change</p>
+                              </div>
+                              <div class="col-3 text-right">
+                                <i class="fa fa-line-chart text-white f-16"></i>
+                              </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="col-xl-3 col-md-6" >
+                        <div class="card">
+                          <div class="card-block RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-8">
+                                <h4 class="text-c-purple">37</h4>
+                                <h6 class="text-muted m-b-0">Vacant</h6>
+                              </div>
+                              <div class="col-4 text-right">
+                                <i class="fa fa-bar-chart f-28"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer bg-c-purple RoomColorBlock">
+                            <div class="row align-items-center">
+                              <div class="col-9">
+                                <p class="text-white m-b-0">% change</p>
+                              </div>
+                              <div class="col-3 text-right">
+                                <i class="fa fa-line-chart text-white f-16"></i>
+                              </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                      </div>
+                     
+                    </div>
+                </div>
+
+
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Dashboard">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <p class="m-4">2. Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="TodatArival">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <p class="m-4">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="ExpectedCheckout">
+          <ng-template ngbTabContent>
+            <div [@fadeInOutTranslate] class="m-t-15">
+              <p class="m-4">4. Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="RoomInstruction">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <p class="m-4">4. Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="WakeupCall">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <p class="m-4">4. Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+              </div>
+            </ng-template>
+          </ngb-tab>
+      </ngb-tabset>
+    </div> 
+</div>

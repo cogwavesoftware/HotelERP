@@ -403,7 +403,11 @@ const routes: Routes = [
        {
         path: 'advanceposting', 
         loadChildren: () => import('./hmsoperation/advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
-      } 
+      } ,
+      {
+        path:'newdash',
+        loadChildren:()=> import('./hmsoperation/newdashboard/newdashboard.module').then(m=>m.NewdashboardModule)
+      }
     ]
   },
 

@@ -1,5 +1,6 @@
+
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpErrorResponse,HttpResponse  } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -16,6 +17,36 @@ import { throwError } from 'rxjs';
 export class MasterformService {
 
   constructor(private http: HttpClient) { }
+
+  createAuthorizationHeader(headers: HttpHeaders) {
+  
+   
+    headers.append('Content-Type', 'application/json');
+   
+    headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    headers.append('Accept', 'q=0.8;application/json;q=0.9');
+    headers.append('Authorization', 'apikey biz_adm_clients_sZCmPNobtnvo:829a23765f198249e3eaaf1358c5b19f36231cce');
+  }
+
+  // :Observable<Object[]>
+  SendHttp(data: object) {
+
+    console.log('data')
+    console.log(data)
+    let header = new HttpHeaders();
+    this.createAuthorizationHeader(header);
+    return this.http.post('https://staging.urbanpiper.com/external/api/v1/stores/', data, {headers: header})
+    .pipe(map(user => {         
+          console.log(user)
+          return user;
+  })); 
+   
+
+  }
+
+
+
+
 
   GetBankdetails(branchcode: string) {
     return this.http.get<any>(environment.apiURL + '/api/CloudHMS/Master/GetBankdetails?BranchCode=' + branchcode);

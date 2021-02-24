@@ -23,10 +23,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
   providers: [DatePipe,ConfirmationDialogService],
   imports: [
     CommonModule,RescheckinRoutingModule,
-    SharedModule,
+     SharedModule,
      HttpClientModule,
      DataTableModule,
-     FormsModule,
+      FormsModule,
       NgSelectModule,TagInputModule,
      BsDatepickerModule.forRoot(),TimepickerModule.forRoot(),
     ReactiveFormsModule,ToastyModule.forRoot()

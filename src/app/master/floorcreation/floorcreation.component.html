@@ -14,9 +14,10 @@
           </div>
         </div>
 
+
         <div class="formdesign aqua-gradient" *ngIf="isShown" >
                 <div class="formouter rotate" >
-                <form name="form" (ngSubmit)="onSubmit(f.form)" #f="ngForm">  
+              <form name="form" (ngSubmit)="onSubmit(f.form)" #f="ngForm">  
                     
                 <input type="hidden" name="FloorCode" class="form-control" [(ngModel)]="model.FloorCode" #FloorCode="ngModel" value="{{FloorCode}}"  >
                 <input type="hidden" name="BranchCode" class="form-control" [(ngModel)]="model.BranchCode" #BranchCode="ngModel" value="{{BranchCode}}">

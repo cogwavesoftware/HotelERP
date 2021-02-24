@@ -34,8 +34,6 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     //         }))
 
 
-
-
     //      //   request = request.clone({
     //         //      setHeaders: 
     //         //      { 
@@ -62,7 +60,6 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
        // let acess_token = currentUser['access_token']
-
         if (currentUser != null) {
             let acess_token = currentUser['access_token']
             //    let request = req.clone({
@@ -88,7 +85,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
             // );
         }
         else {
-            this.router.navigateByUrl('/login');
+            this.router.navigateByUrl('/logins');
         }
     }
 

@@ -72,6 +72,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     //   }
     // })
    
+    
   ],
   entryComponents:[ConfirmationDialogComponent],
   providers: [
@@ -81,10 +82,10 @@ import {MatDialogModule} from '@angular/material/dialog';
         provide: NgbDateAdapter,
         useClass: NgbDateNativeAdapter
       },
-      { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+      { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
 
-    //{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-   // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     //fakeBackendProvider

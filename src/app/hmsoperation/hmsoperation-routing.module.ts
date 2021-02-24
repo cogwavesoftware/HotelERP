@@ -38,7 +38,11 @@ const routes: Routes = [
       {
         path: 'advanceposting', 
         loadChildren: () => import('./advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
-      } 
+      } ,
+      {
+        path:'newdash',
+        loadChildren:()=> import('./newdashboard/newdashboard.module').then(m=>m.NewdashboardModule)
+      }
     ]
   }
 ];

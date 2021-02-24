@@ -1,15 +1,16 @@
-import { LinkadvanceComponent } from './linkadvance.component';
+import { NewdashboardComponent } from './newdashboard.component';
 import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { Routes,RouterModule } from '@angular/router';
+
 const routes:Routes = [{
   path:'',
-  component:LinkadvanceComponent,
+  component:NewdashboardComponent,
 
   }];
 
 
-  
 @NgModule({
   declarations: [],
   imports: [
@@ -17,4 +18,4 @@ const routes:Routes = [{
   ],
   exports:[RouterModule]
 })
-export class LinkadvanceRoutingModule { }
+export class NewdashboardRoutingModule { }
