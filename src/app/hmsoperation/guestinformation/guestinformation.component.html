@@ -141,560 +141,527 @@
                     </ngb-tab>
                   
                     <ngb-tab title="Other Details">
-                      <ng-template ngbTabContent>
-                        <div class="userlist reservotherinfo" style="background-color: #fff;">
-                          <div class="  gueststayinfo userlist">
-                            <div class="row" style="margin-bottom: 0;">
-                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Checkin Date </label>
-                                <div class="form-group">
-                                  <div class="input-group" style="margin-bottom:0; ">
-                                    <input  id="othercheckindate" name="othercheckindate"  formControlName="othercheckindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">  
-                                  </div>
-                                </div>
+                      <ng-template ngbTabContent> 
+                        <div class="row" style="margin-bottom: 0;">
+                          <h2 class="h2ClassBg"> <i class="fa fa-user" aria-hidden="true"></i> Guest Stay Information</h2>
+                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                            <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i> Checkin Date </label>
+                            <div class="form-group">
+                              <div class="input-group" style="margin-bottom:0; ">
+                                <input  id="othercheckindate" name="othercheckindate"  formControlName="othercheckindate"  readonly type="text" bsDatepicker [maxDate]="minDate"  [minDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">  
                               </div>
-                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
-                                <div class="form-group">
-                                  <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
-                                   <timepicker id="othercheckintime" readonly name="othercheckintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="othercheckintime" [showMeridian]="ismeridian"></timepicker>
-                                  <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
-                                </div>
-                              </div> 
-                              <div class='col-12 col-lg-2 col-md-4 col-sm-4' >
-                                <div class="form-group">
-                                  <label class="form-control-label" for="othernofdays "><i  class="fa fa-calendar" aria-hidden="true"  ></i>  No of Days </label>
-                                  <select class="custom-select" #Days name="othernofdays" formControlName="othernofdays" (change)="Changeothercheckoutdate(Days.value)"
-                                    id="othernofdays" [ngClass]="{ 'is-invalid': submitted && form.othernofdays.errors }">
-                                    <option value="0">Select</option>
-                                    <option  *ngFor="let Day of noofdays" [value]="Day">
-                                      {{ Day  }}</option>
-                                  </select>
-                                  <div *ngIf="submitted && form.othernofdays.errors" class="invalid-feedback">
-                                    <div *ngIf="form.othernofdays.errors.required">othernofdays is required</div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Checkout Date </label>
-                        
-                                <div class="form-group">
-                                  <div class="input-group" style="margin-bottom:0;">
-                                    <input id="othercheckoutdate" readonly name="othercheckoutdate"    [minDate]="minDate" formControlName="othercheckoutdate" placement="right" type="text"   bsDatepicker  placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
-                                  </div>
-                                </div>
-                              </div> 
-                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                <div class="form-group">
-                                  <label class="form-control-label" for="othercheckouttime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkout Time </label>
-                                  <timepicker id="othercheckouttime" name="othercheckouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="othercheckouttime" [showMeridian]="ismeridian"></timepicker>                                        
-                                       
-                                          <div *ngIf="!valid">Invalid time </div>                                  
-                                </div>
-                              </div>
-                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
-                               
-                              </div> 
-                        
-                        
-                            </div> 
-                        
                             </div>
-                            <div class="col-md-12" style="padding-left:0; padding-right:0">
-                              <div class="row" style="margin-bottom: 0px;">
-                               
-                                <div class="col-sm-12"> 
-                                  <div class="row" style="margin-bottom: 0;">
-                                 <div class="col-md-8" style="border-right: 1px solid #ccc;">
-                                   <div class="userlist " style="margin-bottom: 0px; position: relative; padding-top:0;padding-bottom:0">
-                                     <div class="row" style="margin-bottom:0"> 
-                                      </div>
-                          
-                          
-                          
-                                      <div class="row guestinfofirstrow" style="padding-top:5px;" > 
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                         <div class="form-group">
-                                           <label class="form-control-label" for="Reference">Reference </label> 
-                                             <input type="text" class="form-control tooltip-form searchiconrelative" id="otherRefName" formControlName="otherRefName" name="otherRefName" autocomplete="off"  required  />   
-                                             <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="ReferanceModelOpen('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a> 
-                                           </div>   
-                                       </div> 
-                          
-                                       <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
-                                         <div class="form-group">
-                                           <label class="form-control-label" for="otherTitle "> Title</label>
-                                           <select class="custom-select" name="otherTitle" formControlName="otherTitle"
-                                             id="otherTitle"
-                                             [ngClass]="{ 'is-invalid': submitted && form.otherTitle.errors }">
-                                             <option value="select">Select</option> 
-                                             <option  *ngFor="let otherTitle of otherTitlelist"
-                                               [value]="otherTitle.Description">{{ otherTitle.Description  }}</option>
-                                           </select>
-                                           <div *ngIf="submitted && form.otherTitle.errors" class="invalid-feedback">
-                                             <div *ngIf="form.otherTitle.errors.required">otherTitle </div>
-                                           </div>
-                                         </div>  
-                                       </div> 
-                               
-                                       <div class='col-12 col-lg-5 col-md-4 col-sm-4'>
-                                         <div class="form-group">
-                                           <label class="form-control-label" for="Guest Name">Guest Name </label>
-                                           <input type="text"  (keydown.shift.control.z)="OpenGuestMosel('effect-5',data)" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="otherguestname" name="otherguestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.otherguestname.errors || form.controls.otherguestname.touched || form.controls.otherguestname.dirty}" required    />  
-                                           <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
-                                         
-                                           <div class="invalid-feedback" *ngIf="form.controls.otherguestname.errors?.required" >otherguestname fees is required</div>
-                                           </div>  
-                                       </div>
-                                       <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                         <div class="form-group">
-                                           <label class="form-control-label" for="othergender">  othergender </label>
-                                          <select class="custom-select"  name="othergender" formControlName="othergender"  id="othergenderid" [ngClass]="{ 'is-invalid': submitted && form.othergender.errors }"> 
-                                            <option value="select">Select</option> 
-                                            <option *ngFor="let sour of othergendertypes" [value]="sour.Description">{{ sour.Description  }}</option>
-                                          </select>
-                                          <div *ngIf="submitted && form.othergender.errors" class="invalid-feedback">
-                                           <div *ngIf="form.othergender.errors.required">othergender is required</div>
-                                         </div>
-                                           </div>  
-                                       </div> 
-                           
-                                       
-                                   </div> <!-- end row -->
-                                   <div class="row guestinfofirstrow">
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="othermobile"> mobile </label>
-                                         <input type="text" class="form-control tooltip-form" id="otherothermobileid" formControlName="othermobile" name="othermobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.othermobile.errors || form.controls.othermobile.touched || form.controls.othermobile.dirty}" required  />  
-                                         <div class="invalid-feedback" *ngIf="form.controls.otherguestname.errors?.required" >othermobile   is required</div>
-                                         </div>  
-                                     </div>
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="otheremail">otheremail </label>
-                                         <input type="otheremail" class="form-control tooltip-form" id="otheremailid" formControlName="otheremail" name="otheremail" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.otheremail.errors || form.controls.otheremail.touched || form.controls.otheremail.dirty}" required  />  
-                                         <div class="invalid-feedback" *ngIf="form.controls.othermobile.errors?.required" >otheremail   is required</div>
-                                         </div>  
-                                     </div>
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="otherpincode">otherpincode </label>
-                                         <input type="text" (keydown.shift.control.x)="openMyModalotherpincode('effect-4',data)" class="form-control tooltip-form searchiconrelative" id="otherpincode" formControlName="otherpincode" name="otherpincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.otherpincode.errors || form.controls.otherpincode.touched || form.controls.otherpincode.dirty}" required style="position: relative;"  />  
-                                         <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalotherpincode('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
-                                          <div class="invalid-feedback" *ngIf="form.controls.otherpincode.errors?.required" >otherpincode   is required</div>
-                                         </div>  
-                                     </div> 
-                          
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="otherArea">otherArea </label>
-                                         <input type="text" class="form-control tooltip-form searchiconrelative" id="otherArea" formControlName="otherArea" name="otherArea" autocomplete="off"  required  />  
-                                         
-                                         </div>  
-                                     </div>
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="othercity">othercity </label>
-                                         <input type="text" class="form-control tooltip-form searchiconrelative" id="othercity" formControlName="othercity" name="othercity" autocomplete="off" required  />  
-                                         
-                                         </div>  
-                                     </div>
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="otherstate ">otherstate</label>
-                                         <select class="custom-select" #otherstatename (change)="GetotherstateCodes(otherstatename.value)"  name="otherstate" formControlName="otherstate"
-                                           id="otherstate">
-                                          
-                                           <option value="select">Select</option> 
-                                           <option  *ngFor="let otherstate of otherstateList"
-                                             [value]=" otherstate.otherstate">{{ otherstate.otherstate  }}</option>
-                                         </select>
-                                         
-                                       </div>
-                          
-                          
-                                     </div>
-                                  
-                                   </div>
-                                   <div class="row  guestinfofirstrow"  >
-                                                                
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                      
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="otherstate">otherstateCode </label>
-                                         <input type="text" class="form-control tooltip-form" id="otherstateCode" formControlName="otherstateCode" name="otherstateCode" autocomplete="off" required  />  
-                                         
-                                         </div> 
-                                     </div>
-                                     
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>  
-                                         <div class="form-group">
-                                             <label class="form-control-label" for="othernation ">othernation</label>
-                                             <select class="custom-select" name="othernation" formControlName="othernation"
-                                               id="othernation"
-                                               [ngClass]="{ 'is-invalid': submitted && form.othernation.errors }">
-                                               <option value="select">Select</option> 
-                                               <option  *ngFor="let othernationd of othernationlist"
-                                                 [value]="othernationd">{{ othernationd  }}</option>
-                                             </select>
-                                             <div *ngIf="submitted && form.othernation.errors" class="invalid-feedback">
-                                               <div *ngIf="form.othernation.errors.required">othernation </div>
-                                             </div>
-                                           </div>
-                          
-                                     </div>
-                                     
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="Booking">Booking Id </label>
-                                         <input type="text" class="form-control tooltip-form" id="otherotherbookingid" formControlName="booking" name="booking" autocomplete="off"  />  
-                                         
-                                         </div>  
-                                     </div>
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="othercompany">othercompany </label>
-                                        
-                                           <input type="text" class="form-control tooltip-form searchiconrelative" id="othercompany" formControlName="othercompany" name="othercompany" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.othercompany.errors || form.controls.othercompany.touched || form.controls.othercompany.dirty}" required  />   
-                                           <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="Openothercompanymodel('effect-7',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
-                                         
-                                         <div class="invalid-feedback" *ngIf="form.controls.othercompany.errors?.required" >othercompany   is required</div>
-                                         </div>  
-                          
-                                     </div>
-                          
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="othergstno">othergstno/LUTNO </label>
-                                         <input type="text" class="form-control tooltip-form" id="othergstno" formControlName="othergstno" name="othergstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.othergstno.errors || form.controls.othergstno.touched || form.controls.othergstno.dirty}" required  />  
-                                         <div class="invalid-feedback" *ngIf="form.controls.othergstno.errors?.required" >othergstno   is required</div>
-                                         </div>  
-                                     </div>
-                                     <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                       <div class="form-group">
-                                         <label class="form-control-label" for="Foreign Guest ">  Foreign Guest  </label>
-                                        <select class="custom-select"  name="otherforiegnguest" formControlName="otherforiegnguest"  id="otherforiegnguest" [ngClass]="{ 'is-invalid': submitted && form.otherforiegnguest.errors }"> 
-                                          <option value="select">Select</option> 
-                                          <option [ngValue]="sour.Id" *ngFor="let sour of otherforiegnguest" [value]="sour">{{ sour  }}</option>
-                                        </select>
-                                        <div *ngIf="submitted && form.othergender.errors" class="invalid-feedback">
-                                         <div *ngIf="form.othergender.errors.required">otherforiegnguest is required</div>
-                                       </div>
-                                         </div>  
-                                     </div>
-                                    </div> <!-- end of row-->
-                                    <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
-                                     <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
-                                      <div class="form-group">
-                                       <label class="form-control-label" for="otheraddress1"> otheraddress1</label>       
-                                       <input type="text" class="form-control tooltip-form" id="otheraddress1" formControlName="otheraddress1">
-                                       
-                                       </div>  
-                          
-                          
+                          </div>
+                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'   >
+                            <div class="form-group">
+                              <label class="form-control-label" for="city"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkin Time </label>
+                               <timepicker id="othercheckintime" readonly name="othercheckintime"  (isValid)="isValid($event)"  [showSpinners]="false" formControlName="othercheckintime" [showMeridian]="ismeridian"></timepicker>
+                              <!-- <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>        -->
+                            </div>
+                          </div> 
+                          <div class='col-12 col-lg-2 col-md-4 col-sm-4' >
+                            <div class="form-group">
+                              <label class="form-control-label" for="othernofdays "><i  class="fa fa-calendar" aria-hidden="true"  ></i>  No of Days </label>
+                              <select class="custom-select" #Days name="nofdays" formControlName="othernofdays" (change)="ChangeCheckoutDate(Days.value)"
+                                id="othernofdays" [ngClass]="{ 'is-invalid': submitted && form.othernofdays.errors }">
+                                <option value="0">Select</option>
+                                <option  *ngFor="let Day of noofdays" [value]="Day">
+                                  {{ Day  }}</option>
+                              </select>
+                              <div *ngIf="submitted && form.othernofdays.errors" class="invalid-feedback">
+                                <div *ngIf="form.othernofdays.errors.required">nofdays is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                            <label class="form-control-label" for="pincode"><i  class="fa fa-calendar" aria-hidden="true"  ></i>  Checkout Date </label>
+
+                            <div class="form-group">
+                              <div class="input-group" style="margin-bottom:0;">
+                                <input id="othercheckoutdate" readonly name="othercheckoutdate"    [minDate]="minDate" formControlName="othercheckoutdate" placement="right" type="text"   bsDatepicker  placement="bottom"  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue', selectFromOtherMonth: true  }" class="form-control">
+                              </div>
+                            </div>
+                          </div> 
+                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                            <div class="form-group">
+                              <label class="form-control-label" for="othercheckouttime"><i  class="fa fa-clock-o" aria-hidden="true"></i> Checkout Time </label>
+                              <timepicker id="othercheckouttime" name="othercheckouttime"  (isValid)="isValid($event)" [showSpinners]="false" formControlName="othercheckouttime" [showMeridian]="ismeridian"></timepicker>      
+                                      <div *ngIf="!valid">Invalid time </div>                                  
+                            </div>
+                          </div> 
+                        </div> 
+
+                        <div class="col-md-12" style="padding-left:0; padding-right:0">
+                          <div class="row" style="margin-bottom: 0px;">
+                            <h2 class="h2ClassBg"> <i class="fa fa-user" aria-hidden="true"></i> Guest  Information</h2>
+                            <div class="col-sm-8"> 
+                              <div class="row" style="margin-bottom: 0;">
+                             <div class="col-md-12" style="border-right: 1px solid #ccc;">
+                               <div class="userlist " style="margin-bottom: 0px; position: relative; padding-top:0;padding-bottom:0">
+                                 <div class="row" style="margin-bottom:0"> 
+                                  </div>
+                      
+                      
+                      
+                                  <div class="row guestinfofirstrow" style="padding-top:5px;" > 
+                                    <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                     <div class="form-group">
+                                       <label class="form-control-label" for="Reference">Reference </label> 
+                                         <input type="text" class="form-control tooltip-form searchiconrelative" id="otherRefName" formControlName="otherRefName" name="otherRefName" autocomplete="off"  required  />   
+                                         <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="ReferanceModelOpen('effect-6',data)" style="position: absolute;"><i class="fa fa-search"></i></a> 
+                                       </div>   
                                    </div> 
-                          
-                                   <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
-                                    <div class="form-group">
-                                     <label class="form-control-label" for="otheraddress2"> otheraddress2 </label>       
-                                     <input type="text" class="form-control tooltip-form" id="otheraddress2" formControlName="otheraddress2">
-                                    
+                      
+                                   <div class='col-12 col-lg-1 col-md-4 col-sm-4'>
+                                     <div class="form-group">
+                                       <label class="form-control-label" for="otherTitle "> Title</label>
+                                       <select class="custom-select" name="otherTitle" formControlName="otherTitle"
+                                         id="otherTitle"
+                                         [ngClass]="{ 'is-invalid': submitted && form.otherTitle.errors }">
+                                         <option value="select">Select</option> 
+                                         <option  *ngFor="let otherTitle of otherTitlelist"
+                                           [value]="otherTitle.Description">{{ otherTitle.Description  }}</option>
+                                       </select>
+                                       <div *ngIf="submitted && form.otherTitle.errors" class="invalid-feedback">
+                                         <div *ngIf="form.otherTitle.errors.required">otherTitle </div>
+                                       </div>
                                      </div>  
-                          
-                          
+                                   </div> 
+                           
+                                   <div class='col-12 col-lg-5 col-md-4 col-sm-4'>
+                                     <div class="form-group">
+                                       <label class="form-control-label" for="Guest Name">Guest Name </label>
+                                       <input type="text"  (keydown.shift.control.z)="OpenGuestMosel('effect-5',data)" class="form-control tooltip-form searchiconrelative" id="guestid" formControlName="otherguestname" name="otherguestname" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.otherguestname.errors || form.controls.otherguestname.touched || form.controls.otherguestname.dirty}" required    />  
+                                       <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="OpenGuestMosel('effect-5',data)" style="position: absolute;"><i class="fa fa-search"></i></a>
+                                     
+                                       <div class="invalid-feedback" *ngIf="form.controls.otherguestname.errors?.required" >otherguestname fees is required</div>
+                                       </div>  
+                                   </div>
+                                   <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                     <div class="form-group">
+                                       <label class="form-control-label" for="othergender">   Gender </label>
+                                      <select class="custom-select"  name="othergender" formControlName="othergender"  id="othergenderid" [ngClass]="{ 'is-invalid': submitted && form.othergender.errors }"> 
+                                        <option value="select">Select</option> 
+                                        <option *ngFor="let sour of othergendertypes" [value]="sour.Description">{{ sour.Description  }}</option>
+                                      </select>
+                                      <div *ngIf="submitted && form.othergender.errors" class="invalid-feedback">
+                                       <div *ngIf="form.othergender.errors.required">othergender is required</div>
+                                     </div>
+                                       </div>  
+                                   </div> 
+                       
+                                   
+                               </div> <!-- end row -->
+                               <div class="row guestinfofirstrow">
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="othermobile"> Mobile </label>
+                                     <input type="text" class="form-control tooltip-form" id="otherothermobileid" formControlName="othermobile" name="othermobile" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.othermobile.errors || form.controls.othermobile.touched || form.controls.othermobile.dirty}" required  />  
+                                     <div class="invalid-feedback" *ngIf="form.controls.otherguestname.errors?.required" >othermobile   is required</div>
+                                     </div>  
+                                 </div>
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="otheremail">Email </label>
+                                     <input type="otheremail" class="form-control tooltip-form" id="otheremailid" formControlName="otheremail" name="otheremail" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.otheremail.errors || form.controls.otheremail.touched || form.controls.otheremail.dirty}" required  />  
+                                     <div class="invalid-feedback" *ngIf="form.controls.othermobile.errors?.required" >otheremail   is required</div>
+                                     </div>  
+                                 </div>
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="otherpincode">Pincode </label>
+                                     <input type="text" (keydown.shift.control.x)="openMyModalotherpincode('effect-4',data)" class="form-control tooltip-form searchiconrelative" id="otherpincode" formControlName="otherpincode" name="otherpincode" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.otherpincode.errors || form.controls.otherpincode.touched || form.controls.otherpincode.dirty}" required style="position: relative;"  />  
+                                     <a href="javascript:;" class="m-r-15 crm-action-view text-info" (click)="openMyModalotherpincode('effect-4',data)" style="position: absolute;top:22px; right:0"><i class="fa fa-search"></i></a> 
+                                      <div class="invalid-feedback" *ngIf="form.controls.otherpincode.errors?.required" >otherpincode   is required</div>
+                                     </div>  
                                  </div> 
-                          
+                      
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="otherArea"> Area </label>
+                                     <input type="text" class="form-control tooltip-form searchiconrelative" id="otherArea" formControlName="otherArea" name="otherArea" autocomplete="off"  required  />  
+                                     
+                                     </div>  
+                                 </div>
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="othercity">City </label>
+                                     <input type="text" class="form-control tooltip-form searchiconrelative" id="othercity" formControlName="othercity" name="othercity" autocomplete="off" required  />  
+                                     
+                                     </div>  
+                                 </div>
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="otherstate ">State</label>
+                                     <select class="custom-select" #otherstatename (change)="GetotherstateCodes(otherstatename.value)"  name="otherstate" formControlName="otherstate"
+                                       id="otherstate">
+                                      
+                                       <option value="select">Select</option> 
+                                       <option  *ngFor="let otherstate of otherstateList"
+                                         [value]=" otherstate.otherstate">{{ otherstate.otherstate  }}</option>
+                                     </select>
+                                     
+                                   </div>
+                      
+                      
+                                 </div>
+                              
+                               </div>
+                               <div class="row  guestinfofirstrow"  >
+                                                            
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                  
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="otherstate">State Code </label>
+                                     <input type="text" class="form-control tooltip-form" id="otherstateCode" formControlName="otherstateCode" name="otherstateCode" autocomplete="off" required  />  
+                                     
+                                     </div> 
+                                 </div>
+                                 
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>  
+                                     <div class="form-group">
+                                         <label class="form-control-label" for="othernation ">Nation</label>
+                                         <select class="custom-select" name="othernation" formControlName="othernation"
+                                           id="othernation"
+                                           [ngClass]="{ 'is-invalid': submitted && form.othernation.errors }">
+                                           <option value="select">Select</option> 
+                                           <option  *ngFor="let othernationd of othernationlist"
+                                             [value]="othernationd">{{ othernationd  }}</option>
+                                         </select>
+                                         <div *ngIf="submitted && form.othernation.errors" class="invalid-feedback">
+                                           <div *ngIf="form.othernation.errors.required">othernation </div>
+                                         </div>
+                                       </div>
+                      
+                                 </div>
+                                 
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="Booking">Booking Id </label>
+                                     <input type="text" class="form-control tooltip-form" id="otherBookingid" formControlName="otherBookingid" name="otherBookingid" autocomplete="off"  />  
+                                     </div>  
+                                 </div>
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="othercompany">Company </label> 
+                                       <input type="text" class="form-control tooltip-form searchiconrelative" id="othercompany" formControlName="othercompany" name="othercompany" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.othercompany.errors || form.controls.othercompany.touched || form.controls.othercompany.dirty}" required  />   
+                                       <a href="javascript:;" class="m-r-15 crm-action-view text-info searchiconabsoulte" (click)="Openothercompanymodel('effect-7',data)" style="position: absolute;"><i class="fa fa-search"></i></a> 
+                                     <div class="invalid-feedback" *ngIf="form.controls.othercompany.errors?.required" >othercompany   is required</div>
+                                     </div>  
+                      
+                                 </div>
+                      
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="othergstno">Gstno/LUTNO </label>
+                                     <input type="text" class="form-control tooltip-form" id="othergstno" formControlName="othergstno" name="othergstno" autocomplete="off" [ngClass] = "{'is-invalid' : submitted && form.controls.othergstno.errors || form.controls.othergstno.touched || form.controls.othergstno.dirty}" required  />  
+                                     <div class="invalid-feedback" *ngIf="form.controls.othergstno.errors?.required" >othergstno   is required</div>
+                                     </div>  
+                                 </div>
+                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                   <div class="form-group">
+                                     <label class="form-control-label" for="Foreign Guest ">  Foreign Guest  </label>
+                                    <select class="custom-select"  name="otherforiegnguest" formControlName="otherforiegnguest"  id="otherforiegnguest" [ngClass]="{ 'is-invalid': submitted && form.otherforiegnguest.errors }"> 
+                                      <option value="select">Select</option> 
+                                      <option [ngValue]="sour.Id" *ngFor="let sour of otherforiegnguest" [value]="sour">{{ sour  }}</option>
+                                    </select>
+                                    <div *ngIf="submitted && form.othergender.errors" class="invalid-feedback">
+                                     <div *ngIf="form.othergender.errors.required">otherforiegnguest is required</div>
+                                   </div>
+                                     </div>  
+                                 </div>
+                                </div> <!-- end of row-->
+                                <div class="row guestinfofirstrow" style="margin-bottom: 0;"> 
                                  <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
                                   <div class="form-group">
-                                   <label class="form-control-label" for="otheraddress3"> Address 3 </label>       
-                                   <input type="text" class="form-control tooltip-form" id="otheraddress3" formControlName="otheraddress3">
-                                  
-                                   </div>  
-                          
-                          
-                               </div>  
+                                   <label class="form-control-label" for="otheraddress1"> Address1</label>       
+                                   <input type="text" class="form-control tooltip-form" id="otheraddress1" formControlName="otheraddress1">
                                    
-                                   </div> <!-- row end -->
-                          
-                                      </div> <!-- end of userlist--> 
-                                 </div>
-                                 <div class="col-md-4" style="padding-top: 5px;">
-                                   <div class="row guestinfofirstrow guestphotoscreen" >  
-                                     <a href="javascript:;" class="m-r-15 p-l-10  crm-action-view text-info  addguestcolor" (click)="OpenAdditionalGuest ('adguesteffect')"   ><i class="fa fa-user" aria-hidden="true"></i> Add Additional Guest Detsils </a>
-                          
-                                      <table class="table table-responsive" style="padding-left:6px; width:95%; margin-bottom: 0;">
-                                       <thead>
-                                         <tr>
-                                           <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
-                                           <th><i class="fa fa-user" aria-hidden="true"></i> ID Front</th>
-                                           <th><i class="fa fa-user" aria-hidden="true"></i> ID Back</th>
-                                         </tr>
-                                       </thead>
-                                       <tbody>
-                                         <tr>
-                                           <td>
-                                             <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImage($event,j)" *ngIf="showWebcam"
-                                             [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
-                                             [videoOptions]="videoOptions"
-                                             [imageQuality]="1"
-                                             (cameraSwitched)="cameraWasSwitched($event)"
-                                             (initError)="handleInitError($event)"
-                                            ></webcam>
-                                     
-                                     <div class="snapshot ">
-                                                      <div *ngIf="snapshotshow">                               
-                                          <img  [height]="75" [width]="100" [src]="previewUrl"  />
-                                        </div>  
-                                        
-                                        <h4 *ngIf="errors.length > 0">Messages:</h4>
-                                        <ul *ngFor="let error of errors">
-                                          <li>{{error | json}}</li>
-                                        </ul>
-                                        </div> </td>
-                                           <td><img [src]="previewUrl2"  style="width:100px;height:75px">   </td>
-                                           <td><img [src]="previewUrl3"  style="width:100px;height:75px">     </td>
-                                         </tr>
-                                         <tr>
-                                           <td>
-                                             <button class="actionBtn camarabtn" [disabled] = "SnapshotbuttonDisabled" (click)="triggerSnapshot();"  >Capture</button>
-                                           <button class="actionBtn camarabtn" [disabled]="camarabuttonDisabled" (click)="SwitchOnCamara()"  >Switch On</button>
-                                           </td>
-                                           <td><input type="file" class="form-control tooltip-form" id="GuestIdFront" (change)="fileProgressIdProof($event,'Front')" formControlName="GuestIdFront" name="GuestIdFront" autocomplete="off"  required  />  </td>
-                                           <td><input type="file" class="form-control tooltip-form" id="GuestIdBack" (change)="fileProgressIdProof($event,'Back')" formControlName="GuestIdBack" name="GuestIdBack" autocomplete="off"   required  />  
-                                           </td>
-                                         </tr>
-                                        
-                                       </tbody>
-                                     </table>
+                                   </div>  
+                      
+                      
+                               </div> 
+                      
+                               <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                 <label class="form-control-label" for="otheraddress2"> Address2 </label>       
+                                 <input type="text" class="form-control tooltip-form" id="otheraddress2" formControlName="otheraddress2">
+                                
+                                 </div>  
+                      
+                      
+                             </div> 
+                      
+                             <div class='col-12 col-lg-4 col-md-4 col-sm-4'>
+                              <div class="form-group">
+                               <label class="form-control-label" for="otheraddress3"> Address 3 </label>       
+                               <input type="text" class="form-control tooltip-form" id="otheraddress3" formControlName="otheraddress3">
+                              
+                               </div>  
+                      
+                      
+                           </div>  
                                
+                               </div> <!-- row end -->
+                      
+                                  </div> <!-- end of userlist--> 
+                             </div>
+                            <div class="row">
+                              
+                            </div>
+                           </div> <!-- end of new row-->
+                      
+                              <!--  test row 1-->
+                              
+                            </div> <!-- col-10 end-->
+                            <div class="col-sm-4">
+                              <table class="table table-responsive" style="padding-left:6px; width:95%; margin-bottom: 0;">
+                                <thead>
+                                  <tr>
+                                    <th><i class="fa fa-user" aria-hidden="true"></i> Guest Photo</th>
+                                    <th><i class="fa fa-user" aria-hidden="true"></i> ID Front</th>
+                                    <th><i class="fa fa-user" aria-hidden="true"></i> ID Back</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td> <webcam [height]="100" [width]="150" [trigger]="triggerObservable" (imageCapture)="handleImage($event,j)" *ngIf="showWebcam"
+                                      [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                                      [videoOptions]="videoOptions"
+                                      [imageQuality]="1"
+                                      (cameraSwitched)="cameraWasSwitched($event)"
+                                      (initError)="handleInitError($event)"
+                                     ></webcam>
+                                     <div class="snapshot ">
+                                      <div *ngIf="snapshotshow">                               
+                                      <img  [height]="75" [width]="100" [src]="previewUrl"  />
+                                      </div>  
+                        
+                        <h4 *ngIf="errors.length > 0">Messages:</h4>
+                        <ul *ngFor="let error of errors">
+                          <li>{{error | json}}</li>
+                        </ul>
+                        </div>
+                                    </td>
+                                    <td><i class="fa fa-user" aria-hidden="true"></i> ID Front</td>
+                                    <td><i class="fa fa-user" aria-hidden="true"></i> ID Back</td>
+                                  </tr>
+                                </tbody>
+                             </table>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <h2 class="h2ClassBg"> <i class="fa fa-user" aria-hidden="true"></i> Other Details</h2>
+                          <div class="  userlist">
+                            <div class="row">
+                               <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="firstname">Source </label>
+                                 <select class="custom-select"  name="othersource" formControlName="othersource"  id="othersourceid"> 
+                                   <option value="select">Select</option> 
+                                   <option  *ngFor="let itemothersource of othersourcemode" [value]="itemothersource.Description">{{ itemothersource.Description}}</option>
+                                 </select>
                                  
-                                  </div> <!-- row end -->
-                                 </div>
-                               </div> <!-- end of new row-->
-                          
-                                  <!--  test row 1-->
-                                  <div class="otherrow userlist">
-                                    <div class="row">
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                  </div>  
+                                  </div>
+                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
+                                      <div class="form-group">
+                                        <label class="form-control-label" for="otherArrivalfrom"> Arrival  From</label>
+                                        <input type="text" class="form-control tooltip-form" id="otherArrivalfrom"
+                                          formControlName="otherArrivalfrom" name="otherArrivalfrom" autocomplete="off"/>
+                                          </div> 
+                                   </div>
+                                    
+                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="Booking">Convenience fees </label>
+                                      <input type="text" class="form-control tooltip-form" id="otherconvenienceid" formControlName="otherconvenience" name="otherconvenience" autocomplete="off"   />  
+                                       </div>  
+                                  </div>
+                                  <div class="col-12 col-lg-2 col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="otherarivalmode">Arrival Mode </label>
+                                     <select class="custom-select"  name="otherarivalmode" formControlName="otherarivalmode"  id="otherarivalmodeid"> 
+                                       <option value="select">Select</option> 
+                                       <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
+                                     </select>
+                                     
+                                      </div> 
+                                  </div>
+                                  <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
                                         <div class="form-group">
-                                          <label class="form-control-label" for="firstname">othersource </label>
-                                         <select class="custom-select"  name="othersource" formControlName="othersource"  id="othersourceid"> 
-                                           <option value="select">Select</option> 
-                                           <option  *ngFor="let itemothersource of othersourcemode" [value]="itemothersource.Description">{{ itemothersource.Description}}</option>
-                                         </select>
-                                         
-                                          </div>  
-                                          </div>
-                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
-                                              <div class="form-group">
-                                                <label class="form-control-label" for="otherArrivalfrom">otherArrivalfrom From</label>
-                                                <input type="text" class="form-control tooltip-form" id="otherArrivalfrom"
-                                                  formControlName="otherArrivalfrom" name="otherArrivalfrom" autocomplete="off"/>
-                                                  </div> 
-                                           </div>
-                                            
-                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                            <div class="form-group">
-                                              <label class="form-control-label" for="Booking">otherconvenience fees </label>
-                                              <input type="text" class="form-control tooltip-form" id="otherconvenienceid" formControlName="otherconvenience" name="otherconvenience" autocomplete="off"   />  
-                                               </div>  
-                                          </div>
-                                          <div class="col-12 col-lg-2 col-md-4 col-sm-4">
-                                            <div class="form-group">
-                                              <label class="form-control-label" for="otherarivalmode">Arrival Mode </label>
-                                             <select class="custom-select"  name="otherarivalmode" formControlName="otherarivalmode"  id="otherarivalmodeid"> 
-                                               <option value="select">Select</option> 
-                                               <option *ngFor="let sour of arrivalmode" [value]="sour.Description">{{ sour.Description  }}</option>
-                                             </select>
-                                             
-                                              </div> 
-                                          </div>
-                                          <div class='col-12 col-lg-2 col-md-4 col-sm-4'> 
-                                                <div class="form-group">
-                                                <label class="form-control-label" for="otherProceeding">otherProceeding From</label>
-                                                <input type="text" class="form-control tooltip-form" id="otherProceeding"
-                                                  formControlName="otherProceeding" name="otherProceeding" autocomplete="off" />
-                                                    </div> 
-                                                 </div>
-                                                 <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                                  <div class="form-group">
-                                                    <label class="form-control-label" for="othervisit ">Purposse of othervisit</label>
-                                                    <select class="custom-select" name="othervisit" formControlName="othervisit" id="othervisit">
-                                                      
-                                                     
-                                                      <option value="select">Select</option>
-                                                      <option  *ngFor="let sour of purposeofothervisit"
-                                                        [value]="sour.Description">{{ sour.Description  }}</option>
-                                                    </select>
-                                                    
-                                                  </div>
-                                                </div>
-                                
-                                    </div><!-- end 1 row -->
-                                
-                                    <div class="row">
-                                      
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                              <label class="form-control-label" for="otherVehicle">otherVehicle No</label>
-                                              <input type="text" class="form-control tooltip-form" id="otherVehicle"
-                                                formControlName="otherVehicle" name="otherVehicle" autocomplete="off" />
-                                                
-                                        
+                                        <label class="form-control-label" for="otherProceeding"> Proceeding From</label>
+                                        <input type="text" class="form-control tooltip-form" id="otherProceeding"
+                                          formControlName="otherProceeding" name="otherProceeding" autocomplete="off" />
                                             </div> 
                                          </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="otherBags ">No Of otherBags</label>
-                                          <select class="custom-select" name="otherBags" formControlName="otherBags"
-                                            id="otherBags"
-                                            [ngClass]="{ 'is-invalid': submitted && form.otherBags.errors }">
-                                            <option value="select">Select</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                           
-                                          </select>
-                                          <div *ngIf="submitted && form.otherBags.errors" class="invalid-feedback">
-                                            <div *ngIf="form.otherBags.errors.required">otherBags Type</div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="othernews ">othernews Paper</label>
-                                          <select class="custom-select" name="othernews" formControlName="othernews"
-                                            id="othernews"
-                                            [ngClass]="{ 'is-invalid': submitted && form.othernews.errors }">
-                                            <option value="select">Select</option>
-                                            <option *ngFor="let sour of othernewspaper"
-                                              [value]="sour.Description">{{ sour.Description  }}</option>
-                                          </select>
-                                          <div *ngIf="submitted && form.othernews.errors" class="invalid-feedback">
-                                            <div *ngIf="form.othernews.errors.required">othernews Type</div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="otherBilling ">otherBilling Instruction</label>
-                                          <select class="custom-select" name="otherBilling" formControlName="otherBilling"
-                                            id="otherBilling"
-                                            [ngClass]="{ 'is-invalid': submitted && form.otherBilling.errors }">
-                                            <option value="select">Select</option>
-                                            <option  *ngFor="let sour of otherBillinginstruction"
-                                              [value]="sour.Description">{{ sour.Description  }}</option>
-                                          </select>
-                                          <div *ngIf="submitted && form.otherBilling.errors" class="invalid-feedback">
-                                            <div *ngIf="form.otherBilling.errors.required">otherBilling Type</div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="othercometoknow ">How D U c to Know?</label>
-                                          <select class="custom-select" name="othercometoknow" formControlName="othercometoknow"
-                                            id="othercometoknow">
-                                          
-                                            <option value="select">Select</option>
-                                            <option  *ngFor="let sour of howuknow"
-                                              [value]="sour.Description">{{ sour.Description  }}</option>
-                                          </select>
-                                          
-                                        </div>
-                                      </div>
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <label class="form-control-label" for="otherDOB">Date of Birth</label>
-                                        <div class="form-group">
-                                          <div class="input-group" style="margin-bottom: 0;">                                                
-                                            <input id="otherDOB" name="otherDOB"  formControlName="otherDOB"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                               
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div> <!-- end 2nd row -->
-                                
-                                    <div class="row" style="margin-bottom:0;"> 
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <label class="form-control-label" for="otherDOA">Date of Anniversary</label>
+                                         <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
                                           <div class="form-group">
-                                            <div class="input-group">
+                                            <label class="form-control-label" for="othervisit ">Purposse of  visit</label>
+                                            <select class="custom-select" name="othervisit" formControlName="othervisit" id="othervisit">
                                               
-                                              <input id="otherDOA" name="otherDOA"  formControlName="otherDOA"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                  
-                                            </div>
-                                          </div>
-                                        </div>  
-                                
-                                        <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                          <div class="form-group">
-                                            <label class="form-control-label" for="otheridproof">ID Proof</label>
-                                            <select class="custom-select" name="otheridproof" formControlName="otheridproof"
-                                              id="otheridproof">
-                                            
+                                             
                                               <option value="select">Select</option>
-                                              <option  *ngFor="let sour of howuknow"
+                                              <option  *ngFor="let sour of purposeofothervisit"
                                                 [value]="sour.Description">{{ sour.Description  }}</option>
                                             </select>
                                             
                                           </div>
                                         </div>
-                                        <div class="col-12 col-lg-2 col-md-4 col-sm-4 ">
-                                          <label >Id No</label>  
-                                          <input type="text" class="form-control tooltip-form" id="otheridproofno" formControlName="otheridproofno" name="otheridproofno" autocomplete="off" />  
-                                                       
-                                      </div> 
+                        
+                            </div><!-- end 1 row -->
+                        
+                            <div class="row">
+                              
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                  <div class="form-group">
+                                      <label class="form-control-label" for="otherVehicle">Vehicle No</label>
+                                      <input type="text" class="form-control tooltip-form" id="otherVehicle"
+                                        formControlName="otherVehicle" name="otherVehicle" autocomplete="off" />
+                                        
                                 
-                                      <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
-                                        <div class="form-group">
-                                          <label class="form-control-label" for="discvalue">Grace Period </label>
-                                          <input type="text" class="form-control tooltip-form" id="othergraceperiod"
-                                            formControlName="othergraceperiod" name="othergraceperiod" autocomplete="off"
-                                            [ngClass]="{'is-invalid' : submitted && form.controls.othergraceperiod.errors || form.controls.othergraceperiod.touched || form.controls.othergraceperiod.dirty}"
-                                            required />
-                                          <div class="invalid-feedback"
-                                            *ngIf="form.controls.othergraceperiod.errors?.required">othergraceperiod is required
-                                          </div>
-                                        </div>
-                                      </div>
-                                
-                                
-                                      
-                                
-                                       </div><!-- end 3rd row-->
-                                       <div class="row" style="margin-bottom:0;">
-                                          <!-- button start  -->
-                                        <div class="col-md-12" style="  text-align: right; ">
-                                          <button type="button" id="printgrcbtn" (click)="printPage()" class="btn btn-sm btn-primary ">PRINT GRC</button>
-                                           <button type="submit" id="checkinbtn" class="btn btn-sm btn-primary m-r-5 m-l-5 ">Save</button>                                                                                 
-                                          <button type="button" id="closebtn" class="btn btn-sm btn-primary">Close</button>
-                                
-                                
-                                        </div> <!-- button end -->
-                                       </div>
-                                  </div><!-- user list row -->
-                                 
-                               
-                                </div> <!-- col-10 end-->
-                                
+                                    </div> 
+                                 </div>
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="otherBags ">No Of  Bags</label>
+                                  <select class="custom-select" name="otherBags" formControlName="otherBags"
+                                    id="otherBags"
+                                    [ngClass]="{ 'is-invalid': submitted && form.otherBags.errors }">
+                                    <option value="select">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                   
+                                  </select>
+                                  <div *ngIf="submitted && form.otherBags.errors" class="invalid-feedback">
+                                    <div *ngIf="form.otherBags.errors.required"> Bags Type</div>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                       </div>
-  
+                        
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="othernews ">News Paper</label>
+                                  <select class="custom-select" name="othernews" formControlName="othernews"
+                                    id="othernews"
+                                    [ngClass]="{ 'is-invalid': submitted && form.othernews.errors }">
+                                    <option value="select">Select</option>
+                                    <option *ngFor="let sour of othernewspaper"
+                                      [value]="sour.Description">{{ sour.Description  }}</option>
+                                  </select>
+                                  <div *ngIf="submitted && form.othernews.errors" class="invalid-feedback">
+                                    <div *ngIf="form.othernews.errors.required"> news Type</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="otherBilling "> Billing Instruction</label>
+                                  <select class="custom-select" name="otherBilling" formControlName="otherBilling"
+                                    id="otherBilling"
+                                    [ngClass]="{ 'is-invalid': submitted && form.otherBilling.errors }">
+                                    <option value="select">Select</option>
+                                    <option  *ngFor="let sour of otherBillinginstruction"
+                                      [value]="sour.Description">{{ sour.Description  }}</option>
+                                  </select>
+                                  <div *ngIf="submitted && form.otherBilling.errors" class="invalid-feedback">
+                                    <div *ngIf="form.otherBilling.errors.required"> Billing Type</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="othercometoknow ">How D U c to Know?</label>
+                                  <select class="custom-select" name="othercometoknow" formControlName="othercometoknow"
+                                    id="othercometoknow">
+                                  
+                                    <option value="select">Select</option>
+                                    <option  *ngFor="let sour of howuknow"
+                                      [value]="sour.Description">{{ sour.Description  }}</option>
+                                  </select>
+                                  
+                                </div>
+                              </div>
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <label class="form-control-label" for="otherDOB">Date of Birth</label>
+                                <div class="form-group">
+                                  <div class="input-group" style="margin-bottom: 0;">                                                
+                                    <input id="otherDOB" name="otherDOB"  formControlName="otherDOB"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                               
+                                  </div>
+                                </div>
+                              </div>
+                            </div> <!-- end 2nd row -->
+                        
+                            <div class="row" style="margin-bottom:0;"> 
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                  <label class="form-control-label" for="otherDOA">Date of Anniversary</label>
+                                  <div class="form-group">
+                                    <div class="input-group">
+                                      
+                                      <input id="otherDOA" name="otherDOA"  formControlName="otherDOA"  type="text" bsDatepicker   [maxDate]="minDate" placement="bottom"   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',containerClass: 'theme-dark-blue'}" class="form-control">                                  
+                                    </div>
+                                  </div>
+                                </div>  
+                        
+                                <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                  <div class="form-group">
+                                    <label class="form-control-label" for="otheridproof">ID Proof</label>
+                                    <select class="custom-select" name="otheridproof" formControlName="otheridproof"
+                                      id="otheridproof">
+                                    
+                                      <option value="select">Select</option>
+                                      <option  *ngFor="let sour of howuknow"
+                                        [value]="sour.Description">{{ sour.Description  }}</option>
+                                    </select>
+                                    
+                                  </div>
+                                </div>
+                                <div class="col-12 col-lg-2 col-md-4 col-sm-4 ">
+                                  <label >Id No</label>  
+                                  <input type="text" class="form-control tooltip-form" id="otheridproofno" formControlName="otheridproofno" name="otheridproofno" autocomplete="off" />  
+                                               
+                              </div> 
+                        
+                              <div class='col-12 col-lg-2 col-md-4 col-sm-4'>
+                                <div class="form-group">
+                                  <label class="form-control-label" for="discvalue">Grace Period </label>
+                                  <input type="text" class="form-control tooltip-form" id="othergraceperiod"
+                                    formControlName="othergraceperiod" name="othergraceperiod" autocomplete="off"
+                                    [ngClass]="{'is-invalid' : submitted && form.controls.othergraceperiod.errors || form.controls.othergraceperiod.touched || form.controls.othergraceperiod.dirty}"
+                                    required />
+                                  <div class="invalid-feedback"
+                                    *ngIf="form.controls.othergraceperiod.errors?.required">othergraceperiod is required
+                                  </div>
+                                </div>
+                              </div>
                          
+                        
+                               </div><!-- end 3rd row-->
+                               <div class="row" style="margin-bottom:0;">
+                                  <!-- button start  -->
+                                <div class="col-md-12" style="  text-align: right; ">
+                                  <button type="button" id="printgrcbtn" (click)="printPage()" class="btn btn-sm btn-primary ">PRINT GRC</button>
+                                   <button type="submit" id="checkinbtn" class="btn btn-sm btn-primary m-r-5 m-l-5 ">Save</button>                                                                                 
+                                  <button type="button" id="closebtn" class="btn btn-sm btn-primary">Close</button> 
+                                </div> <!-- button end -->
+                               </div>
+                          </div><!-- user list row --> 
+                        </div>
                       </ng-template>
                     </ngb-tab>
                   
   
               
                   </ngb-tabset>
-                  <!-- tab ending -->
-  
-                  
+                  <!-- tab ending --> 
   
                 </div>
   

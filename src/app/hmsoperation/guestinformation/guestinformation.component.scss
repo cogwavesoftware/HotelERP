@@ -1,0 +1,232 @@
+.test123{
+     
+    /* You can add global styles to this file, and also import other style files */
+.grid-table
+{
+	// display:table;
+}
+.thead
+{
+	display:table-header-group;
+	font-weight:bold;
+	border-bottom: 1px solid black;
+    text-align: center;
+    background-color: #f0f8ff;
+}
+.thead .td{
+  
+    width: 115px;
+    text-align: left;
+}
+.tbody
+{
+	display:table-row-group;
+}
+.tbody .td input,
+.tbody .td select{
+     
+    width: 115px;
+    height: 23px;
+}
+.thead .td .btn.btn-outline-success{
+    
+    width: 30px;
+    height: 28px;
+    padding: 0;
+    background: none;
+    color: #000;
+    font-size: 90%;
+    text-align: center;
+    border:1px solid #585858;
+}
+.tbody .td button.ng-tns-c5-1{   
+    // border-radius: 5px;
+    // width: 30px;
+    // padding: 0;
+    // background: red;
+    // color: #fff;
+    // font-size: 115%;
+}
+.tr
+{
+	display:table-row;
+	
+}
+.td
+{
+	display:table-cell;
+	padding:  0px 1px 0px 0px;
+}
+.thead div.tr div.td:last-child{
+    background-color: #fff;
+}
+i:hover{
+	cursor: pointer;
+}
+
+input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+	border-color: #dc3545;
+}
+
+
+.elementToFadeInAndOut {
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  50% { opacity: 1; }
+}
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid yellow!important;
+    }
+  
+
+}
+ @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .test123[_ngcontent-emt-c5] .tbody[_ngcontent-emt-c5] .td{
+        border:2px solid blue!important;
+    }
+  }
+
+ 
+  .roomselect {
+    text-align: center;
+    color: white;
+    margin: 1px;
+}
+
+.freeroom {
+    background-color: green;    
+    padding: 0px;
+    width: 75px;
+    height: 50px;   
+    display: inline-table;
+    margin: 2px 1px 2px 3px;
+}
+
+.occroom {
+    background-color: red;
+    padding: 0px;
+    width: 75px;
+    height: 50px;    
+    display: inline-table;
+    margin: 2px 1px 2px 3px;
+}
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .thead .td {
+    width: 115px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+}
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td input{
+    width:114px;
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td {
+    width: 181px;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+     
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td select,
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td input{
+    width:180px;
+}
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.grpcheckingpayntarry .grid-table .tbody .td.lasttd{
+    width:auto;
+}
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .thead .td.lasttd,
+.checkinformsgrops .accouter .test123.grpcheckinbookingtbl .grid-table .tbody .td.lasttd{
+    width:auto;
+}
+.dynamicphotoarray .grid-table .thead,
+.dynamicphotoarray .grid-table .tbody{
+    width: 100%;
+    float: left;
+}
+.dynamicphotoarray .grid-table .thead .td {
+    width:100px;
+    float: left;
+    border:1px solid #ccc;
+}
+.dynamicphotoarray .grid-table .tbody .td input,
+.dynamicphotoarray .grid-table .tbody .td select,
+.dynamicphotoarray .grid-table .tbody .td input
+{
+    width:100px;
+    float: left;
+    border:1px solid #ccc;    
+}
+.guestphotoscreen .table thead tr th,
+.additionalguest .table thead tr th,
+.addGuestouter .table thead tr th{
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    color: #000;
+    text-align: center;
+    padding:2px 0px 2px 0px;
+    font-weight: normal;
+}
+.guestphotoscreen .table tbody tr td,
+.additionalguest .table tbody tr td,
+.addGuestouter .table tbody tr td{
+    border: 1px solid #ccc;
+    text-align: center; 
+    margin: 0 auto;
+}
+.guestphotoscreen .table tbody tr td img,
+.additionalguest .table tbody tr td img,
+.addGuestouter .table tbody tr td img{
+    border-radius: 5px;
+    border:1px solid #000;    
+}
+.width100 label{
+    width: 218px;
+    display: block;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+.width100 label b{ 
+    float:right;
+    font-weight: bold;
+}
+
+.reservotherinfo .fltleftouter{
+    width:100%;
+}
+.reservotherinfo .fltleftouter .col-12.col-lg-3.col-md-3.col-sm-3{
+    padding-right: 1px;
+    padding-left: 0
+}
+
+.h2ClassBg{
+    font-size: 15px;
+    width:100%;
+    display:block;
+    color: #000 !important;
+    font-weight: normal;
+    padding: 5px 10px 6px 10px;
+    background-color: #63a4ff !important;
+    background-image: linear-gradient(315deg, #63a4ff 74%, #83eaf1 0%) !important;
+}

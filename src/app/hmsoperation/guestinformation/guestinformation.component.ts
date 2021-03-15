@@ -15,13 +15,15 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { filter, debounceTime, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
 import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
 import { IpserviceService } from 'src/app/_services/ipservice.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; 
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-guestinformation',
   templateUrl: './guestinformation.component.html',
   styleUrls: ['./guestinformation.component.scss']
 })
 export class GuestinformationComponent implements OnInit {
+  Process: string;
   @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular;
   private gridApi;
   private gridColumnApi;
@@ -45,6 +47,40 @@ export class GuestinformationComponent implements OnInit {
   Id$: Observable<string>; 
   valid: boolean = true;
   private selectedRows = [];
+  public snapshotshow = false;
+  SnapshotbuttonDisabled: boolean;
+  camarabuttonDisabled: boolean;
+  public showWebcam = false;
+  public allowCameraSwitch = true; 
+  public multipleWebcamsAvailable = false;
+  public Guestphotopathurl: string;
+  public GuestDoucmentFrontpathurl: string = "0";
+  public GuestDoucmentBackpathurl: string = "0";
+  public OnCamera: string = "OnCamera"
+  public Iscamaraon: boolean = false;
+
+  // toggle webcam on/off
+   public deviceId: string;
+  error: string;
+  base64TrimmedURL: any;
+  base64DefaultURL: any;
+  generatedImage: any;
+
+  previewUrl: any = null;
+  previewUrl2: any = null;
+  previewUrl3: any = null;
+  GuetIdFront0: any = null;
+  GuetImg0; GuetImg1; GuetImg2; GuetImg3: any = null;
+  GuetIdFront1; GuetIdFront2; GuetIdFront3: any = null;
+  GuetIdBack0; GuetIdBack1; GuetIdBack2; GuetIdBack3: any = null;
+  public errors: WebcamInitError[] = [];
+  // latest snapshot
+  public webcamImage: WebcamImage = null;
+  // webcam snapshot trigger
+  private trigger: Subject<void> = new Subject<void>();
+  // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+
   isValid(event: boolean): void {
     this.valid = event;
   }
@@ -107,9 +143,11 @@ export class GuestinformationComponent implements OnInit {
         otherDOA: ["", [Validators.required]] ,
         otheridproof: ["", [Validators.required]] ,
         otheridproofno: ["", [Validators.required]] ,
-        othergraceperiod: ["", [Validators.required]] 
-
-        
+        othergraceperiod: ["", [Validators.required]] ,
+        bankAccountForms: this.formBuilder.array([]),
+        GuestPhotoPath: ["", [Validators.required]],
+        GuestIdFront: ["", [Validators.required]],
+        GuestIdBack: ["", [Validators.required]],
 
       });
       this.columnDefs = [
@@ -123,7 +161,11 @@ export class GuestinformationComponent implements OnInit {
     }
 
   ngOnInit() {
-    
+    this.previewUrl = environment.GuestimagePath + '/imagenot1.png';
+    this.previewUrl2 = environment.GuestimagePath + '/imagenot1.png';
+    this.previewUrl3 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdFront0 = environment.GuestimagePath + '/imagenot1.png';
+    this.GuetIdBack0 = environment.GuestimagePath + '/imagenot1.png';
   }
   onGridReady(params) {
     this.rowData = this._masterformservice.GetAllTaxRule();
@@ -145,6 +187,195 @@ export class GuestinformationComponent implements OnInit {
   onRowClicked(event){
     console.log("jai");
     console.log(event.data); 
+  }
+
+  public SwitchOnCamara() {
+    this.SnapshotbuttonDisabled = false;
+    this.camarabuttonDisabled = true;
+
+    if (this.showWebcam) {
+      this.snapshotshow = true;
+    }
+    else {
+      this.snapshotshow = false;
+    }
+    this.showWebcam = !this.showWebcam;
+  }
+  public toggleWebcam(): void {
+    this.showWebcam = !this.showWebcam;
+    this.snapshotshow = true;
+  }
+
+  public handleInitError(error: WebcamInitError): void {
+    this.errors.push(error);
+  }
+
+  public showNextWebcam(directionOrDeviceId: boolean | string): void {
+    // true => move forward through devices
+    // false => move backwards through devices
+    // string => move to device with given deviceId
+    this.nextWebcam.next(directionOrDeviceId);
+  }
+
+  public handleImage(webcamImage: WebcamImage): void {
+    console.info('received webcam image', webcamImage);
+    this.webcamImage = webcamImage;
+    this.previewUrl = webcamImage.imageAsDataUrl
+    this.getImage(webcamImage.imageAsBase64)
+  }
+
+  public cameraWasSwitched(deviceId: string): void {
+    console.log('active device: ' + deviceId);
+    this.deviceId = deviceId;
+  }
+
+  public get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  public get nextWebcamObservable(): Observable<boolean | string> {
+    return this.nextWebcam.asObservable();
+  }
+
+  getImage(url) {
+
+    // Base64 url of image trimmed one without data:image/png;base64
+    this.base64DefaultURL = url;
+    // Naming the image
+    const date = new Date().valueOf();
+    let text = '';
+    const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(Math.floor(Math.random() * possibleText.length));
+    }
+    // Replace extension according to your media type
+    const imageName = date + '_' + text + '.png';
+    // call method that creates a blob from dataUri
+    //const imageBlob = this.dataURItoBlob(this.base64DefaultURL);
+    const formData = new FormData();
+    let imageBlob;
+    this.dataURItoBlob(this.base64DefaultURL).subscribe(data => {
+      imageBlob = data;
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      formData.append('GuestPohto', imageFile, imageName);
+    });
+    this._masterservice.SavaImsData(formData)
+      .subscribe(res => {
+        console.log(imageName);
+        this.Guestphotopathurl = imageName;
+
+        console.log(res);
+
+      },
+        error => {
+          // alert('e')
+          console.log(error);
+        },
+        () => {
+
+        });
+  }
+
+
+
+  getImageSecGuest(url, index) {
+    this.Process = "Please Wait"
+    // Base64 url of image trimmed one without data:image/png;base64
+    this.base64DefaultURL = url;
+    // Naming the image
+    const date = new Date().valueOf();
+    let text = '';
+    const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(Math.floor(Math.random() * possibleText.length));
+    }
+    // Replace extension according to your media type
+    const imageName = date + '_' + text + '.png';
+    // call method that creates a blob from dataUri
+    //const imageBlob = this.dataURItoBlob(this.base64DefaultURL);
+    const formData = new FormData();
+    let imageBlob;
+    this.dataURItoBlob(this.base64DefaultURL).subscribe(data => {
+      imageBlob = data;
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      formData.append('GuestPohto', imageFile, imageName);
+    });
+    this.Process = "Upload Procee 10%"
+    this._masterservice.SavaImsData(formData)
+      .subscribe(res => {
+        this.Process = "Upload Procee 50%"
+      },
+        error => {
+          // alert('e')
+          console.log(error);
+          this.Process = "Upload Image Failed Due to Slow Network"
+        },
+        () => {
+          // this.bankAccountForms.controls[index].patchValue({
+          //   GuestImage: imageName
+          // })
+          this.Process = "Upload Compleated"
+        });
+  }
+
+
+
+
+  dataURItoBlob(dataURI): Observable<Blob> {
+    return Observable.create((observer: Observer<Blob>) => {
+      const byteString = window.atob(dataURI);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: 'image/jpeg' });
+      observer.next(blob);
+      observer.complete();
+    });
+  }
+
+  UplodaImageData(index) {
+    debugger;
+    this.Process = "Wait Image Uploading..."
+    const formData = new FormData();
+    let Idfront = "";
+    let Idback = "";
+    // if (this.fileDataIdfrontSecGuest != null) {
+
+    //   var timerandom1 = this.datePipe.transform(new Date(), "ddMMyymmss");
+    //   var Rans1 = +timerandom1 * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+    //   Idfront = 'CW_1001' + '_' + Rans1.toString() + "Front" + '.png'
+    //   formData.append('GuestIdFront', this.fileDataIdfrontSecGuest, Idfront);
+    // }
+
+
+    // if (this.fileDataIdBackSecGuest != null) {
+
+    //   var timerandom = this.datePipe.transform(new Date(), "ddMMyymmss");
+    //   var Rans = +timerandom * Math.floor(Math.random() * (99999 - 10000)) + 10000;
+    //   Idback = 'CW_1001' + '_' + Rans.toString() + "Back" + '.png'
+    //   formData.append('GuestIdBack', this.fileDataIdBackSecGuest, Idback);
+    // }
+
+    this._masterservice.SavaImsData(formData)
+      .subscribe(res => {
+        this.Process = "Wait Image Uploading 50%..."
+
+      },
+        error => {
+          this.Process = "Upload Failed Please Try again"
+        },
+        () => {
+          debugger;
+          // this.bankAccountForms.controls[index].patchValue({
+          //   GuestIdFronturl: Idfront,
+          //   GuestIdBackurl: Idback
+          // });
+          this.Process = "Image Uploaded Successfully"
+        });
+
+
   }
 
 }
