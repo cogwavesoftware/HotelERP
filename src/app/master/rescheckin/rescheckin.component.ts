@@ -300,13 +300,11 @@ export class RescheckinComponent implements OnInit, OnDestroy {
       checkouttime: [this.myTime, [Validators.required]],
       nofdays: ["1", [Validators.required]],
       checkoutdate: [this.maxDate, [Validators.required]],
-
       disctype: ["select", [Validators.required]],
       applycoupen: ["", [Validators.required]],
       discvalue: ["", [Validators.required]],
       graceperiod: ["", [Validators.required]],
       PayArray: this.formBuilder.array([]),
-
       GuestPhotoPath: ["", [Validators.required]],
       GuestIdFront: ["", [Validators.required]],
       GuestIdBack: ["", [Validators.required]],

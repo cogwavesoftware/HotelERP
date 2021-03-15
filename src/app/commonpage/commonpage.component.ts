@@ -62,7 +62,7 @@ declare global {
 export class CommonpageComponent implements OnInit {
 
 
-
+  dataobj:any;
   public data:Observable<any>;
   items: TreeviewItem[];
   ipAddress:any;
@@ -148,7 +148,17 @@ export class CommonpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    debugger;
+      this.http.get("/assets/data/Store.json").subscribe(r1 => {
+        this.dataobj = r1;
+        console.log(r1)
+        console.log('r1')
+        this._masterservice.SendHttp(this.dataobj).subscribe(res=>{
+          console.log(res);
+        })
+      });
+
+
   this._authservice.logout();
   //this.determineLocalIp();
 
@@ -160,6 +170,8 @@ export class CommonpageComponent implements OnInit {
   
     
   }
+
+
 
   private determineLocalIp() {
     window.RTCPeerConnection = this.getRTCPeerConnection();

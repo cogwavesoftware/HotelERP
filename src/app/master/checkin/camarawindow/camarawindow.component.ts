@@ -43,6 +43,7 @@ export class CamarawindowComponent implements OnInit {
   private nextWebcamSecGuest: Subject<boolean | string> = new Subject<boolean | string>();
   private triggerSecGuest: Subject<void> = new Subject<void>();
   public webcamImageSecGuest: WebcamImage = null;
+  
   @Output() ratingClicked: EventEmitter<string> =  new EventEmitter<string>();
 
 ngOnChanges(): void { 

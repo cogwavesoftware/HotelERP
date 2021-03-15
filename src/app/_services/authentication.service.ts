@@ -86,10 +86,10 @@ export class AuthenticationService {
 
     gosuperadminlogin(username, password) 
     {       
-         let urlSearchParams = new URLSearchParams();
-         urlSearchParams.append('UserName', username);
-         urlSearchParams.append('Password', password);
-         urlSearchParams.append('grant_type', 'password');
+        let urlSearchParams = new URLSearchParams();
+        urlSearchParams.append('UserName', username);
+        urlSearchParams.append('Password', password);
+        urlSearchParams.append('grant_type', 'password');
         let body = urlSearchParams.toString()
         return this.http.post<any>(environment.apiURL + '/postoken',  body,{ headers:environment.BASE_CONTENTTYPE_HEADER }) 
         .pipe(map(user => {
@@ -184,6 +184,7 @@ export class AuthenticationService {
     } 
     logout() 
     {
+      debugger;
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');   
         localStorage.removeItem('id');   

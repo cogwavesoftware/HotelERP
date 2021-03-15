@@ -1,0 +1,62 @@
+{
+    "stores": [
+        {
+            "city": "Bangalore",
+            "name": "CogeavePOS",
+            "min_pickup_time": 900,
+            "min_delivery_time": 1800,
+            "contact_phone": "+919999999999",
+            "notification_phones": [
+                "9999999999",
+                "+918888888888"
+            ],
+            "ref_id": "258963355555555",
+            "min_order_value": 200,
+            "hide_from_ui": false,
+            "address": "Sector 21, D - block",
+            "notification_emails": [
+                "d1@mail.com",
+                "d2@mail.com"
+            ],
+            "zip_codes": [
+                "110021",
+                "2312323"
+            ],
+            "geo_longitude": 22.234324,
+            "active": false,
+            "geo_latitude": 19.12312,
+            "ordering_enabled": true,
+            "translations": {
+                "language": "fr",
+                "name": ""
+            },
+            "excluded_platforms": [
+                "zomato",
+                "scootsy"
+            ],
+            "included_platforms": [
+                "swiggy"
+            ],
+            "timings": [
+                {
+                    "day": "monday",
+                    "slots": [
+                        {
+                            "start_time": "10:00:00",
+                            "end_time": "22:30:00"
+                        }
+                    ]
+                },
+                {
+                    "day": "tuesday",
+                    "slots": [
+                        {
+                            "start_time": "10:00:00",
+                            "end_time": "22:30:00"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

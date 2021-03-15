@@ -410,9 +410,13 @@ const routes: Routes = [
         loadChildren: () => import('./hmsoperation/advanceposting/advanceposting.module').then(m=>m.AdvancepostingModule)
       } ,
       {
+        path:'newdash',
+        loadChildren:()=> import('./hmsoperation/newdashboard/newdashboard.module').then(m=>m.NewdashboardModule)
+      },
+      {
         path: 'guestinformation', 
         loadChildren: () => import('./hmsoperation/guestinformation/guestinformation.module').then(m=>m.GuestinformationModule)
-      },
+      }
     ]
   },
 

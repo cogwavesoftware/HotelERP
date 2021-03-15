@@ -209,6 +209,7 @@ export class LoginsComponent implements OnInit {
       this.loading = true;
       this.authenticationService.gologin(mobile, "cogwaveotp").subscribe(
         data => {
+          console.log(data);
           console.log(data.access_token);
           if (data.access_token != null)
            {
