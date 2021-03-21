@@ -84,8 +84,8 @@ import {MatDialogModule} from '@angular/material/dialog';
       },
       { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
 
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    //  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     //fakeBackendProvider
