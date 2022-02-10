@@ -74,7 +74,7 @@
     "ngx-toastr": "^10.2.0",
     "ngx-treeview": "^6.0.2",
     "ngx-webcam": "^0.2.6",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nouislider": "^11.1.0",
     "rxjs": "~6.5.2",
     "rxjs-compat": "^6.1.0",
